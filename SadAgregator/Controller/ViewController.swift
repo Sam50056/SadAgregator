@@ -37,6 +37,28 @@ extension ViewController : CheckKeysDataManagerDelegate {
             
         }
         
+        //Message field from api
+        let message = data["message"]
+        
+        //Checking if it is there or not
+        if message.exists() {
+            
+            guard let id = message["id"].int ,
+                  let title = message["title"].string,
+                  let msg = message["msg"].string else {
+                return
+            }
+            
+            let alertController = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+            
+            let action = UIAlertAction(title: "Ok", style: .default) { (_) in
+                
+                alertController.dismiss(animated: true, completion: nil)
+                
+            }
+            
+        }
+        
     }
     
     func didFailGettingCheckKeysData(error: String) {
