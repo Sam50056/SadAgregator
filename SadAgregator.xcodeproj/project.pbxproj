@@ -13,9 +13,12 @@
 		228CB764255BF96D002B4A96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228CB762255BF96D002B4A96 /* Main.storyboard */; };
 		228CB766255BF974002B4A96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228CB765255BF974002B4A96 /* Assets.xcassets */; };
 		228CB769255BF974002B4A96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228CB767255BF974002B4A96 /* LaunchScreen.storyboard */; };
+		228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */; };
+		44D7F3DB0392E9E53844BA25 /* Pods_SadAgregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F53D53512395AE77F62F84F /* Pods-SadAgregator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.release.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.release.xcconfig"; sourceTree = "<group>"; };
 		228CB759255BF96D002B4A96 /* SadAgregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SadAgregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228CB75C255BF96D002B4A96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		228CB75E255BF96D002B4A96 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,9 @@
 		228CB765255BF974002B4A96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		228CB768255BF974002B4A96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		228CB76A255BF974002B4A96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckKeysDataManager.swift; sourceTree = "<group>"; };
+		8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.debug.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.debug.xcconfig"; sourceTree = "<group>"; };
+		DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SadAgregator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44D7F3DB0392E9E53844BA25 /* Pods_SadAgregator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0365DD7211556145F6E19519 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		228CB750255BF96D002B4A96 = {
 			isa = PBXGroup;
 			children = (
 				228CB75B255BF96D002B4A96 /* SadAgregator */,
 				228CB75A255BF96D002B4A96 /* Products */,
+				6358550D007648CA0215FE8A /* Pods */,
+				0365DD7211556145F6E19519 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,13 +75,48 @@
 			children = (
 				228CB75C255BF96D002B4A96 /* AppDelegate.swift */,
 				228CB75E255BF96D002B4A96 /* SceneDelegate.swift */,
-				228CB760255BF96D002B4A96 /* ViewController.swift */,
-				228CB762255BF96D002B4A96 /* Main.storyboard */,
+				228CB774255BF996002B4A96 /* Model */,
+				228CB770255BF981002B4A96 /* View */,
+				228CB773255BF98A002B4A96 /* Controller */,
 				228CB765255BF974002B4A96 /* Assets.xcassets */,
-				228CB767255BF974002B4A96 /* LaunchScreen.storyboard */,
 				228CB76A255BF974002B4A96 /* Info.plist */,
 			);
 			path = SadAgregator;
+			sourceTree = "<group>";
+		};
+		228CB770255BF981002B4A96 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				228CB762255BF96D002B4A96 /* Main.storyboard */,
+				228CB767255BF974002B4A96 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		228CB773255BF98A002B4A96 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				228CB760255BF96D002B4A96 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		228CB774255BF996002B4A96 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6358550D007648CA0215FE8A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */,
+				0F53D53512395AE77F62F84F /* Pods-SadAgregator.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +126,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 228CB76D255BF974002B4A96 /* Build configuration list for PBXNativeTarget "SadAgregator" */;
 			buildPhases = (
+				E081A0F1354B5AAFFBF3FDDE /* [CP] Check Pods Manifest.lock */,
 				228CB755255BF96D002B4A96 /* Sources */,
 				228CB756255BF96D002B4A96 /* Frameworks */,
 				228CB757255BF96D002B4A96 /* Resources */,
+				57EA207A34239E3726832F6B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,11 +186,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		57EA207A34239E3726832F6B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SadAgregator/Pods-SadAgregator-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SadAgregator/Pods-SadAgregator-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SadAgregator/Pods-SadAgregator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E081A0F1354B5AAFFBF3FDDE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SadAgregator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		228CB755255BF96D002B4A96 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
 				228CB761255BF96D002B4A96 /* ViewController.swift in Sources */,
 				228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */,
 				228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */,
@@ -283,6 +380,7 @@
 		};
 		228CB76E255BF974002B4A96 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +400,7 @@
 		};
 		228CB76F255BF974002B4A96 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F53D53512395AE77F62F84F /* Pods-SadAgregator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
