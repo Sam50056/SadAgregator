@@ -57,6 +57,8 @@ extension ViewController : CheckKeysDataManagerDelegate {
                 
             }
             
+            alertController.addAction(action)
+            
         }
         
     }
