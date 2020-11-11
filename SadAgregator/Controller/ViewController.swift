@@ -10,6 +10,7 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
     
+    let key = UserDefaults.standard.string(forKey: "key")
     
     var checkKeysDataManager = CheckKeysDataManager()
     
@@ -18,7 +19,7 @@ class ViewController: UIViewController {
         
         checkKeysDataManager.delegate = self
         
-        checkKeysDataManager.getKeysData()
+        checkKeysDataManager.getKeysData(key: key)
     }
     
     
