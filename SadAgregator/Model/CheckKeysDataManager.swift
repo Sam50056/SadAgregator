@@ -19,7 +19,7 @@ struct CheckKeysDataManager {
     
     func getKeysData(key: String?) {
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_client.CheckKeys?AKey=\(key ?? "")"
+        let urlString = "https://agrapi.tk-sad.ru/agr_client.CheckKeys?AKey=\(key ?? "")" //If the key is nil we just send nothing ("") 
         
         guard let url = URL(string: urlString) else {
             return

@@ -51,7 +51,7 @@ extension ViewController : CheckKeysDataManagerDelegate {
             
             let alertController = UIAlertController(title: title, message: msg, preferredStyle: .alert)
             
-            let action = UIAlertAction(title: "Ok", style: .default) { (_) in
+            let action = UIAlertAction(title: "Закрыть", style: .cancel) { (_) in
                 
                 alertController.dismiss(animated: true, completion: nil)
                 
