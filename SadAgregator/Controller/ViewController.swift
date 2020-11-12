@@ -53,6 +53,10 @@ extension ViewController : CheckKeysDataManagerDelegate {
             
             let action = UIAlertAction(title: "Закрыть", style: .cancel) { (_) in
                 
+                guard let key = self.key else {return}
+                
+                MessageReadedDataManager().getMessageReadedData(key: key, messageId: String(id))
+                
                 alertController.dismiss(animated: true, completion: nil)
                 
             }
