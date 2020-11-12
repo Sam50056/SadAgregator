@@ -18,28 +18,7 @@ struct MessageReadedDataManager {
             
             let session = URLSession(configuration: .default)
             
-            let task = session.dataTask(with: url) { (data, response, error) in
-                
-                if error != nil {
-                    
-                    return
-                }
-                
-                do{
-                    
-                    if let safeData = data {
-                        
-                        let jsonAnswer = try JSON(data: safeData)
-                        
-                        
-                        
-                    }
-                    
-                }catch{
-                    
-                }
-                
-            }
+            let task = session.dataTask(with: url)
             
             task.resume()
             
