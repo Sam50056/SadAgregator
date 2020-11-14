@@ -108,7 +108,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         case 3...7:
             cell = tableView.dequeueReusableCell(withIdentifier: "activityLineCell", for: indexPath)
         default:
-            print("")
+            print("Error with indexPath (Got out of switch)")
             
         }
         
