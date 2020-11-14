@@ -115,7 +115,6 @@ extension ViewController : MainDataManagerDelegate{
     
 }
 
-
 //MARK: - UITableView stuff
 extension ViewController : UITableViewDelegate , UITableViewDataSource {
     
@@ -142,7 +141,11 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             }
             
         case 1:
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "generalPostsPhotosCell", for: indexPath)
+            
+            setUpGeneralPostsPhotosCell(cell: cell, data: mainPageData["total_activity"])
+            
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: "linesActivityCell", for: indexPath)
         case 3...7:
@@ -165,6 +168,27 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
+    //MARK: - Cells setup functions
+    func setUpGeneralPostsPhotosCell(cell : UITableViewCell , data : JSON){
+        
+        if let todaysPostsLabel = cell.viewWithTag(1) as? UILabel ,
+           let yesterdayPostsLabel = cell.viewWithTag(2) as? UILabel,
+           let todayPhotosLabel = cell.viewWithTag(3) as? UILabel,
+           let yesterdayPhotosLabel = cell.viewWithTag(4) as? UILabel {
+            
+            todaysPostsLabel.text = data["post_today"].stringValue
+            
+            yesterdayPostsLabel.text = data["post_ystd"].stringValue
+            
+            todayPhotosLabel.text = data["photo_today"].stringValue
+            
+            yesterdayPhotosLabel.text = data["photo_ystd"].stringValue
+            
+        }
+        
     }
     
 }

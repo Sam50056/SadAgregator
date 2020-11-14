@@ -40,8 +40,6 @@ struct CheckKeysDataManager {
                 
                 if let safeData = data{
                     
-                    print("CHECK KEYS DATA: \(String(data: safeData , encoding: String.Encoding.utf8)!)")
-                    
                     let jsonAnswer = try JSON(data: safeData)
                     
                     delegate?.didGetCheckKeysData(data: jsonAnswer)
