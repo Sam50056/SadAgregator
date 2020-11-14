@@ -10,6 +10,10 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var searchView: UIView!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     let key = UserDefaults.standard.string(forKey: "key")
     
     var checkKeysDataManager = CheckKeysDataManager()
@@ -19,12 +23,20 @@ class ViewController: UIViewController {
         
         checkKeysDataManager.delegate = self
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.separatorStyle = .none
+        
+        searchView.layer.cornerRadius = 8
+        
         checkKeysDataManager.getKeysData(key: key)
     }
     
     
 }
 
+//MARK: - CheckKeysDataManagerDelegate stuff
 extension ViewController : CheckKeysDataManagerDelegate {
     
     func didGetCheckKeysData(data: JSON) {
@@ -69,6 +81,49 @@ extension ViewController : CheckKeysDataManagerDelegate {
     
     func didFailGettingCheckKeysData(error: String) {
         print("Error with CheckKeysDataManager: \(error)")
+    }
+    
+}
+
+
+//MARK: - UITableView stuff
+extension ViewController : UITableViewDelegate , UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 9
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var cell = UITableViewCell()
+        
+        switch indexPath.row {
+        
+        case 0:
+            cell = tableView.dequeueReusableCell(withIdentifier: "firstCell", for: indexPath)
+        case 1:
+            cell = tableView.dequeueReusableCell(withIdentifier: "generalPostsPhotos", for: indexPath)
+        case 2:
+            cell = tableView.dequeueReusableCell(withIdentifier: "linesActivity", for: indexPath)
+        default:
+            print("")
+            
+        }
+        
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 1{
+            
+            return 126
+            
+        }
+        
+        return 50
+        
     }
     
 }
