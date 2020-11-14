@@ -21,6 +21,8 @@ struct MainDataManager {
         
         let urlString = "https://agrapi.tk-sad.ru/agr_intf.Main?AKey=\(key)"
         
+        print("URLString for MainPageDataManager: \(urlString)")
+        
         guard let url = URL(string: urlString) else {return}
         
         let session = URLSession(configuration: .default)
@@ -35,23 +37,25 @@ struct MainDataManager {
             }
             
             
-            do{
+           // do{
                 
-                if let data = data {
+                if let safeData = data {
                     
-                    let jsonAnswer = try JSON(data: data)
+                    let json = String(data: safeData , encoding: String.Encoding.windowsCP1251)!
+                    
+                    let jsonAnswer = JSON(parseJSON: json)
                     
                     delegate?.didGetMainData(data: jsonAnswer)
                     
                 }
                 
-            }catch{
-                delegate?.didFailGettingMainData(error: error.localizedDescription)
-            }
+//            }catch{
+//                delegate?.didFailGettingMainData(error: error.localizedDescription)
+//            }
             
         }
         
-            task.resume()
+        task.resume()
         
     }
     

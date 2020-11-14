@@ -14,14 +14,18 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let key = UserDefaults.standard.string(forKey: "key")
+    var key = UserDefaults.standard.string(forKey: "key")
     
     var checkKeysDataManager = CheckKeysDataManager()
+    var mainPageDataManager = MainDataManager()
+    
+    var mainPageData : JSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         checkKeysDataManager.delegate = self
+        mainPageDataManager.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -41,46 +45,72 @@ extension ViewController : CheckKeysDataManagerDelegate {
     
     func didGetCheckKeysData(data: JSON) {
         
-        if let safeKey = data["key"].string {
+        DispatchQueue.main.async {
             
-            print("Key: \(safeKey)")
-            
-            UserDefaults.standard.set(safeKey, forKey: "key") //Saving the key to UserDefaults
-            
-        }
-        
-        //Message field from api
-        let message = data["message"]
-        
-        //Checking if it is there or not
-        if message.exists() {
-            
-            guard let id = message["id"].int ,
-                  let title = message["title"].string,
-                  let msg = message["msg"].string else {
-                return
-            }
-            
-            let alertController = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-            
-            let action = UIAlertAction(title: "Закрыть", style: .cancel) { (_) in
+            if let safeKey = data["key"].string {
                 
-                guard let key = self.key else {return}
+                print("Key: \(safeKey)")
                 
-                MessageReadedDataManager().getMessageReadedData(key: key, messageId: String(id))
+                UserDefaults.standard.set(safeKey, forKey: "key") //Saving the key to UserDefaults
                 
-                alertController.dismiss(animated: true, completion: nil)
+                self.key = safeKey
+                
+                self.mainPageDataManager.getMainData(key: safeKey)
                 
             }
             
-            alertController.addAction(action)
+            //Message field from api
+            let message = data["message"]
             
+            //Checking if it is there or not
+            if message.exists() {
+                
+                guard let id = message["id"].int ,
+                      let title = message["title"].string,
+                      let msg = message["msg"].string else {
+                    return
+                }
+                
+                let alertController = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+                
+                let action = UIAlertAction(title: "Закрыть", style: .cancel) { (_) in
+                    
+                    guard let key = self.key else {return}
+                    
+                    MessageReadedDataManager().getMessageReadedData(key: key, messageId: String(id))
+                    
+                    alertController.dismiss(animated: true, completion: nil)
+                    
+                }
+                
+                alertController.addAction(action)
+                
+            }
         }
-        
     }
     
     func didFailGettingCheckKeysData(error: String) {
         print("Error with CheckKeysDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - MainDataManagerDelegate stuff
+extension ViewController : MainDataManagerDelegate{
+    
+    func didGetMainData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+            self.mainPageData = data //Saving main page data from api to this var
+            
+            self.tableView.reloadData()
+            
+        }
+    }
+    
+    func didFailGettingMainData(error: String) {
+        print("Error with MainDataManager: \(error)")
     }
     
 }
@@ -97,10 +127,20 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         
         var cell = UITableViewCell()
         
+        guard let mainPageData = mainPageData else {
+            return cell
+        }
+        
         switch indexPath.row {
         
         case 0:
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "firstCell", for: indexPath)
+            
+            if let label = cell.viewWithTag(1) as? UILabel {
+                label.text = mainPageData["activity"].stringValue
+            }
+            
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: "generalPostsPhotosCell", for: indexPath)
         case 2:
@@ -109,23 +149,22 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: "activityLineCell", for: indexPath)
         default:
             print("Error with indexPath (Got out of switch)")
-            
         }
         
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) ->    CGFloat {
         
         if indexPath.row == 1{
-            
             return 126
-            
         }
         
         return 50
-        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

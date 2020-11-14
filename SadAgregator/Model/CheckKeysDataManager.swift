@@ -21,6 +21,8 @@ struct CheckKeysDataManager {
         
         let urlString = "https://agrapi.tk-sad.ru/agr_client.CheckKeys?AKey=\(key ?? "")" //If the key is nil we just send nothing ("") 
         
+        print("URLString for checkKeysDataManager: \(urlString)")
+        
         guard let url = URL(string: urlString) else {
             return
         }
@@ -37,6 +39,8 @@ struct CheckKeysDataManager {
             do {
                 
                 if let safeData = data{
+                    
+                    print("CHECK KEYS DATA: \(String(data: safeData , encoding: String.Encoding.utf8)!)")
                     
                     let jsonAnswer = try JSON(data: safeData)
                     
