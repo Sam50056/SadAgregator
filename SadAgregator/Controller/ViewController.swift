@@ -102,9 +102,11 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         case 0:
             cell = tableView.dequeueReusableCell(withIdentifier: "firstCell", for: indexPath)
         case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: "generalPostsPhotos", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "generalPostsPhotosCell", for: indexPath)
         case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: "linesActivity", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "linesActivityCell", for: indexPath)
+        case 3...7:
+            cell = tableView.dequeueReusableCell(withIdentifier: "activityLineCell", for: indexPath)
         default:
             print("")
             
@@ -114,7 +116,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) ->    CGFloat {
         
         if indexPath.row == 1{
             
