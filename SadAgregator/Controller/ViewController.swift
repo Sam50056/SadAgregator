@@ -22,8 +22,12 @@ class ViewController: UIViewController {
     var mainDataManager = MainDataManager()
     
     var mainData : JSON?
+    
     var activityLineCellsArray = [JSON]()
     var postavshikActivityCellsArray = [JSON]()
+    var postsArray = [JSON]()
+    
+    var maxIndexForPosts = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,6 +120,8 @@ extension ViewController : MainDataManagerDelegate{
             
             self.postavshikActivityCellsArray = data["points_top"].arrayValue
             
+            self.postsArray = data["posts"].arrayValue
+            
             self.tableView.reloadData()
             
             self.refreshControl.endRefreshing()
@@ -132,7 +138,7 @@ extension ViewController : MainDataManagerDelegate{
 extension ViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 + activityLineCellsArray.count + 1 + 1 + postavshikActivityCellsArray.count
+        return 3 + activityLineCellsArray.count + 1 + 1 + postavshikActivityCellsArray.count + postsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -147,6 +153,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         
         let maxIndexForPostavshikActivityCells = maxIndexForActivityLineCells + 1 + postavshikActivityCellsArray.count  /// We take maxIndexForActivityLineCells and do + 1 because there is "postavshikiActivityCell" , then do + 1 again to get the index after that cell and that is the stating point for  postavshikActivityCellsArray. And for getting the maxIndexForPostavshikActivityCells , we add to that starting point or stating index the count of postavshikActivityCellsArray.
         
+        let maxIndexForPosts = maxIndexForPostavshikActivityCells + 1 + postsArray.count
         
         switch indexPath.row {
         
@@ -191,10 +198,20 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             let postavshikActivityLCell = postavshikActivityCellsArray[index]
             
             setUpPostavshikCell(cell: cell, data: postavshikActivityLCell)
-        
+            
         case maxIndexForPostavshikActivityCells + 1:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
+            
+        case maxIndexForPostavshikActivityCells + 2...maxIndexForPosts:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
+            
+            let index = indexPath.row - (maxIndexForPostavshikActivityCells + 2)
+            
+            let post = postsArray[index]
+            
+            setUpPostCell(cell: cell, data: post)
             
         default:
             print("Error with indexPath (Got out of switch)")
@@ -205,8 +222,14 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) ->    CGFloat {
         
-        if indexPath.row == 1{
+        let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count - 1
+        let maxIndexForPostavshikActivityCells = maxIndexForActivityLineCells + 1 + postavshikActivityCellsArray.count
+        let maxIndexForPosts = maxIndexForPostavshikActivityCells + 1 + postsArray.count
+        
+        if indexPath.row == 1 {
             return 126
+        }else if indexPath.row >= maxIndexForPostavshikActivityCells + 2 && indexPath.row <= maxIndexForPosts{
+            return 250
         }
         
         return 50
@@ -281,4 +304,41 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         
     }
     
+    func setUpPostCell(cell: UITableViewCell , data : JSON){
+        
+        if let vendorLabel = cell.viewWithTag(1) as? UILabel,
+           let byLabel = cell.viewWithTag(2) as? UILabel ,
+           let priceLabel = cell.viewWithTag(3) as? UILabel ,
+           let sizeCollectionView = cell.viewWithTag(4) as? UICollectionView,
+           let optionsCollectionView = cell.viewWithTag(5) as? UICollectionView{
+            
+            //            sizeCollectionView.delegate = self
+            //            optionsCollectionView.delegate = self
+            //            sizeCollectionView.dataSource = self
+            //            optionsCollectionView.dataSource = self
+            
+            vendorLabel.text = data["vendor_capt"].stringValue
+            
+            byLabel.text = data["by"].stringValue
+            
+            priceLabel.text = "\(data["price"].stringValue) руб"
+            
+            
+        }
+        
+    }
+    
 }
+
+//MARK: -  UICollectionView stuff
+//extension ViewController : UICollectionViewDelegate , UICollectionViewDataSource{
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        <#code#>
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        <#code#>
+//    }
+//
+//}

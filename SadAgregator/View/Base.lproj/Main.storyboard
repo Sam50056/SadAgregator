@@ -425,15 +425,15 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Самвел Ерзнкян " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="CQO-TZ-WXQ">
-                                                            <rect key="frame" x="68" y="11.999999999999998" width="230" height="20.333333333333329"/>
+                                                            <rect key="frame" x="68" y="11.999999999999998" width="220" height="20.333333333333329"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="700 руб" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Grk-6S-omz">
-                                                            <rect key="frame" x="306" y="11.666666666666668" width="60" height="21.000000000000004"/>
+                                                            <rect key="frame" x="296" y="11.666666666666668" width="70" height="21.000000000000004"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="60" id="fXD-he-N5g"/>
+                                                                <constraint firstAttribute="width" constant="70" id="fXD-he-N5g"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <nil key="textColor"/>
