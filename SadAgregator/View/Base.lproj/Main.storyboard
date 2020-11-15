@@ -298,6 +298,37 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postavshikiActivityCell" rowHeight="50" id="IP0-ne-SAo">
+                                        <rect key="frame" x="0.0" y="379" width="390" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IP0-ne-SAo" id="zaz-Jy-ycd">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Активность поставщиков" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBU-FM-6WV">
+                                                    <rect key="frame" x="28" y="14.666666666666664" width="217" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8ya-16-GV4">
+                                                    <rect key="frame" x="336" y="17" width="26" height="16.333333333333329"/>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="26" id="WLo-yO-SkP"/>
+                                                        <constraint firstAttribute="height" constant="20" id="qlD-nP-GHb"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.89626395700000006" green="0.90821486709999999" blue="0.90771836039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="8ya-16-GV4" secondAttribute="trailing" constant="8" id="Jdh-1A-ZCQ"/>
+                                                <constraint firstItem="ZBU-FM-6WV" firstAttribute="centerY" secondItem="zaz-Jy-ycd" secondAttribute="centerY" id="UUR-cq-RoR"/>
+                                                <constraint firstItem="8ya-16-GV4" firstAttribute="centerY" secondItem="zaz-Jy-ycd" secondAttribute="centerY" id="pke-q9-pLm"/>
+                                                <constraint firstItem="ZBU-FM-6WV" firstAttribute="leading" secondItem="zaz-Jy-ycd" secondAttribute="leadingMargin" constant="8" id="ql7-xh-ta9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -318,7 +349,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1177" y="1111"/>
+            <point key="canvasLocation" x="-1306" y="859"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="5S3-zP-UQM">

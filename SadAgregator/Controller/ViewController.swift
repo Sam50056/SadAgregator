@@ -129,7 +129,7 @@ extension ViewController : MainDataManagerDelegate{
 extension ViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 + activityLineCellsArray.count
+        return 3 + activityLineCellsArray.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -140,7 +140,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             return cell
         }
         
-        let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count ///Max index (indexPath.row) for Activity line cells. So that 3 is because we have 3 static cells , then an array of activity line cells which is not static. So we do 3 + count of the array and get the max index we can put into switch. And what we'll put there will be 3..<array.count. This means that from 3rd index to 3 + array.count all the cells will be "activityLineCell".
+        let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count - 1 ///Max index (indexPath.row) for Activity line cells. So that 3 is because we have 3 static cells , then an array of activity line cells which is not static. So we do 3 + count of the array -1 (because array indexing starts from 0)  and get the max index we can put into switch. And what we'll put there will be 3..<array.count-1 This means that from 3rd index to 3 + array.count-1  all the cells will be "activityLineCell".
         
         switch indexPath.row {
         
@@ -162,7 +162,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             
             cell = tableView.dequeueReusableCell(withIdentifier: "linesActivityCell", for: indexPath)
             
-        case 3..<maxIndexForActivityLineCells:
+        case 3...maxIndexForActivityLineCells:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "activityLineCell", for: indexPath)
             
@@ -171,6 +171,10 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             let activityLine = activityLineCellsArray[index]
             
             setUpActivityLineCell(cell: cell, data: activityLine)
+            
+        case maxIndexForActivityLineCells + 1:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "postavshikiActivityCell", for: indexPath)
             
         default:
             print("Error with indexPath (Got out of switch)")
