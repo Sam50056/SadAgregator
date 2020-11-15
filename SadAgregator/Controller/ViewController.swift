@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     
     var mainData : JSON?
     var activityLineCellsArray = [JSON]()
+    var postavshikActivityCellsArray = [JSON]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,6 +114,8 @@ extension ViewController : MainDataManagerDelegate{
             
             self.activityLineCellsArray = data["lines_act_top"].arrayValue
             
+            self.postavshikActivityCellsArray = data["points_top"].arrayValue
+            
             self.tableView.reloadData()
             
             self.refreshControl.endRefreshing()
@@ -129,7 +132,7 @@ extension ViewController : MainDataManagerDelegate{
 extension ViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 + activityLineCellsArray.count + 1
+        return 3 + activityLineCellsArray.count + 1 + 1 + postavshikActivityCellsArray.count - 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -141,6 +144,9 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         }
         
         let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count - 1 ///Max index (indexPath.row) for Activity line cells. So that 3 is because we have 3 static cells , then an array of activity line cells which is not static. So we do 3 + count of the array -1 (because array indexing starts from 0)  and get the max index we can put into switch. And what we'll put there will be 3..<array.count-1 This means that from 3rd index to 3 + array.count-1  all the cells will be "activityLineCell".
+        
+        let maxIndexForPostavshikActivityCells = maxIndexForActivityLineCells + 1 + postavshikActivityCellsArray.count  /// We take maxIndexForActivityLineCells and do + 1 because there is "postavshikiActivityCell" , then do + 1 again to get the index after that cell and that is the stating point for  postavshikActivityCellsArray. And for getting the maxIndexForPostavshikActivityCells , we add to that starting point or stating index the count of postavshikActivityCellsArray.
+        
         
         switch indexPath.row {
         
@@ -175,6 +181,21 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         case maxIndexForActivityLineCells + 1:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postavshikiActivityCell", for: indexPath)
+            
+        case maxIndexForActivityLineCells + 2...maxIndexForPostavshikActivityCells:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "postavshikActivityCell", for: indexPath)
+            
+            print("IndexPath : \(indexPath.row) , \(maxIndexForActivityLineCells + 2)")
+            
+            let index = indexPath.row - (maxIndexForActivityLineCells + 2)
+            
+            print("Index: \(index)")
+            
+            let postavshikActivityLCell = postavshikActivityCellsArray[index]
+            
+            setUpPostavshikCell(cell: cell, data: postavshikActivityLCell)
+            
             
         default:
             print("Error with indexPath (Got out of switch)")
@@ -231,6 +252,22 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func setUpActivityLineCell(cell : UITableViewCell , data : JSON) {
+        
+        if let mainLabel = cell.viewWithTag(1) as? UILabel ,
+           let lastActLabel = cell.viewWithTag(2) as? UILabel ,
+           let postCountLabel = cell.viewWithTag(3) as? UILabel {
+            
+            mainLabel.text = data["capt"].stringValue
+            
+            lastActLabel.text = data["last_act"].stringValue
+            
+            postCountLabel.text = data["posts"].stringValue
+            
+        }
+        
+    }
+    
+    func setUpPostavshikCell(cell : UITableViewCell , data : JSON){
         
         if let mainLabel = cell.viewWithTag(1) as? UILabel ,
            let lastActLabel = cell.viewWithTag(2) as? UILabel ,
