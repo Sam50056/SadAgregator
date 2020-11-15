@@ -14,22 +14,28 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var refreshControl = UIRefreshControl()
+    
     var key = UserDefaults.standard.string(forKey: "key")
     
     var checkKeysDataManager = CheckKeysDataManager()
-    var mainPageDataManager = MainDataManager()
+    var mainDataManager = MainDataManager()
     
-    var mainPageData : JSON?
+    var mainData : JSON?
     var activityLineCellsArray = [JSON]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         checkKeysDataManager.delegate = self
-        mainPageDataManager.delegate = self
+        mainDataManager.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl) // not required when using UITableViewController
         
         tableView.separatorStyle = .none
         
@@ -56,7 +62,7 @@ extension ViewController : CheckKeysDataManagerDelegate {
                 
                 self.key = safeKey
                 
-                self.mainPageDataManager.getMainData(key: safeKey)
+                self.mainDataManager.getMainData(key: safeKey)
                 
             }
             
@@ -103,12 +109,13 @@ extension ViewController : MainDataManagerDelegate{
         
         DispatchQueue.main.async {
             
-            self.mainPageData = data //Saving main page data from api to this var
+            self.mainData = data //Saving main page data from api to this var
             
             self.activityLineCellsArray = data["lines_act_top"].arrayValue
             
             self.tableView.reloadData()
             
+            self.refreshControl.endRefreshing()
         }
     }
     
@@ -129,7 +136,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         
         var cell = UITableViewCell()
         
-        guard let mainPageData = mainPageData else {
+        guard let mainPageData = mainData else {
             return cell
         }
         
@@ -183,6 +190,19 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
+    //MARK: - Refresh func
+    
+    @objc func refresh(_ sender: AnyObject) {
+        
+        guard let key = key else {
+            return
+        }
+        
+        mainDataManager.getMainData(key: key)
+        
     }
     
     
