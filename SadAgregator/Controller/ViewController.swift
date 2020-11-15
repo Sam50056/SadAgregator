@@ -132,7 +132,7 @@ extension ViewController : MainDataManagerDelegate{
 extension ViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 + activityLineCellsArray.count + 1 + 1 + postavshikActivityCellsArray.count - 1
+        return 3 + activityLineCellsArray.count + 1 + 1 + postavshikActivityCellsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -186,16 +186,15 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postavshikActivityCell", for: indexPath)
             
-            print("IndexPath : \(indexPath.row) , \(maxIndexForActivityLineCells + 2)")
-            
             let index = indexPath.row - (maxIndexForActivityLineCells + 2)
-            
-            print("Index: \(index)")
             
             let postavshikActivityLCell = postavshikActivityCellsArray[index]
             
             setUpPostavshikCell(cell: cell, data: postavshikActivityLCell)
+        
+        case maxIndexForPostavshikActivityCells + 1:
             
+            cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
             
         default:
             print("Error with indexPath (Got out of switch)")
@@ -227,7 +226,6 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         }
         
         mainDataManager.getMainData(key: key)
-        
     }
     
     
