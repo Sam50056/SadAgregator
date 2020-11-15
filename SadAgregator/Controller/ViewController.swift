@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     var mainPageDataManager = MainDataManager()
     
     var mainPageData : JSON?
+    var activityLineCellsArray = [JSON]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,6 +105,8 @@ extension ViewController : MainDataManagerDelegate{
             
             self.mainPageData = data //Saving main page data from api to this var
             
+            self.activityLineCellsArray = data["lines_act_top"].arrayValue
+            
             self.tableView.reloadData()
             
         }
@@ -119,7 +122,7 @@ extension ViewController : MainDataManagerDelegate{
 extension ViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 3 + activityLineCellsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -129,6 +132,8 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         guard let mainPageData = mainPageData else {
             return cell
         }
+        
+        let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count ///Max index (indexPath.row) for Activity line cells. So that 3 is because we have 3 static cells , then an array of activity line cells which is not static. So we do 3 + count of the array and get the max index we can put into switch. And what we'll put there will be 3..<array.count. This means that from 3rd index to 3 + array.count all the cells will be "activityLineCell".
         
         switch indexPath.row {
         
@@ -147,9 +152,19 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             setUpGeneralPostsPhotosCell(cell: cell, data: mainPageData["total_activity"])
             
         case 2:
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "linesActivityCell", for: indexPath)
-        case 3...7:
+            
+        case 3..<maxIndexForActivityLineCells:
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "activityLineCell", for: indexPath)
+            
+            let index = indexPath.row - 3 // We do minus three , still that 3 (count of static cells)
+            
+            let activityLine = activityLineCellsArray[index]
+            
+            setUpActivityLineCell(cell: cell, data: activityLine)
+            
         default:
             print("Error with indexPath (Got out of switch)")
         }
@@ -186,6 +201,22 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             todayPhotosLabel.text = data["photo_today"].stringValue
             
             yesterdayPhotosLabel.text = data["photo_ystd"].stringValue
+            
+        }
+        
+    }
+    
+    func setUpActivityLineCell(cell : UITableViewCell , data : JSON) {
+        
+        if let mainLabel = cell.viewWithTag(1) as? UILabel ,
+           let lastActLabel = cell.viewWithTag(2) as? UILabel ,
+           let postCountLabel = cell.viewWithTag(3) as? UILabel {
+            
+            mainLabel.text = data["capt"].stringValue
+            
+            lastActLabel.text = data["last_act"].stringValue
+            
+            postCountLabel.text = data["posts"].stringValue
             
         }
         
