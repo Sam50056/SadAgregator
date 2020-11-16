@@ -332,14 +332,13 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
                 razmerLabel.text = "Размеры:"
             }
             
-            sizeCollectionView.reloadData()
-            
             vendorLabel.text = data["vendor_capt"].stringValue
             
             byLabel.text = data["by"].stringValue
             
             priceLabel.text = "\(data["price"].stringValue) руб"
             
+            sizeCollectionView.reloadData()
         }
         
     }
@@ -360,6 +359,10 @@ extension ViewController : UICollectionViewDelegate , UICollectionViewDataSource
         if let label = cell.viewWithTag(2) as? UILabel{
             
             label.text = sizesArray[indexPath.row].stringValue
+        }
+        
+        if let bgView = cell.viewWithTag(1) {
+            bgView.layer.cornerRadius = 5
         }
         
         return cell
