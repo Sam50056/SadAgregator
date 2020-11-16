@@ -452,13 +452,16 @@
                                                         <constraint firstItem="CQO-TZ-WXQ" firstAttribute="centerY" secondItem="VTC-qe-v1V" secondAttribute="centerY" id="oAe-Mq-1KT"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Размеры:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJo-Mp-hgw">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Размеры:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJo-Mp-hgw">
                                                     <rect key="frame" x="8" y="60" width="69" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="69" id="0Wt-Sk-auK"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="4" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="voV-eu-CFo">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="5" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="voV-eu-CFo">
                                                     <rect key="frame" x="85" y="60" width="277" height="18"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
@@ -508,7 +511,7 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="5" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QjJ-Vc-0od">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="6" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QjJ-Vc-0od">
                                                     <rect key="frame" x="8" y="86" width="374" height="56"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
@@ -563,9 +566,9 @@
                                             <constraints>
                                                 <constraint firstItem="voV-eu-CFo" firstAttribute="top" secondItem="VTC-qe-v1V" secondAttribute="bottom" constant="8" id="7pv-Lt-R4L"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="voV-eu-CFo" secondAttribute="trailing" constant="8" id="DAk-vQ-ATy"/>
+                                                <constraint firstItem="QjJ-Vc-0od" firstAttribute="top" secondItem="voV-eu-CFo" secondAttribute="bottom" constant="8" id="Erb-sL-DjH"/>
                                                 <constraint firstAttribute="trailing" secondItem="QjJ-Vc-0od" secondAttribute="trailing" constant="8" id="FyV-3J-mzX"/>
                                                 <constraint firstItem="voV-eu-CFo" firstAttribute="centerY" secondItem="YJo-Mp-hgw" secondAttribute="centerY" id="G9Q-sI-J35"/>
-                                                <constraint firstItem="QjJ-Vc-0od" firstAttribute="top" secondItem="YJo-Mp-hgw" secondAttribute="bottom" constant="8" id="GTm-LZ-zIf"/>
                                                 <constraint firstItem="VTC-qe-v1V" firstAttribute="top" secondItem="NAG-FS-roG" secondAttribute="top" constant="8" id="Jza-U7-mQ1"/>
                                                 <constraint firstItem="YJo-Mp-hgw" firstAttribute="top" secondItem="VTC-qe-v1V" secondAttribute="bottom" constant="8" id="P0R-Us-XbP"/>
                                                 <constraint firstItem="VTC-qe-v1V" firstAttribute="leading" secondItem="NAG-FS-roG" secondAttribute="leading" constant="8" id="dYI-Il-WDO"/>

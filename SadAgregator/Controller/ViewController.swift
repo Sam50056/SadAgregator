@@ -311,22 +311,34 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         if let vendorLabel = cell.viewWithTag(1) as? UILabel,
            let byLabel = cell.viewWithTag(2) as? UILabel ,
            let priceLabel = cell.viewWithTag(3) as? UILabel ,
-           let sizeCollectionView = cell.viewWithTag(4) as? UICollectionView,
-           let optionsCollectionView = cell.viewWithTag(5) as? UICollectionView{
+           let razmerLabel = cell.viewWithTag(4) as? UILabel,
+           let sizeCollectionView = cell.viewWithTag(5) as? UICollectionView,
+           let optionsCollectionView = cell.viewWithTag(6) as? UICollectionView{
+            
+            sizeCollectionView.delegate = self
+            //            optionsCollectionView.delegate = self
+            sizeCollectionView.dataSource = self
+            // optionsCollectionView.dataSource = self
             
             sizesArray = data["sizes"].arrayValue
             
-            sizeCollectionView.delegate = self
-//            optionsCollectionView.delegate = self
-            sizeCollectionView.dataSource = self
-            // optionsCollectionView.dataSource = self
+            if sizesArray == [] {
+                
+                sizeCollectionView.constraints[0].constant = 0
+                razmerLabel.text = ""
+            }else{
+                
+                sizeCollectionView.constraints[0].constant = 18
+                razmerLabel.text = "Размеры:"
+            }
+            
+            sizeCollectionView.reloadData()
             
             vendorLabel.text = data["vendor_capt"].stringValue
             
             byLabel.text = data["by"].stringValue
             
             priceLabel.text = "\(data["price"].stringValue) руб"
-            
             
         }
         
