@@ -27,6 +27,8 @@ class ViewController: UIViewController {
     var postavshikActivityCellsArray = [JSON]()
     var postsArray = [JSON]()
     
+    var sizesArray = [JSON]()
+    
     var maxIndexForPosts = 0
     
     override func viewDidLoad() {
@@ -312,6 +314,8 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
            let sizeCollectionView = cell.viewWithTag(4) as? UICollectionView,
            let optionsCollectionView = cell.viewWithTag(5) as? UICollectionView{
             
+            sizesArray = data["sizes"].arrayValue
+            
             sizeCollectionView.delegate = self
 //            optionsCollectionView.delegate = self
             sizeCollectionView.dataSource = self
@@ -334,7 +338,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
 extension ViewController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return sizesArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -343,7 +347,7 @@ extension ViewController : UICollectionViewDelegate , UICollectionViewDataSource
         
         if let label = cell.viewWithTag(2) as? UILabel{
             
-            label.text = "55"
+            label.text = sizesArray[indexPath.row].stringValue
         }
         
         return cell
