@@ -312,10 +312,10 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
            let sizeCollectionView = cell.viewWithTag(4) as? UICollectionView,
            let optionsCollectionView = cell.viewWithTag(5) as? UICollectionView{
             
-            //            sizeCollectionView.delegate = self
-            //            optionsCollectionView.delegate = self
-            //            sizeCollectionView.dataSource = self
-            //            optionsCollectionView.dataSource = self
+            sizeCollectionView.delegate = self
+//            optionsCollectionView.delegate = self
+            sizeCollectionView.dataSource = self
+            // optionsCollectionView.dataSource = self
             
             vendorLabel.text = data["vendor_capt"].stringValue
             
@@ -331,14 +331,29 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
 }
 
 //MARK: -  UICollectionView stuff
-//extension ViewController : UICollectionViewDelegate , UICollectionViewDataSource{
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        <#code#>
-//    }
-//
-//}
+extension ViewController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sizeCell", for: indexPath)
+        
+        if let label = cell.viewWithTag(2) as? UILabel{
+            
+            label.text = "55"
+        }
+        
+        return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: 25, height: 18)
+        
+    }
+    
+}
