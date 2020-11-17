@@ -323,12 +323,8 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             sizesArray = data["sizes"].arrayValue
             
             if sizesArray == [] {
-                
-                sizeCollectionView.constraints[0].constant = 0
                 razmerLabel.text = ""
             }else{
-                
-                sizeCollectionView.constraints[0].constant = 18
                 razmerLabel.text = "Размеры:"
             }
             
