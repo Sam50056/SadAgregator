@@ -511,7 +511,7 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="6" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QjJ-Vc-0od">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="6" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QjJ-Vc-0od">
                                                     <rect key="frame" x="8" y="86" width="374" height="56"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>

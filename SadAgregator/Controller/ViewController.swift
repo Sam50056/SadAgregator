@@ -27,9 +27,39 @@ class ViewController: UIViewController {
     var postavshikActivityCellsArray = [JSON]()
     var postsArray = [JSON]()
     
-    var sizesArray = [JSON]()
+    enum Section {
+        case main
+    }
     
-    var maxIndexForPosts = 0
+    typealias DataSource =  UICollectionViewDiffableDataSource<Section, String>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, String>
+    
+    
+    var sizes : Array<[String]> {
+        
+        get{
+            
+            var thisArray = Array<[String]>()
+            
+            for post in postsArray {
+                
+                let sizesForThisPost = post["sizes"].arrayValue
+                
+                var stringSizesForThisPost = [String]()
+                
+                for size in sizesForThisPost {
+                    stringSizesForThisPost.append(size.stringValue)
+                }
+                
+                thisArray.append(stringSizesForThisPost)
+                
+            }
+            
+            return thisArray
+            
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -213,7 +243,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             
             let post = postsArray[index]
             
-            setUpPostCell(cell: cell, data: post)
+            setUpPostCell(cell: cell, data: post, index: index)
             
         default:
             print("Error with indexPath (Got out of switch)")
@@ -306,7 +336,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         
     }
     
-    func setUpPostCell(cell: UITableViewCell , data : JSON){
+    func setUpPostCell(cell: UITableViewCell , data : JSON, index : Int){
         
         if let vendorLabel = cell.viewWithTag(1) as? UILabel,
            let byLabel = cell.viewWithTag(2) as? UILabel ,
@@ -317,16 +347,8 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             
             sizeCollectionView.delegate = self
             //            optionsCollectionView.delegate = self
-            sizeCollectionView.dataSource = self
+//            sizeCollectionView.dataSource = self
             // optionsCollectionView.dataSource = self
-            
-            sizesArray = data["sizes"].arrayValue
-            
-            if sizesArray == [] {
-                razmerLabel.text = ""
-            }else{
-                razmerLabel.text = "Размеры:"
-            }
             
             vendorLabel.text = data["vendor_capt"].stringValue
             
@@ -334,7 +356,17 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             
             priceLabel.text = "\(data["price"].stringValue) руб"
             
-            sizeCollectionView.reloadData()
+            //
+            let sizesArray = sizes[index]
+           
+            if sizesArray == [] {
+                razmerLabel.text = ""
+            }else{
+                razmerLabel.text = "Размеры:"
+            }
+            
+            let dataSource = makeDataSource(collectionView: sizeCollectionView)
+            applySnapshot(dataSource: dataSource, array: sizesArray)
         }
         
     }
@@ -342,33 +374,53 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
 }
 
 //MARK: -  UICollectionView stuff
-extension ViewController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
+extension ViewController : UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sizesArray.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sizeCell", for: indexPath)
-        
-        if let label = cell.viewWithTag(2) as? UILabel{
+    func makeDataSource(collectionView : UICollectionView) -> DataSource {
+        // 1
+        let dataSource = DataSource(
+            collectionView: collectionView){ (collectionView, indexPath, sizeString) -> UICollectionViewCell? in
             
-            label.text = sizesArray[indexPath.row].stringValue
+            // 2
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "sizeCell",
+                for: indexPath)
+            
+            if let label = cell.viewWithTag(2) as? UILabel{
+                
+                label.text = sizeString
+            }
+            
+            if let bgView = cell.viewWithTag(1) {
+                bgView.layer.cornerRadius = 5
+            }
+            
+            return cell
         }
         
-        if let bgView = cell.viewWithTag(1) {
-            bgView.layer.cornerRadius = 5
-        }
-        
-        return cell
-        
+        return dataSource
     }
+    
+    func applySnapshot(dataSource : DataSource,  animatingDifferences: Bool = true , array : [String]) {
+        // 2
+        var snapshot = Snapshot()
+        // 3
+        snapshot.appendSections([.main])
+        // 4
+        snapshot.appendItems(array)
+        // 5
+        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: 25, height: 18)
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
 }
