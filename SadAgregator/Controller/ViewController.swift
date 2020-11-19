@@ -27,12 +27,8 @@ class ViewController: UIViewController {
     var postavshikActivityCellsArray = [JSON]()
     var postsArray = [JSON]()
     
-    enum Section {
-        case main
-    }
-    
-    typealias DataSource =  UICollectionViewDiffableDataSource<Section, String>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, String>
+//    typealias DataSource =  UICollectionViewDiffableDataSource<Section, String>
+//    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, String>
     
     
     var sizes : Array<[String]> {
@@ -355,8 +351,8 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
         
-        cell.sizeCollectionView.delegate = self
-        cell.optionCollectionView.delegate = self
+        //        cell.sizeCollectionView.delegate = self
+        //        cell.optionCollectionView.delegate = self
         
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         

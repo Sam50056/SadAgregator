@@ -13,32 +13,34 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
     @IBOutlet weak var byLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     
-    @IBOutlet weak var ramzmeriLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var sizeCollectionView: UICollectionView!
-    @IBOutlet weak var optionCollectionView: UICollectionView!
+    typealias DataSource =  UICollectionViewDiffableDataSource<SectionLayoutKind, String>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, String>
     
-    @IBOutlet weak var sizesViewHeight: NSLayoutConstraint!
+    var dataSource: UICollectionViewDiffableDataSource<SectionLayoutKind, String>!
     
-    var sizes : [String]?{
-        didSet{
-            
-            sizeCollectionView.reloadData()
-            
-            if sizes!.isEmpty{
-                ramzmeriLabel.text = ""
-                sizesViewHeight.constant = 0.1
-            }else{
-                ramzmeriLabel.text = "Размеры:"
-                sizesViewHeight.constant = 30
+    enum SectionLayoutKind : Int , CaseIterable{
+        case size , option
+        var widthDimension : NSCollectionLayoutDimension{
+            switch self {
+            case .option:
+                return .fractionalWidth(0.25)
+            case .size:
+                return .estimated(30)
             }
-            
         }
     }
     
-    var options : [String]? {
+    var sizes = [String](){
         didSet{
-            optionCollectionView.reloadData()
+            applySnapshot()
+        }
+    }
+    
+    var options = [String]() {
+        didSet{
+            applySnapshot()
         }
     }
     
@@ -46,11 +48,12 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        sizeCollectionView.register(UINib(nibName: "SizeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "sizeCell")
-        sizeCollectionView.dataSource = self
+        collectionView.collectionViewLayout = createLayout()
+        makeDataSource()
         
-        optionCollectionView.register(UINib(nibName: "OptionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "optionCell")
-        optionCollectionView.dataSource = self
+        collectionView.register(UINib(nibName: "SizeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "sizeCell")
+        
+        collectionView.register(UINib(nibName: "OptionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "optionCell")
         
     }
     
@@ -60,7 +63,7 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionView.tag == 1 ? sizes?.count ?? 0 : options?.count ?? 0
+        return collectionView.tag == 1 ? sizes.count : options.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -71,17 +74,99 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
             
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sizeCell", for: indexPath) as! SizeCollectionViewCell
             
-            (cell as! SizeCollectionViewCell).label.text = sizes![indexPath.row]
+            (cell as! SizeCollectionViewCell).label.text = sizes[indexPath.row]
             
         }else if collectionView.tag == 2 {
             
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "optionCell", for: indexPath) as! OptionCollectionViewCell
             
-            (cell as! OptionCollectionViewCell).label.text = options![indexPath.row]
+            (cell as! OptionCollectionViewCell).label.text = options[indexPath.row]
             
         }
         
+        cell.backgroundColor = .red
+        
         return cell
+        
+    }
+    
+    func createLayout() -> UICollectionViewLayout {
+        
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex, NSCollectionViewLayoutEnvironment) -> NSCollectionLayoutSection? in
+            
+            guard let sectionLayoutKind = SectionLayoutKind(rawValue: sectionIndex)else{return nil}
+            
+            let widthDimension = sectionLayoutKind.widthDimension
+            
+            let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension: .absolute(30))
+            
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+//            item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
+            
+            let groupSize = sectionLayoutKind ==
+                .size ? NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(24))
+                :  NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(30))
+            
+            let group = sectionLayoutKind == .size ? NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item]) : NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            
+            group.interItemSpacing = .fixed(10)
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.interGroupSpacing = 10
+            section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+            
+            return section
+        }
+        
+        return layout
+        
+    }
+    
+    func makeDataSource() {
+        
+        self.dataSource = DataSource(collectionView: collectionView){ (collectionView, indexPath, text) -> UICollectionViewCell? in
+            
+            var cell = UICollectionViewCell()
+            
+            guard let section = SectionLayoutKind(rawValue: indexPath.section) else {return cell}
+            
+            //            let maxIndexForSizes = sizes.count - 1
+            //            let maxIndexForOptions = maxIndexForSizes + options.count
+            
+            if section == .size {
+                
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sizeCell", for: indexPath) as! SizeCollectionViewCell
+                
+                (cell as! SizeCollectionViewCell).label.text = text
+                
+            }else if section == .option {
+                
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "optionCell", for: indexPath) as! OptionCollectionViewCell
+                
+                (cell as! OptionCollectionViewCell).label.text = text
+                
+            }
+            
+            return cell
+        }
+        
+    }
+    
+    func applySnapshot(animatingDifferences: Bool = false ) {
+        
+        let sections = SectionLayoutKind.allCases
+        var snapshot = Snapshot()
+        snapshot.appendSections(sections)
+        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+        
+        
+        var sizesSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
+        sizesSnapshot.append(sizes)
+        
+        var optionsSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
+        optionsSnapshot.append(options)
+        dataSource.apply(optionsSnapshot, to: .option, animatingDifferences: animatingDifferences)
+        dataSource.apply(sizesSnapshot, to: .size, animatingDifferences: animatingDifferences)
         
     }
     
