@@ -357,8 +357,6 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         
         cell.sizeCollectionView.delegate = self
         cell.optionCollectionView.delegate = self
-        //            sizeCollectionView.dataSource = self
-        // optionsCollectionView.dataSource = self
         
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
@@ -366,20 +364,11 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         
         cell.priceLabel.text = "\(data["price"].stringValue) руб"
         
-        
         let sizesArray = sizes[index]
         let optionsArray = options[index]
         
         cell.sizes = sizesArray
         cell.options = optionsArray
-        
-        if sizesArray.isEmpty {
-            cell.ramzmeriLabel.text = ""
-            cell.sizesViewHeight.constant = 0.1
-        }else{
-            cell.ramzmeriLabel.text = "Размеры:"
-            cell.sizesViewHeight.constant = 30
-        }
         
     }
     

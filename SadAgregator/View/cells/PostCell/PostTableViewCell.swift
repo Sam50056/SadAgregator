@@ -22,7 +22,17 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
     
     var sizes : [String]?{
         didSet{
+            
             sizeCollectionView.reloadData()
+            
+            if sizes!.isEmpty{
+                ramzmeriLabel.text = ""
+                sizesViewHeight.constant = 0.1
+            }else{
+                ramzmeriLabel.text = "Размеры:"
+                sizesViewHeight.constant = 30
+            }
+            
         }
     }
     
@@ -31,6 +41,7 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
             optionCollectionView.reloadData()
         }
     }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
