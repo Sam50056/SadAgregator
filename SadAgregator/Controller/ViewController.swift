@@ -69,6 +69,7 @@ class ViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
         
         //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
@@ -237,13 +238,13 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             
         case maxIndexForPostavshikActivityCells + 2...maxIndexForPosts:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
             
             let index = indexPath.row - (maxIndexForPostavshikActivityCells + 2)
             
             let post = postsArray[index]
             
-            setUpPostCell(cell: cell, data: post, index: index)
+            setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: index)
             
         default:
             print("Error with indexPath (Got out of switch)")
@@ -336,86 +337,78 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         
     }
     
-    func setUpPostCell(cell: UITableViewCell , data : JSON, index : Int){
+    func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
         
-        if let vendorLabel = cell.viewWithTag(1) as? UILabel,
-           let byLabel = cell.viewWithTag(2) as? UILabel ,
-           let priceLabel = cell.viewWithTag(3) as? UILabel ,
-           let razmerLabel = cell.viewWithTag(4) as? UILabel,
-           let sizeCollectionView = cell.viewWithTag(5) as? UICollectionView,
-           let optionsCollectionView = cell.viewWithTag(6) as? UICollectionView{
-            
-            sizeCollectionView.delegate = self
-            //            optionsCollectionView.delegate = self
-//            sizeCollectionView.dataSource = self
-            // optionsCollectionView.dataSource = self
-            
-            vendorLabel.text = data["vendor_capt"].stringValue
-            
-            byLabel.text = data["by"].stringValue
-            
-            priceLabel.text = "\(data["price"].stringValue) руб"
-            
-            //
-            let sizesArray = sizes[index]
-           
-            if sizesArray == [] {
-                razmerLabel.text = ""
-            }else{
-                razmerLabel.text = "Размеры:"
-            }
-            
-            let dataSource = makeDataSource(collectionView: sizeCollectionView)
-            applySnapshot(dataSource: dataSource, array: sizesArray)
+        cell.sizeCollectionView.delegate = self
+        //                    optionsCollectionView.delegate = self
+        //            sizeCollectionView.dataSource = self
+        // optionsCollectionView.dataSource = self
+        
+        cell.vendorLabel.text = data["vendor_capt"].stringValue
+        
+        cell.byLabel.text = data["by"].stringValue
+        
+        cell.priceLabel.text = "\(data["price"].stringValue) руб"
+        
+        
+        let sizesArray = sizes[index]
+        
+        cell.sizes = sizesArray
+        
+        if sizesArray == [] {
+            cell.ramzmeriLabel.text = ""
+        }else{
+            cell.ramzmeriLabel.text = "Размеры:"
         }
         
     }
+    
     
 }
 
 //MARK: -  UICollectionView stuff
-extension ViewController : UICollectionViewDelegate , UICollectionViewDelegateFlowLayout{
+extension ViewController : UICollectionViewDelegate , UICollectionViewDelegateFlowLayout {
     
-    func makeDataSource(collectionView : UICollectionView) -> DataSource {
-        // 1
-        let dataSource = DataSource(
-            collectionView: collectionView){ (collectionView, indexPath, sizeString) -> UICollectionViewCell? in
-            
-            // 2
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "sizeCell",
-                for: indexPath)
-            
-            if let label = cell.viewWithTag(2) as? UILabel{
-                
-                label.text = sizeString
-            }
-            
-            if let bgView = cell.viewWithTag(1) {
-                bgView.layer.cornerRadius = 5
-            }
-            
-            return cell
-        }
-        
-        return dataSource
-    }
-    
-    func applySnapshot(dataSource : DataSource,  animatingDifferences: Bool = true , array : [String]) {
-        // 2
-        var snapshot = Snapshot()
-        // 3
-        snapshot.appendSections([.main])
-        // 4
-        snapshot.appendItems(array)
-        // 5
-        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
-    }
-    
+//    func makeDataSource(collectionView : UICollectionView) -> DataSource {
+//        // 1
+//        let dataSource = DataSource(
+//            collectionView: collectionView){ (collectionView, indexPath, sizeString) -> UICollectionViewCell? in
+//
+//            // 2
+//            let cell = collectionView.dequeueReusableCell(
+//                withReuseIdentifier: "sizeCell",
+//                for: indexPath)
+//
+//            if let label = cell.viewWithTag(2) as? UILabel{
+//
+//                label.text = sizeString
+//            }
+//
+//            if let bgView = cell.viewWithTag(1) {
+//                bgView.layer.cornerRadius = 5
+//            }
+//
+//            return cell
+//        }
+//
+//        return dataSource
+//    }
+//
+//    func applySnapshot(dataSource : DataSource,  animatingDifferences: Bool = true , array : [String]) {
+//        // 2
+//        var snapshot = Snapshot()
+//        // 3
+//        snapshot.appendSections([.main])
+//        // 4
+//        snapshot.appendItems(array)
+//        // 5
+//        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+//    }
+//
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: 25, height: 18)
+        return CGSize(width: 30, height: 18)
         
     }
     
