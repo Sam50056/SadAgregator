@@ -19,6 +19,8 @@
 		22A49CB52566645800CCC781 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CB32566645800CCC781 /* PostTableViewCell.xib */; };
 		22A49CBB2566650600CCC781 /* SizeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CB92566650600CCC781 /* SizeCollectionViewCell.swift */; };
 		22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */; };
+		22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */; };
+		22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */; };
 		22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D60981255D41F000FC622B /* MessageReadedDataManager.swift */; };
 		44D7F3DB0392E9E53844BA25 /* Pods_SadAgregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */; };
 /* End PBXBuildFile section */
@@ -39,6 +41,8 @@
 		22A49CB32566645800CCC781 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		22A49CB92566650600CCC781 /* SizeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCollectionViewCell.swift; sourceTree = "<group>"; };
 		22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SizeCollectionViewCell.xib; sourceTree = "<group>"; };
+		22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCollectionViewCell.swift; sourceTree = "<group>"; };
+		22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionCollectionViewCell.xib; sourceTree = "<group>"; };
 		22D60981255D41F000FC622B /* MessageReadedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadedDataManager.swift; sourceTree = "<group>"; };
 		8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.debug.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.debug.xcconfig"; sourceTree = "<group>"; };
 		DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SadAgregator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +149,7 @@
 		22A49CB12566641800CCC781 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				22A49CC02566716200CCC781 /* OptionCell */,
 				22A49CBE2566655D00CCC781 /* SizeCell */,
 			);
 			path = CollectionViewCells;
@@ -157,6 +162,15 @@
 				22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */,
 			);
 			path = SizeCell;
+			sourceTree = "<group>";
+		};
+		22A49CC02566716200CCC781 /* OptionCell */ = {
+			isa = PBXGroup;
+			children = (
+				22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */,
+				22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */,
+			);
+			path = OptionCell;
 			sourceTree = "<group>";
 		};
 		6358550D007648CA0215FE8A /* Pods */ = {
@@ -228,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A49CB52566645800CCC781 /* PostTableViewCell.xib in Resources */,
+				22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */,
 				22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */,
 				228CB769255BF974002B4A96 /* LaunchScreen.storyboard in Resources */,
 				228CB766255BF974002B4A96 /* Assets.xcassets in Resources */,
@@ -286,6 +301,7 @@
 			files = (
 				2291BE452560620F004F55DF /* MainDataManager.swift in Sources */,
 				22A49CBB2566650600CCC781 /* SizeCollectionViewCell.swift in Sources */,
+				22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
 				228CB761255BF96D002B4A96 /* ViewController.swift in Sources */,
 				22A49CB42566645800CCC781 /* PostTableViewCell.swift in Sources */,

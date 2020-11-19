@@ -36,9 +36,7 @@ class ViewController: UIViewController {
     
     
     var sizes : Array<[String]> {
-        
         get{
-            
             var thisArray = Array<[String]>()
             
             for post in postsArray {
@@ -52,13 +50,31 @@ class ViewController: UIViewController {
                 }
                 
                 thisArray.append(stringSizesForThisPost)
-                
             }
             
             return thisArray
-            
         }
-        
+    }
+    
+    var options : Array<[String]> {
+        get{
+            var thisArray = Array<[String]>()
+            
+            for post in postsArray {
+                
+                let optionsForThisPost = post["options"].arrayValue
+                
+                var stringOptionsForThisPost = [String]()
+                
+                for option in optionsForThisPost {
+                    stringOptionsForThisPost.append(option.stringValue)
+                }
+                
+                thisArray.append(stringOptionsForThisPost)
+            }
+            
+            return thisArray
+        }
     }
     
     override func viewDidLoad() {
@@ -340,7 +356,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
         
         cell.sizeCollectionView.delegate = self
-        //                    optionsCollectionView.delegate = self
+        cell.optionCollectionView.delegate = self
         //            sizeCollectionView.dataSource = self
         // optionsCollectionView.dataSource = self
         
@@ -352,13 +368,17 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         
         
         let sizesArray = sizes[index]
+        let optionsArray = options[index]
         
         cell.sizes = sizesArray
+        cell.options = optionsArray
         
-        if sizesArray == [] {
+        if sizesArray.isEmpty {
             cell.ramzmeriLabel.text = ""
+            cell.sizesViewHeight.constant = 0.1
         }else{
             cell.ramzmeriLabel.text = "Размеры:"
+            cell.sizesViewHeight.constant = 30
         }
         
     }
@@ -369,46 +389,46 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
 //MARK: -  UICollectionView stuff
 extension ViewController : UICollectionViewDelegate , UICollectionViewDelegateFlowLayout {
     
-//    func makeDataSource(collectionView : UICollectionView) -> DataSource {
-//        // 1
-//        let dataSource = DataSource(
-//            collectionView: collectionView){ (collectionView, indexPath, sizeString) -> UICollectionViewCell? in
-//
-//            // 2
-//            let cell = collectionView.dequeueReusableCell(
-//                withReuseIdentifier: "sizeCell",
-//                for: indexPath)
-//
-//            if let label = cell.viewWithTag(2) as? UILabel{
-//
-//                label.text = sizeString
-//            }
-//
-//            if let bgView = cell.viewWithTag(1) {
-//                bgView.layer.cornerRadius = 5
-//            }
-//
-//            return cell
-//        }
-//
-//        return dataSource
-//    }
-//
-//    func applySnapshot(dataSource : DataSource,  animatingDifferences: Bool = true , array : [String]) {
-//        // 2
-//        var snapshot = Snapshot()
-//        // 3
-//        snapshot.appendSections([.main])
-//        // 4
-//        snapshot.appendItems(array)
-//        // 5
-//        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
-//    }
-//
+    //    func makeDataSource(collectionView : UICollectionView) -> DataSource {
+    //        // 1
+    //        let dataSource = DataSource(
+    //            collectionView: collectionView){ (collectionView, indexPath, sizeString) -> UICollectionViewCell? in
+    //
+    //            // 2
+    //            let cell = collectionView.dequeueReusableCell(
+    //                withReuseIdentifier: "sizeCell",
+    //                for: indexPath)
+    //
+    //            if let label = cell.viewWithTag(2) as? UILabel{
+    //
+    //                label.text = sizeString
+    //            }
+    //
+    //            if let bgView = cell.viewWithTag(1) {
+    //                bgView.layer.cornerRadius = 5
+    //            }
+    //
+    //            return cell
+    //        }
+    //
+    //        return dataSource
+    //    }
+    //
+    //    func applySnapshot(dataSource : DataSource,  animatingDifferences: Bool = true , array : [String]) {
+    //        // 2
+    //        var snapshot = Snapshot()
+    //        // 3
+    //        snapshot.appendSections([.main])
+    //        // 4
+    //        snapshot.appendItems(array)
+    //        // 5
+    //        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    //    }
+    //
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: 30, height: 18)
+        return collectionView.tag == 1 ? CGSize(width: 30, height: 18) : CGSize(width: 110, height: 20)
         
     }
     

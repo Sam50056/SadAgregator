@@ -16,12 +16,19 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
     @IBOutlet weak var ramzmeriLabel: UILabel!
     
     @IBOutlet weak var sizeCollectionView: UICollectionView!
+    @IBOutlet weak var optionCollectionView: UICollectionView!
+    
+    @IBOutlet weak var sizesViewHeight: NSLayoutConstraint!
     
     var sizes : [String]?{
         didSet{
-            
             sizeCollectionView.reloadData()
-            
+        }
+    }
+    
+    var options : [String]? {
+        didSet{
+            optionCollectionView.reloadData()
         }
     }
     
@@ -31,6 +38,9 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
         sizeCollectionView.register(UINib(nibName: "SizeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "sizeCell")
         sizeCollectionView.dataSource = self
         
+        optionCollectionView.register(UINib(nibName: "OptionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "optionCell")
+        optionCollectionView.dataSource = self
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,14 +49,26 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sizes?.count ?? 0
+        return collectionView.tag == 1 ? sizes?.count ?? 0 : options?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sizeCell", for: indexPath) as! SizeCollectionViewCell
+        var cell = UICollectionViewCell()
         
-        cell.label.text = sizes![indexPath.row]
+        if collectionView.tag == 1{
+            
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sizeCell", for: indexPath) as! SizeCollectionViewCell
+            
+            (cell as! SizeCollectionViewCell).label.text = sizes![indexPath.row]
+            
+        }else if collectionView.tag == 2 {
+            
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "optionCell", for: indexPath) as! OptionCollectionViewCell
+            
+            (cell as! OptionCollectionViewCell).label.text = options![indexPath.row]
+            
+        }
         
         return cell
         
