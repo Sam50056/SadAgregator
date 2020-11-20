@@ -295,7 +295,18 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         if indexPath.row == 1 {
             return 126
         }else if indexPath.row >= maxIndexForPostavshikActivityCells + 2 && indexPath.row <= maxIndexForPosts{
-            return 340
+            
+            let index = indexPath.row - (maxIndexForPostavshikActivityCells + 2)
+            
+            if options[index].count > 4{
+                return 440
+            }
+            
+            if options.count > 8 {
+                return 480
+            }
+            
+            return 400
         }
         
         return 50
