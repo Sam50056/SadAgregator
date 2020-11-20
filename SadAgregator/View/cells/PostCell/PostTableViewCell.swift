@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
     
@@ -21,13 +22,15 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
     var dataSource: UICollectionViewDiffableDataSource<SectionLayoutKind, String>!
     
     enum SectionLayoutKind : Int , CaseIterable{
-        case size , option
+        case size , option , photo
         var widthDimension : NSCollectionLayoutDimension{
             switch self {
             case .option:
                 return .estimated(110)
             case .size:
                 return .estimated(30)
+            case .photo:
+                return .fractionalWidth(0.5)
             }
         }
     }
@@ -44,6 +47,12 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
         }
     }
     
+    var images = [String](){
+        didSet{
+            applySnapshot()
+        }
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,6 +64,7 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
         
         collectionView.register(UINib(nibName: "OptionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "optionCell")
         
+        collectionView.register(UINib(nibName: "PhotoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "photoCell")
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -96,25 +106,58 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
             
             guard let sectionLayoutKind = SectionLayoutKind(rawValue: sectionIndex)else{return nil}
             
-            let widthDimension = sectionLayoutKind.widthDimension
+            let section: NSCollectionLayoutSection
             
-            let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension: sectionLayoutKind == .size ? .absolute(20) : .fractionalHeight(0.8))
-            
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
-            
-            let groupSize = sectionLayoutKind ==
-                .size ? NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(26))
-                :  NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.18))
-            
-            let group = sectionLayoutKind == .size ? NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item]) : NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-            
-            group.interItemSpacing = sectionLayoutKind == .size ? .fixed(10) : .fixed(5)
-            
-            let section = NSCollectionLayoutSection(group: group)
-//            section.interGroupSpacing = 1
-            sectionLayoutKind == .size ? section.orthogonalScrollingBehavior = .continuous : nil
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0)
+            if sectionLayoutKind == .size || sectionLayoutKind == .option{
+                
+                let widthDimension = sectionLayoutKind.widthDimension
+                
+                let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension: sectionLayoutKind == .size ? .absolute(20) : .absolute(30))
+                
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
+                
+                let groupSize = sectionLayoutKind ==
+                    .size ? NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(26))
+                    :  NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.18))
+                
+                let group = sectionLayoutKind == .size ? NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item]) : NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                group.interItemSpacing = sectionLayoutKind == .size ? .fixed(10) : .fixed(5)
+                
+                section = NSCollectionLayoutSection(group: group)
+                //            section.interGroupSpacing = 1
+                sectionLayoutKind == .size ? section.orthogonalScrollingBehavior = .continuous : nil
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0)
+                
+            }else if sectionLayoutKind == .photo{
+                
+                let leadingItem = NSCollectionLayoutItem(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7),
+                                                       heightDimension: .fractionalHeight(1.0)))
+                leadingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+                
+                let trailingItem = NSCollectionLayoutItem(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                       heightDimension: .fractionalHeight(0.3)))
+                trailingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+                let trailingGroup = NSCollectionLayoutGroup.vertical(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3),
+                                                       heightDimension: .fractionalHeight(1.0)),
+                    subitem: trailingItem, count: 2)
+                
+                let nestedGroup = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                       heightDimension: .fractionalHeight(0.8)),
+                    subitems: [leadingItem, trailingGroup])
+                
+                section = NSCollectionLayoutSection(group: nestedGroup)
+                
+                section.orthogonalScrollingBehavior = .continuous
+                
+            }else {
+                fatalError("Wrong section")
+            }
             
             return section
         }
@@ -125,26 +168,33 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
     
     func makeDataSource() {
         
-        self.dataSource = DataSource(collectionView: collectionView){ (collectionView, indexPath, text) -> UICollectionViewCell? in
+        self.dataSource = DataSource(collectionView: collectionView){ (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             var cell = UICollectionViewCell()
             
             guard let section = SectionLayoutKind(rawValue: indexPath.section) else {return cell}
             
-            //            let maxIndexForSizes = sizes.count - 1
-            //            let maxIndexForOptions = maxIndexForSizes + options.count
-            
             if section == .size {
                 
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sizeCell", for: indexPath) as! SizeCollectionViewCell
                 
-                (cell as! SizeCollectionViewCell).label.text = text
+                (cell as! SizeCollectionViewCell).label.text = item
                 
             }else if section == .option {
                 
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "optionCell", for: indexPath) as! OptionCollectionViewCell
                 
-                (cell as! OptionCollectionViewCell).label.text = text
+                (cell as! OptionCollectionViewCell).label.text = item
+                
+            }else if section == .photo {
+                
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionViewCell
+                
+                if let url = URL(string: item){
+                    
+                    (cell as! PhotoCollectionViewCell).imageView.sd_setImage(with: url, placeholderImage:nil)
+                    
+                }
                 
             }
             
@@ -153,7 +203,7 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
         
     }
     
-    func applySnapshot(animatingDifferences: Bool = false ) {
+    func applySnapshot(animatingDifferences: Bool = false) {
         
         let sections = SectionLayoutKind.allCases
         var snapshot = Snapshot()
@@ -166,8 +216,13 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
         
         var optionsSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
         optionsSnapshot.append(options)
+        
+        var photosSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
+        photosSnapshot.append(images)
+        
         dataSource.apply(optionsSnapshot, to: .option, animatingDifferences: animatingDifferences)
         dataSource.apply(sizesSnapshot, to: .size, animatingDifferences: animatingDifferences)
+        dataSource.apply(photosSnapshot,to: .photo , animatingDifferences: animatingDifferences)
         
     }
     

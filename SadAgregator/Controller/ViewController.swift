@@ -73,6 +73,27 @@ class ViewController: UIViewController {
         }
     }
     
+    var images : Array<[String]> {
+        get{
+            var thisArray = Array<[String]>()
+            
+            for post in postsArray {
+                
+                let imagesForThisPost = post["images"].arrayValue
+                
+                var stringImagesForThisPost = [String]()
+                
+                for image in imagesForThisPost {
+                    stringImagesForThisPost.append(image["img"].stringValue)
+                }
+                
+                thisArray.append(stringImagesForThisPost)
+            }
+            
+            return thisArray
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -265,7 +286,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) ->    CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count - 1
         let maxIndexForPostavshikActivityCells = maxIndexForActivityLineCells + 1 + postavshikActivityCellsArray.count
@@ -274,7 +295,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         if indexPath.row == 1 {
             return 126
         }else if indexPath.row >= maxIndexForPostavshikActivityCells + 2 && indexPath.row <= maxIndexForPosts{
-            return 250
+            return 340
         }
         
         return 50
@@ -362,9 +383,11 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
         
         let sizesArray = sizes[index]
         let optionsArray = options[index]
+        let imagesArray = images[index]
         
         cell.sizes = sizesArray
         cell.options = optionsArray
+        cell.images = imagesArray
         
     }
     
@@ -373,43 +396,6 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
 
 //MARK: -  UICollectionView stuff
 extension ViewController : UICollectionViewDelegate , UICollectionViewDelegateFlowLayout {
-    
-    //    func makeDataSource(collectionView : UICollectionView) -> DataSource {
-    //        // 1
-    //        let dataSource = DataSource(
-    //            collectionView: collectionView){ (collectionView, indexPath, sizeString) -> UICollectionViewCell? in
-    //
-    //            // 2
-    //            let cell = collectionView.dequeueReusableCell(
-    //                withReuseIdentifier: "sizeCell",
-    //                for: indexPath)
-    //
-    //            if let label = cell.viewWithTag(2) as? UILabel{
-    //
-    //                label.text = sizeString
-    //            }
-    //
-    //            if let bgView = cell.viewWithTag(1) {
-    //                bgView.layer.cornerRadius = 5
-    //            }
-    //
-    //            return cell
-    //        }
-    //
-    //        return dataSource
-    //    }
-    //
-    //    func applySnapshot(dataSource : DataSource,  animatingDifferences: Bool = true , array : [String]) {
-    //        // 2
-    //        var snapshot = Snapshot()
-    //        // 3
-    //        snapshot.appendSections([.main])
-    //        // 4
-    //        snapshot.appendItems(array)
-    //        // 5
-    //        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
-    //    }
-    //
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
