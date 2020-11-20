@@ -299,14 +299,14 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
             let index = indexPath.row - (maxIndexForPostavshikActivityCells + 2)
             
             if options[index].count > 4{
-                return 440
+                return 390
             }
             
             if options.count > 8 {
-                return 480
+                return 430
             }
             
-            return 400
+            return 350
         }
         
         return 50

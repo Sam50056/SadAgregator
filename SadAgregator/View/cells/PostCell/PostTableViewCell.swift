@@ -134,7 +134,7 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
                 
                 let leadingItem = NSCollectionLayoutItem(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7),
-                                                       heightDimension: .fractionalHeight(0.8)))
+                                                       heightDimension: .fractionalHeight(1)))
                 leadingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
                 
                 let trailingItem = NSCollectionLayoutItem(
@@ -143,7 +143,7 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
                 trailingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
                 let trailingGroup = NSCollectionLayoutGroup.vertical(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3),
-                                                       heightDimension: .fractionalHeight(0.8)),
+                                                       heightDimension: .fractionalHeight(1)),
                     subitem: trailingItem, count: 2)
                 
                 let nestedGroup = NSCollectionLayoutGroup.horizontal(

@@ -15,6 +15,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        imageView.clipsToBounds = true
     }
 
 }
