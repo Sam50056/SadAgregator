@@ -25,7 +25,7 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
         var widthDimension : NSCollectionLayoutDimension{
             switch self {
             case .option:
-                return .fractionalWidth(0.25)
+                return .estimated(110)
             case .size:
                 return .estimated(30)
             }
@@ -98,22 +98,23 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
             
             let widthDimension = sectionLayoutKind.widthDimension
             
-            let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension: .absolute(30))
+            let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension: sectionLayoutKind == .size ? .absolute(20) : .fractionalHeight(0.8))
             
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//            item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
             
             let groupSize = sectionLayoutKind ==
-                .size ? NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(24))
-                :  NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(30))
+                .size ? NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(26))
+                :  NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.18))
             
             let group = sectionLayoutKind == .size ? NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item]) : NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
-            group.interItemSpacing = .fixed(10)
+            group.interItemSpacing = sectionLayoutKind == .size ? .fixed(10) : .fixed(5)
             
             let section = NSCollectionLayoutSection(group: group)
-            section.interGroupSpacing = 10
-            section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+//            section.interGroupSpacing = 1
+            sectionLayoutKind == .size ? section.orthogonalScrollingBehavior = .continuous : nil
+            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0)
             
             return section
         }
