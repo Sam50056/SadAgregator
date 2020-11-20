@@ -115,6 +115,11 @@ class ViewController: UIViewController {
         checkKeysDataManager.getKeysData(key: key)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isNavigationBarHidden = true
+    }
     
 }
 
