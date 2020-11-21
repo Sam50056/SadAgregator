@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
+		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB75C255BF96D002B4A96 /* AppDelegate.swift */; };
 		228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB75E255BF96D002B4A96 /* SceneDelegate.swift */; };
 		228CB761255BF96D002B4A96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB760255BF96D002B4A96 /* ViewController.swift */; };
@@ -29,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		0F53D53512395AE77F62F84F /* Pods-SadAgregator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.release.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.release.xcconfig"; sourceTree = "<group>"; };
+		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
+		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		228CB759255BF96D002B4A96 /* SadAgregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SadAgregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228CB75C255BF96D002B4A96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		228CB75E255BF96D002B4A96 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,16 @@
 				DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2253EE252569D1C500103C86 /* MainScreenDataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				2291BE442560620F004F55DF /* MainDataManager.swift */,
+				228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */,
+				22D60981255D41F000FC622B /* MessageReadedDataManager.swift */,
+			);
+			path = MainScreenDataManagers;
 			sourceTree = "<group>";
 		};
 		228CB750255BF96D002B4A96 = {
@@ -118,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				228CB760255BF96D002B4A96 /* ViewController.swift */,
+				2253EE2A2569D85D00103C86 /* LineViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -125,9 +140,8 @@
 		228CB774255BF996002B4A96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */,
-				22D60981255D41F000FC622B /* MessageReadedDataManager.swift */,
-				2291BE442560620F004F55DF /* MainDataManager.swift */,
+				2253EE252569D1C500103C86 /* MainScreenDataManagers */,
+				2253EE262569D23600103C86 /* ActivityLineDataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -316,11 +330,13 @@
 			files = (
 				2291BE452560620F004F55DF /* MainDataManager.swift in Sources */,
 				22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */,
+				2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */,
 				22A49CBB2566650600CCC781 /* SizeCollectionViewCell.swift in Sources */,
 				22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
 				228CB761255BF96D002B4A96 /* ViewController.swift in Sources */,
 				22A49CB42566645800CCC781 /* PostTableViewCell.swift in Sources */,
+				2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
 				228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */,
 				228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */,

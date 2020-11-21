@@ -18,18 +18,14 @@ class ViewController: UIViewController {
     
     var key = UserDefaults.standard.string(forKey: "key")
     
-    var checkKeysDataManager = CheckKeysDataManager()
-    var mainDataManager = MainDataManager()
+    lazy var checkKeysDataManager = CheckKeysDataManager()
+    lazy var mainDataManager = MainDataManager()
     
     var mainData : JSON?
     
     var activityLineCellsArray = [JSON]()
     var postavshikActivityCellsArray = [JSON]()
     var postsArray = [JSON]()
-    
-//    typealias DataSource =  UICollectionViewDiffableDataSource<Section, String>
-//    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, String>
-    
     
     var sizes : Array<[String]> {
         get{
@@ -93,6 +89,8 @@ class ViewController: UIViewController {
             return thisArray
         }
     }
+    
+    var selectedLineId : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -318,6 +316,25 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let index = indexPath.row
+        
+        let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count - 1
+        let maxIndexForPostavshikActivityCells = maxIndexForActivityLineCells + 1 + postavshikActivityCellsArray.count
+        let maxIndexForPosts = maxIndexForPostavshikActivityCells + 1 + postsArray.count
+        
+        if index >= 3 && index <= maxIndexForActivityLineCells{
+            
+            let indexForCell = index - 3
+            
+            let cellData = activityLineCellsArray[indexForCell]
+            
+            selectedLineId = cellData["line_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToLine", sender: self)
+            
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -410,17 +427,18 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
     
 }
 
-//MARK: -  UICollectionView stuff
-extension ViewController : UICollectionViewDelegate , UICollectionViewDelegateFlowLayout {
+extension ViewController {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        return collectionView.tag == 1 ? CGSize(width: 30, height: 18) : CGSize(width: 110, height: 20)
+        if segue.identifier == "goToLine"{
+            
+            let destinationVC = segue.destination as! LineViewController
+            
+            destinationVC.thisLineId = selectedLineId
+            
+        }
         
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
 }

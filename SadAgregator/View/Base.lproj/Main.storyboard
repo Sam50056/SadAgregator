@@ -246,12 +246,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="koj-j9-MmD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3468" y="2377"/>
+            <point key="canvasLocation" x="-3668" y="2377"/>
         </scene>
-        <!--View Controller-->
+        <!--Line View Controller-->
         <scene sceneID="MTm-WZ-QSG">
             <objects>
-                <viewController id="6xv-TR-yJ5" sceneMemberID="viewController">
+                <viewController id="6xv-TR-yJ5" customClass="LineViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZZH-vx-kjE">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
