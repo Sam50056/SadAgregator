@@ -140,7 +140,7 @@
                                 <rect key="frame" x="8" y="471" width="347" height="24"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 мин. назад" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZp-bw-5Yy">
-                                        <rect key="frame" x="0.0" y="5" width="70" height="14"/>
+                                        <rect key="frame" x="0.0" y="6" width="70" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="Kro-tx-i4T"/>
                                         </constraints>
@@ -160,7 +160,7 @@
                                 <constraints>
                                     <constraint firstItem="tsf-WR-ctC" firstAttribute="top" secondItem="PUa-Dn-Z6k" secondAttribute="top" id="6E4-pw-Wqs"/>
                                     <constraint firstAttribute="height" constant="24" id="6bq-cH-28p"/>
-                                    <constraint firstItem="eZp-bw-5Yy" firstAttribute="centerY" secondItem="tsf-WR-ctC" secondAttribute="centerY" id="YYS-I1-nXH"/>
+                                    <constraint firstItem="eZp-bw-5Yy" firstAttribute="centerY" secondItem="tsf-WR-ctC" secondAttribute="centerY" constant="1" id="YYS-I1-nXH"/>
                                     <constraint firstItem="tsf-WR-ctC" firstAttribute="centerY" secondItem="PUa-Dn-Z6k" secondAttribute="centerY" id="Z2f-PA-VbK"/>
                                     <constraint firstItem="tsf-WR-ctC" firstAttribute="leading" secondItem="eZp-bw-5Yy" secondAttribute="trailing" constant="32" id="blQ-JX-7Qq"/>
                                     <constraint firstAttribute="bottom" secondItem="tsf-WR-ctC" secondAttribute="bottom" id="t07-WB-nWa"/>
