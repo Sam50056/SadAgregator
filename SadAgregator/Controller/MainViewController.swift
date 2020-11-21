@@ -8,7 +8,7 @@
 import UIKit
 import SwiftyJSON
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     @IBOutlet weak var searchView: UIView!
     
@@ -122,7 +122,7 @@ class ViewController: UIViewController {
 }
 
 //MARK: - CheckKeysDataManagerDelegate stuff
-extension ViewController : CheckKeysDataManagerDelegate {
+extension MainViewController : CheckKeysDataManagerDelegate {
     
     func didGetCheckKeysData(data: JSON) {
         
@@ -177,7 +177,7 @@ extension ViewController : CheckKeysDataManagerDelegate {
 }
 
 //MARK: - MainDataManagerDelegate stuff
-extension ViewController : MainDataManagerDelegate{
+extension MainViewController : MainDataManagerDelegate{
     
     func didGetMainData(data: JSON) {
         
@@ -204,7 +204,7 @@ extension ViewController : MainDataManagerDelegate{
 }
 
 //MARK: - UITableView stuff
-extension ViewController : UITableViewDelegate , UITableViewDataSource {
+extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3 + activityLineCellsArray.count + 1 + 1 + postavshikActivityCellsArray.count + postsArray.count
@@ -427,7 +427,7 @@ extension ViewController : UITableViewDelegate , UITableViewDataSource {
     
 }
 
-extension ViewController {
+extension MainViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
