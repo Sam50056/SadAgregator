@@ -35,17 +35,13 @@ struct ActivityLineDataManager {
                 return
             }
             
-            do{
-                
-                guard let data = data else {delegate?.didFailGettingActivityLineData(error: "Data is empty"); return}
-                
-                let jsonAnswer = try JSON(data: data)
-                
-                delegate?.didGetActivityData(data: jsonAnswer)
-                
-            }catch{
-                delegate?.didFailGettingActivityLineData(error: error.localizedDescription)
-            }
+            guard let data = data else {delegate?.didFailGettingActivityLineData(error: "Data is empty"); return}
+            
+            let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+            
+            let jsonAnswer = JSON(parseJSON: json)
+            
+            delegate?.didGetActivityData(data: jsonAnswer)
             
         }
         

@@ -36,22 +36,15 @@ struct MainDataManager {
                 return
             }
             
-            
-           // do{
+            if let safeData = data {
                 
-                if let safeData = data {
-                    
-                    let json = String(data: safeData , encoding: String.Encoding.windowsCP1251)!
-                    
-                    let jsonAnswer = JSON(parseJSON: json)
-                    
-                    delegate?.didGetMainData(data: jsonAnswer)
-                    
-                }
+                let json = String(data: safeData , encoding: String.Encoding.windowsCP1251)!
                 
-//            }catch{
-//                delegate?.didFailGettingMainData(error: error.localizedDescription)
-//            }
+                let jsonAnswer = JSON(parseJSON: json)
+                
+                delegate?.didGetMainData(data: jsonAnswer)
+                
+            }
             
         }
         

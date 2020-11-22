@@ -122,6 +122,7 @@ class MainViewController: UIViewController {
 }
 
 //MARK: - CheckKeysDataManagerDelegate stuff
+
 extension MainViewController : CheckKeysDataManagerDelegate {
     
     func didGetCheckKeysData(data: JSON) {
@@ -177,6 +178,7 @@ extension MainViewController : CheckKeysDataManagerDelegate {
 }
 
 //MARK: - MainDataManagerDelegate stuff
+
 extension MainViewController : MainDataManagerDelegate{
     
     func didGetMainData(data: JSON) {
@@ -204,6 +206,7 @@ extension MainViewController : MainDataManagerDelegate{
 }
 
 //MARK: - UITableView stuff
+
 extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -351,7 +354,8 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     
-    //MARK: - Cells setup functions
+    //MARK: - Cells Setup
+    
     func setUpGeneralPostsPhotosCell(cell : UITableViewCell , data : JSON){
         
         if let todaysPostsLabel = cell.viewWithTag(1) as? UILabel ,
@@ -405,9 +409,6 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
         
-        //        cell.sizeCollectionView.delegate = self
-        //        cell.optionCollectionView.delegate = self
-        
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
         cell.byLabel.text = data["by"].stringValue
@@ -426,6 +427,8 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
     
 }
+
+//MARK: - Segue Stuff
 
 extension MainViewController {
     
