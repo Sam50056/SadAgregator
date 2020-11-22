@@ -20,9 +20,9 @@ class LineViewController: UIViewController {
     lazy var activityLineDataManager = ActivityLineDataManager()
     
     var lineData : JSON?
-    var postsArray = [JSON]()
     
     var activityTochkaCellsArray = [JSON]()
+    var postsArray = [JSON]()
     
     var sizes : Array<[String]> {
         get{
@@ -87,7 +87,6 @@ class LineViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -111,6 +110,8 @@ class LineViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = "Линия"
+        
     }
     
 }
@@ -122,6 +123,8 @@ extension LineViewController : ActivityLineDataManagerDelegate{
         DispatchQueue.main.async{
             
             self.lineData = data
+            
+            self.navigationItem.title = data["capt"].stringValue
             
             self.activityTochkaCellsArray = data["points_top"].arrayValue
             
@@ -311,6 +314,5 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         cell.images = imagesArray
         
     }
-    
     
 }
