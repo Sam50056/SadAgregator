@@ -12,6 +12,8 @@ class LineViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var refreshControl = UIRefreshControl()
+    
     let key = UserDefaults.standard.string(forKey: "key")!
     var thisLineId : String?
     
@@ -30,9 +32,11 @@ class LineViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        if let safeId = thisLineId{
-            activityLineDataManager.getActivityData(key: key, lineId: safeId)
-        }
+        //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl) // not required when using UITableViewController
+        
+        refresh(self)
         
     }
     
@@ -55,6 +59,8 @@ extension LineViewController : ActivityLineDataManagerDelegate{
             self.activityTochkaCellsArray = data["points_top"].arrayValue
             
             self.tableView.reloadData()
+            
+            self.refreshControl.endRefreshing()
         }
     }
     
@@ -62,8 +68,18 @@ extension LineViewController : ActivityLineDataManagerDelegate{
         print("Error with ActivityLineDataManager: \(error)")
     }
     
+    
+    //MARK: - Refresh func
+    
+    @objc func refresh(_ sender: AnyObject) {
+        
+        if let safeId = thisLineId{
+            activityLineDataManager.getActivityData(key: key, lineId: safeId)
+        }
+        
+    }
+    
 }
-
 //MARK: - UITableView Stuff
 extension LineViewController : UITableViewDelegate , UITableViewDataSource{
     
@@ -108,7 +124,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             let activityLine = activityTochkaCellsArray[index]
             
             setUpActivityLineCell(cell: cell, data: activityLine)
-        
+            
         case maxIndexForActivityTochkaCells + 1:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
