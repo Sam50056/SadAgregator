@@ -68,7 +68,7 @@ extension LineViewController : ActivityLineDataManagerDelegate{
 extension LineViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 + activityTochkaCellsArray.count
+        return 3 + activityTochkaCellsArray.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,6 +108,10 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             let activityLine = activityTochkaCellsArray[index]
             
             setUpActivityLineCell(cell: cell, data: activityLine)
+        
+        case maxIndexForActivityTochkaCells + 1:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
             
         default:
             print("IndexPath out of switch: \(index)")
