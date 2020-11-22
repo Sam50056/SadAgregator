@@ -543,10 +543,20 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="2gc-c2-Kpi">
+                                                    <rect key="frame" x="336" y="17" width="26" height="16.333333333333329"/>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="26" id="Ibn-qa-p2g"/>
+                                                        <constraint firstAttribute="height" constant="20" id="f1I-Zh-vnH"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.89626395700000006" green="0.90821486709999999" blue="0.90771836039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="95Y-Wu-8dC" firstAttribute="leading" secondItem="GUg-56-vQS" secondAttribute="leadingMargin" constant="8" id="8Nd-dg-dRy"/>
+                                                <constraint firstItem="2gc-c2-Kpi" firstAttribute="centerY" secondItem="GUg-56-vQS" secondAttribute="centerY" id="9Ke-lG-Cd6"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="2gc-c2-Kpi" secondAttribute="trailing" constant="8" id="hJC-Jh-Lj6"/>
                                                 <constraint firstItem="95Y-Wu-8dC" firstAttribute="centerY" secondItem="GUg-56-vQS" secondAttribute="centerY" id="lRI-4g-l5p"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -571,7 +581,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Vs-BG-wk6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2538" y="2377"/>
+            <point key="canvasLocation" x="-2540" y="2376.5402843601896"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">

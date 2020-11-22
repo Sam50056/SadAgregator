@@ -148,7 +148,7 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
                 
                 let nestedGroup = NSCollectionLayoutGroup.horizontal(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: .fractionalHeight(0.77)),
+                                                       heightDimension: .fractionalHeight(0.75)),
                     subitems: [leadingItem, trailingGroup])
                 
                 section = NSCollectionLayoutSection(group: nestedGroup)

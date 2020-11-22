@@ -425,7 +425,6 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         
     }
     
-    
 }
 
 //MARK: - Segue Stuff
