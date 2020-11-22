@@ -576,7 +576,7 @@
                     <navigationItem key="navigationItem" id="wYe-Fc-DZU"/>
                     <connections>
                         <outlet property="tableView" destination="ftC-sG-ENj" id="ks5-fJ-e3l"/>
-                        <segue destination="PU7-Gp-SMR" kind="show" id="3vK-wY-P32"/>
+                        <segue destination="PU7-Gp-SMR" kind="show" identifier="goToTochka" id="3vK-wY-P32"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Vs-BG-wk6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

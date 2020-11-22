@@ -90,6 +90,8 @@ class LineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Линия"
+        
         activityLineDataManager.delegate = self
         
         tableView.separatorStyle = .none
@@ -110,8 +112,6 @@ class LineViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.title = "Линия"
-        
     }
     
 }
@@ -247,6 +247,24 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let index = indexPath.row
+        
+        let maxIndexForActivityTochkaCells = 3 + activityTochkaCellsArray.count - 1
+        let maxIndexForPosts = maxIndexForActivityTochkaCells + 1 + postsArray.count
+        
+        if index >= 3 && index <= maxIndexForActivityTochkaCells{
+            
+            let indexForCell = index - 3
+            
+            let cellData = activityTochkaCellsArray[indexForCell]
+            
+           // selectedLineId = cellData["line_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToTochka", sender: self)
+            
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
