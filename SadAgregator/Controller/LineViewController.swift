@@ -17,7 +17,9 @@ class LineViewController: UIViewController {
     
     lazy var activityLineDataManager = ActivityLineDataManager()
     
-    var lineData : JSON? 
+    var lineData : JSON?
+    
+    var activityTochkaCellsArray = [JSON]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +52,8 @@ extension LineViewController : ActivityLineDataManagerDelegate{
             
             self.lineData = data
             
+            self.activityTochkaCellsArray = data["points_top"].arrayValue
+            
             self.tableView.reloadData()
         }
     }
@@ -64,7 +68,7 @@ extension LineViewController : ActivityLineDataManagerDelegate{
 extension LineViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 3 + activityTochkaCellsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,6 +78,8 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         var cell = UITableViewCell()
         
         guard let lineData = lineData else {return cell}
+        
+        let maxIndexForActivityTochkaCells = 3 + activityTochkaCellsArray.count - 1 ///Max index (indexPath.row) for Activity tochka cells. So that 3 is because we have 3 static cells , then an array of activity tochka cells which is not static. So we do 3 + count of the array -1 (because array indexing starts from 0)  and get the max index we can put into switch. And what we'll put there will be 3..<array.count-1 This means that from 3rd index to 3 + array.count-1  all the cells will be "activityTochkaCell".
         
         switch index {
         
@@ -92,6 +98,16 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         case 2:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "TochkiActivityCell", for: indexPath)
+            
+        case 3...maxIndexForActivityTochkaCells:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "activityTochkaCell", for: indexPath)
+            
+            let index = indexPath.row - 3 // We do minus three , still that 3 (count of static cells)
+            
+            let activityLine = activityTochkaCellsArray[index]
+            
+            setUpActivityLineCell(cell: cell, data: activityLine)
             
         default:
             print("IndexPath out of switch: \(index)")
@@ -141,6 +157,22 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             todayPhotosLabel.text = data["photo_today"].stringValue
             
             yesterdayPhotosLabel.text = data["photo_ystd"].stringValue
+            
+        }
+        
+    }
+    
+    func setUpActivityLineCell(cell : UITableViewCell , data : JSON) {
+        
+        if let mainLabel = cell.viewWithTag(1) as? UILabel ,
+           let lastActLabel = cell.viewWithTag(2) as? UILabel ,
+           let postCountLabel = cell.viewWithTag(3) as? UILabel {
+            
+            mainLabel.text = data["capt"].stringValue
+            
+            lastActLabel.text = data["last_act"].stringValue
+            
+            postCountLabel.text = data["posts"].stringValue
             
         }
         
