@@ -123,7 +123,7 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
                 
                 let group = sectionLayoutKind == .size ? NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item]) : NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
-                group.interItemSpacing = sectionLayoutKind == .size ? .fixed(10) : .fixed(5)
+                group.interItemSpacing = sectionLayoutKind == .size ? .fixed(10) : .fixed(8)
                 
                 section = NSCollectionLayoutSection(group: group)
                 //            section.interGroupSpacing = 1
