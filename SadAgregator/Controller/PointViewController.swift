@@ -84,6 +84,10 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             
             setUpGeneralPostsPhotosCell(cell: cell, data: tochkaData["activity"])
             
+        case 2:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "agregatorsCell", for: indexPath)
+            
         default:
             print("IndexPath out of switch: \(index)")
         }
