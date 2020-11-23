@@ -76,6 +76,8 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "pointSwitchCell", for: indexPath)
             
+            setUpSwitchCell(cell: cell, data: tochkaData["arrows"])
+            
         case 1:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "generalPostsPhotosCell", for: indexPath)
@@ -91,10 +93,22 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 0 ? 50 : 126
+        return indexPath.row == 1 ? 126 : 50
     }
     
     //MARK: - Cell Setup
+    
+    func setUpSwitchCell(cell : UITableViewCell, data: JSON){
+        
+        if let leftLabel = cell.viewWithTag(2) as? UILabel,
+           let rightLabel = cell.viewWithTag(3) as? UILabel{
+            
+            leftLabel.text = data["name_prev"].stringValue
+            rightLabel.text = data["name_next"].stringValue
+            
+        }
+        
+    }
     
     func setUpGeneralPostsPhotosCell(cell : UITableViewCell , data : JSON){
         
