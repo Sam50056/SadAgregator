@@ -118,7 +118,23 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 1 ? 126 : 50
+        
+        let maxIndexForVendCells = 3 + vendsArray.count - 1
+        //        let maxIndexForPosts = maxIndexForActivityTochkaCells + 1 + postsArray.count
+        
+        if indexPath.row == 1 {
+            return 126
+        }else if indexPath.row >= 3 && indexPath.row <= maxIndexForVendCells && indexPath.row <= maxIndexForVendCells {
+            return 115
+        }
+        
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     //MARK: - Cell Setup
@@ -162,7 +178,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         ratingView.settings.filledBorderColor = .lightGray
         ratingView.settings.emptyBorderColor = .lightGray
         
-        cell.addSubview(view)
+        cell.addSubview(ratingView)
         
         //            cell.frame = CGRect(x: 5, y: 5, width: 30, height: 15)
         
