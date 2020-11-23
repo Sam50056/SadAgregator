@@ -100,6 +100,8 @@ class PointViewController: UIViewController {
         tableView.register(VendTableViewCell.self, forCellReuseIdentifier: "vendCell")
         tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
         
+        self.navigationItem.title = "Точка"
+        
         if let safeId = thisPointId{
             activityPointDataManager.getActivityPointData(key: key, pointId: safeId)
         }
@@ -115,6 +117,8 @@ extension PointViewController : ActivityPointDataManagerDelegate {
         DispatchQueue.main.async {
             
             self.pointData = data
+            
+            self.navigationItem.title = data["capt"].stringValue
             
             self.vendsArray = data["vends"].arrayValue
             
