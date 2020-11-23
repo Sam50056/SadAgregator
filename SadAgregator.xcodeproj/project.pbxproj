@@ -10,6 +10,7 @@
 		221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221949FE256B1FBD00E0564D /* PointViewController.swift */; };
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
+		2260D3E8256C1C8E008F64A6 /* VendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2260D3E7256C1C8E008F64A6 /* VendTableViewCell.swift */; };
 		228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB75C255BF96D002B4A96 /* AppDelegate.swift */; };
 		228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB75E255BF96D002B4A96 /* SceneDelegate.swift */; };
 		228CB761255BF96D002B4A96 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB760255BF96D002B4A96 /* MainViewController.swift */; };
@@ -36,6 +37,7 @@
 		221949FE256B1FBD00E0564D /* PointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointViewController.swift; sourceTree = "<group>"; };
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
+		2260D3E7256C1C8E008F64A6 /* VendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendTableViewCell.swift; sourceTree = "<group>"; };
 		228CB759255BF96D002B4A96 /* SadAgregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SadAgregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228CB75C255BF96D002B4A96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		228CB75E255BF96D002B4A96 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -168,10 +170,19 @@
 			path = ActivityPointDataManagers;
 			sourceTree = "<group>";
 		};
+		22A05356256C17E60016B40A /* VendorCell */ = {
+			isa = PBXGroup;
+			children = (
+				2260D3E7256C1C8E008F64A6 /* VendTableViewCell.swift */,
+			);
+			path = VendorCell;
+			sourceTree = "<group>";
+		};
 		22A49CA7256661D700CCC781 /* cells */ = {
 			isa = PBXGroup;
 			children = (
 				22A49CAE256663FA00CCC781 /* PostCell */,
+				22A05356256C17E60016B40A /* VendorCell */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -351,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */,
+				2260D3E8256C1C8E008F64A6 /* VendTableViewCell.swift in Sources */,
 				2291BE452560620F004F55DF /* MainDataManager.swift in Sources */,
 				22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */,
 				2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */,

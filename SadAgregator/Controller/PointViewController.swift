@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftyJSON
+import Cosmos
 
 class PointViewController: UIViewController {
     
@@ -31,12 +32,16 @@ class PointViewController: UIViewController {
         
         tableView.separatorStyle = .none
         
+        tableView.register(VendTableViewCell.self, forCellReuseIdentifier: "vendCell")
+        
         if let safeId = thisPointId{
             activityPointDataManager.getActivityPointData(key: key, pointId: safeId)
         }
     }
     
 }
+
+//MARK: - ActivityPointDataManagerDelegate Stuff
 
 extension PointViewController : ActivityPointDataManagerDelegate {
     
@@ -96,13 +101,13 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             
         case 3...maxIndexForVendCells:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "agregatorsCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "vendCell", for: indexPath)
             
             let index = indexPath.row - 3 // We do minus three , still that 3 (count of static cells)
             
             let vend = vendsArray[index]
             
-           // setUpActivityLineCell(cell: cell, data: activityLine)
+            setUpVendCell(cell: cell as! VendTableViewCell, data: vend)
             
         default:
             print("IndexPath out of switch: \(index)")
@@ -146,6 +151,25 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             yesterdayPhotosLabel.text = data["photo_ystd"].stringValue
             
         }
+        
+    }
+    
+    func setUpVendCell(cell: VendTableViewCell , data : JSON){
+        
+        let ratingView = CosmosView()
+        
+        ratingView.settings.filledColor = .lightGray
+        ratingView.settings.filledBorderColor = .lightGray
+        ratingView.settings.emptyBorderColor = .lightGray
+        
+        cell.addSubview(view)
+        
+        //            cell.frame = CGRect(x: 5, y: 5, width: 30, height: 15)
+        
+        ratingView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 5).isActive = true
+        ratingView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: 10).isActive = true
+        ratingView.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 0).isActive = true
+        
         
     }
     

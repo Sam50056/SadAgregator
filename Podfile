@@ -14,4 +14,6 @@ pod 'SDWebImage', '~> 5.0'
 
 pod 'IQKeyboardManagerSwift'
 
+pod 'Cosmos', '~> 23.0'
+
 end
