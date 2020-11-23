@@ -169,7 +169,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         
         guard let lineData = lineData else {return cell}
         
-        let maxIndexForActivityTochkaCells = 3 + activityTochkaCellsArray.count - 1 ///Max index (indexPath.row) for Activity tochka cells. So that 3 is because we have 3 static cells , then an array of activity tochka cells which is not static. So we do 3 + count of the array -1 (because array indexing starts from 0)  and get the max index we can put into switch. And what we'll put there will be 3..<array.count-1 This means that from 3rd index to 3 + array.count-1  all the cells will be "activityTochkaCell".
+        let maxIndexForActivityTochkaCells = 3 + activityTochkaCellsArray.count - 1 ///Max index (indexPath.row) for Activity point cells. So that 3 is because we have 3 static cells , then an array of activity point cells which is not static. So we do 3 + count of the array -1 (because array indexing starts from 0)  and get the max index we can put into switch. And what we'll put there will be 3..<array.count-1 This means that from 3rd index to 3 + array.count-1  all the cells will be "activityPointCell".
         
         let maxIndexForPosts = maxIndexForActivityTochkaCells + 1 + postsArray.count
         

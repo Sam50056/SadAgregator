@@ -21,6 +21,8 @@ struct ActivityPointDataManager {
         
         let urlString = "https://agrapi.tk-sad.ru/agr_intf.ActivityPoint?AKey=\(key)&APointID=\(id)"
         
+        print("URLString for ActivityPointDataManager: \(urlString)")
+        
         guard let url = URL(string: urlString) else {
             delegate?.didFailGettingActivityPointDataWithError(error: "Wrong URL")
             return

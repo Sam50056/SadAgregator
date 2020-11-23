@@ -19,6 +19,8 @@ class PointViewController: UIViewController {
     
     var pointData : JSON?
     
+    var vendsArray = [JSON]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +45,8 @@ extension PointViewController : ActivityPointDataManagerDelegate {
             
             self.pointData = data
             
+            self.vendsArray = data["vends"].arrayValue
+            
             self.tableView.reloadData()
             
         }
@@ -59,7 +63,7 @@ extension PointViewController : ActivityPointDataManagerDelegate {
 extension PointViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 3 + vendsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,6 +73,8 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         var cell = UITableViewCell()
         
         guard let tochkaData = pointData else {return cell}
+        
+        let maxIndexForVendCells = 3 + vendsArray.count - 1
         
         switch index {
         
@@ -87,6 +93,16 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         case 2:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "agregatorsCell", for: indexPath)
+            
+        case 3...maxIndexForVendCells:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "agregatorsCell", for: indexPath)
+            
+            let index = indexPath.row - 3 // We do minus three , still that 3 (count of static cells)
+            
+            let vend = vendsArray[index]
+            
+           // setUpActivityLineCell(cell: cell, data: activityLine)
             
         default:
             print("IndexPath out of switch: \(index)")

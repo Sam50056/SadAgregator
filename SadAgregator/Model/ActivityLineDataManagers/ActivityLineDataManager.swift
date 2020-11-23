@@ -21,6 +21,8 @@ struct ActivityLineDataManager {
         
         let urlString = "https://agrapi.tk-sad.ru/agr_intf.ActivityLine?AKey=\(key)&ALineID=\(id)"
         
+        print("URLString for ActivityLineDataManager: \(urlString)")
+        
         guard let url = URL(string: urlString) else {
             delegate?.didFailGettingActivityLineData(error: "Wrong URL")
             return
