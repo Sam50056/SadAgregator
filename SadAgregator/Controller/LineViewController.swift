@@ -87,6 +87,8 @@ class LineViewController: UIViewController {
         }
     }
     
+    var selectedPointId : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -259,7 +261,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             
             let cellData = activityTochkaCellsArray[indexForCell]
             
-           // selectedLineId = cellData["line_id"].stringValue
+            selectedPointId = cellData["point_id"].stringValue
             
             self.performSegue(withIdentifier: "goToTochka", sender: self)
             
@@ -333,4 +335,21 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         
     }
     
+}
+
+//MARK: - Segue Stuff
+
+extension LineViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "goToTochka" {
+            
+            let destinationVC = segue.destination as! PointViewController
+            
+            destinationVC.thisPointId = selectedPointId
+            
+        }
+        
+    }
 }

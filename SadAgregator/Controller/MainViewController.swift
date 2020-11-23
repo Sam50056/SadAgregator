@@ -90,7 +90,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    var selectedLineId : String = ""
+    var selectedLineId : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()

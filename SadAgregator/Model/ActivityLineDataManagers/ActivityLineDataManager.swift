@@ -19,7 +19,7 @@ struct ActivityLineDataManager {
     
     func getActivityData(key: String , lineId id : String){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_intf.ActivityLine?AKey=afbKKBXxTETYjfdFlDMLSWn136834791&ALineID=14"
+        let urlString = "https://agrapi.tk-sad.ru/agr_intf.ActivityLine?AKey=\(key)&ALineID=\(id)"
         
         guard let url = URL(string: urlString) else {
             delegate?.didFailGettingActivityLineData(error: "Wrong URL")

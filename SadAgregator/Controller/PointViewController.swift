@@ -12,15 +12,44 @@ class PointViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var tochkaData : JSON?
+    var key = UserDefaults.standard.string(forKey: "key")!
+    var thisPointId : String?
+    
+    lazy var activityPointDataManager = ActivityPointDataManager()
+    
+    var pointData : JSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityPointDataManager.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.separatorStyle = .none
+        
+        if let safeId = thisPointId{
+            activityPointDataManager.getActivityPointData(key: key, pointId: safeId)
+        }
+    }
+    
+}
+
+extension PointViewController : ActivityPointDataManagerDelegate {
+    
+    func didGetActivityPointData(data: JSON) {
+        DispatchQueue.main.async {
+            
+            self.pointData = data
+            
+            self.tableView.reloadData()
+            
+        }
+    }
+    
+    func didFailGettingActivityPointDataWithError(error: String) {
+        print("Error with ActivityPointDataManager: \(error)")
     }
     
 }
@@ -39,7 +68,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         
         var cell = UITableViewCell()
         
-        guard let tochkaData = tochkaData else {return cell}
+        guard let tochkaData = pointData else {return cell}
         
         switch index {
         
