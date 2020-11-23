@@ -191,7 +191,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             
         case 3...maxIndexForActivityTochkaCells:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "activityTochkaCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "activityPointCell", for: indexPath)
             
             let index = indexPath.row - 3 // We do minus three , still that 3 (count of static cells)
             

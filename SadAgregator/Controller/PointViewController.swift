@@ -8,7 +8,7 @@
 import UIKit
 import SwiftyJSON
 
-class TochkaViewController: UIViewController {
+class PointViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -27,7 +27,7 @@ class TochkaViewController: UIViewController {
 
 //MARK: - UITableView
 
-extension TochkaViewController : UITableViewDelegate , UITableViewDataSource{
+extension PointViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
@@ -45,7 +45,7 @@ extension TochkaViewController : UITableViewDelegate , UITableViewDataSource{
         
         case 0:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "lineSwitchCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "pointSwitchCell", for: indexPath)
             
         case 1:
             
