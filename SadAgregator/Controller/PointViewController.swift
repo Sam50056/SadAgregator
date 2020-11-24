@@ -97,7 +97,7 @@ class PointViewController: UIViewController {
         
         tableView.separatorStyle = .none
         
-        tableView.register(VendTableViewCell.self, forCellReuseIdentifier: "vendCell")
+        tableView.register(UINib(nibName: "VendTableViewCell", bundle: nil), forCellReuseIdentifier: "vendCell")
         tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
         
         self.navigationItem.title = "Точка"
@@ -290,30 +290,30 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
     
     func setUpVendCell(cell: VendTableViewCell , data : JSON){
         
-        let nameLabel = UILabel() //UILabel(frame: CGRect(x: 8, y: 8, width: 50, height: 20))
-        let ratingView = CosmosView()
-        
-        nameLabel.font = UIFont(name: "Arial", size: 15)
-        
-        //        nameLabel.topAnchor.constraint(equalTo: cell.topAnchor, constant: 8).isActive = true
-        //        nameLabel.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: 8).isActive = true
-        //        nameLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 8).isActive = true
-        //
-        nameLabel.text = data["name"].stringValue
-        
-        cell.addSubview(nameLabel)
-        
-        ratingView.settings.filledColor = .lightGray
-        ratingView.settings.filledBorderColor = .lightGray
-        ratingView.settings.emptyBorderColor = .lightGray
-        //            cell.frame = CGRect(x: 5, y: 5, width: 30, height: 15)
-        //
-        //        ratingView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5).isActive = true
-        //        ratingView.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: 10).isActive = true
-        //        ratingView.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 8).isActive = true
-        //
-        //
-        cell.addSubview(ratingView)
+//        let nameLabel = UILabel() //UILabel(frame: CGRect(x: 8, y: 8, width: 50, height: 20))
+//        let ratingView = CosmosView()
+//
+//        nameLabel.font = UIFont(name: "Arial", size: 15)
+//
+//        //        nameLabel.topAnchor.constraint(equalTo: cell.topAnchor, constant: 8).isActive = true
+//        //        nameLabel.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: 8).isActive = true
+//        //        nameLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 8).isActive = true
+//        //
+//        nameLabel.text = data["name"].stringValue
+//
+//        cell.addSubview(nameLabel)
+//
+//        ratingView.settings.filledColor = .lightGray
+//        ratingView.settings.filledBorderColor = .lightGray
+//        ratingView.settings.emptyBorderColor = .lightGray
+//        //            cell.frame = CGRect(x: 5, y: 5, width: 30, height: 15)
+//        //
+//        //        ratingView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5).isActive = true
+//        //        ratingView.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: 10).isActive = true
+//        //        ratingView.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 8).isActive = true
+//        //
+//        //
+//        cell.addSubview(ratingView)
     }
     
     func setUpActivityLineCell(cell : UITableViewCell , data : JSON) {
