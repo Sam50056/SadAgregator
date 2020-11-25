@@ -15,8 +15,10 @@ class VendTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel : UILabel!
     @IBOutlet weak var actLabel : UILabel!
     @IBOutlet weak var peoplesLabel : UILabel!
+    @IBOutlet weak var revLabel: UILabel!
     
     @IBOutlet weak var peoplesImageView : UIImageView!
+    @IBOutlet weak var revImageView: UIImageView!
     
     var data : JSON?
     

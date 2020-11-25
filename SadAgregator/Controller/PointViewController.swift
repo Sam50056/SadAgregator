@@ -306,6 +306,16 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             cell.peoplesImageView.isHidden = false
         }
         
+        let rev = data["revs"].intValue
+        
+        if rev == 0{
+            cell.revLabel.text = ""
+            cell.revImageView.isHidden = true
+        }else{
+            cell.revLabel.text = String(rev)
+            cell.revImageView.isHidden = false
+        }
+        
         
     }
     
