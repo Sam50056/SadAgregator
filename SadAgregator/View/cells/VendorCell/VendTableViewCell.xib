@@ -78,21 +78,31 @@
                         </subviews>
                     </stackView>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7tu-uR-bDH">
-                        <rect key="frame" x="16" y="35.5" width="222.5" height="78.5"/>
+                        <rect key="frame" x="16" y="35.5" width="222.5" height="77.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tableView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4wW-on-pIP">
+                        <rect key="frame" x="0.0" y="121" width="320" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="dng-bg-Omu"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="p37-af-azI" firstAttribute="top" secondItem="qjw-mj-pfX" secondAttribute="bottom" constant="8" id="1aq-PF-6xU"/>
+                    <constraint firstItem="4wW-on-pIP" firstAttribute="top" secondItem="7tu-uR-bDH" secondAttribute="bottom" constant="8" id="MWJ-Il-7W7"/>
+                    <constraint firstAttribute="bottom" secondItem="4wW-on-pIP" secondAttribute="bottom" id="NFI-IB-hJc"/>
                     <constraint firstItem="qjw-mj-pfX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="NsD-bb-m8k"/>
                     <constraint firstItem="7tu-uR-bDH" firstAttribute="top" secondItem="qjw-mj-pfX" secondAttribute="bottom" constant="8" id="PyR-hc-dRV"/>
                     <constraint firstAttribute="trailing" secondItem="qjw-mj-pfX" secondAttribute="trailing" constant="8" id="RFi-tW-Ruu"/>
                     <constraint firstItem="7tu-uR-bDH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="RQd-Hx-GbI"/>
                     <constraint firstItem="p37-af-azI" firstAttribute="leading" secondItem="7tu-uR-bDH" secondAttribute="trailing" constant="8" id="VKM-FN-xpH"/>
+                    <constraint firstItem="4wW-on-pIP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hEv-d6-SQ1"/>
                     <constraint firstAttribute="trailing" secondItem="p37-af-azI" secondAttribute="trailing" constant="8" id="oPx-XZ-Gc8"/>
                     <constraint firstItem="qjw-mj-pfX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="qlz-EA-4xc"/>
-                    <constraint firstAttribute="bottom" secondItem="7tu-uR-bDH" secondAttribute="bottom" constant="8" id="wT1-8Y-UAv"/>
+                    <constraint firstAttribute="trailing" secondItem="4wW-on-pIP" secondAttribute="trailing" id="xlK-oi-PHE"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

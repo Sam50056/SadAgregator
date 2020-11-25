@@ -230,7 +230,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         if indexPath.row == 1 {
             return 126
         }else if indexPath.row >= 3 && indexPath.row <= maxIndexForVendCells && indexPath.row <= maxIndexForVendCells {
-            return 130
+            return 120
         }else if indexPath.row >= maxIndexForActivityPointCells + 2 && indexPath.row <= maxIndexForPosts{
             
             let index = indexPath.row - (maxIndexForActivityPointCells + 2)
