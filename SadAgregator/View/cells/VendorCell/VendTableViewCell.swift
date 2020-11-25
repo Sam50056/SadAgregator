@@ -18,6 +18,7 @@ class VendTableViewCell: UITableViewCell {
         
         tableView.register(UINib(nibName: "RatingTableViewCell", bundle: nil), forCellReuseIdentifier: "ratingCell")
         tableView.register(UINib(nibName: "PopTableViewCell", bundle: nil), forCellReuseIdentifier: "popCell")
+        tableView.register(UINib(nibName: "PhoneTableViewCell", bundle: nil), forCellReuseIdentifier: "phoneCell")
         
         tableView.dataSource = self
     }
@@ -32,7 +33,7 @@ class VendTableViewCell: UITableViewCell {
 extension VendTableViewCell : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,10 +43,16 @@ extension VendTableViewCell : UITableViewDataSource{
         switch indexPath.row {
         
         case 0:
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
+            
         case 1:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "popCell", for: indexPath)
+            
+        case 2:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "phoneCell", for: indexPath)
             
         default:
             print("IndexPath out of switch: \(indexPath.row)")
