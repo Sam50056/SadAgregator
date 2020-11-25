@@ -17,6 +17,7 @@ class VendTableViewCell: UITableViewCell {
         tableView.separatorStyle = .none
         
         tableView.register(UINib(nibName: "RatingTableViewCell", bundle: nil), forCellReuseIdentifier: "ratingCell")
+        tableView.register(UINib(nibName: "PopTableViewCell", bundle: nil), forCellReuseIdentifier: "popCell")
         
         tableView.dataSource = self
     }
@@ -31,14 +32,26 @@ class VendTableViewCell: UITableViewCell {
 extension VendTableViewCell : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = UITableViewCell()
         
-        cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
+        switch indexPath.row {
+        
+        case 0:
+            cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
+        case 1:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "popCell", for: indexPath)
+            
+        default:
+            print("IndexPath out of switch: \(indexPath.row)")
+            
+        }
+        
         
         return cell
         

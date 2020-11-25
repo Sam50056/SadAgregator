@@ -21,6 +21,8 @@
 		2290485D256DAC80000B7A28 /* VendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2290485B256DAC80000B7A28 /* VendTableViewCell.xib */; };
 		22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22904860256DC701000B7A28 /* RatingTableViewCell.swift */; };
 		22904863256DC702000B7A28 /* RatingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22904861256DC701000B7A28 /* RatingTableViewCell.xib */; };
+		2290486B256E4978000B7A28 /* PopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22904869256E4978000B7A28 /* PopTableViewCell.swift */; };
+		2290486C256E4978000B7A28 /* PopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2290486A256E4978000B7A28 /* PopTableViewCell.xib */; };
 		2291BE452560620F004F55DF /* MainDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BE442560620F004F55DF /* MainDataManager.swift */; };
 		22A0534E256BCE350016B40A /* ActivityPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0534D256BCE350016B40A /* ActivityPointDataManager.swift */; };
 		22A49CB42566645800CCC781 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CB22566645800CCC781 /* PostTableViewCell.swift */; };
@@ -53,6 +55,8 @@
 		2290485B256DAC80000B7A28 /* VendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VendTableViewCell.xib; sourceTree = "<group>"; };
 		22904860256DC701000B7A28 /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
 		22904861256DC701000B7A28 /* RatingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTableViewCell.xib; sourceTree = "<group>"; };
+		22904869256E4978000B7A28 /* PopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopTableViewCell.swift; sourceTree = "<group>"; };
+		2290486A256E4978000B7A28 /* PopTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopTableViewCell.xib; sourceTree = "<group>"; };
 		2291BE442560620F004F55DF /* MainDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataManager.swift; sourceTree = "<group>"; };
 		22A0534D256BCE350016B40A /* ActivityPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPointDataManager.swift; sourceTree = "<group>"; };
 		22A49CB22566645800CCC781 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 		2290485F256DC6B7000B7A28 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				22904868256E4961000B7A28 /* PopCell */,
 				22904866256DC706000B7A28 /* RatingCell */,
 			);
 			path = TableViewCells;
@@ -175,6 +180,15 @@
 				22904861256DC701000B7A28 /* RatingTableViewCell.xib */,
 			);
 			path = RatingCell;
+			sourceTree = "<group>";
+		};
+		22904868256E4961000B7A28 /* PopCell */ = {
+			isa = PBXGroup;
+			children = (
+				22904869256E4978000B7A28 /* PopTableViewCell.swift */,
+				2290486A256E4978000B7A28 /* PopTableViewCell.xib */,
+			);
+			path = PopCell;
 			sourceTree = "<group>";
 		};
 		22A0534B256BCDE10016B40A /* ActivityLineDataManagers */ = {
@@ -330,6 +344,7 @@
 				22A49CB52566645800CCC781 /* PostTableViewCell.xib in Resources */,
 				22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */,
 				22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */,
+				2290486C256E4978000B7A28 /* PopTableViewCell.xib in Resources */,
 				228CB769255BF974002B4A96 /* LaunchScreen.storyboard in Resources */,
 				22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */,
 				228CB766255BF974002B4A96 /* Assets.xcassets in Resources */,
@@ -393,6 +408,7 @@
 				22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */,
 				2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */,
 				22A49CBB2566650600CCC781 /* SizeCollectionViewCell.swift in Sources */,
+				2290486B256E4978000B7A28 /* PopTableViewCell.swift in Sources */,
 				2290485C256DAC80000B7A28 /* VendTableViewCell.swift in Sources */,
 				22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
