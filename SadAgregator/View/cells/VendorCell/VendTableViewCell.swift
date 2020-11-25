@@ -109,13 +109,13 @@ extension VendTableViewCell : UITableViewDataSource{
             
         case 1:
             
-            if phone != nil{
+            if phone != nil , rating != nil{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "phoneCell", for: indexPath)
                 
                 setUpPhoneCell(cell: cell as! PhoneTableViewCell, data: phone!)
                 
-            }else {
+            }else if pop != nil {
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "popCell", for: indexPath)
                 
