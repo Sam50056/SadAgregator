@@ -22,6 +22,24 @@ class VendTableViewCell: UITableViewCell {
     
     var data : JSON?
     
+    var rating : String?{
+        didSet{
+            tableView.reloadData()
+        }
+    }
+    
+    var phone : String?{
+        didSet{
+            tableView.reloadData()
+        }
+    }
+    
+    var pop : String?{
+        didSet{
+            tableView.reloadData()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -44,7 +62,22 @@ class VendTableViewCell: UITableViewCell {
 extension VendTableViewCell : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        
+        var count = 0
+        
+        if pop != nil {
+            count += 1
+        }
+        
+        if phone != nil{
+            count += 1
+        }
+        
+        if rating != nil {
+            count += 1
+        }
+        
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,19 +88,49 @@ extension VendTableViewCell : UITableViewDataSource{
         
         case 0:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
+            if rating != nil {
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
+                
+                setUpRatingCell(cell: cell as! RatingTableViewCell, data: rating!)
+                
+            }else if phone != nil{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "phoneCell", for: indexPath)
+                
+                setUpPhoneCell(cell: cell as! PhoneTableViewCell, data: phone!)
+                
+            }else {
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "popCell", for: indexPath)
+                
+                setUpPopCell(cell: cell as! PopTableViewCell, data: pop!)
+            }
             
         case 1:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "popCell", for: indexPath)
+            if phone != nil{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "phoneCell", for: indexPath)
+                
+                setUpPhoneCell(cell: cell as! PhoneTableViewCell, data: phone!)
+                
+            }else {
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "popCell", for: indexPath)
+                
+                setUpPopCell(cell: cell as! PopTableViewCell, data: pop!)
+                
+            }
             
         case 2:
+            //If it came to 3 elements in table View , it means that the last is 100% popCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "popCell", for: indexPath)
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "phoneCell", for: indexPath)
+            setUpPopCell(cell: cell as! PopTableViewCell, data: pop!)
             
         default:
             print("IndexPath out of switch: \(indexPath.row)")
-            
         }
         
         
@@ -75,5 +138,25 @@ extension VendTableViewCell : UITableViewDataSource{
         
     }
     
+    
+    //MARK: - Cell SetUp
+    
+    func setUpRatingCell(cell : RatingTableViewCell , data : String){
+        
+        cell.ratingView.rating = Double(data)!
+        
+    }
+    
+    func setUpPhoneCell(cell : PhoneTableViewCell , data : String){
+        
+        cell.label.text = data
+        
+    }
+    
+    func setUpPopCell(cell : PopTableViewCell , data : String){
+        
+        cell.label.text = data
+        
+    }
     
 }

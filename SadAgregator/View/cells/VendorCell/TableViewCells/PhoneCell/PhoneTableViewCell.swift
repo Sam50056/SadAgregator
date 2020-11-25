@@ -9,6 +9,9 @@ import UIKit
 
 class PhoneTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var phoneImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

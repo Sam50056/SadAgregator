@@ -316,6 +316,13 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             cell.revImageView.isHidden = false
         }
         
+        let phone = data["ph"].stringValue
+        let pop = data["pop"].intValue
+        let rating = data["rate"].stringValue
+        
+        cell.rating = rating == "0" ? nil : rating
+        cell.phone = phone == "" ? nil : phone
+        cell.pop = pop == 0 ? "Нет уникального контента" : "Охват ~\(String(pop)) чел/сутки"
         
     }
     
