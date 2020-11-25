@@ -307,7 +307,6 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         }
         
         
-        
     }
     
     func setUpActivityLineCell(cell : UITableViewCell , data : JSON) {
