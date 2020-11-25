@@ -296,6 +296,18 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         
         cell.actLabel.text = data["act"].stringValue
         
+        let peoples = data["peoples"].stringValue
+        
+        if peoples == "0"{
+            cell.peoplesLabel.text = ""
+            cell.peoplesImageView.isHidden = true
+        }else{
+            cell.peoplesLabel.text = peoples
+            cell.peoplesImageView.isHidden = false
+        }
+        
+        
+        
     }
     
     func setUpActivityLineCell(cell : UITableViewCell , data : JSON) {

@@ -16,6 +16,8 @@ class VendTableViewCell: UITableViewCell {
     @IBOutlet weak var actLabel : UILabel!
     @IBOutlet weak var peoplesLabel : UILabel!
     
+    @IBOutlet weak var peoplesImageView : UIImageView!
+    
     var data : JSON?
     
     override func awakeFromNib() {

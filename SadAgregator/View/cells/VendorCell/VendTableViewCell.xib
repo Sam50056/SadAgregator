@@ -76,6 +76,7 @@
             <connections>
                 <outlet property="actLabel" destination="X0u-v3-uZ6" id="yZF-QY-JIh"/>
                 <outlet property="nameLabel" destination="6rK-DH-s1f" id="JYU-Je-7s7"/>
+                <outlet property="peoplesImageView" destination="bMI-Fk-sDZ" id="qga-Wf-4qd"/>
                 <outlet property="peoplesLabel" destination="qHg-Z9-Jgr" id="5wr-r7-dHb"/>
                 <outlet property="tableView" destination="7tu-uR-bDH" id="d1F-Ah-3eA"/>
             </connections>
