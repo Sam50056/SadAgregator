@@ -228,9 +228,17 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
         
         if indexPath.row == 1 {
+            
             return 126
+            
         }else if indexPath.row >= 3 && indexPath.row <= maxIndexForVendCells && indexPath.row <= maxIndexForVendCells {
-            return 120
+            
+            let index = indexPath.row - 3
+            
+            let vend = vendsArray[index]
+            
+            return makeHeightForVendCell(vend: vend)
+            
         }else if indexPath.row >= maxIndexForActivityPointCells + 2 && indexPath.row <= maxIndexForPosts{
             
             let index = indexPath.row - (maxIndexForActivityPointCells + 2)
@@ -253,6 +261,29 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         
         tableView.deselectRow(at: indexPath, animated: true)
         
+    }
+    
+    func makeHeightForVendCell(vend : JSON) -> CGFloat {
+        
+        var height = 90
+
+        let phone = vend["ph"].stringValue
+        let pop = vend["pop"].intValue
+        let rating = vend["rate"].stringValue
+
+        if rating != "0" {
+            height += 10
+        }
+        
+        if phone != "" {
+            height += 10
+        }
+        
+        if pop != 0 {
+            height += 10
+        }
+        
+        return CGFloat(height)
     }
     
     //MARK: - Cell Setup

@@ -83,7 +83,7 @@
                     </tableView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4wW-on-pIP">
                         <rect key="frame" x="0.0" y="121" width="320" height="1"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.86005309133818653" green="0.86005309133818653" blue="0.86005309133818653" alpha="0.7731075665808671" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="dng-bg-Omu"/>
                         </constraints>
