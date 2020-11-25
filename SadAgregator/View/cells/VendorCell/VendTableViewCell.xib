@@ -20,15 +20,15 @@
                         <rect key="frame" x="16" y="8" width="296" height="19.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ольга Высоцкая" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="6rK-DH-s1f">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="19.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="180" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="X0u-v3-uZ6">
-                                <rect key="frame" x="216" y="0.0" width="80" height="19.5"/>
+                                <rect key="frame" x="196" y="0.0" width="100" height="19.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="xUn-4P-aqQ"/>
+                                    <constraint firstAttribute="width" constant="100" id="xUn-4P-aqQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
@@ -39,8 +39,8 @@
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FYz-bo-vYd">
                         <rect key="frame" x="246.5" y="35.5" width="65.5" height="18"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bMI-Fk-sDZ">
-                                <rect key="frame" x="0.0" y="0.0" width="22" height="18"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill.checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bMI-Fk-sDZ">
+                                <rect key="frame" x="0.0" y="1.5" width="22" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="IhO-Wl-dBa"/>
                                     <constraint firstAttribute="height" constant="18" id="ZI3-dL-f11"/>
@@ -74,9 +74,15 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="actLabel" destination="X0u-v3-uZ6" id="yZF-QY-JIh"/>
+                <outlet property="nameLabel" destination="6rK-DH-s1f" id="JYU-Je-7s7"/>
+                <outlet property="peoplesLabel" destination="qHg-Z9-Jgr" id="5wr-r7-dHb"/>
                 <outlet property="tableView" destination="7tu-uR-bDH" id="d1F-Ah-3eA"/>
             </connections>
             <point key="canvasLocation" x="73.913043478260875" y="133.92857142857142"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="person.fill.checkmark" catalog="system" width="128" height="88"/>
+    </resources>
 </document>

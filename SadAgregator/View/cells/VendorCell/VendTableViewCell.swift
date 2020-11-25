@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class VendTableViewCell: UITableViewCell {
     
     @IBOutlet weak var tableView : UITableView!
+    
+    @IBOutlet weak var nameLabel : UILabel!
+    @IBOutlet weak var actLabel : UILabel!
+    @IBOutlet weak var peoplesLabel : UILabel!
+    
+    var data : JSON?
     
     override func awakeFromNib() {
         super.awakeFromNib()
