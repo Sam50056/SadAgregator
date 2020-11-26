@@ -59,6 +59,8 @@ class VendTableViewCell: UITableViewCell {
     
 }
 
+//MARK: - UITableViewDataSource
+
 extension VendTableViewCell : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -124,6 +126,7 @@ extension VendTableViewCell : UITableViewDataSource{
             }
             
         case 2:
+            
             //If it came to 3 elements in table View , it means that the last is 100% popCell
             cell = tableView.dequeueReusableCell(withIdentifier: "popCell", for: indexPath)
             
