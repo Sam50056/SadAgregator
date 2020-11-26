@@ -16,6 +16,8 @@ class SearchViewController: UIViewController {
     
     var searchText : String = ""
     
+    var hintCellShouldBeShown = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,7 +46,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return hintCellShouldBeShown ? 1 : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -52,6 +54,8 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         var cell = UITableViewCell()
         
         cell = tableView.dequeueReusableCell(withIdentifier: "hintCell", for: indexPath)
+        
+        setUpHintCell(cell: cell)
         
         return cell
         
@@ -62,5 +66,24 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
+    
+    @IBAction func removeHintCell(_ sender : Any) {
+        
+        hintCellShouldBeShown = false
+        
+        tableView.reloadData()
+        
+    }
+    
+    //MARK: - Cell SetUp
+    
+    func setUpHintCell(cell : UITableViewCell){
+        
+        if let closeButton = cell.viewWithTag(3) as? UIButton {
+            closeButton.addTarget(self, action: #selector(removeHintCell(_: )), for: .touchUpInside)
+        }
+        
+    }
+    
     
 }

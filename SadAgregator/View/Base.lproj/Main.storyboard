@@ -1212,14 +1212,14 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DYR-Xw-HtK">
                                                     <rect key="frame" x="98" y="17.666666666666668" width="194" height="25.000000000000004"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.bubble.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jql-dk-3LQ">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.bubble.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jql-dk-3LQ">
                                                             <rect key="frame" x="0.0" y="1.3333333333333339" width="25" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="GA8-c0-U5Y"/>
                                                                 <constraint firstAttribute="height" constant="25" id="Ung-0W-yf1"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Как работает поиск? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTB-hJ-uqV">
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Как работает поиск? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTB-hJ-uqV">
                                                             <rect key="frame" x="41" y="0.0" width="153" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="152.66999999999999" id="xeB-Nh-sQD"/>
@@ -1252,8 +1252,16 @@
                                                         <constraint firstAttribute="height" constant="1" id="zl5-wU-Xrb"/>
                                                     </constraints>
                                                 </view>
+                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aX2-ag-THW">
+                                                    <rect key="frame" x="330" y="13" width="60" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="HXN-PJ-Tdl"/>
+                                                        <constraint firstAttribute="width" constant="60" id="KQc-RB-Buk"/>
+                                                    </constraints>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="aX2-ag-THW" secondAttribute="trailing" id="BIa-c6-zPN"/>
                                                 <constraint firstItem="mqJ-3h-znM" firstAttribute="trailing" secondItem="Ql8-hy-5G2" secondAttribute="trailingMargin" id="Fkz-ci-A5p"/>
                                                 <constraint firstItem="gMe-Ux-y7N" firstAttribute="leading" secondItem="Ql8-hy-5G2" secondAttribute="leading" id="G3V-AM-ZhU"/>
                                                 <constraint firstItem="DYR-Xw-HtK" firstAttribute="centerY" secondItem="Ql8-hy-5G2" secondAttribute="centerY" id="K8q-7Y-EFP"/>
@@ -1263,6 +1271,7 @@
                                                 <constraint firstItem="DYR-Xw-HtK" firstAttribute="centerX" secondItem="Ql8-hy-5G2" secondAttribute="centerX" id="TiB-Rs-IWV"/>
                                                 <constraint firstAttribute="bottom" secondItem="yUj-Ww-3sx" secondAttribute="bottom" id="ZX4-ht-SDN"/>
                                                 <constraint firstAttribute="trailing" secondItem="gMe-Ux-y7N" secondAttribute="trailing" id="gWl-l6-Yle"/>
+                                                <constraint firstItem="aX2-ag-THW" firstAttribute="centerY" secondItem="Ql8-hy-5G2" secondAttribute="centerY" id="hs1-yG-0j4"/>
                                                 <constraint firstItem="gMe-Ux-y7N" firstAttribute="top" secondItem="Ql8-hy-5G2" secondAttribute="top" id="xfT-P0-p7b"/>
                                             </constraints>
                                         </tableViewCellContentView>
