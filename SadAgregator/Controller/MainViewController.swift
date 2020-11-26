@@ -14,6 +14,8 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var searchTextField: UITextField!
+    
     var refreshControl = UIRefreshControl()
     
     var key = UserDefaults.standard.string(forKey: "key")
@@ -98,6 +100,8 @@ class MainViewController: UIViewController {
         checkKeysDataManager.delegate = self
         mainDataManager.delegate = self
         
+        searchTextField.delegate = self
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
@@ -108,7 +112,7 @@ class MainViewController: UIViewController {
         
         tableView.separatorStyle = .none
         
-        searchView.layer.cornerRadius = 8
+        searchView.layer.cornerRadius = 10
         
         checkKeysDataManager.getKeysData(key: key)
     }
@@ -203,6 +207,22 @@ extension MainViewController : MainDataManagerDelegate{
     
     func didFailGettingMainData(error: String) {
         print("Error with MainDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - UITextField Stuff
+
+extension MainViewController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField.text != ""{
+            self.performSegue(withIdentifier: "goSearch", sender: self)
+        }
+        
+        return true
+        
     }
     
 }
@@ -440,6 +460,12 @@ extension MainViewController {
             let destinationVC = segue.destination as! LineViewController
             
             destinationVC.thisLineId = selectedLineId
+            
+        }else if segue.identifier == "goSearch" {
+            
+            let destinationVC = segue.destination as! SearchViewController
+            
+            destinationVC.searchText = searchTextField.text!
             
         }
         

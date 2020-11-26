@@ -9,13 +9,31 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+    @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var searchTextField: UITextField!
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    var searchText : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        searchView.layer.cornerRadius = 10
+        
+        tableView.separatorStyle = .none
+        
         tableView.delegate = self
         tableView.dataSource = self
+        
+        searchTextField.text = searchText
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = false
         
     }
     
@@ -39,5 +57,10 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
     
 }

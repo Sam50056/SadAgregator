@@ -1082,10 +1082,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="sQc-W5-0zD"/>
                     <connections>
+                        <outlet property="searchTextField" destination="XZE-DD-NK1" id="eFg-Ea-w2X"/>
                         <outlet property="searchView" destination="dx9-h0-UIx" id="GgF-TY-rRM"/>
                         <outlet property="tableView" destination="7Tj-2s-VjJ" id="WXK-VC-c1M"/>
                         <segue destination="6xv-TR-yJ5" kind="show" identifier="goToLine" id="UT5-6g-K7A"/>
-                        <segue destination="iOY-jj-tLQ" kind="show" id="0O8-eQ-Bac"/>
+                        <segue destination="iOY-jj-tLQ" kind="show" identifier="goSearch" id="0O8-eQ-Bac"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1280,6 +1281,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="5ES-kO-YhF"/>
                     <connections>
+                        <outlet property="searchTextField" destination="rJu-Fk-XD1" id="5qx-XM-4fc"/>
+                        <outlet property="searchView" destination="iXp-Gb-Eke" id="XSD-aR-ulk"/>
                         <outlet property="tableView" destination="hPT-z2-Xkj" id="j4i-yj-5YZ"/>
                     </connections>
                 </viewController>
