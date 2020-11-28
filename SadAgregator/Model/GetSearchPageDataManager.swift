@@ -21,11 +21,13 @@ struct GetSearchPageDataManager {
         
         let urlString = "https://agrapi.tk-sad.ru/agr_srch.GetSearchPage?AKey=\(key)&AQuery=\(query)&APage=\(page)"
         
+        print("URLString for GetSearchPageDataManager: \(urlString)")
+        
         guard let encodedURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: encodedURL)  else {return}
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
-            print(String(data: data!, encoding: String.Encoding.windowsCP1251)!)
+//            print(String(data: data!, encoding: String.Encoding.windowsCP1251)!)
             
             if error != nil {
                 delegate?.didFailGettingSearchPageData(error: error!.localizedDescription)
