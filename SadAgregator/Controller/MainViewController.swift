@@ -123,6 +123,16 @@ class MainViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         //Setting back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        //Clear the searchTextField
+        searchTextField.text = ""
+        searchTextField.endEditing(true)
+        
     }
     
 }
