@@ -19,6 +19,7 @@ class SearchViewController: UIViewController {
     
     var searchText : String = ""
     var page : Int = 1
+    var rowForPaggingUpdate : Int = 10
     
     var hintCellShouldBeShown = true
     
@@ -124,7 +125,7 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
         
         DispatchQueue.main.async {
             
-            self.postsArray = data["posts"].arrayValue
+            self.postsArray.append(contentsOf: data["posts"].arrayValue)
             
             self.tableView.reloadData()
             
@@ -205,6 +206,22 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         tableView.deselectRow(at: indexPath, animated: true)
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+        if indexPath.row == rowForPaggingUpdate{
+
+            page += 1
+            
+            rowForPaggingUpdate += 9
+            
+            getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
+            
+            print("Done a request for page: \(page)")
+            
+        }
+
     }
     
     @IBAction func removeHintCell(_ sender : Any) {

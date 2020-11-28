@@ -27,7 +27,7 @@ struct GetSearchPageDataManager {
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
-//            print(String(data: data!, encoding: String.Encoding.windowsCP1251)!)
+            //            print(String(data: data!, encoding: String.Encoding.windowsCP1251)!)
             
             if error != nil {
                 delegate?.didFailGettingSearchPageData(error: error!.localizedDescription)
