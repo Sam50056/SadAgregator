@@ -17,12 +17,16 @@ class PointViewController: UIViewController {
     var thisPointId : String?
     
     lazy var activityPointDataManager = ActivityPointDataManager()
+    lazy var pointPostsPaggingDataManager = PointPostsPaggingDataManager()
     
     var pointData : JSON?
     
     var vendsArray = [JSON]()
     var activityPointCellsArray = [JSON]()
     var postsArray = [JSON]()
+    
+    var page : Int = 1
+    var rowForPaggingUpdate : Int!
     
     var sizes : Array<[String]> {
         get{
@@ -91,6 +95,7 @@ class PointViewController: UIViewController {
         super.viewDidLoad()
         
         activityPointDataManager.delegate = self
+        pointPostsPaggingDataManager.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -126,6 +131,8 @@ extension PointViewController : ActivityPointDataManagerDelegate {
             
             self.postsArray = data["posts"].arrayValue
             
+            self.rowForPaggingUpdate = 5 + self.vendsArray.count + 10
+            
             self.tableView.reloadData()
             
         }
@@ -133,6 +140,28 @@ extension PointViewController : ActivityPointDataManagerDelegate {
     
     func didFailGettingActivityPointDataWithError(error: String) {
         print("Error with ActivityPointDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - PointPostsPaggingDataManagerDelegate
+
+extension PointViewController : PointPostsPaggingDataManagerDelegate {
+    
+    func didGetPointPostsPaggingData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+            self.postsArray.append(contentsOf: data["posts"].arrayValue)
+            
+            self.tableView.reloadData()
+            
+        }
+        
+    }
+    
+    func didFailGettingPointPostsPaggingDataWithError(error: String) {
+        print("Error with PointPostsPaggingDataManager: \(error)")
     }
     
 }
@@ -266,11 +295,11 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
     func makeHeightForVendCell(vend : JSON) -> CGFloat {
         
         var height = 90
-
+        
         let phone = vend["ph"].stringValue
         let pop = vend["pop"].intValue
         let rating = vend["rate"].stringValue
-
+        
         if rating != "0" {
             height += 10
         }
@@ -284,6 +313,23 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         }
         
         return CGFloat(height)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if rowForPaggingUpdate == nil {return}
+        
+        if indexPath.row == rowForPaggingUpdate{
+            
+            page += 1
+            
+            rowForPaggingUpdate += 9
+            
+            pointPostsPaggingDataManager.getPointPostsPaggingData(key: key, pointId: thisPointId!, page: page)
+            
+            print("Done a request for page: \(page)")
+            
+        }
     }
     
     //MARK: - Cell Setup
