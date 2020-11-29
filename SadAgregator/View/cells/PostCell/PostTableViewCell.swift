@@ -13,6 +13,7 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
     @IBOutlet weak var vendorLabel: UILabel!
     @IBOutlet weak var byLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var postedLabel: UILabel!
     
     @IBOutlet weak var collectionView: UICollectionView!
     

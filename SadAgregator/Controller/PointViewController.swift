@@ -381,6 +381,8 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         
         cell.priceLabel.text = "\(data["price"].stringValue) руб"
         
+        cell.postedLabel.text = data["posted"].stringValue
+        
         let sizesArray = sizes[index]
         let optionsArray = options[index]
         let imagesArray = images[index]
