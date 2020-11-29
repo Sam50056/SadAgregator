@@ -22,12 +22,16 @@ class MainViewController: UIViewController {
     
     lazy var checkKeysDataManager = CheckKeysDataManager()
     lazy var mainDataManager = MainDataManager()
+    lazy var mainPaggingDataManager = MainPaggingDataManager()
     
     var mainData : JSON?
     
     var activityLineCellsArray = [JSON]()
     var postavshikActivityCellsArray = [JSON]()
     var postsArray = [JSON]()
+    
+    var page = 1
+    var rowForPaggingUpdate : Int = 21
     
     var sizes : Array<[String]> {
         get{
@@ -99,6 +103,7 @@ class MainViewController: UIViewController {
         
         checkKeysDataManager.delegate = self
         mainDataManager.delegate = self
+        mainPaggingDataManager.delegate = self
         
         searchTextField.delegate = self
         
@@ -217,6 +222,28 @@ extension MainViewController : MainDataManagerDelegate{
     
     func didFailGettingMainData(error: String) {
         print("Error with MainDataManager: \(error)")
+    }
+    
+}
+ 
+//MARK: - MainPaggingDataManagerDelegate Stuff
+
+extension MainViewController : MainPaggingDataManagerDelegate{
+    
+    func didGetMainPaggingData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+            self.postsArray.append(contentsOf: data["posts"].arrayValue)
+            
+            self.tableView.reloadData()
+            
+        }
+        
+    }
+    
+    func didFailGettingMainPaggingDataWithError(error: String) {
+        print("Error with MainPaggingDataManager: \(error)")
     }
     
 }
@@ -371,6 +398,22 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == rowForPaggingUpdate{
+            
+            page += 1
+            
+            rowForPaggingUpdate += 9
+            
+            mainPaggingDataManager.getMainPaggingData(key: key!, page: page)
+            
+            print("Done a request for page: \(page)")
+            
+        }
+        
     }
     
     

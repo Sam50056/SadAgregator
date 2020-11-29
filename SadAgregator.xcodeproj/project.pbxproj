@@ -35,6 +35,7 @@
 		22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */; };
 		22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */; };
 		22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */; };
+		22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7270E2573189E00B56249 /* MainPaggingDataManager.swift */; };
 		22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */; };
 		22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */; };
 		22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D60981255D41F000FC622B /* MessageReadedDataManager.swift */; };
@@ -73,6 +74,7 @@
 		22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SizeCollectionViewCell.xib; sourceTree = "<group>"; };
 		22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionCollectionViewCell.xib; sourceTree = "<group>"; };
+		22B7270E2573189E00B56249 /* MainPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPaggingDataManager.swift; sourceTree = "<group>"; };
 		22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		22D60981255D41F000FC622B /* MessageReadedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadedDataManager.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				2291BE442560620F004F55DF /* MainDataManager.swift */,
+				22B7270E2573189E00B56249 /* MainPaggingDataManager.swift */,
 				228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */,
 				22D60981255D41F000FC622B /* MessageReadedDataManager.swift */,
 			);
@@ -440,6 +443,7 @@
 				22A49CB42566645800CCC781 /* PostTableViewCell.swift in Sources */,
 				2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
+				22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */,
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
 				228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */,
 				228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */,
