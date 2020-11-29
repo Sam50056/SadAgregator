@@ -18,11 +18,15 @@ class LineViewController: UIViewController {
     var thisLineId : String?
     
     lazy var activityLineDataManager = ActivityLineDataManager()
+    lazy var linePostsPaggingDataManager = LinePostsPaggingDataManager()
     
     var lineData : JSON?
     
     var activityPointCellsArray = [JSON]()
     var postsArray = [JSON]()
+    
+    var page : Int = 1
+    var rowForPaggingUpdate : Int = 17
     
     var sizes : Array<[String]> {
         get{
@@ -95,6 +99,7 @@ class LineViewController: UIViewController {
         self.navigationItem.title = "Линия"
         
         activityLineDataManager.delegate = self
+        linePostsPaggingDataManager.delegate = self
         
         tableView.separatorStyle = .none
         tableView.delegate = self
@@ -119,6 +124,7 @@ class LineViewController: UIViewController {
 }
 
 //MARK: - ActivityLineDataManagerDelegate stuff
+
 extension LineViewController : ActivityLineDataManagerDelegate{
     
     func didGetActivityData(data: JSON) {
@@ -154,6 +160,30 @@ extension LineViewController : ActivityLineDataManagerDelegate{
     }
     
 }
+
+//MARK: - LinePostsPaggingDataManagerDelegate Stuff
+
+extension LineViewController : LinePostsPaggingDataManagerDelegate {
+    
+    func didGetLinePostsPaggingData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+            self.postsArray.append(contentsOf: data["posts"].arrayValue)
+            
+            self.tableView.reloadData()
+            
+        }
+        
+    }
+    
+    func didFailGettingLinePostsPaggingDataWithError(error: String) {
+        print("Error with LinePostsPaggingDataManager: \(error)")
+    }
+    
+}
+
+
 //MARK: - UITableView Stuff
 extension LineViewController : UITableViewDelegate , UITableViewDataSource{
     
@@ -269,6 +299,24 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == rowForPaggingUpdate{
+            
+            page += 1
+            
+            rowForPaggingUpdate += 9
+            
+            linePostsPaggingDataManager.getLinePostsPaggingData(key: key, lineId: thisLineId!, page: page)
+            
+            print("Done a request for page: \(page)")
+            
+        }
+        
+    }
+    
+    //MARK: - Cells SetUp
     
     func setUpSwitchCell(cell : UITableViewCell, data: JSON){
         
