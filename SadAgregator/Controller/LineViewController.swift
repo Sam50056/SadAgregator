@@ -91,6 +91,14 @@ class LineViewController: UIViewController {
         }
     }
     
+    var nextLineId : String?{
+        return lineData?["arrows"]["id_next"].string
+    }
+    
+    var previousLineId : String? {
+        return lineData?["arrows"]["id_prev"].string
+    }
+    
     var selectedPointId : String?
     
     override func viewDidLoad() {
@@ -316,15 +324,43 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         
     }
     
+    //MARK: - Switch Cells Funcs
+    
+    @IBAction func leftSwitchButtonPressed(sender : UIButton){
+        
+        guard let previousLineId = previousLineId else {return}
+        
+        thisLineId = previousLineId
+        
+        refresh(self)
+        
+    }
+    
+    @IBAction func rightSwitchButtonPressed(sender : UIButton){
+        
+        guard let nextLineId = nextLineId else {return}
+        
+        thisLineId = nextLineId
+        
+        refresh(self)
+        
+    }
+    
     //MARK: - Cells SetUp
     
     func setUpSwitchCell(cell : UITableViewCell, data: JSON){
         
         if let leftLabel = cell.viewWithTag(2) as? UILabel,
-           let rightLabel = cell.viewWithTag(3) as? UILabel{
+           let rightLabel = cell.viewWithTag(3) as? UILabel,
+           let leftButtton = cell.viewWithTag(1) as? UIButton,
+           let rightButton = cell.viewWithTag(4) as? UIButton{
             
             leftLabel.text = data["name_prev"].stringValue
             rightLabel.text = data["name_next"].stringValue
+            
+            rightButton.addTarget(self, action: #selector(rightSwitchButtonPressed(sender:)), for: .touchUpInside)
+            
+            leftButtton.addTarget(self, action: #selector(leftSwitchButtonPressed(sender:)), for: .touchUpInside)
             
         }
         
