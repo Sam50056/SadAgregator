@@ -13,6 +13,8 @@ class PointViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var refreshControl = UIRefreshControl()
+    
     var key = UserDefaults.standard.string(forKey: "key")!
     var thisPointId : String?
     
@@ -27,6 +29,14 @@ class PointViewController: UIViewController {
     
     var page : Int = 1
     var rowForPaggingUpdate : Int!
+    
+    var nextPointId : String?{
+        return pointData?["arrows"]["id_next"].string
+    }
+    
+    var previousPointId : String? {
+        return pointData?["arrows"]["id_prev"].string
+    }
     
     var sizes : Array<[String]> {
         get{
@@ -102,14 +112,26 @@ class PointViewController: UIViewController {
         
         tableView.separatorStyle = .none
         
+        //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl) // not required when using UITableViewController
+        
         tableView.register(UINib(nibName: "VendTableViewCell", bundle: nil), forCellReuseIdentifier: "vendCell")
         tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
         
         self.navigationItem.title = "Точка"
         
+        refresh(self)
+    }
+    
+    //MARK: - Refresh func
+    
+    @objc func refresh(_ sender: AnyObject) {
+        
         if let safeId = thisPointId{
             activityPointDataManager.getActivityPointData(key: key, pointId: safeId)
         }
+        
     }
     
 }
@@ -134,6 +156,8 @@ extension PointViewController : ActivityPointDataManagerDelegate {
             self.rowForPaggingUpdate = 5 + self.vendsArray.count + 10
             
             self.tableView.reloadData()
+            
+            self.refreshControl.endRefreshing()
             
         }
     }
@@ -332,15 +356,44 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         }
     }
     
+    //MARK: - Switch Cells Funcs
+    
+    @IBAction func leftSwitchButtonPressed(sender : UIButton){
+        
+        guard let previousPointId = previousPointId else {return}
+        
+        thisPointId = previousPointId
+        
+        refresh(self)
+        
+    }
+    
+    @IBAction func rightSwitchButtonPressed(sender : UIButton){
+        
+        guard let nextPointId = nextPointId else {return}
+        
+        thisPointId = nextPointId
+        
+        refresh(self)
+        
+    }
+    
+    
     //MARK: - Cell Setup
     
     func setUpSwitchCell(cell : UITableViewCell, data: JSON){
         
         if let leftLabel = cell.viewWithTag(2) as? UILabel,
-           let rightLabel = cell.viewWithTag(3) as? UILabel{
+           let rightLabel = cell.viewWithTag(3) as? UILabel,
+           let leftButtton = cell.viewWithTag(1) as? UIButton,
+           let rightButton = cell.viewWithTag(4) as? UIButton{
             
             leftLabel.text = data["name_prev"].stringValue
             rightLabel.text = data["name_next"].stringValue
+            
+            rightButton.addTarget(self, action: #selector(rightSwitchButtonPressed(sender:)), for: .touchUpInside)
+            
+            leftButtton.addTarget(self, action: #selector(leftSwitchButtonPressed(sender:)), for: .touchUpInside)
             
         }
         

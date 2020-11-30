@@ -340,7 +340,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         
         guard let nextLineId = nextLineId else {return}
         
-        thisLineId = nextLineId
+        thisLineId = previousLineId
         
         refresh(self)
         
