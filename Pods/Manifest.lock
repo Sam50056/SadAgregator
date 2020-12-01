@@ -6,6 +6,14 @@ PODS:
     - SDWebImage/Core (= 5.9.5)
   - SDWebImage/Core (5.9.5)
   - SwiftyJSON (5.0.0)
+  - YandexMobileMetrica (3.12.0):
+    - YandexMobileMetrica/Static (= 3.12.0)
+  - YandexMobileMetrica/Static (3.12.0):
+    - YandexMobileMetrica/Static/Core (= 3.12.0)
+    - YandexMobileMetrica/Static/Crashes (= 3.12.0)
+  - YandexMobileMetrica/Static/Core (3.12.0)
+  - YandexMobileMetrica/Static/Crashes (3.12.0):
+    - YandexMobileMetrica/Static/Core
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
@@ -13,6 +21,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - SDWebImage (~> 5.0)
   - SwiftyJSON
+  - YandexMobileMetrica (= 3.12.0)
 
 SPEC REPOS:
   trunk:
@@ -21,6 +30,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - SDWebImage
     - SwiftyJSON
+    - YandexMobileMetrica
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
@@ -28,7 +38,8 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   SDWebImage: 0b2ba0d56479bf6a45ecddbfd5558bea93150d25
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  YandexMobileMetrica: 7ba67267e1ef841f77d5db17a5091b8e9eba911f
 
-PODFILE CHECKSUM: a513b81ec6cc158db126b2a2ebf17cd1db1354cf
+PODFILE CHECKSUM: 7d79b0b506df0347f20524f9558e774cb058fdfd
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

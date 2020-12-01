@@ -16,4 +16,6 @@ pod 'IQKeyboardManagerSwift'
 
 pod 'Cosmos', '~> 23.0'
 
+pod 'YandexMobileMetrica', '3.12.0'
+
 end

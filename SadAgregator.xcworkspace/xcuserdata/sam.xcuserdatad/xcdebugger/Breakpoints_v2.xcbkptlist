@@ -3,4 +3,114 @@
    uuid = "6E929852-A77C-4866-B759-217B9582C4FB"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "68D2A510-4224-408C-B9C8-850CBA65A818"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SadAgregator/Controller/LineViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "68D2A510-4224-408C-B9C8-850CBA65A818 - bf72371e571c3e30"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SadAgregator.LineViewController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "SadAgregator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sam/Desktop/SadAgregator/SadAgregator/Controller/LineViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "214"
+                  endingLineNumber = "214"
+                  offsetFromSymbolStart = "708">
+               </Location>
+               <Location
+                  uuid = "68D2A510-4224-408C-B9C8-850CBA65A818 - bf72371e571c3e30"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SadAgregator.LineViewController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "SadAgregator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sam/Desktop/SadAgregator/SadAgregator/Controller/LineViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "214"
+                  endingLineNumber = "214"
+                  offsetFromSymbolStart = "1108">
+               </Location>
+               <Location
+                  uuid = "68D2A510-4224-408C-B9C8-850CBA65A818 - bf72371e571c3e30"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SadAgregator.LineViewController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "SadAgregator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sam/Desktop/SadAgregator/SadAgregator/Controller/LineViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "214"
+                  endingLineNumber = "214"
+                  offsetFromSymbolStart = "1512">
+               </Location>
+               <Location
+                  uuid = "68D2A510-4224-408C-B9C8-850CBA65A818 - bf72371e571c3e30"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SadAgregator.LineViewController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "SadAgregator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sam/Desktop/SadAgregator/SadAgregator/Controller/LineViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "214"
+                  endingLineNumber = "214"
+                  offsetFromSymbolStart = "1704">
+               </Location>
+               <Location
+                  uuid = "68D2A510-4224-408C-B9C8-850CBA65A818 - bf72371e571c3e30"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SadAgregator.LineViewController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "SadAgregator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sam/Desktop/SadAgregator/SadAgregator/Controller/LineViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "214"
+                  endingLineNumber = "214"
+                  offsetFromSymbolStart = "2432">
+               </Location>
+               <Location
+                  uuid = "68D2A510-4224-408C-B9C8-850CBA65A818 - bf72371e571c3e30"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SadAgregator.LineViewController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "SadAgregator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sam/Desktop/SadAgregator/SadAgregator/Controller/LineViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "214"
+                  endingLineNumber = "214"
+                  offsetFromSymbolStart = "2656">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
