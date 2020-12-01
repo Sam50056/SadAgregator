@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
     var mainData : JSON?
     
     var activityLineCellsArray = [JSON]()
-    var postavshikActivityCellsArray = [JSON]()
+    var activityPointCellsArray = [JSON]()
     var postsArray = [JSON]()
     
     var page = 1
@@ -97,6 +97,7 @@ class MainViewController: UIViewController {
     }
     
     var selectedLineId : String?
+    var selectedPointId : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -210,7 +211,7 @@ extension MainViewController : MainDataManagerDelegate{
             
             self.activityLineCellsArray = data["lines_act_top"].arrayValue
             
-            self.postavshikActivityCellsArray = data["points_top"].arrayValue
+            self.activityPointCellsArray = data["points_top"].arrayValue
             
             self.postsArray = data["posts"].arrayValue
             
@@ -269,7 +270,7 @@ extension MainViewController : UITextFieldDelegate {
 extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 + activityLineCellsArray.count + 1 + 1 + postavshikActivityCellsArray.count + postsArray.count
+        return 3 + activityLineCellsArray.count + 1 + 1 + activityPointCellsArray.count + postsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -282,9 +283,9 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         
         let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count - 1 ///Max index (indexPath.row) for Activity line cells. So that 3 is because we have 3 static cells , then an array of activity line cells which is not static. So we do 3 + count of the array -1 (because array indexing starts from 0)  and get the max index we can put into switch. And what we'll put there will be 3..<array.count-1 This means that from 3rd index to 3 + array.count-1  all the cells will be "activityLineCell".
         
-        let maxIndexForPostavshikActivityCells = maxIndexForActivityLineCells + 1 + postavshikActivityCellsArray.count  /// We take maxIndexForActivityLineCells and do + 1 because there is "postavshikiActivityCell" , then do + 1 again to get the index after that cell and that is the stating point for  postavshikActivityCellsArray. And for getting the maxIndexForPostavshikActivityCells , we add to that starting point or stating index the count of postavshikActivityCellsArray.
+        let maxIndexForActivityPointCells = maxIndexForActivityLineCells + 1 + activityPointCellsArray.count  /// We take maxIndexForActivityLineCells and do + 1 because there is "postavshikiActivityCell" , then do + 1 again to get the index after that cell and that is the stating point for  activityPointCellsArray. And for getting the maxIndexForActivityPointCells , we add to that starting point or stating index the count of activityPointCellsArray.
         
-        let maxIndexForPosts = maxIndexForPostavshikActivityCells + 1 + postsArray.count
+        let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
         
         switch indexPath.row {
         
@@ -320,25 +321,25 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postavshikiActivityCell", for: indexPath)
             
-        case maxIndexForActivityLineCells + 2...maxIndexForPostavshikActivityCells:
+        case maxIndexForActivityLineCells + 2...maxIndexForActivityPointCells:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "postavshikActivityCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "activityPointCell", for: indexPath)
             
             let index = indexPath.row - (maxIndexForActivityLineCells + 2)
             
-            let postavshikActivityLCell = postavshikActivityCellsArray[index]
+            let activityPointCell = activityPointCellsArray[index]
             
-            setUpPostavshikCell(cell: cell, data: postavshikActivityLCell)
+            setUpActivityPointCell(cell: cell, data: activityPointCell)
             
-        case maxIndexForPostavshikActivityCells + 1:
+        case maxIndexForActivityPointCells + 1:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
             
-        case maxIndexForPostavshikActivityCells + 2...maxIndexForPosts:
+        case maxIndexForActivityPointCells + 2...maxIndexForPosts:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
             
-            let index = indexPath.row - (maxIndexForPostavshikActivityCells + 2)
+            let index = indexPath.row - (maxIndexForActivityPointCells + 2)
             
             let post = postsArray[index]
             
@@ -354,14 +355,14 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count - 1
-        let maxIndexForPostavshikActivityCells = maxIndexForActivityLineCells + 1 + postavshikActivityCellsArray.count
-        let maxIndexForPosts = maxIndexForPostavshikActivityCells + 1 + postsArray.count
+        let maxIndexForActivityPointCells = maxIndexForActivityLineCells + 1 + activityPointCellsArray.count
+        let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
         
         if indexPath.row == 1 {
             return 126
-        }else if indexPath.row >= maxIndexForPostavshikActivityCells + 2 && indexPath.row <= maxIndexForPosts{
+        }else if indexPath.row >= maxIndexForActivityPointCells + 2 && indexPath.row <= maxIndexForPosts{
             
-            let index = indexPath.row - (maxIndexForPostavshikActivityCells + 2)
+            let index = indexPath.row - (maxIndexForActivityPointCells + 2)
             
             if options[index].count > 4{
                 return 500
@@ -382,8 +383,8 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         let index = indexPath.row
         
         let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count - 1
-        let maxIndexForPostavshikActivityCells = maxIndexForActivityLineCells + 1 + postavshikActivityCellsArray.count
-        let maxIndexForPosts = maxIndexForPostavshikActivityCells + 1 + postsArray.count
+        let maxIndexForActivityPointCells = maxIndexForActivityLineCells + 1 + activityPointCellsArray.count
+        let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
         
         if index >= 3 && index <= maxIndexForActivityLineCells{
             
@@ -394,6 +395,16 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             selectedLineId = cellData["line_id"].stringValue
             
             self.performSegue(withIdentifier: "goToLine", sender: self)
+            
+        }else if  index >= maxIndexForActivityLineCells + 2 && index <= maxIndexForActivityPointCells{
+            
+            let indexForCell = index - (maxIndexForActivityLineCells + 2)
+            
+            let cellData = activityPointCellsArray[indexForCell]
+            
+            selectedPointId = cellData["point_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToPoint", sender: self)
             
         }
         
@@ -466,7 +477,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         
     }
     
-    func setUpPostavshikCell(cell : UITableViewCell , data : JSON){
+    func setUpActivityPointCell(cell : UITableViewCell , data : JSON){
         
         if let mainLabel = cell.viewWithTag(1) as? UILabel ,
            let lastActLabel = cell.viewWithTag(2) as? UILabel ,
@@ -515,6 +526,12 @@ extension MainViewController {
             let destinationVC = segue.destination as! LineViewController
             
             destinationVC.thisLineId = selectedLineId
+            
+        }else if segue.identifier == "goToPoint"{
+         
+            let destinationVC = segue.destination as! PointViewController
+            
+            destinationVC.thisPointId = selectedPointId
             
         }else if segue.identifier == "goSearch" {
             

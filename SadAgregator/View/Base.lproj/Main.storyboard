@@ -994,7 +994,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postavshikActivityCell" rowHeight="50" id="QC9-lJ-8t9">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="activityPointCell" rowHeight="50" id="QC9-lJ-8t9">
                                         <rect key="frame" x="0.0" y="429" width="390" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QC9-lJ-8t9" id="N1z-Bf-7Km">
@@ -1088,6 +1088,7 @@
                         <outlet property="tableView" destination="7Tj-2s-VjJ" id="WXK-VC-c1M"/>
                         <segue destination="6xv-TR-yJ5" kind="show" identifier="goToLine" id="UT5-6g-K7A"/>
                         <segue destination="iOY-jj-tLQ" kind="show" identifier="goSearch" id="0O8-eQ-Bac"/>
+                        <segue destination="PU7-Gp-SMR" kind="show" identifier="goToPoint" id="LYd-3X-sUB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1320,6 +1321,9 @@
             <point key="canvasLocation" x="-1306.1538461538462" y="858.76777251184831"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="LYd-3X-sUB"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
