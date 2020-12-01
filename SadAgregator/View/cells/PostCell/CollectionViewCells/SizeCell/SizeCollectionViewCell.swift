@@ -16,7 +16,7 @@ class SizeCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         view.layer.cornerRadius = 5
-        view.backgroundColor = #colorLiteral(red: 0.8250553269, green: 0.8415564335, blue: 0.8415564335, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.9591086507, green: 0.9659582973, blue: 0.9731834531, alpha: 1)
         
     }
 
