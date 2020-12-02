@@ -25,6 +25,7 @@
 		22904863256DC702000B7A28 /* RatingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22904861256DC701000B7A28 /* RatingTableViewCell.xib */; };
 		2290486B256E4978000B7A28 /* PopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22904869256E4978000B7A28 /* PopTableViewCell.swift */; };
 		2290486C256E4978000B7A28 /* PopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2290486A256E4978000B7A28 /* PopTableViewCell.xib */; };
+		22906B332577E31100F00B0D /* PostavshikViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22906B322577E31100F00B0D /* PostavshikViewController.swift */; };
 		2291BE452560620F004F55DF /* MainDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BE442560620F004F55DF /* MainDataManager.swift */; };
 		229FE68E25700B120001FF54 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FE68D25700B120001FF54 /* SearchViewController.swift */; };
 		229FE69225706B6B0001FF54 /* GetSearchPageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FE69125706B6B0001FF54 /* GetSearchPageDataManager.swift */; };
@@ -66,6 +67,7 @@
 		22904861256DC701000B7A28 /* RatingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTableViewCell.xib; sourceTree = "<group>"; };
 		22904869256E4978000B7A28 /* PopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopTableViewCell.swift; sourceTree = "<group>"; };
 		2290486A256E4978000B7A28 /* PopTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopTableViewCell.xib; sourceTree = "<group>"; };
+		22906B322577E31100F00B0D /* PostavshikViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostavshikViewController.swift; sourceTree = "<group>"; };
 		2291BE442560620F004F55DF /* MainDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataManager.swift; sourceTree = "<group>"; };
 		229FE68D25700B120001FF54 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		229FE69125706B6B0001FF54 /* GetSearchPageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSearchPageDataManager.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				2253EE2A2569D85D00103C86 /* LineViewController.swift */,
 				221949FE256B1FBD00E0564D /* PointViewController.swift */,
 				229FE68D25700B120001FF54 /* SearchViewController.swift */,
+				22906B322577E31100F00B0D /* PostavshikViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				2290486B256E4978000B7A28 /* PopTableViewCell.swift in Sources */,
 				2290485C256DAC80000B7A28 /* VendTableViewCell.swift in Sources */,
 				22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */,
+				22906B332577E31100F00B0D /* PostavshikViewController.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
 				228CB761255BF96D002B4A96 /* MainViewController.swift in Sources */,
 				22A49CB42566645800CCC781 /* PostTableViewCell.swift in Sources */,

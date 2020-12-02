@@ -318,6 +318,18 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let index = indexPath.row
+        
+        let maxIndexForVendCells = 3 + vendsArray.count - 1
+        let maxIndexForActivityPointCells = 1 + maxIndexForVendCells + activityPointCellsArray.count
+        let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
+        
+        if index >= 3 && index <= maxIndexForVendCells {
+            
+            self.performSegue(withIdentifier: "goToPostavshik", sender: self)
+            
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
