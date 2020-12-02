@@ -16,9 +16,11 @@ class PointViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     
     var key = UserDefaults.standard.string(forKey: "key")!
+    
     var thisPointId : String?
     
     lazy var activityPointDataManager = ActivityPointDataManager()
+    
     lazy var pointPostsPaggingDataManager = PointPostsPaggingDataManager()
     
     var pointData : JSON?
@@ -37,6 +39,8 @@ class PointViewController: UIViewController {
     var previousPointId : String? {
         return pointData?["arrows"]["id_prev"].string
     }
+    
+    var selectedVendId : String?
     
     var sizes : Array<[String]> {
         get{
@@ -136,6 +140,20 @@ class PointViewController: UIViewController {
         
         if let safeId = thisPointId{
             activityPointDataManager.getActivityPointData(key: key, pointId: safeId)
+        }
+        
+    }
+    
+    //MARK: - Segue Stuff
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "goToPostavshik"{
+            
+            let destinationVC = segue.destination as! PostavshikViewController
+            
+            destinationVC.thisVendorId = selectedVendId
+            
         }
         
     }
@@ -325,6 +343,10 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
         
         if index >= 3 && index <= maxIndexForVendCells {
+            
+            let indexForVends = index - 3
+            
+            selectedVendId = vendsArray[indexForVends]["id"].stringValue
             
             self.performSegue(withIdentifier: "goToPostavshik", sender: self)
             
