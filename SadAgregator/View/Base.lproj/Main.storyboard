@@ -8,6 +8,27 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="Mur-d3-iUu">
+            <objects>
+                <viewController id="tgI-Wx-GfF" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qTr-YV-iic">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="IoR-9T-t2O"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="eLf-cF-6hX">
+                        <rightBarButtonItems>
+                            <barButtonItem image="heart" catalog="system" id="I8y-uP-oWV"/>
+                            <barButtonItem image="info.circle" catalog="system" id="Pwl-Op-FRg"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zpk-ph-JhD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4794" y="2377"/>
+        </scene>
         <!--Point View Controller-->
         <scene sceneID="qQs-kk-Ska">
             <objects>
@@ -330,6 +351,7 @@
                     <navigationItem key="navigationItem" id="sDZ-Kd-cXw"/>
                     <connections>
                         <outlet property="tableView" destination="kRI-vX-pSJ" id="H0Y-3i-sG1"/>
+                        <segue destination="tgI-Wx-GfF" kind="show" id="3eo-7Z-uW5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="koj-j9-MmD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1322,14 +1344,16 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="LYd-3X-sUB"/>
+        <segue reference="3vK-wY-P32"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="exclamationmark.bubble.fill" catalog="system" width="128" height="110"/>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
