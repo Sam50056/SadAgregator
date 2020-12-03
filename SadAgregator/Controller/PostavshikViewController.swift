@@ -93,18 +93,61 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
     func setUpPostavshikTopCell(cell : UITableViewCell, data : JSON) {
         //   let revsCountLabel = cell.viewWithTag(4) as? UILabel
         if let imageView = cell.viewWithTag(1) as? UIImageView,
-           let ratingView = cell.viewWithTag(3) as? CosmosView
+           let ratingView = cell.viewWithTag(3) as? CosmosView,
+           let nameLabel = cell.viewWithTag(2) as? UILabel,
+           let peoplesImageView = cell.viewWithTag(4) as? UIImageView,
+           let peoplesLabel = cell.viewWithTag(5) as? UILabel,
+           let revImageView = cell.viewWithTag(6) as? UIImageView,
+           let revLabel = cell.viewWithTag(7) as? UILabel
         {
+            
+            //Set up the name
+            nameLabel.text = data["name"].stringValue
+            
+            //Set up peoples label, imageView
+            let peoples = data["peoples"].stringValue
+            
+            if peoples == "0"{
+                peoplesLabel.text = ""
+                peoplesImageView.isHidden = true
+            }else{
+                peoplesLabel.text = peoples
+                peoplesImageView.isHidden = false
+            }
+            
+            let revsArray = data["revs_info"]["revs"].arrayValue
+            let rev = revsArray.count
+            
+            if rev == 0{
+                revLabel.text = ""
+                revImageView.isHidden = true
+            }else{
+                revLabel.text = String(rev)
+                revImageView.isHidden = false
+            }
             
             //Set up image view
             imageView.layer.cornerRadius = imageView.frame.width / 2
             imageView.clipsToBounds = true
             imageView.sd_setImage(with: URL(string: data["img"].stringValue))
             
+            //Set up the rating
             
-            ratingView.rating = Double(data["revs_info"]["rate"].stringValue)!
+            let rating = Double(data["revs_info"]["rate"].stringValue)!
             
-            
+            if rating != 0 {
+                ratingView.rating = rating
+            }else{
+                
+                ratingView.isHidden = true
+                
+                let label = UILabel(frame: ratingView.frame)
+                cell.addSubview(label)
+                label.font = .systemFont(ofSize: 14)
+                
+                label.text = "Отзывов ещё нет"
+                
+            }
             
         }
         
