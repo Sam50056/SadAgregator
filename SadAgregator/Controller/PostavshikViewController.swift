@@ -22,6 +22,18 @@ class PostavshikViewController: UIViewController {
     
     var vendorData : JSON?
     
+    var vendorPhone : String? {
+        return vendorData?["phone"].stringValue
+    }
+    
+    var vendorPlace : String? {
+        return vendorData?["place"].stringValue
+    }
+    
+    var vendorPop : String? {
+        return vendorData?["pop"].stringValue
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,6 +98,19 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func getRowsCount() -> Int{
+        
+        var count = 1
+        
+        guard let phone = vendorPhone , let pop = vendorPop, let place = vendorPlace else {return count}
+        
+        phone != "" ? count += 1 : nil
+        pop != "" ? count += 1 : nil
+        place != "" ? count += 1 : nil
+        
+        return count
     }
     
     //MARK: - Cells SetUp

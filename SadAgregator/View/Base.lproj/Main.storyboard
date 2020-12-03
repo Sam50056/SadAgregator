@@ -108,6 +108,48 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="infoCell" rowHeight="55" id="uFD-5X-uJv">
+                                        <rect key="frame" x="0.0" y="120" width="390" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uFD-5X-uJv" id="phj-Ht-pCc">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.2.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jFI-Wz-gOA">
+                                                    <rect key="frame" x="8" y="18.666666666666664" width="23" height="18.666666666666664"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="22" id="hF1-jK-Kkc"/>
+                                                        <constraint firstAttribute="width" constant="23" id="xke-WZ-WKs"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8GA-4F-ecb">
+                                                    <rect key="frame" x="47" y="18.666666666666668" width="205" height="18.000000000000004"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwK-ie-sBS">
+                                                    <rect key="frame" x="260" y="18.666666666666668" width="122" height="18.000000000000004"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="bJo-tF-roa"/>
+                                                        <constraint firstAttribute="width" constant="122" id="wVn-nW-UXk"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8GA-4F-ecb" firstAttribute="centerY" secondItem="phj-Ht-pCc" secondAttribute="centerY" id="8Tm-CP-95t"/>
+                                                <constraint firstItem="8GA-4F-ecb" firstAttribute="leading" secondItem="jFI-Wz-gOA" secondAttribute="trailing" constant="16" id="AzQ-4K-td1"/>
+                                                <constraint firstAttribute="trailing" secondItem="hwK-ie-sBS" secondAttribute="trailing" constant="8" id="CiQ-vn-f70"/>
+                                                <constraint firstItem="jFI-Wz-gOA" firstAttribute="leading" secondItem="phj-Ht-pCc" secondAttribute="leading" constant="8" id="QOm-N9-Bdw"/>
+                                                <constraint firstItem="hwK-ie-sBS" firstAttribute="centerY" secondItem="phj-Ht-pCc" secondAttribute="centerY" id="TBL-qU-bTv"/>
+                                                <constraint firstItem="jFI-Wz-gOA" firstAttribute="centerY" secondItem="phj-Ht-pCc" secondAttribute="centerY" id="rN4-yz-NaM"/>
+                                                <constraint firstItem="hwK-ie-sBS" firstAttribute="leading" secondItem="8GA-4F-ecb" secondAttribute="trailing" constant="8" id="vr5-fR-5w2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -1466,6 +1508,7 @@
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
+        <image name="person.2.fill" catalog="system" width="128" height="80"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="person.fill.checkmark" catalog="system" width="128" height="88"/>
         <image name="photo" catalog="system" width="128" height="93"/>
