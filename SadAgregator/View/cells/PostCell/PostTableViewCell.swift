@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
+class PostTableViewCell: UITableViewCell  {
     
     @IBOutlet weak var vendorLabel: UILabel!
     @IBOutlet weak var byLabel: UILabel!
@@ -70,34 +70,6 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionView.tag == 1 ? sizes.count : options.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        var cell = UICollectionViewCell()
-        
-        if collectionView.tag == 1{
-            
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sizeCell", for: indexPath) as! SizeCollectionViewCell
-            
-            (cell as! SizeCollectionViewCell).label.text = sizes[indexPath.row]
-            
-        }else if collectionView.tag == 2 {
-            
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "optionCell", for: indexPath) as! OptionCollectionViewCell
-            
-            (cell as! OptionCollectionViewCell).label.text = options[indexPath.row]
-            
-        }
-        
-        cell.backgroundColor = .red
-        
-        return cell
         
     }
     
@@ -206,24 +178,15 @@ class PostTableViewCell: UITableViewCell , UICollectionViewDataSource  {
     
     func applySnapshot(animatingDifferences: Bool = false) {
         
-        let sections = SectionLayoutKind.allCases
         var snapshot = Snapshot()
-        snapshot.appendSections(sections)
+        
+        snapshot.appendSections(SectionLayoutKind.allCases)
+        
+        snapshot.appendItems(sizes, toSection: .size)
+        snapshot.appendItems(options, toSection: .option)
+        snapshot.appendItems(images,toSection: .photo)
+        
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
-        
-        
-        var sizesSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
-        sizesSnapshot.append(sizes)
-        
-        var optionsSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
-        optionsSnapshot.append(options)
-        
-        var photosSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
-        photosSnapshot.append(images)
-        
-        dataSource.apply(optionsSnapshot, to: .option, animatingDifferences: animatingDifferences)
-        dataSource.apply(sizesSnapshot, to: .size, animatingDifferences: animatingDifferences)
-        dataSource.apply(photosSnapshot,to: .photo , animatingDifferences: animatingDifferences)
         
     }
     
