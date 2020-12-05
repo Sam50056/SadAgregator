@@ -82,29 +82,48 @@ class PostTableViewCell: UITableViewCell  {
             
             let section: NSCollectionLayoutSection
             
-            if sectionLayoutKind == .size || sectionLayoutKind == .option{
+            if sectionLayoutKind == .option{
                 
                 let widthDimension = sectionLayoutKind.widthDimension
                 
-                let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension: sectionLayoutKind == .size ? .absolute(20) : .absolute(30))
+                let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension:.absolute(30))
                 
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
                 
-                let groupSize = sectionLayoutKind ==
-                    .size ? NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(22))
-                    :  NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(32))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: !options.isEmpty ? .absolute(32) : .absolute(0))
                 
-                let group = sectionLayoutKind == .size ? NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item]) : NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
-                group.interItemSpacing = sectionLayoutKind == .size ? .fixed(10) : .fixed(8)
+                group.interItemSpacing = .fixed(8)
                 
                 section = NSCollectionLayoutSection(group: group)
                 //            section.interGroupSpacing = 1
-                sectionLayoutKind == .size ? section.orthogonalScrollingBehavior = .continuous : nil
+                
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0)
                 
-            } else if sectionLayoutKind == .photo {
+            } else if sectionLayoutKind == .size {
+                
+                let widthDimension = sectionLayoutKind.widthDimension
+                
+                let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension: .absolute(20))
+                
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: !sizes.isEmpty ? .absolute(22) : .absolute(0))
+                
+                let group =  NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                group.interItemSpacing = .fixed(10)
+                
+                section = NSCollectionLayoutSection(group: group)
+                //            section.interGroupSpacing = 1
+                section.orthogonalScrollingBehavior = .continuous
+                
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0)
+                
+            }else if sectionLayoutKind == .photo {
                 
                 if self.images.count == 1 {
                     let leadingItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
