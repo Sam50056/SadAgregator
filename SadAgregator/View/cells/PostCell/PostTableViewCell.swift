@@ -86,12 +86,12 @@ class PostTableViewCell: UITableViewCell  {
                 
                 let widthDimension = sectionLayoutKind.widthDimension
                 
-                let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension:.absolute(30))
+                let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension:.fractionalHeight(1))
                 
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: !options.isEmpty ? .absolute(32) : .absolute(0))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: !options.isEmpty ? .fractionalHeight(0.06) : .absolute(0))
                 
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
@@ -106,12 +106,12 @@ class PostTableViewCell: UITableViewCell  {
                 
                 let widthDimension = sectionLayoutKind.widthDimension
                 
-                let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension: .absolute(20))
+                let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension: .fractionalHeight(1))
                 
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: !sizes.isEmpty ? .absolute(22) : .absolute(0))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: !sizes.isEmpty ? .fractionalHeight(0.05) : .absolute(0))
                 
                 let group =  NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
@@ -132,14 +132,18 @@ class PostTableViewCell: UITableViewCell  {
                     
                     section = NSCollectionLayoutSection(group: nestedGroup)
                     section.orthogonalScrollingBehavior = .none
+                    
                     return section
+                    
                 } else if self.images.count == 2 {
+                    
                     let leadingItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5)))
                     leadingItem.contentInsets = NSDirectionalEdgeInsets(top: contentInsets, leading: contentInsets, bottom: contentInsets, trailing: contentInsets)
                     let nestedGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.8)), subitem: leadingItem, count: 2)
                     
                     section = NSCollectionLayoutSection(group: nestedGroup)
                     section.orthogonalScrollingBehavior = .none
+                    
                     return section
                     
                 } else if self.images.count == 3 {
@@ -156,6 +160,7 @@ class PostTableViewCell: UITableViewCell  {
                     
                     section = NSCollectionLayoutSection(group: nestedGroup)
                     section.orthogonalScrollingBehavior = .none
+                    
                     return section
                     
                 } else if self.images.count == 4 {
@@ -172,6 +177,7 @@ class PostTableViewCell: UITableViewCell  {
                     
                     section = NSCollectionLayoutSection(group: nestedGroup)
                     section.orthogonalScrollingBehavior = .none
+                    
                     return section
                     
                 } else if self.images.count == 5 {
@@ -189,6 +195,7 @@ class PostTableViewCell: UITableViewCell  {
                     
                     section = NSCollectionLayoutSection(group: nestedGroup)
                     section.orthogonalScrollingBehavior = .none
+                    
                     return section
                     
                 } else if self.images.count == 6 {
@@ -213,6 +220,7 @@ class PostTableViewCell: UITableViewCell  {
                     
                     section = NSCollectionLayoutSection(group: nestedGroup)
                     section.orthogonalScrollingBehavior = .none
+                    
                     return section
                     
                 } else if self.images.count == 7 {
@@ -234,6 +242,7 @@ class PostTableViewCell: UITableViewCell  {
                     
                     section = NSCollectionLayoutSection(group: nestedGroup)
                     section.orthogonalScrollingBehavior = .none
+                    
                     return section
                     
                 } else if self.images.count == 8 {
@@ -256,6 +265,7 @@ class PostTableViewCell: UITableViewCell  {
                     
                     section = NSCollectionLayoutSection(group: nestedGroup)
                     section.orthogonalScrollingBehavior = .none
+                    
                     return section
                     
                 } else if self.images.count == 9 {
@@ -278,8 +288,11 @@ class PostTableViewCell: UITableViewCell  {
                     
                     section = NSCollectionLayoutSection(group: nestedGroup)
                     section.orthogonalScrollingBehavior = .none
+                    
                     return section
+                    
                 } else if self.images.count == 10 {
+                    
                     let leadingItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5)))
                     leadingItem.contentInsets = NSDirectionalEdgeInsets(top: contentInsets, leading: contentInsets, bottom: contentInsets, trailing: contentInsets)
                     let leadingGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1)), subitem: leadingItem, count: 2)
@@ -298,8 +311,11 @@ class PostTableViewCell: UITableViewCell  {
                     
                     section = NSCollectionLayoutSection(group: nestedGroup)
                     section.orthogonalScrollingBehavior = .none
+                    
                     return section
+                    
                 } else {
+                    
                     let leadingItem = NSCollectionLayoutItem(
                         layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7),
                                                            heightDimension: .fractionalHeight(1)))
@@ -329,6 +345,7 @@ class PostTableViewCell: UITableViewCell  {
             }
             
             return section
+            
         }
         
         return layout
