@@ -165,6 +165,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             }
             
             indexForPosts = indexPath.row - 1
+            
         }else {indexForPosts = indexPath.row}
         
         cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell

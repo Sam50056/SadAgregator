@@ -42,9 +42,9 @@ class PostavshikViewController: UIViewController {
         return vendorData?["vk_link"].stringValue
     }
     
-    var vendorRevs : [JSON]?{
-        return vendorData?["revs_info"]["revs"].arrayValue
-    }
+    var vendorRevs = [JSON]()
+    
+    var postsArray = [JSON]()
     
     var infoCells : [InfoCellObject] = []
     
@@ -76,6 +76,8 @@ extension PostavshikViewController : VendorCardDataManagerDelegate{
             
             self.vendorData = data
             
+            self.postsArray = data["posts"].arrayValue
+            
             self.tableView.reloadData()
             
         }
@@ -92,8 +94,38 @@ extension PostavshikViewController : VendorCardDataManagerDelegate{
 
 extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource{
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 5
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + getInfoRowsCount() + getRevRowsCount()
+      
+        switch section {
+        
+        case 0:
+            
+            return 1
+            
+        case 1:
+            
+            return getInfoRowsCount()
+            
+        case 2:
+            
+            return getRevRowsCount()
+            
+        case 3:
+            
+            return vendorRevs.count
+            
+        case 4:
+            
+            return postsArray.count
+            
+        default:
+            fatalError("Invalid section")
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,14 +134,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         guard let vendorData = self.vendorData else {return cell}
         
-        let maxIndexForInfoCells = getInfoRowsCount()
-        
-        let maxIndexForRevStaticCells = maxIndexForInfoCells + 3
-        
-        let maxIndexForRevCells = maxIndexForRevStaticCells + self.vendorRevs!.count
-        
-        
-        switch indexPath.row {
+        switch indexPath.section {
         
         case 0:
             
@@ -117,41 +142,32 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             setUpPostavshikTopCell(cell: cell, data: vendorData)
             
-        case 1...maxIndexForInfoCells:
+        case 1:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
             
-            let indexForInfoCell = indexPath.row - 1
+            setUpInfoCell(cell: cell, data: vendorData, index: indexPath.row)
             
-            setUpInfoCell(cell: cell, data: vendorData, index: indexForInfoCell)
+        case 2:
             
-        default:
-            
-            if getRevRowsCount() != 0 {
+            if indexPath.row == 0{
                 
-                if indexPath.row == maxIndexForInfoCells + 1{
-                    
-                    cell = tableView.dequeueReusableCell(withIdentifier: "rateVend", for: indexPath)
-                    
-                }
+                cell = tableView.dequeueReusableCell(withIdentifier: "rateVend", for: indexPath)
                 
-                if indexPath.row == maxIndexForInfoCells + 2{
-                    
-                    cell = tableView.dequeueReusableCell(withIdentifier: "leaveARevCell", for: indexPath)
-                }
+            }else if indexPath.row == 1 {
                 
-                if indexPath.row == maxIndexForInfoCells + 3{
-                    
-                    cell = tableView.dequeueReusableCell(withIdentifier: "revCountLabel", for: indexPath)
-                }
+                cell = tableView.dequeueReusableCell(withIdentifier: "leaveARevCell", for: indexPath)
                 
+            }else if indexPath.row == 2{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "revCountLabel", for: indexPath)
             }
             
-            
-            
+        default:
+            print("Index Path Section out of switch : \(indexPath.section)")
         }
         
-            return cell
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
