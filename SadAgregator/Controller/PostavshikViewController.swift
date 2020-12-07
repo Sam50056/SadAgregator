@@ -42,6 +42,8 @@ class PostavshikViewController: UIViewController {
         return vendorData?["vk_link"].stringValue
     }
     
+    var infoCells : [InfoCellObject] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -110,6 +112,10 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
             
+            let indexForInfoCell = indexPath.row - 1
+            
+            setUpInfoCell(cell: cell, data: vendorData, index: indexForInfoCell)
+            
         default:
             print("IndexPath out of switch")
         }
@@ -124,15 +130,44 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
     
     func getRowsCount() -> Int{
         
-        var count = 1
+        var count = 0
         
         guard let phone = vendorPhone , let pop = vendorPop, let place = vendorPlace , let regDate = vendorRegDate , let vkLink = vendorVkLink else {return count}
         
-        phone != "" ? count += 1 : nil
-        pop != "" ? count += 1 : nil
-        place != "" ? count += 1 : nil
-        regDate != "" ? count += 1 : nil
-        vkLink != "" ? count += 1 : nil
+        if phone != "" {
+            count += 1
+            
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "phone.fill")!, leftLabelText: "Номер телефона", rightLabelText: phone))
+            
+        }
+        
+        if pop != "" {
+            count += 1
+            
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "person.2.fill")!, leftLabelText: "Охват", rightLabelText: pop))
+            
+        }
+        
+        if place != "" {
+            count += 1
+            
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "paperplane.fill")!, leftLabelText: "Контейнер", rightLabelText: place))
+            
+        }
+        
+        if regDate != "" {
+            count += 1
+            
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "phone")!, leftLabelText: "Дата регистрации VK", rightLabelText: regDate))
+            
+        }
+        
+        if vkLink != "" {
+            count += 1
+            
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "phone")!, leftLabelText: "Страница", rightLabelText: vkLink))
+            
+        }
         
         print("Rows count: \(count)")
         
@@ -203,5 +238,33 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         }
         
     }
+    
+    func setUpInfoCell(cell : UITableViewCell, data : JSON, index : Int){
+        
+        if let imageView = cell.viewWithTag(1) as? UIImageView,
+           let leftLabel = cell.viewWithTag(2) as? UILabel ,
+           let rightLabel = cell.viewWithTag(3) as? UILabel{
+            
+            let thisInfoCellObject = infoCells[index]
+            
+            imageView.image = thisInfoCellObject.image
+            
+            leftLabel.text = thisInfoCellObject.leftLabelText
+            
+            rightLabel.text = thisInfoCellObject.rightLabelText
+            
+        }
+        
+    }
+    
+}
+
+//MARK: - InfoCellObject
+
+struct InfoCellObject {
+    
+    let image : UIImage
+    let leftLabelText : String
+    let rightLabelText : String
     
 }
