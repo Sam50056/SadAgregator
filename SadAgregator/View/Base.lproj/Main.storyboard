@@ -313,6 +313,37 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="lastPostsCell" rowHeight="50" id="Wio-OD-Xph">
+                                        <rect key="frame" x="0.0" y="323.66666793823242" width="390" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wio-OD-Xph" id="72Q-tb-Tp7">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Последние посты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clI-Mz-PHF">
+                                                    <rect key="frame" x="28" y="14.999999999999998" width="151.66666666666666" height="20.333333333333329"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7M4-7p-VLz">
+                                                    <rect key="frame" x="336" y="17" width="26" height="16.333333333333329"/>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="26" id="DrM-y4-eZn"/>
+                                                        <constraint firstAttribute="height" constant="20" id="nBv-uP-v7V"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.960834682" green="0.96459835770000002" blue="0.97255879639999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <constraints>
+                                                <constraint firstItem="clI-Mz-PHF" firstAttribute="centerY" secondItem="72Q-tb-Tp7" secondAttribute="centerY" id="hgN-zU-ght"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="7M4-7p-VLz" secondAttribute="trailing" constant="8" id="hhe-ZK-UKh"/>
+                                                <constraint firstItem="clI-Mz-PHF" firstAttribute="leading" secondItem="72Q-tb-Tp7" secondAttribute="leadingMargin" constant="8" id="l7r-tM-xsd"/>
+                                                <constraint firstItem="7M4-7p-VLz" firstAttribute="centerY" secondItem="72Q-tb-Tp7" secondAttribute="centerY" id="r5V-3H-ZCl"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -1662,7 +1693,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="LYd-3X-sUB"/>
+        <segue reference="3vK-wY-P32"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
