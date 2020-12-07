@@ -64,7 +64,7 @@ class PostTableViewCell: UITableViewCell  {
                 return 0.95
             }
             
-            return 0.9
+            return 0.92
             
         }else{
             
