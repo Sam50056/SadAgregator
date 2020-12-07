@@ -34,6 +34,14 @@ class PostavshikViewController: UIViewController {
         return vendorData?["pop"].stringValue
     }
     
+    var vendorRegDate : String? {
+        return vendorData?["reg_dt"].stringValue
+    }
+    
+    var vendorVkLink : String?{
+        return vendorData?["vk_link"].stringValue
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,7 +87,7 @@ extension PostavshikViewController : VendorCardDataManagerDelegate{
 extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 1 + getRowsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,9 +96,23 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         guard let vendorData = self.vendorData else {return cell}
         
-        cell = tableView.dequeueReusableCell(withIdentifier: "postavshikTopCell", for: indexPath)
+        var maxIndexForInfoCells = getRowsCount()
         
-        setUpPostavshikTopCell(cell: cell, data: vendorData)
+        switch indexPath.row {
+        
+        case 0:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "postavshikTopCell", for: indexPath)
+            
+            setUpPostavshikTopCell(cell: cell, data: vendorData)
+            
+        case 1...maxIndexForInfoCells:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
+            
+        default:
+            print("IndexPath out of switch")
+        }
         
         return cell
         
@@ -104,11 +126,15 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         var count = 1
         
-        guard let phone = vendorPhone , let pop = vendorPop, let place = vendorPlace else {return count}
+        guard let phone = vendorPhone , let pop = vendorPop, let place = vendorPlace , let regDate = vendorRegDate , let vkLink = vendorVkLink else {return count}
         
         phone != "" ? count += 1 : nil
         pop != "" ? count += 1 : nil
         place != "" ? count += 1 : nil
+        regDate != "" ? count += 1 : nil
+        vkLink != "" ? count += 1 : nil
+        
+        print("Rows count: \(count)")
         
         return count
     }
