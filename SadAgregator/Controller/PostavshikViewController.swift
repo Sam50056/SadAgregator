@@ -137,35 +137,35 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         if phone != "" {
             count += 1
             
-            infoCells.append(InfoCellObject(image: UIImage(systemName: "phone.fill")!, leftLabelText: "Номер телефона", rightLabelText: phone))
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "phone.fill")!, leftLabelText: "Номер телефона", rightLabelText: phone, shouldRightLabelBeBlue: false))
             
         }
         
         if pop != "" {
             count += 1
             
-            infoCells.append(InfoCellObject(image: UIImage(systemName: "person.2.fill")!, leftLabelText: "Охват", rightLabelText: pop))
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "person.2.fill")!, leftLabelText: "Охват", rightLabelText: pop, shouldRightLabelBeBlue: false))
             
         }
         
         if place != "" {
             count += 1
             
-            infoCells.append(InfoCellObject(image: UIImage(systemName: "paperplane.fill")!, leftLabelText: "Контейнер", rightLabelText: place))
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "paperplane.fill")!, leftLabelText: "Контейнер", rightLabelText: place, shouldRightLabelBeBlue: true))
             
         }
         
         if regDate != "" {
             count += 1
             
-            infoCells.append(InfoCellObject(image: UIImage(systemName: "phone")!, leftLabelText: "Дата регистрации VK", rightLabelText: regDate))
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "phone")!, leftLabelText: "Дата регистрации VK", rightLabelText: regDate, shouldRightLabelBeBlue: false))
             
         }
         
         if vkLink != "" {
             count += 1
             
-            infoCells.append(InfoCellObject(image: UIImage(systemName: "phone")!, leftLabelText: "Страница", rightLabelText: vkLink))
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "phone")!, leftLabelText: "Страница", rightLabelText: vkLink, shouldRightLabelBeBlue: true))
             
         }
         
@@ -253,6 +253,8 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             rightLabel.text = thisInfoCellObject.rightLabelText
             
+            thisInfoCellObject.shouldRightLabelBeBlue ? (rightLabel.textColor = .systemBlue) : (rightLabel.textColor = #colorLiteral(red: 0.3666185141, green: 0.3666757345, blue: 0.3666060269, alpha: 1))
+            
         }
         
     }
@@ -266,5 +268,6 @@ struct InfoCellObject {
     let image : UIImage
     let leftLabelText : String
     let rightLabelText : String
+    let shouldRightLabelBeBlue : Bool
     
 }
