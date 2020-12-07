@@ -89,7 +89,7 @@ extension PostavshikViewController : VendorCardDataManagerDelegate{
 extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + getRowsCount()
+        return 1 + getRowsCount() + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,6 +115,10 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             let indexForInfoCell = indexPath.row - 1
             
             setUpInfoCell(cell: cell, data: vendorData, index: indexForInfoCell)
+            
+        case maxIndexForInfoCells + 1:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "rateVend", for: indexPath)
             
         default:
             print("IndexPath out of switch")
@@ -168,8 +172,6 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             infoCells.append(InfoCellObject(image: UIImage(systemName: "phone")!, leftLabelText: "Страница", rightLabelText: vkLink, shouldRightLabelBeBlue: true))
             
         }
-        
-        print("Rows count: \(count)")
         
         return count
     }
