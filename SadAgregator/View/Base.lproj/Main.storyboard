@@ -244,12 +244,32 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edF-WA-09K">
+                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="1"/>
+                                                    <color key="backgroundColor" red="0.93868440389999996" green="0.93872648479999998" blue="0.94224876170000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="Fp3-1M-oL7"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Prm-jr-qQm">
+                                                    <rect key="frame" x="0.0" y="50" width="390" height="1"/>
+                                                    <color key="backgroundColor" red="0.93868440389999996" green="0.93872648479999998" blue="0.94224876170000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="CiF-dA-pvR"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="edF-WA-09K" firstAttribute="top" secondItem="VKu-Dj-6ni" secondAttribute="top" id="0jt-rZ-XdE"/>
                                                 <constraint firstItem="RmU-Ug-kFs" firstAttribute="leading" secondItem="ZVF-Sh-bIp" secondAttribute="trailing" constant="8" id="Ath-EZ-Chc"/>
                                                 <constraint firstItem="ZVF-Sh-bIp" firstAttribute="centerY" secondItem="VKu-Dj-6ni" secondAttribute="centerY" id="HsH-Pf-GjP"/>
                                                 <constraint firstItem="ZVF-Sh-bIp" firstAttribute="leading" secondItem="VKu-Dj-6ni" secondAttribute="leading" constant="20" symbolic="YES" id="WHG-gB-mHi"/>
+                                                <constraint firstAttribute="bottom" secondItem="Prm-jr-qQm" secondAttribute="bottom" id="X1u-It-c7z"/>
+                                                <constraint firstAttribute="trailing" secondItem="edF-WA-09K" secondAttribute="trailing" id="XSY-If-eA0"/>
+                                                <constraint firstItem="edF-WA-09K" firstAttribute="leading" secondItem="VKu-Dj-6ni" secondAttribute="leading" id="cjD-bz-5hn"/>
+                                                <constraint firstAttribute="trailing" secondItem="Prm-jr-qQm" secondAttribute="trailing" id="dAo-Hf-1sm"/>
                                                 <constraint firstItem="RmU-Ug-kFs" firstAttribute="centerY" secondItem="VKu-Dj-6ni" secondAttribute="centerY" id="hhg-UW-GHP"/>
+                                                <constraint firstItem="Prm-jr-qQm" firstAttribute="leading" secondItem="VKu-Dj-6ni" secondAttribute="leading" id="no7-IX-IST"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -266,10 +286,30 @@
                                                     <color key="textColor" red="0.34574854370000002" green="0.34580290320000001" blue="0.34573665260000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ATm-Bn-dGb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="1"/>
+                                                    <color key="backgroundColor" red="0.93868440389999996" green="0.93872648479999998" blue="0.94224876170000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="yCz-y3-1Rs"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6S0-NZ-NER">
+                                                    <rect key="frame" x="0.0" y="42.666666666666664" width="390" height="1"/>
+                                                    <color key="backgroundColor" red="0.93868440389999996" green="0.93872648479999998" blue="0.94224876170000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="YNT-0A-W0D"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="F5Y-8K-51p" firstAttribute="centerY" secondItem="eAC-LP-Lsl" secondAttribute="centerY" id="8L9-xt-wjG"/>
+                                                <constraint firstItem="ATm-Bn-dGb" firstAttribute="leading" secondItem="eAC-LP-Lsl" secondAttribute="leading" id="Pu5-pG-5uR"/>
+                                                <constraint firstAttribute="bottom" secondItem="6S0-NZ-NER" secondAttribute="bottom" id="Xhc-j9-i3u"/>
                                                 <constraint firstItem="F5Y-8K-51p" firstAttribute="leading" secondItem="eAC-LP-Lsl" secondAttribute="leadingMargin" id="do3-y5-jCh"/>
+                                                <constraint firstItem="6S0-NZ-NER" firstAttribute="leading" secondItem="eAC-LP-Lsl" secondAttribute="leading" id="fdd-Xi-8RE"/>
+                                                <constraint firstAttribute="trailing" secondItem="ATm-Bn-dGb" secondAttribute="trailing" id="hdB-UH-iVZ"/>
+                                                <constraint firstItem="ATm-Bn-dGb" firstAttribute="top" secondItem="eAC-LP-Lsl" secondAttribute="top" id="mFJ-qZ-HaJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="6S0-NZ-NER" secondAttribute="trailing" id="oDk-Lc-X3A"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
