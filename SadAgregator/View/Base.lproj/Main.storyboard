@@ -59,6 +59,7 @@
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill.checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="yD8-mt-yX1">
                                                                     <rect key="frame" x="0.0" y="1.9999999999999982" width="22" height="14.666666666666666"/>
+                                                                    <color key="tintColor" red="0.79936379189999995" green="0.79947966339999998" blue="0.79933840040000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="22" id="iXf-on-Auc"/>
                                                                         <constraint firstAttribute="height" constant="18" id="iqn-NR-S6h"/>
@@ -77,6 +78,7 @@
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="6" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="386-tN-oMz">
                                                                     <rect key="frame" x="0.0" y="-0.33333333333333215" width="18" height="17.666666666666664"/>
+                                                                    <color key="tintColor" red="0.79936379189999995" green="0.79947966339999998" blue="0.79933840040000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="18" id="66O-zw-x9f"/>
                                                                         <constraint firstAttribute="height" constant="18" id="8AB-Ul-9OS"/>
