@@ -42,6 +42,10 @@ class PostavshikViewController: UIViewController {
         return vendorData?["vk_link"].stringValue
     }
     
+    var vendorRevs : [JSON]?{
+        return vendorData?["revs_info"]["revs"].arrayValue
+    }
+    
     var infoCells : [InfoCellObject] = []
     
     override func viewDidLoad() {
@@ -89,7 +93,7 @@ extension PostavshikViewController : VendorCardDataManagerDelegate{
 extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + getRowsCount() + 1 + 1
+        return 1 + getInfoRowsCount() + getRevRowsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,7 +102,12 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         guard let vendorData = self.vendorData else {return cell}
         
-        var maxIndexForInfoCells = getRowsCount()
+        let maxIndexForInfoCells = getInfoRowsCount()
+        
+        let maxIndexForRevStaticCells = maxIndexForInfoCells + 3
+        
+        let maxIndexForRevCells = maxIndexForRevStaticCells + self.vendorRevs!.count
+        
         
         switch indexPath.row {
         
@@ -116,27 +125,40 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             setUpInfoCell(cell: cell, data: vendorData, index: indexForInfoCell)
             
-        case maxIndexForInfoCells + 1:
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "rateVend", for: indexPath)
-            
-        case maxIndexForInfoCells + 2:
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "leaveARevCell", for: indexPath)
-            
         default:
-            print("IndexPath out of switch")
+            
+            if getRevRowsCount() != 0 {
+                
+                if indexPath.row == maxIndexForInfoCells + 1{
+                    
+                    cell = tableView.dequeueReusableCell(withIdentifier: "rateVend", for: indexPath)
+                    
+                }
+                
+                if indexPath.row == maxIndexForInfoCells + 2{
+                    
+                    cell = tableView.dequeueReusableCell(withIdentifier: "leaveARevCell", for: indexPath)
+                }
+                
+                if indexPath.row == maxIndexForInfoCells + 3{
+                    
+                    cell = tableView.dequeueReusableCell(withIdentifier: "revCountLabel", for: indexPath)
+                }
+                
+            }
+            
+            
+            
         }
         
-        return cell
-        
+            return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func getRowsCount() -> Int{
+    func getInfoRowsCount() -> Int{
         
         var count = 0
         
@@ -174,6 +196,21 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             count += 1
             
             infoCells.append(InfoCellObject(image: UIImage(systemName: "phone")!, leftLabelText: "Страница", rightLabelText: vkLink, shouldRightLabelBeBlue: true))
+            
+        }
+        
+        return count
+    }
+    
+    func getRevRowsCount() -> Int{
+        
+        var count = 0
+        
+        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLogged")
+        
+        if isLoggedIn {
+            
+            count += 3 //Three cells (rateVend , leaveARevCell and revCountCell)
             
         }
         
