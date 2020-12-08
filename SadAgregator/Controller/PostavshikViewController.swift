@@ -143,6 +143,8 @@ extension PostavshikViewController : VendorCardDataManagerDelegate{
             
             self.postsArray = data["posts"].arrayValue
             
+            self.vendorRevs = data["revs_info"]["revs"].arrayValue
+            
             self.tableView.reloadData()
             
         }
