@@ -231,7 +231,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         case 1:
             return 1
         case 2:
-            return 1
+            return (pointData?["alert_text"].stringValue) == "" ? 0 : 1
         case 3:
             return 1
         case 4:
@@ -256,7 +256,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         
         var cell = UITableViewCell()
         
-        guard let tochkaData = pointData else {return cell}
+        guard let pointData = pointData else {return cell}
         
         switch indexPath.section {
         
@@ -264,17 +264,19 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "pointSwitchCell", for: indexPath)
             
-            setUpSwitchCell(cell: cell, data: tochkaData["arrows"])
+            setUpSwitchCell(cell: cell, data: pointData["arrows"])
             
         case 1:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "generalPostsPhotosCell", for: indexPath)
             
-            setUpGeneralPostsPhotosCell(cell: cell, data: tochkaData["activity"])
+            setUpGeneralPostsPhotosCell(cell: cell, data: pointData["activity"])
 
         case 2:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "alertCell", for: indexPath)
+            
+            setUpAlertCell(cell: cell, data: pointData)
             
         case 3:
             
@@ -331,6 +333,8 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         switch indexPath.section {
         case 1:
             return 126
+        case 2:
+            return 70
         case 4:
             
             let index = indexPath.row
@@ -472,6 +476,16 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             todayPhotosLabel.text = data["photo_today"].stringValue
             
             yesterdayPhotosLabel.text = data["photo_ystd"].stringValue
+            
+        }
+        
+    }
+    
+    func setUpAlertCell(cell : UITableViewCell, data: JSON){
+        
+        if let label = cell.viewWithTag(1) as? UILabel{
+            
+            label.text = data["alert_text"].stringValue
             
         }
         
