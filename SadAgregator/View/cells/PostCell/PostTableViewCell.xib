@@ -60,7 +60,7 @@
                                     <constraint firstItem="2D9-dG-k9E" firstAttribute="leading" secondItem="F9Q-xC-IMV" secondAttribute="trailing" constant="8" id="zim-VP-mEa"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IO7-nw-6KB">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IO7-nw-6KB">
                                 <rect key="frame" x="16" y="36" width="331" height="392"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="15v-TS-fz7">
