@@ -156,7 +156,7 @@ extension MainViewController : CheckKeysDataManagerDelegate {
     
     func didGetCheckKeysData(data: JSON) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             
             if let safeKey = data["key"].string {
                 
@@ -164,9 +164,9 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                 
                 UserDefaults.standard.set(safeKey, forKey: "key") //Saving the key to UserDefaults
                 
-                self.key = safeKey
+                key = safeKey
                 
-                self.mainDataManager.getMainData(key: safeKey)
+                refresh(self)
                 
             }
             
