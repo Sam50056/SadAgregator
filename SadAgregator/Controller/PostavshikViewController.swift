@@ -415,13 +415,20 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 ratingView.rating = rating
             }else{
                 
-                ratingView.isHidden = true
-                
-                let label = UILabel(frame: ratingView.frame)
-                cell.addSubview(label)
-                label.font = .systemFont(ofSize: 14)
-                
-                label.text = "Отзывов ещё нет"
+                if ratingView.tag != 1{
+                    
+                    ratingView.isHidden = true
+                    
+                    let label = UILabel(frame: ratingView.frame)
+                    
+                    cell.addSubview(label)
+                    
+                    label.font = .systemFont(ofSize: 14)
+                    
+                    label.text = "Отзывов ещё нет"
+                    
+                    ratingView.tag = 1 //I put tag 1 to know that the label is already shown and when cell is rerendered , label should not be added again , it's already in there , that's why there is a check for tag above ( if ratingView.tag != 1)
+                }
                 
             }
             
