@@ -128,14 +128,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jFI-Wz-gOA">
-                                                    <rect key="frame" x="20" y="15" width="25" height="25"/>
+                                                    <rect key="frame" x="20" y="15" width="27" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="hF1-jK-Kkc"/>
-                                                        <constraint firstAttribute="width" constant="25" id="xke-WZ-WKs"/>
+                                                        <constraint firstAttribute="width" constant="27" id="xke-WZ-WKs"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8GA-4F-ecb">
-                                                    <rect key="frame" x="61" y="18.666666666666668" width="179" height="18.000000000000004"/>
+                                                    <rect key="frame" x="63" y="18.666666666666668" width="177" height="18.000000000000004"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
