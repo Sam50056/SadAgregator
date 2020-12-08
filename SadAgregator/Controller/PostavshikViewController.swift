@@ -335,7 +335,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         if regDate != "" {
             count += 1
             
-            infoCells.append(InfoCellObject(image: UIImage(systemName: "phone")!, leftLabelText: "Дата регистрации VK", rightLabelText: regDate, shouldRightLabelBeBlue: false))
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "calendar")!, leftLabelText: "Дата регистрации VK", rightLabelText: regDate, shouldRightLabelBeBlue: false))
             
         }
         
