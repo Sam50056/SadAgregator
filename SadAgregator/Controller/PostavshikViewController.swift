@@ -342,7 +342,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         if vkLink != "" {
             count += 1
             
-            infoCells.append(InfoCellObject(image: UIImage(systemName: "phone")!, leftLabelText: "Страница", rightLabelText: vkLink, shouldRightLabelBeBlue: true))
+            infoCells.append(InfoCellObject(image: UIImage(named: "vk-2")!, leftLabelText: "Страница", rightLabelText: vkLink, shouldRightLabelBeBlue: true))
             
         }
         
