@@ -376,7 +376,9 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
            let peoplesImageView = cell.viewWithTag(4) as? UIImageView,
            let peoplesLabel = cell.viewWithTag(5) as? UILabel,
            let revImageView = cell.viewWithTag(6) as? UIImageView,
-           let revLabel = cell.viewWithTag(7) as? UILabel
+           let revLabel = cell.viewWithTag(7) as? UILabel,
+           let imageCountImageView = cell.viewWithTag(8) as? UIImageView,
+           let imageCountLabel = cell.viewWithTag(9) as? UILabel
         {
             
             //Set up the name
@@ -393,6 +395,17 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 peoplesImageView.isHidden = false
             }
             
+            let imgsCount = data["revs_info"]["imgs_cnt"].stringValue
+            
+            if imgsCount == "0"{
+                imageCountLabel.text = ""
+                imageCountImageView.isHidden = true
+            }else{
+                imageCountLabel.text = imgsCount
+                imageCountImageView.isHidden = false
+            }
+            
+            //Set up revs
             let revsArray = data["revs_info"]["revs"].arrayValue
             let rev = revsArray.count
             
