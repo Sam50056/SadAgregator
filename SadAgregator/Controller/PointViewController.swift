@@ -177,7 +177,7 @@ extension PointViewController : ActivityPointDataManagerDelegate {
             
             self.postsArray = data["posts"].arrayValue
             
-            self.rowForPaggingUpdate = 5 + self.vendsArray.count + 10
+            self.rowForPaggingUpdate = self.vendsArray.count + 10
             
             self.tableView.reloadData()
             
@@ -218,8 +218,36 @@ extension PointViewController : PointPostsPaggingDataManagerDelegate {
 
 extension PointViewController : UITableViewDelegate , UITableViewDataSource{
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 9
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 + 1 + vendsArray.count + activityPointCellsArray.count + 1 + postsArray.count
+        //        return 3 + 1 + vendsArray.count + activityPointCellsArray.count + 1 + postsArray.count
+        
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case 2:
+            return 1
+        case 3:
+            return 1
+        case 4:
+            return vendsArray.count
+        case 5:
+            return 1
+        case 6:
+            return activityPointCellsArray.count
+        case 7:
+            return 1
+        case 8:
+            return postsArray.count
+        default:
+            fatalError("Invalid section: \(section)")
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -230,11 +258,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         
         guard let tochkaData = pointData else {return cell}
         
-        let maxIndexForVendCells = 3 + vendsArray.count - 1
-        let maxIndexForActivityPointCells = 1 + maxIndexForVendCells + activityPointCellsArray.count
-        let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
-        
-        switch index {
+        switch indexPath.section {
         
         case 0:
             
@@ -247,44 +271,48 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             cell = tableView.dequeueReusableCell(withIdentifier: "generalPostsPhotosCell", for: indexPath)
             
             setUpGeneralPostsPhotosCell(cell: cell, data: tochkaData["activity"])
-            
+
         case 2:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "alertCell", for: indexPath)
+            
+        case 3:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "agregatorsCell", for: indexPath)
             
-        case 3...maxIndexForVendCells:
+        case 4:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "vendCell", for: indexPath)
             
-            let index = indexPath.row - 3 // We do minus three , still that 3 (count of static cells)
+            let index = indexPath.row
             
             let vend = vendsArray[index]
             
             setUpVendCell(cell: cell as! VendTableViewCell, data: vend)
             
-        case maxIndexForVendCells + 1:
+        case 5:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "TochkiActivityCell", for: indexPath)
             
-        case maxIndexForVendCells + 2...maxIndexForActivityPointCells:
+        case 6:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "activityPointCell", for: indexPath)
             
-            let index = indexPath.row - (maxIndexForVendCells + 2) // We do minus three , still that 3 (count of static cells)
+            let index = indexPath.row
             
             let activityLine = activityPointCellsArray[index]
             
             setUpActivityLineCell(cell: cell, data: activityLine)
             
-        case maxIndexForActivityPointCells + 1:
+        case 7:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
             
-        case maxIndexForActivityPointCells + 2...maxIndexForPosts:
+        case 8:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
             
-            let index = indexPath.row - (maxIndexForActivityPointCells + 2)
+            let index = indexPath.row
             
             let post = postsArray[index]
             
@@ -300,25 +328,20 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let maxIndexForVendCells = 3 + vendsArray.count - 1
-        let maxIndexForActivityPointCells = 1 + maxIndexForVendCells + activityPointCellsArray.count
-        let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
-        
-        if indexPath.row == 1 {
-            
+        switch indexPath.section {
+        case 1:
             return 126
+        case 4:
             
-        }else if indexPath.row >= 3 && indexPath.row <= maxIndexForVendCells && indexPath.row <= maxIndexForVendCells {
-            
-            let index = indexPath.row - 3
+            let index = indexPath.row
             
             let vend = vendsArray[index]
             
             return makeHeightForVendCell(vend: vend)
             
-        }else if indexPath.row >= maxIndexForActivityPointCells + 2 && indexPath.row <= maxIndexForPosts{
+        case 8:
             
-            let index = indexPath.row - (maxIndexForActivityPointCells + 2)
+            let index = indexPath.row
             
             if options[index].count > 4{
                 return 500
@@ -329,24 +352,20 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             }
             
             return 460
+            
+        default:
+            return 50
         }
         
-        return 50
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let index = indexPath.row
         
-        let maxIndexForVendCells = 3 + vendsArray.count - 1
-        let maxIndexForActivityPointCells = 1 + maxIndexForVendCells + activityPointCellsArray.count
-        let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
-        
-        if index >= 3 && index <= maxIndexForVendCells {
+        if indexPath.section == 4 {
             
-            let indexForVends = index - 3
-            
-            selectedVendId = vendsArray[indexForVends]["id"].stringValue
+            selectedVendId = vendsArray[index]["id"].stringValue
             
             self.performSegue(withIdentifier: "goToPostavshik", sender: self)
             
