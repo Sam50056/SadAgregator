@@ -226,7 +226,7 @@ extension MainViewController : MainDataManagerDelegate{
     }
     
 }
- 
+
 //MARK: - MainPaggingDataManagerDelegate Stuff
 
 extension MainViewController : MainPaggingDataManagerDelegate{
@@ -499,7 +499,8 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         
         cell.byLabel.text = data["by"].stringValue
         
-        cell.priceLabel.text = "\(data["price"].stringValue) руб"
+        let price = data["price"].stringValue
+        cell.priceLabel.text = "\(price == "0" ? "" : price + "руб")"
         
         cell.postedLabel.text = data["posted"].stringValue
         
@@ -528,7 +529,7 @@ extension MainViewController {
             destinationVC.thisLineId = selectedLineId
             
         }else if segue.identifier == "goToPoint"{
-         
+            
             let destinationVC = segue.destination as! PointViewController
             
             destinationVC.thisPointId = selectedPointId

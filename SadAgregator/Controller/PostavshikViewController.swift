@@ -477,7 +477,8 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         cell.byLabel.text = data["by"].stringValue
         
-        cell.priceLabel.text = "\(data["price"].stringValue) руб"
+        let price = data["price"].stringValue
+        cell.priceLabel.text = "\(price == "0" ? "" : price + "руб")"
         
         cell.postedLabel.text = data["posted"].stringValue
         

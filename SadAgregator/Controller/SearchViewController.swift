@@ -210,9 +210,9 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
+        
         if indexPath.row == rowForPaggingUpdate{
-
+            
             page += 1
             
             rowForPaggingUpdate += 9
@@ -222,7 +222,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             print("Done a request for page: \(page)")
             
         }
-
+        
     }
     
     @IBAction func removeHintCell(_ sender : Any) {
@@ -249,7 +249,8 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         cell.byLabel.text = data["by"].stringValue
         
-        cell.priceLabel.text = "\(data["price"].stringValue) руб"
+        let price = data["price"].stringValue
+        cell.priceLabel.text = "\(price == "0" ? "" : price + "руб")"
         
         cell.postedLabel.text = data["posted"].stringValue
         
