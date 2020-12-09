@@ -33,6 +33,7 @@ struct MenuView: View {
                             Image(systemName: "arrow.forward.square")
                                 .resizable()
                                 .frame(width: 23, height: 20, alignment: .center)
+                                .foregroundColor(Color(.systemBlue))
                             
                             Text("Войти в аккаунт TK-SAD")
                                 .font(.custom("", size: 16))
@@ -46,6 +47,7 @@ struct MenuView: View {
                             Image(systemName: "person.2.fill")
                                 .resizable()
                                 .frame(width: 30, height: 20, alignment: .center)
+                                .foregroundColor(Color(.systemBlue))
                             
                             Text("Зарегистрироваться")
                                 .font(.custom("", size: 16))
@@ -64,6 +66,7 @@ struct MenuView: View {
                         Image(systemName: "menubar.arrow.up.rectangle")
                             .resizable()
                             .frame(width: 25, height: 20, alignment: .center)
+                            .foregroundColor(Color(.systemBlue))
                         
                         Text("Парсер")
                             .font(.custom("", size: 16))
@@ -82,6 +85,7 @@ struct MenuView: View {
                             Image(systemName: "bubble.left.and.bubble.right.fill")
                                 .resizable()
                                 .frame(width: 26, height: 20, alignment: .center)
+                                .foregroundColor(Color(.systemBlue))
                             
                             Text("Задать вопрос")
                                 .font(.custom("", size: 16))
@@ -95,6 +99,7 @@ struct MenuView: View {
                             Image(systemName: "questionmark.circle.fill")
                                 .resizable()
                                 .frame(width: 22, height: 20, alignment: .center)
+                                .foregroundColor(Color(.systemBlue))
                             
                             Text("Помощь")
                                 .font(.custom("", size: 16))
