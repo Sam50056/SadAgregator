@@ -22,7 +22,7 @@ struct MenuView: View {
                         .fontWeight(.semibold)
                         .padding(.all, 5)
                     
-                }
+                } //Welcome
                 
                 Section{
                     
@@ -54,6 +54,22 @@ struct MenuView: View {
                         .padding(.vertical, 5)
                         
                     }
+                    
+                } //Log in / reg stuff
+                
+                Section{
+                    
+                    HStack(spacing: 21){
+                        
+                        Image(systemName: "menubar.arrow.up.rectangle")
+                            .resizable()
+                            .frame(width: 25, height: 20, alignment: .center)
+                        
+                        Text("Парсер")
+                            .font(.custom("", size: 16))
+                        
+                    }
+                    .padding(.vertical, 5)
                     
                 }
                 
