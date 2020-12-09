@@ -15,6 +15,7 @@ class PostavshikViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let key = UserDefaults.standard.string(forKey: "key")!
+    let isLoggedIn = UserDefaults.standard.bool(forKey: "isLogged")
     
     var thisVendorId : String?
     
@@ -369,9 +370,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         var count = 0
         
-        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLogged")
-        
-        if isLoggedIn {
+        if self.isLoggedIn {
             
             count += 3 //Three cells (rateVend , leaveARevCell and revCountCell)
             

@@ -6,110 +6,276 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct MenuView: View {
+    
+    @State var isLogged = true //UserDefaults.standard.bool(forKey: "isLogged")
     
     var body: some View {
         
         VStack{
             
-            Form{
+            if !isLogged{
                 
-                Section{
+                Form{
                     
-                    Text("Добро пожаловать!")
-                        .font(.title)
-                        .fontWeight(.semibold)
-                        .padding(.all, 5)
-                    
-                } //Welcome
-                
-                Section{
-                    
-                    List{
+                    Section{
                         
-                        HStack(spacing: 23){
+                        Text("Добро пожаловать!")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                            .padding(.all, 5)
+                        
+                    } //Welcome
+                    
+                    Section{
+                        
+                        List{
                             
-                            Image(systemName: "arrow.forward.square")
+                            HStack(spacing: 23){
+                                
+                                Image(systemName: "arrow.forward.square")
+                                    .resizable()
+                                    .frame(width: 23, height: 20, alignment: .center)
+                                    .foregroundColor(Color(.systemBlue))
+                                
+                                Text("Войти в аккаунт TK-SAD")
+                                    .font(.custom("", size: 16))
+                                
+                            }
+                            .padding(.vertical, 5)
+                            
+                            
+                            HStack(spacing: 16){
+                                
+                                Image(systemName: "person.2.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 20, alignment: .center)
+                                    .foregroundColor(Color(.systemBlue))
+                                
+                                Text("Зарегистрироваться")
+                                    .font(.custom("", size: 16))
+                                
+                            }
+                            .padding(.vertical, 5)
+                            
+                        }
+                        
+                    } //Log in / reg stuff
+                    
+                    Section{
+                        
+                        HStack(spacing: 21){
+                            
+                            Image(systemName: "menubar.arrow.up.rectangle")
                                 .resizable()
-                                .frame(width: 23, height: 20, alignment: .center)
+                                .frame(width: 25, height: 20, alignment: .center)
                                 .foregroundColor(Color(.systemBlue))
                             
-                            Text("Войти в аккаунт TK-SAD")
+                            Text("Парсер")
                                 .font(.custom("", size: 16))
                             
                         }
                         .padding(.vertical, 5)
                         
+                    } //Parser
+                    
+                    Section{
+                        
+                        List{
+                            
+                            HStack(spacing: 20){
+                                
+                                Image(systemName: "bubble.left.and.bubble.right.fill")
+                                    .resizable()
+                                    .frame(width: 26, height: 20, alignment: .center)
+                                    .foregroundColor(Color(.systemBlue))
+                                
+                                Text("Задать вопрос")
+                                    .font(.custom("", size: 16))
+                                
+                            }
+                            .padding(.vertical, 5)
+                            
+                            
+                            HStack(spacing: 24){
+                                
+                                Image(systemName: "questionmark.circle.fill")
+                                    .resizable()
+                                    .frame(width: 22, height: 20, alignment: .center)
+                                    .foregroundColor(Color(.systemBlue))
+                                
+                                Text("Помощь")
+                                    .font(.custom("", size: 16))
+                                
+                            }
+                            .padding(.vertical, 5)
+                            
+                        }
+                        
+                    } // Help
+                    
+                }
+                
+            }else {
+                
+                Form{
+                    
+                    Section{
+                        
+                        VStack(alignment: .leading){
+                            
+                            Text("Максим")
+                                .font(.title)
+                                .fontWeight(.semibold)
+                                .padding([.top,.horizontal], 5)
+                                .padding(.bottom, 2)
+                            
+                            HStack{
+                                
+                                Text("Перейти в настройки")
+                                    .font(.system(size: 15))
+                                
+                                Spacer()
+                                
+                                Text("32323")
+                                    .font(.system(size: 15))
+                                
+                            }
+                            .padding([.bottom, .horizontal], 5)
+                            .foregroundColor(Color(.systemGray))
+                            
+                        }
+                        
+                    } //Top Section
+                    
+                    Section{
+                        
+                        List{
+                            
+                            HStack(spacing: 16){
+                                
+                                Image(systemName: "person.2.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 20, alignment: .center)
+                                    .foregroundColor(Color(.systemBlue))
+                                
+                                Text("Избранные поставщики")
+                                    .font(.custom("", size: 16))
+                                
+                            }
+                            .padding(.vertical, 5)
+                            
+                            HStack(spacing: 23){
+                                
+                                Image(systemName: "rectangle.fill.on.rectangle.fill")
+                                    .resizable()
+                                    .frame(width: 23, height: 20, alignment: .center)
+                                    .foregroundColor(Color(.systemBlue))
+                                
+                                Text("Избранные посты")
+                                    .font(.custom("", size: 16))
+                                
+                            }
+                            .padding(.vertical, 5)
+                            
+                            HStack(spacing: 26){
+                                
+                                Image(systemName: "person.badge.plus.fill")
+                                    .resizable()
+                                    .frame(width: 20, height: 20, alignment: .center)
+                                    .foregroundColor(Color(.systemBlue))
+                                
+                                Text("Новый поставщик")
+                                    .font(.custom("", size: 16))
+                                
+                            }
+                            .padding(.vertical, 5)
+                            
+                        }
+                        
+                    } //Log in / reg stuff
+                    
+                    Section{
                         
                         HStack(spacing: 16){
                             
-                            Image(systemName: "person.2.fill")
+                            Image(systemName: "puzzlepiece.fill")
                                 .resizable()
                                 .frame(width: 30, height: 20, alignment: .center)
                                 .foregroundColor(Color(.systemBlue))
                             
-                            Text("Зарегистрироваться")
+                            Text("Быстрая настройка выгрузки")
                                 .font(.custom("", size: 16))
                             
                         }
                         .padding(.vertical, 5)
                         
-                    }
-                    
-                } //Log in / reg stuff
-                
-                Section{
-                    
-                    HStack(spacing: 21){
-                        
-                        Image(systemName: "menubar.arrow.up.rectangle")
-                            .resizable()
-                            .frame(width: 25, height: 20, alignment: .center)
-                            .foregroundColor(Color(.systemBlue))
-                        
-                        Text("Парсер")
-                            .font(.custom("", size: 16))
-                        
-                    }
-                    .padding(.vertical, 5)
-                    
-                } //Parser
-                
-                Section{
-                    
-                    List{
-                        
-                        HStack(spacing: 20){
+                        HStack(spacing: 21){
                             
-                            Image(systemName: "bubble.left.and.bubble.right.fill")
+                            Image(systemName: "menubar.arrow.up.rectangle")
                                 .resizable()
-                                .frame(width: 26, height: 20, alignment: .center)
+                                .frame(width: 25, height: 20, alignment: .center)
                                 .foregroundColor(Color(.systemBlue))
                             
-                            Text("Задать вопрос")
+                            Text("Парсер")
                                 .font(.custom("", size: 16))
                             
                         }
                         .padding(.vertical, 5)
                         
-                        
-                        HStack(spacing: 24){
-                            
-                            Image(systemName: "questionmark.circle.fill")
-                                .resizable()
-                                .frame(width: 22, height: 20, alignment: .center)
-                                .foregroundColor(Color(.systemBlue))
-                            
-                            Text("Помощь")
-                                .font(.custom("", size: 16))
-                            
-                        }
-                        .padding(.vertical, 5)
-                        
-                    }
+                    } //Parser
                     
-                } // Help
+                    Section{
+                        
+                        List{
+                            
+                            HStack(spacing: 20){
+                                
+                                Image(systemName: "bubble.left.and.bubble.right.fill")
+                                    .resizable()
+                                    .frame(width: 26, height: 20, alignment: .center)
+                                    .foregroundColor(Color(.systemBlue))
+                                
+                                Text("Задать вопрос")
+                                    .font(.custom("", size: 16))
+                                
+                            }
+                            .padding(.vertical, 5)
+                            
+                            
+                            HStack(spacing: 24){
+                                
+                                Image(systemName: "questionmark.circle.fill")
+                                    .resizable()
+                                    .frame(width: 22, height: 20, alignment: .center)
+                                    .foregroundColor(Color(.systemBlue))
+                                
+                                Text("Помощь")
+                                    .font(.custom("", size: 16))
+                                
+                            }
+                            .padding(.vertical, 5)
+                            
+                            HStack(spacing: 24){
+                                
+                                Image(systemName: "arrow.right.square")
+                                    .resizable()
+                                    .frame(width: 22, height: 20, alignment: .center)
+                                    .foregroundColor(Color(.systemBlue))
+                                
+                                Text("Выйти из аккаунта")
+                                    .font(.custom("", size: 16))
+                                
+                            }
+                            .padding(.vertical, 5)
+                            
+                        }
+                        
+                    } // Help
+                    
+                }
                 
             }
             
