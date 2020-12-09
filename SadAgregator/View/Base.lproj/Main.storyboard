@@ -1582,10 +1582,10 @@
             </objects>
             <point key="canvasLocation" x="577" y="859"/>
         </scene>
-        <!--View Controller-->
+        <!--Menu Hosting Controller-->
         <scene sceneID="Gya-o8-FEd">
             <objects>
-                <viewController id="lIf-Yl-jSU" sceneMemberID="viewController">
+                <viewController id="lIf-Yl-jSU" customClass="MenuHostingController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BPj-UB-mIs">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
