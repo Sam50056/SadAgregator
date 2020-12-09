@@ -162,7 +162,7 @@ extension PostavshikViewController : VendorCardDataManagerDelegate{
 extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 7
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -187,9 +187,13 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 4:
             
-            return 1
+            return (vendorData?["alert_text"].stringValue) == "" ? 0 : 1
             
         case 5:
+            
+            return 1
+            
+        case 6:
             
             return postsArray.count
             
@@ -236,9 +240,15 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 4:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "alertCell", for: indexPath)
+            
+            setUpAlertCell(cell: cell, data: vendorData)
             
         case 5:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
+            
+        case 6:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
             
@@ -281,6 +291,10 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             return 50
             
         case 5:
+            
+            return 50
+            
+        case 6:
             
             let index = indexPath.row
             
@@ -466,6 +480,16 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             rightLabel.text = thisInfoCellObject.rightLabelText
             
             thisInfoCellObject.shouldRightLabelBeBlue ? (rightLabel.textColor = .systemBlue) : (rightLabel.textColor = #colorLiteral(red: 0.3666185141, green: 0.3666757345, blue: 0.3666060269, alpha: 1))
+            
+        }
+        
+    }
+    
+    func setUpAlertCell(cell : UITableViewCell, data: JSON){
+        
+        if let label = cell.viewWithTag(1) as? UILabel{
+            
+            label.text = data["alert_text"].stringValue
             
         }
         

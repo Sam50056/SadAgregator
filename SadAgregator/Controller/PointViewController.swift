@@ -223,7 +223,6 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        return 3 + 1 + vendsArray.count + activityPointCellsArray.count + 1 + postsArray.count
         
         switch section {
         case 0:
