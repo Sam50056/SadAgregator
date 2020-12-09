@@ -28,21 +28,30 @@ struct MenuView: View {
                     
                     List{
                         
-                        HStack{
+                        HStack(spacing: 23){
                             
-                            Image(systemName: "person")
+                            Image(systemName: "arrow.forward.square")
+                                .resizable()
+                                .frame(width: 23, height: 20, alignment: .center)
                             
                             Text("Войти в аккаунт TK-SAD")
-                            
-                        }.padding(.vertical, 5)
-                        
-                        HStack{
-                            
-                            Image(systemName: "person")
-                            
-                            Text("Зарегистрироваться")
+                                .font(.custom("", size: 16))
                             
                         }
+                        .padding(.vertical, 5)
+                        
+                        
+                        HStack(spacing: 16){
+                            
+                            Image(systemName: "person.2")
+                                .resizable()
+                                .frame(width: 30, height: 20, alignment: .center)
+                            
+                            Text("Зарегистрироваться")
+                                .font(.custom("", size: 16))
+                            
+                        }
+                        .padding(.vertical, 5)
                         
                     }
                     
