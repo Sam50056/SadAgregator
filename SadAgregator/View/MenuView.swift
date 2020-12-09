@@ -43,7 +43,7 @@ struct MenuView: View {
                         
                         HStack(spacing: 16){
                             
-                            Image(systemName: "person.2")
+                            Image(systemName: "person.2.fill")
                                 .resizable()
                                 .frame(width: 30, height: 20, alignment: .center)
                             
@@ -71,7 +71,40 @@ struct MenuView: View {
                     }
                     .padding(.vertical, 5)
                     
-                }
+                } //Parser
+                
+                Section{
+                    
+                    List{
+                        
+                        HStack(spacing: 20){
+                            
+                            Image(systemName: "bubble.left.and.bubble.right.fill")
+                                .resizable()
+                                .frame(width: 26, height: 20, alignment: .center)
+                            
+                            Text("Задать вопрос")
+                                .font(.custom("", size: 16))
+                            
+                        }
+                        .padding(.vertical, 5)
+                        
+                        
+                        HStack(spacing: 24){
+                            
+                            Image(systemName: "questionmark.circle.fill")
+                                .resizable()
+                                .frame(width: 22, height: 20, alignment: .center)
+                            
+                            Text("Помощь")
+                                .font(.custom("", size: 16))
+                            
+                        }
+                        .padding(.vertical, 5)
+                        
+                    }
+                    
+                } // Help
                 
             }
             
