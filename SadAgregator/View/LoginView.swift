@@ -125,7 +125,8 @@ struct LoginView: View {
                 
             }
             .font(.system(size: 14))
-            .padding(.vertical, 16)
+            .padding(.bottom, 16)
+            .padding(.top , 8)
             
         }
         
