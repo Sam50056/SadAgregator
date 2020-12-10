@@ -21,17 +21,23 @@ struct LoginView: View {
                 
                 VStack(alignment: .leading, spacing: 16){
                     
-                    HStack{
+                    HStack(spacing: 16){
                         
-                        Image(systemName: "person")
+                        Image("vk")
+                            .resizable()
+                            .frame(width: 25, height: 25, alignment: .center)
+                            .cornerRadius(5)
                         
                         Text("Войти через Вконтаке")
                         
                     }
                     
-                    HStack(){
+                    HStack(spacing: 13){
                         
-                        Image(systemName: "person")
+                        Image("odno")
+                            .resizable()
+                            .frame(width: 28, height: 30, alignment: .center)
+                            
                         
                         Text("Войти через Одноклассники")
                         
