@@ -136,6 +136,7 @@ struct RegView: View {
             HStack{
                 
                 Text("Уже есть аккаунт?")
+                    .foregroundColor(Color(.systemGray))
                 
                 Button(action: {
                     

@@ -121,6 +121,7 @@ struct LoginView: View {
             HStack{
                 
                 Text("Нет аккаунта?")
+                    .foregroundColor(Color(.systemGray))
                 
                 Button(action: {
                     
