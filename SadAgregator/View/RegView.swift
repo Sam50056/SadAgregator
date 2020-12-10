@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  RegView.swift
 //  SadAgregator
 //
 //  Created by Sam Yerznkyan on 10.12.2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct RegView: View {
     
     @Binding var isPresented : Bool
     
@@ -28,7 +28,7 @@ struct LoginView: View {
                             .frame(width: 25, height: 25, alignment: .center)
                             .cornerRadius(5)
                         
-                        Text("Войти через Вконтаке")
+                        Text("Регистрация через Вконтаке")
                         
                     }
                     
@@ -37,9 +37,9 @@ struct LoginView: View {
                         Image("odno")
                             .resizable()
                             .frame(width: 28, height: 30, alignment: .center)
-                            
                         
-                        Text("Войти через Одноклассники")
+                        
+                        Text("Регистрация через Одноклассники")
                         
                     }
                     
@@ -66,7 +66,35 @@ struct LoginView: View {
                     
                     HStack{
                         
+                        TextField("Имя", text: $emailText)
+                            .padding(.horizontal , 8)
+                            .padding(.vertical, 12)
+                            .multilineTextAlignment(.leading)
+                        
+                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color(.systemGray))
+                    )
+                    .padding(.bottom, 8)
+                    
+                    HStack{
+                        
                         TextField("Пароль", text: $emailText)
+                            .padding(.horizontal , 8)
+                            .padding(.vertical, 12)
+                            .multilineTextAlignment(.leading)
+                        
+                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color(.systemGray))
+                    )
+                    .padding(.bottom, 8)
+                    
+                    HStack{
+                        
+                        TextField("Телефон(не обязательно)", text: $emailText)
                             .padding(.horizontal , 8)
                             .padding(.vertical, 12)
                             .multilineTextAlignment(.leading)
@@ -86,7 +114,7 @@ struct LoginView: View {
                         
                         VStack{
                             
-                            Text("ВОЙТИ")
+                            Text("РЕГИСТРАЦИЯ")
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 12)
                                 .cornerRadius(8)
@@ -95,19 +123,6 @@ struct LoginView: View {
                                 .cornerRadius(8)
                         }
                         
-                    })
-                    
-                    Text("Забыли пароль для входа в систему?")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(.systemGray))
-                    
-                    Button(action: {
-                        
-                    }, label: {
-                        Text("Восстановить пароль")
-                            .foregroundColor(Color(.systemBlue))
-                            .font(.system(size: 14))
-                            .bold()
                     })
                     
                 }.padding(.horizontal, 20)
@@ -120,12 +135,12 @@ struct LoginView: View {
             
             HStack{
                 
-                Text("Нет аккаунта?")
+                Text("Уже есть аккаунт?")
                 
                 Button(action: {
                     
                 }, label: {
-                    Text("Зарегистрироваться")
+                    Text("Войти")
                         .bold()
                 })
                 
@@ -136,39 +151,14 @@ struct LoginView: View {
             
         }
         
-        .navigationBarTitle("Авторизация", displayMode: .inline)
+        .navigationBarTitle("Регистрация", displayMode: .inline)
         
     }
     
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct RegView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(isPresented: .constant(false))
-    }
-}
-
-struct DividerView: View {
-    
-    let label: String
-    let horizontalPadding: CGFloat
-    let color: Color
-    
-    init(label: String, horizontalPadding: CGFloat = 20, color: Color = .gray) {
-        self.label = label
-        self.horizontalPadding = horizontalPadding
-        self.color = color
-    }
-    
-    var body: some View {
-        HStack {
-            line
-            Text(label).foregroundColor(color)
-            line
-        }
-    }
-    
-    var line: some View {
-        VStack { Divider().background(color) }.padding(.horizontal,horizontalPadding)
+        RegView(isPresented: .constant(false))
     }
 }

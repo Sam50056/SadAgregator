@@ -13,6 +13,7 @@ struct MenuView: View {
     @State var isLogged = UserDefaults.standard.bool(forKey: "isLogged")
     
     @State var showModalLogIn = false
+    @State var showModalReg = false
     
     var body: some View {
         
@@ -54,18 +55,22 @@ struct MenuView: View {
                                     
                                 }
                                 
-                                HStack(spacing: 16){
-                                    
-                                    Image(systemName: "person.2.fill")
-                                        .resizable()
-                                        .frame(width: 30, height: 20, alignment: .center)
-                                        .foregroundColor(Color(.systemBlue))
-                                    
-                                    Text("Зарегистрироваться")
-                                        .font(.custom("", size: 16))
+                                NavigationLink(destination: RegView(isPresented: $showModalReg), isActive: $showModalReg) {
+                                    HStack(spacing: 16){
+                                        
+                                        Image(systemName: "person.2.fill")
+                                            .resizable()
+                                            .frame(width: 30, height: 20, alignment: .center)
+                                            .foregroundColor(Color(.systemBlue))
+                                        
+                                        Text("Зарегистрироваться")
+                                            .font(.custom("", size: 16))
+                                        
+                                    }
+                                    .padding(.vertical, 5)
                                     
                                 }
-                                .padding(.vertical, 5)
+                                
                                 
                             }
                             
