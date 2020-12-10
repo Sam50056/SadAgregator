@@ -11,6 +11,8 @@ struct RegView: View {
     
     @Binding var isPresented : Bool
     
+    @Binding var shouldShowLogin : Bool
+    
     @State var emailText : String = ""
     
     var body: some View {
@@ -140,6 +142,10 @@ struct RegView: View {
                 
                 Button(action: {
                     
+                    withAnimation{
+                        shouldShowLogin = true
+                    }
+                    
                 }, label: {
                     Text("Войти")
                         .bold()
@@ -160,6 +166,6 @@ struct RegView: View {
 
 struct RegView_Previews: PreviewProvider {
     static var previews: some View {
-        RegView(isPresented: .constant(false))
+        RegView(isPresented: .constant(false), shouldShowLogin: .constant(false))
     }
 }

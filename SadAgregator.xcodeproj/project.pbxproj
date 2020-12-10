@@ -32,6 +32,7 @@
 		229FE69225706B6B0001FF54 /* GetSearchPageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FE69125706B6B0001FF54 /* GetSearchPageDataManager.swift */; };
 		22A0534E256BCE350016B40A /* ActivityPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0534D256BCE350016B40A /* ActivityPointDataManager.swift */; };
 		22A155CF2582925D000EAB64 /* RegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A155CE2582925D000EAB64 /* RegView.swift */; };
+		22A155DD2582C5D8000EAB64 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A155DC2582C5D8000EAB64 /* AuthView.swift */; };
 		22A49CB42566645800CCC781 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CB22566645800CCC781 /* PostTableViewCell.swift */; };
 		22A49CB52566645800CCC781 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CB32566645800CCC781 /* PostTableViewCell.xib */; };
 		22A49CBB2566650600CCC781 /* SizeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CB92566650600CCC781 /* SizeCollectionViewCell.swift */; };
@@ -79,6 +80,7 @@
 		229FE69125706B6B0001FF54 /* GetSearchPageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSearchPageDataManager.swift; sourceTree = "<group>"; };
 		22A0534D256BCE350016B40A /* ActivityPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPointDataManager.swift; sourceTree = "<group>"; };
 		22A155CE2582925D000EAB64 /* RegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegView.swift; sourceTree = "<group>"; };
+		22A155DC2582C5D8000EAB64 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		22A49CB22566645800CCC781 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		22A49CB32566645800CCC781 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		22A49CB92566650600CCC781 /* SizeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				228CB762255BF96D002B4A96 /* Main.storyboard */,
 				228CB767255BF974002B4A96 /* LaunchScreen.storyboard */,
 				22C9221225814CA40063B5D4 /* MenuView.swift */,
+				22A155DC2582C5D8000EAB64 /* AuthView.swift */,
 				22D663D025823D9E0058B5CC /* LoginView.swift */,
 				22A155CE2582925D000EAB64 /* RegView.swift */,
 			);
@@ -493,6 +496,7 @@
 				22C9221325814CA40063B5D4 /* MenuView.swift in Sources */,
 				22A155CF2582925D000EAB64 /* RegView.swift in Sources */,
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
+				22A155DD2582C5D8000EAB64 /* AuthView.swift in Sources */,
 				228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */,
 				228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */,
 				22A0534E256BCE350016B40A /* ActivityPointDataManager.swift in Sources */,

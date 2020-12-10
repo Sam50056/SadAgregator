@@ -11,6 +11,8 @@ struct LoginView: View {
     
     @Binding var isPresented : Bool
     
+    @Binding var shouldShowLogin : Bool
+    
     @State var emailText : String = ""
     
     var body: some View {
@@ -125,6 +127,10 @@ struct LoginView: View {
                 
                 Button(action: {
                     
+                    withAnimation{
+                        shouldShowLogin = false
+                    }
+                    
                 }, label: {
                     Text("Зарегистрироваться")
                         .bold()
@@ -145,7 +151,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(isPresented: .constant(false))
+        LoginView(isPresented: .constant(false), shouldShowLogin: .constant(false))
     }
 }
 
