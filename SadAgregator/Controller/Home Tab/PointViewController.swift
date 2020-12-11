@@ -177,7 +177,7 @@ extension PointViewController : ActivityPointDataManagerDelegate {
             
             self.postsArray = data["posts"].arrayValue
             
-            self.rowForPaggingUpdate = self.vendsArray.count + 10
+            self.rowForPaggingUpdate = 10
             
             self.tableView.reloadData()
             
@@ -202,7 +202,7 @@ extension PointViewController : PointPostsPaggingDataManagerDelegate {
             
             self.postsArray.append(contentsOf: data["posts"].arrayValue)
             
-            self.tableView.reloadData()
+            self.tableView.reloadSections([8], with: .automatic)
             
         }
         
@@ -395,17 +395,22 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         
         if rowForPaggingUpdate == nil {return}
         
-        if indexPath.row == rowForPaggingUpdate{
+        if indexPath.section == 8{
             
-            page += 1
-            
-            rowForPaggingUpdate += 9
-            
-            pointPostsPaggingDataManager.getPointPostsPaggingData(key: key, pointId: thisPointId!, page: page)
-            
-            print("Done a request for page: \(page)")
+            if indexPath.row == rowForPaggingUpdate{
+                
+                page += 1
+                
+                rowForPaggingUpdate += 9
+                
+                pointPostsPaggingDataManager.getPointPostsPaggingData(key: key, pointId: thisPointId!, page: page)
+                
+                print("Done a request for page: \(page)")
+                
+            }
             
         }
+        
     }
     
     //MARK: - Switch Cells Funcs
