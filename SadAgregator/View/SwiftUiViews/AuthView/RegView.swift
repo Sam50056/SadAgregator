@@ -96,7 +96,7 @@ struct RegView: View {
                     
                     HStack{
                         
-                        TextField("Телефон(не обязательно)", text: $emailText)
+                        TextField("Телефон (не обязательно)", text: $emailText)
                             .padding(.horizontal , 8)
                             .padding(.vertical, 12)
                             .multilineTextAlignment(.leading)
