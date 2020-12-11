@@ -17,6 +17,9 @@ class PostTableViewCell: UITableViewCell  {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var vkImageView: UIImageView!
+    @IBOutlet weak var likeButton: UIButton!
+    
     typealias DataSource =  UICollectionViewDiffableDataSource<SectionLayoutKind, String>
     typealias Snapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, String>
     
@@ -35,6 +38,8 @@ class PostTableViewCell: UITableViewCell  {
             }
         }
     }
+    
+    let isLogged = UserDefaults.standard.bool(forKey: "isLogged")
     
     var sizes = [String](){
         didSet{
@@ -101,6 +106,9 @@ class PostTableViewCell: UITableViewCell  {
         collectionView.register(UINib(nibName: "OptionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "optionCell")
         
         collectionView.register(UINib(nibName: "PhotoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "photoCell")
+        
+        vkImageView.layer.cornerRadius = 5
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -178,10 +178,7 @@
 				22A49CA7256661D700CCC781 /* cells */,
 				228CB762255BF96D002B4A96 /* Main.storyboard */,
 				228CB767255BF974002B4A96 /* LaunchScreen.storyboard */,
-				22C9221225814CA40063B5D4 /* MenuView.swift */,
-				22A155DC2582C5D8000EAB64 /* AuthView.swift */,
-				22D663D025823D9E0058B5CC /* LoginView.swift */,
-				22A155CE2582925D000EAB64 /* RegView.swift */,
+				22A155E12582C76E000EAB64 /* SwiftUiViews */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -261,6 +258,25 @@
 				2290485B256DAC80000B7A28 /* VendTableViewCell.xib */,
 			);
 			path = VendorCell;
+			sourceTree = "<group>";
+		};
+		22A155E02582C746000EAB64 /* AuthView */ = {
+			isa = PBXGroup;
+			children = (
+				22A155DC2582C5D8000EAB64 /* AuthView.swift */,
+				22D663D025823D9E0058B5CC /* LoginView.swift */,
+				22A155CE2582925D000EAB64 /* RegView.swift */,
+			);
+			path = AuthView;
+			sourceTree = "<group>";
+		};
+		22A155E12582C76E000EAB64 /* SwiftUiViews */ = {
+			isa = PBXGroup;
+			children = (
+				22C9221225814CA40063B5D4 /* MenuView.swift */,
+				22A155E02582C746000EAB64 /* AuthView */,
+			);
+			path = SwiftUiViews;
 			sourceTree = "<group>";
 		};
 		22A49CA7256661D700CCC781 /* cells */ = {
