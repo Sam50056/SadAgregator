@@ -127,7 +127,7 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
             
             self.postsArray.append(contentsOf: data["posts"].arrayValue)
             
-            self.tableView.reloadData()
+            self.tableView.reloadSections([0,1], with: .automatic)
             
         }
         
@@ -143,36 +143,49 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
 
 extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (hintCellShouldBeShown ? 1 : 0) + postsArray.count
+        
+        switch section {
+        
+        case 0:
+            return hintCellShouldBeShown ? 1 : 0
+        case 1:
+            return postsArray.count
+            
+        default:
+            fatalError("Invalid section")
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = UITableViewCell()
         
-        var indexForPosts : Int
+        switch indexPath.section{
         
-        if hintCellShouldBeShown{
+        case 0:
             
-            if indexPath.row == 0 {
-                
-                cell = tableView.dequeueReusableCell(withIdentifier: "hintCell", for: indexPath)
-                
-                setUpHintCell(cell: cell)
-                
-                return cell
-            }
+            cell = tableView.dequeueReusableCell(withIdentifier: "hintCell", for: indexPath)
             
-            indexForPosts = indexPath.row - 1
+            setUpHintCell(cell: cell)
             
-        }else {indexForPosts = indexPath.row}
-        
-        cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
-        
-        let post = postsArray[indexForPosts]
-        
-        setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: indexForPosts)
+        case 1:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
+            
+            let post = postsArray[indexPath.row]
+            
+            setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: indexPath.row)
+            
+        default:
+            fatalError("Invalid Section")
+            
+        }
         
         return cell
         
@@ -180,19 +193,20 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        var indexForPosts : Int
+        switch indexPath.section {
         
-        if hintCellShouldBeShown{
+        case 0:
             
-            if indexPath.row == 0 {
-                return 50
-            }
+            return 50
             
-            indexForPosts = indexPath.row - 1
+        case 1:
             
-        }else{indexForPosts = indexPath.row}
+            return K.postHeight
+            
+        default:
+            fatalError("Invalid Section")
+        }
         
-        return K.postHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -203,15 +217,19 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.row == rowForPaggingUpdate{
+        if indexPath.section == 1{
             
-            page += 1
-            
-            rowForPaggingUpdate += 9
-            
-            getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
-            
-            print("Done a request for page: \(page)")
+            if indexPath.row == rowForPaggingUpdate{
+                
+                page += 1
+                
+                rowForPaggingUpdate += 9
+                
+                getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
+                
+                print("Done a request for page: \(page)")
+                
+            }
             
         }
         
@@ -221,7 +239,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         hintCellShouldBeShown = false
         
-        tableView.reloadData()
+        tableView.reloadSections([0], with: .automatic)
         
     }
     
