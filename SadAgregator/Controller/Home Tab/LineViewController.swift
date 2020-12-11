@@ -270,7 +270,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             return 126
         }else if indexPath.row >= maxIndexForActivityTochkaCells + 2 && indexPath.row <= maxIndexForPosts{
             
-            return 460
+            return K.postHeight
         }
         
         return 50

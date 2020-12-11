@@ -297,7 +297,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 6:
             
-            return 460
+            return K.postHeight
             
             
         default:

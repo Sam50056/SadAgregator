@@ -192,7 +192,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
         }else{indexForPosts = indexPath.row}
         
-        return 460
+        return K.postHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

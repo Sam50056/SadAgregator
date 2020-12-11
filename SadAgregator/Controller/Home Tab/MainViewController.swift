@@ -362,7 +362,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             return 126
         }else if indexPath.row >= maxIndexForActivityPointCells + 2 && indexPath.row <= maxIndexForPosts{
             
-            return 460
+            return K.postHeight
         }
         
         return 50

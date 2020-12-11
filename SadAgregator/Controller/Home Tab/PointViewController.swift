@@ -270,7 +270,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             cell = tableView.dequeueReusableCell(withIdentifier: "generalPostsPhotosCell", for: indexPath)
             
             setUpGeneralPostsPhotosCell(cell: cell, data: pointData["activity"])
-
+            
         case 2:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "alertCell", for: indexPath)
@@ -344,7 +344,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             
         case 8:
             
-            return 460
+            return K.postHeight
             
         default:
             return 50
