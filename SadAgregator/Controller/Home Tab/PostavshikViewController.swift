@@ -188,7 +188,11 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 4:
             
-            return (vendorData?["alert_text"].stringValue) == "" ? 0 : 1
+            if vendorData?["alert_text"].stringValue != "" || vendorData?["altert_text"].stringValue != "" {
+                return 1
+            }else {
+                return 0
+            }
             
         case 5:
             
@@ -478,7 +482,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         if let label = cell.viewWithTag(1) as? UILabel{
             
-            label.text = data["alert_text"].stringValue
+            label.text = data["alert_text"].stringValue != "" ? data["alert_text"].stringValue : data["altert_text"].stringValue
             
         }
         

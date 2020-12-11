@@ -230,7 +230,13 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         case 1:
             return 1
         case 2:
-            return (pointData?["alert_text"].stringValue) == "" ? 0 : 1
+            
+            if pointData?["alert_text"].stringValue != "" || pointData?["altert_text"].stringValue != "" {
+                return 1
+            }else {
+                return 0
+            }
+            
         case 3:
             return 1
         case 4:
@@ -333,7 +339,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         case 1:
             return 126
         case 2:
-            return 70
+            return 80
         case 4:
             
             let index = indexPath.row
@@ -489,7 +495,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         
         if let label = cell.viewWithTag(1) as? UILabel{
             
-            label.text = data["alert_text"].stringValue
+            label.text = data["alert_text"].stringValue != "" ? data["alert_text"].stringValue : data["altert_text"].stringValue
             
         }
         
