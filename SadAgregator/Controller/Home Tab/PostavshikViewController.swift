@@ -196,7 +196,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 5:
             
-            return 1
+            return postsArray.isEmpty ? 0 : 1
             
         case 6:
             
