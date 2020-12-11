@@ -347,7 +347,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             return K.postHeight
             
         default:
-            return 50
+            return K.simpleCellHeight
         }
         
     }

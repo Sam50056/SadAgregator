@@ -273,7 +273,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             return K.postHeight
         }
         
-        return 50
+        return K.simpleCellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

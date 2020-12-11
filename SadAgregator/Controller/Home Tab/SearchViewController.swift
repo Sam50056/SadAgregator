@@ -197,7 +197,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         case 0:
             
-            return 50
+            return K.simpleCellHeight
             
         case 1:
             
