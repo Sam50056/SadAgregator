@@ -362,6 +362,16 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             
             self.performSegue(withIdentifier: "goToPostavshik", sender: self)
             
+        }else if indexPath.section == 6{
+            
+            self.thisPointId = activityPointCellsArray[indexPath.row]["point_id"].stringValue
+            
+            self.page = 1
+            
+            self.refresh(self)
+            
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
