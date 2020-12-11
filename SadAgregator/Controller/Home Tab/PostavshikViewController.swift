@@ -297,16 +297,6 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 6:
             
-            let index = indexPath.row
-            
-            if options[index].count > 4{
-                return 500
-            }
-            
-            if options.count > 6 {
-                return 560
-            }
-            
             return 460
             
             

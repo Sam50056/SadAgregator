@@ -362,16 +362,6 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             return 126
         }else if indexPath.row >= maxIndexForActivityPointCells + 2 && indexPath.row <= maxIndexForPosts{
             
-            let index = indexPath.row - (maxIndexForActivityPointCells + 2)
-            
-            if options[index].count > 4{
-                return 500
-            }
-            
-            if options.count > 6 {
-                return 560
-            }
-            
             return 460
         }
         

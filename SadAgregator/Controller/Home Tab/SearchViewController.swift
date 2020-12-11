@@ -192,14 +192,6 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
         }else{indexForPosts = indexPath.row}
         
-        if options[indexForPosts].count > 4{
-            return 500
-        }
-        
-        if options.count > 6 {
-            return 560
-        }
-        
         return 460
     }
     
