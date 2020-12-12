@@ -102,6 +102,8 @@ class SearchViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        searchTextField.delegate = self
+        
         searchTextField.text = searchText
         
         getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
@@ -135,6 +137,30 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
     
     func didFailGettingSearchPageData(error: String) {
         print("Error with GetSearchPageDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - UITextField Stuff
+
+extension SearchViewController : UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField.text != ""{
+            
+            page = 1
+            
+            searchText = textField.text!
+            
+            postsArray.removeAll()
+            
+            getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
+            
+        }
+        
+        return true 
+        
     }
     
 }
