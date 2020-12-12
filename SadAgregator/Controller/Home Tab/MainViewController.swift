@@ -119,8 +119,6 @@ class MainViewController: UIViewController {
         tableView.separatorStyle = .none
         
         searchView.layer.cornerRadius = 10
-        
-        checkKeysDataManager.getKeysData(key: key)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,6 +127,13 @@ class MainViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         //Setting back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        checkKeysDataManager.getKeysData(key: key)
         
     }
     
