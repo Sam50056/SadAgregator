@@ -211,10 +211,11 @@
             <connections>
                 <outlet property="byLabel" destination="F9Q-xC-IMV" id="4jX-AI-Eh1"/>
                 <outlet property="collectionView" destination="IO7-nw-6KB" id="jh9-Va-oSn"/>
+                <outlet property="likeButtonImageView" destination="Us6-U2-kyD" id="jDq-WT-RgR"/>
                 <outlet property="postedLabel" destination="eZp-bw-5Yy" id="OaP-26-hV9"/>
                 <outlet property="priceLabel" destination="2D9-dG-k9E" id="o87-Hv-JUL"/>
                 <outlet property="vendorLabel" destination="SSR-4S-9BF" id="PqE-PW-DhV"/>
-                <outlet property="vkImageView" destination="SgS-Tb-JH2" id="sxU-hf-4TK"/>
+                <outlet property="vigruzitImageView" destination="SgS-Tb-JH2" id="sxU-hf-4TK"/>
             </connections>
             <point key="canvasLocation" x="52.898550724637687" y="294.30803571428572"/>
         </tableViewCell>

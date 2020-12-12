@@ -20,6 +20,10 @@ class MainViewController: UIViewController {
     
     var key = UserDefaults.standard.string(forKey: "key")
     
+    var isLogged : Bool {
+        return UserDefaults.standard.bool(forKey: K.keyForLogged)
+    }
+    
     lazy var checkKeysDataManager = CheckKeysDataManager()
     lazy var mainDataManager = MainDataManager()
     lazy var mainPaggingDataManager = MainPaggingDataManager()
@@ -506,6 +510,8 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         cell.sizes = sizesArray
         cell.options = optionsArray
         cell.images = imagesArray
+        
+        isLogged ? (cell.likeButtonImageView.isHidden = false) : (cell.likeButtonImageView.isHidden = true)
         
     }
     
