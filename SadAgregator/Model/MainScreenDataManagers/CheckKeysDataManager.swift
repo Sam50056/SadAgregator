@@ -40,7 +40,9 @@ struct CheckKeysDataManager {
                 
                 if let safeData = data{
                     
-                    let jsonAnswer = try JSON(data: safeData)
+                    let json = String(data: safeData , encoding: String.Encoding.windowsCP1251)!
+                    
+                    let jsonAnswer = JSON(parseJSON: json)
                     
                     delegate?.didGetCheckKeysData(data: jsonAnswer)
                     
