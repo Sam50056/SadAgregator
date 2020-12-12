@@ -23,7 +23,7 @@ struct AuthView: View {
         if showLogin{
             LoginView(isPresented: $isPresented, shouldShowLogin: $showLogin, isLogged: $isLogged)
         }else{
-            RegView(isPresented: $isPresented,shouldShowLogin: $showLogin)
+            RegView(isPresented: $isPresented,shouldShowLogin: $showLogin, isLogged: $isLogged)
         }
         
     }

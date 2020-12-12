@@ -6,14 +6,22 @@
 //
 
 import SwiftUI
+import SwiftyJSON
 
 struct RegView: View {
+    
+    let key = UserDefaults.standard.string(forKey: K.keyForKey)!
     
     @Binding var isPresented : Bool
     
     @Binding var shouldShowLogin : Bool
     
+    @Binding var isLogged : Bool 
+    
     @State var emailText : String = ""
+    @State var nameText : String = ""
+    @State var passText : String = ""
+    @State var phoneText : String = ""
     
     var body: some View {
         
@@ -68,7 +76,7 @@ struct RegView: View {
                     
                     HStack{
                         
-                        TextField("Имя", text: $emailText)
+                        TextField("Имя", text: $nameText)
                             .padding(.horizontal , 8)
                             .padding(.vertical, 12)
                             .multilineTextAlignment(.leading)
@@ -82,7 +90,7 @@ struct RegView: View {
                     
                     HStack{
                         
-                        TextField("Пароль", text: $emailText)
+                        TextField("Пароль", text: $passText)
                             .padding(.horizontal , 8)
                             .padding(.vertical, 12)
                             .multilineTextAlignment(.leading)
@@ -96,7 +104,7 @@ struct RegView: View {
                     
                     HStack{
                         
-                        TextField("Телефон (не обязательно)", text: $emailText)
+                        TextField("Телефон (не обязательно)", text: $phoneText)
                             .padding(.horizontal , 8)
                             .padding(.vertical, 12)
                             .multilineTextAlignment(.leading)
@@ -110,7 +118,7 @@ struct RegView: View {
                     
                     Button(action: {
                         
-                        isPresented = false
+                        RegisterDataManager(delegate: self).getRegisterData(key: key, email: emailText, name: nameText, password: passText, phone: phoneText)
                         
                     }, label: {
                         
@@ -160,6 +168,48 @@ struct RegView: View {
         
         .navigationBarTitle("Регистрация", displayMode: .inline)
         
+    }
+    
+}
+
+//MARK: - RegisterDataManagerDelegate
+
+extension RegView : RegisterDataManagerDelegate , CheckKeysDataManagerDelegate{
+    
+    func didGetRegisterData(data: JSON) {
+        
+        CheckKeysDataManager(delegate: self).getKeysData(key: key)
+        
+    }
+    
+    func didGetCheckKeysData(data: JSON) {
+        
+        let defaults = UserDefaults.standard
+        
+        let key = data["key"].stringValue
+        
+        let anonym = data["anonym"].stringValue
+        
+        defaults.setValue(key, forKey: K.keyForKey)
+        
+        if anonym != "1"{
+            
+            defaults.setValue(true, forKey: K.keyForLogged)
+            
+            isLogged = true
+            
+            isPresented = false
+            
+        }
+        
+    }
+    
+    func didFailGettingRegisterDataWithError(error: String) {
+        print("Error with RegisterDataManager: \(error)")
+    }
+    
+    func didFailGettingCheckKeysData(error: String) {
+        print("Error with CheckKeysDataManager: \(error)")
     }
     
 }
