@@ -6,14 +6,21 @@
 //
 
 import SwiftUI
+import SwiftyJSON
 
 struct LoginView: View {
+    
+    let key = UserDefaults.standard.string(forKey: K.keyForKey)!
     
     @Binding var isPresented : Bool
     
     @Binding var shouldShowLogin : Bool
     
+    @Binding var isLogged : Bool
+    
     @State var emailText : String = ""
+    
+    @State var passText : String = ""
     
     var body: some View {
         
@@ -68,7 +75,7 @@ struct LoginView: View {
                     
                     HStack{
                         
-                        TextField("Пароль", text: $emailText)
+                        TextField("Пароль", text: $passText)
                             .padding(.horizontal , 8)
                             .padding(.vertical, 12)
                             .multilineTextAlignment(.leading)
@@ -82,7 +89,7 @@ struct LoginView: View {
                     
                     Button(action: {
                         
-                        isPresented = false
+                        AuthDataManager(delegate: self).getAuthData(key: key, login: emailText, pass: passText)
                         
                     }, label: {
                         
@@ -149,10 +156,45 @@ struct LoginView: View {
     
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView(isPresented: .constant(false), shouldShowLogin: .constant(false))
+//MARK: - AuthDataManagerDelegate Stuff
+
+extension LoginView : AuthDataManagerDelegate , CheckKeysDataManagerDelegate {
+    
+    func didGetAuthData(data: JSON) {
+        
+        CheckKeysDataManager(delegate: self).getKeysData(key: key)
+        
     }
+    
+    func didGetCheckKeysData(data: JSON) {
+        
+        let defaults = UserDefaults.standard
+        
+        let key = data["key"].stringValue
+        
+        let anonym = data["anonym"].stringValue
+        
+        defaults.setValue(key, forKey: K.keyForKey)
+        
+        if anonym != "1"{
+            
+            defaults.setValue(true, forKey: K.keyForLogged)
+            
+            isLogged = true
+            
+            isPresented = false
+        }
+        
+    }
+    
+    func didFailGettingAuthDataWithError(error: String) {
+        print("Error with AuthDataManager: \(error)")
+    }
+    
+    func didFailGettingCheckKeysData(error: String) {
+        print("Error with CheckKeysDataManager: \(error)")
+    }
+    
 }
 
 struct DividerView: View {

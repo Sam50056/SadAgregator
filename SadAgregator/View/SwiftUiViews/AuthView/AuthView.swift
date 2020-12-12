@@ -12,6 +12,8 @@ struct AuthView: View {
     
     @Binding var isPresented : Bool
     
+    @Binding var isLogged : Bool
+    
     @State var isModalPresented : Bool = true
     
     @State var showLogin : Bool
@@ -19,7 +21,7 @@ struct AuthView: View {
     var body: some View {
         
         if showLogin{
-            LoginView(isPresented: $isPresented, shouldShowLogin: $showLogin)
+            LoginView(isPresented: $isPresented, shouldShowLogin: $showLogin, isLogged: $isLogged)
         }else{
             RegView(isPresented: $isPresented,shouldShowLogin: $showLogin)
         }
@@ -28,8 +30,3 @@ struct AuthView: View {
     
 }
 
-struct AuthView_Previews: PreviewProvider {
-    static var previews: some View {
-        AuthView(isPresented: .constant(false), showLogin: true)
-    }
-}

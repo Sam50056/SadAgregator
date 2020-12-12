@@ -163,9 +163,3 @@ struct RegView: View {
     }
     
 }
-
-struct RegView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegView(isPresented: .constant(false), shouldShowLogin: .constant(false))
-    }
-}
