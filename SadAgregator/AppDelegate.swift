@@ -14,7 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        IQKeyboardManager.shared.enable = true //Enabling IQKeybpard
+        var systemVersion = UIDevice.current.systemVersion
+        
+        if systemVersion.contains("13."){
+            IQKeyboardManager.shared.enable = true //Enabling IQKeybpard
+        }
         
         // Initializing the AppMetrica SDK.
         let configuration = YMMYandexMetricaConfiguration.init(apiKey: "e4345797-36d2-45de-8b8c-391a0c9e6559")
