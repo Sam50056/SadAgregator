@@ -137,9 +137,9 @@ struct RegView: View {
                     
                 }.padding(.horizontal, 20)
                 
+                Spacer()
+                
             }
-            
-            Spacer()
             
             Divider()
             
