@@ -83,10 +83,11 @@ struct MenuView: View {
                                 Image(systemName: "menubar.arrow.up.rectangle")
                                     .resizable()
                                     .frame(width: 25, height: 20, alignment: .center)
-                                    .foregroundColor(Color(.systemBlue))
+                                    .foregroundColor(Color(.systemGray))
                                 
                                 Text("Парсер")
                                     .font(.custom("", size: 16))
+                                    .foregroundColor(Color(.systemGray))
                                 
                             }
                             .padding(.vertical, 5)
