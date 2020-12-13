@@ -119,6 +119,8 @@ class PostavshikViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadUserData()
+        
         vendorCardDataManager.delegate = self
         
         tableView.delegate = self
