@@ -264,6 +264,9 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             }else if indexPath.row == 2{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "revCountLabel", for: indexPath)
+                
+                setUpRevCountLabel(cell: cell)
+                
             }
             
         case 4:
@@ -506,6 +509,16 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         if let label = cell.viewWithTag(1) as? UILabel{
             
             label.text = data["alert_text"].stringValue != "" ? data["alert_text"].stringValue : data["altert_text"].stringValue
+            
+        }
+        
+    }
+    
+    func setUpRevCountLabel(cell : UITableViewCell) {
+        
+        if let label = cell.viewWithTag(1) as? UILabel{
+            
+            label.text = "\(vendorRevs.count) ОТЗЫВОВ"
             
         }
         
