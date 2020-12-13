@@ -11,18 +11,7 @@ import RealmSwift
 
 struct MenuView: View {
     
-    let realm = try! Realm()
-    
-    var key = ""
-    
-    @State var isLogged = false
-    
-    @State var showModalLogIn = false
-    @State var showModalReg = false
-    
-    init() {
-        loadUserData()
-    }
+    @ObservedObject var menuViewModel = MenuViewModel()
     
     var body: some View {
         
@@ -30,7 +19,7 @@ struct MenuView: View {
             
             VStack{
                 
-                if !isLogged{
+                if !menuViewModel.isLogged{
                     
                     Form{
                         
@@ -47,7 +36,7 @@ struct MenuView: View {
                             
                             List{
                                 
-                                NavigationLink(destination: AuthView(key: key, isPresented: $showModalLogIn, isLogged: $isLogged, showLogin: true), isActive: $showModalLogIn){
+                                NavigationLink(destination: AuthView(key: menuViewModel.key, isPresented: $menuViewModel.showModalLogIn, isLogged: $menuViewModel.isLogged, showLogin: true), isActive: $menuViewModel.showModalLogIn){
                                     
                                     HStack(spacing: 23){
                                         
@@ -64,7 +53,7 @@ struct MenuView: View {
                                     
                                 }
                                 
-                                NavigationLink(destination: AuthView(key: key, isPresented: $showModalReg, isLogged: $isLogged, showLogin: false), isActive: $showModalReg) {
+                                NavigationLink(destination: AuthView(key: menuViewModel.key, isPresented: $menuViewModel.showModalReg, isLogged: $menuViewModel.isLogged, showLogin: false), isActive: $menuViewModel.showModalReg) {
                                     HStack(spacing: 16){
                                         
                                         Image(systemName: "person.2.fill")
@@ -148,7 +137,7 @@ struct MenuView: View {
                             
                             VStack(alignment: .leading){
                                 
-                                Text("Максим")
+                                Text(menuViewModel.name)
                                     .font(.title)
                                     .fontWeight(.semibold)
                                     .padding([.top,.horizontal], 5)
@@ -161,7 +150,7 @@ struct MenuView: View {
                                     
                                     Spacer()
                                     
-                                    Text("32323")
+                                    Text(menuViewModel.code)
                                         .font(.system(size: 15))
                                     
                                 }
@@ -306,24 +295,9 @@ struct MenuView: View {
             .navigationBarHidden(true)
             
         }
+        .environmentObject(menuViewModel)
         
     }
     
 }
 
-
-//MARK: - Data Manipulation Methods
-
-extension MenuView {
-
-    mutating func loadUserData (){
-
-        let userDataObject = realm.objects(UserData.self)
-        
-        key = userDataObject.first!.key
-
-        isLogged = userDataObject.first!.isLogged
-
-    }
-
-}

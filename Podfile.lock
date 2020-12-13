@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.2.2)
+  - Alamofire (5.4.0)
   - Cosmos (23.0.0)
   - IQKeyboardManagerSwift (6.5.6)
   - Realm (10.4.0):
@@ -7,9 +7,9 @@ PODS:
   - Realm/Headers (10.4.0)
   - RealmSwift (10.4.0):
     - Realm (= 10.4.0)
-  - SDWebImage (5.9.5):
-    - SDWebImage/Core (= 5.9.5)
-  - SDWebImage/Core (5.9.5)
+  - SDWebImage (5.10.0):
+    - SDWebImage/Core (= 5.10.0)
+  - SDWebImage/Core (5.10.0)
   - SwiftyJSON (5.0.0)
   - YandexMobileMetrica (3.12.0):
     - YandexMobileMetrica/Static (= 3.12.0)
@@ -41,15 +41,15 @@ SPEC REPOS:
     - YandexMobileMetrica
 
 SPEC CHECKSUMS:
-  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Realm: d8466b2238f034a5ff7a031aed63b7dacdf0dd10
   RealmSwift: 37a93ae742667948cc094a3c6ae3d006db32b66f
-  SDWebImage: 0b2ba0d56479bf6a45ecddbfd5558bea93150d25
+  SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   YandexMobileMetrica: 7ba67267e1ef841f77d5db17a5091b8e9eba911f
 
-PODFILE CHECKSUM: 284ca69104bea350f8f7ce1338d50db19bea621a
+PODFILE CHECKSUM: f7c8d936bba05ffdaef6fc3c8f92fd9c339e31e6
 
 COCOAPODS: 1.10.0

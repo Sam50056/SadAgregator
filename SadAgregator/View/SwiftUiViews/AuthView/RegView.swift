@@ -15,11 +15,9 @@ struct RegView: View {
     
     var key : String
     
-    @Binding var isPresented : Bool
+    @EnvironmentObject var menuViewModel : MenuViewModel
     
     @Binding var shouldShowLogin : Bool
-    
-    @Binding var isLogged : Bool 
     
     @State var emailText : String = ""
     @State var nameText : String = ""
@@ -120,6 +118,8 @@ struct RegView: View {
                     .padding(.bottom, 8)
                     
                     Button(action: {
+                        
+                        menuViewModel.loadUserData()
                         
                         RegisterDataManager(delegate: self).getRegisterData(key: key, email: emailText, name: nameText, password: passText, phone: phoneText)
                         
@@ -242,11 +242,13 @@ extension RegView : RegisterDataManagerDelegate , CheckKeysDataManagerDelegate{
                     print("Error saving data to realm , \(error.localizedDescription)")
                 }
                 
+                menuViewModel.loadUserData()
+                
+                menuViewModel.isLogged = true
+                
+                menuViewModel.showModalReg = false
+                
             }
-            
-            isLogged = true
-            
-            isPresented = false
             
         }
         

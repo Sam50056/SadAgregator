@@ -108,7 +108,6 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loadUserData()
         
         checkKeysDataManager.delegate = self
@@ -130,6 +129,12 @@ class MainViewController: UIViewController {
         searchView.layer.cornerRadius = 10
         
         checkKeysDataManager.getKeysData(key: key)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        loadUserData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -160,7 +165,14 @@ extension MainViewController {
         
         let userDataObject = realm.objects(UserData.self)
         
+        let userDataFirst = userDataObject.first
+        
         userData = userDataObject
+        
+        print("Key Realm: \(String(describing: userDataFirst?.key))")
+        
+        key = userDataFirst?.key
+        isLogged = userDataFirst?.isLogged ?? false
         
     }
     
@@ -206,8 +218,6 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                     
                     userDataObject.isLogged = true
                     
-                    isLogged = true
-                    
                 }
                 
                 userDataObject.key = safeKey
@@ -222,7 +232,7 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                     print("Error saving data to realm , \(error.localizedDescription)")
                 }
                 
-                key = safeKey
+                loadUserData()
                 
                 refresh(self)
                 

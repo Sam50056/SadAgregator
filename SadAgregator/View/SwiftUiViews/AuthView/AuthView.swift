@@ -23,9 +23,9 @@ struct AuthView: View {
     var body: some View {
         
         if showLogin{
-            LoginView(key: key, isPresented: $isPresented, shouldShowLogin: $showLogin, isLogged: $isLogged)
+            LoginView(key: key, shouldShowLogin: $showLogin)
         }else{
-            RegView(key: key, isPresented: $isPresented,shouldShowLogin: $showLogin, isLogged: $isLogged)
+            RegView(key: key, shouldShowLogin: $showLogin)
         }
         
     }

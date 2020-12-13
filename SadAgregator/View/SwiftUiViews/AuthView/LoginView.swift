@@ -15,11 +15,9 @@ struct LoginView: View {
     
     var key : String
     
-    @Binding var isPresented : Bool
+    @EnvironmentObject var menuViewModel : MenuViewModel
     
     @Binding var shouldShowLogin : Bool
-    
-    @Binding var isLogged : Bool
     
     @State var emailText : String = ""
     
@@ -91,6 +89,8 @@ struct LoginView: View {
                     .padding(.bottom, 8)
                     
                     Button(action: {
+                        
+                        menuViewModel.loadUserData()
                         
                         AuthDataManager(delegate: self).getAuthData(key: key, login: emailText, pass: passText)
                         
@@ -224,13 +224,14 @@ extension LoginView : AuthDataManagerDelegate , CheckKeysDataManagerDelegate {
                     print("Error saving data to realm , \(error.localizedDescription)")
                 }
                 
+                menuViewModel.loadUserData()
+                
+                menuViewModel.isLogged = true
+                
+                menuViewModel.showModalLogIn = false
                 
             }
             
-            
-            isLogged = true
-            
-            isPresented = false
         }
         
     }
