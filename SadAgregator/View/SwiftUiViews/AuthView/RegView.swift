@@ -7,10 +7,13 @@
 
 import SwiftUI
 import SwiftyJSON
+import RealmSwift
 
 struct RegView: View {
     
-    let key = UserDefaults.standard.string(forKey: K.keyForKey)!
+    let realm = try! Realm()
+    
+    var key : String
     
     @Binding var isPresented : Bool
     
@@ -172,6 +175,30 @@ struct RegView: View {
     
 }
 
+
+//MARK: - Data Manipulation Methods
+
+extension RegView {
+    
+    func deleteAllDataFromDB(){
+        
+        //Deleting everything from DB
+        do{
+            
+            try realm.write{
+                realm.deleteAll()
+            }
+            
+        }catch{
+            print("Error with deleting all data from Realm , \(error) ERROR DELETING REALM")
+        }
+        
+    }
+    
+}
+
+
+
 //MARK: - RegisterDataManagerDelegate
 
 extension RegView : RegisterDataManagerDelegate , CheckKeysDataManagerDelegate{
@@ -184,17 +211,38 @@ extension RegView : RegisterDataManagerDelegate , CheckKeysDataManagerDelegate{
     
     func didGetCheckKeysData(data: JSON) {
         
-        let defaults = UserDefaults.standard
+        let userDataObject = UserData()
         
         let key = data["key"].stringValue
         
         let anonym = data["anonym"].stringValue
         
-        defaults.setValue(key, forKey: K.keyForKey)
+        userDataObject.key = key
         
-        if anonym != "1"{
+        if anonym == "0"{
             
-            defaults.setValue(true, forKey: K.keyForLogged)
+            userDataObject.isLogged = true
+            
+            let name = data["name"].stringValue
+            
+            let code = data["code"].stringValue
+            
+            userDataObject.name = name
+            userDataObject.code = code
+            
+            DispatchQueue.main.async { [self]
+                
+                deleteAllDataFromDB()
+                
+                do{
+                    try self.realm.write{
+                        self.realm.add(userDataObject)
+                    }
+                }catch{
+                    print("Error saving data to realm , \(error.localizedDescription)")
+                }
+                
+            }
             
             isLogged = true
             

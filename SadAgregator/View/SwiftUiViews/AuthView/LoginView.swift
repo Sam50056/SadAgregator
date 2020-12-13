@@ -7,10 +7,13 @@
 
 import SwiftUI
 import SwiftyJSON
+import RealmSwift
 
 struct LoginView: View {
     
-    let key = UserDefaults.standard.string(forKey: K.keyForKey)!
+    let realm = try! Realm()
+    
+    var key : String
     
     @Binding var isPresented : Bool
     
@@ -46,7 +49,7 @@ struct LoginView: View {
                         Image("odno")
                             .resizable()
                             .frame(width: 28, height: 30, alignment: .center)
-                            
+                        
                         
                         Text("Войти через Одноклассники")
                         
@@ -156,6 +159,28 @@ struct LoginView: View {
     
 }
 
+//MARK: - Data Manipulation Methods
+
+extension LoginView {
+    
+    func deleteAllDataFromDB(){
+        
+        //Deleting everything from DB
+        do{
+            
+            try realm.write{
+                realm.deleteAll()
+            }
+            
+        }catch{
+            print("Error with deleting all data from Realm , \(error) ERROR DELETING REALM")
+        }
+        
+    }
+    
+}
+
+
 //MARK: - AuthDataManagerDelegate Stuff
 
 extension LoginView : AuthDataManagerDelegate , CheckKeysDataManagerDelegate {
@@ -168,17 +193,40 @@ extension LoginView : AuthDataManagerDelegate , CheckKeysDataManagerDelegate {
     
     func didGetCheckKeysData(data: JSON) {
         
-        let defaults = UserDefaults.standard
+        let userDataObject = UserData()
         
         let key = data["key"].stringValue
         
         let anonym = data["anonym"].stringValue
         
-        defaults.setValue(key, forKey: K.keyForKey)
+        userDataObject.key = key
         
-        if anonym != "1"{
+        if anonym == "0"{
             
-            defaults.setValue(true, forKey: K.keyForLogged)
+            userDataObject.isLogged = true
+            
+            let name = data["name"].stringValue
+            
+            let code = data["code"].stringValue
+            
+            userDataObject.name = name
+            userDataObject.code = code
+            
+            DispatchQueue.main.async { [self]
+                
+                deleteAllDataFromDB()
+                
+                do{
+                    try self.realm.write{
+                        self.realm.add(userDataObject)
+                    }
+                }catch{
+                    print("Error saving data to realm , \(error.localizedDescription)")
+                }
+                
+                
+            }
+            
             
             isLogged = true
             

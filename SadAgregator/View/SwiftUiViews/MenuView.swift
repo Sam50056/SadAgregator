@@ -7,13 +7,22 @@
 
 import SwiftUI
 import UIKit
+import RealmSwift
 
 struct MenuView: View {
     
-    @State var isLogged = UserDefaults.standard.bool(forKey: "isLogged")
+    let realm = try! Realm()
+    
+    var key = ""
+    
+    @State var isLogged = false
     
     @State var showModalLogIn = false
     @State var showModalReg = false
+    
+    init() {
+        loadUserData()
+    }
     
     var body: some View {
         
@@ -38,7 +47,7 @@ struct MenuView: View {
                             
                             List{
                                 
-                                NavigationLink(destination: AuthView(isPresented: $showModalLogIn, isLogged: $isLogged, showLogin: true), isActive: $showModalLogIn){
+                                NavigationLink(destination: AuthView(key: key, isPresented: $showModalLogIn, isLogged: $isLogged, showLogin: true), isActive: $showModalLogIn){
                                     
                                     HStack(spacing: 23){
                                         
@@ -55,7 +64,7 @@ struct MenuView: View {
                                     
                                 }
                                 
-                                NavigationLink(destination: AuthView(isPresented: $showModalReg, isLogged: $isLogged, showLogin: false), isActive: $showModalReg) {
+                                NavigationLink(destination: AuthView(key: key, isPresented: $showModalReg, isLogged: $isLogged, showLogin: false), isActive: $showModalReg) {
                                     HStack(spacing: 16){
                                         
                                         Image(systemName: "person.2.fill")
@@ -302,8 +311,19 @@ struct MenuView: View {
     
 }
 
-struct MenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        MenuView()
+
+//MARK: - Data Manipulation Methods
+
+extension MenuView {
+
+    mutating func loadUserData (){
+
+        let userDataObject = realm.objects(UserData.self)
+        
+        key = userDataObject.first!.key
+
+        isLogged = userDataObject.first!.isLogged
+
     }
+
 }

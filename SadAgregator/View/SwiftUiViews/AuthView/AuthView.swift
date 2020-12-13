@@ -10,6 +10,8 @@ import SwiftUI
 
 struct AuthView: View {
     
+    var key : String
+    
     @Binding var isPresented : Bool
     
     @Binding var isLogged : Bool
@@ -21,9 +23,9 @@ struct AuthView: View {
     var body: some View {
         
         if showLogin{
-            LoginView(isPresented: $isPresented, shouldShowLogin: $showLogin, isLogged: $isLogged)
+            LoginView(key: key, isPresented: $isPresented, shouldShowLogin: $showLogin, isLogged: $isLogged)
         }else{
-            RegView(isPresented: $isPresented,shouldShowLogin: $showLogin, isLogged: $isLogged)
+            RegView(key: key, isPresented: $isPresented,shouldShowLogin: $showLogin, isLogged: $isLogged)
         }
         
     }
