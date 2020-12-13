@@ -15,6 +15,8 @@ class PostavshikViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var likeBarButton: UIBarButtonItem!
+    
     let realm = try! Realm()
     
     var key = ""
@@ -24,6 +26,8 @@ class PostavshikViewController: UIViewController {
     var thisVendorId : String?
     
     lazy var vendorCardDataManager = VendorCardDataManager()
+    
+    lazy var vendorLikeDataManager = VendorLikeDataManager()
     
     var vendorData : JSON?
     
@@ -110,6 +114,8 @@ class PostavshikViewController: UIViewController {
         return vendorData?["vk_link"].stringValue
     }
     
+    var vendorLikeStatus : String?
+    
     var vendorRevs = [JSON]()
     
     var postsArray = [JSON]()
@@ -122,6 +128,7 @@ class PostavshikViewController: UIViewController {
         loadUserData()
         
         vendorCardDataManager.delegate = self
+        vendorLikeDataManager.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -133,6 +140,28 @@ class PostavshikViewController: UIViewController {
         if let safeId = thisVendorId{
             vendorCardDataManager.getVendorCardData(key: key, vendorId: safeId)
         }
+        
+    }
+    
+    
+    @IBAction func likeBarButtonPressed(_ sender: UIBarButtonItem) {
+        
+        guard let thisVendId = thisVendorId else {return}
+        
+        var newStatus = ""
+        
+        if vendorLikeStatus == "0"{
+            newStatus = "1"
+        }else if vendorLikeStatus == "1"{
+            newStatus = "0"
+        }else{
+            print("Error. Wrong Like Status")
+            return
+        }
+        
+        vendorLikeDataManager.getVendorLikeData(key: key, vendId: thisVendId, status: newStatus)
+        
+        vendorLikeStatus = newStatus
         
     }
     
@@ -161,15 +190,19 @@ extension PostavshikViewController : VendorCardDataManagerDelegate{
     
     func getVendorCardData(data: JSON) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             
-            self.vendorData = data
+            vendorData = data
             
-            self.postsArray = data["posts"].arrayValue
+            postsArray = data["posts"].arrayValue
             
-            self.vendorRevs = data["revs_info"]["revs"].arrayValue
+            vendorRevs = data["revs_info"]["revs"].arrayValue
             
-            self.tableView.reloadData()
+            vendorLikeStatus = data["vend_like"].string
+            
+            setLikeBarButtonImage()
+            
+            tableView.reloadData()
             
         }
         
@@ -177,6 +210,40 @@ extension PostavshikViewController : VendorCardDataManagerDelegate{
     
     func didFailGettingVendorCardDataWithError(error: String) {
         print("Error with VendorCardDataManager: \(error)")
+    }
+    
+    func setLikeBarButtonImage(){
+        
+        DispatchQueue.main.async{ [self] in
+            
+            if vendorLikeStatus == "1" {
+                
+                likeBarButton.image = UIImage(systemName: "heart.fill")
+                
+            }else {
+                
+                likeBarButton.image = UIImage(systemName: "heart")
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
+//MARK: - VendorLikeDataManagerDelegate Stuff
+
+extension PostavshikViewController : VendorLikeDataManagerDelegate{
+    
+    func didGetVendorLikeData(data: JSON) {
+        
+        setLikeBarButtonImage()
+        
+    }
+    
+    func didFailGettingVendorLikeDataWithError(error: String) {
+        print("Error with VendorLikeDataManager : \(error)")
     }
     
 }

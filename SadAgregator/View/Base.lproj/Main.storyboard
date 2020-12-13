@@ -413,11 +413,16 @@
                     </view>
                     <navigationItem key="navigationItem" title="Поставщик" id="eLf-cF-6hX">
                         <rightBarButtonItems>
-                            <barButtonItem image="heart" catalog="system" id="I8y-uP-oWV"/>
+                            <barButtonItem image="heart" catalog="system" id="I8y-uP-oWV">
+                                <connections>
+                                    <action selector="likeBarButtonPressed:" destination="tgI-Wx-GfF" id="Xxj-J0-Sgd"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="info.circle" catalog="system" id="Pwl-Op-FRg"/>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="likeBarButton" destination="I8y-uP-oWV" id="wct-57-J1I"/>
                         <outlet property="tableView" destination="gkI-HL-ayK" id="9el-eD-zhu"/>
                     </connections>
                 </viewController>

@@ -49,6 +49,7 @@
 		22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */; };
 		22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */; };
 		22C9221325814CA40063B5D4 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9221225814CA40063B5D4 /* MenuView.swift */; };
+		22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */; };
 		22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */; };
 		22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */; };
 		22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D60981255D41F000FC622B /* MessageReadedDataManager.swift */; };
@@ -102,6 +103,7 @@
 		22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointPostsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHostingController.swift; sourceTree = "<group>"; };
 		22C9221225814CA40063B5D4 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorLikeDataManager.swift; sourceTree = "<group>"; };
 		22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		22D60981255D41F000FC622B /* MessageReadedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadedDataManager.swift; sourceTree = "<group>"; };
@@ -139,7 +141,7 @@
 			path = PhoneCell;
 			sourceTree = "<group>";
 		};
-		2253EE252569D1C500103C86 /* MainScreenDataManagers */ = {
+		2253EE252569D1C500103C86 /* Main Screen Managers */ = {
 			isa = PBXGroup;
 			children = (
 				2291BE442560620F004F55DF /* MainDataManager.swift */,
@@ -147,7 +149,7 @@
 				228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */,
 				22D60981255D41F000FC622B /* MessageReadedDataManager.swift */,
 			);
-			path = MainScreenDataManagers;
+			path = "Main Screen Managers";
 			sourceTree = "<group>";
 		};
 		22634AB425858C7300DF6FDB /* Data Base Models  */ = {
@@ -213,13 +215,13 @@
 		228CB774255BF996002B4A96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				22634AB425858C7300DF6FDB /* Data Base Models  */,
 				22A155E32583E11C000EAB64 /* Constants.swift */,
-				2253EE252569D1C500103C86 /* MainScreenDataManagers */,
-				22A0534B256BCDE10016B40A /* ActivityLineDataManagers */,
-				22A0534C256BCDFC0016B40A /* ActivityPointDataManagers */,
-				229FE69125706B6B0001FF54 /* GetSearchPageDataManager.swift */,
-				22906B392578293500F00B0D /* VendorCardDataManager.swift */,
+				22634AB425858C7300DF6FDB /* Data Base Models  */,
+				2253EE252569D1C500103C86 /* Main Screen Managers */,
+				22A0534B256BCDE10016B40A /* Activity Line Managers */,
+				22A0534C256BCDFC0016B40A /* Activity Point Managers */,
+				22CE4F8F25869E5C0060E9DF /* Search Managers */,
+				22CE4F9025869E690060E9DF /* Vendor Managers */,
 				22A155E72584E408000EAB64 /* Auth */,
 			);
 			path = Model;
@@ -253,22 +255,22 @@
 			path = PopCell;
 			sourceTree = "<group>";
 		};
-		22A0534B256BCDE10016B40A /* ActivityLineDataManagers */ = {
+		22A0534B256BCDE10016B40A /* Activity Line Managers */ = {
 			isa = PBXGroup;
 			children = (
 				2253EE262569D23600103C86 /* ActivityLineDataManager.swift */,
 				22B7271225740E8C00B56249 /* LinePostsPaggingDataManager.swift */,
 			);
-			path = ActivityLineDataManagers;
+			path = "Activity Line Managers";
 			sourceTree = "<group>";
 		};
-		22A0534C256BCDFC0016B40A /* ActivityPointDataManagers */ = {
+		22A0534C256BCDFC0016B40A /* Activity Point Managers */ = {
 			isa = PBXGroup;
 			children = (
 				22A0534D256BCE350016B40A /* ActivityPointDataManager.swift */,
 				22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */,
 			);
-			path = ActivityPointDataManagers;
+			path = "Activity Point Managers";
 			sourceTree = "<group>";
 		};
 		22A05356256C17E60016B40A /* VendorCell */ = {
@@ -375,6 +377,23 @@
 				22A155EC2584E766000EAB64 /* MenuViewModel.swift */,
 			);
 			path = "Menu Tab";
+			sourceTree = "<group>";
+		};
+		22CE4F8F25869E5C0060E9DF /* Search Managers */ = {
+			isa = PBXGroup;
+			children = (
+				229FE69125706B6B0001FF54 /* GetSearchPageDataManager.swift */,
+			);
+			path = "Search Managers";
+			sourceTree = "<group>";
+		};
+		22CE4F9025869E690060E9DF /* Vendor Managers */ = {
+			isa = PBXGroup;
+			children = (
+				22906B392578293500F00B0D /* VendorCardDataManager.swift */,
+				22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */,
+			);
+			path = "Vendor Managers";
 			sourceTree = "<group>";
 		};
 		22D175F52567EC6F00DA7D0E /* PhotoCell */ = {
@@ -539,6 +558,7 @@
 				2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
 				22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */,
+				22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */,
 				22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */,
 				22634AB625858CA800DF6FDB /* UserData.swift in Sources */,
 				22B7271325740E8C00B56249 /* LinePostsPaggingDataManager.swift in Sources */,
