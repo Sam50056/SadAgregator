@@ -7,15 +7,20 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
 class LineViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    let realm = try! Realm()
+    
     var refreshControl = UIRefreshControl()
     
-    let key = UserDefaults.standard.string(forKey: "key")!
+    var key : String = ""
     var thisLineId : String?
+    
+    var isLogged = false
     
     lazy var activityLineDataManager = ActivityLineDataManager()
     lazy var linePostsPaggingDataManager = LinePostsPaggingDataManager()
@@ -106,6 +111,8 @@ class LineViewController: UIViewController {
         
         self.navigationItem.title = "Линия"
         
+        loadUserData()
+        
         activityLineDataManager.delegate = self
         linePostsPaggingDataManager.delegate = self
         
@@ -127,6 +134,22 @@ class LineViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
+    }
+    
+}
+
+//MARK: - Data Manipulation Methods
+
+extension LineViewController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        key = userDataObject.first!.key
+        
+        isLogged = userDataObject.first!.isLogged
+        
     }
     
 }
@@ -409,6 +432,8 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         cell.sizes = sizesArray
         cell.options = optionsArray
         cell.images = imagesArray
+        
+        isLogged ? (cell.likeButtonImageView.isHidden = false) : (cell.likeButtonImageView.isHidden = true)
         
     }
     

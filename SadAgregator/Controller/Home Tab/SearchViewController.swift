@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
 class SearchViewController: UIViewController {
     
@@ -15,7 +16,11 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let key = UserDefaults.standard.string(forKey: "key")!
+    let realm = try! Realm()
+    
+    var key = ""
+    
+    var isLogged = false
     
     var searchText : String = ""
     var page : Int = 1
@@ -93,6 +98,8 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadUserData()
+        
         getSearchPageDataManager.delegate = self
         
         searchView.layer.cornerRadius = 10
@@ -114,6 +121,23 @@ class SearchViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.title = "Поиск"
+        
+    }
+    
+}
+
+
+//MARK: - Data Manipulation Methods
+
+extension SearchViewController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        key = userDataObject.first!.key
+        
+        isLogged = userDataObject.first!.isLogged
         
     }
     
@@ -297,6 +321,8 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         cell.sizes = sizesArray
         cell.options = optionsArray
         cell.images = imagesArray
+        
+        isLogged ? (cell.likeButtonImageView.isHidden = false) : (cell.likeButtonImageView.isHidden = true)
         
     }
     

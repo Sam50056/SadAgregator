@@ -9,13 +9,17 @@ import UIKit
 import SwiftyJSON
 import Cosmos
 import SDWebImage
+import RealmSwift
 
 class PostavshikViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let key = UserDefaults.standard.string(forKey: "key")!
-    let isLoggedIn = UserDefaults.standard.bool(forKey: "isLogged")
+    let realm = try! Realm()
+    
+    var key = ""
+    
+    var isLogged = false
     
     var thisVendorId : String?
     
@@ -131,6 +135,23 @@ class PostavshikViewController: UIViewController {
     }
     
 }
+
+//MARK: - Data Manipulation Methods
+
+extension PostavshikViewController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        key = userDataObject.first!.key
+        
+        isLogged = userDataObject.first!.isLogged
+        
+    }
+    
+}
+
 
 //MARK: - VendorCardDataManagerDelegate Stuff
 
@@ -364,7 +385,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         var count = 0
         
-        if self.isLoggedIn {
+        if self.isLogged {
             
             count += 3 //Three cells (rateVend , leaveARevCell and revCountCell)
             
@@ -506,6 +527,8 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         cell.sizes = sizesArray
         cell.options = optionsArray
         cell.images = imagesArray
+        
+        isLogged ? (cell.likeButtonImageView.isHidden = false) : (cell.likeButtonImageView.isHidden = true)
         
     }
     

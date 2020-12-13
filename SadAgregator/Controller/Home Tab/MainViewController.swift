@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
 class MainViewController: UIViewController {
     
@@ -18,11 +19,11 @@ class MainViewController: UIViewController {
     
     var refreshControl = UIRefreshControl()
     
-    var key = UserDefaults.standard.string(forKey: "key")
+    let realm = try! Realm()
     
-    var isLogged : Bool {
-        return UserDefaults.standard.bool(forKey: K.keyForLogged)
-    }
+    var key : String?
+    
+    var isLogged : Bool = false
     
     lazy var checkKeysDataManager = CheckKeysDataManager()
     lazy var mainDataManager = MainDataManager()
@@ -103,8 +104,12 @@ class MainViewController: UIViewController {
     var selectedLineId : String?
     var selectedPointId : String?
     
+    var userData : Results<UserData>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadUserData()
         
         checkKeysDataManager.delegate = self
         mainDataManager.delegate = self
@@ -123,6 +128,8 @@ class MainViewController: UIViewController {
         tableView.separatorStyle = .none
         
         searchView.layer.cornerRadius = 10
+        
+        checkKeysDataManager.getKeysData(key: key)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,19 +141,41 @@ class MainViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        checkKeysDataManager.getKeysData(key: key)
-        
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         //Clear the searchTextField
         searchTextField.text = ""
         searchTextField.endEditing(true)
+        
+    }
+    
+}
+
+//MARK: - Data Manipulation Methods
+
+extension MainViewController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        userData = userDataObject
+        
+    }
+    
+    func deleteAllDataFromDB(){
+        
+        //Deleting everything from DB
+        do{
+            
+            try realm.write{
+                realm.deleteAll()
+            }
+            
+        }catch{
+            print("Error with deleting all data from Realm , \(error) ERROR DELETING REALM")
+        }
         
     }
     
@@ -164,7 +193,34 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                 
                 print("Key: \(safeKey)")
                 
-                UserDefaults.standard.set(safeKey, forKey: "key") //Saving the key to UserDefaults
+                let userDataObject = UserData()
+                
+                if data["anonym"].stringValue == "0"{
+                    
+                    let name = data["name"].stringValue
+                    
+                    let code = data["code"].stringValue
+                    
+                    userDataObject.name = name
+                    userDataObject.code = code
+                    
+                    userDataObject.isLogged = true
+                    
+                    isLogged = true
+                    
+                }
+                
+                userDataObject.key = safeKey
+                
+                deleteAllDataFromDB()
+                
+                do{
+                    try self.realm.write{
+                        self.realm.add(userDataObject)
+                    }
+                }catch{
+                    print("Error saving data to realm , \(error.localizedDescription)")
+                }
                 
                 key = safeKey
                 

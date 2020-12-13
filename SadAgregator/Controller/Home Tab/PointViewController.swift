@@ -8,14 +8,19 @@
 import UIKit
 import SwiftyJSON
 import Cosmos
+import RealmSwift
 
 class PointViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    let realm = try! Realm()
+    
     var refreshControl = UIRefreshControl()
     
-    var key = UserDefaults.standard.string(forKey: "key")!
+    var key = ""
+    
+    var isLogged = false 
     
     var thisPointId : String?
     
@@ -108,6 +113,8 @@ class PointViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadUserData()
+        
         activityPointDataManager.delegate = self
         pointPostsPaggingDataManager.delegate = self
         
@@ -159,6 +166,23 @@ class PointViewController: UIViewController {
     }
     
 }
+
+//MARK: - Data Manipulation Methods
+
+extension PointViewController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        key = userDataObject.first!.key
+        
+        isLogged = userDataObject.first!.isLogged
+        
+    }
+    
+}
+
 
 //MARK: - ActivityPointDataManagerDelegate Stuff
 
@@ -573,6 +597,8 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         cell.sizes = sizesArray
         cell.options = optionsArray
         cell.images = imagesArray
+        
+        isLogged ? (cell.likeButtonImageView.isHidden = false) : (cell.likeButtonImageView.isHidden = true)
         
     }
     
