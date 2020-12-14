@@ -11,15 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="511" id="KGk-i7-Jjw" customClass="PostTableViewCell" customModule="SadAgregator" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="363" height="511"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="578" id="KGk-i7-Jjw" customClass="PostTableViewCell" customModule="SadAgregator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="363" height="578"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="363" height="511"/>
+                <rect key="frame" x="0.0" y="0.0" width="363" height="578"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQV-oh-YJ4" userLabel="BGView">
-                        <rect key="frame" x="0.0" y="0.0" width="363" height="503"/>
+                        <rect key="frame" x="0.0" y="0.0" width="363" height="570"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p91-BU-613" userLabel="topView">
                                 <rect key="frame" x="16" y="8" width="331" height="20"/>
@@ -61,9 +61,12 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IO7-nw-6KB">
-                                <rect key="frame" x="16" y="36" width="331" height="400"/>
+                                <rect key="frame" x="16" y="36" width="331" height="467"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="15v-TS-fz7">
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="460" id="Ape-xf-cio"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ql0-7T-A5l">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -71,7 +74,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7EA-pY-GDv" userLabel="BottomView">
-                                <rect key="frame" x="16" y="436" width="285" height="35"/>
+                                <rect key="frame" x="16" y="503" width="285" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPt-GC-e9h">
                                         <rect key="frame" x="0.0" y="5" width="25" height="25"/>
@@ -138,7 +141,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PUa-Dn-Z6k">
-                                <rect key="frame" x="16" y="471" width="331" height="24"/>
+                                <rect key="frame" x="16" y="538" width="331" height="24"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 мин. назад" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZp-bw-5Yy">
                                         <rect key="frame" x="0.0" y="6" width="76" height="14"/>
@@ -169,7 +172,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Us6-U2-kyD">
-                                <rect key="frame" x="317" y="437.5" width="30" height="32.5"/>
+                                <rect key="frame" x="317" y="504.5" width="30" height="32.5"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="7xL-kw-HuR"/>
@@ -217,7 +220,7 @@
                 <outlet property="vendorLabel" destination="SSR-4S-9BF" id="PqE-PW-DhV"/>
                 <outlet property="vigruzitImageView" destination="SgS-Tb-JH2" id="sxU-hf-4TK"/>
             </connections>
-            <point key="canvasLocation" x="52.898550724637687" y="294.30803571428572"/>
+            <point key="canvasLocation" x="52.898550724637687" y="316.74107142857139"/>
         </tableViewCell>
     </objects>
     <resources>

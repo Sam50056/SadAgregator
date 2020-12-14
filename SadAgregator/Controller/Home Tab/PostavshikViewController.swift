@@ -373,7 +373,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         
         switch indexPath.section {
         
@@ -409,6 +409,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         default:
             fatalError("Invalid Section")
         }
+        
         
     }
     
