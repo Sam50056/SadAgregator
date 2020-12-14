@@ -10,6 +10,7 @@ import SwiftyJSON
 import Cosmos
 import SDWebImage
 import RealmSwift
+import Cosmos
 
 class PostavshikViewController: UIViewController {
     
@@ -336,6 +337,14 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
+        case 3:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "revCell", for: indexPath)
+            
+            let rev = vendorRevs[indexPath.row]
+            
+            setUpRevCell(cell: cell, data: rev)
+            
         case 4:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "alertCell", for: indexPath)
@@ -382,7 +391,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 3:
             
-            return 50
+            return 150
             
         case 4:
             
@@ -585,7 +594,36 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         if let label = cell.viewWithTag(1) as? UILabel{
             
-            label.text = "\(vendorRevs.count) ОТЗЫВОВ"
+            let revsCount = vendorRevs.count
+            
+            var trailingText = ""
+            
+            if revsCount % 10 == 1{
+                trailingText = "ОТЗЫВ"
+            }else{
+                trailingText = "ОТЗЫВОВ"
+            }
+            
+            label.text = "\(revsCount) \(trailingText)"
+            
+        }
+        
+    }
+    
+    func setUpRevCell(cell : UITableViewCell, data : JSON){
+        
+        if let authorLabel = cell.viewWithTag(1) as? UILabel,
+           let ratingView = cell.viewWithTag(2) as? CosmosView,
+           let textView = cell.viewWithTag(3) as? UITextView,
+           let dateLabel = cell.viewWithTag(4) as? UILabel{
+            
+            authorLabel.text = data["author"].stringValue
+            
+            ratingView.rating = Double(data["rate"].stringValue)!
+            
+            textView.text = data["text"].stringValue
+            
+            dateLabel.text = data["dt"].stringValue
             
         }
         
