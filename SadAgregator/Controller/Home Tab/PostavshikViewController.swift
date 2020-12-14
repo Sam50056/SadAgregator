@@ -146,7 +146,7 @@ class PostavshikViewController: UIViewController {
     
     @IBAction func likeBarButtonPressed(_ sender: UIBarButtonItem) {
         
-        guard let thisVendId = thisVendorId else {return}
+        guard let thisVendId = thisVendorId , isLogged == true else {return}
         
         var newStatus = ""
         
