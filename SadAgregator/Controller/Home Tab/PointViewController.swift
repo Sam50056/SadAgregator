@@ -410,23 +410,21 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
     
     func makeHeightForVendCell(vend : JSON) -> CGFloat {
         
-        var height = 90
+        var height = 80
         
         let phone = vend["ph"].stringValue
         let pop = vend["pop"].intValue
         let rating = vend["rate"].stringValue
         
         if rating != "0" {
-            height += 10
+            height += 15
         }
         
         if phone != "" {
-            height += 10
+            height += 15
         }
         
-        if pop != 0 {
-            height += 10
-        }
+        height += 10 // We do + 10 because anyways if pop is o or something else , we show that on screen
         
         return CGFloat(height)
     }
