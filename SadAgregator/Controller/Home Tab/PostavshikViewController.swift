@@ -27,8 +27,8 @@ class PostavshikViewController: UIViewController {
     var thisVendorId : String?
     
     lazy var vendorCardDataManager = VendorCardDataManager()
-    
     lazy var vendorLikeDataManager = VendorLikeDataManager()
+    lazy var reviewUpdateDataManager = ReviewUpdateDataManager()
     
     var vendorData : JSON?
     
@@ -599,6 +599,12 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
            let userRating = Double(data["my_rate"].stringValue){
             
             ratingView.rating = userRating
+            
+            ratingView.didFinishTouchingCosmos = { [self] rating in
+                
+                reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: thisVendorId!, rating: rating)
+                
+            }
             
         }
         
