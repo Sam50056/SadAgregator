@@ -9,7 +9,7 @@ import Foundation
 
 struct ReviewUpdateDataManager {
     
-    func getReviewUpdateData(key : String , vendId : String,  rating : Double){
+    func getReviewUpdateData(key : String , vendId : String,  rating : Int){
         
         let urlString = "https://agrapi.tk-sad.ru/agr_intf.ReviewUpdate?AKey=\(key)&AvendID=\(vendId)&ARating=\(rating)&ATitle=&AText=&AImages="
         

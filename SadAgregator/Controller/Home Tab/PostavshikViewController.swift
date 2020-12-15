@@ -602,7 +602,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             ratingView.didFinishTouchingCosmos = { [self] rating in
                 
-                reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: thisVendorId!, rating: rating)
+                reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: thisVendorId!, rating: Int(rating))
                 
             }
             
