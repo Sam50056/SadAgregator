@@ -31,7 +31,7 @@ class LineViewController: UIViewController {
     var postsArray = [JSON]()
     
     var page : Int = 1
-    var rowForPaggingUpdate : Int = 17
+    var rowForPaggingUpdate : Int = 10
     
     var sizes : Array<[String]> {
         get{
@@ -202,7 +202,7 @@ extension LineViewController : LinePostsPaggingDataManagerDelegate {
             
             self.postsArray.append(contentsOf: data["posts"].arrayValue)
             
-            self.tableView.reloadData()
+            self.tableView.reloadSections([5], with: .automatic)
             
         }
         
@@ -218,8 +218,31 @@ extension LineViewController : LinePostsPaggingDataManagerDelegate {
 //MARK: - UITableView Stuff
 extension LineViewController : UITableViewDelegate , UITableViewDataSource{
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 6
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 + activityPointCellsArray.count + 1 + postsArray.count
+        
+        switch section {
+        
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case 2:
+            return 1
+        case 3:
+            return activityPointCellsArray.count
+        case 4:
+            return 1
+        case 5:
+            return postsArray.count
+        default:
+            fatalError("Invalid Section: \(section)")
+            
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -230,11 +253,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         
         guard let lineData = lineData else {return cell}
         
-        let maxIndexForActivityPointCells = 3 + activityPointCellsArray.count - 1 ///Max index (indexPath.row) for Activity point cells. So that 3 is because we have 3 static cells , then an array of activity point cells which is not static. So we do 3 + count of the array -1 (because array indexing starts from 0)  and get the max index we can put into switch. And what we'll put there will be 3..<array.count-1 This means that from 3rd index to 3 + array.count-1  all the cells will be "activityPointCell".
-        
-        let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
-        
-        switch index {
+        switch indexPath.section {
         
         case 0:
             
@@ -252,25 +271,21 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "TochkiActivityCell", for: indexPath)
             
-        case 3...maxIndexForActivityPointCells:
+        case 3:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "activityPointCell", for: indexPath)
-            
-            let index = indexPath.row - 3 // We do minus three , still that 3 (count of static cells)
             
             let activityLine = activityPointCellsArray[index]
             
             setUpActivityLineCell(cell: cell, data: activityLine)
             
-        case maxIndexForActivityPointCells + 1:
+        case 4:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
             
-        case maxIndexForActivityPointCells + 2...maxIndexForPosts:
+        case 5:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
-            
-            let index = indexPath.row - (maxIndexForActivityPointCells + 2)
             
             let post = postsArray[index]
             
@@ -286,31 +301,26 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let maxIndexForActivityTochkaCells = 3 + activityPointCellsArray.count - 1
-        let maxIndexForPosts = maxIndexForActivityTochkaCells + 1 + postsArray.count
+        switch indexPath.section {
         
-        if indexPath.row == 1 {
+        case 1:
             return 126
-        }else if indexPath.row >= maxIndexForActivityTochkaCells + 2 && indexPath.row <= maxIndexForPosts{
-            
+        case 5:
             return K.postHeight
+        default:
+            return K.simpleCellHeight
+            
         }
         
-        return K.simpleCellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let index = indexPath.row
         
-        let maxIndexForActivityTochkaCells = 3 + activityPointCellsArray.count - 1
-        let maxIndexForPosts = maxIndexForActivityTochkaCells + 1 + postsArray.count
-        
-        if index >= 3 && index <= maxIndexForActivityTochkaCells{
+        if indexPath.section == 3 {
             
-            let indexForCell = index - 3
-            
-            let cellData = activityPointCellsArray[indexForCell]
+            let cellData = activityPointCellsArray[index]
             
             selectedPointId = cellData["point_id"].stringValue
             
@@ -319,19 +329,24 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.row == rowForPaggingUpdate{
+        if indexPath.section == 5 {
             
-            page += 1
-            
-            rowForPaggingUpdate += 9
-            
-            linePostsPaggingDataManager.getLinePostsPaggingData(key: key, lineId: thisLineId!, page: page)
-            
-            print("Done a request for page: \(page)")
+            if indexPath.row == rowForPaggingUpdate{
+                
+                page += 1
+                
+                rowForPaggingUpdate += 9
+                
+                linePostsPaggingDataManager.getLinePostsPaggingData(key: key, lineId: thisLineId!, page: page)
+                
+                print("Done a request for page: \(page)")
+                
+            }
             
         }
         
