@@ -413,7 +413,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         var height = 80
         
         let phone = vend["ph"].stringValue
-        let pop = vend["pop"].intValue
+        //let pop = vend["pop"].intValue
         let rating = vend["rate"].stringValue
         
         if rating != "0" {

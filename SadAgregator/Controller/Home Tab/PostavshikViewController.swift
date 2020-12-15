@@ -325,6 +325,8 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "rateVend", for: indexPath)
                 
+                setUpRateVend(cell: cell, data: vendorData)
+                
             }else if indexPath.row == 1 {
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "leaveARevCell", for: indexPath)
@@ -586,6 +588,17 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         if let label = cell.viewWithTag(1) as? UILabel{
             
             label.text = data["alert_text"].stringValue != "" ? data["alert_text"].stringValue : data["altert_text"].stringValue
+            
+        }
+        
+    }
+    
+    func setUpRateVend(cell : UITableViewCell, data : JSON){
+        
+        if let ratingView = cell.viewWithTag(1) as? CosmosView,
+           let userRating = Double(data["my_rate"].stringValue){
+            
+            ratingView.rating = userRating
             
         }
         

@@ -197,7 +197,7 @@
                                                     <color key="textColor" red="0.34574854370000002" green="0.34580290320000001" blue="0.34573665260000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Kl-u7-mVA" customClass="CosmosView" customModule="Cosmos">
+                                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Kl-u7-mVA" customClass="CosmosView" customModule="Cosmos">
                                                     <rect key="frame" x="235" y="15.666666666666664" width="135" height="23"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
