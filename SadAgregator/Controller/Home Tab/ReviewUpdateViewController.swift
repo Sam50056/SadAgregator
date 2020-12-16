@@ -33,7 +33,7 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
         textView.text = ""
         
         textView.layer.borderWidth = 1
-        textView.layer.borderColor = UIColor.systemGray.cgColor
+        textView.layer.borderColor = #colorLiteral(red: 0.9175441861, green: 0.917704761, blue: 0.9175459743, alpha: 1)
         
         textView.layer.cornerRadius = 5
         
