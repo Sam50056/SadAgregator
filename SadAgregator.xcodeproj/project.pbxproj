@@ -14,6 +14,7 @@
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		22634AB625858CA800DF6FDB /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22634AB525858CA800DF6FDB /* UserData.swift */; };
+		227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */; };
 		227ADAAA25892D8E009B32EC /* ReviewUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */; };
 		228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB75C255BF96D002B4A96 /* AppDelegate.swift */; };
 		228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB75E255BF96D002B4A96 /* SceneDelegate.swift */; };
@@ -67,6 +68,7 @@
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		22634AB525858CA800DF6FDB /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUpdateViewController.swift; sourceTree = "<group>"; };
 		227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUpdateDataManager.swift; sourceTree = "<group>"; };
 		228CB759255BF96D002B4A96 /* SadAgregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SadAgregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228CB75C255BF96D002B4A96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				221949FE256B1FBD00E0564D /* PointViewController.swift */,
 				229FE68D25700B120001FF54 /* SearchViewController.swift */,
 				22906B362578020300F00B0D /* PostavshikViewController.swift */,
+				227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
 				228CB761255BF96D002B4A96 /* MainViewController.swift in Sources */,
+				227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */,
 				22A49CB42566645800CCC781 /* PostTableViewCell.swift in Sources */,
 				22906B3A2578293500F00B0D /* VendorCardDataManager.swift in Sources */,
 				2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */,

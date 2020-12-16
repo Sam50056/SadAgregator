@@ -1,0 +1,42 @@
+//
+//  ReviewUpdateViewController.swift
+//  SadAgregator
+//
+//  Created by Sam Yerznkyan on 16.12.2020.
+//
+
+import UIKit
+import Cosmos
+
+class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
+    
+    @IBOutlet weak var titleTextField: UITextField!
+    
+    @IBOutlet weak var RatingView: CosmosView!
+    
+    @IBOutlet weak var textView: UITextView!
+    
+    @IBOutlet weak var saveButton: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        textView.delegate = self
+        
+        saveButton.layer.cornerRadius = 5
+        
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        let numberOfChars = newText.count // for Swift use count(newText)
+        return numberOfChars < 10;
+    }
+    
+    @IBAction func saveButtonPressed(_ sender: UIButton) {
+        
+        
+        
+    }
+    
+}

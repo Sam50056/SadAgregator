@@ -144,6 +144,7 @@ class PostavshikViewController: UIViewController {
         
     }
     
+    //MARK: - Actions
     
     @IBAction func likeBarButtonPressed(_ sender: UIBarButtonItem) {
         
@@ -163,6 +164,18 @@ class PostavshikViewController: UIViewController {
         vendorLikeDataManager.getVendorLikeData(key: key, vendId: thisVendId, status: newStatus)
         
         vendorLikeStatus = newStatus
+        
+    }
+    
+    //MARK: - Segue Stuff
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier = "goToReviewUpdate"{
+            
+            
+            
+        }
         
     }
     
@@ -416,7 +429,15 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 2, indexPath.row == 1{
+            
+            self.performSegue(withIdentifier: "goToReviewUpdate", sender: self)
+            
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     //MARK: - Row Count Stuff
