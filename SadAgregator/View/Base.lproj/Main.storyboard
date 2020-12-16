@@ -88,14 +88,24 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKV-Py-OHO">
-                                <rect key="frame" x="16" y="516.33333333333337" width="163" height="30"/>
+                                <rect key="frame" x="16" y="516.33333333333337" width="170" height="30"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="photo.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UDK-9s-j8r">
-                                        <rect key="frame" x="8" y="6.6666666666666643" width="23.666666666666671" height="17.333333333333336"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bB-6x-ALl">
+                                        <rect key="frame" x="0.0" y="0.0" width="170" height="30"/>
+                                        <connections>
+                                            <action selector="addPhotoPressed:" destination="s7e-YJ-ycF" eventType="touchUpInside" id="rrD-ON-QaS"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UDK-9s-j8r">
+                                        <rect key="frame" x="8.0000000000000018" y="6.6666666666666643" width="23.666666666666671" height="17.333333333333336"/>
                                         <color key="tintColor" systemColor="systemGrayColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="23.670000000000002" id="2Ar-yQ-Xx1"/>
+                                            <constraint firstAttribute="height" constant="20.329999999999998" id="hcd-nj-me3"/>
+                                        </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Добавить фото" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79r-oI-irQ">
-                                        <rect key="frame" x="40" y="5" width="127" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добавить фото" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79r-oI-irQ">
+                                        <rect key="frame" x="39.666666666666664" y="5" width="122.33333333333334" height="20"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -103,11 +113,15 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="2bB-6x-ALl" firstAttribute="top" secondItem="XKV-Py-OHO" secondAttribute="top" id="2PH-aI-mFh"/>
+                                    <constraint firstAttribute="bottom" secondItem="2bB-6x-ALl" secondAttribute="bottom" id="6rU-JL-9Ni"/>
                                     <constraint firstItem="79r-oI-irQ" firstAttribute="leading" secondItem="UDK-9s-j8r" secondAttribute="trailing" constant="8" id="83d-t3-JLk"/>
+                                    <constraint firstAttribute="trailing" secondItem="2bB-6x-ALl" secondAttribute="trailing" id="AAp-eB-Hvt"/>
                                     <constraint firstItem="UDK-9s-j8r" firstAttribute="leading" secondItem="XKV-Py-OHO" secondAttribute="leading" constant="8" id="OxU-Fv-KkT"/>
                                     <constraint firstAttribute="height" constant="30" id="PV2-PM-A3A"/>
+                                    <constraint firstItem="2bB-6x-ALl" firstAttribute="leading" secondItem="XKV-Py-OHO" secondAttribute="leading" id="a6Y-bM-P89"/>
                                     <constraint firstItem="79r-oI-irQ" firstAttribute="centerY" secondItem="XKV-Py-OHO" secondAttribute="centerY" id="j7U-M0-Lvm"/>
-                                    <constraint firstAttribute="width" constant="163" id="t9S-ny-uEj"/>
+                                    <constraint firstAttribute="width" constant="170" id="t9S-ny-uEj"/>
                                     <constraint firstAttribute="trailing" secondItem="79r-oI-irQ" secondAttribute="trailing" constant="8" id="tzP-PY-AKT"/>
                                     <constraint firstItem="UDK-9s-j8r" firstAttribute="centerY" secondItem="XKV-Py-OHO" secondAttribute="centerY" id="wPN-ha-Fyr"/>
                                 </constraints>
