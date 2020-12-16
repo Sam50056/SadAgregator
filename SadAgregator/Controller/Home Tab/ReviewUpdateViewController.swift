@@ -13,11 +13,17 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var titleTextField: UITextField!
     
-    @IBOutlet weak var RatingView: CosmosView!
+    @IBOutlet weak var ratingView: CosmosView!
     
     @IBOutlet weak var textView: UITextView!
     
     @IBOutlet weak var saveButton: UIButton!
+    
+    var key : String?
+    var vendId : String?
+    var myRate : Double?
+    
+    lazy var reviewUpdateDataManager = ReviewUpdateDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +39,22 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
         
         saveButton.layer.cornerRadius = 5
         
+        if let myRate = myRate {
+            
+            ratingView.rating = myRate
+            
+        }
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let myRate = myRate else {return}
+       
+        self.navigationItem.title = myRate == 0 ? "ОСТАВИТЬ ОТЗЫВ" : "РЕДАКТИРОВАТЬ ОТЗЫВ"
+        
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -44,6 +66,15 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         
         
+        guard let key = key , let vendId = vendId else {return}
+        
+        if !textView.text.contains("\\"){
+            
+            reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: vendId, rating: Int(ratingView.rating), title: titleTextField.text!, text: textView.text)
+            
+            self.navigationController?.popViewController(animated: true)
+            
+        }
         
     }
     

@@ -159,7 +159,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="qGQ-H1-zsO"/>
                     <connections>
-                        <outlet property="RatingView" destination="ShL-Z3-9Ko" id="ey8-38-nR6"/>
+                        <outlet property="ratingView" destination="ShL-Z3-9Ko" id="ey8-38-nR6"/>
                         <outlet property="saveButton" destination="uqz-aI-sXG" id="9bd-gm-tTX"/>
                         <outlet property="textView" destination="hPi-s6-ZgP" id="IaY-CW-iaS"/>
                         <outlet property="titleTextField" destination="9Nh-dc-pKC" id="pZz-BT-Zss"/>
@@ -423,7 +423,7 @@
                                                         <constraint firstAttribute="height" constant="31" id="wRB-5W-NHe"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ОСТАВИТЬ ОТЗЫВ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-Ug-kFs">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ОСТАВИТЬ ОТЗЫВ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-Ug-kFs">
                                                     <rect key="frame" x="58" y="16.666666666666668" width="138.33333333333334" height="18.000000000000004"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <nil key="textColor"/>

@@ -144,6 +144,22 @@ class PostavshikViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let safeId = thisVendorId{
+            vendorCardDataManager.getVendorCardData(key: key, vendorId: safeId)
+        }
+        
+    }
+    
     //MARK: - Actions
     
     @IBAction func likeBarButtonPressed(_ sender: UIBarButtonItem) {
@@ -173,7 +189,11 @@ class PostavshikViewController: UIViewController {
         
         if segue.identifier == "goToReviewUpdate"{
             
+            let destinationVC = segue.destination as! ReviewUpdateViewController
             
+            destinationVC.key = key
+            destinationVC.vendId = thisVendorId
+            destinationVC.myRate = Double(vendorData!["my_rate"].stringValue)!
             
         }
         
@@ -343,6 +363,8 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             }else if indexPath.row == 1 {
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "leaveARevCell", for: indexPath)
+                
+                setUpLeaveARevCell(cell: cell, data: vendorData)
                 
             }else if indexPath.row == 2{
                 
@@ -626,6 +648,17 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: thisVendorId!, rating: Int(rating))
                 
             }
+            
+        }
+        
+    }
+    
+    func setUpLeaveARevCell(cell : UITableViewCell, data: JSON){
+        
+        if let label = cell.viewWithTag(1) as? UILabel,
+           let userRating = Double(data["my_rate"].stringValue){
+            
+            label.text = userRating == 0 ? "ОСТАВИТЬ ОТЗЫВ" : "РЕДАКТИРОВАТЬ ОТЗЫВ"
             
         }
         
