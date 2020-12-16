@@ -15,11 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        var systemVersion = UIDevice.current.systemVersion
-//
-//        if systemVersion.contains("13."){
-//            IQKeyboardManager.shared.enable = true //Enabling IQKeybpard
-//        }
+        //        var systemVersion = UIDevice.current.systemVersion
+        //
+        //        if systemVersion.contains("13."){
+        //            IQKeyboardManager.shared.enable = true //Enabling IQKeybpard
+        //        }
+        
+        IQKeyboardManager.shared.enable = true
         
         print("\(Realm.Configuration.defaultConfiguration.fileURL) REALM FILE URL")
         
