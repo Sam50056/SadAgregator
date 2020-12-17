@@ -27,6 +27,8 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
     var vendId : String?
     var myRate : Double?
     
+    lazy var getMyReviewDataManager = GetMyReviewDataManager()
+    
     lazy var reviewUpdateDataManager = ReviewUpdateDataManager()
     
     lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
@@ -46,6 +48,7 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
         imagesCollectionView.delegate = self
         imagesCollectionView.dataSource = self
         
+        getMyReviewDataManager.delegate = self
         newPhotoPlaceDataManager.delegate = self
         
         textView.text = ""
@@ -69,9 +72,11 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let myRate = myRate else {return}
+        guard let myRate = myRate , let key = key , let vendId = vendId else {return}
         
         self.navigationItem.title = myRate == 0 ? "ОСТАВИТЬ ОТЗЫВ" : "РЕДАКТИРОВАТЬ ОТЗЫВ"
+        
+        getMyReviewDataManager.getVendorLikeData(key: key, vendId: vendId)
         
     }
     
@@ -172,6 +177,32 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
             print(error)
         }
         
+    }
+    
+}
+
+//MARK: - GetMyReviewDataManagerDelegate
+
+extension ReviewUpdateViewController : GetMyReviewDataManagerDelegate{
+    
+    func didGetGetMyReviewData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            guard let title =  data["title"].string , let text = data["text"].string , let rate = Double(data["rate"].stringValue) else {return}
+            
+            titleTextField.text = title
+            
+            textView.text = text
+            
+            ratingView.rating = rate
+            
+        }
+        
+    }
+    
+    func didFailGettingGetMyReviewDataWithError(error: String) {
+        print("Error with GetMyReviewDataManager: \(error)")
     }
     
 }

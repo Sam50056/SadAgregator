@@ -17,6 +17,7 @@
 		227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */; };
 		227828EE258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */; };
 		22782906258AC7FE00B435FA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22782905258AC7FE00B435FA /* Extensions.swift */; };
+		2278290A258BB60E00B435FA /* GetMyReviewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22782909258BB60E00B435FA /* GetMyReviewDataManager.swift */; };
 		227ADAAA25892D8E009B32EC /* ReviewUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */; };
 		228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB75C255BF96D002B4A96 /* AppDelegate.swift */; };
 		228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB75E255BF96D002B4A96 /* SceneDelegate.swift */; };
@@ -73,6 +74,7 @@
 		227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUpdateViewController.swift; sourceTree = "<group>"; };
 		227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPhotoPlaceDataManager.swift; sourceTree = "<group>"; };
 		22782905258AC7FE00B435FA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		22782909258BB60E00B435FA /* GetMyReviewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyReviewDataManager.swift; sourceTree = "<group>"; };
 		227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUpdateDataManager.swift; sourceTree = "<group>"; };
 		228CB759255BF96D002B4A96 /* SadAgregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SadAgregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228CB75C255BF96D002B4A96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				22906B392578293500F00B0D /* VendorCardDataManager.swift */,
 				22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */,
 				227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */,
+				22782909258BB60E00B435FA /* GetMyReviewDataManager.swift */,
 			);
 			path = "Vendor Managers";
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				2291BE452560620F004F55DF /* MainDataManager.swift in Sources */,
 				22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */,
 				22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */,
+				2278290A258BB60E00B435FA /* GetMyReviewDataManager.swift in Sources */,
 				2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */,
 				229FE68E25700B120001FF54 /* SearchViewController.swift in Sources */,
 				221C072C256E5ABB001BC842 /* PhoneTableViewCell.swift in Sources */,
