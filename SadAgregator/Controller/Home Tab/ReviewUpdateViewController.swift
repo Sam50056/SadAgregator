@@ -8,8 +8,6 @@
 import UIKit
 import Cosmos
 import IQKeyboardManagerSwift
-import MobileCoreServices
-import Alamofire
 import SwiftyJSON
 
 class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
@@ -99,22 +97,38 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
         
         print("import result : \(fromUrl)")
         
-        let fileName = fromUrl.lastPathComponent
-        let mimeType = fromUrl.mimeType()
+        guard let toUrl = URL(string: toUrl) else {return}
         
         do{
             
             let data = try Data(contentsOf: fromUrl)
             
-            let headers: HTTPHeaders = [.contentType("multipart/form")]
+            let image = UIImage(data: data)!
             
-            AF.upload(multipartFormData: { multipartFormData in
-                multipartFormData.append(data, withName: "file" , fileName: fileName , mimeType: mimeType)
-            },
-            to: toUrl, headers : headers)
-            .responseJSON { response in
-                print("ANSWER: \(String(data: response.data!, encoding: String.Encoding.windowsCP1251)!)")
+            let imageData = image.jpegData(compressionQuality: 0.5)
+            
+            var request = URLRequest(url: toUrl)
+            
+            request.httpMethod = "POST"
+            request.setValue("text/plane", forHTTPHeaderField: "Content-Type")
+            request.httpBody = imageData
+            
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                
+                if error != nil {
+                    print("Error sending file: \(error!.localizedDescription)")
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+                
+                print("Answer : \(json)")
+                
             }
+            
+            task.resume()
             
         }catch{
             print(error)
