@@ -6,8 +6,16 @@
 //
 
 import Foundation
+import SwiftyJSON
+
+protocol ReviewUpdateDataManagerDelegate {
+    func didGetReviewUpdateData(data : JSON)
+    func didFailGettingReviewUpdateDataWithError(error : String)
+}
 
 struct ReviewUpdateDataManager {
+    
+    var delegate : ReviewUpdateDataManagerDelegate?
     
     func getReviewUpdateData(key : String , vendId : String,  rating : Int, title : String = "" , text : String = "" , images : String = "" ){
         
@@ -19,7 +27,21 @@ struct ReviewUpdateDataManager {
         
         let session = URLSession(configuration: .default)
         
-        let task = session.dataTask(with: url)
+        let task = session.dataTask(with: url) { (data, response, error) in
+            
+            if error != nil {
+                delegate?.didFailGettingReviewUpdateDataWithError(error: error!.localizedDescription)
+                return
+            }
+            
+            guard let data = data else {delegate?.didFailGettingReviewUpdateDataWithError(error: "Data is empty"); return}
+            
+            let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+            
+            let jsonAnswer = JSON(parseJSON: json)
+            
+            delegate?.didGetReviewUpdateData(data: jsonAnswer)
+        }
         
         task.resume()
         

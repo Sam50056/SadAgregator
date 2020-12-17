@@ -49,6 +49,7 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
         imagesCollectionView.dataSource = self
         
         getMyReviewDataManager.delegate = self
+        reviewUpdateDataManager.delegate = self
         newPhotoPlaceDataManager.delegate = self
         
         textView.text = ""
@@ -106,8 +107,6 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
             }
             
             reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: vendId, rating: Int(ratingView.rating), title: titleTextField.text!, text: textView.text, images : images)
-             
-            self.navigationController?.popViewController(animated: true)
             
         }
         
@@ -263,6 +262,48 @@ extension ReviewUpdateViewController : NewPhotoPlaceDataManagerDelegate{
     
     func didFailGettingNewPhotoPlaceDataWithError(error: String) {
         print("Error with NewPhotoPlaceDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - GetMyReviewDataManagerDelegate
+
+extension ReviewUpdateViewController : ReviewUpdateDataManagerDelegate {
+    
+    func didGetReviewUpdateData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if let message = data["msg"].string{
+                
+                let alertController = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+                
+                let action = UIAlertAction(title: "Ok", style: .default) { (_) in
+                    
+                    alertController.dismiss(animated: true, completion: nil)
+                    
+                }
+                
+                alertController.addAction(action)
+                
+                self.present(alertController, animated: true, completion: nil)
+                
+            }
+            
+            let result = data["result"].intValue
+            
+            if result == 1 {
+                
+                self.navigationController?.popViewController(animated: true)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingReviewUpdateDataWithError(error: String) {
+        print("Error with ReviewUpdateDataManager : \(error)")
     }
     
 }
