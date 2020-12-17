@@ -514,7 +514,11 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         if self.isLogged {
             
-            count += 3 //Three cells (rateVend , leaveARevCell and revCountCell)
+            count += 2 //Two cells (rateVend , leaveARevCell)
+            
+            if vendorRevs.count != 0{
+                count += 1 // revCountCell should not be shown when there are no revs
+            }
             
         }
         
