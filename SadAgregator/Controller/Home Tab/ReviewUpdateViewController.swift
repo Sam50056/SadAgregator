@@ -142,11 +142,15 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
                 
                 DispatchQueue.main.async {
                     
-                    guard let selectedImageId = selectedImageId , let selectedImageLink = selectedImageLink else {return}
+                    guard let imageId = selectedImageId , let imageLink = selectedImageLink else {return}
                     
-                    imageCellObjects.append(ImageCellObject(id: selectedImageId, link: selectedImageLink))
+                    imageCellObjects.append(ImageCellObject(id: imageId, link: imageLink))
                     
                     imagesCollectionView.reloadData()
+                    
+                    selectedImageLink = nil
+                    selectedImageId = nil
+                    selectedImageURL = nil
                     
                 }
                 
@@ -263,6 +267,8 @@ extension ReviewUpdateViewController : UICollectionViewDelegate , UICollectionVi
                 
                 imageView.sd_setImage(with: safeURL)
                 
+                imageView.layer.cornerRadius = 8
+                imageView.clipsToBounds = true
                 badgeView.layer.cornerRadius = badgeView.frame.width / 2
                 
             }
