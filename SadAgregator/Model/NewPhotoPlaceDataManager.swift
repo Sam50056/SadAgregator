@@ -21,7 +21,7 @@ struct NewPhotoPlaceDataManager {
         
         let urlString = "https://agrapi.tk-sad.ru/agr_utils.NewPhotoPlace?AKey=\(key)"
         
-        print("URLString for VendorLikeDataManager: \(urlString)")
+        print("URLString for NewPhotoPlaceDataManager: \(urlString)")
         
         guard let url = URL(string: urlString) else {
             delegate?.didFailGettingNewPhotoPlaceDataWithError(error: "Wrong URL")

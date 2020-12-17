@@ -9,6 +9,7 @@ import UIKit
 import Cosmos
 import IQKeyboardManagerSwift
 import SwiftyJSON
+import SDWebImage
 
 class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
     
@@ -31,6 +32,11 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
     lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
     
     var selectedImageURL : URL?
+    
+    var selectedImageLink : String?
+    var selectedImageId : String?
+    
+    var imageCellObjects = [ImageCellObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +77,7 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
-        let numberOfChars = newText.count // for Swift use count(newText)
+        let numberOfChars = newText.count
         return numberOfChars < 400;
     }
     
@@ -121,7 +127,7 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
             request.setValue("text/plane", forHTTPHeaderField: "Content-Type")
             request.httpBody = imageData
             
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let task = URLSession.shared.dataTask(with: request) { [self] (data, response, error) in
                 
                 if error != nil {
                     print("Error sending file: \(error!.localizedDescription)")
@@ -133,6 +139,16 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
                 let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
                 
                 print("Answer : \(json)")
+                
+                DispatchQueue.main.async {
+                    
+                    guard let selectedImageId = selectedImageId , let selectedImageLink = selectedImageLink else {return}
+                    
+                    imageCellObjects.append(ImageCellObject(id: selectedImageId, link: selectedImageLink))
+                    
+                    imagesCollectionView.reloadData()
+                    
+                }
                 
             }
             
@@ -161,6 +177,17 @@ extension ReviewUpdateViewController : NewPhotoPlaceDataManagerDelegate{
             guard let selectedImageURL = self.selectedImageURL else {return}
             
             sendFileToServer(from: selectedImageURL, to: url)
+            
+            let imageId = data["image_id"].stringValue
+            
+            let imageLinkWithPortAndWithoutFile = "\(data["post_to"].stringValue)"
+            let splitIndex = imageLinkWithPortAndWithoutFile.lastIndex(of: ":")!
+            let imageLink = "\(String(imageLinkWithPortAndWithoutFile[imageLinkWithPortAndWithoutFile.startIndex ..< splitIndex]))\(data["file_name"].stringValue)"
+            
+            print("Image Link: \(imageLink)")
+            
+            selectedImageId = imageId
+            selectedImageLink = imageLink
             
         }
         
@@ -212,30 +239,43 @@ extension ReviewUpdateViewController : UIImagePickerControllerDelegate, UINaviga
 extension ReviewUpdateViewController : UICollectionViewDelegate , UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return imageCellObjects.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath)
         
-        setUpImageCell(cell: cell)
+        let imageCellObject = imageCellObjects[indexPath.row]
+        
+        setUpImageCell(cell: cell, cellObject: imageCellObject)
         
         return cell
         
     }
     
-    func setUpImageCell(cell : UICollectionViewCell){
+    func setUpImageCell(cell : UICollectionViewCell, cellObject : ImageCellObject){
         
         if let imageView = cell.viewWithTag(1) as? UIImageView ,
            let badgeView = cell.viewWithTag(2){
             
-            imageView.image = .remove
-            
-            badgeView.layer.cornerRadius = badgeView.frame.width / 2
+            if let safeURL = URL(string: cellObject.link){
+                
+                imageView.sd_setImage(with: safeURL)
+                
+                badgeView.layer.cornerRadius = badgeView.frame.width / 2
+                
+            }
             
         }
         
     }
+    
+}
+
+struct ImageCellObject{
+    
+    let id : String
+    let link : String
     
 }
