@@ -169,9 +169,20 @@
                                                         </imageView>
                                                         <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZaV-1l-bAC">
                                                             <rect key="frame" x="56" y="0.0" width="24" height="24"/>
+                                                            <subviews>
+                                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uST-QY-97P">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <state key="normal" image="multiply" catalog="system"/>
+                                                                </button>
+                                                            </subviews>
                                                             <color key="backgroundColor" systemColor="systemBlueColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="0qD-zX-yOE"/>
+                                                                <constraint firstItem="uST-QY-97P" firstAttribute="top" secondItem="ZaV-1l-bAC" secondAttribute="top" id="Bbw-eI-26H"/>
+                                                                <constraint firstItem="uST-QY-97P" firstAttribute="leading" secondItem="ZaV-1l-bAC" secondAttribute="leading" id="Vua-vd-qd7"/>
+                                                                <constraint firstAttribute="bottom" secondItem="uST-QY-97P" secondAttribute="bottom" id="aBx-F5-7aI"/>
+                                                                <constraint firstAttribute="trailing" secondItem="uST-QY-97P" secondAttribute="trailing" id="anN-ds-uYr"/>
                                                                 <constraint firstAttribute="width" constant="24" id="zEW-6v-aud"/>
                                                             </constraints>
                                                         </view>

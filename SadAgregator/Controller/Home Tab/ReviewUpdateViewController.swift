@@ -103,6 +103,16 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
         
     }
     
+    @IBAction func closeButtonPressed(_ sender: UIButton){
+        
+        let index = sender.tag
+        
+        imageCellObjects.remove(at: index)
+        
+        imagesCollectionView.reloadData()
+        
+    }
+    
     //MARK: - File Sending
     
     func sendFileToServer(from fromUrl : URL, to toUrl : String){
@@ -252,16 +262,17 @@ extension ReviewUpdateViewController : UICollectionViewDelegate , UICollectionVi
         
         let imageCellObject = imageCellObjects[indexPath.row]
         
-        setUpImageCell(cell: cell, cellObject: imageCellObject)
+        setUpImageCell(cell: cell, cellObject: imageCellObject, index: indexPath.row)
         
         return cell
         
     }
     
-    func setUpImageCell(cell : UICollectionViewCell, cellObject : ImageCellObject){
+    func setUpImageCell(cell : UICollectionViewCell, cellObject : ImageCellObject, index : Int){
         
         if let imageView = cell.viewWithTag(1) as? UIImageView ,
-           let badgeView = cell.viewWithTag(2){
+           let badgeView = cell.viewWithTag(2),
+           let removeButton = cell.viewWithTag(3) as? UIButton{
             
             if let safeURL = URL(string: cellObject.link){
                 
@@ -270,6 +281,9 @@ extension ReviewUpdateViewController : UICollectionViewDelegate , UICollectionVi
                 imageView.layer.cornerRadius = 8
                 imageView.clipsToBounds = true
                 badgeView.layer.cornerRadius = badgeView.frame.width / 2
+                
+                removeButton.addTarget(self, action: #selector(closeButtonPressed(_:)), for: .touchUpInside)
+                removeButton.tag = index
                 
             }
             
