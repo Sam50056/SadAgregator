@@ -94,8 +94,19 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
         
         if !textView.text.contains("\\") , !titleTextField.text!.contains("\\"){
             
-            reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: vendId, rating: Int(ratingView.rating), title: titleTextField.text!, text: textView.text)
+            var images = ""
+            for object in imageCellObjects{
+                
+                if images != "" {
+                    images += ",\(object.id)"
+                }else{
+                    images += "\(object.id)"
+                }
+               
+            }
             
+            reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: vendId, rating: Int(ratingView.rating), title: titleTextField.text!, text: textView.text, images : images)
+             
             self.navigationController?.popViewController(animated: true)
             
         }

@@ -9,9 +9,9 @@ import Foundation
 
 struct ReviewUpdateDataManager {
     
-    func getReviewUpdateData(key : String , vendId : String,  rating : Int, title : String = "" , text : String = ""){
+    func getReviewUpdateData(key : String , vendId : String,  rating : Int, title : String = "" , text : String = "" , images : String = "" ){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_intf.ReviewUpdate?AKey=\(key)&AvendID=\(vendId)&ARating=\(rating)&ATitle=\(title)&AText=\(text)&AImages="
+        let urlString = "https://agrapi.tk-sad.ru/agr_intf.ReviewUpdate?AKey=\(key)&AvendID=\(vendId)&ARating=\(rating)&ATitle=\(title)&AText=\(text)&AImages=\(images)"
         
         print("URLString for ReviewUpdateDataManager: \(urlString)")
         
