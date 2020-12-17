@@ -93,11 +93,15 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
         
     }
     
+    //MARK: - File Sending
+    
     func sendFileToServer(from fromUrl : URL, to toUrl : String){
         
         print("import result : \(fromUrl)")
         
         guard let toUrl = URL(string: toUrl) else {return}
+        
+        print("To URL: \(toUrl)")
         
         do{
             
@@ -146,7 +150,7 @@ extension ReviewUpdateViewController : NewPhotoPlaceDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            let url = "\(data["post_to"].stringValue)\(data["file_name"].stringValue)"
+            let url = "\(data["post_to"].stringValue)/store?file_name=\(data["file_name"].stringValue)"
             
             print("URL FOR SENDING THE FILE: \(url)")
             
