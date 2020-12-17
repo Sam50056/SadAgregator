@@ -74,10 +74,9 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         
-        
         guard let key = key , let vendId = vendId else {return}
         
-        if !textView.text.contains("\\"){
+        if !textView.text.contains("\\") , !titleTextField.text!.contains("\\"){
             
             reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: vendId, rating: Int(ratingView.rating), title: titleTextField.text!, text: textView.text)
             
