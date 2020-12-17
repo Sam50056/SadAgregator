@@ -416,7 +416,17 @@ class PostTableViewCell: UITableViewCell  {
                 
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionViewCell
                 
-                if let url = URL(string: item){
+                let originalUrlString = item
+                
+                let indexOfLastSlash = originalUrlString.lastIndex(of: "/")
+                let indexOfDot = originalUrlString.lastIndex(of: ".")
+                let firstPartOfURL = String(originalUrlString[originalUrlString.startIndex ..< indexOfLastSlash!])
+                let secondPartOfURL = "/340\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
+                let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
+                
+//                print("FULL URL: \(fullURL)")
+                
+                if let url = URL(string: fullURL){
                     
                     (cell as! PhotoCollectionViewCell).imageView.sd_setImage(with: url, placeholderImage:nil)
                     
