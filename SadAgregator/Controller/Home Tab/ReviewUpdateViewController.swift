@@ -208,6 +208,18 @@ extension ReviewUpdateViewController : GetMyReviewDataManagerDelegate{
             
             ratingView.rating = rate
             
+            if let images = data["imgs"].array {
+                
+                for image in images {
+                    
+                    imageCellObjects.append(ImageCellObject(id: image["id"].stringValue, link: image["img"].stringValue))
+                    
+                }
+                
+                imagesCollectionView.reloadData()
+                
+            }
+            
         }
         
     }
