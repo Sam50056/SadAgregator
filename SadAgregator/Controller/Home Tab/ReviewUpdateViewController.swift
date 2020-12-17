@@ -244,7 +244,7 @@ extension ReviewUpdateViewController : NewPhotoPlaceDataManagerDelegate{
     
 }
 
-//MARK: - UIDocumentPickerDelegate
+//MARK: - UIImagePickerControllerDelegate
 
 extension ReviewUpdateViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
