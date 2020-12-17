@@ -20,6 +20,8 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var saveButton: UIButton!
     
+    @IBOutlet weak var imagesCollectionView: UICollectionView!
+    
     var key : String?
     var vendId : String?
     var myRate : Double?
@@ -34,6 +36,9 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         
         textView.delegate = self
+        
+        imagesCollectionView.delegate = self
+        imagesCollectionView.dataSource = self
         
         newPhotoPlaceDataManager.delegate = self
         
@@ -199,5 +204,38 @@ extension ReviewUpdateViewController : UIImagePickerControllerDelegate, UINaviga
         
     }
     
+    
+}
+
+//MARK: - UICollectionView Data Source
+
+extension ReviewUpdateViewController : UICollectionViewDelegate , UICollectionViewDataSource{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath)
+        
+        setUpImageCell(cell: cell)
+        
+        return cell
+        
+    }
+    
+    func setUpImageCell(cell : UICollectionViewCell){
+        
+        if let imageView = cell.viewWithTag(1) as? UIImageView ,
+           let badgeView = cell.viewWithTag(2){
+            
+            imageView.image = .remove
+            
+            badgeView.layer.cornerRadius = badgeView.frame.width / 2
+            
+        }
+        
+    }
     
 }
