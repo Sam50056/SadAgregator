@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import Hero
 
 class PostTableViewCell: UITableViewCell  {
     
@@ -441,6 +442,8 @@ class PostTableViewCell: UITableViewCell  {
             }else if section == .photo {
                 
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionViewCell
+                
+                cell.hero.id = item
                 
                 let originalUrlString = item
                 

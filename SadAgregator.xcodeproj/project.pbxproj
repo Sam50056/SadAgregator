@@ -14,6 +14,8 @@
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		22634AB625858CA800DF6FDB /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22634AB525858CA800DF6FDB /* UserData.swift */; };
+		226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9444258D2179008CEC4A /* GalleryViewController.swift */; };
+		226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9447258D2EF9008CEC4A /* HeroHelper.swift */; };
 		227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */; };
 		227828EE258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */; };
 		22782906258AC7FE00B435FA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22782905258AC7FE00B435FA /* Extensions.swift */; };
@@ -71,6 +73,8 @@
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		22634AB525858CA800DF6FDB /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		226D9444258D2179008CEC4A /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		226D9447258D2EF9008CEC4A /* HeroHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroHelper.swift; sourceTree = "<group>"; };
 		227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUpdateViewController.swift; sourceTree = "<group>"; };
 		227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPhotoPlaceDataManager.swift; sourceTree = "<group>"; };
 		22782905258AC7FE00B435FA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -225,6 +229,7 @@
 		228CB774255BF996002B4A96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				226D9447258D2EF9008CEC4A /* HeroHelper.swift */,
 				22782905258AC7FE00B435FA /* Extensions.swift */,
 				22A155E32583E11C000EAB64 /* Constants.swift */,
 				22634AB425858C7300DF6FDB /* Data Base Models  */,
@@ -379,6 +384,7 @@
 				229FE68D25700B120001FF54 /* SearchViewController.swift */,
 				22906B362578020300F00B0D /* PostavshikViewController.swift */,
 				227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */,
+				226D9444258D2179008CEC4A /* GalleryViewController.swift */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
@@ -566,6 +572,8 @@
 				2290485C256DAC80000B7A28 /* VendTableViewCell.swift in Sources */,
 				22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */,
 				227ADAAA25892D8E009B32EC /* ReviewUpdateDataManager.swift in Sources */,
+				226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */,
+				226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */,
 				22906B372578020300F00B0D /* PostavshikViewController.swift in Sources */,
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,

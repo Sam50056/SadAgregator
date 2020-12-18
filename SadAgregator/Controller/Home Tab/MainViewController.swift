@@ -8,6 +8,7 @@
 import UIKit
 import SwiftyJSON
 import RealmSwift
+import Hero
 
 class MainViewController: UIViewController {
     
@@ -146,6 +147,8 @@ class MainViewController: UIViewController {
         //Setting back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
         
+        enableHero()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -155,6 +158,7 @@ class MainViewController: UIViewController {
         searchTextField.text = ""
         searchTextField.endEditing(true)
         
+        disableHero()
     }
     
 }
@@ -593,7 +597,13 @@ extension MainViewController : PhotoCollectionViewCellDelegate{
     
     func didTapOnCell(url: String, allImageUrls: [String]) {
         
+        let vc = GalleryViewController()
         
+        vc.imageView.heroID = url
+        
+        vc.imageURL = url
+        
+        showHero(vc, navigationAnimationType: .none)
         
     }
     
