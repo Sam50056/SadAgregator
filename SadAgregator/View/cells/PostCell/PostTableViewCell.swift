@@ -93,6 +93,30 @@ class PostTableViewCell: UITableViewCell  {
         
     }
     
+    var compression : Int{
+        
+        if self.images.count >= 6{
+            
+            if self.images.count >= 8{
+                return 250
+            }
+            
+            return 340
+            
+        }else{
+            
+            if self.images.count > 4{
+                
+                return 340
+                
+            }
+            
+            return 550
+            
+        }
+        
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -421,7 +445,7 @@ class PostTableViewCell: UITableViewCell  {
                 let indexOfLastSlash = originalUrlString.lastIndex(of: "/")
                 let indexOfDot = originalUrlString.lastIndex(of: ".")
                 let firstPartOfURL = String(originalUrlString[originalUrlString.startIndex ..< indexOfLastSlash!])
-                let secondPartOfURL = "/340\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
+                let secondPartOfURL = "/\(self.compression)\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
                 let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
                 
 //                print("FULL URL: \(fullURL)")
