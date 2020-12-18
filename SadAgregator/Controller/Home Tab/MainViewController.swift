@@ -595,13 +595,13 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
 
 extension MainViewController : PhotoCollectionViewCellDelegate{
     
-    func didTapOnCell(url: String, allImageUrls: [String]) {
+    func didTapOnCell(index: Int, images: [String]) {
         
         let vc = GalleryViewController()
         
-        vc.imageView.heroID = url
+        vc.imageView.heroID = images[index]
         
-        vc.imageURL = url
+        vc.imageURL = images[index]
         
         showHero(vc, navigationAnimationType: .none)
         

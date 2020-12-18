@@ -493,12 +493,12 @@ class PostTableViewCell: UITableViewCell  {
         
         print("Selected Image Link : \(imageURL)")
         
-        photoDelegate?.didTapOnCell(url: imageURL, allImageUrls: self.images)
+        photoDelegate?.didTapOnCell(index: index, images: images)
         
     }
     
 }
 
 protocol PhotoCollectionViewCellDelegate {
-    func didTapOnCell(url: String, allImageUrls : [String])
+    func didTapOnCell(index: Int, images : [String])
 }
