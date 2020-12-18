@@ -106,6 +106,8 @@ class MainViewController: UIViewController {
     
     var userData : Results<UserData>!
     
+    //MARK: - Lifecycle Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadUserData()
@@ -560,6 +562,8 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
         
+        cell.photoDelegate = self
+        
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
         cell.byLabel.text = data["by"].stringValue
@@ -578,6 +582,18 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         cell.images = imagesArray
         
         isLogged ? (cell.likeButtonImageView.isHidden = false) : (cell.likeButtonImageView.isHidden = true)
+        
+    }
+    
+}
+
+//MARK: - PhotoCollectionViewCellDelegate stuff
+
+extension MainViewController : PhotoCollectionViewCellDelegate{
+    
+    func didTapOnCell(url: String, allImageUrls: [String]) {
+        
+        
         
     }
     

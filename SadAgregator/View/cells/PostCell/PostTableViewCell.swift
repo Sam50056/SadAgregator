@@ -117,6 +117,8 @@ class PostTableViewCell: UITableViewCell  {
         
     }
     
+    var photoDelegate : PhotoCollectionViewCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -448,7 +450,7 @@ class PostTableViewCell: UITableViewCell  {
                 let secondPartOfURL = "/\(self.compression)\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
                 let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
                 
-//                print("FULL URL: \(fullURL)")
+                //                print("FULL URL: \(fullURL)")
                 
                 if let url = URL(string: fullURL){
                     
@@ -484,8 +486,16 @@ class PostTableViewCell: UITableViewCell  {
         
         let index = sender.tag
         
-        print("Selected Image Link : \(self.images[index])")
+        let imageURL = self.images[index]
+        
+        print("Selected Image Link : \(imageURL)")
+        
+        photoDelegate?.didTapOnCell(url: imageURL, allImageUrls: self.images)
         
     }
     
+}
+
+protocol PhotoCollectionViewCellDelegate {
+    func didTapOnCell(url: String, allImageUrls : [String])
 }
