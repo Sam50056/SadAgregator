@@ -454,6 +454,9 @@ class PostTableViewCell: UITableViewCell  {
                     
                     (cell as! PhotoCollectionViewCell).imageView.sd_setImage(with: url, placeholderImage:nil)
                     
+                    (cell as! PhotoCollectionViewCell).button.tag = indexPath.row
+                    (cell as! PhotoCollectionViewCell).button.addTarget(self, action: #selector(self.imageCellTapped(_:)), for: .touchUpInside)
+                    
                 }
                 
             }
@@ -474,6 +477,14 @@ class PostTableViewCell: UITableViewCell  {
         snapshot.appendItems(images,toSection: .photo)
         
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+        
+    }
+    
+    @IBAction func imageCellTapped (_ sender : UIButton){
+        
+        let index = sender.tag
+        
+        print("Selected Image Link : \(self.images[index])")
         
     }
     
