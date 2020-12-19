@@ -27,6 +27,8 @@ class GalleryViewController: UIViewController {
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         view.addGestureRecognizer(pan)
+        
+        collectionView.heroID = images[selectedImageIndex]
 
         
     }

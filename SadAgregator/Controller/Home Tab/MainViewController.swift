@@ -603,7 +603,7 @@ extension MainViewController : PhotoCollectionViewCellDelegate{
         
         vc.images = images
 
-        presentHero(vc, navigationAnimationType: .zoomOut)
+        presentHero(vc, navigationAnimationType: .none)
         
     }
     
