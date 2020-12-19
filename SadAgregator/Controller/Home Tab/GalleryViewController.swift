@@ -11,20 +11,19 @@ import SDWebImage
 
 class GalleryViewController: UIViewController {
     
-    var imageView = UIImageView()
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    var imageURL = String()
+    var images : [String]  = []
+    
+    var selectedImageIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageView.frame = view.bounds
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
-        imageView.contentMode = .scaleAspectFit
-        
-        imageView.sd_setImage(with: URL(string: imageURL), completed: nil)
-        
-        view.addSubview(imageView)
+        collectionView.scrollToItem(at: IndexPath(row: selectedImageIndex, section: 0), at: .centeredHorizontally, animated: false)
         
     }
     
@@ -41,5 +40,60 @@ class GalleryViewController: UIViewController {
         disableHero()
         
     }
+    
+}
+
+//MARK: - UICollectionView stuff
+
+extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "galleryCell", for: indexPath)
+        
+        if let scrollView = cell.viewWithTag(1) as? UIScrollView ,
+           let imageView = cell.viewWithTag(2) as? UIImageView{
+            
+            imageView.image = nil
+            
+            scrollView.maximumZoomScale = 4
+            scrollView.minimumZoomScale = 1
+            
+            scrollView.delegate = self
+            scrollView.zoomScale = 1
+            
+            imageView.contentMode = .scaleAspectFit
+            
+            imageView.clipsToBounds = true
+            
+            let originalUrlString = images[indexPath.row]
+            
+//            let indexOfLastSlash = originalUrlString.lastIndex(of: "/")
+//            let indexOfDot = originalUrlString.lastIndex(of: ".")
+//            let firstPartOfURL = String(originalUrlString[originalUrlString.startIndex ..< indexOfLastSlash!])
+//            let secondPartOfURL = "/550\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
+//            let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
+            
+            imageView.load(url: URL(string: originalUrlString)!)
+            
+        }
+        
+        return cell
+        
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return scrollView.subviews[0]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
+    
     
 }

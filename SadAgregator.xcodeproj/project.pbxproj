@@ -210,9 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				22A49CA7256661D700CCC781 /* cells */,
+				22A155E12582C76E000EAB64 /* SwiftUiViews */,
 				228CB762255BF96D002B4A96 /* Main.storyboard */,
 				228CB767255BF974002B4A96 /* LaunchScreen.storyboard */,
-				22A155E12582C76E000EAB64 /* SwiftUiViews */,
 			);
 			path = View;
 			sourceTree = "<group>";

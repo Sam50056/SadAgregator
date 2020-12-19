@@ -597,13 +597,13 @@ extension MainViewController : PhotoCollectionViewCellDelegate{
     
     func didTapOnCell(index: Int, images: [String]) {
         
-        let vc = GalleryViewController()
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
         
-        vc.imageView.heroID = images[index]
+        vc.selectedImageIndex = index
         
-        vc.imageURL = images[index]
-        
-        showHero(vc, navigationAnimationType: .none)
+        vc.images = images
+
+        presentHero(vc, navigationAnimationType: .zoomOut)
         
     }
     

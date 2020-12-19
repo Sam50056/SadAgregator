@@ -31,6 +31,19 @@ extension UIViewController {
         navigationController?.hero.navigationAnimationType = navigationAnimationType
         navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    func presentHero(_ viewController : UIViewController , navigationAnimationType: HeroDefaultAnimationType){
+        
+        viewController.hero.isEnabled = true
+        
+        viewController.modalPresentationStyle = .fullScreen
+        
+        viewController.heroModalAnimationType = navigationAnimationType
+        
+        present(viewController, animated: true, completion: nil)
+        
+    }
+    
 }
 
 extension UINavigationController {
