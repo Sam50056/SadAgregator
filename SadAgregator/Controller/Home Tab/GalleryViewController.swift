@@ -25,6 +25,10 @@ class GalleryViewController: UIViewController {
         
         collectionView.scrollToItem(at: IndexPath(row: selectedImageIndex, section: 0), at: .centeredHorizontally, animated: false)
         
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        view.addGestureRecognizer(pan)
+
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +43,10 @@ class GalleryViewController: UIViewController {
         
         disableHero()
         
+    }
+    
+    @objc func handleTap(_ sender: UIPanGestureRecognizer? = nil) {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
