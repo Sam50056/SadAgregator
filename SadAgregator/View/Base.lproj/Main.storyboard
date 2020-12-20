@@ -1556,6 +1556,37 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBK-3F-PIk">
+                                <rect key="frame" x="244" y="754" width="114" height="40"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7rG-TM-xKe">
+                                        <rect key="frame" x="8" y="7.0000000000000018" width="20" height="24.666666666666671"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="O4r-lW-L4U"/>
+                                            <constraint firstAttribute="height" constant="24" id="qne-Sr-yPs"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Скачать" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XrB-Vm-Lh6">
+                                        <rect key="frame" x="36" y="9.6666666666666288" width="70" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="AXd-zz-JsJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="XrB-Vm-Lh6" firstAttribute="centerY" secondItem="gBK-3F-PIk" secondAttribute="centerY" id="2ZX-fr-Aeh"/>
+                                    <constraint firstAttribute="trailing" secondItem="XrB-Vm-Lh6" secondAttribute="trailing" constant="8" id="6KL-Kh-ePP"/>
+                                    <constraint firstItem="7rG-TM-xKe" firstAttribute="top" secondItem="gBK-3F-PIk" secondAttribute="top" constant="8" id="KeT-k4-I9t"/>
+                                    <constraint firstItem="XrB-Vm-Lh6" firstAttribute="leading" secondItem="7rG-TM-xKe" secondAttribute="trailing" constant="8" id="qXQ-mC-yYd"/>
+                                    <constraint firstAttribute="bottom" secondItem="7rG-TM-xKe" secondAttribute="bottom" constant="8" id="qeQ-bm-a9H"/>
+                                    <constraint firstAttribute="height" constant="40" id="yf9-pB-Qq7"/>
+                                    <constraint firstItem="7rG-TM-xKe" firstAttribute="leading" secondItem="gBK-3F-PIk" secondAttribute="leading" constant="8" id="ztA-sm-kcZ"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Фото 0 из 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ctr-GR-S9Y">
                                 <rect key="frame" x="147" y="60" width="96" height="35"/>
                                 <constraints>
@@ -1570,14 +1601,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Tfq-hn-Uh2" firstAttribute="trailing" secondItem="PYB-ho-Bly" secondAttribute="trailing" id="3Ha-Xk-KZI"/>
+                            <constraint firstItem="Tfq-hn-Uh2" firstAttribute="bottom" secondItem="gBK-3F-PIk" secondAttribute="bottom" constant="16" id="D5B-Nd-s89"/>
                             <constraint firstItem="PYB-ho-Bly" firstAttribute="leading" secondItem="Tfq-hn-Uh2" secondAttribute="leading" id="Ins-Eo-ZAs"/>
                             <constraint firstAttribute="bottom" secondItem="PYB-ho-Bly" secondAttribute="bottom" id="Jkw-F8-tmC"/>
                             <constraint firstItem="Ctr-GR-S9Y" firstAttribute="top" secondItem="Tfq-hn-Uh2" secondAttribute="top" constant="16" id="M55-OD-rlC"/>
                             <constraint firstItem="Ctr-GR-S9Y" firstAttribute="centerX" secondItem="wc3-7Q-Qub" secondAttribute="centerX" id="MuX-VO-BG0"/>
+                            <constraint firstItem="Tfq-hn-Uh2" firstAttribute="trailing" secondItem="gBK-3F-PIk" secondAttribute="trailing" constant="32" id="WSg-m9-4mG"/>
                             <constraint firstItem="PYB-ho-Bly" firstAttribute="top" secondItem="wc3-7Q-Qub" secondAttribute="top" id="ly0-hz-1Hx"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonView" destination="gBK-3F-PIk" id="vHI-Es-bzR"/>
                         <outlet property="collectionView" destination="PYB-ho-Bly" id="OYY-kS-ZWQ"/>
                         <outlet property="imageIndexLabel" destination="Ctr-GR-S9Y" id="ZIn-z9-gcs"/>
                     </connections>
@@ -2271,6 +2305,7 @@
         <image name="photo.on.rectangle.fill" catalog="system" width="128" height="96"/>
         <image name="plus.message.fill" catalog="system" width="128" height="113"/>
         <image name="rectangle.fill.on.rectangle.fill" catalog="system" width="128" height="96"/>
+        <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

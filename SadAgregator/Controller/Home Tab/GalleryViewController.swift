@@ -15,6 +15,8 @@ class GalleryViewController: UIViewController {
     
     @IBOutlet weak var imageIndexLabel: UILabel!
     
+    @IBOutlet weak var buttonView: UIView!
+    
     var images : [String]  = []
     
     var selectedImageIndex = 0
@@ -35,6 +37,8 @@ class GalleryViewController: UIViewController {
         collectionView.isPagingEnabled = true
         
         imageIndexLabel.text = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
+        
+        buttonView.layer.cornerRadius = 8
         
     }
     
