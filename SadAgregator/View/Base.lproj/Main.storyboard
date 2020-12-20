@@ -1488,7 +1488,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PYB-ho-Bly">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="766"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="998-72-bul">
                                     <size key="itemSize" width="372" height="758"/>
@@ -1498,7 +1498,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="galleryCell" id="eFN-cL-RfP">
-                                        <rect key="frame" x="0.0" y="43" width="372" height="758"/>
+                                        <rect key="frame" x="0.0" y="4" width="372" height="758"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xnK-c5-zr8">
                                             <rect key="frame" x="0.0" y="0.0" width="372" height="758"/>
@@ -1569,12 +1569,12 @@
                         <viewLayoutGuide key="safeArea" id="Tfq-hn-Uh2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="PYB-ho-Bly" secondAttribute="bottom" id="0hA-dU-44H"/>
+                            <constraint firstItem="PYB-ho-Bly" firstAttribute="top" secondItem="Tfq-hn-Uh2" secondAttribute="top" id="0gd-O0-KfS"/>
                             <constraint firstItem="Tfq-hn-Uh2" firstAttribute="trailing" secondItem="PYB-ho-Bly" secondAttribute="trailing" id="3Ha-Xk-KZI"/>
                             <constraint firstItem="PYB-ho-Bly" firstAttribute="leading" secondItem="Tfq-hn-Uh2" secondAttribute="leading" id="Ins-Eo-ZAs"/>
                             <constraint firstItem="Ctr-GR-S9Y" firstAttribute="top" secondItem="Tfq-hn-Uh2" secondAttribute="top" constant="16" id="M55-OD-rlC"/>
                             <constraint firstItem="Ctr-GR-S9Y" firstAttribute="centerX" secondItem="wc3-7Q-Qub" secondAttribute="centerX" id="MuX-VO-BG0"/>
-                            <constraint firstItem="PYB-ho-Bly" firstAttribute="top" secondItem="wc3-7Q-Qub" secondAttribute="top" id="h3w-Tg-TCV"/>
+                            <constraint firstItem="Tfq-hn-Uh2" firstAttribute="bottom" secondItem="PYB-ho-Bly" secondAttribute="bottom" id="dXB-3f-v2P"/>
                         </constraints>
                     </view>
                     <connections>
