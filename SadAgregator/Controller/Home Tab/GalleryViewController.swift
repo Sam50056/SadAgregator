@@ -29,7 +29,8 @@ class GalleryViewController: UIViewController {
         view.addGestureRecognizer(pan)
         
         collectionView.heroID = images[selectedImageIndex]
-
+        
+        collectionView.isPagingEnabled = true
         
     }
     
@@ -82,11 +83,11 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
             
             let originalUrlString = images[indexPath.row]
             
-//            let indexOfLastSlash = originalUrlString.lastIndex(of: "/")
-//            let indexOfDot = originalUrlString.lastIndex(of: ".")
-//            let firstPartOfURL = String(originalUrlString[originalUrlString.startIndex ..< indexOfLastSlash!])
-//            let secondPartOfURL = "/550\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
-//            let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
+            //            let indexOfLastSlash = originalUrlString.lastIndex(of: "/")
+            //            let indexOfDot = originalUrlString.lastIndex(of: ".")
+            //            let firstPartOfURL = String(originalUrlString[originalUrlString.startIndex ..< indexOfLastSlash!])
+            //            let secondPartOfURL = "/550\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
+            //            let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
             
             imageView.load(url: URL(string: originalUrlString)!)
             
