@@ -29,8 +29,8 @@ class GalleryViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.scrollToItem(at: IndexPath(row: selectedImageIndex, section: 0), at: .centeredHorizontally, animated: false)
-        
+        collectionView.isPagingEnabled = true
+
         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(_:)))
         view.addGestureRecognizer(pan)
         
@@ -39,12 +39,17 @@ class GalleryViewController: UIViewController {
         
         collectionView.heroID = images[selectedImageIndex]
         
-        collectionView.isPagingEnabled = true
-        
-        imageIndexLabel.text = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
-        
         buttonView.layer.cornerRadius = 8
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.collectionView.scrollToItem(at: IndexPath(row: selectedImageIndex, section: 0),
+         at: .centeredHorizontally,
+         animated: false)
+        imageIndexLabel.text = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,13 +140,13 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
             
             let originalUrlString = images[indexPath.row]
             
-            //            let indexOfLastSlash = originalUrlString.lastIndex(of: "/")
-            //            let indexOfDot = originalUrlString.lastIndex(of: ".")
-            //            let firstPartOfURL = String(originalUrlString[originalUrlString.startIndex ..< indexOfLastSlash!])
-            //            let secondPartOfURL = "/550\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
-            //            let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
+            let indexOfLastSlash = originalUrlString.lastIndex(of: "/")
+            let indexOfDot = originalUrlString.lastIndex(of: ".")
+            let firstPartOfURL = String(originalUrlString[originalUrlString.startIndex ..< indexOfLastSlash!])
+            let secondPartOfURL = "/550\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
+            let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
             
-            imageView.load(url: URL(string: originalUrlString)!)
+            imageView.load(url: URL(string: fullURL)!)
             
         }
         
