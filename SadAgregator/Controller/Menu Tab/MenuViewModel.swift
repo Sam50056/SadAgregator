@@ -20,6 +20,7 @@ class MenuViewModel : ObservableObject{
     
     @Published var showModalLogIn = false
     @Published var showModalReg = false
+    @Published var showProfile = false
     
     init() {
         loadUserData()

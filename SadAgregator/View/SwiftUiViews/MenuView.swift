@@ -135,27 +135,31 @@ struct MenuView: View {
                         
                         Section{
                             
-                            VStack(alignment: .leading){
+                            NavigationLink(destination: ProfileView(), isActive: $menuViewModel.showProfile){
                                 
-                                Text(menuViewModel.name)
-                                    .font(.title)
-                                    .fontWeight(.semibold)
-                                    .padding([.top,.horizontal], 5)
-                                    .padding(.bottom, 2)
-                                
-                                HStack{
+                                VStack(alignment: .leading){
                                     
-                                    Text("Перейти в настройки")
-                                        .font(.system(size: 15))
+                                    Text(menuViewModel.name)
+                                        .font(.title)
+                                        .fontWeight(.semibold)
+                                        .padding([.top,.horizontal], 5)
+                                        .padding(.bottom, 2)
                                     
-                                    Spacer()
-                                    
-                                    Text(menuViewModel.code)
-                                        .font(.system(size: 15))
+                                    HStack{
+                                        
+                                        Text("Перейти в настройки")
+                                            .font(.system(size: 15))
+                                        
+                                        Spacer()
+                                        
+                                        Text(menuViewModel.code)
+                                            .font(.system(size: 15))
+                                        
+                                    }
+                                    .padding([.bottom, .horizontal], 5)
+                                    .foregroundColor(Color(.systemGray))
                                     
                                 }
-                                .padding([.bottom, .horizontal], 5)
-                                .foregroundColor(Color(.systemGray))
                                 
                             }
                             
