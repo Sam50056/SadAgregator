@@ -31,8 +31,11 @@ class GalleryViewController: UIViewController {
         
         collectionView.scrollToItem(at: IndexPath(row: selectedImageIndex, section: 0), at: .centeredHorizontally, animated: false)
         
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(_:)))
         view.addGestureRecognizer(pan)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        view.addGestureRecognizer(tap)
         
         collectionView.heroID = images[selectedImageIndex]
         
@@ -60,8 +63,24 @@ class GalleryViewController: UIViewController {
     
     //MARK: - Actions
     
-    @objc func handleTap(_ sender: UIPanGestureRecognizer? = nil) {
+    @objc func handlePan(_ sender: UIPanGestureRecognizer? = nil) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleTap(_ sender: UIPanGestureRecognizer? = nil) {
+        
+        UIView.transition(with: buttonView, duration: 0.4,
+                          options: .transitionCrossDissolve,
+                          animations: {
+                            self.buttonView.isHidden.toggle()
+                          })
+        
+        UIView.transition(with: imageIndexLabel, duration: 0.4,
+                          options: .transitionCrossDissolve,
+                          animations: {
+                            self.imageIndexLabel.isHidden.toggle()
+                          })
+        
     }
     
     @IBAction func downloadButtonPressed(_ sender: UIButton) {
@@ -75,11 +94,10 @@ class GalleryViewController: UIViewController {
         
         // set up activity view controller
         let imageToShare = [ image! ]
-        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
-        // exclude some activity types from the list (optional)
-        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToTwitter, UIActivity.ActivityType.postToTwitter]
+        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+        
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
