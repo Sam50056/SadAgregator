@@ -1556,6 +1556,15 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Фото 0 из 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ctr-GR-S9Y">
+                                <rect key="frame" x="147" y="60" width="96" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="fad-9Z-q5X"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Tfq-hn-Uh2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1563,11 +1572,14 @@
                             <constraint firstAttribute="bottom" secondItem="PYB-ho-Bly" secondAttribute="bottom" id="0hA-dU-44H"/>
                             <constraint firstItem="Tfq-hn-Uh2" firstAttribute="trailing" secondItem="PYB-ho-Bly" secondAttribute="trailing" id="3Ha-Xk-KZI"/>
                             <constraint firstItem="PYB-ho-Bly" firstAttribute="leading" secondItem="Tfq-hn-Uh2" secondAttribute="leading" id="Ins-Eo-ZAs"/>
+                            <constraint firstItem="Ctr-GR-S9Y" firstAttribute="top" secondItem="Tfq-hn-Uh2" secondAttribute="top" constant="16" id="M55-OD-rlC"/>
+                            <constraint firstItem="Ctr-GR-S9Y" firstAttribute="centerX" secondItem="wc3-7Q-Qub" secondAttribute="centerX" id="MuX-VO-BG0"/>
                             <constraint firstItem="PYB-ho-Bly" firstAttribute="top" secondItem="wc3-7Q-Qub" secondAttribute="top" id="h3w-Tg-TCV"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="PYB-ho-Bly" id="OYY-kS-ZWQ"/>
+                        <outlet property="imageIndexLabel" destination="Ctr-GR-S9Y" id="ZIn-z9-gcs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="egT-VA-qTB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

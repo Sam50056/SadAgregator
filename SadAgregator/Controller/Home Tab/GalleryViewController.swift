@@ -13,6 +13,8 @@ class GalleryViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var imageIndexLabel: UILabel!
+    
     var images : [String]  = []
     
     var selectedImageIndex = 0
@@ -107,7 +109,7 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0 
+        return 0
     }
     
     
