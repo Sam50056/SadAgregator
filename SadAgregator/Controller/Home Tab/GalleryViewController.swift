@@ -17,6 +17,8 @@ class GalleryViewController: UIViewController {
     
     @IBOutlet weak var buttonView: UIView!
     
+    @IBOutlet weak var downloadButton: UIButton!
+    
     var images : [String]  = []
     
     var selectedImageIndex = 0
@@ -56,8 +58,32 @@ class GalleryViewController: UIViewController {
         
     }
     
+    //MARK: - Actions
+    
     @objc func handleTap(_ sender: UIPanGestureRecognizer? = nil) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func downloadButtonPressed(_ sender: UIButton) {
+        
+        let currentImageLink = images[(currentIndexPathOf(collectionView).row)]
+        
+        guard let imageData = try? Data(contentsOf: URL(string: currentImageLink)!) else {return}
+        
+        // image to share
+        let image = UIImage(data: imageData)
+        
+        // set up activity view controller
+        let imageToShare = [ image! ]
+        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.saveToCameraRoll, UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToTwitter, UIActivity.ActivityType.postToTwitter]
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+        
     }
     
 }

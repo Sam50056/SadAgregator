@@ -1575,14 +1575,24 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Quz-uF-CM4">
+                                        <rect key="frame" x="0.0" y="0.0" width="114" height="40"/>
+                                        <connections>
+                                            <action selector="downloadButtonPressed:" destination="1ko-Tn-5vx" eventType="touchUpInside" id="fe0-2t-L1c"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="XrB-Vm-Lh6" firstAttribute="centerY" secondItem="gBK-3F-PIk" secondAttribute="centerY" id="2ZX-fr-Aeh"/>
                                     <constraint firstAttribute="trailing" secondItem="XrB-Vm-Lh6" secondAttribute="trailing" constant="8" id="6KL-Kh-ePP"/>
                                     <constraint firstItem="7rG-TM-xKe" firstAttribute="top" secondItem="gBK-3F-PIk" secondAttribute="top" constant="8" id="KeT-k4-I9t"/>
+                                    <constraint firstAttribute="trailing" secondItem="Quz-uF-CM4" secondAttribute="trailing" id="cj6-O3-IB1"/>
+                                    <constraint firstItem="Quz-uF-CM4" firstAttribute="top" secondItem="gBK-3F-PIk" secondAttribute="top" id="igG-El-qtd"/>
+                                    <constraint firstAttribute="bottom" secondItem="Quz-uF-CM4" secondAttribute="bottom" id="lAF-Nf-3zv"/>
                                     <constraint firstItem="XrB-Vm-Lh6" firstAttribute="leading" secondItem="7rG-TM-xKe" secondAttribute="trailing" constant="8" id="qXQ-mC-yYd"/>
                                     <constraint firstAttribute="bottom" secondItem="7rG-TM-xKe" secondAttribute="bottom" constant="8" id="qeQ-bm-a9H"/>
+                                    <constraint firstItem="Quz-uF-CM4" firstAttribute="leading" secondItem="gBK-3F-PIk" secondAttribute="leading" id="uIo-8N-aUd"/>
                                     <constraint firstAttribute="height" constant="40" id="yf9-pB-Qq7"/>
                                     <constraint firstItem="7rG-TM-xKe" firstAttribute="leading" secondItem="gBK-3F-PIk" secondAttribute="leading" constant="8" id="ztA-sm-kcZ"/>
                                 </constraints>
@@ -1613,6 +1623,7 @@
                     <connections>
                         <outlet property="buttonView" destination="gBK-3F-PIk" id="vHI-Es-bzR"/>
                         <outlet property="collectionView" destination="PYB-ho-Bly" id="OYY-kS-ZWQ"/>
+                        <outlet property="downloadButton" destination="Quz-uF-CM4" id="QDh-Sn-IeN"/>
                         <outlet property="imageIndexLabel" destination="Ctr-GR-S9Y" id="ZIn-z9-gcs"/>
                     </connections>
                 </viewController>
