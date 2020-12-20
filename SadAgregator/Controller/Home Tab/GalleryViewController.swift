@@ -34,6 +34,8 @@ class GalleryViewController: UIViewController {
         
         collectionView.isPagingEnabled = true
         
+        imageIndexLabel.text = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,6 +112,26 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func currentIndexPathOf(_ collectionVeiw : UICollectionView) -> IndexPath{
+        
+        var visibleRect = CGRect()
+        
+        visibleRect.origin = collectionView.contentOffset
+        visibleRect.size = collectionView.bounds.size
+        
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        
+        let indexPath = collectionView.indexPathForItem(at: visiblePoint)!
+        
+        return indexPath
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        imageIndexLabel.text = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
+        
     }
     
     
