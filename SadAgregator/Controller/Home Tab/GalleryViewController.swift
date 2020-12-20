@@ -106,5 +106,9 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0 
+    }
+    
     
 }
