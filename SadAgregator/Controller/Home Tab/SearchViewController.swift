@@ -305,12 +305,14 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
         
+        cell.photoDelegate = self
+        
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
         cell.byLabel.text = data["by"].stringValue
         
         let price = data["price"].stringValue
-        cell.priceLabel.text = "\(price == "0" ? "" : price + "руб")"
+        cell.priceLabel.text = "\(price == "0" ? "" : price + " руб")"
         
         cell.postedLabel.text = data["posted"].stringValue
         
@@ -323,6 +325,24 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         cell.images = imagesArray
         
         isLogged ? (cell.likeButtonImageView.isHidden = false) : (cell.likeButtonImageView.isHidden = true)
+        
+    }
+    
+}
+
+//MARK: - PhotoCollectionViewCellDelegate stuff
+
+extension SearchViewController : PhotoCollectionViewCellDelegate{
+    
+    func didTapOnCell(index: Int, images: [String]) {
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
+        
+        vc.selectedImageIndex = index
+        
+        vc.images = images
+
+        presentHero(vc, navigationAnimationType: .none)
         
     }
     

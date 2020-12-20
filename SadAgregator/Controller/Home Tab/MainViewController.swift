@@ -573,7 +573,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         cell.byLabel.text = data["by"].stringValue
         
         let price = data["price"].stringValue
-        cell.priceLabel.text = "\(price == "0" ? "" : price + "руб")"
+        cell.priceLabel.text = "\(price == "0" ? "" : price + " руб")"
         
         cell.postedLabel.text = data["posted"].stringValue
         
