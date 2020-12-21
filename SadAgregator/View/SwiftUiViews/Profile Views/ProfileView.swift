@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+//MARK: - Profile View
+
 struct ProfileView: View {
     
     @ObservedObject var profileViewModel = ProfileViewModel()
@@ -39,34 +41,7 @@ struct ProfileView: View {
                             
                             if !profileViewModel.isVkConnected!{
                                 
-                                VStack{
-                                    
-                                    HStack{
-                                        
-                                        Image("vk-2")
-                                            .resizable()
-                                            .frame(width: 30, height: 30, alignment: .center)
-                                        
-                                        Text("Подключить выгрузку")
-                                            .font(.system(size: 18))
-                                            .foregroundColor(Color(#colorLiteral(red: 0.3157836497, green: 0.5058068037, blue: 0.7203877568, alpha: 1)))
-                                        
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 12)
-                                    .foregroundColor(Color(.systemBlue))
-                                    .background(Color(.white))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .stroke(Color(#colorLiteral(red: 0.3157836497, green: 0.5058068037, blue: 0.7203877568, alpha: 1)))
-                                    )
-                                    
-                                    Text("Подключите ваш аккаунт ВКонтакте для публикации товаров поставщиков на своей стене")
-                                        .font(.caption)
-                                        .foregroundColor(Color(.systemGray))
-                                    
-                                    
-                                }.padding()
+                                PodkluchitVkVigruzkuView()
                                 
                             }else {
                                 
@@ -116,33 +91,7 @@ struct ProfileView: View {
                             
                             if !profileViewModel.isOkConnected!{
                                 
-                                VStack{
-                                    
-                                    HStack{
-                                        
-                                        Image("odno")
-                                            .resizable()
-                                            .frame(width: 32, height: 35, alignment: .center)
-                                        
-                                        Text("Подключить выгрузку")
-                                            .font(.system(size: 18))
-                                        
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 12)
-                                    .foregroundColor(Color(.systemOrange))
-                                    .background(Color(.white))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .stroke(Color(.systemOrange))
-                                    )
-                                    
-                                    Text("Подключите ваш аккаунт Одноклассников для публикации товаров поставщиков на своей стене")
-                                        .font(.caption)
-                                        .foregroundColor(Color(.systemGray))
-                                    
-                                    
-                                }.padding(.horizontal)
+                                PodkluchitOkVigruzkuView()
                                 
                             }else {
                                 
@@ -330,11 +279,7 @@ struct ProfileView: View {
     
 }
 
-struct MasterNastroekView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
-}
+//MARK: - CellView
 
 struct CellView: View {
     
@@ -394,4 +339,81 @@ struct CellView: View {
         }
         .padding()
     }
+}
+
+//MARK: - PodkluchitVkVigruzkuView
+
+struct PodkluchitVkVigruzkuView : View{
+    
+    var body: some View{
+        
+        VStack{
+            
+            HStack{
+                
+                Image("vk-2")
+                    .resizable()
+                    .frame(width: 30, height: 30, alignment: .center)
+                
+                Text("Подключить выгрузку")
+                    .font(.system(size: 18))
+                    .foregroundColor(Color(#colorLiteral(red: 0.3157836497, green: 0.5058068037, blue: 0.7203877568, alpha: 1)))
+                
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .foregroundColor(Color(.systemBlue))
+            .background(Color(.white))
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color(#colorLiteral(red: 0.3157836497, green: 0.5058068037, blue: 0.7203877568, alpha: 1)))
+            )
+            
+            Text("Подключите ваш аккаунт ВКонтакте для публикации товаров поставщиков на своей стене")
+                .font(.caption)
+                .foregroundColor(Color(.systemGray))
+            
+            
+        }.padding()
+        
+    }
+    
+}
+
+//MARK: - PodkluchitOkVigruzkuView
+
+struct PodkluchitOkVigruzkuView : View{
+    
+    var body: some View{
+        
+        VStack{
+            
+            HStack{
+                
+                Image("odno")
+                    .resizable()
+                    .frame(width: 32, height: 35, alignment: .center)
+                
+                Text("Подключить выгрузку")
+                    .font(.system(size: 18))
+                
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .foregroundColor(Color(.systemOrange))
+            .background(Color(.white))
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color(.systemOrange))
+            )
+            
+            Text("Подключите ваш аккаунт Одноклассников для публикации товаров поставщиков на своей стене")
+                .font(.caption)
+                .foregroundColor(Color(.systemGray))
+            
+            
+        }.padding(.horizontal)
+        
+    }
+    
 }
