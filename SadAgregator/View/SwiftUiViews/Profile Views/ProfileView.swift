@@ -301,7 +301,7 @@ struct ProfileView: View {
                             .background(Color(#colorLiteral(red: 0.9622963071, green: 0.9662981629, blue: 0.9730395675, alpha: 1)))
                             .cornerRadius(8)
                             
-                        }.padding(.horizontal)
+                        }.padding(.horizontal).padding(.bottom , 16)
                         
                     }
                     
