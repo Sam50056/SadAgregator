@@ -30,8 +30,8 @@ class ProfileViewModel : ObservableObject{
     @Published var newPassText = ""
     @Published var confirmPassText = ""
     
-    @Published var isVkConnected = true
-    @Published var isOkConnected = true
+    @Published var isVkConnected : Bool?
+    @Published var isOkConnected : Bool?
     
     init() {
         loadUserData()
@@ -62,6 +62,9 @@ extension ProfileViewModel : GetProfileDataManagerDelegate {
             partnerCode = data["user"]["partner_code"].stringValue
             
             password = "*********"
+            
+            isOkConnected = data["user"]["ok_token"].stringValue != ""
+            isVkConnected = data["user"]["vk_token"].stringValue != ""
             
         }
         
