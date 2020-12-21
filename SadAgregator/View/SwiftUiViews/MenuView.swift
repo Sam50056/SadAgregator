@@ -300,6 +300,9 @@ struct MenuView: View {
             
         }
         .environmentObject(menuViewModel)
+        .onAppear {
+            menuViewModel.loadUserData()
+        }
         
     }
     
