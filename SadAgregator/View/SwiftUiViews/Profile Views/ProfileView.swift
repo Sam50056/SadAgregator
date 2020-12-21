@@ -172,86 +172,93 @@ struct ProfileView: View {
                                 .padding()
                                 .background(Color(#colorLiteral(red: 0.9591086507, green: 0.9659582973, blue: 0.9731834531, alpha: 1)))
                                 
+                                if profileViewModel.isVkConnected!{
+                                    
+                                    VStack{
+                                        
+                                        HStack{
+                                            
+                                            Image("vk")
+                                                .resizable()
+                                                .frame(width: 40, height: 40, alignment: .center)
+                                            
+                                            Text("Выгрузка подключена")
+                                                .font(.system(size: 18))
+                                                .foregroundColor(Color.white)
+                                                .fontWeight(.semibold)
+                                            
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical , 8)
+                                        .foregroundColor(Color(.systemBlue))
+                                        .background(Color(#colorLiteral(red: 0.3157836497, green: 0.5058068037, blue: 0.7203877568, alpha: 1)))
+                                        .cornerRadius(8)
+                                        
+                                        Text("Выгрузка подключена , теперь вы сможете выгружать товары к себе на страницу")
+                                            .font(.caption)
+                                            .foregroundColor(Color(.systemGray))
+                                        
+                                        HStack{
+                                            
+                                            Text("Переподключить аккаунт VK.COM")
+                                                .font(.system(size: 18))
+                                                .foregroundColor(Color.gray)
+                                                .fontWeight(.semibold)
+                                            
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical , 14)
+                                        .foregroundColor(Color(.systemBlue))
+                                        .background(Color(#colorLiteral(red: 0.9622963071, green: 0.9662981629, blue: 0.9730395675, alpha: 1)))
+                                        .cornerRadius(8)
+                                        
+                                    }.padding()
+                                    
+                                }
                                 
-                                VStack{
+                                if profileViewModel.isOkConnected!{
                                     
-                                    HStack{
+                                    VStack{
                                         
-                                        Image("vk")
-                                            .resizable()
-                                            .frame(width: 40, height: 40, alignment: .center)
+                                        HStack{
+                                            
+                                            Image("odno")
+                                                .resizable()
+                                                .frame(width: 40, height: 40, alignment: .center)
+                                            
+                                            Text("Выгрузка подключена")
+                                                .font(.system(size: 18))
+                                                .foregroundColor(Color.white)
+                                                .fontWeight(.semibold)
+                                            
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical , 8)
+                                        .foregroundColor(Color(.systemBlue))
+                                        .background(Color(#colorLiteral(red: 0.9986427426, green: 0.5983409286, blue: 0, alpha: 1)))
+                                        .cornerRadius(8)
                                         
-                                        Text("Выгрузка подключена")
-                                            .font(.system(size: 18))
-                                            .foregroundColor(Color.white)
-                                            .fontWeight(.semibold)
+                                        Text("Выгрузка подключена , теперь вы сможете выгружать товары к себе на страницу")
+                                            .font(.caption)
+                                            .foregroundColor(Color(.systemGray))
                                         
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical , 8)
-                                    .foregroundColor(Color(.systemBlue))
-                                    .background(Color(#colorLiteral(red: 0.3157836497, green: 0.5058068037, blue: 0.7203877568, alpha: 1)))
-                                    .cornerRadius(8)
+                                        HStack{
+                                            
+                                            Text("Переподключить аккаунт OK.RU")
+                                                .font(.system(size: 18))
+                                                .foregroundColor(Color.gray)
+                                                .fontWeight(.semibold)
+                                            
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical , 14)
+                                        .foregroundColor(Color(.systemBlue))
+                                        .background(Color(#colorLiteral(red: 0.9622963071, green: 0.9662981629, blue: 0.9730395675, alpha: 1)))
+                                        .cornerRadius(8)
+                                        
+                                    }.padding(.horizontal).padding(.bottom , 16)
                                     
-                                    Text("Выгрузка подключена , теперь вы сможете выгружать товары к себе на страницу")
-                                        .font(.caption)
-                                        .foregroundColor(Color(.systemGray))
-                                    
-                                    HStack{
-                                        
-                                        Text("Переподключить аккаунт VK.COM")
-                                            .font(.system(size: 18))
-                                            .foregroundColor(Color.gray)
-                                            .fontWeight(.semibold)
-                                        
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical , 14)
-                                    .foregroundColor(Color(.systemBlue))
-                                    .background(Color(#colorLiteral(red: 0.9622963071, green: 0.9662981629, blue: 0.9730395675, alpha: 1)))
-                                    .cornerRadius(8)
-                                    
-                                }.padding()
-                                
-                                VStack{
-                                    
-                                    HStack{
-                                        
-                                        Image("odno")
-                                            .resizable()
-                                            .frame(width: 40, height: 40, alignment: .center)
-                                        
-                                        Text("Выгрузка подключена")
-                                            .font(.system(size: 18))
-                                            .foregroundColor(Color.white)
-                                            .fontWeight(.semibold)
-                                        
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical , 8)
-                                    .foregroundColor(Color(.systemBlue))
-                                    .background(Color(#colorLiteral(red: 0.9986427426, green: 0.5983409286, blue: 0, alpha: 1)))
-                                    .cornerRadius(8)
-                                    
-                                    Text("Выгрузка подключена , теперь вы сможете выгружать товары к себе на страницу")
-                                        .font(.caption)
-                                        .foregroundColor(Color(.systemGray))
-                                    
-                                    HStack{
-                                        
-                                        Text("Переподключить аккаунт OK.RU")
-                                            .font(.system(size: 18))
-                                            .foregroundColor(Color.gray)
-                                            .fontWeight(.semibold)
-                                        
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical , 14)
-                                    .foregroundColor(Color(.systemBlue))
-                                    .background(Color(#colorLiteral(red: 0.9622963071, green: 0.9662981629, blue: 0.9730395675, alpha: 1)))
-                                    .cornerRadius(8)
-                                    
-                                }.padding(.horizontal).padding(.bottom , 16)
+                                }
                                 
                             }
                             
@@ -414,6 +421,7 @@ struct PodkluchitOkVigruzkuView : View{
             
             
         }.padding(.horizontal)
+        .padding(.bottom , 8)
         
     }
     
