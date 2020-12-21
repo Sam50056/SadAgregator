@@ -23,15 +23,15 @@ struct ProfileView: View {
                         
                         VStack{
                             
-                            CellView(labelText: "Имя", buttonText: "Максим",shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Имя", buttonText: profileViewModel.name,shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Телефон", buttonText: "79090001122",shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Телефон", buttonText: profileViewModel.phone,shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Email", buttonText: "mapmarket2007@yandex.ru",shouldShowImage: false, shouldShowAlert: $profileViewModel.isAlertShown , shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Email", buttonText: profileViewModel.email,shouldShowImage: false, shouldShowAlert: $profileViewModel.isAlertShown , shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Пароль", buttonText: "*********",shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Пароль", buttonText: profileViewModel.password,shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Код партнера", buttonText: "898917", shouldShowImage: false,shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Код партнера", buttonText: profileViewModel.partnerCode, shouldShowImage: false,shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
                         } //Cells
                         
@@ -309,6 +309,10 @@ struct ProfileView: View {
             
             PassAlertWithTextFieldsView(title: .constant("Изменение пароля"), oldPassText: $profileViewModel.oldPassText, newPassText: $profileViewModel.newPassText, confirmPassText: $profileViewModel.confirmPassText, isShown: $profileViewModel.isPassAlertShown)
             
+        }
+        
+        .onAppear{
+            profileViewModel.getProfileData()
         }
         
         .navigationBarTitle("Профиль", displayMode: .inline)

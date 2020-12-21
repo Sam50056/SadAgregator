@@ -12,6 +12,7 @@
 		221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */; };
 		22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22216A4325853FCC00D5248B /* RegisterDataManager.swift */; };
 		22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E97259116270097C9E6 /* ProfileViewModel.swift */; };
+		22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E9B259135370097C9E6 /* GetProfileDataManager.swift */; };
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		22634AB625858CA800DF6FDB /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22634AB525858CA800DF6FDB /* UserData.swift */; };
@@ -74,6 +75,7 @@
 		221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneTableViewCell.xib; sourceTree = "<group>"; };
 		22216A4325853FCC00D5248B /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		22423E97259116270097C9E6 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		22423E9B259135370097C9E6 /* GetProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileDataManager.swift; sourceTree = "<group>"; };
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		22634AB525858CA800DF6FDB /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -159,6 +161,14 @@
 				221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */,
 			);
 			path = PhoneCell;
+			sourceTree = "<group>";
+		};
+		22423E9A259131F80097C9E6 /* Menu Managers */ = {
+			isa = PBXGroup;
+			children = (
+				22423E9B259135370097C9E6 /* GetProfileDataManager.swift */,
+			);
+			path = "Menu Managers";
 			sourceTree = "<group>";
 		};
 		2253EE252569D1C500103C86 /* Main Screen Managers */ = {
@@ -254,6 +264,7 @@
 				22CE4F8F25869E5C0060E9DF /* Search Managers */,
 				22CE4F9025869E690060E9DF /* Vendor Managers */,
 				22A155E72584E408000EAB64 /* Auth */,
+				22423E9A259131F80097C9E6 /* Menu Managers */,
 				227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */,
 			);
 			path = Model;
@@ -610,6 +621,7 @@
 				227828EE258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift in Sources */,
 				22A155E92584E43C000EAB64 /* AuthDataManager.swift in Sources */,
 				22D663D125823D9E0058B5CC /* LoginView.swift in Sources */,
+				22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */,
 				22C9221325814CA40063B5D4 /* MenuView.swift in Sources */,
 				22A155CF2582925D000EAB64 /* RegView.swift in Sources */,
 				22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */,
