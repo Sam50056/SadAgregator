@@ -14,6 +14,9 @@ class ProfileViewModel : ObservableObject{
     @Published var alertTextFieldText = ""
     
     @Published var isPassAlertShown = false
+    @Published var oldPassText = ""
+    @Published var newPassText = ""
+    @Published var confirmPassText = ""
     
     @Published var isVkConnected = true
     @Published var isOkConnected = true

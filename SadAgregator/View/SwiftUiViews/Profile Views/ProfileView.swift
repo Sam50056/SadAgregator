@@ -23,15 +23,15 @@ struct ProfileView: View {
                         
                         VStack{
                             
-                            CellView(labelText: "Имя", buttonText: "Максим",shouldShowAlert: $profileViewModel.isAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Имя", buttonText: "Максим",shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Телефон", buttonText: "79090001122",shouldShowAlert: $profileViewModel.isAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Телефон", buttonText: "79090001122",shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Email", buttonText: "mapmarket2007@yandex.ru",shouldShowImage: false, shouldShowAlert: $profileViewModel.isAlertShown , alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Email", buttonText: "mapmarket2007@yandex.ru",shouldShowImage: false, shouldShowAlert: $profileViewModel.isAlertShown , shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Пароль", buttonText: "*********",shouldShowAlert: $profileViewModel.isAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Пароль", buttonText: "*********",shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Код партнера", buttonText: "898917", shouldShowImage: false,shouldShowAlert: $profileViewModel.isAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Код партнера", buttonText: "898917", shouldShowImage: false,shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
                         } //Cells
                         
@@ -307,6 +307,8 @@ struct ProfileView: View {
             
             AlertWithTextFieldView(title: $profileViewModel.alertTitle , text: $profileViewModel.alertTextFieldText, isShown : $profileViewModel.isAlertShown)
             
+            PassAlertWithTextFieldsView(title: .constant("Изменение пароля"), oldPassText: $profileViewModel.oldPassText, newPassText: $profileViewModel.newPassText, confirmPassText: $profileViewModel.confirmPassText, isShown: $profileViewModel.isPassAlertShown)
+            
         }
         
         .navigationBarTitle("Профиль", displayMode: .inline)
@@ -331,6 +333,8 @@ struct CellView: View {
     
     @Binding var shouldShowAlert : Bool
     
+    @Binding var shouldShowPassAlert : Bool
+    
     @Binding var alertTitle : String
     
     var body: some View {
@@ -346,11 +350,22 @@ struct CellView: View {
                 
                 Button(action: {
                     
+                    shouldShowAlert = false
+                    shouldShowPassAlert = false
+                    
                     if !shouldShowImage {return}
                     
                     alertTitle = labelText
                     
-                    shouldShowAlert = true
+                    if alertTitle == "Пароль"{
+                        
+                        shouldShowPassAlert = true
+                        
+                    }else {
+                        
+                        shouldShowAlert = true
+                        
+                    }
                     
                 }, label: {
                     
