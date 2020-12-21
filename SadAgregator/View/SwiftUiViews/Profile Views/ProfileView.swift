@@ -27,7 +27,7 @@ struct ProfileView: View {
                             
                             CellView(labelText: "Телефон", buttonText: "79090001122",shouldShowAlert: $profileViewModel.isAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Email", buttonText: "mapmarket2007@yandex.ru",shouldShowAlert: $profileViewModel.isAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Email", buttonText: "mapmarket2007@yandex.ru",shouldShowImage: false, shouldShowAlert: $profileViewModel.isAlertShown , alertTitle: $profileViewModel.alertTitle)
                             
                             CellView(labelText: "Пароль", buttonText: "*********",shouldShowAlert: $profileViewModel.isAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
