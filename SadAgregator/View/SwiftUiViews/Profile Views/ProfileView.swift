@@ -9,12 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @State var alertTitle = ""
-    @State var isAlertShown = false
-    @State var alertTextFieldText = ""
-    
-    @State var isVkConnected = false
-    @State var isOkConnected = true
+    @ObservedObject var profileViewModel = ProfileViewModel()
     
     var body: some View {
         
@@ -28,19 +23,19 @@ struct ProfileView: View {
                         
                         VStack{
                             
-                            CellView(labelText: "Имя", buttonText: "Максим",shouldShowAlert: $isAlertShown, alertTitle: $alertTitle)
+                            CellView(labelText: "Имя", buttonText: "Максим",shouldShowAlert: $profileViewModel.isAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Телефон", buttonText: "79090001122",shouldShowAlert: $isAlertShown, alertTitle: $alertTitle)
+                            CellView(labelText: "Телефон", buttonText: "79090001122",shouldShowAlert: $profileViewModel.isAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Email", buttonText: "mapmarket2007@yandex.ru", shouldShowImage: false,shouldShowAlert: $isAlertShown, alertTitle: $alertTitle)
+                            CellView(labelText: "Email", buttonText: "mapmarket2007@yandex.ru",shouldShowAlert: $profileViewModel.isAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Пароль", buttonText: "*********",shouldShowAlert: $isAlertShown, alertTitle: $alertTitle)
+                            CellView(labelText: "Пароль", buttonText: "*********",shouldShowAlert: $profileViewModel.isAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
-                            CellView(labelText: "Код партнера", buttonText: "898917", shouldShowImage: false,shouldShowAlert: $isAlertShown, alertTitle: $alertTitle)
+                            CellView(labelText: "Код партнера", buttonText: "898917", shouldShowImage: false,shouldShowAlert: $profileViewModel.isAlertShown, alertTitle: $profileViewModel.alertTitle)
                             
                         } //Cells
                         
-                        if !isVkConnected{
+                        if !profileViewModel.isVkConnected{
                             
                             VStack{
                                 
@@ -117,7 +112,7 @@ struct ProfileView: View {
                             
                         }
                         
-                        if !isOkConnected{
+                        if !profileViewModel.isOkConnected{
                             
                             VStack{
                                 
@@ -310,7 +305,7 @@ struct ProfileView: View {
                 
             }
             
-            AlertWithTextFieldView(title: $alertTitle , text: $alertTextFieldText, isShown : $isAlertShown)
+            AlertWithTextFieldView(title: $profileViewModel.alertTitle , text: $profileViewModel.alertTextFieldText, isShown : $profileViewModel.isAlertShown)
             
         }
         
