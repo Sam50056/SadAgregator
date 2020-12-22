@@ -39,61 +39,7 @@ struct ProfileView: View {
                         
                         if profileViewModel.isVkConnected != nil , profileViewModel.isOkConnected != nil  {
                             
-                            if !profileViewModel.isVkConnected!{
-                                
-                                PodkluchitVkVigruzkuView()
-                                
-                            }else {
-                                
-                                HStack(alignment: .top){
-                                    
-                                    Image("vk")
-                                        .resizable()
-                                        .cornerRadius(5)
-                                        .frame(width: 25 , height: 25, alignment: .center)
-                                    
-                                    VStack(alignment: .leading, spacing: 8){
-                                        
-                                        Text("ВКонтакте")
-                                            .foregroundColor(Color(#colorLiteral(red: 0.3157836497, green: 0.5058068037, blue: 0.7203877568, alpha: 1)))
-                                        
-                                        HStack{
-                                            
-                                            Text("дней осталось")
-                                                .fontWeight(.semibold)
-                                            
-                                            Spacer()
-                                            
-                                            Text("114 дн.")
-                                                .foregroundColor(Color(.systemGray))
-                                            
-                                        }
-                                        .font(.system(size: 15))
-                                        
-                                        HStack{
-                                            
-                                            Text("выгружено фото")
-                                                .fontWeight(.semibold)
-                                            
-                                            Spacer()
-                                            
-                                            Text("112")
-                                                .foregroundColor(Color(.systemGray))
-                                            
-                                        }
-                                        .font(.system(size: 15))
-                                        
-                                    }
-                                    
-                                }.padding()
-                                
-                            }
-                            
-                            if !profileViewModel.isOkConnected!{
-                                
-                                PodkluchitOkVigruzkuView()
-                                
-                            }else {
+                            if profileViewModel.isOkConnected! {
                                 
                                 HStack(alignment: .top){
                                     
@@ -142,6 +88,53 @@ struct ProfileView: View {
                                 }.padding(.horizontal)
                                 
                             }
+                            
+                            if profileViewModel.isVkConnected!{
+                                
+                                HStack(alignment: .top){
+                                    
+                                    Image("vk")
+                                        .resizable()
+                                        .cornerRadius(5)
+                                        .frame(width: 25 , height: 25, alignment: .center)
+                                    
+                                    VStack(alignment: .leading, spacing: 8){
+                                        
+                                        Text("ВКонтакте")
+                                            .foregroundColor(Color(#colorLiteral(red: 0.3157836497, green: 0.5058068037, blue: 0.7203877568, alpha: 1)))
+                                        
+                                        HStack{
+                                            
+                                            Text("дней осталось")
+                                                .fontWeight(.semibold)
+                                            
+                                            Spacer()
+                                            
+                                            Text("114 дн.")
+                                                .foregroundColor(Color(.systemGray))
+                                            
+                                        }
+                                        .font(.system(size: 15))
+                                        
+                                        HStack{
+                                            
+                                            Text("выгружено фото")
+                                                .fontWeight(.semibold)
+                                            
+                                            Spacer()
+                                            
+                                            Text("112")
+                                                .foregroundColor(Color(.systemGray))
+                                            
+                                        }
+                                        .font(.system(size: 15))
+                                        
+                                    }
+                                    
+                                }.padding()
+                                
+                            }
+                            
                             
                             if profileViewModel.isOkConnected! || profileViewModel.isVkConnected! {
                                 
@@ -259,6 +252,19 @@ struct ProfileView: View {
                                     }.padding(.horizontal).padding(.bottom , 16)
                                     
                                 }
+                                
+                            }
+                            
+                            
+                            if !profileViewModel.isVkConnected!{
+                                
+                                PodkluchitVkVigruzkuView()
+                                
+                            }
+                            
+                            if !profileViewModel.isOkConnected!{
+                                
+                                PodkluchitOkVigruzkuView()
                                 
                             }
                             
