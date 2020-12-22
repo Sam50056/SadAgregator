@@ -295,14 +295,15 @@ struct MenuView: View {
                 }
                 
             }
+            .onAppear {
+                menuViewModel.loadUserData()
+                menuViewModel.updateData()
+            }
             
             .navigationBarHidden(true)
             
         }
         .environmentObject(menuViewModel)
-        .onAppear {
-            menuViewModel.loadUserData()
-        }
         
     }
     

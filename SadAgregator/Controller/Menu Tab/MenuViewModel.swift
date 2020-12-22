@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 import RealmSwift
 
 class MenuViewModel : ObservableObject{
@@ -25,6 +26,62 @@ class MenuViewModel : ObservableObject{
     
     init() {
         loadUserData()
+    }
+    
+}
+
+//MARK: - CheckKeysDataManagerDelegate
+
+extension MenuViewModel : CheckKeysDataManagerDelegate{
+    
+    func updateData() {
+        
+        if isLogged{
+            
+            CheckKeysDataManager(delegate: self).getKeysData(key: key)
+            
+        }
+        
+    }
+    
+    func didGetCheckKeysData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if let safeKey = data["key"].string {
+                
+                let userDataObject = UserData()
+                
+                let name = data["name"].stringValue
+                let code = data["code"].stringValue
+                
+                userDataObject.name = name
+                userDataObject.code = code
+                
+                userDataObject.isLogged = true
+                
+                userDataObject.key = safeKey
+                
+                deleteAllDataFromDB()
+                
+                do{
+                    try self.realm.write{
+                        self.realm.add(userDataObject)
+                    }
+                }catch{
+                    print("Error saving data to realm , \(error.localizedDescription)")
+                }
+                
+                loadUserData()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingCheckKeysData(error: String) {
+        print("Error with CheckKeysDataManager: \(error)")
     }
     
 }
@@ -50,4 +107,20 @@ extension MenuViewModel {
         }
         
     }
+    
+    func deleteAllDataFromDB(){
+        
+        //Deleting everything from DB
+        do{
+            
+            try realm.write{
+                realm.deleteAll()
+            }
+            
+        }catch{
+            print("Error with deleting all data from Realm , \(error) ERROR DELETING REALM")
+        }
+        
+    }
+    
 }
