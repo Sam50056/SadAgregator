@@ -32,11 +32,14 @@ struct AlertWithTextFieldView: View {
                 
                 Button("Отмена"){
                     isShown = false
+                    text = "" 
                 }.foregroundColor(.black)
                 
                 Spacer()
                 
                 Button(action: {
+                    
+                    profileViewModel.changeUserOption()
                     
                 }, label: {
                         
