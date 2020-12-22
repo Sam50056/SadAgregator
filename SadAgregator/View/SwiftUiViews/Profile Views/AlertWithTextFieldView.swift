@@ -78,6 +78,8 @@ struct PassAlertWithTextFieldsView: View {
     
     let screenSize = UIScreen.main.bounds
     
+    @EnvironmentObject var profileViewModel : ProfileViewModel
+    
     var body: some View {
         
         VStack(spacing: 16){
@@ -103,7 +105,7 @@ struct PassAlertWithTextFieldsView: View {
                 
                 Button(action: {
                     
-                    
+                    profileViewModel.changePass()
                     
                 }, label: {
                         

@@ -14,6 +14,7 @@
 		22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E97259116270097C9E6 /* ProfileViewModel.swift */; };
 		22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E9B259135370097C9E6 /* GetProfileDataManager.swift */; };
 		22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E9F25924BD70097C9E6 /* UserChangeOptionDataManager.swift */; };
+		224584272592A6A60000B3D4 /* UserChangePassDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224584262592A6A60000B3D4 /* UserChangePassDataManager.swift */; };
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		22634AB625858CA800DF6FDB /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22634AB525858CA800DF6FDB /* UserData.swift */; };
@@ -78,6 +79,7 @@
 		22423E97259116270097C9E6 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		22423E9B259135370097C9E6 /* GetProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileDataManager.swift; sourceTree = "<group>"; };
 		22423E9F25924BD70097C9E6 /* UserChangeOptionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChangeOptionDataManager.swift; sourceTree = "<group>"; };
+		224584262592A6A60000B3D4 /* UserChangePassDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChangePassDataManager.swift; sourceTree = "<group>"; };
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		22634AB525858CA800DF6FDB /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			children = (
 				22423E9B259135370097C9E6 /* GetProfileDataManager.swift */,
 				22423E9F25924BD70097C9E6 /* UserChangeOptionDataManager.swift */,
+				224584262592A6A60000B3D4 /* UserChangePassDataManager.swift */,
 			);
 			path = "Menu Managers";
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				22906B372578020300F00B0D /* PostavshikViewController.swift in Sources */,
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
+				224584272592A6A60000B3D4 /* UserChangePassDataManager.swift in Sources */,
 				228CB761255BF96D002B4A96 /* MainViewController.swift in Sources */,
 				2265853F259017FA004587AA /* ProfileView.swift in Sources */,
 				227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */,

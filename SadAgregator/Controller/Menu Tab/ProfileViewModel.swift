@@ -116,6 +116,44 @@ extension ProfileViewModel : UserChangeOptionDataManagerDelegate{
     
 }
 
+//MARK: - UserChangePassDataManagerDelegate
+
+extension ProfileViewModel : UserChangePassDataManagerDelegate{
+    
+    func changePass(){
+        
+        if confirmPassText == newPassText{
+            
+            UserChangePassDataManager(delegate: self).getUserChangePassData(key: key, oldPass: oldPassText, newPass: newPassText)
+            
+        }
+        
+    }
+    
+    func didGetUserChangePassData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1 {
+                
+                oldPassText = ""
+                newPassText = ""
+                confirmPassText = ""
+                
+                isPassAlertShown = false
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingUserChangePassDataWithError(error: String) {
+        print("Error with UserChangePassDataManager : \(error)")
+    }
+    
+}
+
 //MARK: - Data Manipulation Methods
 
 extension ProfileViewModel {
