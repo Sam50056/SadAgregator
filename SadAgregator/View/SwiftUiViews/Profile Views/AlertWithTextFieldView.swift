@@ -17,13 +17,15 @@ struct AlertWithTextFieldView: View {
     
     let screenSize = UIScreen.main.bounds
     
+    @EnvironmentObject var profileViewModel : ProfileViewModel
+    
     var body: some View {
         
         VStack(spacing: 16){
             
             Text(title)
             
-            TextField("", text: $text)
+            TextField(profileViewModel.alertTitle == "Имя" ? profileViewModel.name : profileViewModel.phone , text: $text)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
             HStack{
@@ -97,6 +99,8 @@ struct PassAlertWithTextFieldsView: View {
                 Spacer()
                 
                 Button(action: {
+                    
+                    
                     
                 }, label: {
                         

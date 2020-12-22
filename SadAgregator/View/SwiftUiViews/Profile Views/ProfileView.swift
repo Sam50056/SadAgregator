@@ -287,6 +287,8 @@ struct ProfileView: View {
             profileViewModel.getProfileData()
         }
         
+        .environmentObject(profileViewModel)
+        
         .navigationBarTitle("Профиль", displayMode: .inline)
         
     }
