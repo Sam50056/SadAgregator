@@ -370,7 +370,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             
             let vend = vendsArray[index]
             
-            return makeHeightForVendCell(vend: vend)
+            return K.makeHeightForVendCell(vend: vend)
             
         case 8:
             
@@ -406,27 +406,6 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-    }
-    
-    func makeHeightForVendCell(vend : JSON) -> CGFloat {
-        
-        var height = 80
-        
-        let phone = vend["ph"].stringValue
-        //let pop = vend["pop"].intValue
-        let rating = vend["rate"].stringValue
-        
-        if rating != "0" {
-            height += 15
-        }
-        
-        if phone != "" {
-            height += 15
-        }
-        
-        height += 10 // We do + 10 because anyways if pop is o or something else , we show that on screen
-        
-        return CGFloat(height)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -169,18 +169,22 @@ struct MenuView: View {
                             
                             List{
                                 
-                                HStack(spacing: 16){
+                                NavigationLink(destination: FavoriteVendsView(), isActive: $menuViewModel.showFavoriteVends){
                                     
-                                    Image(systemName: "person.2.fill")
-                                        .resizable()
-                                        .frame(width: 30, height: 20, alignment: .center)
-                                        .foregroundColor(Color(.systemBlue))
-                                    
-                                    Text("Избранные поставщики")
-                                        .font(.custom("", size: 16))
+                                    HStack(spacing: 16){
+                                        
+                                        Image(systemName: "person.2.fill")
+                                            .resizable()
+                                            .frame(width: 30, height: 20, alignment: .center)
+                                            .foregroundColor(Color(.systemBlue))
+                                        
+                                        Text("Избранные поставщики")
+                                            .font(.custom("", size: 16))
+                                        
+                                    }
+                                    .padding(.vertical, 5)
                                     
                                 }
-                                .padding(.vertical, 5)
                                 
                                 HStack(spacing: 23){
                                     

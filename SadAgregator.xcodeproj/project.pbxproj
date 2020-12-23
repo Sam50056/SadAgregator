@@ -11,6 +11,7 @@
 		221C072C256E5ABB001BC842 /* PhoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C072A256E5ABB001BC842 /* PhoneTableViewCell.swift */; };
 		221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */; };
 		22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22216A4325853FCC00D5248B /* RegisterDataManager.swift */; };
+		2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */; };
 		22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E97259116270097C9E6 /* ProfileViewModel.swift */; };
 		22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E9B259135370097C9E6 /* GetProfileDataManager.swift */; };
 		22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E9F25924BD70097C9E6 /* UserChangeOptionDataManager.swift */; };
@@ -76,6 +77,7 @@
 		221C072A256E5ABB001BC842 /* PhoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTableViewCell.swift; sourceTree = "<group>"; };
 		221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneTableViewCell.xib; sourceTree = "<group>"; };
 		22216A4325853FCC00D5248B /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
+		2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVendsView.swift; sourceTree = "<group>"; };
 		22423E97259116270097C9E6 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		22423E9B259135370097C9E6 /* GetProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileDataManager.swift; sourceTree = "<group>"; };
 		22423E9F25924BD70097C9E6 /* UserChangeOptionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChangeOptionDataManager.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				22C9221225814CA40063B5D4 /* MenuView.swift */,
 				22A155E02582C746000EAB64 /* Auth Views */,
 				2265853B259017C8004587AA /* Profile Views */,
+				2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */,
 			);
 			path = SwiftUiViews;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				22A155ED2584E766000EAB64 /* MenuViewModel.swift in Sources */,
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
 				22782906258AC7FE00B435FA /* Extensions.swift in Sources */,
+				2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */,
 				22A155DD2582C5D8000EAB64 /* AuthView.swift in Sources */,
 				228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */,
 				228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */,
@@ -790,6 +794,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F2L5WWWBR4;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -810,6 +815,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F2L5WWWBR4;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

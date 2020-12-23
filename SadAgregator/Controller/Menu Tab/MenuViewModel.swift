@@ -24,6 +24,8 @@ class MenuViewModel : ObservableObject{
     
     @Published var showProfile = false
     
+    @Published var showFavoriteVends = false
+    
     init() {
         loadUserData()
     }
