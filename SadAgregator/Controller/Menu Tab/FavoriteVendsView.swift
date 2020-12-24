@@ -16,7 +16,7 @@ struct FavoriteVendsView : UIViewControllerRepresentable{
     
     func makeUIViewController(context: Context) -> FavoriteVendsViewController {
         
-        return FavoriteVendsViewController()
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavoriteVendsVC") as! FavoriteVendsViewController
         
     }
     
@@ -41,6 +41,8 @@ class FavoriteVendsViewController : UITableViewController {
     
     var vendsArray = [JSON]()
     
+    var selectedVendId : String?
+    
     override func viewDidLoad() {
         
         loadUserData()
@@ -55,6 +57,22 @@ class FavoriteVendsViewController : UITableViewController {
         
     }
     
+    //MARK: - Segue Stuff
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "goToPostavshik"{
+            
+            let destinationVC = segue.destination as! PostavshikViewController
+            
+            destinationVC.thisVendorId = selectedVendId
+            
+        }
+        
+    }
+    
+    //MARK: - TableView Stuff
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return vendsArray.count
     }
@@ -66,6 +84,14 @@ class FavoriteVendsViewController : UITableViewController {
         setUpVendCell(cell: cell, data: vendsArray[indexPath.row])
         
         return cell
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        selectedVendId = vendsArray[indexPath.row]["id"].stringValue
+        
+        self.performSegue(withIdentifier: "goToPostavshik", sender: self)
         
     }
     

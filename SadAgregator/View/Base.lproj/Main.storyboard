@@ -15,34 +15,34 @@
             <objects>
                 <viewController id="s7e-YJ-ycF" customClass="ReviewUpdateViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rIN-oH-uXG">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Заголовок отзыва" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTJ-xL-3QQ">
-                                <rect key="frame" x="16" y="119.99999999999999" width="136" height="19.333333333333329"/>
+                                <rect key="frame" x="16" y="32" width="136" height="19.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Nh-dc-pKC">
-                                <rect key="frame" x="16" y="147.33333333333334" width="358" height="34"/>
+                                <rect key="frame" x="16" y="59.333333333333343" width="358" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Текст отзыва" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dG8-1s-Uxv">
-                                <rect key="frame" x="15.999999999999993" y="272.33333333333331" width="99.333333333333314" height="20"/>
+                                <rect key="frame" x="15.999999999999993" y="184.33333333333334" width="99.333333333333314" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Оценка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KxK-4Z-VEc">
-                                <rect key="frame" x="16" y="217" width="176" height="20"/>
+                                <rect key="frame" x="16" y="129" width="176" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShL-Z3-9Ko" customClass="CosmosView" customModule="Cosmos">
-                                <rect key="frame" x="224" y="214.33333333333334" width="150" height="25"/>
+                                <rect key="frame" x="224" y="126.33333333333331" width="150" height="25"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="AqW-Dd-AMV"/>
@@ -64,21 +64,21 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XH4-zp-Pgu">
-                                <rect key="frame" x="0.0" y="197.33333333333334" width="390" height="1"/>
+                                <rect key="frame" x="0.0" y="109.33333333333333" width="390" height="1"/>
                                 <color key="backgroundColor" red="0.93868440389999996" green="0.93872648479999998" blue="0.94224876170000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="X2h-Hq-szb"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1GL-6c-Wa3">
-                                <rect key="frame" x="0.0" y="255.33333333333334" width="390" height="1.0000000000000284"/>
+                                <rect key="frame" x="0.0" y="167.33333333333334" width="390" height="1"/>
                                 <color key="backgroundColor" red="0.93868440389999996" green="0.93872648479999998" blue="0.94224876170000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="AcC-4f-9YT"/>
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hPi-s6-ZgP">
-                                <rect key="frame" x="16" y="300.33333333333331" width="358" height="200"/>
+                                <rect key="frame" x="16" y="212.33333333333337" width="358" height="200"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="dCn-ci-0aw"/>
@@ -89,7 +89,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKV-Py-OHO">
-                                <rect key="frame" x="16" y="516.33333333333337" width="170" height="30"/>
+                                <rect key="frame" x="16" y="428.33333333333331" width="170" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bB-6x-ALl">
                                         <rect key="frame" x="0.0" y="0.0" width="170" height="30"/>
@@ -128,7 +128,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqz-aI-sXG">
-                                <rect key="frame" x="262" y="516.33333333333337" width="112" height="40"/>
+                                <rect key="frame" x="262" y="428.33333333333331" width="112" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="72q-Fk-QCE"/>
@@ -142,7 +142,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jVj-mn-5Pm">
-                                <rect key="frame" x="16" y="588.33333333333337" width="358" height="82"/>
+                                <rect key="frame" x="16" y="500.33333333333326" width="358" height="82"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="82" id="Qwk-FU-5JV"/>
@@ -263,11 +263,11 @@
             <objects>
                 <viewController id="tgI-Wx-GfF" customClass="PostavshikViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qTr-YV-iic">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gkI-HL-ayK">
-                                <rect key="frame" x="0.0" y="88" width="390" height="673"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="756"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postavshikTopCell" rowHeight="92" id="lAo-76-Ufm">
@@ -2107,6 +2107,27 @@
             </objects>
             <point key="canvasLocation" x="2612" y="859"/>
         </scene>
+        <!--Favorite Vends View Controller-->
+        <scene sceneID="qRN-g7-9ju">
+            <objects>
+                <tableViewController storyboardIdentifier="FavoriteVendsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="T5E-ax-yp2" customClass="FavoriteVendsViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dxr-Hl-j6w">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="T5E-ax-yp2" id="vgq-QU-dQn"/>
+                            <outlet property="delegate" destination="T5E-ax-yp2" id="K7w-sd-IDu"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="tgI-Wx-GfF" kind="show" identifier="goToPostavshik" id="nWz-tH-Z2P"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9OG-59-sKb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2611" y="1636"/>
+        </scene>
         <!--Search View Controller-->
         <scene sceneID="Wua-F5-Agj">
             <objects>
@@ -2297,6 +2318,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="LYd-3X-sUB"/>
+        <segue reference="nWz-tH-Z2P"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
