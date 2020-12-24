@@ -12,6 +12,7 @@
 		221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */; };
 		22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22216A4325853FCC00D5248B /* RegisterDataManager.swift */; };
 		2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */; };
+		2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */; };
 		22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E97259116270097C9E6 /* ProfileViewModel.swift */; };
 		22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E9B259135370097C9E6 /* GetProfileDataManager.swift */; };
 		22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E9F25924BD70097C9E6 /* UserChangeOptionDataManager.swift */; };
@@ -78,6 +79,7 @@
 		221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneTableViewCell.xib; sourceTree = "<group>"; };
 		22216A4325853FCC00D5248B /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVendsView.swift; sourceTree = "<group>"; };
+		2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVendorsDataManager.swift; sourceTree = "<group>"; };
 		22423E97259116270097C9E6 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		22423E9B259135370097C9E6 /* GetProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileDataManager.swift; sourceTree = "<group>"; };
 		22423E9F25924BD70097C9E6 /* UserChangeOptionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChangeOptionDataManager.swift; sourceTree = "<group>"; };
@@ -350,7 +352,6 @@
 				22C9221225814CA40063B5D4 /* MenuView.swift */,
 				22A155E02582C746000EAB64 /* Auth Views */,
 				2265853B259017C8004587AA /* Profile Views */,
-				2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */,
 			);
 			path = SwiftUiViews;
 			sourceTree = "<group>";
@@ -431,6 +432,7 @@
 				22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */,
 				22A155EC2584E766000EAB64 /* MenuViewModel.swift */,
 				22423E97259116270097C9E6 /* ProfileViewModel.swift */,
+				2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */,
 			);
 			path = "Menu Tab";
 			sourceTree = "<group>";
@@ -450,6 +452,7 @@
 				22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */,
 				227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */,
 				22782909258BB60E00B435FA /* GetMyReviewDataManager.swift */,
+				2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */,
 			);
 			path = "Vendor Managers";
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */,
 				22906B372578020300F00B0D /* PostavshikViewController.swift in Sources */,
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
+				2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
 				224584272592A6A60000B3D4 /* UserChangePassDataManager.swift in Sources */,
 				228CB761255BF96D002B4A96 /* MainViewController.swift in Sources */,
