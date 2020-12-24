@@ -305,6 +305,7 @@ struct MenuView: View {
             }
             
             .navigationBarHidden(true)
+            .navigationBarTitle(Text(""), displayMode: .inline)
             
         }
         .environmentObject(menuViewModel)
