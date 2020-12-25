@@ -218,18 +218,22 @@ struct MenuView: View {
                         
                         Section{
                             
-                            HStack(spacing: 16){
+                            NavigationLink(destination: MasterNastroekView() , isActive: $menuViewModel.showMaster){
                                 
-                                Image(systemName: "puzzlepiece.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 20, alignment: .center)
-                                    .foregroundColor(Color(.systemBlue))
-                                
-                                Text("Быстрая настройка выгрузки")
-                                    .font(.custom("", size: 16))
+                                HStack(spacing: 16){
+                                    
+                                    Image(systemName: "puzzlepiece.fill")
+                                        .resizable()
+                                        .frame(width: 30, height: 20, alignment: .center)
+                                        .foregroundColor(Color(.systemBlue))
+                                    
+                                    Text("Быстрая настройка выгрузки")
+                                        .font(.custom("", size: 16))
+                                    
+                                }
+                                .padding(.vertical, 5)
                                 
                             }
-                            .padding(.vertical, 5)
                             
                             HStack(spacing: 21){
                                 
