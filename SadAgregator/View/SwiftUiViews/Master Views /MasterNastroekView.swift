@@ -13,10 +13,7 @@ enum MasterViewType{
 
 struct MasterNastroekView: View {
     
-    @State var currentViewType : MasterViewType = .inputVal
-    @State var shouldShowBackButton = true
-    
-    let screenSize = UIScreen.main.bounds
+    @ObservedObject var masterViewModel = MasterViewModel()
     
     var body: some View {
         
@@ -31,23 +28,23 @@ struct MasterNastroekView: View {
                     
                     VStack{
                         
-                        if currentViewType != nil{
+                        if masterViewModel.currentViewType != nil{
                             
-                            if currentViewType == .simpleReq{
+                            if masterViewModel.currentViewType == .simpleReq{
                                 Spacer()
                                 SimpleReqView(capt: "Hello", answers: ["Sam" , "Hey", "Another Sam"])
                             }
                             
-                            if currentViewType == .inputVal{
+                            if masterViewModel.currentViewType == .inputVal{
                                 Spacer()
                                 InputValView()
                             }
                             
-                            if currentViewType == .listSelect{
+                            if masterViewModel.currentViewType == .listSelect{
                                 ListSelectView()
                             }
                             
-                            if shouldShowBackButton{
+                            if masterViewModel.shouldShowBackButton{
                                 
                                 Spacer()
                                 
@@ -69,6 +66,7 @@ struct MasterNastroekView: View {
             }
             
         }
+        .environmentObject(masterViewModel)
         
     }
     
