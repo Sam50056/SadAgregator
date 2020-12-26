@@ -43,6 +43,20 @@ class MasterViewModel : ObservableObject{
     
 }
 
+//MARK: - Back Button
+
+extension MasterViewModel{
+    
+    func backButtonPressed(){
+        
+        nextStepId = previousStepId
+        
+        getStepData()
+        
+    }
+    
+}
+
 //MARK: - SetUp for Views
 
 extension MasterViewModel{
@@ -134,7 +148,7 @@ extension MasterViewModel : SetSimpleReqDataManagerDelegate{
                 
                 self.nextStepId = nextStepId
                 
-                getStepDataManager.getGetStepData(key: key, step: nextStepId)
+                getStepData()
                 
             }
             

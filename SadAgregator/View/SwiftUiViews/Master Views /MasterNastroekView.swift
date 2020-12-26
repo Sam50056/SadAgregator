@@ -55,6 +55,8 @@ struct MasterNastroekView: View {
                                 
                                 Button("Back"){
                                     
+                                    masterViewModel.backButtonPressed()
+                                    
                                 }
                                 
                             }
