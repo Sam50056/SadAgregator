@@ -42,9 +42,16 @@ struct MasterNastroekView: View {
                                 ListSelectView()
                             }
                             
-                            if masterViewModel.shouldShowBackButton{
+                            if masterViewModel.currentViewData!["descr"].exists(){
                                 
-                                Spacer()
+                                Text(masterViewModel.currentViewData!["descr"].stringValue)
+                                    .font(.system(size: 16))
+                                    .foregroundColor(Color(.systemGray))
+                                    .padding(.horizontal)
+                                
+                            }
+                            
+                            if masterViewModel.shouldShowBackButton{
                                 
                                 Button("Back"){
                                     

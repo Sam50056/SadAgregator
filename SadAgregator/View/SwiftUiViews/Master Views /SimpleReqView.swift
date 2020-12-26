@@ -35,10 +35,14 @@ struct SimpleReqView: View {
                                 Text("\(masterViewModel.currentViewData!["ansqers"].arrayValue[index]["capt"].stringValue)")
                                     .foregroundColor(Color(.systemBlue))
                                 
-                                Text("\(masterViewModel.currentViewData!["ansqers"].arrayValue[index]["hint"].stringValue)")
-                                    .foregroundColor(Color(.systemGray))
-                                    .lineLimit(nil)
-                                    .fixedSize(horizontal: false, vertical: true)
+                                if masterViewModel.currentViewData!["ansqers"].arrayValue[index]["hint"].exists(){
+                                    
+                                    Text("\(masterViewModel.currentViewData!["ansqers"].arrayValue[index]["hint"].stringValue)")
+                                        .foregroundColor(Color(.systemGray))
+                                        .lineLimit(nil)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                    
+                                }
                                 
                             }
                             
