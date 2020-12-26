@@ -20,6 +20,14 @@ struct SimpleReqView: View {
                 .bold()
                 .font(.system(size: 21))
             
+            if masterViewModel.currentViewData!["hint"].stringValue != "" {
+                
+                Text(masterViewModel.currentViewData!["hint"].stringValue)
+                    .foregroundColor(Color(.systemGray))
+                    .font(.system(size: 17))
+                
+            }
+            
             VStack(spacing: 16){
                 
                 ForEach(masterViewModel.answers , id: \.id) { answer in

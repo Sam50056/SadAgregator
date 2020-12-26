@@ -9,12 +9,11 @@ import SwiftUI
 
 struct ListSelectView: View {
     
+    @EnvironmentObject var masterViewModel : MasterViewModel
+    
     @State var text : String = ""
     
-    var array = ["Sam", "Sam","Sam", "Sam","Sam", "Sam","Sam", "Sam","Sam", "Sam","Sam", "Sam"]
-    
     var body: some View {
-        
         
         GeometryReader { geometry in
             
@@ -24,9 +23,17 @@ struct ListSelectView: View {
                     
                     VStack(alignment: .leading,spacing: 16){
                         
-                        Text("Sam Hello Sam")
+                        Text(masterViewModel.currentViewData!["capt"].stringValue)
                             .font(.system(size: 21))
                             .bold()
+                        
+                        if masterViewModel.currentViewData!["hint"].stringValue != "" {
+                            
+                            Text(masterViewModel.currentViewData!["hint"].stringValue)
+                                .foregroundColor(Color(.systemGray))
+                                .font(.system(size: 17))
+                            
+                        }
                         
                         HStack{
                             
@@ -35,7 +42,7 @@ struct ListSelectView: View {
                                 .frame(width: 20, height: 20, alignment: .center)
                                 .foregroundColor(Color(.systemGray))
                             
-                            TextField("Poisk", text: $text)
+                            TextField("Поиск по списку", text: $text)
                             
                         }
                         .padding()
@@ -49,7 +56,7 @@ struct ListSelectView: View {
                     
                     VStack{
                         
-                        ForEach(array , id: \.self){ item in
+                        ForEach(masterViewModel.items , id: \.id){ item in
                             
                             VStack{
                                 
@@ -57,26 +64,30 @@ struct ListSelectView: View {
                                     
                                     VStack(alignment: .leading, spacing: 8){
                                         
-                                        Text(item)
+                                        Text(item.capt)
                                         
-                                        Text("Some description")
-                                            .foregroundColor(Color(.systemGray))
+                                        if item.hint != ""{
+                                            Text(item.hint)
+                                                .foregroundColor(Color(.systemGray))
+                                        }
                                         
                                     }
                                     .font(.system(size: 16))
                                     
                                     Spacer()
                                     
-                                    Text("Connected")
-                                        .foregroundColor(Color(.systemBlue))
+                                    if item.button != ""{
+                                        Text("Connected")
+                                            .foregroundColor(Color(.systemBlue))
+                                    }
                                     
-                                }
-                                .onTapGesture {
-                                    print("Selected item: \(item)")
                                 }
                                 
                                 Divider()
                                 
+                            }
+                            .onTapGesture {
+                                print("Selected item: \(item)")
                             }
                             
                         }
@@ -93,5 +104,14 @@ struct ListSelectView: View {
         }
         
     }
+    
+}
+
+struct ListSelectItem : Identifiable{
+    
+    let id : Int
+    let capt : String
+    let hint : String
+    let button : String = ""
     
 }

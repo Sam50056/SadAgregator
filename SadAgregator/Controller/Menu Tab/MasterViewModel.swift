@@ -29,6 +29,8 @@ class MasterViewModel : ObservableObject{
     
     @Published var answers = [SimpleReqAnswer]()
     
+    @Published var items = [ListSelectItem]()
+    
     init() {
         
         //        loadUserData()
@@ -52,6 +54,18 @@ extension MasterViewModel{
         for answer in currentViewData!["ansqers"].arrayValue{
             
             answers.append(SimpleReqAnswer(id: answer["id"].intValue, capt: answer["capt"].stringValue, hint: answer["hint"].stringValue))
+            
+        }
+        
+    }
+    
+    func setUpListSelect() {
+        
+        items.removeAll()
+        
+        for item in currentViewData!["items"].arrayValue{
+            
+            items.append(ListSelectItem(id: item["id"].intValue, capt: item["capt"].stringValue, hint: item["hint"].stringValue))
             
         }
         
@@ -82,6 +96,8 @@ extension MasterViewModel : GetStepDataManagerDelegate{
             
             if currentViewType == "simple_req"{
                 setUpForSimpleReq()
+            }else if currentViewType == "list_select" {
+                setUpListSelect()
             }
             
             if previousStepId == "" {
