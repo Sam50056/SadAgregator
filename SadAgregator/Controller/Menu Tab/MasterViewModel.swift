@@ -33,6 +33,19 @@ class MasterViewModel : ObservableObject{
     @Published var answers = [SimpleReqAnswer]()
     
     @Published var items = [ListSelectItem]()
+    @Published var inputValTextFieldText = "" {
+        didSet {
+            
+            guard let currentViewData = currentViewData else {return}
+            
+            let characterLimit = currentViewData["max_len"].int
+            
+            if inputValTextFieldText.count > characterLimit ?? 32 && oldValue.count <= characterLimit ?? 32 {
+                inputValTextFieldText = oldValue
+            }
+            
+        }
+    }
     
     init() {
         
@@ -89,6 +102,12 @@ extension MasterViewModel{
         
     }
     
+    func setUpInputVal(){
+        
+        inputValTextFieldText = currentViewData!["input_val"]["def_val"].stringValue
+        
+    }
+    
 }
 
 //MARK: - GetStepDataManager
@@ -127,6 +146,8 @@ extension MasterViewModel : GetStepDataManagerDelegate{
                 setUpForSimpleReq()
             }else if currentViewType == "list_select" {
                 setUpListSelect()
+            }else if currentViewType == "input_val"{
+                setUpInputVal()
             }
             
             if previousStepId == "" {

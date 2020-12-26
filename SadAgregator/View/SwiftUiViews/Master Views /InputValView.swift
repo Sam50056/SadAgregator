@@ -9,22 +9,41 @@ import SwiftUI
 
 struct InputValView: View {
     
-    @State var textFieldText = ""
+    @EnvironmentObject var masterViewModel : MasterViewModel
     
     var body: some View {
         
         VStack(alignment: .leading, spacing: 16){
             
-            Text("Aasdoasjdoajsdojasodj")
+            Text(masterViewModel.currentViewData!["capt"].stringValue)
                 .font(.system(size: 21))
                 .bold()
             
+            if masterViewModel.currentViewData!["hint"].stringValue != "" {
+                
+                Text(masterViewModel.currentViewData!["hint"].stringValue)
+                    .foregroundColor(Color(.systemGray))
+                    .font(.system(size: 17))
+                
+            }
+            
             HStack{
                 
-                TextField("", text: $textFieldText)
+                if masterViewModel.currentViewData!["input_val"]["can_edit"].intValue == 1{
+                    
+                    TextField(masterViewModel.currentViewData!["input_val"]["place_holder"].stringValue, text: $masterViewModel.inputValTextFieldText)
+                    
+                }else {
+                    
+                    Text(masterViewModel.currentViewData!["input_val"]["def_val"].stringValue)
+                    
+                    Spacer()
+                    
+                }
                 
             }
             .padding()
+            .frame(maxWidth: .infinity)
             .background(Color(.white))
             .cornerRadius(8)
             .shadow(radius: 2)
