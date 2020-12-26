@@ -15,6 +15,8 @@ class MasterViewModel : ObservableObject{
     
     @Published var key = ""
     
+    @Published var shouldShowMaster = false
+    
     @Published var shouldShowBackButton = false
     
     @Published var currentStepId : Int?

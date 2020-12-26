@@ -13,6 +13,8 @@ struct MenuView: View {
     
     @ObservedObject var menuViewModel = MenuViewModel()
     
+    @ObservedObject var masterViewModel = MasterViewModel()
+    
     var body: some View {
         
         NavigationView{
@@ -218,7 +220,7 @@ struct MenuView: View {
                         
                         Section{
                             
-                            NavigationLink(destination: MasterNastroekView() , isActive: $menuViewModel.showMaster){
+                            NavigationLink(destination: MasterNastroekView() , isActive: $masterViewModel.shouldShowMaster){
                                 
                                 HStack(spacing: 16){
                                     
@@ -313,6 +315,7 @@ struct MenuView: View {
             
         }
         .environmentObject(menuViewModel)
+        .environmentObject(masterViewModel)
         
     }
     

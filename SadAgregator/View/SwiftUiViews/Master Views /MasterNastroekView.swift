@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MasterNastroekView: View {
     
-    @ObservedObject var masterViewModel = MasterViewModel()
+    @EnvironmentObject var masterViewModel : MasterViewModel
     
     var body: some View {
         
@@ -92,7 +92,6 @@ struct MasterNastroekView: View {
             }
             
         }
-        .environmentObject(masterViewModel)
         .onAppear{
             masterViewModel.getStepData()
         }
