@@ -36,8 +36,8 @@ class MasterViewModel : ObservableObject{
     
     init() {
         
-        loadUserData()
-//        key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
+//        loadUserData()
+        key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
         
         getStepDataManager.delegate = self
         setSimpleReqDataManager.delegate = self
@@ -101,6 +101,8 @@ extension MasterViewModel : GetStepDataManagerDelegate{
             
             shouldShowMaster = false
             nextStepId = nil
+            currentStepId = nil
+            currentViewType = nil
             
         }else{
             

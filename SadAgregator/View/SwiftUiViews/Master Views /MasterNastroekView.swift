@@ -24,7 +24,7 @@ struct MasterNastroekView: View {
                     
                     VStack{
                         
-                        if masterViewModel.currentViewData != nil{
+                        if masterViewModel.currentViewType != nil{
                             
                             if masterViewModel.currentViewType == "simple_req"{
                                 Spacer()
