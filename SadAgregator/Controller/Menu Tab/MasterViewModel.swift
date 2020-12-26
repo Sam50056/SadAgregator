@@ -41,6 +41,24 @@ class MasterViewModel : ObservableObject{
     
 }
 
+//MARK: - SetUp for Views
+
+extension MasterViewModel{
+    
+    func setUpForSimpleReq(){
+        
+        answers.removeAll()
+        
+        for answer in currentViewData!["ansqers"].arrayValue{
+            
+            answers.append(SimpleReqAnswer(id: answer["id"].intValue, capt: answer["capt"].stringValue, hint: answer["hint"].stringValue))
+            
+        }
+        
+    }
+    
+}
+
 //MARK: - GetStepDataManager
 
 extension MasterViewModel : GetStepDataManagerDelegate{
@@ -63,15 +81,7 @@ extension MasterViewModel : GetStepDataManagerDelegate{
             previousStepId = data["back_step_id"].stringValue
             
             if currentViewType == "simple_req"{
-                
-                answers.removeAll()
-                
-                for answer in currentViewData!["ansqers"].arrayValue{
-                    
-                    answers.append(SimpleReqAnswer(id: answer["id"].intValue, capt: answer["capt"].stringValue, hint: answer["hint"].stringValue))
-                    
-                }
-                
+                setUpForSimpleReq()
             }
             
             if previousStepId == "" {
