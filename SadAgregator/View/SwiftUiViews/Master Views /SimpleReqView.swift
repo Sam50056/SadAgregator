@@ -6,35 +6,38 @@
 //
 
 import SwiftUI
+import SwiftyJSON
 
 struct SimpleReqView: View {
     
-    var capt : String
-    
-    var answers : [String]
+    @EnvironmentObject var masterViewModel : MasterViewModel
     
     var body: some View {
         
         VStack(alignment: .leading, spacing: 16){
             
-            Text(capt)
+            Text(masterViewModel.currentViewData!["capt"].stringValue)
                 .bold()
                 .font(.system(size: 21))
             
             VStack(spacing: 16){
                 
-                ForEach(self.answers , id: \.self) { answer in
+                ForEach(0..<masterViewModel.currentViewData!["ansqers"].arrayValue.count) { index in
                     
                     HStack{
                         
-                        VStack(spacing: 8){
+                        VStack(alignment: .leading,spacing: 8){
                             
-                            Text(answer)
+                            Text("\(masterViewModel.currentViewData!["ansqers"].arrayValue[index]["capt"].stringValue)")
                                 .foregroundColor(Color(.systemBlue))
                             
-                            Text(answer)
+                            Text("\(masterViewModel.currentViewData!["ansqers"].arrayValue[index]["hint"].stringValue)")
+                                .foregroundColor(Color(.systemGray))
+                                .lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true)
                             
                         }
+                        
                         Spacer()
                         
                     }

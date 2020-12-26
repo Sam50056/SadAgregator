@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-enum MasterViewType{
-    case simpleReq , inputVal , listSelect , listWork
-}
-
 struct MasterNastroekView: View {
     
     @ObservedObject var masterViewModel = MasterViewModel()
@@ -28,19 +24,21 @@ struct MasterNastroekView: View {
                     
                     VStack{
                         
-                        if masterViewModel.currentViewType != nil{
+                        if masterViewModel.currentViewData != nil{
                             
-                            if masterViewModel.currentViewType == .simpleReq{
+                            if masterViewModel.currentViewType == "simple_req"{
                                 Spacer()
-                                SimpleReqView(capt: "Hello", answers: ["Sam" , "Hey", "Another Sam"])
+                                SimpleReqView()
+                                Spacer()
                             }
                             
-                            if masterViewModel.currentViewType == .inputVal{
+                            if masterViewModel.currentViewType == "input_val"{
                                 Spacer()
                                 InputValView()
+                                Spacer()
                             }
                             
-                            if masterViewModel.currentViewType == .listSelect{
+                            if masterViewModel.currentViewType == "list_select"{
                                 ListSelectView()
                             }
                             
@@ -67,6 +65,9 @@ struct MasterNastroekView: View {
             
         }
         .environmentObject(masterViewModel)
+        .onAppear{
+            masterViewModel.getStepData()
+        }
         
     }
     
