@@ -152,6 +152,11 @@ extension MasterViewModel : SetSimpleReqDataManagerDelegate{
                 
                 self.nextStepId = nextStepId
                 
+                if nextStepId == "-2"{
+                    shouldShowMaster = false
+                    return
+                }
+                
                 getStepData()
                 
             }
@@ -183,6 +188,11 @@ extension MasterViewModel : SetListSelectDataManagerDelegate{
             if let nextStepId = data["next_step_id"].string {
                 
                 self.nextStepId = nextStepId
+                
+                if nextStepId == "-2"{
+                    shouldShowMaster = false
+                    return
+                }
                 
                 getStepData()
                 
