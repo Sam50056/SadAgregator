@@ -81,6 +81,7 @@ struct ListSelectView: View {
                         Divider()
                         
                     }
+                    .background(item.rec == 1 ? Color(#colorLiteral(red: 0.9177419543, green: 0.9516320825, blue: 0.9884006381, alpha: 1)) : Color.white)
                     .onTapGesture {
                         masterViewModel.selectListSelectViewAnswer(id: item.id)
                     }
@@ -91,6 +92,7 @@ struct ListSelectView: View {
             .padding()
             .background(Color(.white))
             .cornerRadius(12)
+            .shadow(radius: 4)
             
         }
         .padding(.horizontal,16)
@@ -105,5 +107,6 @@ struct ListSelectItem : Identifiable{
     let capt : String
     let hint : String
     let button : String
+    let rec : Int
     
 }

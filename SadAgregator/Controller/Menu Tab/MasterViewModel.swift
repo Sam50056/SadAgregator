@@ -83,7 +83,7 @@ extension MasterViewModel{
         
         for item in currentViewData!["items"].arrayValue{
             
-            items.append(ListSelectItem(id: item["id"].intValue, capt: item["capt"].stringValue, hint: item["hint"].stringValue, button: item["button"].stringValue))
+            items.append(ListSelectItem(id: item["id"].intValue, capt: item["capt"].stringValue, hint: item["hint"].stringValue, button: item["button"].stringValue, rec: item["rec"].intValue))
             
         }
         
