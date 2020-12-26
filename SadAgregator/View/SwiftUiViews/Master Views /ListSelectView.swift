@@ -72,7 +72,7 @@ struct ListSelectView: View {
                             Spacer()
                             
                             if item.button != ""{
-                                Text("Connected")
+                                Text(item.button)
                                     .foregroundColor(Color(.systemBlue))
                             }
                             
