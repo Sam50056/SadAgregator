@@ -17,9 +17,9 @@ struct GetStepDataManager {
     
     var delegate : GetStepDataManagerDelegate?
     
-    func getGetStepData(key : String){
+    func getGetStepData(key : String , step : String){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_assist.GetStep?AKey=\(key)&AStep="
+        let urlString = "https://agrapi.tk-sad.ru/agr_assist.GetStep?AKey=\(key)&AStep=\(step)"
         
         print("URLString for GetStepDataManager: \(urlString)")
         

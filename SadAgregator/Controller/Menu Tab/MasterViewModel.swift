@@ -17,8 +17,9 @@ class MasterViewModel : ObservableObject{
     
     @Published var shouldShowBackButton = false
     
+    @Published var currentStepId : Int?
     @Published var previousStepId = ""
-    @Published var nextStepId : Int?
+    @Published var nextStepId : String?
     
     @Published var currentViewData : JSON?
     @Published var currentViewType : String?
@@ -27,7 +28,8 @@ class MasterViewModel : ObservableObject{
     
     init() {
         
-        loadUserData()
+//        loadUserData()
+        key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
         
         getStepDataManager.delegate = self
         
@@ -41,7 +43,7 @@ extension MasterViewModel : GetStepDataManagerDelegate{
     
     func getStepData(){
         
-        getStepDataManager.getGetStepData(key: key)
+        getStepDataManager.getGetStepData(key: key, step: nextStepId ?? "")
         
     }
     
@@ -51,7 +53,7 @@ extension MasterViewModel : GetStepDataManagerDelegate{
             
             currentViewType = data["type"].string
             
-            nextStepId = data["step_id"].int
+            currentStepId = data["step_id"].int
             previousStepId = data["back_step_id"].stringValue
             
             currentViewData = data
