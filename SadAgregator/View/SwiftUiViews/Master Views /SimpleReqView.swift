@@ -22,22 +22,24 @@ struct SimpleReqView: View {
             
             VStack(spacing: 16){
                 
-                ForEach(0..<masterViewModel.currentViewData!["ansqers"].arrayValue.count) { index in
+                ForEach(masterViewModel.answers , id: \.id) { answer in
                     
                     Button(action: {
+                        
+                        masterViewModel.selectSimpleReqViewAnswer(id: answer.id)
                         
                     }){
                         
                         HStack{
                             
                             VStack(alignment: .leading,spacing: 8){
-                                
-                                Text("\(masterViewModel.currentViewData!["ansqers"].arrayValue[index]["capt"].stringValue)")
+                                 
+                                Text("\(answer.capt)")
                                     .foregroundColor(Color(.systemBlue))
                                 
-                                if masterViewModel.currentViewData!["ansqers"].arrayValue[index]["hint"].exists(){
+                                if answer.hint != ""{
                                     
-                                    Text("\(masterViewModel.currentViewData!["ansqers"].arrayValue[index]["hint"].stringValue)")
+                                    Text("\(answer.hint)")
                                         .foregroundColor(Color(.systemGray))
                                         .lineLimit(nil)
                                         .fixedSize(horizontal: false, vertical: true)
@@ -66,5 +68,13 @@ struct SimpleReqView: View {
         .padding(.horizontal , 16)
         
     }
+    
+}
+
+struct SimpleReqAnswer : Identifiable {
+    
+    let id : Int
+    let capt : String
+    let hint : String
     
 }

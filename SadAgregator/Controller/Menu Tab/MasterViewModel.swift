@@ -25,19 +25,23 @@ class MasterViewModel : ObservableObject{
     @Published var currentViewType : String?
     
     lazy var getStepDataManager = GetStepDataManager()
+    lazy var setSimpleReqDataManager = SetSimpleReqDataManager()
+    
+    @Published var answers = [SimpleReqAnswer]()
     
     init() {
         
-//        loadUserData()
+        //        loadUserData()
         key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
         
         getStepDataManager.delegate = self
+        setSimpleReqDataManager.delegate = self
         
     }
     
 }
 
-//MARK: - GetStepDataManagerDelegate
+//MARK: - GetStepDataManager
 
 extension MasterViewModel : GetStepDataManagerDelegate{
     
@@ -53,10 +57,22 @@ extension MasterViewModel : GetStepDataManagerDelegate{
             
             currentViewType = data["type"].string
             
+            currentViewData = data
+            
             currentStepId = data["step_id"].int
             previousStepId = data["back_step_id"].stringValue
             
-            currentViewData = data
+            if currentViewType == "simple_req"{
+                
+                answers.removeAll()
+                
+                for answer in currentViewData!["ansqers"].arrayValue{
+                    
+                    answers.append(SimpleReqAnswer(id: answer["id"].intValue, capt: answer["capt"].stringValue, hint: answer["hint"].stringValue))
+                    
+                }
+                
+            }
             
             if previousStepId == "" {
                 shouldShowBackButton = false
@@ -70,6 +86,38 @@ extension MasterViewModel : GetStepDataManagerDelegate{
     
     func didFailGettingGetStepDataWithError(error: String) {
         print("Error with GetStepDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - SetSimpleReqDataManager
+
+extension MasterViewModel : SetSimpleReqDataManagerDelegate{
+    
+    func selectSimpleReqViewAnswer(id : Int){
+        
+        setSimpleReqDataManager.getSetSimpleReqData(key: key, stepId: currentStepId!, sellId: id)
+        
+    }
+    
+    func didGetSetSimpleReqData(data: JSON) {
+        
+        DispatchQueue.main.async{ [self] in
+            
+            if let nextStepId = data["next_step_id"].string {
+                
+                self.nextStepId = nextStepId
+                
+                getStepDataManager.getGetStepData(key: key, step: nextStepId)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingSetSimpleReqDataWithError(error: String) {
+        print("Error with SetSimpleReqDataManager: \(error)")
     }
     
 }

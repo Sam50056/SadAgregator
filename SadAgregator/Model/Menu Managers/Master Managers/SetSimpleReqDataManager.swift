@@ -17,7 +17,7 @@ struct SetSimpleReqDataManager {
     
     var delegate : SetSimpleReqDataManagerDelegate?
     
-    func getSetSimpleReqData(key: String, stepId : String , sellId : String){
+    func getSetSimpleReqData(key: String, stepId : Int , sellId : Int){
         
         let urlString = "https://agrapi.tk-sad.ru/agr_assist.Set_SimpleReq?AKey=\(key)&AStepID=\(stepId)&ASelID=\(sellId)"
         
