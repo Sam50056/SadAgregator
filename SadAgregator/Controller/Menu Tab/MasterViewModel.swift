@@ -36,8 +36,8 @@ class MasterViewModel : ObservableObject{
     
     init() {
         
-        //        loadUserData()
-        key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
+        loadUserData()
+//        key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
         
         getStepDataManager.delegate = self
         setSimpleReqDataManager.delegate = self
@@ -97,7 +97,16 @@ extension MasterViewModel : GetStepDataManagerDelegate{
     
     func getStepData(){
         
-        getStepDataManager.getGetStepData(key: key, step: nextStepId ?? "")
+        if nextStepId == "-2"{
+            
+            shouldShowMaster = false
+            nextStepId = nil
+            
+        }else{
+            
+            getStepDataManager.getGetStepData(key: key, step: nextStepId ?? "")
+            
+        }
         
     }
     
@@ -152,11 +161,6 @@ extension MasterViewModel : SetSimpleReqDataManagerDelegate{
                 
                 self.nextStepId = nextStepId
                 
-                if nextStepId == "-2"{
-                    shouldShowMaster = false
-                    return
-                }
-                
                 getStepData()
                 
             }
@@ -188,11 +192,6 @@ extension MasterViewModel : SetListSelectDataManagerDelegate{
             if let nextStepId = data["next_step_id"].string {
                 
                 self.nextStepId = nextStepId
-                
-                if nextStepId == "-2"{
-                    shouldShowMaster = false
-                    return
-                }
                 
                 getStepData()
                 
