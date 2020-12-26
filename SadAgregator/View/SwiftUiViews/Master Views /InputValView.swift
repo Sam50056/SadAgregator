@@ -50,19 +50,33 @@ struct InputValView: View {
             
             HStack{
                 
-                Text("Done")
-                    .padding(12)
-                    .frame(maxWidth: .infinity)
-                    .background(Color(.systemBlue))
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
+                if masterViewModel.currentViewData!["buttons"]["left"].exists(){
+                    
+                    Text(masterViewModel.currentViewData!["buttons"]["left"]["capt"].stringValue)
+                        .padding(12)
+                        .frame(maxWidth: .infinity)
+                        .background(Color(.systemBlue))
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .onTapGesture {
+                            print("HELLO")
+                        }
+                    
+                }
                 
-                Text("Done")
-                    .padding(12)
-                    .frame(maxWidth: .infinity)
-                    .background(Color(.systemBlue))
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
+                if masterViewModel.currentViewData!["buttons"]["right"].exists(){
+                    
+                    Text(masterViewModel.currentViewData!["buttons"]["right"]["capt"].stringValue)
+                        .padding(12)
+                        .frame(maxWidth: .infinity)
+                        .background(Color(.systemBlue))
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .onTapGesture {
+                            print("HELLO2")
+                        }
+                    
+                }
                 
             }
             
