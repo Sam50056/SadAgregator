@@ -24,29 +24,35 @@ struct SimpleReqView: View {
                 
                 ForEach(0..<masterViewModel.currentViewData!["ansqers"].arrayValue.count) { index in
                     
-                    HStack{
+                    Button(action: {
                         
-                        VStack(alignment: .leading,spacing: 8){
+                    }){
+                        
+                        HStack{
                             
-                            Text("\(masterViewModel.currentViewData!["ansqers"].arrayValue[index]["capt"].stringValue)")
-                                .foregroundColor(Color(.systemBlue))
+                            VStack(alignment: .leading,spacing: 8){
+                                
+                                Text("\(masterViewModel.currentViewData!["ansqers"].arrayValue[index]["capt"].stringValue)")
+                                    .foregroundColor(Color(.systemBlue))
+                                
+                                Text("\(masterViewModel.currentViewData!["ansqers"].arrayValue[index]["hint"].stringValue)")
+                                    .foregroundColor(Color(.systemGray))
+                                    .lineLimit(nil)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                
+                            }
                             
-                            Text("\(masterViewModel.currentViewData!["ansqers"].arrayValue[index]["hint"].stringValue)")
-                                .foregroundColor(Color(.systemGray))
-                                .lineLimit(nil)
-                                .fixedSize(horizontal: false, vertical: true)
+                            Spacer()
                             
                         }
-                        
-                        Spacer()
+                        .font(.system(size: 18))
+                        .padding(16)
+                        .frame(maxWidth: .infinity)
+                        .background(Color(.white))
+                        .cornerRadius(8)
+                        .shadow(radius: 4)
                         
                     }
-                    .font(.system(size: 18))
-                    .padding(16)
-                    .frame(maxWidth: .infinity)
-                    .background(Color(.white))
-                    .cornerRadius(8)
-                    .shadow(radius: 4)
                     
                 }
                 
