@@ -104,6 +104,6 @@ struct ListSelectItem : Identifiable{
     let id : Int
     let capt : String
     let hint : String
-    let button : String = ""
+    let button : String
     
 }
