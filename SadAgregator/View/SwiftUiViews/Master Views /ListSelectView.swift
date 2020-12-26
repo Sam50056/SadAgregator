@@ -82,7 +82,7 @@ struct ListSelectView: View {
                         
                     }
                     .onTapGesture {
-                        print("Selected item: \(item)")
+                        masterViewModel.selectListSelectViewAnswer(id: item.id)
                     }
                     
                 }
