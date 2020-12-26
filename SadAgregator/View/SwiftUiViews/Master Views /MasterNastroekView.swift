@@ -48,16 +48,34 @@ struct MasterNastroekView: View {
                                     .font(.system(size: 16))
                                     .foregroundColor(Color(.systemGray))
                                     .padding(.horizontal)
+                                    .padding(.bottom)
                                 
                             }
                             
                             if masterViewModel.shouldShowBackButton{
                                 
-                                Button("Back"){
-                                    
+                                Button(action: {
                                     masterViewModel.backButtonPressed()
+                                }){
+                                    
+                                    HStack{
+                                        
+                                        Image(systemName: "arrow.backward")
+                                            .resizable()
+                                            .frame(width: 20, height: 15, alignment: .center)
+                                        
+                                        Text("Назад")
+                                        
+                                    }
+                                    .padding()
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(Color(.systemBlue))
+                                    )
                                     
                                 }
+                                .padding(.horizontal, 8)
+                                
                                 
                             }
                             
