@@ -58,13 +58,14 @@ struct MasterNastroekView: View {
                                     masterViewModel.backButtonPressed()
                                 }){
                                     
-                                    HStack{
+                                    HStack(spacing: 8){
                                         
                                         Image(systemName: "arrow.backward")
                                             .resizable()
-                                            .frame(width: 20, height: 15, alignment: .center)
+                                            .frame(width: 16, height: 12, alignment: .center)
                                         
-                                        Text("Назад")
+                                        Text("НАЗАД")
+                                            .font(.system(size: 16))
                                         
                                     }
                                     .padding()
