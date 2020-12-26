@@ -39,7 +39,7 @@ struct MasterNastroekView: View {
                             }
                             
                             if masterViewModel.currentViewType == "list_select"{
-                                ListSelectView()
+                                ListSelectView().padding(.top)
                             }
                             
                             if masterViewModel.currentViewData!["descr"].exists(){
