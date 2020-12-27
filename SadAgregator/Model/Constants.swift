@@ -10,6 +10,10 @@ import SwiftyJSON
 
 struct K {
     
+    //MARK: - UserDefaults keys
+    
+    static let UNToken = "UNtoken" //User Notifications Token
+    
     //MARK: - Design vars
     
     static let postHeight : CGFloat = 500

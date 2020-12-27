@@ -147,6 +147,7 @@
 		22B7271225740E8C00B56249 /* LinePostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePostsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointPostsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22BD86512597FD690052956D /* SetInputValDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInputValDataManager.swift; sourceTree = "<group>"; };
+		22BD86542598B4CD0052956D /* SadAgregator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SadAgregator.entitlements; sourceTree = "<group>"; };
 		22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHostingController.swift; sourceTree = "<group>"; };
 		22C9221225814CA40063B5D4 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorLikeDataManager.swift; sourceTree = "<group>"; };
@@ -286,6 +287,7 @@
 				228CB773255BF98A002B4A96 /* Controller */,
 				228CB765255BF974002B4A96 /* Assets.xcassets */,
 				228CB76A255BF974002B4A96 /* Info.plist */,
+				22BD86542598B4CD0052956D /* SadAgregator.entitlements */,
 			);
 			path = SadAgregator;
 			sourceTree = "<group>";
@@ -855,6 +857,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F2L5WWWBR4;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
@@ -876,6 +879,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F2L5WWWBR4;
 				INFOPLIST_FILE = SadAgregator/Info.plist;

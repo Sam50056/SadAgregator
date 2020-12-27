@@ -15,15 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        //        var systemVersion = UIDevice.current.systemVersion
-        //
-        //        if systemVersion.contains("13."){
-        //            IQKeyboardManager.shared.enable = true //Enabling IQKeybpard
-        //        }
+        configureNotification(application: application)
         
         IQKeyboardManager.shared.enable = true
         
-        print("\(Realm.Configuration.defaultConfiguration.fileURL) REALM FILE URL")
+        print("\(String(describing: Realm.Configuration.defaultConfiguration.fileURL)) REALM FILE URL")
         
         // Initializing the AppMetrica SDK.
         let configuration = YMMYandexMetricaConfiguration.init(apiKey: "e4345797-36d2-45de-8b8c-391a0c9e6559")
@@ -44,6 +40,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    //MARK: - Notifications
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let token = deviceToken.reduce("") { $0 + String(format: "%02x", $1) }
+        UserDefaults.standard.setValue(token, forKey: K.UNToken) //Saving token in memory
+    }
+    
+    // this method enables user permission
+    func configureNotification(application: UIApplication) {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.badge, .sound, .alert]) { granted, _ in
+            guard granted else { return }
+            DispatchQueue.main.async {
+                application.registerForRemoteNotifications()
+            }
+        }
     }
     
     
