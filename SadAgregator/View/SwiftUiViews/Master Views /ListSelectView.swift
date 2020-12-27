@@ -31,6 +31,24 @@ struct ListSelectView: View {
                     
                 }
                 
+                if masterViewModel.currentViewData!["refresh_albs"].intValue == 1{
+                    
+                    Button(action: {
+                        
+                        
+                        
+                    }){
+                        Text("Обновить список альбомов")
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color(.systemBlue))
+                            .foregroundColor(Color.white)
+                            .cornerRadius(8)
+                    }
+                      
+                    
+                }
+                
                 HStack{
                     
                     Image(systemName: "magnifyingglass")
