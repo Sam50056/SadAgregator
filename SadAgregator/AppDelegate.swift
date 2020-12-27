@@ -45,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Notifications
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let token = deviceToken.reduce("") { $0 + String(format: "%02x", $1) }
+        let token = String(data : deviceToken, encoding: String.Encoding.windowsCP1251)
+        print("UN Token : \(String(describing: token))")
         UserDefaults.standard.setValue(token, forKey: K.UNToken) //Saving token in memory
     }
     
