@@ -52,29 +52,39 @@ struct InputValView: View {
                 
                 if masterViewModel.currentViewData!["buttons"]["left"].exists(){
                     
-                    Text(masterViewModel.currentViewData!["buttons"]["left"]["capt"].stringValue)
-                        .padding(12)
-                        .frame(maxWidth: .infinity)
-                        .background(Color(.systemBlue))
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                        .onTapGesture {
-                            print("HELLO")
-                        }
+                    Button(action: {
+                        
+                        masterViewModel.selectInputValViewButton(id: masterViewModel.currentViewData!["buttons"]["left"]["id"].intValue)
+                        
+                    }){
+                        
+                        Text(masterViewModel.currentViewData!["buttons"]["left"]["capt"].stringValue)
+                            .padding(12)
+                            .frame(maxWidth: .infinity)
+                            .background(Color(.systemBlue))
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                        
+                    }
                     
                 }
                 
                 if masterViewModel.currentViewData!["buttons"]["right"].exists(){
                     
-                    Text(masterViewModel.currentViewData!["buttons"]["right"]["capt"].stringValue)
-                        .padding(12)
-                        .frame(maxWidth: .infinity)
-                        .background(Color(.systemBlue))
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                        .onTapGesture {
-                            print("HELLO2")
-                        }
+                    Button(action:{
+                        
+                        masterViewModel.selectInputValViewButton(id: masterViewModel.currentViewData!["buttons"]["right"]["id"].intValue)
+                        
+                    }){
+                        
+                        Text(masterViewModel.currentViewData!["buttons"]["right"]["capt"].stringValue)
+                            .padding(12)
+                            .frame(maxWidth: .infinity)
+                            .background(Color(.systemBlue))
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                        
+                    }
                     
                 }
                 

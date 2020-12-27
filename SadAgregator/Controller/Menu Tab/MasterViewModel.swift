@@ -29,6 +29,7 @@ class MasterViewModel : ObservableObject{
     lazy var getStepDataManager = GetStepDataManager()
     lazy var setSimpleReqDataManager = SetSimpleReqDataManager()
     lazy var setListSelectDataManager = SetListSelectDataManager()
+    lazy var setInputValDataManager = SetInputValDataManager()
     
     @Published var answers = [SimpleReqAnswer]()
     
@@ -49,12 +50,13 @@ class MasterViewModel : ObservableObject{
     
     init() {
         
-//        loadUserData()
+        //        loadUserData()
         key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
         
         getStepDataManager.delegate = self
         setSimpleReqDataManager.delegate = self
         setListSelectDataManager.delegate = self
+        setInputValDataManager.delegate = self
         
     }
     
@@ -226,6 +228,38 @@ extension MasterViewModel : SetListSelectDataManagerDelegate{
     
     func didFailGettingSetListSelectDataWithError(error: String) {
         print("Error with SetListSelectDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - SetInputValDataManager
+
+extension MasterViewModel : SetInputValDataManagerDelegate{
+    
+    func selectInputValViewButton(id : Int){
+        
+        setInputValDataManager.getSetInputValData(key: key, stepId: currentStepId!, buttonId: id, val: inputValTextFieldText)
+        
+    }
+    
+    func didGetSetInputValData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if let nextStepId = data["next_step_id"].string {
+                
+                self.nextStepId = nextStepId
+                
+                getStepData()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingSetInputValDataWithError(error: String) {
+        print("Error with SetInputValDataManager : \(error)")
     }
     
 }

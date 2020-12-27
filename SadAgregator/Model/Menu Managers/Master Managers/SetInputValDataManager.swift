@@ -17,7 +17,7 @@ struct SetInputValDataManager {
     
     var delegate : SetInputValDataManagerDelegate?
     
-    func getSetInputValData(key: String , stepId : String , buttonId : String ,val : String){
+    func getSetInputValData(key: String , stepId : Int , buttonId : Int ,val : String){
         
         let urlString = "https://agrapi.tk-sad.ru/agr_assist.Set_InputVAL?AKey=\(key)&AStepID=\(stepId)&AButtonID=\(buttonId)&AVal=\(val)"
         
