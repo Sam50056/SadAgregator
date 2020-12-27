@@ -121,9 +121,8 @@ extension MasterViewModel : GetStepDataManagerDelegate{
         if nextStepId == "-2"{
             
             shouldShowMaster = false
-            nextStepId = nil
-            currentStepId = nil
-            currentViewType = nil
+            
+            emptyData()
             
         }else{
             
@@ -278,6 +277,14 @@ extension MasterViewModel {
             
             
         }
+        
+    }
+    
+    func emptyData() {
+        
+        nextStepId = nil
+        currentStepId = nil
+        currentViewType = nil
         
     }
     
