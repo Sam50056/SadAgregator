@@ -294,6 +294,17 @@
 			path = "UIKit VIews";
 			sourceTree = "<group>";
 		};
+		226886A82599EFAF0079933D /* Menu Views */ = {
+			isa = PBXGroup;
+			children = (
+				22C9221225814CA40063B5D4 /* MenuView.swift */,
+				22A155E02582C746000EAB64 /* Auth Views */,
+				2265853B259017C8004587AA /* Profile Views */,
+				22595793259667C10088C7E4 /* Master Views  */,
+			);
+			path = "Menu Views";
+			sourceTree = "<group>";
+		};
 		228CB750255BF96D002B4A96 = {
 			isa = PBXGroup;
 			children = (
@@ -436,10 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				226886A42599EDBF0079933D /* UIKit VIews */,
-				22C9221225814CA40063B5D4 /* MenuView.swift */,
-				22A155E02582C746000EAB64 /* Auth Views */,
-				2265853B259017C8004587AA /* Profile Views */,
-				22595793259667C10088C7E4 /* Master Views  */,
+				226886A82599EFAF0079933D /* Menu Views */,
 			);
 			path = SwiftUiViews;
 			sourceTree = "<group>";
