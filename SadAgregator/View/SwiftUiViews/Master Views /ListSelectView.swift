@@ -35,7 +35,7 @@ struct ListSelectView: View {
                     
                     Button(action: {
                         
-                        
+                        masterViewModel.shouldShowAlertInListSelect = true //Showing the alert
                         
                     }){
                         Text("Обновить список альбомов")
@@ -114,6 +114,13 @@ struct ListSelectView: View {
             
         }
         .padding(.horizontal,16)
+        .alert(isPresented: $masterViewModel.shouldShowAlertInListSelect) {
+            Alert(title: Text("Обновить альбомы?"), primaryButton: .default(Text("Да")){
+                
+            } , secondaryButton: .default(Text("Нет")){
+                
+            })
+        }
         
     }
     

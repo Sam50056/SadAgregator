@@ -35,6 +35,8 @@ class MasterViewModel : ObservableObject{
     @Published var answers = [SimpleReqAnswer]()
     
     @Published var items = [ListSelectItem]()
+    @Published var shouldShowAlertInListSelect = false
+    
     @Published var inputValTextFieldText = "" {
         didSet {
             
