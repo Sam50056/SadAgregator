@@ -37,19 +37,14 @@ struct ListWorkView: View {
                     
                     HStack{
                         
-                        Text("Вы еще не добавили поставщиков")
+                        Text(masterViewModel.currentViewData!["capt_list_ext_button"].stringValue)
                             .foregroundColor(Color(.systemBlue))
                         
-                        ZStack{
-                            
-                            Circle()
-                                .foregroundColor(Color(.systemBlue))
-                                .frame(width: 30, height: 30)
-                            
-                            Text("0")
-                                .foregroundColor(Color(.white))
-                                .padding(2)
-                        } // Text in cirlce
+                        Text(masterViewModel.currentViewData!["ext_list_cnt"].stringValue)
+                            .padding(.all , 8)
+                            .font(.system(size: 14))
+                            .foregroundColor(Color(.white))
+                            .background(Circle().foregroundColor(Color(.systemBlue)))
                         
                     }
                     .padding()
