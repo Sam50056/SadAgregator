@@ -119,7 +119,7 @@ struct ListSelectView: View {
                 
                 masterViewModel.refreshAlbsData()
                 
-            } , secondaryButton: .cancel(Text("Нет")){
+            } , secondaryButton: .default(Text("Нет")){
                 masterViewModel.shouldShowAlertInListSelect = false
             })
         }
