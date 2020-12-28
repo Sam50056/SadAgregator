@@ -29,6 +29,7 @@
 		2265853F259017FA004587AA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2265853E259017FA004587AA /* ProfileView.swift */; };
 		2265854325901812004587AA /* AlertWithTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2265854225901812004587AA /* AlertWithTextFieldView.swift */; };
 		2268869325994F030079933D /* ListWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2268869225994F030079933D /* ListWorkView.swift */; };
+		2268869725995C070079933D /* SearchListWorkDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2268869625995C070079933D /* SearchListWorkDataManager.swift */; };
 		226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9444258D2179008CEC4A /* GalleryViewController.swift */; };
 		226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9447258D2EF9008CEC4A /* HeroHelper.swift */; };
 		227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */; };
@@ -106,6 +107,7 @@
 		2265853E259017FA004587AA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		2265854225901812004587AA /* AlertWithTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertWithTextFieldView.swift; sourceTree = "<group>"; };
 		2268869225994F030079933D /* ListWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWorkView.swift; sourceTree = "<group>"; };
+		2268869625995C070079933D /* SearchListWorkDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListWorkDataManager.swift; sourceTree = "<group>"; };
 		226D9444258D2179008CEC4A /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		226D9447258D2EF9008CEC4A /* HeroHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroHelper.swift; sourceTree = "<group>"; };
 		227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUpdateViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */,
 				22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */,
 				22BD86512597FD690052956D /* SetInputValDataManager.swift */,
+				2268869525995BD60079933D /* ListWork Managers */,
 			);
 			path = "Master Managers";
 			sourceTree = "<group>";
@@ -260,6 +263,14 @@
 				2265854225901812004587AA /* AlertWithTextFieldView.swift */,
 			);
 			path = "Profile Views";
+			sourceTree = "<group>";
+		};
+		2268869525995BD60079933D /* ListWork Managers */ = {
+			isa = PBXGroup;
+			children = (
+				2268869625995C070079933D /* SearchListWorkDataManager.swift */,
+			);
+			path = "ListWork Managers";
 			sourceTree = "<group>";
 		};
 		228CB750255BF96D002B4A96 = {
@@ -705,6 +716,7 @@
 				22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */,
 				22C9221325814CA40063B5D4 /* MenuView.swift in Sources */,
 				22A155CF2582925D000EAB64 /* RegView.swift in Sources */,
+				2268869725995C070079933D /* SearchListWorkDataManager.swift in Sources */,
 				22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */,
 				22A155ED2584E766000EAB64 /* MenuViewModel.swift in Sources */,
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
