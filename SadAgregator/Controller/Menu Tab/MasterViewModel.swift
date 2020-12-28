@@ -31,6 +31,7 @@ class MasterViewModel : ObservableObject{
     lazy var setListSelectDataManager = SetListSelectDataManager()
     lazy var setInputValDataManager = SetInputValDataManager()
     lazy var searchListWorkDataManager = SearchListWorkDataManager()
+    lazy var refreshAlbsDataManager = RefreshAlbsDataManager()
     
     @Published var answers = [SimpleReqAnswer]()
     
@@ -72,6 +73,7 @@ class MasterViewModel : ObservableObject{
         setListSelectDataManager.delegate = self
         setInputValDataManager.delegate = self
         searchListWorkDataManager.delegate = self
+        refreshAlbsDataManager.delegate = self
         
     }
     
@@ -254,6 +256,38 @@ extension MasterViewModel : SetListSelectDataManagerDelegate{
     
     func didFailGettingSetListSelectDataWithError(error: String) {
         print("Error with SetListSelectDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - RefreshAlbsDataManager
+
+extension MasterViewModel : RefreshAlbsDataManagerDelegate{
+    
+    func refreshAlbsData(){
+        refreshAlbsDataManager.getRefreshAlbsData(key: key)
+    }
+    
+    func didGetRefreshAlbsData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+            if data["result"].intValue == 1{
+               
+                self.getStepData()
+                
+            }else{
+                Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
+                    self.refreshAlbsData()
+                }
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingRefreshAlbsDataWithError(error: String) {
+        print("Error with RefreshAlbsDataManager : \(error)")
     }
     
 }

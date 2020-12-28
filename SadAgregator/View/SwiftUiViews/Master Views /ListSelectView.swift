@@ -117,7 +117,7 @@ struct ListSelectView: View {
         .alert(isPresented: $masterViewModel.shouldShowAlertInListSelect) {
             Alert(title: Text("Обновить альбомы?"), primaryButton: .default(Text("Да")){
                 
-                
+                masterViewModel.refreshAlbsData()
                 
             } , secondaryButton: .cancel(Text("Нет")){
                 masterViewModel.shouldShowAlertInListSelect = false
