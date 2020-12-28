@@ -32,6 +32,7 @@ class MasterViewModel : ObservableObject{
     lazy var setInputValDataManager = SetInputValDataManager()
     lazy var searchListWorkDataManager = SearchListWorkDataManager()
     lazy var refreshAlbsDataManager = RefreshAlbsDataManager()
+    lazy var getListWorkExtDataManager = GetListWorkExtDataManager()
     
     @Published var answers = [SimpleReqAnswer]()
     
@@ -54,6 +55,7 @@ class MasterViewModel : ObservableObject{
     }
     
     @Published var list = [ListWorkItem]()
+    @Published var list2 = [ListWorkItem]()
     @Published var listWorkSearchTextFieldText = ""{
         didSet{
             
@@ -80,6 +82,7 @@ class MasterViewModel : ObservableObject{
         setInputValDataManager.delegate = self
         searchListWorkDataManager.delegate = self
         refreshAlbsDataManager.delegate = self
+        getListWorkExtDataManager.delegate = self
         
     }
     
@@ -348,6 +351,38 @@ extension MasterViewModel : SearchListWorkDataManagerDelegate{
     
     func didFailGettingSearchListWorkDataWithError(error: String) {
         print("Error with SearchListWorkDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - GetListWorkExtDataManager
+
+extension MasterViewModel : GetListWorkExtDataManagerDelegate{
+    
+    func extButtonPressed(){
+        
+        getListWorkExtDataManager.getGetListWorkExtData(key: key, stepId: currentStepId!)
+        
+    }
+    
+    func didGetGetListWorkExtData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            list2.removeAll()
+            
+            for item in data["list"].arrayValue{
+                
+                list2.append(ListWorkItem(id: item["id"].intValue, capt: item["capt"].stringValue, subCapt: item["sub_capt"].stringValue, act: item["act"].stringValue, ext: item["ext"].intValue))
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingGetListWorkExtDataWithError(error: String) {
+        print("Error with GetListWorkExtDataManager : \(error)")
     }
     
 }
