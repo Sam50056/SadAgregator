@@ -84,42 +84,7 @@ struct ListWorkView: View {
                     
                     ForEach(masterViewModel.list , id: \.id){ item in
                         
-                        VStack{
-                            
-                            HStack{
-                                
-                                VStack(alignment: .leading, spacing: 8){
-                                    
-                                    Text(item.capt)
-                                    
-                                    if item.subCapt != ""{
-                                        Text(item.subCapt)
-                                            .foregroundColor(Color(.systemGray))
-                                    }
-                                    
-                                }
-                                .font(.system(size: 16))
-                                
-                                Spacer()
-                                
-                                if item.act != ""{
-                                    
-                                    Button(action: {
-                                        
-                                    }){
-                                        Text(item.act)
-                                            .foregroundColor(Color(.systemBlue))
-                                    }
-                                }
-                                
-                            }
-                            
-                            Divider()
-                            
-                        }
-                        .onTapGesture {
-                            
-                        }
+                        ListWorkItemView(item: item)
                         
                     }
                     
@@ -148,5 +113,49 @@ struct ListWorkItem : Identifiable{
     let subCapt : String
     let act : String
     let ext : Int
+    
+}
+
+struct ListWorkItemView : View {
+    
+    let item : ListWorkItem
+    
+    var body: some View{
+        
+        VStack{
+            
+            HStack{
+                
+                VStack(alignment: .leading, spacing: 8){
+                    
+                    Text(item.capt)
+                    
+                    if item.subCapt != ""{
+                        Text(item.subCapt)
+                            .foregroundColor(Color(.systemGray))
+                    }
+                    
+                }
+                .font(.system(size: 16))
+                
+                Spacer()
+                
+                if item.act != ""{
+                    
+                    Button(action: {
+                        
+                    }){
+                        Text(item.act)
+                            .foregroundColor(Color(.systemBlue))
+                    }
+                }
+                
+            }
+            
+            Divider()
+            
+        }
+        
+    }
     
 }
