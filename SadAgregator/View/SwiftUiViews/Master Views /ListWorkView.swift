@@ -61,7 +61,7 @@ struct ListWorkView: View {
                     
                 }
                 
-                Text("Поиск по поставщикам")
+                Text(masterViewModel.currentViewData!["capt_list_name"].stringValue)
                     .font(.system(size: 19))
                     .bold()
                 
@@ -72,7 +72,7 @@ struct ListWorkView: View {
                         .frame(width: 20, height: 20, alignment: .center)
                         .foregroundColor(Color(.systemGray))
                     
-                    TextField("Поиск по списку", text: $masterViewModel.listWorkSearchTextFieldText)
+                    TextField(masterViewModel.currentViewData!["edt_place_holder"].stringValue, text: $masterViewModel.listWorkSearchTextFieldText)
                     
                 }
                 .padding()
