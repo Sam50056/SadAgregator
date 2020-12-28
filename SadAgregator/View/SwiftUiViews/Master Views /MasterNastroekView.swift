@@ -43,7 +43,9 @@ struct MasterNastroekView: View {
                             }
                             
                             if masterViewModel.currentViewType == "list_work"{
+                                Spacer()
                                 ListWorkView().padding(.top)
+                                Spacer()
                             }
                             
                             if masterViewModel.currentViewData!["descr"].exists(){

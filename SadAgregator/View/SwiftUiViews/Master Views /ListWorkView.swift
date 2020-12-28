@@ -138,6 +138,9 @@ struct ListWorkView: View {
             
         }
         .padding(.horizontal,16)
+        .onDisappear{
+            masterViewModel.listWorkSearchTextFieldText = ""
+        }
         
     }
     
