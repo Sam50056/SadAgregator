@@ -42,6 +42,10 @@ struct MasterNastroekView: View {
                                 ListSelectView().padding(.top)
                             }
                             
+                            if masterViewModel.currentViewType == "list_work"{
+                                ListWorkView().padding(.top)
+                            }
+                            
                             if masterViewModel.currentViewData!["descr"].exists(){
                                 
                                 Text(masterViewModel.currentViewData!["descr"].stringValue)
