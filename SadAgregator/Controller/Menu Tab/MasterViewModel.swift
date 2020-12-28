@@ -30,6 +30,7 @@ class MasterViewModel : ObservableObject{
     lazy var setSimpleReqDataManager = SetSimpleReqDataManager()
     lazy var setListSelectDataManager = SetListSelectDataManager()
     lazy var setInputValDataManager = SetInputValDataManager()
+    lazy var searchListWorkDataManager = SearchListWorkDataManager()
     
     @Published var answers = [SimpleReqAnswer]()
     
@@ -48,15 +49,27 @@ class MasterViewModel : ObservableObject{
         }
     }
     
+    @Published var list = [ListWorkItem]()
+    @Published var listWorkSearchTextFieldText = ""{
+        didSet{
+            
+            searchListWorkDataManager.getSearchListWorkData(key: key, stepId: currentStepId!, query: listWorkSearchTextFieldText)
+            
+        }
+    }
+    
     init() {
         
         //        loadUserData()
         key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
         
+        //Setting Delegates
+        
         getStepDataManager.delegate = self
         setSimpleReqDataManager.delegate = self
         setListSelectDataManager.delegate = self
         setInputValDataManager.delegate = self
+        searchListWorkDataManager.delegate = self
         
     }
     
@@ -107,6 +120,18 @@ extension MasterViewModel{
     func setUpInputVal(){
         
         inputValTextFieldText = currentViewData!["input_val"]["def_val"].stringValue
+        
+    }
+    
+    func setUpListWork(data : JSON){
+        
+        list.removeAll()
+        
+        for item in data["list"].arrayValue{
+            
+            list.append(ListWorkItem(id: item["id"].intValue, capt: item["capt"].stringValue, subCapt: item["sub_capt"].stringValue, act: item["act"].stringValue, ext: item["ext"].intValue))
+            
+        }
         
     }
     
@@ -263,6 +288,26 @@ extension MasterViewModel : SetInputValDataManagerDelegate{
     
 }
 
+//MARK: - SearchListWorkDataManager
+
+extension MasterViewModel : SearchListWorkDataManagerDelegate{
+    
+    func didGetSearchListWorkData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            setUpListWork(data: data)
+            
+        }
+        
+    }
+    
+    func didFailGettingSearchListWorkDataWithError(error: String) {
+        print("Error with SearchListWorkDataManager : \(error)")
+    }
+    
+}
+
 //MARK: - Data Manipulation Methods
 
 extension MasterViewModel {
@@ -285,6 +330,8 @@ extension MasterViewModel {
         nextStepId = nil
         currentStepId = nil
         currentViewType = nil
+        inputValTextFieldText = ""
+        listWorkSearchTextFieldText = "" 
         
     }
     

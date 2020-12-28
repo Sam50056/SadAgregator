@@ -17,7 +17,7 @@ struct SearchListWorkDataManager {
     
     var delegate : SearchListWorkDataManagerDelegate?
     
-    func getSearchListWorkData(key: String , stepId : String , query : String){
+    func getSearchListWorkData(key: String , stepId : Int , query : String){
         
         let urlString = "https://agrapi.tk-sad.ru/agr_assist.Srch_ListWork?AKey=\(key)&AStep=\(stepId)&AQuery=\(query)"
         

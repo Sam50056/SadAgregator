@@ -11,8 +11,6 @@ struct ListWorkView: View {
     
     @EnvironmentObject var masterViewModel : MasterViewModel
     
-    @State var text = ""
-    
     var body: some View {
         
         VStack(alignment: .leading, spacing: 16){
@@ -74,7 +72,7 @@ struct ListWorkView: View {
                         .frame(width: 20, height: 20, alignment: .center)
                         .foregroundColor(Color(.systemGray))
                     
-                    TextField("Поиск по списку", text: $text)
+                    TextField("Поиск по списку", text: $masterViewModel.listWorkSearchTextFieldText)
                     
                 }
                 .padding()
@@ -84,51 +82,59 @@ struct ListWorkView: View {
                 .shadow(radius: 4)
                 
             }
-            //
-            //            VStack{
-            //
-            //                ForEach(masterViewModel.items , id: \.id){ item in
-            //
-            //                    VStack{
-            //
-            //                        HStack{
-            //
-            //                            VStack(alignment: .leading, spacing: 8){
-            //
-            //                                Text(item.capt)
-            //
-            //                                if item.hint != ""{
-            //                                    Text(item.hint)
-            //                                        .foregroundColor(Color(.systemGray))
-            //                                }
-            //
-            //                            }
-            //                            .font(.system(size: 16))
-            //
-            //                            Spacer()
-            //
-            //                            if item.button != ""{
-            //                                Text(item.button)
-            //                                    .foregroundColor(Color(.systemBlue))
-            //                            }
-            //
-            //                        }
-            //
-            //                        Divider()
-            //
-            //                    }
-            //                    .background(item.rec == 1 ? Color(#colorLiteral(red: 0.9177419543, green: 0.9516320825, blue: 0.9884006381, alpha: 1)) : Color.white)
-            //                    .onTapGesture {
-            //                        masterViewModel.selectListSelectViewAnswer(id: item.id)
-            //                    }
-            //
-            //                }
-            //
-            //            }
-            //            .padding()
-            //            .background(Color(.white))
-            //            .cornerRadius(12)
-            //            .shadow(radius: 4)
+            
+            if !masterViewModel.list.isEmpty{
+                
+                VStack{
+                    
+                    ForEach(masterViewModel.list , id: \.id){ item in
+                        
+                        VStack{
+                            
+                            HStack{
+                                
+                                VStack(alignment: .leading, spacing: 8){
+                                    
+                                    Text(item.capt)
+                                    
+                                    if item.subCapt != ""{
+                                        Text(item.subCapt)
+                                            .foregroundColor(Color(.systemGray))
+                                    }
+                                    
+                                }
+                                .font(.system(size: 16))
+                                
+                                Spacer()
+                                
+                                if item.act != ""{
+                                    
+                                    Button(action: {
+                                        
+                                    }){
+                                        Text(item.act)
+                                            .foregroundColor(Color(.systemBlue))
+                                    }
+                                }
+                                
+                            }
+                            
+                            Divider()
+                            
+                        }
+                        .onTapGesture {
+                            
+                        }
+                        
+                    }
+                    
+                }
+                .padding()
+                .background(Color(.white))
+                .cornerRadius(12)
+                .shadow(radius: 4)
+                
+            }
             
         }
         .padding(.horizontal,16)
@@ -137,8 +143,12 @@ struct ListWorkView: View {
     
 }
 
-struct ListWorkView_Previews: PreviewProvider {
-    static var previews: some View {
-        ListWorkView()
-    }
+struct ListWorkItem : Identifiable{
+    
+    let id : Int
+    let capt : String
+    let subCapt : String
+    let act : String
+    let ext : Int
+    
 }
