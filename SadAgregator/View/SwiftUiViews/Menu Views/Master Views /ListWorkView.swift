@@ -29,12 +29,29 @@ struct ListWorkView: View {
                     
                 }
                 
-                Button(action: {
-                    
-                    
-                    
-                }){
-                    
+                NavigationLink(destination:
+                                
+                                ScrollView{
+                                    
+                                    VStack{
+                                        
+                                        ForEach(masterViewModel.list2 , id: \.id){ item in
+                                            
+                                            ListWorkItemView(item: item)
+                                            
+                                        }
+                                        
+                                    }
+                                    .padding()
+                                    .background(Color(.white))
+                                    .frame(maxWidth: .infinity)
+                                    
+                                }.onAppear{
+                                    masterViewModel.extButtonPressed()
+                                }
+                                .navigationBarTitle(Text(masterViewModel.currentViewData!["capt_list_exists"].stringValue), displayMode: .inline)
+                               
+                               , isActive : $masterViewModel.shouldShowSecondScreenInListWork){
                     HStack{
                         
                         Text(masterViewModel.currentViewData!["capt_list_ext_button"].stringValue)
@@ -99,7 +116,9 @@ struct ListWorkView: View {
         }
         .padding(.horizontal,16)
         .onDisappear{
-            masterViewModel.listWorkSearchTextFieldText = ""
+            if !masterViewModel.shouldShowSecondScreenInListWork{
+                masterViewModel.listWorkSearchTextFieldText = ""
+            }
         }
         
     }

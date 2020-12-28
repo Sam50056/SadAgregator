@@ -56,6 +56,7 @@ class MasterViewModel : ObservableObject{
     
     @Published var list = [ListWorkItem]()
     @Published var list2 = [ListWorkItem]()
+    @Published var shouldShowSecondScreenInListWork = false
     @Published var listWorkSearchTextFieldText = ""{
         didSet{
             

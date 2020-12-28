@@ -102,7 +102,11 @@ struct MasterNastroekView: View {
             masterViewModel.getStepData()
         }
         .onDisappear{
-            masterViewModel.emptyData()
+            
+            if !masterViewModel.shouldShowSecondScreenInListWork{ //I add this check because there's one screen that is shown via nav link in list work , and there's no need for emptying data when showing it
+                masterViewModel.emptyData()
+            }
+            
         }
         
     }
