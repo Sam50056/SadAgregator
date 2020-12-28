@@ -37,6 +37,7 @@ class MasterViewModel : ObservableObject{
     
     @Published var items = [ListSelectItem]()
     @Published var shouldShowAlertInListSelect = false
+    @Published var shouldShowAnimationInListSelect = false
     
     @Published var inputValTextFieldText = "" {
         didSet {
@@ -55,6 +56,11 @@ class MasterViewModel : ObservableObject{
     @Published var list = [ListWorkItem]()
     @Published var listWorkSearchTextFieldText = ""{
         didSet{
+            
+            if listWorkSearchTextFieldText == ""{
+                list.removeAll()
+                return
+            }
             
             searchListWorkDataManager.getSearchListWorkData(key: key, stepId: currentStepId!, query: listWorkSearchTextFieldText)
             
@@ -266,6 +272,7 @@ extension MasterViewModel : RefreshAlbsDataManagerDelegate{
     
     func refreshAlbsData(){
         refreshAlbsDataManager.getRefreshAlbsData(key: key)
+        shouldShowAnimationInListSelect = true
     }
     
     func didGetRefreshAlbsData(data: JSON) {
@@ -275,6 +282,7 @@ extension MasterViewModel : RefreshAlbsDataManagerDelegate{
             if data["result"].intValue == 1{
                
                 self.getStepData()
+                self.shouldShowAnimationInListSelect = false
                 
             }else{
                 Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
