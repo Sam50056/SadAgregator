@@ -54,6 +54,7 @@ class MasterViewModel : ObservableObject{
         }
     }
     
+    @Published var listWorkData = JSON()
     @Published var list = [ListWorkItem]()
     @Published var list2 = [ListWorkItem]()
     @Published var shouldShowSecondScreenInListWork = false
@@ -65,7 +66,7 @@ class MasterViewModel : ObservableObject{
                 return
             }
             
-            searchListWorkDataManager.getSearchListWorkData(key: key, stepId: currentStepId!, query: listWorkSearchTextFieldText)
+            getSearchListWorkData()
             
         }
     }
@@ -146,6 +147,8 @@ extension MasterViewModel{
             list.append(ListWorkItem(id: item["id"].intValue, capt: item["capt"].stringValue, subCapt: item["sub_capt"].stringValue, act: item["act"].stringValue, ext: item["ext"].intValue))
             
         }
+        
+        listWorkData = data
         
     }
     
@@ -340,6 +343,12 @@ extension MasterViewModel : SetInputValDataManagerDelegate{
 
 extension MasterViewModel : SearchListWorkDataManagerDelegate{
     
+    func getSearchListWorkData(){
+        
+        searchListWorkDataManager.getSearchListWorkData(key: key, stepId: currentStepId!, query: listWorkSearchTextFieldText)
+        
+    }
+    
     func didGetSearchListWorkData(data: JSON) {
         
         DispatchQueue.main.async { [self] in
@@ -377,6 +386,8 @@ extension MasterViewModel : GetListWorkExtDataManagerDelegate{
                 list2.append(ListWorkItem(id: item["id"].intValue, capt: item["capt"].stringValue, subCapt: item["sub_capt"].stringValue, act: item["act"].stringValue, ext: item["ext"].intValue))
                 
             }
+            
+            listWorkData = data
             
         }
         

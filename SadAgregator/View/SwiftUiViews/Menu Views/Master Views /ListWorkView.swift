@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftyJSON
 
 struct ListWorkView: View {
     
@@ -37,7 +38,7 @@ struct ListWorkView: View {
                                         
                                         ForEach(masterViewModel.list2 , id: \.id){ item in
                                             
-                                            ListWorkItemView(item: item)
+                                            ListWorkItemView(item: item, isList1: false)
                                             
                                         }
                                         
@@ -101,7 +102,7 @@ struct ListWorkView: View {
                     
                     ForEach(masterViewModel.list , id: \.id){ item in
                         
-                        ListWorkItemView(item: item)
+                        ListWorkItemView(item: item, isList1: true)
                         
                     }
                     
@@ -135,9 +136,13 @@ struct ListWorkItem : Identifiable{
     
 }
 
-struct ListWorkItemView : View {
+struct ListWorkItemView : View , AddOrDeleteListWorkExtDataManagerDelegate{
+    
+    @EnvironmentObject var masterViewModel : MasterViewModel
     
     let item : ListWorkItem
+    
+    let isList1 : Bool //This var shows if current item is in list1 or list2 
     
     var body: some View{
         
@@ -163,6 +168,8 @@ struct ListWorkItemView : View {
                     
                     Button(action: {
                         
+                        AddOrDeleteListWorkExtDataManager(delegate: self).getAddOrDeleteListWorkExtData(method: (item.ext == 1 ? "del" : "add"), key: masterViewModel.key, stepId: masterViewModel.currentStepId!, listId: item.id)
+                        
                     }){
                         Text(item.act)
                             .foregroundColor(Color(.systemBlue))
@@ -176,5 +183,28 @@ struct ListWorkItemView : View {
         }
         
     }
+    
+    func didGetAddOrDeleteListWorkExtData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                if isList1 {
+                    masterViewModel.getSearchListWorkData()
+                }else{
+                    masterViewModel.extButtonPressed()
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingAddOrDeleteListWorkExtDataWithError(error: String) {
+        print("Error with AddOrDeleteListWorkExtDataManager : \(error)")
+    }
+    
     
 }
