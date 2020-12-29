@@ -98,7 +98,30 @@ struct MasterNastroekView: View {
             }
             
         }
-        .navigationBarTitle(Text(""), displayMode: .inline)
+        .navigationBarTitle(Text("Мастер Настроек"), displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading:
+                                Button(action: {
+                                    
+                                    if masterViewModel.shouldShowBackButton{
+                                        masterViewModel.backButtonPressed()
+                                    }else{
+                                        masterViewModel.shouldShowMaster = false
+                                    }
+                                    
+                                }) {
+                                    
+                                    Image(systemName: "chevron.left")
+                                    
+                                },trailing:
+                                    Button(action: {
+                                        self.masterViewModel.shouldShowMaster = false
+                                    }){
+                                        
+                                        Image(systemName: "multiply")
+                                        
+                                    })
+        
         .onAppear{
             masterViewModel.getStepData()
         }
