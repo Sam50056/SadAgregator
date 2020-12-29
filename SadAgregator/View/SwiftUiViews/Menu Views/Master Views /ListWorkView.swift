@@ -16,6 +16,8 @@ struct ListWorkView: View {
         
         VStack(alignment: .leading, spacing: 16){
             
+            Spacer()
+            
             VStack(alignment: .leading,spacing: 16){
                 
                 Text(masterViewModel.currentViewData!["capt"].stringValue)
@@ -111,6 +113,28 @@ struct ListWorkView: View {
                 .background(Color(.white))
                 .cornerRadius(12)
                 .shadow(radius: 4)
+                
+            }
+            
+            Spacer()
+            
+            Button(action: {
+                
+                
+                
+            }){
+                
+                VStack(alignment: .center){
+                    
+                    Text("Готово")
+                    
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color(.systemBlue))
+                .foregroundColor(.white)
+                .cornerRadius(8)
+                .offset(y: 26)
                 
             }
             
