@@ -81,6 +81,7 @@
 		22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D60981255D41F000FC622B /* MessageReadedDataManager.swift */; };
 		22D663D125823D9E0058B5CC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D663D025823D9E0058B5CC /* LoginView.swift */; };
 		22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90202259A953C009732CC /* GetListWorkExtDataManager.swift */; };
+		22D9021D259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9021C259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift */; };
 		22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */; };
 		22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */; };
 		44D7F3DB0392E9E53844BA25 /* Pods_SadAgregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */; };
@@ -165,6 +166,7 @@
 		22D60981255D41F000FC622B /* MessageReadedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadedDataManager.swift; sourceTree = "<group>"; };
 		22D663D025823D9E0058B5CC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		22D90202259A953C009732CC /* GetListWorkExtDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListWorkExtDataManager.swift; sourceTree = "<group>"; };
+		22D9021C259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrDeleteListWorkExtDataManager.swift; sourceTree = "<group>"; };
 		22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSimpleReqDataManager.swift; sourceTree = "<group>"; };
 		22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListSelectDataManager.swift; sourceTree = "<group>"; };
 		8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.debug.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -247,8 +249,8 @@
 			children = (
 				225957A92596A6450088C7E4 /* GetStepDataManager.swift */,
 				22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */,
-				2268869A25996B760079933D /* ListSelect Managers */,
 				22BD86512597FD690052956D /* SetInputValDataManager.swift */,
+				2268869A25996B760079933D /* ListSelect Managers */,
 				2268869525995BD60079933D /* ListWork Managers */,
 			);
 			path = "Master Managers";
@@ -276,6 +278,7 @@
 			children = (
 				2268869625995C070079933D /* SearchListWorkDataManager.swift */,
 				22D90202259A953C009732CC /* GetListWorkExtDataManager.swift */,
+				22D9021C259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift */,
 			);
 			path = "ListWork Managers";
 			sourceTree = "<group>";
@@ -733,6 +736,7 @@
 				2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
 				22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */,
+				22D9021D259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift in Sources */,
 				22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */,
 				2259579F259668370088C7E4 /* InputValView.swift in Sources */,
 				22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */,

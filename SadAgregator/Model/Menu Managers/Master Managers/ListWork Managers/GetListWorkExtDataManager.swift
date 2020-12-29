@@ -19,7 +19,6 @@ struct GetListWorkExtDataManager {
     
     func getGetListWorkExtData(key : String , stepId : Int){
         
-        
         let urlString = "https://agrapi.tk-sad.ru/agr_assist.Get_ListWORK_Ext?AKey=\(key)&AStep=\(stepId)"
         
         print("URLString for GetListWorkExtDataManager : \(urlString)")
