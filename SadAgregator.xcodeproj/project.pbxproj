@@ -83,6 +83,7 @@
 		22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90202259A953C009732CC /* GetListWorkExtDataManager.swift */; };
 		22D9021D259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9021C259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift */; };
 		22D90221259AC9EF009732CC /* AlbumsInProgressDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90220259AC9EF009732CC /* AlbumsInProgressDataManager.swift */; };
+		22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90223259AD188009732CC /* SetListWorkDataManager.swift */; };
 		22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */; };
 		22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */; };
 		44D7F3DB0392E9E53844BA25 /* Pods_SadAgregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */; };
@@ -169,6 +170,7 @@
 		22D90202259A953C009732CC /* GetListWorkExtDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListWorkExtDataManager.swift; sourceTree = "<group>"; };
 		22D9021C259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrDeleteListWorkExtDataManager.swift; sourceTree = "<group>"; };
 		22D90220259AC9EF009732CC /* AlbumsInProgressDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsInProgressDataManager.swift; sourceTree = "<group>"; };
+		22D90223259AD188009732CC /* SetListWorkDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListWorkDataManager.swift; sourceTree = "<group>"; };
 		22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSimpleReqDataManager.swift; sourceTree = "<group>"; };
 		22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListSelectDataManager.swift; sourceTree = "<group>"; };
 		8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.debug.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				2268869625995C070079933D /* SearchListWorkDataManager.swift */,
 				22D90202259A953C009732CC /* GetListWorkExtDataManager.swift */,
 				22D9021C259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift */,
+				22D90223259AD188009732CC /* SetListWorkDataManager.swift */,
 			);
 			path = "ListWork Managers";
 			sourceTree = "<group>";
@@ -726,6 +729,7 @@
 				22906B372578020300F00B0D /* PostavshikViewController.swift in Sources */,
 				2259579C259668220088C7E4 /* SimpleReqView.swift in Sources */,
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
+				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
 				2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
 				224584272592A6A60000B3D4 /* UserChangePassDataManager.swift in Sources */,
