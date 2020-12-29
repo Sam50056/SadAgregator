@@ -98,6 +98,7 @@ struct MasterNastroekView: View {
             }
             
         }
+        .navigationBarTitle(Text(""), displayMode: .inline)
         .onAppear{
             masterViewModel.getStepData()
         }
