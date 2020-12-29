@@ -183,6 +183,14 @@ struct MenuView: View {
                                         Text("Избранные поставщики")
                                             .font(.custom("", size: 16))
                                         
+                                        Spacer()
+                                        
+                                        if menuViewModel.lkVends != "0"{
+                                            Text(menuViewModel.lkVends)
+                                                .font(.custom("", size: 16))
+                                                .foregroundColor(Color(.systemGray))
+                                        }
+                                        
                                     }
                                     .padding(.vertical, 5)
                                     
@@ -197,6 +205,14 @@ struct MenuView: View {
                                     
                                     Text("Избранные посты")
                                         .font(.custom("", size: 16))
+                                    
+                                    Spacer()
+                                    
+                                    if menuViewModel.lkPosts != "0"{
+                                        Text(menuViewModel.lkPosts)
+                                            .font(.custom("", size: 16))
+                                            .foregroundColor(Color(.systemGray))
+                                    }
                                     
                                 }
                                 .padding(.vertical, 5)

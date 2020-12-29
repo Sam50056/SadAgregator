@@ -18,6 +18,8 @@ class MenuViewModel : ObservableObject{
     @Published var isLogged = false
     @Published var name = ""
     @Published var code = ""
+    @Published var lkVends = ""
+    @Published var lkPosts = ""
     
     @Published var showModalLogIn = false
     @Published var showModalReg = false
@@ -59,12 +61,18 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
                 let name = data["name"].stringValue
                 let code = data["code"].stringValue
                 
+                let lkVends = data["lk_vends"].stringValue
+                let lkPosts = data["lk_posts"].stringValue
+                
                 userDataObject.name = name
                 userDataObject.code = code
                 
                 userDataObject.isLogged = true
                 
                 userDataObject.key = safeKey
+                
+                userDataObject.lkPosts = lkPosts
+                userDataObject.lkVends = lkVends
                 
                 deleteAllDataFromDB()
                 
@@ -107,6 +115,9 @@ extension MenuViewModel {
             name = userDataObject.name
             
             code = userDataObject.code
+            
+            lkVends = userDataObject.lkVends
+            lkPosts = userDataObject.lkPosts
             
         }
         

@@ -219,8 +219,14 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                     
                     let code = data["code"].stringValue
                     
+                    let lkVends = data["lk_vends"].stringValue
+                    let lkPosts = data["lk_posts"].stringValue
+                    
                     userDataObject.name = name
                     userDataObject.code = code
+                    
+                    userDataObject.lkPosts = lkPosts
+                    userDataObject.lkVends = lkVends
                     
                     userDataObject.isLogged = true
                     
