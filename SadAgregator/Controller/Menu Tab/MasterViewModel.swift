@@ -32,6 +32,7 @@ class MasterViewModel : ObservableObject{
     lazy var setInputValDataManager = SetInputValDataManager()
     lazy var searchListWorkDataManager = SearchListWorkDataManager()
     lazy var refreshAlbsDataManager = RefreshAlbsDataManager()
+    lazy var albumsInProgressDataManager = AlbumsInProgressDataManager()
     lazy var getListWorkExtDataManager = GetListWorkExtDataManager()
     
     @Published var answers = [SimpleReqAnswer]()
@@ -83,6 +84,7 @@ class MasterViewModel : ObservableObject{
         setInputValDataManager.delegate = self
         searchListWorkDataManager.delegate = self
         refreshAlbsDataManager.delegate = self
+        albumsInProgressDataManager.delegate = self
         getListWorkExtDataManager.delegate = self
         
     }
@@ -284,15 +286,38 @@ extension MasterViewModel : RefreshAlbsDataManagerDelegate{
     func didGetRefreshAlbsData(data: JSON) {
         
         DispatchQueue.main.async {
+            self.checkAlbumRefreshProgress()
+        }
+        
+    }
+    
+    func didFailGettingRefreshAlbsDataWithError(error: String) {
+        print("Error with RefreshAlbsDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - AlbumsInProgressDataManager
+
+extension MasterViewModel : AlbumsInProgressDataManagerDelegate{
+    
+    func checkAlbumRefreshProgress(){
+        albumsInProgressDataManager.getAlbumsInProgressData(key: key)
+    }
+    
+    func didGetAlbumsInProgressData(data: JSON) {
+        
+        DispatchQueue.main.async {
             
             if data["result"].intValue == 1{
-               
+                
                 self.getStepData()
+                
                 self.shouldShowAnimationInListSelect = false
                 
             }else{
                 Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
-                    self.refreshAlbsData()
+                    self.checkAlbumRefreshProgress()
                 }
             }
             
@@ -300,8 +325,8 @@ extension MasterViewModel : RefreshAlbsDataManagerDelegate{
         
     }
     
-    func didFailGettingRefreshAlbsDataWithError(error: String) {
-        print("Error with RefreshAlbsDataManager : \(error)")
+    func didFailGettingAlbumsInProgressDataWithError(error: String) {
+        print("Error with AlbumsInProgressDataManager : \(error)")
     }
     
 }
