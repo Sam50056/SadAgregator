@@ -98,7 +98,7 @@ struct MasterNastroekView: View {
             }
             
         }
-        .navigationBarTitle(Text("Мастер Настроек"), displayMode: .inline)
+        .navigationBarTitle(Text("Мастер настроек"), displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
                                 Button(action: {
