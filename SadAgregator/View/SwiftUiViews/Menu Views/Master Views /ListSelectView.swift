@@ -64,8 +64,10 @@ struct ListSelectView: View {
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color(.white))
-                    .cornerRadius(8)
-                    .shadow(radius: 4)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color(#colorLiteral(red: 0.8500244617, green: 0.8551172614, blue: 0.854884088, alpha: 1)))
+                    )
                     
                 }
                 
@@ -111,8 +113,10 @@ struct ListSelectView: View {
                 }
                 .padding()
                 .background(Color(.white))
-                .cornerRadius(12)
-                .shadow(radius: 4)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color(#colorLiteral(red: 0.8500244617, green: 0.8551172614, blue: 0.854884088, alpha: 1)))
+                )
                 
             }
             .padding(.horizontal,16)

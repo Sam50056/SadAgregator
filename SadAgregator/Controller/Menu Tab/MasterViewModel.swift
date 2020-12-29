@@ -117,7 +117,7 @@ extension MasterViewModel{
         
         for answer in currentViewData!["ansqers"].arrayValue{
             
-            answers.append(SimpleReqAnswer(id: answer["id"].intValue, capt: answer["capt"].stringValue, hint: answer["hint"].stringValue))
+            answers.append(SimpleReqAnswer(id: answer["id"].intValue, capt: answer["capt"].stringValue, hint: answer["hint"].stringValue, rec: answer["rec"].intValue))
             
         }
         
