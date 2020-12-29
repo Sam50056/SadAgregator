@@ -34,6 +34,7 @@ class MasterViewModel : ObservableObject{
     lazy var refreshAlbsDataManager = RefreshAlbsDataManager()
     lazy var albumsInProgressDataManager = AlbumsInProgressDataManager()
     lazy var getListWorkExtDataManager = GetListWorkExtDataManager()
+    lazy var setListWorkDataManager = SetListWorkDataManager()
     
     @Published var answers = [SimpleReqAnswer]()
     
@@ -86,6 +87,7 @@ class MasterViewModel : ObservableObject{
         refreshAlbsDataManager.delegate = self
         albumsInProgressDataManager.delegate = self
         getListWorkExtDataManager.delegate = self
+        setListWorkDataManager.delegate = self
         
     }
     
@@ -419,6 +421,36 @@ extension MasterViewModel : GetListWorkExtDataManagerDelegate{
     
     func didFailGettingGetListWorkExtDataWithError(error: String) {
         print("Error with GetListWorkExtDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - SetListWorkDataManager
+
+extension MasterViewModel : SetListWorkDataManagerDelegate{
+    
+    func donePressedInListWork(){
+        setListWorkDataManager.getSetListWorkData(key: key, stepId: currentStepId!)
+    }
+    
+    func didGetSetListWorkData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if let nextStepId = data["next_step_id"].string {
+                
+                self.nextStepId = nextStepId
+                
+                getStepData()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingSetListWorkDataWithError(error: String) {
+        print("Error with SetListWorkDataManager : \(error)")
     }
     
 }

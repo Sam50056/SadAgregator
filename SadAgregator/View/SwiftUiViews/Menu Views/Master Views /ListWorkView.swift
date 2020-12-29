@@ -120,7 +120,7 @@ struct ListWorkView: View {
             
             Button(action: {
                 
-                
+                masterViewModel.donePressedInListWork()
                 
             }){
                 
