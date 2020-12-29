@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureNotification(application: application)
         
         IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Готово"
         
         print("\(String(describing: Realm.Configuration.defaultConfiguration.fileURL)) REALM FILE URL")
         
