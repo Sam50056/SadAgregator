@@ -63,10 +63,9 @@ class MasterViewModel : ObservableObject{
             
             if listWorkSearchTextFieldText == ""{
                 list.removeAll()
-                return
+            }else{
+                getSearchListWorkData()
             }
-            
-            getSearchListWorkData()
             
         }
     }
