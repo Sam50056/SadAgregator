@@ -84,6 +84,7 @@
 		22D9021D259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9021C259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift */; };
 		22D90221259AC9EF009732CC /* AlbumsInProgressDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90220259AC9EF009732CC /* AlbumsInProgressDataManager.swift */; };
 		22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90223259AD188009732CC /* SetListWorkDataManager.swift */; };
+		22D9022F259BFFC3009732CC /* AddPointRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9022E259BFFC3009732CC /* AddPointRequestView.swift */; };
 		22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */; };
 		22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */; };
 		44D7F3DB0392E9E53844BA25 /* Pods_SadAgregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */; };
@@ -171,6 +172,7 @@
 		22D9021C259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrDeleteListWorkExtDataManager.swift; sourceTree = "<group>"; };
 		22D90220259AC9EF009732CC /* AlbumsInProgressDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsInProgressDataManager.swift; sourceTree = "<group>"; };
 		22D90223259AD188009732CC /* SetListWorkDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListWorkDataManager.swift; sourceTree = "<group>"; };
+		22D9022E259BFFC3009732CC /* AddPointRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointRequestView.swift; sourceTree = "<group>"; };
 		22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSimpleReqDataManager.swift; sourceTree = "<group>"; };
 		22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListSelectDataManager.swift; sourceTree = "<group>"; };
 		8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.debug.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				22C9221225814CA40063B5D4 /* MenuView.swift */,
+				22D9022E259BFFC3009732CC /* AddPointRequestView.swift */,
 				22A155E02582C746000EAB64 /* Auth Views */,
 				2265853B259017C8004587AA /* Profile Views */,
 				22595793259667C10088C7E4 /* Master Views  */,
@@ -737,6 +740,7 @@
 				225957A2259668540088C7E4 /* ListSelectView.swift in Sources */,
 				2265853F259017FA004587AA /* ProfileView.swift in Sources */,
 				227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */,
+				22D9022F259BFFC3009732CC /* AddPointRequestView.swift in Sources */,
 				22A49CB42566645800CCC781 /* PostTableViewCell.swift in Sources */,
 				22906B3A2578293500F00B0D /* VendorCardDataManager.swift in Sources */,
 				2265854325901812004587AA /* AlertWithTextFieldView.swift in Sources */,
