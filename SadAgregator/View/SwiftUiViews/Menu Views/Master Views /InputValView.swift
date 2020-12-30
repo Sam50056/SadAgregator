@@ -45,6 +45,7 @@ struct InputValView: View {
             .padding()
             .frame(maxWidth: .infinity)
             .background(Color(.white))
+            .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color(#colorLiteral(red: 0.8500244617, green: 0.8551172614, blue: 0.854884088, alpha: 1)))
