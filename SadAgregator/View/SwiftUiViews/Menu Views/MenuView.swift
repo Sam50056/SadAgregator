@@ -217,18 +217,22 @@ struct MenuView: View {
                                 }
                                 .padding(.vertical, 5)
                                 
-                                HStack(spacing: 26){
+                                NavigationLink(destination: AddPointRequestView()){
                                     
-                                    Image(systemName: "person.badge.plus.fill")
-                                        .resizable()
-                                        .frame(width: 20, height: 20, alignment: .center)
-                                        .foregroundColor(Color(.systemBlue))
-                                    
-                                    Text("Новый поставщик")
-                                        .font(.custom("", size: 16))
+                                    HStack(spacing: 26){
+                                        
+                                        Image(systemName: "person.badge.plus.fill")
+                                            .resizable()
+                                            .frame(width: 20, height: 20, alignment: .center)
+                                            .foregroundColor(Color(.systemBlue))
+                                        
+                                        Text("Новый поставщик")
+                                            .font(.custom("", size: 16))
+                                        
+                                    }
+                                    .padding(.vertical, 5)
                                     
                                 }
-                                .padding(.vertical, 5)
                                 
                             }
                             
