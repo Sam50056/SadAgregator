@@ -87,6 +87,7 @@
 		22D9022F259BFFC3009732CC /* AddPointRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9022E259BFFC3009732CC /* AddPointRequestView.swift */; };
 		22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90232259C023B009732CC /* FavoritePostsView.swift */; };
 		22D90236259C0359009732CC /* MyPostsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90235259C0359009732CC /* MyPostsDataManager.swift */; };
+		22D90239259C1546009732CC /* SendQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90238259C1546009732CC /* SendQuestionView.swift */; };
 		22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */; };
 		22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */; };
 		44D7F3DB0392E9E53844BA25 /* Pods_SadAgregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */; };
@@ -177,6 +178,7 @@
 		22D9022E259BFFC3009732CC /* AddPointRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointRequestView.swift; sourceTree = "<group>"; };
 		22D90232259C023B009732CC /* FavoritePostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostsView.swift; sourceTree = "<group>"; };
 		22D90235259C0359009732CC /* MyPostsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsDataManager.swift; sourceTree = "<group>"; };
+		22D90238259C1546009732CC /* SendQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendQuestionView.swift; sourceTree = "<group>"; };
 		22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSimpleReqDataManager.swift; sourceTree = "<group>"; };
 		22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListSelectDataManager.swift; sourceTree = "<group>"; };
 		8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.debug.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			children = (
 				22C9221225814CA40063B5D4 /* MenuView.swift */,
 				22D9022E259BFFC3009732CC /* AddPointRequestView.swift */,
+				22D90238259C1546009732CC /* SendQuestionView.swift */,
 				22A155E02582C746000EAB64 /* Auth Views */,
 				2265853B259017C8004587AA /* Profile Views */,
 				22595793259667C10088C7E4 /* Master Views  */,
@@ -777,6 +780,7 @@
 				2268869725995C070079933D /* SearchListWorkDataManager.swift in Sources */,
 				22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */,
 				22A155ED2584E766000EAB64 /* MenuViewModel.swift in Sources */,
+				22D90239259C1546009732CC /* SendQuestionView.swift in Sources */,
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
 				2268869C25996B920079933D /* RefreshAlbsDataManager.swift in Sources */,
 				22782906258AC7FE00B435FA /* Extensions.swift in Sources */,
