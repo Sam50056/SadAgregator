@@ -24,7 +24,7 @@ struct SendQuestionView : View {
                     TextFieldWithDividerView(text: $text1, placeholderText: "Email")
                     
                     MultilineTextView(text: $text2)
-                        .frame(height: 60)
+                        .frame(height: 120)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color(#colorLiteral(red: 0.8500244617, green: 0.8551172614, blue: 0.854884088, alpha: 1)))

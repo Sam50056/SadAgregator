@@ -15,11 +15,13 @@ struct MultilineTextView: UIViewRepresentable {
         
         let view = UITextView()
         
-        view.isScrollEnabled = false
+        view.isScrollEnabled = true
         
         view.isEditable = true
         
         view.isUserInteractionEnabled = true
+        
+        view.font = .systemFont(ofSize: 16)
         
         return view
     }
