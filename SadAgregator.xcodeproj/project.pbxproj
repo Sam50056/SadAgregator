@@ -88,6 +88,7 @@
 		22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90232259C023B009732CC /* FavoritePostsView.swift */; };
 		22D90236259C0359009732CC /* MyPostsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90235259C0359009732CC /* MyPostsDataManager.swift */; };
 		22D90239259C1546009732CC /* SendQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90238259C1546009732CC /* SendQuestionView.swift */; };
+		22D9023D259C1988009732CC /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9023C259C1988009732CC /* MultilineTextView.swift */; };
 		22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */; };
 		22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */; };
 		44D7F3DB0392E9E53844BA25 /* Pods_SadAgregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */; };
@@ -179,6 +180,7 @@
 		22D90232259C023B009732CC /* FavoritePostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostsView.swift; sourceTree = "<group>"; };
 		22D90235259C0359009732CC /* MyPostsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsDataManager.swift; sourceTree = "<group>"; };
 		22D90238259C1546009732CC /* SendQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendQuestionView.swift; sourceTree = "<group>"; };
+		22D9023C259C1988009732CC /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
 		22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSimpleReqDataManager.swift; sourceTree = "<group>"; };
 		22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListSelectDataManager.swift; sourceTree = "<group>"; };
 		8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.debug.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				226886A52599EDD00079933D /* ActivityIndicatorView.swift */,
+				22D9023C259C1988009732CC /* MultilineTextView.swift */,
 			);
 			path = "UIKit VIews";
 			sourceTree = "<group>";
@@ -784,6 +787,7 @@
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
 				2268869C25996B920079933D /* RefreshAlbsDataManager.swift in Sources */,
 				22782906258AC7FE00B435FA /* Extensions.swift in Sources */,
+				22D9023D259C1988009732CC /* MultilineTextView.swift in Sources */,
 				2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */,
 				226886A62599EDD00079933D /* ActivityIndicatorView.swift in Sources */,
 				22A155DD2582C5D8000EAB64 /* AuthView.swift in Sources */,
