@@ -196,26 +196,30 @@ struct MenuView: View {
                                     
                                 }
                                 
-                                HStack(spacing: 23){
+                                NavigationLink(destination: FavoritePostsView()){
                                     
-                                    Image(systemName: "rectangle.fill.on.rectangle.fill")
-                                        .resizable()
-                                        .frame(width: 23, height: 20, alignment: .center)
-                                        .foregroundColor(Color(.systemBlue))
-                                    
-                                    Text("Избранные посты")
-                                        .font(.custom("", size: 16))
-                                    
-                                    Spacer()
-                                    
-                                    if menuViewModel.lkPosts != "0"{
-                                        Text(menuViewModel.lkPosts)
+                                    HStack(spacing: 23){
+                                        
+                                        Image(systemName: "rectangle.fill.on.rectangle.fill")
+                                            .resizable()
+                                            .frame(width: 23, height: 20, alignment: .center)
+                                            .foregroundColor(Color(.systemBlue))
+                                        
+                                        Text("Избранные посты")
                                             .font(.custom("", size: 16))
-                                            .foregroundColor(Color(.systemGray))
+                                        
+                                        Spacer()
+                                        
+                                        if menuViewModel.lkPosts != "0"{
+                                            Text(menuViewModel.lkPosts)
+                                                .font(.custom("", size: 16))
+                                                .foregroundColor(Color(.systemGray))
+                                        }
+                                        
                                     }
+                                    .padding(.vertical, 5)
                                     
                                 }
-                                .padding(.vertical, 5)
                                 
                                 NavigationLink(destination: AddPointRequestView()){
                                     

@@ -2128,6 +2128,24 @@
             </objects>
             <point key="canvasLocation" x="2611" y="1636"/>
         </scene>
+        <!--Favorite Posts View Controller-->
+        <scene sceneID="9fG-Vg-xsa">
+            <objects>
+                <tableViewController storyboardIdentifier="FavoritePostsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qX2-PD-Q56" customClass="FavoritePostsViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Gux-2L-asI">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="qX2-PD-Q56" id="fGM-wd-Yb5"/>
+                            <outlet property="delegate" destination="qX2-PD-Q56" id="eTW-kj-oAS"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dRw-bK-FJn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3906" y="1636"/>
+        </scene>
         <!--Search View Controller-->
         <scene sceneID="Wua-F5-Agj">
             <objects>
