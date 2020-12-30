@@ -21,11 +21,11 @@ struct AddPointRequestView: View {
                 
                 VStack(spacing: 32){
                     
-                    AddPointRequestViewSubView(text: $text1, placeholderText: "Номер места")
+                    TextFieldWithDividerView(text: $text1, placeholderText: "Номер места")
                     
-                    AddPointRequestViewSubView(text: $text2, placeholderText: "Ссылка на поставщика в vk.com")
+                    TextFieldWithDividerView(text: $text2, placeholderText: "Ссылка на поставщика в vk.com")
                     
-                    AddPointRequestViewSubView(text: $text3, placeholderText: "Комментарий")
+                    TextFieldWithDividerView(text: $text3, placeholderText: "Комментарий")
                     
                 }
                 
@@ -66,7 +66,7 @@ struct AddPointRequestView_Previews: PreviewProvider {
     }
 }
 
-struct AddPointRequestViewSubView : View{
+struct TextFieldWithDividerView : View{
     
     @Binding var text : String
     
