@@ -39,8 +39,20 @@ class MasterViewModel : ObservableObject{
     @Published var answers = [SimpleReqAnswer]()
     
     @Published var items = [ListSelectItem]()
+    @Published var filteredItems = [ListSelectItem]()
     @Published var shouldShowAlertInListSelect = false
     @Published var shouldShowAnimationInListSelect = false
+    @Published var listSelectTextFieldText = "" {
+        didSet{
+            
+            if listSelectTextFieldText != "" {
+                filteredItems = items.filter{$0.capt.lowercased().contains(listSelectTextFieldText.lowercased())}
+            }else{
+                filteredItems = items
+            }
+            
+        }
+    }
     
     @Published var inputValTextFieldText = "" {
         didSet {

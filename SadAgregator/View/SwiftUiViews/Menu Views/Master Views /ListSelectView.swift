@@ -58,7 +58,7 @@ struct ListSelectView: View {
                             .frame(width: 20, height: 20, alignment: .center)
                             .foregroundColor(Color(.systemGray))
                         
-                        TextField("Поиск по списку", text: $text)
+                        TextField("Поиск по списку", text: $masterViewModel.listSelectTextFieldText)
                         
                     }
                     .padding()
@@ -72,53 +72,58 @@ struct ListSelectView: View {
                     
                 }
                 
-                VStack{
+                if !masterViewModel.filteredItems.isEmpty {
                     
-                    ForEach(masterViewModel.items , id: \.id){ item in
+                    VStack{
                         
-                        VStack{
+                        ForEach(masterViewModel.filteredItems , id: \.id){ item in
                             
-                            HStack{
+                            VStack{
                                 
-                                VStack(alignment: .leading, spacing: 8){
+                                HStack{
                                     
-                                    Text(item.capt)
+                                    VStack(alignment: .leading, spacing: 8){
+                                        
+                                        Text(item.capt)
+                                        
+                                        if item.hint != ""{
+                                            Text(item.hint)
+                                                .foregroundColor(Color(.systemGray))
+                                        }
+                                        
+                                    }
+                                    .font(.system(size: 16))
                                     
-                                    if item.hint != ""{
-                                        Text(item.hint)
-                                            .foregroundColor(Color(.systemGray))
+                                    Spacer()
+                                    
+                                    if item.button != ""{
+                                        Text(item.button)
+                                            .foregroundColor(Color(.systemBlue))
                                     }
                                     
                                 }
-                                .font(.system(size: 16))
                                 
-                                Spacer()
-                                
-                                if item.button != ""{
-                                    Text(item.button)
-                                        .foregroundColor(Color(.systemBlue))
-                                }
+                                Divider()
                                 
                             }
+                            .background(item.rec == 1 ? Color(#colorLiteral(red: 0.9177419543, green: 0.9516320825, blue: 0.9884006381, alpha: 1)) : Color.white)
+                            .onTapGesture {
+                                masterViewModel.selectListSelectViewAnswer(id: item.id)
+                            }
                             
-                            Divider()
-                            
-                        }
-                        .background(item.rec == 1 ? Color(#colorLiteral(red: 0.9177419543, green: 0.9516320825, blue: 0.9884006381, alpha: 1)) : Color.white)
-                        .onTapGesture {
-                            masterViewModel.selectListSelectViewAnswer(id: item.id)
                         }
                         
                     }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color(.white))
+                    .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color(#colorLiteral(red: 0.8500244617, green: 0.8551172614, blue: 0.854884088, alpha: 1)))
+                    )
                     
                 }
-                .padding()
-                .background(Color(.white))
-                .cornerRadius(8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color(#colorLiteral(red: 0.8500244617, green: 0.8551172614, blue: 0.854884088, alpha: 1)))
-                )
                 
             }
             .padding(.horizontal,16)
@@ -131,10 +136,13 @@ struct ListSelectView: View {
                     masterViewModel.shouldShowAlertInListSelect = false
                 })
             }
-
+            
             ActivityIndicatorView(isAnimating : $masterViewModel.shouldShowAnimationInListSelect, style: .large)
                 .frame(width: 50, height: 50, alignment: .center)
             
+        }
+        .onAppear{
+            masterViewModel.filteredItems = masterViewModel.items
         }
         
     }
