@@ -10,22 +10,14 @@ import SwiftUI
 
 struct AuthView: View {
     
-    var key : String
-    
-    @Binding var isPresented : Bool
-    
-    @Binding var isLogged : Bool
-    
-    @State var isModalPresented : Bool = true
-    
     @State var showLogin : Bool
     
     var body: some View {
         
         if showLogin{
-            LoginView(key: key, shouldShowLogin: $showLogin)
+            LoginView(shouldShowLogin: $showLogin)
         }else{
-            RegView(key: key, shouldShowLogin: $showLogin)
+            RegView(shouldShowLogin: $showLogin)
         }
         
     }

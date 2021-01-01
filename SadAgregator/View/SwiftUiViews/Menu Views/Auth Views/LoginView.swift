@@ -13,8 +13,6 @@ struct LoginView: View {
     
     let realm = try! Realm()
     
-    var key : String
-    
     @EnvironmentObject var menuViewModel : MenuViewModel
     
     @Binding var shouldShowLogin : Bool
@@ -92,7 +90,7 @@ struct LoginView: View {
                         
                         menuViewModel.loadUserData()
                         
-                        AuthDataManager(delegate: self).getAuthData(key: key, login: emailText, pass: passText)
+                        AuthDataManager(delegate: self).getAuthData(key: menuViewModel.key, login: emailText, pass: passText)
                         
                     }, label: {
                         
@@ -187,7 +185,7 @@ extension LoginView : AuthDataManagerDelegate , CheckKeysDataManagerDelegate {
     
     func didGetAuthData(data: JSON) {
         
-        CheckKeysDataManager(delegate: self).getKeysData(key: key)
+        CheckKeysDataManager(delegate: self).getKeysData(key: menuViewModel.key)
         
     }
     
@@ -228,6 +226,7 @@ extension LoginView : AuthDataManagerDelegate , CheckKeysDataManagerDelegate {
                 
                 menuViewModel.isLogged = true
                 
+                menuViewModel.showModalReg = false
                 menuViewModel.showModalLogIn = false
                 
             }

@@ -13,8 +13,6 @@ struct RegView: View {
     
     let realm = try! Realm()
     
-    var key : String
-    
     @EnvironmentObject var menuViewModel : MenuViewModel
     
     @Binding var shouldShowLogin : Bool
@@ -121,7 +119,7 @@ struct RegView: View {
                         
                         menuViewModel.loadUserData()
                         
-                        RegisterDataManager(delegate: self).getRegisterData(key: key, email: emailText, name: nameText, password: passText, phone: phoneText)
+                        RegisterDataManager(delegate: self).getRegisterData(key: menuViewModel.key, email: emailText, name: nameText, password: passText, phone: phoneText)
                         
                     }, label: {
                         
@@ -205,7 +203,7 @@ extension RegView : RegisterDataManagerDelegate , CheckKeysDataManagerDelegate{
     
     func didGetRegisterData(data: JSON) {
         
-        CheckKeysDataManager(delegate: self).getKeysData(key: key)
+        CheckKeysDataManager(delegate: self).getKeysData(key: menuViewModel.key)
         
     }
     
@@ -247,6 +245,7 @@ extension RegView : RegisterDataManagerDelegate , CheckKeysDataManagerDelegate{
                 menuViewModel.isLogged = true
                 
                 menuViewModel.showModalReg = false
+                menuViewModel.showModalLogIn = false
                 
             }
             

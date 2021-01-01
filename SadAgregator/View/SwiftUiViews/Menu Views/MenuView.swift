@@ -38,7 +38,7 @@ struct MenuView: View {
                             
                             List{
                                 
-                                NavigationLink(destination: AuthView(key: menuViewModel.key, isPresented: $menuViewModel.showModalLogIn, isLogged: $menuViewModel.isLogged, showLogin: true), isActive: $menuViewModel.showModalLogIn){
+                                NavigationLink(destination: AuthView(showLogin: true), isActive: $menuViewModel.showModalLogIn){
                                     
                                     HStack(spacing: 23){
                                         
@@ -55,7 +55,7 @@ struct MenuView: View {
                                     
                                 }
                                 
-                                NavigationLink(destination: AuthView(key: menuViewModel.key, isPresented: $menuViewModel.showModalReg, isLogged: $menuViewModel.isLogged, showLogin: false), isActive: $menuViewModel.showModalReg) {
+                                NavigationLink(destination: AuthView(showLogin: false), isActive: $menuViewModel.showModalReg) {
                                     HStack(spacing: 16){
                                         
                                         Image(systemName: "person.2.fill")
