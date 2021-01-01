@@ -12,6 +12,7 @@ PODS:
     - SDWebImage/Core (= 5.10.0)
   - SDWebImage/Core (5.10.0)
   - SwiftyJSON (5.0.0)
+  - VK-ios-sdk (1.6.1)
   - YandexMobileMetrica (3.12.0):
     - YandexMobileMetrica/Static (= 3.12.0)
   - YandexMobileMetrica/Static (3.12.0):
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - RealmSwift (~> 10.4.0)
   - SDWebImage (~> 5.0)
   - SwiftyJSON
+  - VK-ios-sdk
   - YandexMobileMetrica (= 3.12.0)
 
 SPEC REPOS:
@@ -41,6 +43,7 @@ SPEC REPOS:
     - RealmSwift
     - SDWebImage
     - SwiftyJSON
+    - VK-ios-sdk
     - YandexMobileMetrica
 
 SPEC CHECKSUMS:
@@ -52,8 +55,9 @@ SPEC CHECKSUMS:
   RealmSwift: 37a93ae742667948cc094a3c6ae3d006db32b66f
   SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  VK-ios-sdk: 104a8bc259199fb1fc621c1c93d7a9a6befb4ca0
   YandexMobileMetrica: 7ba67267e1ef841f77d5db17a5091b8e9eba911f
 
-PODFILE CHECKSUM: 282fbb011a2e320b884efddb9bc21b12c94a6309
+PODFILE CHECKSUM: 6d05908be0a2bfd72567b6e9434924e41315dbdf
 
 COCOAPODS: 1.10.0

@@ -9,6 +9,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import YandexMobileMetrica
 import RealmSwift
+import VK_ios_sdk
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         YMMYandexMetrica.activate(with: configuration!)
         
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        VKSdk.processOpen(url, fromApplication: UIApplication.OpenURLOptionsKey.sourceApplication.rawValue)
+        
+        return true
+        
     }
     
     // MARK: UISceneSession Lifecycle

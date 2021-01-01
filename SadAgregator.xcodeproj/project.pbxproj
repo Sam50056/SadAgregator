@@ -17,6 +17,7 @@
 		22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E9B259135370097C9E6 /* GetProfileDataManager.swift */; };
 		22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E9F25924BD70097C9E6 /* UserChangeOptionDataManager.swift */; };
 		224584272592A6A60000B3D4 /* UserChangePassDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224584262592A6A60000B3D4 /* UserChangePassDataManager.swift */; };
+		224BC43B259FE61E003F147F /* VkAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC43A259FE61E003F147F /* VkAuthService.swift */; };
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		22595798259667F90088C7E4 /* MasterNastroekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22595797259667F90088C7E4 /* MasterNastroekView.swift */; };
@@ -106,6 +107,7 @@
 		22423E9B259135370097C9E6 /* GetProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileDataManager.swift; sourceTree = "<group>"; };
 		22423E9F25924BD70097C9E6 /* UserChangeOptionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChangeOptionDataManager.swift; sourceTree = "<group>"; };
 		224584262592A6A60000B3D4 /* UserChangePassDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChangePassDataManager.swift; sourceTree = "<group>"; };
+		224BC43A259FE61E003F147F /* VkAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkAuthService.swift; sourceTree = "<group>"; };
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		22595797259667F90088C7E4 /* MasterNastroekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterNastroekView.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				22A155E72584E408000EAB64 /* Auth */,
 				22423E9A259131F80097C9E6 /* Menu Managers */,
 				227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */,
+				224BC43A259FE61E003F147F /* VkAuthService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 				22A49CB42566645800CCC781 /* PostTableViewCell.swift in Sources */,
 				22906B3A2578293500F00B0D /* VendorCardDataManager.swift in Sources */,
 				2265854325901812004587AA /* AlertWithTextFieldView.swift in Sources */,
+				224BC43B259FE61E003F147F /* VkAuthService.swift in Sources */,
 				2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */,
 				22D90221259AC9EF009732CC /* AlbumsInProgressDataManager.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
@@ -943,14 +947,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F2L5WWWBR4;
+				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Sam.SadAgregator;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tk-sad.SadAgregator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -965,14 +969,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F2L5WWWBR4;
+				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Sam.SadAgregator;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tk-sad.SadAgregator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
