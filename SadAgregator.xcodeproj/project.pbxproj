@@ -228,6 +228,39 @@
 			path = "Menu Managers";
 			sourceTree = "<group>";
 		};
+		224BC43D259FEE11003F147F /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				2253EE252569D1C500103C86 /* Main Screen Managers */,
+				22A0534B256BCDE10016B40A /* Activity Line Managers */,
+				22A0534C256BCDFC0016B40A /* Activity Point Managers */,
+				22CE4F8F25869E5C0060E9DF /* Search Managers */,
+				22CE4F9025869E690060E9DF /* Vendor Managers */,
+				22A155E72584E408000EAB64 /* Auth Managers */,
+				22423E9A259131F80097C9E6 /* Menu Managers */,
+				227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		224BC441259FEE42003F147F /* Supporting Files  */ = {
+			isa = PBXGroup;
+			children = (
+				226D9447258D2EF9008CEC4A /* HeroHelper.swift */,
+				22782905258AC7FE00B435FA /* Extensions.swift */,
+				22A155E32583E11C000EAB64 /* Constants.swift */,
+			);
+			path = "Supporting Files ";
+			sourceTree = "<group>";
+		};
+		224BC442259FEE94003F147F /* Social Media Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				224BC43A259FE61E003F147F /* VkAuthService.swift */,
+			);
+			path = "Social Media Stuff";
+			sourceTree = "<group>";
+		};
 		2253EE252569D1C500103C86 /* Main Screen Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,19 +422,10 @@
 		228CB774255BF996002B4A96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				226D9447258D2EF9008CEC4A /* HeroHelper.swift */,
-				22782905258AC7FE00B435FA /* Extensions.swift */,
-				22A155E32583E11C000EAB64 /* Constants.swift */,
+				224BC441259FEE42003F147F /* Supporting Files  */,
 				22634AB425858C7300DF6FDB /* Data Base Models  */,
-				2253EE252569D1C500103C86 /* Main Screen Managers */,
-				22A0534B256BCDE10016B40A /* Activity Line Managers */,
-				22A0534C256BCDFC0016B40A /* Activity Point Managers */,
-				22CE4F8F25869E5C0060E9DF /* Search Managers */,
-				22CE4F9025869E690060E9DF /* Vendor Managers */,
-				22A155E72584E408000EAB64 /* Auth */,
-				22423E9A259131F80097C9E6 /* Menu Managers */,
-				227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */,
-				224BC43A259FE61E003F147F /* VkAuthService.swift */,
+				224BC43D259FEE11003F147F /* Managers */,
+				224BC442259FEE94003F147F /* Social Media Stuff */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -481,13 +505,13 @@
 			path = SwiftUiViews;
 			sourceTree = "<group>";
 		};
-		22A155E72584E408000EAB64 /* Auth */ = {
+		22A155E72584E408000EAB64 /* Auth Managers */ = {
 			isa = PBXGroup;
 			children = (
 				22A155E82584E43C000EAB64 /* AuthDataManager.swift */,
 				22216A4325853FCC00D5248B /* RegisterDataManager.swift */,
 			);
-			path = Auth;
+			path = "Auth Managers";
 			sourceTree = "<group>";
 		};
 		22A49CA7256661D700CCC781 /* cells */ = {
