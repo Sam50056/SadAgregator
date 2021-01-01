@@ -199,54 +199,18 @@ extension RegView {
 
 //MARK: - RegisterDataManagerDelegate
 
-extension RegView : RegisterDataManagerDelegate , CheckKeysDataManagerDelegate{
+extension RegView : RegisterDataManagerDelegate {
     
     func didGetRegisterData(data: JSON) {
         
-        CheckKeysDataManager(delegate: self).getKeysData(key: menuViewModel.key)
-        
-    }
-    
-    func didGetCheckKeysData(data: JSON) {
-        
-        let userDataObject = UserData()
-        
-        let key = data["key"].stringValue
-        
-        let anonym = data["anonym"].stringValue
-        
-        userDataObject.key = key
-        
-        if anonym == "0"{
+        DispatchQueue.main.async {
             
-            userDataObject.isLogged = true
+            menuViewModel.showModalLogIn = false
+            menuViewModel.showModalReg = false
             
-            let name = data["name"].stringValue
-            
-            let code = data["code"].stringValue
-            
-            userDataObject.name = name
-            userDataObject.code = code
-            
-            DispatchQueue.main.async { [self]
-                
-                deleteAllDataFromDB()
-                
-                do{
-                    try self.realm.write{
-                        self.realm.add(userDataObject)
-                    }
-                }catch{
-                    print("Error saving data to realm , \(error.localizedDescription)")
-                }
-                
-                menuViewModel.loadUserData()
-                
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 menuViewModel.isLogged = true
-                
-                menuViewModel.showModalReg = false
-                menuViewModel.showModalLogIn = false
-                
+                menuViewModel.updateData()
             }
             
         }
@@ -255,10 +219,6 @@ extension RegView : RegisterDataManagerDelegate , CheckKeysDataManagerDelegate{
     
     func didFailGettingRegisterDataWithError(error: String) {
         print("Error with RegisterDataManager: \(error)")
-    }
-    
-    func didFailGettingCheckKeysData(error: String) {
-        print("Error with CheckKeysDataManager: \(error)")
     }
     
 }

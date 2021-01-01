@@ -181,54 +181,18 @@ extension LoginView {
 
 //MARK: - AuthDataManagerDelegate Stuff
 
-extension LoginView : AuthDataManagerDelegate , CheckKeysDataManagerDelegate {
+extension LoginView : AuthDataManagerDelegate {
     
     func didGetAuthData(data: JSON) {
         
-        CheckKeysDataManager(delegate: self).getKeysData(key: menuViewModel.key)
-        
-    }
-    
-    func didGetCheckKeysData(data: JSON) {
-        
-        let userDataObject = UserData()
-        
-        let key = data["key"].stringValue
-        
-        let anonym = data["anonym"].stringValue
-        
-        userDataObject.key = key
-        
-        if anonym == "0"{
+        DispatchQueue.main.async {
             
-            userDataObject.isLogged = true
+            menuViewModel.showModalLogIn = false
+            menuViewModel.showModalReg = false
             
-            let name = data["name"].stringValue
-            
-            let code = data["code"].stringValue
-            
-            userDataObject.name = name
-            userDataObject.code = code
-            
-            DispatchQueue.main.async { [self]
-                
-                deleteAllDataFromDB()
-                
-                do{
-                    try self.realm.write{
-                        self.realm.add(userDataObject)
-                    }
-                }catch{
-                    print("Error saving data to realm , \(error.localizedDescription)")
-                }
-                
-                menuViewModel.loadUserData()
-                
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 menuViewModel.isLogged = true
-                
-                menuViewModel.showModalReg = false
-                menuViewModel.showModalLogIn = false
-                
+                menuViewModel.updateData()
             }
             
         }
@@ -237,10 +201,6 @@ extension LoginView : AuthDataManagerDelegate , CheckKeysDataManagerDelegate {
     
     func didFailGettingAuthDataWithError(error: String) {
         print("Error with AuthDataManager: \(error)")
-    }
-    
-    func didFailGettingCheckKeysData(error: String) {
-        print("Error with CheckKeysDataManager: \(error)")
     }
     
 }
