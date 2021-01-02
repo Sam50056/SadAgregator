@@ -156,6 +156,17 @@ extension MenuViewModel {
         
     }
     
+    func getUserDataObject () -> UserData?{
+        
+        let userData = realm.objects(UserData.self)
+        
+        if let userDataObject = userData.first{
+            return userDataObject
+        }
+        
+        return nil
+    }
+    
     func deleteAllDataFromDB(){
         
         //Deleting everything from DB

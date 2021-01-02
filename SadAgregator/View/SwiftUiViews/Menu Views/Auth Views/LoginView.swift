@@ -163,28 +163,6 @@ struct LoginView: View {
     
 }
 
-//MARK: - Data Manipulation Methods
-
-extension LoginView {
-    
-    func deleteAllDataFromDB(){
-        
-        //Deleting everything from DB
-        do{
-            
-            try realm.write{
-                realm.deleteAll()
-            }
-            
-        }catch{
-            print("Error with deleting all data from Realm , \(error) ERROR DELETING REALM")
-        }
-        
-    }
-    
-}
-
-
 //MARK: - AuthDataManagerDelegate Stuff
 
 extension LoginView : AuthDataManagerDelegate {
@@ -197,6 +175,15 @@ extension LoginView : AuthDataManagerDelegate {
             menuViewModel.showModalReg = false
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                
+                if let userDataObject = menuViewModel.getUserDataObject(){
+                    
+                    try! realm.write{
+                        userDataObject.key = data["key"].stringValue
+                    }
+                    
+                }
+                
                 menuViewModel.isLogged = true
                 menuViewModel.updateData()
             }
