@@ -18,6 +18,7 @@
 		22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E9F25924BD70097C9E6 /* UserChangeOptionDataManager.swift */; };
 		224584272592A6A60000B3D4 /* UserChangePassDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224584262592A6A60000B3D4 /* UserChangePassDataManager.swift */; };
 		224BC43B259FE61E003F147F /* VkAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC43A259FE61E003F147F /* VkAuthService.swift */; };
+		224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC44925A013C3003F147F /* AuthSocialDataManager.swift */; };
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		22595798259667F90088C7E4 /* MasterNastroekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22595797259667F90088C7E4 /* MasterNastroekView.swift */; };
@@ -108,6 +109,7 @@
 		22423E9F25924BD70097C9E6 /* UserChangeOptionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChangeOptionDataManager.swift; sourceTree = "<group>"; };
 		224584262592A6A60000B3D4 /* UserChangePassDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChangePassDataManager.swift; sourceTree = "<group>"; };
 		224BC43A259FE61E003F147F /* VkAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkAuthService.swift; sourceTree = "<group>"; };
+		224BC44925A013C3003F147F /* AuthSocialDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSocialDataManager.swift; sourceTree = "<group>"; };
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		22595797259667F90088C7E4 /* MasterNastroekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterNastroekView.swift; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 			children = (
 				22A155E82584E43C000EAB64 /* AuthDataManager.swift */,
 				22216A4325853FCC00D5248B /* RegisterDataManager.swift */,
+				224BC44925A013C3003F147F /* AuthSocialDataManager.swift */,
 			);
 			path = "Auth Managers";
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 				22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */,
 				22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */,
 				22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */,
+				224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */,
 				2268869325994F030079933D /* ListWorkView.swift in Sources */,
 				22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */,
 				22634AB625858CA800DF6FDB /* UserData.swift in Sources */,
