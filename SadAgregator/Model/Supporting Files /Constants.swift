@@ -20,6 +20,10 @@ struct K {
     
     static let simpleCellHeight : CGFloat = 60
     
+    static let simpleHeaderCellHeight : CGFloat = 50
+    
+    //MARK: - Design funcs
+    
     static func makeHeightForVendCell(vend : JSON) -> CGFloat {
         
         var height = 80
