@@ -9,9 +9,9 @@ import Foundation
 import VK_ios_sdk
 
 protocol VKAuthServiceDelegate{
-    func authServiceShouldShow(viewController : UIViewController)
-    func authServiceSignIn()
-    func authServiceSignInDidFail()
+    func vkAuthServiceShouldShow(viewController : UIViewController)
+    func vkAuthServiceSignIn()
+    func vkAuthServiceSignInDidFail()
 }
 
 class VKAuthService : NSObject ,  VKSdkDelegate , VKSdkUIDelegate{
@@ -50,9 +50,9 @@ class VKAuthService : NSObject ,  VKSdkDelegate , VKSdkUIDelegate{
                 VKSdk.authorize(scope)
             case .authorized:
                 print("Authorized")
-                self.delegate?.authServiceSignIn()
+                self.delegate?.vkAuthServiceSignIn()
             default:
-                delegate?.authServiceSignInDidFail()
+                delegate?.vkAuthServiceSignInDidFail()
                 
             }
             
@@ -63,18 +63,18 @@ class VKAuthService : NSObject ,  VKSdkDelegate , VKSdkUIDelegate{
     func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
         print(#function)
         if result.token != nil {
-            delegate?.authServiceSignIn()
+            delegate?.vkAuthServiceSignIn()
         }
     }
     
     func vkSdkUserAuthorizationFailed() {
         print(#function)
-        delegate?.authServiceSignInDidFail()
+        delegate?.vkAuthServiceSignInDidFail()
     }
     
     func vkSdkShouldPresent(_ controller: UIViewController!) {
         print(#function)
-        delegate?.authServiceShouldShow(viewController: controller)
+        delegate?.vkAuthServiceShouldShow(viewController: controller)
     }
     
     func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {

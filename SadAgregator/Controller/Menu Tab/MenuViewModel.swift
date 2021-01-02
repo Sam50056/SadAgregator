@@ -113,21 +113,41 @@ extension MenuViewModel : VKAuthServiceDelegate{
         
     }
     
-    func authServiceShouldShow(viewController: UIViewController) {
+    func vkAuthServiceShouldShow(viewController: UIViewController) {
         
         //Presenting VK View Controller
         SceneDelegate.shared().window?.rootViewController?.present(viewController, animated: true, completion: nil)
         
     }
     
-    func authServiceSignIn() {
+    func vkAuthServiceSignIn() {
         print("Successfully Signed via VK")
+        
+        if let safeVkToken = vkAuthService.token{
+            
+            AuthSocialDataManager(delegate: self).getGetAuthSocialData(social: "VK", token: safeVkToken)
+            
+        }
     }
     
-    func authServiceSignInDidFail() {
+    func vkAuthServiceSignInDidFail() {
         print("Failed VK Sign In")
     }
     
+    
+}
+
+//MARK: - AuthSocialDataManagerDelegate
+
+extension MenuViewModel : AuthSocialDataManagerDelegate{
+    
+    func didGetAuthSocialData(data: JSON) {
+        print(data.stringValue)
+    }
+    
+    func didFailGettingAuthSocialDataWithError(error: String) {
+        
+    }
     
 }
 
