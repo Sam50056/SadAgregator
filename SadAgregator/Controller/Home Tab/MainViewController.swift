@@ -452,7 +452,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: index)
             
         default:
-            print("Error with indexPath (Got out of switch)")
+            print("Invalid Section")
         }
         
         return cell
