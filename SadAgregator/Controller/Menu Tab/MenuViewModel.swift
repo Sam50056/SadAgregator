@@ -107,6 +107,12 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
 
 extension MenuViewModel : VKAuthServiceDelegate{
     
+    func vkAuth(){
+        
+        vkAuthService.wakeUpSession()
+        
+    }
+    
     func authServiceShouldShow(viewController: UIViewController) {
         
         //Presenting VK View Controller

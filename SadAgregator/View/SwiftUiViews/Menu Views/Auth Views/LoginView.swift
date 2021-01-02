@@ -30,7 +30,7 @@ struct LoginView: View {
                 VStack(alignment: .leading, spacing: 16){
                     
                     Button(action: {
-                        menuViewModel.vkAuthService.wakeUpSession()
+                        menuViewModel.vkAuth()
                     }){
                         
                         HStack(spacing: 16){
