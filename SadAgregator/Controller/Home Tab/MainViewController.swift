@@ -37,7 +37,7 @@ class MainViewController: UIViewController {
     var postsArray = [JSON]()
     
     var page = 1
-    var rowForPaggingUpdate : Int = 21
+    var rowForPaggingUpdate : Int = 10
     
     var sizes : Array<[String]> {
         get{
@@ -356,8 +356,33 @@ extension MainViewController : UITextFieldDelegate {
 
 extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 8
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 + activityLineCellsArray.count + 1 + 1 + activityPointCellsArray.count + postsArray.count
+       
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case 2:
+            return 1
+        case 3:
+            return activityLineCellsArray.count
+        case 4:
+            return 1
+        case 5:
+            return activityPointCellsArray.count
+        case 6:
+            return 1
+        case 7:
+            return postsArray.count
+        default:
+            fatalError("Invalid Section")
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -368,13 +393,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             return cell
         }
         
-        let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count - 1 ///Max index (indexPath.row) for Activity line cells. So that 3 is because we have 3 static cells , then an array of activity line cells which is not static. So we do 3 + count of the array -1 (because array indexing starts from 0)  and get the max index we can put into switch. And what we'll put there will be 3..<array.count-1 This means that from 3rd index to 3 + array.count-1  all the cells will be "activityLineCell".
-        
-        let maxIndexForActivityPointCells = maxIndexForActivityLineCells + 1 + activityPointCellsArray.count  /// We take maxIndexForActivityLineCells and do + 1 because there is "postavshikiActivityCell" , then do + 1 again to get the index after that cell and that is the stating point for  activityPointCellsArray. And for getting the maxIndexForActivityPointCells , we add to that starting point or stating index the count of activityPointCellsArray.
-        
-        let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
-        
-        switch indexPath.row {
+        switch indexPath.section {
         
         case 0:
             
@@ -394,39 +413,39 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             
             cell = tableView.dequeueReusableCell(withIdentifier: "linesActivityCell", for: indexPath)
             
-        case 3...maxIndexForActivityLineCells:
+        case 3:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "activityLineCell", for: indexPath)
             
-            let index = indexPath.row - 3 // We do minus three , still that 3 (count of static cells)
+            let index = indexPath.row
             
             let activityLine = activityLineCellsArray[index]
             
             setUpActivityLineCell(cell: cell, data: activityLine)
             
-        case maxIndexForActivityLineCells + 1:
+        case 4:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postavshikiActivityCell", for: indexPath)
             
-        case maxIndexForActivityLineCells + 2...maxIndexForActivityPointCells:
+        case 5:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "activityPointCell", for: indexPath)
             
-            let index = indexPath.row - (maxIndexForActivityLineCells + 2)
+            let index = indexPath.row
             
             let activityPointCell = activityPointCellsArray[index]
             
             setUpActivityPointCell(cell: cell, data: activityPointCell)
             
-        case maxIndexForActivityPointCells + 1:
+        case 6:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
             
-        case maxIndexForActivityPointCells + 2...maxIndexForPosts:
+        case 7:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
             
-            let index = indexPath.row - (maxIndexForActivityPointCells + 2)
+            let index = indexPath.row
             
             let post = postsArray[index]
             
@@ -441,13 +460,9 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count - 1
-        let maxIndexForActivityPointCells = maxIndexForActivityLineCells + 1 + activityPointCellsArray.count
-        let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
-        
-        if indexPath.row == 1 {
+        if indexPath.section == 1 {
             return 126
-        }else if indexPath.row >= maxIndexForActivityPointCells + 2 && indexPath.row <= maxIndexForPosts{
+        }else if indexPath.section == 7{
             
             return K.postHeight
         }
@@ -459,13 +474,10 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         
         let index = indexPath.row
         
-        let maxIndexForActivityLineCells = 3 + activityLineCellsArray.count - 1
-        let maxIndexForActivityPointCells = maxIndexForActivityLineCells + 1 + activityPointCellsArray.count
-        let maxIndexForPosts = maxIndexForActivityPointCells + 1 + postsArray.count
         
-        if index >= 3 && index <= maxIndexForActivityLineCells{
+        if indexPath.section == 3{
             
-            let indexForCell = index - 3
+            let indexForCell = index
             
             let cellData = activityLineCellsArray[indexForCell]
             
@@ -473,9 +485,9 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             
             self.performSegue(withIdentifier: "goToLine", sender: self)
             
-        }else if  index >= maxIndexForActivityLineCells + 2 && index <= maxIndexForActivityPointCells{
+        }else if indexPath.section == 5{
             
-            let indexForCell = index - (maxIndexForActivityLineCells + 2)
+            let indexForCell = index
             
             let cellData = activityPointCellsArray[indexForCell]
             
@@ -490,15 +502,19 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.row == rowForPaggingUpdate{
+        if indexPath.section == 7{
             
-            page += 1
-            
-            rowForPaggingUpdate += 9
-            
-            mainPaggingDataManager.getMainPaggingData(key: key!, page: page)
-            
-            print("Done a request for page: \(page)")
+            if indexPath.row == rowForPaggingUpdate{
+                
+                page += 1
+                
+                rowForPaggingUpdate += 9
+                
+                mainPaggingDataManager.getMainPaggingData(key: key!, page: page)
+                
+                print("Done a request for page: \(page)")
+                
+            }
             
         }
         
