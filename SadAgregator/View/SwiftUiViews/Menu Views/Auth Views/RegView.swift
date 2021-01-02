@@ -30,15 +30,19 @@ struct RegView: View {
                 
                 VStack(alignment: .leading, spacing: 16){
                     
-                    HStack(spacing: 16){
-                        
-                        Image("vk")
-                            .resizable()
-                            .frame(width: 25, height: 25, alignment: .center)
-                            .cornerRadius(5)
-                        
-                        Text("Регистрация через Вконтаке")
-                        
+                    Button(action: {
+                        menuViewModel.vkAuth()
+                    }){
+                        HStack(spacing: 16){
+                            
+                            Image("vk")
+                                .resizable()
+                                .frame(width: 25, height: 25, alignment: .center)
+                                .cornerRadius(5)
+                            
+                            Text("Регистрация через Вконтаке")
+                            
+                        }
                     }
                     
                     HStack(spacing: 13){
