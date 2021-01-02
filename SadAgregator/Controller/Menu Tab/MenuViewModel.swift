@@ -32,6 +32,8 @@ class MenuViewModel : ObservableObject{
     
     @Published var showMaster = false
     
+    @Published var showAddPointRequestView = false
+    
     init() {
         
         loadUserData()

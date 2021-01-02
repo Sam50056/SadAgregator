@@ -221,7 +221,7 @@ struct MenuView: View {
                                     
                                 }
                                 
-                                NavigationLink(destination: AddPointRequestView()){
+                                NavigationLink(destination: AddPointRequestView(), isActive : $menuViewModel.showAddPointRequestView){
                                     
                                     HStack(spacing: 26){
                                         

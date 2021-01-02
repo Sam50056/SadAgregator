@@ -19,7 +19,7 @@ struct AddPointRequestDataManager {
     
     func getAddPointRequestData(key : String , place : String , vkUrl : String , comment : String){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_utils.AddPointRequest?AKey=&APlace=&AURL=&AComment="
+        let urlString = "https://agrapi.tk-sad.ru/agr_utils.AddPointRequest?AKey=\(key)&APlace=\(place == "" ? "-" : place)&AURL=\(vkUrl)&AComment=\(comment == "" ? "-" : comment)"
         
         print("URLString for AddPointRequestDataManager: \(urlString)")
         

@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import SwiftyJSON
 
 struct AddPointRequestView: View {
+    
+    @EnvironmentObject var menuViewModel : MenuViewModel
     
     @State var text1 = ""
     @State var text2 = ""
@@ -37,7 +40,7 @@ struct AddPointRequestView: View {
                     Spacer()
                     
                     Button(action: {
-                        
+                        AddPointRequestDataManager(delegate: self).getAddPointRequestData(key: menuViewModel.key, place: text1, vkUrl: text2, comment: text3)
                     }){
                         
                         Text("Добавить ссылку")
@@ -60,11 +63,32 @@ struct AddPointRequestView: View {
     
 }
 
-struct AddPointRequestView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddPointRequestView()
+//MARK: - AddPointRequestDataManagerDelegate
+
+extension AddPointRequestView : AddPointRequestDataManagerDelegate{
+    
+    func didGetAddPointRequestData(data: JSON) {
+        
+        DispatchQueue.main.async{
+            
+            if data["result"].intValue == 1{
+                
+                menuViewModel.showAddPointRequestView = false
+                
+            }
+            
+        }
+        
     }
+    
+    func didFailGettingAddPointRequestDataWithError(error: String) {
+        print("Error with AddPointRequestDataManager : \(error)")
+    }
+    
+    
 }
+
+//MARK: - TextFieldWithDividerView
 
 struct TextFieldWithDividerView : View{
     
