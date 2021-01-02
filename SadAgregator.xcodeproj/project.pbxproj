@@ -19,6 +19,7 @@
 		224584272592A6A60000B3D4 /* UserChangePassDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224584262592A6A60000B3D4 /* UserChangePassDataManager.swift */; };
 		224BC43B259FE61E003F147F /* VkAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC43A259FE61E003F147F /* VkAuthService.swift */; };
 		224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC44925A013C3003F147F /* AuthSocialDataManager.swift */; };
+		224BC44D25A0C529003F147F /* AddPointRequestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */; };
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		22595798259667F90088C7E4 /* MasterNastroekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22595797259667F90088C7E4 /* MasterNastroekView.swift */; };
@@ -110,6 +111,7 @@
 		224584262592A6A60000B3D4 /* UserChangePassDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChangePassDataManager.swift; sourceTree = "<group>"; };
 		224BC43A259FE61E003F147F /* VkAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkAuthService.swift; sourceTree = "<group>"; };
 		224BC44925A013C3003F147F /* AuthSocialDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSocialDataManager.swift; sourceTree = "<group>"; };
+		224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointRequestDataManager.swift; sourceTree = "<group>"; };
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		22595797259667F90088C7E4 /* MasterNastroekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterNastroekView.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				225957A72596A5770088C7E4 /* Profile Managers */,
 				225957A82596A5850088C7E4 /* Master Managers */,
 				22D90235259C0359009732CC /* MyPostsDataManager.swift */,
+				224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */,
 			);
 			path = "Menu Managers";
 			sourceTree = "<group>";
@@ -771,6 +774,7 @@
 				227ADAAA25892D8E009B32EC /* ReviewUpdateDataManager.swift in Sources */,
 				226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */,
 				226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */,
+				224BC44D25A0C529003F147F /* AddPointRequestDataManager.swift in Sources */,
 				22595798259667F90088C7E4 /* MasterNastroekView.swift in Sources */,
 				22906B372578020300F00B0D /* PostavshikViewController.swift in Sources */,
 				2259579C259668220088C7E4 /* SimpleReqView.swift in Sources */,
