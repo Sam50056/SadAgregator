@@ -29,14 +29,20 @@ struct LoginView: View {
                 
                 VStack(alignment: .leading, spacing: 16){
                     
-                    HStack(spacing: 16){
+                    Button(action: {
+                        menuViewModel.vkAuthService.wakeUpSession()
+                    }){
                         
-                        Image("vk")
-                            .resizable()
-                            .frame(width: 25, height: 25, alignment: .center)
-                            .cornerRadius(5)
-                        
-                        Text("Войти через Вконтаке")
+                        HStack(spacing: 16){
+                            
+                            Image("vk")
+                                .resizable()
+                                .frame(width: 25, height: 25, alignment: .center)
+                                .cornerRadius(5)
+                            
+                            Text("Войти через Вконтаке")
+                            
+                        }
                         
                     }
                     

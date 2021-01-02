@@ -13,6 +13,8 @@ class MenuViewModel : ObservableObject{
     
     let realm = try! Realm()
     
+    let vkAuthService = VKAuthService()
+    
     @Published var key = "" 
     
     @Published var isLogged = false
@@ -31,7 +33,10 @@ class MenuViewModel : ObservableObject{
     @Published var showMaster = false
     
     init() {
+        
         loadUserData()
+        
+        vkAuthService.delegate = self
     }
     
 }
@@ -95,6 +100,28 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
     func didFailGettingCheckKeysData(error: String) {
         print("Error with CheckKeysDataManager: \(error)")
     }
+    
+}
+
+//MARK: - VKAuthServiceDelegate
+
+extension MenuViewModel : VKAuthServiceDelegate{
+    
+    func authServiceShouldShow(viewController: UIViewController) {
+        
+        //Presenting VK View Controller
+        SceneDelegate.shared().window?.rootViewController?.present(viewController, animated: true, completion: nil)
+        
+    }
+    
+    func authServiceSignIn() {
+        print("Successfully Signed via VK")
+    }
+    
+    func authServiceSignInDidFail() {
+        print("Failed VK Sign In")
+    }
+    
     
 }
 
