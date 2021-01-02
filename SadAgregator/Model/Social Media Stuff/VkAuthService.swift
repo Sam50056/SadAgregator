@@ -8,18 +8,18 @@
 import Foundation
 import VK_ios_sdk
 
-protocol AuthServiceDelegate : class{
+protocol VKAuthServiceDelegate{
     func authServiceShouldShow(viewController : UIViewController)
     func authServiceSignIn()
     func authServiceSignInDidFail()
 }
 
-class AuthService : NSObject ,  VKSdkDelegate , VKSdkUIDelegate{
+class VKAuthService : NSObject ,  VKSdkDelegate , VKSdkUIDelegate{
     
     private let appId = "7547797"
     private let vkSdk : VKSdk
     
-    weak var delegate : AuthServiceDelegate?
+    var delegate : VKAuthServiceDelegate?
     
     var token : String?{
         return VKSdk.accessToken()?.accessToken
@@ -41,7 +41,7 @@ class AuthService : NSObject ,  VKSdkDelegate , VKSdkUIDelegate{
         
         let scope = ["offline"]
         
-        VKSdk.wakeUpSession(scope) { (state, error) in
+        VKSdk.wakeUpSession(scope) { [delegate](state, error) in
             
             switch state {
             
@@ -50,8 +50,9 @@ class AuthService : NSObject ,  VKSdkDelegate , VKSdkUIDelegate{
                 VKSdk.authorize(scope)
             case .authorized:
                 print("Authorized")
+                self.delegate?.authServiceSignIn()
             default:
-                fatalError(error!.localizedDescription)
+                delegate?.authServiceSignInDidFail()
                 
             }
             
