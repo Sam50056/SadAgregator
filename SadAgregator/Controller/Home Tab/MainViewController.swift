@@ -465,6 +465,11 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         }else if indexPath.section == 7{
             
             return K.postHeight
+            
+        }else if indexPath.section == 0 || indexPath.section == 2 || indexPath.section == 4 || indexPath.section == 6{
+            
+            return K.simpleHeaderCellHeight
+            
         }
         
         return K.simpleCellHeight
