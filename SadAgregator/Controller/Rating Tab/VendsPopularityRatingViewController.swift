@@ -31,6 +31,9 @@ class VendsPopularityRatingViewController: UIViewController {
     
     var items = [JSON]()
     
+    var page = 1
+    var rowForPaggingUpdate : Int = 14
+    
     //MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
@@ -71,6 +74,8 @@ class VendsPopularityRatingViewController: UIViewController {
         
         guard let key = key else {return}
         
+        items.removeAll()
+        
         topVendorsDataManager.getTopVendorsData(key: key, query: searchTextField.text ?? "")
         
     }
@@ -102,7 +107,7 @@ extension VendsPopularityRatingViewController : TopVendorsDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            items = data["items"].arrayValue
+            items.append(contentsOf:data["items"].arrayValue)
             
             tableView.reloadData()
             
@@ -170,6 +175,26 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 1{
+            
+            if indexPath.row == rowForPaggingUpdate{
+                
+                page += 1
+                
+                rowForPaggingUpdate += 9
+                
+                topVendorsDataManager.getTopVendorsData(key: key!, query: searchTextField.text!, page: page)
+                
+                print("Done a request for page: \(page)")
+                
+            }
+            
+        }
+        
     }
     
     @IBAction func removeHintCell(_ sender : Any) {
