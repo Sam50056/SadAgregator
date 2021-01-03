@@ -45,4 +45,26 @@ struct K {
         return CGFloat(height)
     }
     
+    static func makeHeightForVendRatingCell(vendRatingCell : JSON) -> CGFloat{
+        
+        var height = 125
+        
+        let prices = vendRatingCell["prices"].stringValue
+        
+        let rating = vendRatingCell["avg_rate"].stringValue
+        
+        if rating != "0" {
+            height += 10
+        }
+        
+        if prices != "" {
+            height += 10
+        }
+        
+        height += 10 // We do + 10 because anyways if pop is o or something else , we show that on screen
+        
+        return CGFloat(height)
+        
+    }
+    
 }

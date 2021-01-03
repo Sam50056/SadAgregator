@@ -168,7 +168,8 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
         if indexPath.section == 0 {
             return K.simpleCellHeight
         }else {
-            return 152
+//            return 152
+            return K.makeHeightForVendRatingCell(vendRatingCell: items[indexPath.row])
         }
         
     }
