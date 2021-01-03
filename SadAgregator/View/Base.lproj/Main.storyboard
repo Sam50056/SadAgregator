@@ -1003,7 +1003,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Арендаторы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxa-9t-Nma">
-                                                    <rect key="frame" x="27.999999999999993" y="14.999999999999998" width="107.33333333333331" height="20.333333333333329"/>
+                                                    <rect key="frame" x="19.999999999999993" y="14.999999999999998" width="107.33333333333331" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1012,7 +1012,7 @@
                                             <color key="backgroundColor" red="0.960834682" green="0.96459835770000002" blue="0.97255879639999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstItem="Pxa-9t-Nma" firstAttribute="centerY" secondItem="8gp-IN-v62" secondAttribute="centerY" id="UMz-OQ-cc0"/>
-                                                <constraint firstItem="Pxa-9t-Nma" firstAttribute="leading" secondItem="8gp-IN-v62" secondAttribute="leadingMargin" constant="8" id="wzE-Dl-8rX"/>
+                                                <constraint firstItem="Pxa-9t-Nma" firstAttribute="leading" secondItem="8gp-IN-v62" secondAttribute="leadingMargin" id="wzE-Dl-8rX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1024,7 +1024,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Активность точек" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGk-N1-duv">
-                                                    <rect key="frame" x="28" y="14.999999999999998" width="151.33333333333334" height="20.333333333333329"/>
+                                                    <rect key="frame" x="20" y="14.999999999999998" width="151.33333333333334" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1043,7 +1043,7 @@
                                                 <constraint firstItem="iez-VD-U41" firstAttribute="centerY" secondItem="byJ-Jt-qes" secondAttribute="centerY" id="7U2-ob-gPR"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="iez-VD-U41" secondAttribute="trailing" constant="8" id="L3h-Rr-h61"/>
                                                 <constraint firstItem="yGk-N1-duv" firstAttribute="centerY" secondItem="byJ-Jt-qes" secondAttribute="centerY" id="ZY0-GT-If0"/>
-                                                <constraint firstItem="yGk-N1-duv" firstAttribute="leading" secondItem="byJ-Jt-qes" secondAttribute="leadingMargin" constant="8" id="dj8-E0-Maa"/>
+                                                <constraint firstItem="yGk-N1-duv" firstAttribute="leading" secondItem="byJ-Jt-qes" secondAttribute="leadingMargin" id="dj8-E0-Maa"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1109,7 +1109,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Последние посты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zno-h0-rOO">
-                                                    <rect key="frame" x="28" y="14.999999999999998" width="151.66666666666666" height="20.333333333333329"/>
+                                                    <rect key="frame" x="20" y="14.999999999999998" width="151.66666666666666" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1117,7 +1117,7 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.960834682" green="0.96459835770000002" blue="0.97255879639999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
-                                                <constraint firstItem="Zno-h0-rOO" firstAttribute="leading" secondItem="Uv6-OO-T0c" secondAttribute="leadingMargin" constant="8" id="FGk-hy-3uI"/>
+                                                <constraint firstItem="Zno-h0-rOO" firstAttribute="leading" secondItem="Uv6-OO-T0c" secondAttribute="leadingMargin" id="FGk-hy-3uI"/>
                                                 <constraint firstItem="Zno-h0-rOO" firstAttribute="centerY" secondItem="Uv6-OO-T0c" secondAttribute="centerY" id="f6U-MX-s9p"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1349,7 +1349,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Активность точек" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qcq-2a-EsW">
-                                                    <rect key="frame" x="28" y="14.999999999999998" width="151.33333333333334" height="20.333333333333329"/>
+                                                    <rect key="frame" x="20" y="14.999999999999998" width="151.33333333333334" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1368,7 +1368,7 @@
                                                 <constraint firstItem="3bc-BC-Okk" firstAttribute="centerY" secondItem="yph-EN-xSv" secondAttribute="centerY" id="GRg-qI-l2b"/>
                                                 <constraint firstItem="Qcq-2a-EsW" firstAttribute="centerY" secondItem="yph-EN-xSv" secondAttribute="centerY" id="hyr-eg-YQJ"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="3bc-BC-Okk" secondAttribute="trailing" constant="8" id="tcO-26-hg4"/>
-                                                <constraint firstItem="Qcq-2a-EsW" firstAttribute="leading" secondItem="yph-EN-xSv" secondAttribute="leadingMargin" constant="8" id="vOi-dF-kUV"/>
+                                                <constraint firstItem="Qcq-2a-EsW" firstAttribute="leading" secondItem="yph-EN-xSv" secondAttribute="leadingMargin" id="vOi-dF-kUV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1434,7 +1434,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Последние посты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95Y-Wu-8dC">
-                                                    <rect key="frame" x="28" y="14.999999999999998" width="151.66666666666666" height="20.333333333333329"/>
+                                                    <rect key="frame" x="20" y="14.999999999999998" width="151.66666666666666" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1450,7 +1450,7 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.960834682" green="0.96459835770000002" blue="0.97255879639999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
-                                                <constraint firstItem="95Y-Wu-8dC" firstAttribute="leading" secondItem="GUg-56-vQS" secondAttribute="leadingMargin" constant="8" id="8Nd-dg-dRy"/>
+                                                <constraint firstItem="95Y-Wu-8dC" firstAttribute="leading" secondItem="GUg-56-vQS" secondAttribute="leadingMargin" id="8Nd-dg-dRy"/>
                                                 <constraint firstItem="2gc-c2-Kpi" firstAttribute="centerY" secondItem="GUg-56-vQS" secondAttribute="centerY" id="9Ke-lG-Cd6"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="2gc-c2-Kpi" secondAttribute="trailing" constant="8" id="hJC-Jh-Lj6"/>
                                                 <constraint firstItem="95Y-Wu-8dC" firstAttribute="centerY" secondItem="GUg-56-vQS" secondAttribute="centerY" id="lRI-4g-l5p"/>
@@ -2485,7 +2485,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="LYd-3X-sUB"/>
+        <segue reference="3vK-wY-P32"/>
         <segue reference="3eo-7Z-uW5"/>
     </inferredMetricsTieBreakers>
     <resources>

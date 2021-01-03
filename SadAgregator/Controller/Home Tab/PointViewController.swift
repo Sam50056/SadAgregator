@@ -364,6 +364,8 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             return 126
         case 2:
             return 80
+        case 3:
+            return K.simpleHeaderCellHeight
         case 4:
             
             let index = indexPath.row
@@ -371,7 +373,10 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             let vend = vendsArray[index]
             
             return K.makeHeightForVendCell(vend: vend)
-            
+        case 5:
+            return K.simpleHeaderCellHeight
+        case 7:
+            return K.simpleHeaderCellHeight
         case 8:
             
             return K.postHeight

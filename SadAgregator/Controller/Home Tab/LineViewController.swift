@@ -305,6 +305,10 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         
         case 1:
             return 126
+        case 2:
+            return K.simpleHeaderCellHeight
+        case 4:
+            return K.simpleHeaderCellHeight
         case 5:
             return K.postHeight
         default:
