@@ -1729,9 +1729,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Сегодня" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5mR-D3-gnK">
-                                                    <rect key="frame" x="160" y="11" width="71" height="21"/>
+                                                    <rect key="frame" x="156" y="11" width="75" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="71" id="nQj-DM-Q0q"/>
+                                                        <constraint firstAttribute="width" constant="75" id="nQj-DM-Q0q"/>
                                                         <constraint firstAttribute="height" constant="21" id="y49-q0-OiK"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1749,13 +1749,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6CJ-hY-qlL">
-                                                    <rect key="frame" x="177" y="48" width="37.333333333333343" height="18.333333333333329"/>
+                                                    <rect key="frame" x="175" y="48" width="37.333333333333343" height="18.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.3960731924" green="0.39607572559999998" blue="0.3960821927" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t1d-EO-fzY">
-                                                    <rect key="frame" x="177" y="86.666666666666671" width="37.333333333333343" height="18"/>
+                                                    <rect key="frame" x="175" y="86.666666666666671" width="37.333333333333343" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.3960731924" green="0.39607572559999998" blue="0.3960821927" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
