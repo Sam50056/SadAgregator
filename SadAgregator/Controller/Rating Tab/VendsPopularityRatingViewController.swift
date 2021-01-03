@@ -48,6 +48,8 @@ class VendsPopularityRatingViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        searchTextField.delegate = self
+        
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl) // not required when using UITableViewController
         
@@ -67,6 +69,25 @@ class VendsPopularityRatingViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
         
     }
+    
+    //MARK: - Actions
+    
+    @IBAction func searchTextFieldEditingChanged(_ sender: UITextField) {
+        
+        if searchTextField.text != "" , key != nil{
+            
+            topVendorsDataManager.getTopVendorsData(key: key!, query: searchTextField.text!)
+            
+            items.removeAll()
+            
+        }else if searchTextField.text == "" , key != nil{
+            
+            refresh(self)
+            
+        }
+        
+    }
+    
     
     //MARK: - Refresh func
     
@@ -122,6 +143,26 @@ extension VendsPopularityRatingViewController : TopVendorsDataManagerDelegate{
     
     func didFailGettingTopVendorsDataWithError(error: String) {
         print("Error with TopVendorsDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - TextField Stuff
+
+extension VendsPopularityRatingViewController : UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField.text != "" , key != nil{
+            
+            topVendorsDataManager.getTopVendorsData(key: key!, query: textField.text!)
+            
+            items.removeAll()
+            
+        }
+        
+        return true 
+        
     }
     
 }

@@ -341,7 +341,7 @@ extension SearchViewController : PhotoCollectionViewCellDelegate{
         vc.selectedImageIndex = index
         
         vc.images = images
-
+        
         presentHero(vc, navigationAnimationType: .none)
         
     }
