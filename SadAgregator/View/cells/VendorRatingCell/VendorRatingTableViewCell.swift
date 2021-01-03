@@ -9,7 +9,7 @@ import UIKit
 
 class VendorRatingTableViewCell: UITableViewCell , UITableViewDelegate , UITableViewDataSource {
     
-    @IBOutlet weak var posLabel: UIStackView!
+    @IBOutlet weak var posLabel: UILabel!
     
     @IBOutlet weak var nameLabel: UILabel!
     
@@ -108,7 +108,7 @@ class VendorRatingTableViewCell: UITableViewCell , UITableViewDelegate , UITable
             
             cell = tableView.dequeueReusableCell(withIdentifier: "pricesCell", for: indexPath)
             
-            setUpPricesCell(cell: cell as! PricesTableViewCell, data: rating!)
+            setUpPricesCell(cell: cell as! PricesTableViewCell, prices: prices!, pricesAvg: pricesAvg!)
             
         case 2:
             
@@ -139,9 +139,9 @@ class VendorRatingTableViewCell: UITableViewCell , UITableViewDelegate , UITable
         
     }
     
-    func setUpPricesCell(cell : PricesTableViewCell, data : String){
+    func setUpPricesCell(cell : PricesTableViewCell, prices : String, pricesAvg : String){
         
-        cell.label.text = data
+        cell.label.text = "\(prices) , \(pricesAvg)"
         
     }
     

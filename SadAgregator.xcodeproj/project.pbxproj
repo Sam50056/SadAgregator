@@ -60,6 +60,7 @@
 		2291BE452560620F004F55DF /* MainDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BE442560620F004F55DF /* MainDataManager.swift */; };
 		229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A95C425A161030086EAD9 /* PricesTableViewCell.swift */; };
 		229A95C725A161030086EAD9 /* PricesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229A95C525A161030086EAD9 /* PricesTableViewCell.xib */; };
+		229A95CA25A16E100086EAD9 /* TopVendorsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */; };
 		229FE68E25700B120001FF54 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FE68D25700B120001FF54 /* SearchViewController.swift */; };
 		229FE69225706B6B0001FF54 /* GetSearchPageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FE69125706B6B0001FF54 /* GetSearchPageDataManager.swift */; };
 		22A0534E256BCE350016B40A /* ActivityPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0534D256BCE350016B40A /* ActivityPointDataManager.swift */; };
@@ -159,6 +160,7 @@
 		2291BE442560620F004F55DF /* MainDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataManager.swift; sourceTree = "<group>"; };
 		229A95C425A161030086EAD9 /* PricesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesTableViewCell.swift; sourceTree = "<group>"; };
 		229A95C525A161030086EAD9 /* PricesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PricesTableViewCell.xib; sourceTree = "<group>"; };
+		229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopVendorsDataManager.swift; sourceTree = "<group>"; };
 		229FE68D25700B120001FF54 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		229FE69125706B6B0001FF54 /* GetSearchPageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSearchPageDataManager.swift; sourceTree = "<group>"; };
 		22A0534D256BCE350016B40A /* ActivityPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPointDataManager.swift; sourceTree = "<group>"; };
@@ -649,6 +651,7 @@
 				227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */,
 				22782909258BB60E00B435FA /* GetMyReviewDataManager.swift */,
 				2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */,
+				229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */,
 			);
 			path = "Vendor Managers";
 			sourceTree = "<group>";
@@ -842,6 +845,7 @@
 				22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */,
 				22D9021D259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift in Sources */,
 				22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */,
+				229A95CA25A16E100086EAD9 /* TopVendorsDataManager.swift in Sources */,
 				2259579F259668370088C7E4 /* InputValView.swift in Sources */,
 				22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */,
 				22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */,

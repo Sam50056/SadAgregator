@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import SwiftyJSON
 
 class VendsPopularityRatingViewController: UIViewController {
     
@@ -26,10 +27,20 @@ class VendsPopularityRatingViewController: UIViewController {
     
     var hintCellShouldBeShown = true
     
+    var topVendorsDataManager = TopVendorsDataManager()
+    
+    var items = [JSON]()
+    
     //MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadUserData()
+        
+        topVendorsDataManager.delegate = self
+        
+        tableView.register(UINib(nibName: "VendorRatingTableViewCell", bundle: nil), forCellReuseIdentifier: "vendRatingCell")
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -41,13 +52,59 @@ class VendsPopularityRatingViewController: UIViewController {
         
         searchView.layer.cornerRadius = 10
         
+       refresh(self)
+        
     }
     
     //MARK: - Refresh func
     
     @objc func refresh(_ sender: AnyObject) {
         
+        guard let key = key else {return}
         
+        topVendorsDataManager.getTopVendorsData(key: key, query: searchTextField.text ?? "")
+        
+    }
+    
+}
+
+
+//MARK: - Data Manipulation Methods
+
+extension VendsPopularityRatingViewController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        key = userDataObject.first!.key
+        
+        isLogged = userDataObject.first!.isLogged
+        
+    }
+    
+}
+
+//MARK: - TopVendorsDataManagerDelegate
+
+extension VendsPopularityRatingViewController : TopVendorsDataManagerDelegate{
+    
+    func didGetTopVendorsData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            items = data["items"].arrayValue
+            
+            tableView.reloadData()
+            
+            refreshControl.endRefreshing()
+            
+        }
+        
+    }
+    
+    func didFailGettingTopVendorsDataWithError(error: String) {
+        print("Error with TopVendorsDataManager : \(error)")
     }
     
 }
@@ -57,16 +114,16 @@ class VendsPopularityRatingViewController: UIViewController {
 extension VendsPopularityRatingViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
             return hintCellShouldBeShown ? 1 : 0
+        }else {
+            return items.count
         }
-        
-        return 0
         
     }
     
@@ -74,12 +131,36 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
         
         var cell = UITableViewCell()
         
-        cell = tableView.dequeueReusableCell(withIdentifier: "hintCell", for: indexPath)
-        
-        setUpHintCell(cell: cell)
+        if indexPath.section == 0{
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "hintCell", for: indexPath)
+            
+            setUpHintCell(cell: cell)
+            
+        }else {
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "vendRatingCell", for: indexPath)
+            
+            setUpVendRatingCell(cell: cell as! VendorRatingTableViewCell, data: items[indexPath.row])
+            
+        }
         
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.section == 0 {
+            return K.simpleCellHeight
+        }else {
+            return 150
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     @IBAction func removeHintCell(_ sender : Any) {
@@ -97,6 +178,48 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
         if let closeButton = cell.viewWithTag(3) as? UIButton {
             closeButton.addTarget(self, action: #selector(removeHintCell(_: )), for: .touchUpInside)
         }
+        
+    }
+    
+    func setUpVendRatingCell(cell: VendorRatingTableViewCell , data : JSON){
+        
+        cell.nameLabel.text = data["name"].stringValue
+        
+        cell.dateLabel.text = data["dt"].stringValue
+        
+        cell.captLabel.text = data["capt"].stringValue
+        
+        cell.posLabel.text = data["pos"].stringValue
+        
+        let peoples = data["peoples"].stringValue
+        
+        if peoples == "0"{
+            cell.peoplesLabel.text = ""
+            cell.peoplesImageView.isHidden = true
+        }else{
+            cell.peoplesLabel.text = peoples
+            cell.peoplesImageView.isHidden = false
+        }
+        
+        let rev = data["revs"].intValue
+        
+        if rev == 0{
+            cell.revLabel.text = ""
+            cell.revImageView.isHidden = true
+        }else{
+            cell.revLabel.text = String(rev)
+            cell.revImageView.isHidden = false
+        }
+        
+        let prices = data["prices"].stringValue
+        let pricesAvg = data["prices_avg"].stringValue
+        let pop = data["popularity"].intValue
+        let rating = data["avg_rate"].stringValue
+        
+        cell.rating = rating == "0" ? nil : rating
+        cell.prices = prices == "" ? nil : prices
+        cell.pricesAvg = pricesAvg == "" ? nil : pricesAvg
+        cell.pop = pop == 0 ? "Нет уникального контента" : "Охват ~\(String(pop)) чел/сутки"
         
     }
     
