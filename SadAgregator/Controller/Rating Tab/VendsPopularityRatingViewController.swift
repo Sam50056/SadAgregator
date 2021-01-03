@@ -74,9 +74,12 @@ class VendsPopularityRatingViewController: UIViewController {
         
         guard let key = key else {return}
         
+        topVendorsDataManager.getTopVendorsData(key: key, query: searchTextField.text ?? "")
+        
         items.removeAll()
         
-        topVendorsDataManager.getTopVendorsData(key: key, query: searchTextField.text ?? "")
+        page = 1
+        rowForPaggingUpdate = 14
         
     }
     
