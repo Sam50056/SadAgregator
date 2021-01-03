@@ -52,7 +52,16 @@ class VendsPopularityRatingViewController: UIViewController {
         
         searchView.layer.cornerRadius = 10
         
-       refresh(self)
+        refresh(self)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isNavigationBarHidden = true
+        //Setting back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
         
     }
     
