@@ -53,8 +53,14 @@ class FavoriteVendsViewController : UITableViewController {
         
         myVendorsDataManager.delegate = self
         
-        myVendorsDataManager.getMyVendorsData(key: key, page: page)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
+        vendsArray.removeAll()
+        
+        myVendorsDataManager.getMyVendorsData(key: key, page: page)
     }
     
     //MARK: - Segue Stuff
