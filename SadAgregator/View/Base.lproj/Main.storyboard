@@ -2075,10 +2075,10 @@
             </objects>
             <point key="canvasLocation" x="577" y="126"/>
         </scene>
-        <!--View Controller-->
+        <!--Vends Popularity Rating View Controller-->
         <scene sceneID="gVf-w0-7Kq">
             <objects>
-                <viewController id="j0J-0w-FQb" sceneMemberID="viewController">
+                <viewController id="j0J-0w-FQb" customClass="VendsPopularityRatingViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1d2-aA-XrV">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2209,6 +2209,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3a3-n5-GjN"/>
+                    <connections>
+                        <outlet property="searchTextField" destination="lWN-px-lT6" id="MkJ-42-Gdr"/>
+                        <outlet property="searchView" destination="shR-K7-q56" id="7Ev-30-3jI"/>
+                        <outlet property="tableView" destination="Yr8-Mn-8aT" id="jhe-u0-zsx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Cl-zS-KfS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
