@@ -1487,6 +1487,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Btq-FN-grI">
+                                <rect key="frame" x="0.0" y="245" width="390" height="415"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PYB-ho-Bly">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1612,11 +1616,15 @@
                         <constraints>
                             <constraint firstItem="Tfq-hn-Uh2" firstAttribute="trailing" secondItem="PYB-ho-Bly" secondAttribute="trailing" id="3Ha-Xk-KZI"/>
                             <constraint firstItem="Tfq-hn-Uh2" firstAttribute="bottom" secondItem="gBK-3F-PIk" secondAttribute="bottom" constant="16" id="D5B-Nd-s89"/>
+                            <constraint firstItem="Tfq-hn-Uh2" firstAttribute="trailing" secondItem="Btq-FN-grI" secondAttribute="trailing" id="HoQ-OX-iVy"/>
                             <constraint firstItem="PYB-ho-Bly" firstAttribute="leading" secondItem="Tfq-hn-Uh2" secondAttribute="leading" id="Ins-Eo-ZAs"/>
                             <constraint firstAttribute="bottom" secondItem="PYB-ho-Bly" secondAttribute="bottom" id="Jkw-F8-tmC"/>
                             <constraint firstItem="Ctr-GR-S9Y" firstAttribute="top" secondItem="Tfq-hn-Uh2" secondAttribute="top" constant="16" id="M55-OD-rlC"/>
                             <constraint firstItem="Ctr-GR-S9Y" firstAttribute="centerX" secondItem="wc3-7Q-Qub" secondAttribute="centerX" id="MuX-VO-BG0"/>
+                            <constraint firstItem="Btq-FN-grI" firstAttribute="top" secondItem="Ctr-GR-S9Y" secondAttribute="bottom" constant="150" id="O4O-bV-Jfu"/>
+                            <constraint firstItem="Btq-FN-grI" firstAttribute="leading" secondItem="Tfq-hn-Uh2" secondAttribute="leading" id="UIm-p9-nyH"/>
                             <constraint firstItem="Tfq-hn-Uh2" firstAttribute="trailing" secondItem="gBK-3F-PIk" secondAttribute="trailing" constant="32" id="WSg-m9-4mG"/>
+                            <constraint firstItem="Tfq-hn-Uh2" firstAttribute="bottom" secondItem="Btq-FN-grI" secondAttribute="bottom" constant="150" id="Zju-hx-u80"/>
                             <constraint firstItem="PYB-ho-Bly" firstAttribute="top" secondItem="wc3-7Q-Qub" secondAttribute="top" id="ly0-hz-1Hx"/>
                         </constraints>
                     </view>
@@ -1624,6 +1632,7 @@
                         <outlet property="buttonView" destination="gBK-3F-PIk" id="vHI-Es-bzR"/>
                         <outlet property="collectionView" destination="PYB-ho-Bly" id="OYY-kS-ZWQ"/>
                         <outlet property="downloadButton" destination="Quz-uF-CM4" id="QDh-Sn-IeN"/>
+                        <outlet property="heroView" destination="Btq-FN-grI" id="lEX-hN-uk8"/>
                         <outlet property="imageIndexLabel" destination="Ctr-GR-S9Y" id="ZIn-z9-gcs"/>
                     </connections>
                 </viewController>

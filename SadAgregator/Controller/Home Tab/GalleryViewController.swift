@@ -11,6 +11,8 @@ import SDWebImage
 
 class GalleryViewController: UIViewController {
     
+    @IBOutlet weak var heroView: UIView!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var imageIndexLabel: UILabel!
@@ -37,7 +39,7 @@ class GalleryViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         view.addGestureRecognizer(tap)
         
-        collectionView.heroID = images[selectedImageIndex]
+        heroView.heroID = images[selectedImageIndex]
         
         buttonView.layer.cornerRadius = 8
         

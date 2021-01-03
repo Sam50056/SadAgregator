@@ -472,7 +472,7 @@ extension LineViewController : PhotoCollectionViewCellDelegate{
         
         vc.images = images
 
-        presentHero(vc, navigationAnimationType: .none)
+        presentHero(vc, navigationAnimationType: .fade)
         
     }
     
