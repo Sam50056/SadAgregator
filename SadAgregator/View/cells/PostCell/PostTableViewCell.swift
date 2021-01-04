@@ -42,6 +42,7 @@ class PostTableViewCell: UITableViewCell  {
     
     var sizes = [String](){
         didSet{
+            if !sizes.isEmpty{sizes.insert("Размеры:", at: 0)}
             applySnapshot()
         }
     }
