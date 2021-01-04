@@ -17,9 +17,9 @@ struct AuthSocialDataManager {
     
     var delegate : AuthSocialDataManagerDelegate?
     
-    func getGetAuthSocialData(social : String ,token : String){
+    func getGetAuthSocialData(social : String ,token : String, key : String){
         
-        let urlString = "https://tk-sad.ru/i/baza/auth-social?social=\(social)&token=\(token)"
+        let urlString = "http://tk-sad.ru/i/baza/auth-social?social=\(social)&token=\(token)&key=\(key)"
         
         print("URLString for AuthSocialDataManager: \(urlString)")
         

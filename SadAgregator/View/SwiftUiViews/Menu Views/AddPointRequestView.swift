@@ -40,7 +40,9 @@ struct AddPointRequestView: View {
                     Spacer()
                     
                     Button(action: {
+                        
                         AddPointRequestDataManager(delegate: self).getAddPointRequestData(key: menuViewModel.key, place: text1, vkUrl: text2, comment: text3)
+                        
                     }){
                         
                         Text("Добавить ссылку")

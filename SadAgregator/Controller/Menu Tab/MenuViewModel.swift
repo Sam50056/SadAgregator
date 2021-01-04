@@ -127,7 +127,7 @@ extension MenuViewModel : VKAuthServiceDelegate{
         
         if let safeVkToken = vkAuthService.token{
             
-            AuthSocialDataManager(delegate: self).getGetAuthSocialData(social: "VK", token: safeVkToken)
+            AuthSocialDataManager(delegate: self).getGetAuthSocialData(social: "VK", token: safeVkToken, key: key)
             
         }
     }
@@ -144,7 +144,7 @@ extension MenuViewModel : VKAuthServiceDelegate{
 extension MenuViewModel : AuthSocialDataManagerDelegate{
     
     func didGetAuthSocialData(data: JSON) {
-        print(data.stringValue)
+        print("New Key : \(data["key"].stringValue)")
     }
     
     func didFailGettingAuthSocialDataWithError(error: String) {
