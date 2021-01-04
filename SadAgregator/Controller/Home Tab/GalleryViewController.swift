@@ -148,7 +148,7 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
             let secondPartOfURL = "/550\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
             let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
             
-            imageView.load(url: URL(string: fullURL)!)
+            imageView.sd_setImage(with: URL(string: fullURL), completed: nil)
             
         }
         
@@ -186,6 +186,8 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         imageIndexLabel.text = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
+        
+        heroView.heroID = images[currentIndexPathOf(collectionView).row]
         
     }
     
