@@ -133,6 +133,8 @@ class PostTableViewCell: UITableViewCell  {
         
         collectionView.register(UINib(nibName: "PhotoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "photoCell")
         
+        collectionView.register(UINib(nibName: "TextLabelCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "textLabelCell")
+        
         vigruzitImageView.layer.cornerRadius = 5
         
     }
@@ -430,9 +432,21 @@ class PostTableViewCell: UITableViewCell  {
             
             if section == .size {
                 
-                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sizeCell", for: indexPath) as! SizeCollectionViewCell
-                
-                (cell as! SizeCollectionViewCell).label.text = item
+                if indexPath.row == 0 {
+                    
+                    cell = collectionView.dequeueReusableCell(withReuseIdentifier: "textLabelCell", for: indexPath) as! TextLabelCollectionViewCell
+                    
+                    (cell as! TextLabelCollectionViewCell).label.text = item
+                    
+                    (cell as! TextLabelCollectionViewCell).label.font = UIFont.boldSystemFont(ofSize: 14)
+                    
+                }else{
+                    
+                    cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sizeCell", for: indexPath) as! SizeCollectionViewCell
+                    
+                    (cell as! SizeCollectionViewCell).label.text = item
+                    
+                }
                 
             }else if section == .option {
                 

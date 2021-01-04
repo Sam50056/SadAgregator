@@ -79,6 +79,8 @@
 		22B7271325740E8C00B56249 /* LinePostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7271225740E8C00B56249 /* LinePostsPaggingDataManager.swift */; };
 		22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */; };
 		22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD86512597FD690052956D /* SetInputValDataManager.swift */; };
+		22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF19D725A3DDC800567DB7 /* TextLabelCollectionViewCell.swift */; };
+		22BF19DA25A3DDC800567DB7 /* TextLabelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF19D825A3DDC800567DB7 /* TextLabelCollectionViewCell.xib */; };
 		22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */; };
 		22C9221325814CA40063B5D4 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9221225814CA40063B5D4 /* MenuView.swift */; };
 		22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */; };
@@ -180,6 +182,8 @@
 		22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointPostsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22BD86512597FD690052956D /* SetInputValDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInputValDataManager.swift; sourceTree = "<group>"; };
 		22BD86542598B4CD0052956D /* SadAgregator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SadAgregator.entitlements; sourceTree = "<group>"; };
+		22BF19D725A3DDC800567DB7 /* TextLabelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLabelCollectionViewCell.swift; sourceTree = "<group>"; };
+		22BF19D825A3DDC800567DB7 /* TextLabelCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextLabelCollectionViewCell.xib; sourceTree = "<group>"; };
 		22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHostingController.swift; sourceTree = "<group>"; };
 		22C9221225814CA40063B5D4 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendsPopularityRatingViewController.swift; sourceTree = "<group>"; };
@@ -565,6 +569,7 @@
 		22A49CB12566641800CCC781 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				22BF19D125A3DD2300567DB7 /* TextLabelCell */,
 				22A49CC02566716200CCC781 /* OptionCell */,
 				22A49CBE2566655D00CCC781 /* SizeCell */,
 				22D175F52567EC6F00DA7D0E /* PhotoCell */,
@@ -588,6 +593,15 @@
 				22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */,
 			);
 			path = OptionCell;
+			sourceTree = "<group>";
+		};
+		22BF19D125A3DD2300567DB7 /* TextLabelCell */ = {
+			isa = PBXGroup;
+			children = (
+				22BF19D725A3DDC800567DB7 /* TextLabelCollectionViewCell.swift */,
+				22BF19D825A3DDC800567DB7 /* TextLabelCollectionViewCell.xib */,
+			);
+			path = TextLabelCell;
 			sourceTree = "<group>";
 		};
 		22C9221725814DBC0063B5D4 /* Home Tab */ = {
@@ -743,6 +757,7 @@
 				228CB769255BF974002B4A96 /* LaunchScreen.storyboard in Resources */,
 				22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */,
 				228CB766255BF974002B4A96 /* Assets.xcassets in Resources */,
+				22BF19DA25A3DDC800567DB7 /* TextLabelCollectionViewCell.xib in Resources */,
 				22904863256DC702000B7A28 /* RatingTableViewCell.xib in Resources */,
 				2290485D256DAC80000B7A28 /* VendTableViewCell.xib in Resources */,
 				228CB764255BF96D002B4A96 /* Main.storyboard in Resources */,
@@ -873,6 +888,7 @@
 				22782906258AC7FE00B435FA /* Extensions.swift in Sources */,
 				22D9023D259C1988009732CC /* MultilineTextView.swift in Sources */,
 				2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */,
+				22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */,
 				226886A62599EDD00079933D /* ActivityIndicatorView.swift in Sources */,
 				22A155DD2582C5D8000EAB64 /* AuthView.swift in Sources */,
 				228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */,
