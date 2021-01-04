@@ -37,6 +37,7 @@ struct ListSelectView: View {
                         
                         Button(action: {
                             
+                            masterViewModel.shouldShowAlbomAlertInListSelect = true
                             masterViewModel.shouldShowAlertInListSelect = true //Showing the alert
                             
                         }){
@@ -128,13 +129,25 @@ struct ListSelectView: View {
             }
             .padding(.horizontal,16)
             .alert(isPresented: $masterViewModel.shouldShowAlertInListSelect) {
-                Alert(title: Text("Обновить альбомы?"), primaryButton: .default(Text("Да")){
+                
+                if masterViewModel.shouldShowAlbomAlertInListSelect{
                     
-                    masterViewModel.refreshAlbsData()
+                    return Alert(title: Text("Обновить альбомы?"), primaryButton: .default(Text("Да")){
+                        
+                        masterViewModel.refreshAlbsData()
+                        
+                    } , secondaryButton: .default(Text("Нет")){
+                        masterViewModel.shouldShowAlertInListSelect = false
+                    })
                     
-                } , secondaryButton: .default(Text("Нет")){
-                    masterViewModel.shouldShowAlertInListSelect = false
-                })
+                }else {
+                    
+                    return Alert(title: Text(masterViewModel.simpleAlerttextInListSelect), dismissButton: .default(Text("Ок")){
+                        masterViewModel.shouldShowAlertInListSelect = false
+                    })
+                    
+                }
+                
             }
             
             ActivityIndicatorView(isAnimating : $masterViewModel.shouldShowAnimationInListSelect, style: .large)

@@ -41,6 +41,8 @@ class MasterViewModel : ObservableObject{
     @Published var items = [ListSelectItem]()
     @Published var filteredItems = [ListSelectItem]()
     @Published var shouldShowAlertInListSelect = false
+    @Published var shouldShowAlbomAlertInListSelect = false
+    @Published var simpleAlerttextInListSelect = "" 
     @Published var shouldShowAnimationInListSelect = false
     @Published var listSelectTextFieldText = "" {
         didSet{
@@ -86,8 +88,8 @@ class MasterViewModel : ObservableObject{
     
     init() {
         
-        loadUserData()
-//        key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
+        //        loadUserData()
+        key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
         
         //Setting Delegates
         
@@ -238,11 +240,15 @@ extension MasterViewModel : SetSimpleReqDataManagerDelegate{
         
         DispatchQueue.main.async{ [self] in
             
-            if let nextStepId = data["next_step_id"].string {
+            if data["result"].intValue == 1 {
                 
-                self.nextStepId = nextStepId
-                
-                getStepData()
+                if let nextStepId = data["next_step_id"].string {
+                    
+                    self.nextStepId = nextStepId
+                    
+                    getStepData()
+                    
+                }
                 
             }
             
@@ -270,11 +276,25 @@ extension MasterViewModel : SetListSelectDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            if let nextStepId = data["next_step_id"].string {
+            if data["result"].intValue == 1 {
                 
-                self.nextStepId = nextStepId
+                if let nextStepId = data["next_step_id"].string {
+                    
+                    self.nextStepId = nextStepId
+                    
+                    getStepData()
+                    
+                }
                 
-                getStepData()
+            }else{
+                
+                if let message = data["msg"].string{
+                    
+                    shouldShowAlertInListSelect = true
+                    simpleAlerttextInListSelect = message
+                    shouldShowAlbomAlertInListSelect = false
+                    
+                }
                 
             }
             
@@ -359,11 +379,15 @@ extension MasterViewModel : SetInputValDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            if let nextStepId = data["next_step_id"].string {
+            if data["result"].intValue == 1 {
                 
-                self.nextStepId = nextStepId
-                
-                getStepData()
+                if let nextStepId = data["next_step_id"].string {
+                    
+                    self.nextStepId = nextStepId
+                    
+                    getStepData()
+                    
+                }
                 
             }
             
@@ -449,11 +473,15 @@ extension MasterViewModel : SetListWorkDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            if let nextStepId = data["next_step_id"].string {
+            if data["result"].intValue == 1 {
                 
-                self.nextStepId = nextStepId
-                
-                getStepData()
+                if let nextStepId = data["next_step_id"].string {
+                    
+                    self.nextStepId = nextStepId
+                    
+                    getStepData()
+                    
+                }
                 
             }
             
