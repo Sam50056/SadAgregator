@@ -28,11 +28,8 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
         collectionView.isPagingEnabled = true
-
+        
         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(_:)))
         view.addGestureRecognizer(pan)
         
@@ -45,13 +42,13 @@ class GalleryViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-        self.collectionView.scrollToItem(at: IndexPath(row: selectedImageIndex, section: 0),
-         at: .centeredHorizontally,
-         animated: false)
+        self.collectionView.scrollToItem(at: IndexPath(row: selectedImageIndex, section: 0), at: .centeredHorizontally, animated: false)
+        
         imageIndexLabel.text = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

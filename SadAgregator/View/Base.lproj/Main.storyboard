@@ -1559,6 +1559,10 @@
                                         <size key="customSize" width="372" height="758"/>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="1ko-Tn-5vx" id="s3s-Ig-Jne"/>
+                                    <outlet property="delegate" destination="1ko-Tn-5vx" id="KNU-gA-I22"/>
+                                </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBK-3F-PIk">
                                 <rect key="frame" x="244" y="754" width="114" height="40"/>
