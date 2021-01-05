@@ -25,6 +25,8 @@ class GalleryViewController: UIViewController {
     
     var selectedImageIndex = 0
     
+    var viewHasShownSelectedImage = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,9 +47,15 @@ class GalleryViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.collectionView.scrollToItem(at: IndexPath(row: selectedImageIndex, section: 0), at: .centeredHorizontally, animated: false)
-        
-        imageIndexLabel.text = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
+        if !viewHasShownSelectedImage{
+            
+            self.collectionView.scrollToItem(at: IndexPath(row: selectedImageIndex, section: 0), at: .centeredHorizontally, animated: false)
+            
+            imageIndexLabel.text = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
+            
+            viewHasShownSelectedImage = true
+            
+        }
         
     }
     
