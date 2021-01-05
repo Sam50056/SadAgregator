@@ -81,6 +81,8 @@
 		22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD86512597FD690052956D /* SetInputValDataManager.swift */; };
 		22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF19D725A3DDC800567DB7 /* TextLabelCollectionViewCell.swift */; };
 		22BF19DA25A3DDC800567DB7 /* TextLabelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF19D825A3DDC800567DB7 /* TextLabelCollectionViewCell.xib */; };
+		22BF19FB25A4DA9300567DB7 /* ActivityLinesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF19FA25A4DA9300567DB7 /* ActivityLinesTableViewController.swift */; };
+		22BF19FF25A4DF0C00567DB7 /* TopLinesDataManager .swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF19FE25A4DF0C00567DB7 /* TopLinesDataManager .swift */; };
 		22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */; };
 		22C9221325814CA40063B5D4 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9221225814CA40063B5D4 /* MenuView.swift */; };
 		22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */; };
@@ -184,6 +186,8 @@
 		22BD86542598B4CD0052956D /* SadAgregator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SadAgregator.entitlements; sourceTree = "<group>"; };
 		22BF19D725A3DDC800567DB7 /* TextLabelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLabelCollectionViewCell.swift; sourceTree = "<group>"; };
 		22BF19D825A3DDC800567DB7 /* TextLabelCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextLabelCollectionViewCell.xib; sourceTree = "<group>"; };
+		22BF19FA25A4DA9300567DB7 /* ActivityLinesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLinesTableViewController.swift; sourceTree = "<group>"; };
+		22BF19FE25A4DF0C00567DB7 /* TopLinesDataManager .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopLinesDataManager .swift"; sourceTree = "<group>"; };
 		22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHostingController.swift; sourceTree = "<group>"; };
 		22C9221225814CA40063B5D4 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendsPopularityRatingViewController.swift; sourceTree = "<group>"; };
@@ -494,6 +498,7 @@
 			children = (
 				2253EE262569D23600103C86 /* ActivityLineDataManager.swift */,
 				22B7271225740E8C00B56249 /* LinePostsPaggingDataManager.swift */,
+				22BF19FE25A4DF0C00567DB7 /* TopLinesDataManager .swift */,
 			);
 			path = "Activity Line Managers";
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 			isa = PBXGroup;
 			children = (
 				228CB760255BF96D002B4A96 /* MainViewController.swift */,
+				22BF19FA25A4DA9300567DB7 /* ActivityLinesTableViewController.swift */,
 				2253EE2A2569D85D00103C86 /* LineViewController.swift */,
 				221949FE256B1FBD00E0564D /* PointViewController.swift */,
 				229FE68D25700B120001FF54 /* SearchViewController.swift */,
@@ -865,6 +871,7 @@
 				22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */,
 				22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */,
 				22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */,
+				22BF19FF25A4DF0C00567DB7 /* TopLinesDataManager .swift in Sources */,
 				22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */,
 				224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */,
 				2268869325994F030079933D /* ListWorkView.swift in Sources */,
@@ -873,6 +880,7 @@
 				22B7271325740E8C00B56249 /* LinePostsPaggingDataManager.swift in Sources */,
 				227828EE258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift in Sources */,
 				22A155E92584E43C000EAB64 /* AuthDataManager.swift in Sources */,
+				22BF19FB25A4DA9300567DB7 /* ActivityLinesTableViewController.swift in Sources */,
 				22D663D125823D9E0058B5CC /* LoginView.swift in Sources */,
 				225957AA2596A6450088C7E4 /* GetStepDataManager.swift in Sources */,
 				22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */,

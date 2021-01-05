@@ -479,8 +479,11 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         
         let index = indexPath.row
         
-        
-        if indexPath.section == 3{
+        if indexPath.section == 2{
+            
+            self.performSegue(withIdentifier: "goToActivityLines", sender: self)
+            
+        }else if indexPath.section == 3{
             
             let indexForCell = index
             
