@@ -37,7 +37,7 @@ class MainViewController: UIViewController {
     var postsArray = [JSON]()
     
     var page = 1
-    var rowForPaggingUpdate : Int = 10
+    var rowForPaggingUpdate : Int = 15
     
     var sizes : Array<[String]> {
         get{
@@ -513,7 +513,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
                 
                 page += 1
                 
-                rowForPaggingUpdate += 9
+                rowForPaggingUpdate += 16
                 
                 mainPaggingDataManager.getMainPaggingData(key: key!, page: page)
                 

@@ -25,18 +25,9 @@ struct MainPaggingDataManager {
         
         guard let url = URL(string: urlString) else {return}
         
-        let session = URLSession(configuration: .default)
-        
-        let task = session.dataTask(with: url) { (data, response, error) in
+        DispatchQueue.global(qos: .userInteractive).async {
             
-            if error != nil {
-                
-                delegate?.didFailGettingMainPaggingDataWithError(error: error!.localizedDescription)
-                
-                return
-            }
-            
-            if let safeData = data {
+            if let safeData = try? Data(contentsOf: url) {
                 
                 let json = String(data: safeData , encoding: String.Encoding.windowsCP1251)!
                 
@@ -47,9 +38,6 @@ struct MainPaggingDataManager {
             }
             
         }
-        
-        task.resume()
-        
         
     }
     
