@@ -867,7 +867,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вчера" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7c-fw-m0f">
                                                     <rect key="frame" x="305" y="11" width="49" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="52b-PH-eOE"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="49" id="52b-PH-eOE"/>
                                                         <constraint firstAttribute="height" constant="21" id="o3P-2z-YXm"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -2498,7 +2498,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="3vK-wY-P32"/>
+        <segue reference="LYd-3X-sUB"/>
         <segue reference="3eo-7Z-uW5"/>
     </inferredMetricsTieBreakers>
     <resources>
