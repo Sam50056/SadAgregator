@@ -24,7 +24,7 @@ class SearchViewController: UIViewController {
     
     var searchText : String = ""
     var page : Int = 1
-    var rowForPaggingUpdate : Int = 10
+    var rowForPaggingUpdate : Int = 15
     
     var hintCellShouldBeShown = true
     
@@ -153,7 +153,7 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
             
             self.postsArray.append(contentsOf: data["posts"].arrayValue)
             
-            self.tableView.reloadSections([0,1], with: .automatic)
+            self.tableView.reloadSections([0,1], with: .none)
             
         }
         
@@ -273,7 +273,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
                 
                 page += 1
                 
-                rowForPaggingUpdate += 9
+                rowForPaggingUpdate += 16
                 
                 getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
                 

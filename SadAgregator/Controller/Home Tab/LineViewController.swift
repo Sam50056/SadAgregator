@@ -31,7 +31,7 @@ class LineViewController: UIViewController {
     var postsArray = [JSON]()
     
     var page : Int = 1
-    var rowForPaggingUpdate : Int = 10
+    var rowForPaggingUpdate : Int = 15
     
     var sizes : Array<[String]> {
         get{
@@ -202,7 +202,7 @@ extension LineViewController : LinePostsPaggingDataManagerDelegate {
             
             self.postsArray.append(contentsOf: data["posts"].arrayValue)
             
-            self.tableView.reloadSections([5], with: .automatic)
+            self.tableView.reloadSections([5], with: .none)
             
         }
         
@@ -344,7 +344,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
                 
                 page += 1
                 
-                rowForPaggingUpdate += 9
+                rowForPaggingUpdate += 16
                 
                 linePostsPaggingDataManager.getLinePostsPaggingData(key: key, lineId: thisLineId!, page: page)
                 

@@ -25,26 +25,19 @@ struct GetSearchPageDataManager {
         
         guard let encodedURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: encodedURL)  else {return}
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        DispatchQueue.global(qos: .userInteractive).async {
             
-            //            print(String(data: data!, encoding: String.Encoding.windowsCP1251)!)
-            
-            if error != nil {
-                delegate?.didFailGettingSearchPageData(error: error!.localizedDescription)
-                return
+            if let safeData = try? Data(contentsOf: url) {
+                
+                let json = String(data: safeData , encoding: String.Encoding.windowsCP1251)!
+                
+                let jsonAnswer = JSON(parseJSON: json)
+                
+                delegate?.didGetSearchPageData(data: jsonAnswer)
+                
             }
             
-            guard let data = data else {delegate?.didFailGettingSearchPageData(error: "Data is empty");  return}
-            
-            let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
-            
-            let jsonAnswer = JSON(parseJSON: json)
-            
-            delegate?.didGetSearchPageData(data: jsonAnswer)
-            
         }
-        
-        task.resume()
         
     }
     
