@@ -7,6 +7,8 @@
 
 import UIKit
 
+//MARK: - UIImageView
+
 extension  UIImageView{
     func load(url: URL){
         DispatchQueue.global().async { [weak self] in
@@ -19,5 +21,17 @@ extension  UIImageView{
             }
         }
     }
+}
+
+//MARK: - UIViewController
+
+extension UIViewController {
+    
+    func postSoobshitButtonClicked(key : String , postId : String){
+        
+        
+        
+    }
+    
 }
 

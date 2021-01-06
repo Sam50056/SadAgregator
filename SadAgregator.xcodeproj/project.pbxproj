@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2201671C25A669790072BFE7 /* GetPostActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201671B25A669790072BFE7 /* GetPostActionsDataManager.swift */; };
+		2201672025A66E380072BFE7 /* SetPostActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */; };
 		221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221949FE256B1FBD00E0564D /* PointViewController.swift */; };
 		221C072C256E5ABB001BC842 /* PhoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C072A256E5ABB001BC842 /* PhoneTableViewCell.swift */; };
 		221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */; };
@@ -115,6 +117,8 @@
 
 /* Begin PBXFileReference section */
 		0F53D53512395AE77F62F84F /* Pods-SadAgregator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.release.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.release.xcconfig"; sourceTree = "<group>"; };
+		2201671B25A669790072BFE7 /* GetPostActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostActionsDataManager.swift; sourceTree = "<group>"; };
+		2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPostActionsDataManager.swift; sourceTree = "<group>"; };
 		221949FE256B1FBD00E0564D /* PointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointViewController.swift; sourceTree = "<group>"; };
 		221C072A256E5ABB001BC842 /* PhoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTableViewCell.swift; sourceTree = "<group>"; };
 		221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneTableViewCell.xib; sourceTree = "<group>"; };
@@ -245,6 +249,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2201671A25A669550072BFE7 /* Post Managers */ = {
+			isa = PBXGroup;
+			children = (
+				22BF1A1625A5FD5C00567DB7 /* PostLikeDataManager.swift */,
+				2201671B25A669790072BFE7 /* GetPostActionsDataManager.swift */,
+				2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */,
+			);
+			path = "Post Managers";
+			sourceTree = "<group>";
+		};
 		221C0729256E5A91001BC842 /* PhoneCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				22BF1A1425A5FC2C00567DB7 /* General Managers */,
+				2201671A25A669550072BFE7 /* Post Managers */,
 				2253EE252569D1C500103C86 /* Main Screen Managers */,
 				22A0534B256BCDE10016B40A /* Activity Line Managers */,
 				22A0534C256BCDFC0016B40A /* Activity Point Managers */,
@@ -629,7 +644,6 @@
 			isa = PBXGroup;
 			children = (
 				227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */,
-				22BF1A1625A5FD5C00567DB7 /* PostLikeDataManager.swift */,
 			);
 			path = "General Managers";
 			sourceTree = "<group>";
@@ -921,6 +935,7 @@
 				22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */,
 				22A155ED2584E766000EAB64 /* MenuViewModel.swift in Sources */,
 				22D90239259C1546009732CC /* SendQuestionView.swift in Sources */,
+				2201671C25A669790072BFE7 /* GetPostActionsDataManager.swift in Sources */,
 				229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */,
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
 				2268869C25996B920079933D /* RefreshAlbsDataManager.swift in Sources */,
@@ -930,6 +945,7 @@
 				2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */,
 				22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */,
 				226886A62599EDD00079933D /* ActivityIndicatorView.swift in Sources */,
+				2201672025A66E380072BFE7 /* SetPostActionsDataManager.swift in Sources */,
 				22A155DD2582C5D8000EAB64 /* AuthView.swift in Sources */,
 				228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */,
 				228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */,

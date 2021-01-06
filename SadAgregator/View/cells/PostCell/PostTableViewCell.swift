@@ -132,6 +132,8 @@ class PostTableViewCell: UITableViewCell  {
     
     var vkLinkUrlString : String?
     
+    var soobshitButtonCallback : (() -> ())?
+    
     //MARK: - Cell Stuff
     
     override func awakeFromNib() {
@@ -551,6 +553,13 @@ class PostTableViewCell: UITableViewCell  {
         
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
         
+    }
+    
+    @IBAction func soobshitButtonPressed(_ sender : UIButton){
+        
+        guard let soobshitButtonCallback = soobshitButtonCallback else {return}
+        
+        soobshitButtonCallback()
     }
     
 }
