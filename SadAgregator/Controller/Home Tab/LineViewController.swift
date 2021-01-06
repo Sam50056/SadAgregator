@@ -133,7 +133,16 @@ class LineViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.isNavigationBarHidden = false
+        navigationController?.isNavigationBarHidden = false
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //Setting back button
+        navigationItem.backBarButtonItem = nil
+        
     }
     
 }
@@ -499,6 +508,8 @@ extension LineViewController {
             let destinationVC = segue.destination as! ActivityPointsTableViewController
             
             destinationVC.lineId = thisLineId
+            
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
             
         }
         
