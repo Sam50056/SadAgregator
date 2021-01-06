@@ -9,7 +9,7 @@ import UIKit
 import SwiftyJSON
 import RealmSwift
 
-class ActivityPointsTableViewController: UITableViewController, TopPointsPaggingDataManagerDelegate, UISearchResultsUpdating {
+class ActivityPointsTableViewController: UITableViewController, TopPointsPaggingDataManagerDelegate, UISearchResultsUpdating, TopPointsPaggingSearchDataManagerDelegate {
     
     let realm = try! Realm()
     
@@ -23,6 +23,7 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
     }
     
     lazy var topPointsPaggingDataManager = TopPointsPaggingDataManager()
+    lazy var topPointsPaggingSearchDataManager = TopPointsPaggingSearchDataManager()
     
     var points = [JSON](){
         didSet{
@@ -42,11 +43,12 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
         loadUserData()
         
         topPointsPaggingDataManager.delegate = self
+        topPointsPaggingSearchDataManager.delegate = self
         
         //Set up search controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.placeholder = "Поиск"
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
@@ -84,16 +86,17 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
         
         let searchText = searchController.searchBar.text!
         
+        points.removeAll()
+        page = 1
+        
         if searchText != ""{
             
-            filteredPoints = points.filter({ (point) -> Bool in
-                
-                return point["capt"].stringValue.lowercased().contains(searchText.lowercased())
-                
-            })
+            topPointsPaggingSearchDataManager.getTopPointsPaggingSearchData(key: key, query: searchText, page: page)
             
         }else{
-            filteredPoints = points
+            
+            topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
+            
         }
         
         tableView.reloadSections([0], with: .automatic)
@@ -116,6 +119,24 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
     
     func didFailGettingTopPointsPaggingDataWithError(error: String) {
         print("Error with TopPointsPaggingDataManager : \(error)")
+    }
+    
+    //MARK: - TopPointsPaggingSearchDataManager
+    
+    func didGetTopPointsPaggingSearchData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            points.append(contentsOf: data["items"].arrayValue)
+            
+            tableView.reloadSections([0], with: .automatic)
+            
+        }
+        
+    }
+    
+    func didFailGettingTopPointsPaggingSearchDataWithError(error: String) {
+        print("Error with TopPointsPaggingSearchDataManager : \(error)")
     }
     
     // MARK: - Table View Stuff
@@ -153,7 +174,15 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             
             rowForPaggingUpdate += 16
             
-            topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
+            if searchController.searchBar.text! == "" || searchController.searchBar.text == nil{
+                
+                topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
+                
+            }else{
+                
+                topPointsPaggingSearchDataManager.getTopPointsPaggingSearchData(key: key, query: searchController.searchBar.text!, page: page)
+                
+            }
             
             print("Done a request for page: \(page)")
             

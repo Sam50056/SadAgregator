@@ -85,6 +85,7 @@
 		22BF19FF25A4DF0C00567DB7 /* TopLinesDataManager .swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF19FE25A4DF0C00567DB7 /* TopLinesDataManager .swift */; };
 		22BF1A0225A540F000567DB7 /* ActivityPointsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A0125A540F000567DB7 /* ActivityPointsTableViewController.swift */; };
 		22BF1A0625A543C900567DB7 /* TopPointsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A0525A543C900567DB7 /* TopPointsPaggingDataManager.swift */; };
+		22BF1A0A25A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A0925A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift */; };
 		22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */; };
 		22C9221325814CA40063B5D4 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9221225814CA40063B5D4 /* MenuView.swift */; };
 		22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */; };
@@ -192,6 +193,7 @@
 		22BF19FE25A4DF0C00567DB7 /* TopLinesDataManager .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopLinesDataManager .swift"; sourceTree = "<group>"; };
 		22BF1A0125A540F000567DB7 /* ActivityPointsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityPointsTableViewController.swift; path = SadAgregator/Controller/ActivityPointsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		22BF1A0525A543C900567DB7 /* TopPointsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPointsPaggingDataManager.swift; sourceTree = "<group>"; };
+		22BF1A0925A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPointsPaggingSearchDataManager.swift; sourceTree = "<group>"; };
 		22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHostingController.swift; sourceTree = "<group>"; };
 		22C9221225814CA40063B5D4 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendsPopularityRatingViewController.swift; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 				22A0534D256BCE350016B40A /* ActivityPointDataManager.swift */,
 				22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */,
 				22BF1A0525A543C900567DB7 /* TopPointsPaggingDataManager.swift */,
+				22BF1A0925A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift */,
 			);
 			path = "Activity Point Managers";
 			sourceTree = "<group>";
@@ -849,6 +852,7 @@
 				22595798259667F90088C7E4 /* MasterNastroekView.swift in Sources */,
 				22906B372578020300F00B0D /* PostavshikViewController.swift in Sources */,
 				2259579C259668220088C7E4 /* SimpleReqView.swift in Sources */,
+				22BF1A0A25A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift in Sources */,
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
 				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
 				2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */,

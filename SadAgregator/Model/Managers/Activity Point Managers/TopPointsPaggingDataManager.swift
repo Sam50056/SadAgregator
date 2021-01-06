@@ -21,7 +21,7 @@ struct TopPointsPaggingDataManager {
         
         let urlString = "https://agrapi.tk-sad.ru/agr_intf.TopPointsPaging?AKey=\(key)&APage=\(page)"
         
-        print("URLString for ActivityPointDataManager: \(urlString)")
+        print("URLString for TopPointsPaggingDataManager: \(urlString)")
         
         guard let url = URL(string: urlString) else {
             delegate?.didFailGettingTopPointsPaggingDataWithError(error: "Wrong URL")
