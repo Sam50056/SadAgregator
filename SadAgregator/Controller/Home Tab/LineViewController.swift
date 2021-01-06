@@ -140,6 +140,8 @@ class LineViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        loadUserData()
+        
         //Setting back button
         navigationItem.backBarButtonItem = nil
         

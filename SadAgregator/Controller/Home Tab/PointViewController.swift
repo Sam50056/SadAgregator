@@ -141,6 +141,12 @@ class PointViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        loadUserData()
+    }
+    
     //MARK: - Refresh func
     
     @objc func refresh(_ sender: AnyObject) {

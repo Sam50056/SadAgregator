@@ -154,6 +154,8 @@ class PostavshikViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        loadUserData()
+        
         if let safeId = thisVendorId{
             vendorCardDataManager.getVendorCardData(key: key, vendorId: safeId)
         }
