@@ -20,6 +20,7 @@ class PostTableViewCell: UITableViewCell  {
     
     @IBOutlet weak var vigruzitImageView: UIImageView!
     @IBOutlet weak var likeButtonImageView: UIImageView!
+    @IBOutlet weak var likeButton : UIButton!
     
     typealias DataSource =  UICollectionViewDiffableDataSource<SectionLayoutKind, String>
     typealias Snapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, String>
@@ -121,6 +122,9 @@ class PostTableViewCell: UITableViewCell  {
     
     var photoDelegate : PhotoCollectionViewCellDelegate?
     
+    
+    //MARK: - Cell Stuff
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -143,6 +147,8 @@ class PostTableViewCell: UITableViewCell  {
         super.setSelected(selected, animated: animated)
         
     }
+    
+    //MARK: - Compositional Layout
     
     func createLayout() -> UICollectionViewLayout {
         
@@ -422,6 +428,8 @@ class PostTableViewCell: UITableViewCell  {
         
     }
     
+    //MARK: - Data Source
+    
     func makeDataSource() {
         
         self.dataSource = DataSource(collectionView: collectionView){ (collectionView, indexPath, item) -> UICollectionViewCell? in
@@ -486,6 +494,8 @@ class PostTableViewCell: UITableViewCell  {
         
     }
     
+    //MARK: - Snapshot Stuff
+    
     func applySnapshot(animatingDifferences: Bool = false) {
         
         var snapshot = Snapshot()
@@ -500,6 +510,8 @@ class PostTableViewCell: UITableViewCell  {
         
     }
     
+    //MARK: - Actions
+    
     @IBAction func imageCellTapped (_ sender : UIButton){
         
         let index = sender.tag
@@ -512,7 +524,15 @@ class PostTableViewCell: UITableViewCell  {
         
     }
     
+    @IBAction func likeButtonPressed(_ sender : UIButton){
+        
+        print("Like Pressed")
+        
+    }
+    
 }
+
+//MARK: - PhotoCollectionViewCellDelegate
 
 protocol PhotoCollectionViewCellDelegate {
     func didTapOnCell(index: Int, images : [String])
