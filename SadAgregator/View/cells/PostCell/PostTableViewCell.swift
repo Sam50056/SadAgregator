@@ -130,6 +130,8 @@ class PostTableViewCell: UITableViewCell  {
     var key : String?
     var id : String?
     
+    var vkLinkUrlString : String?
+    
     //MARK: - Cell Stuff
     
     override func awakeFromNib() {
@@ -540,6 +542,14 @@ class PostTableViewCell: UITableViewCell  {
         let newStatus = like == "0" ? 1 : 0
         
         postLikeDataManager.getPostLikeData(key: safeKey, id: safeId, status: newStatus)
+        
+    }
+    
+    @IBAction func smotretVkPostPressed(_ sender : UIButton){
+        
+        guard let urlString = vkLinkUrlString ,let url = URL(string: urlString) else {return}
+        
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
         
     }
     

@@ -721,6 +721,8 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         like == "0" ? (cell.likeButtonImageView.image = UIImage(systemName: "heart")) : (cell.likeButtonImageView.image = UIImage(systemName: "heart.fill"))
         
+        cell.vkLinkUrlString = data["vk_post"].stringValue
+        
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
         cell.byLabel.text = data["by"].stringValue

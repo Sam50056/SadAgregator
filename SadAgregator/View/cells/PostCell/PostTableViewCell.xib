@@ -127,6 +127,9 @@
                                         <state key="normal" title="См. пост VK">
                                             <color key="titleColor" red="0.19642570610000001" green="0.48198187349999999" blue="0.73336809869999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
+                                        <connections>
+                                            <action selector="smotretVkPostPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8kf-ax-sBB"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
