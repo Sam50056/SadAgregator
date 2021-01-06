@@ -88,6 +88,7 @@
 		22BF1A0A25A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A0925A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift */; };
 		22BF1A0D25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A0C25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift */; };
 		22BF1A1125A5E19100567DB7 /* LinePointsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A1025A5E19100567DB7 /* LinePointsPaggingDataManager.swift */; };
+		22BF1A1725A5FD5C00567DB7 /* PostLikeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A1625A5FD5C00567DB7 /* PostLikeDataManager.swift */; };
 		22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */; };
 		22C9221325814CA40063B5D4 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9221225814CA40063B5D4 /* MenuView.swift */; };
 		22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */; };
@@ -198,6 +199,7 @@
 		22BF1A0925A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPointsPaggingSearchDataManager.swift; sourceTree = "<group>"; };
 		22BF1A0C25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePointsPaggingSearchDataManager.swift; sourceTree = "<group>"; };
 		22BF1A1025A5E19100567DB7 /* LinePointsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePointsPaggingDataManager.swift; sourceTree = "<group>"; };
+		22BF1A1625A5FD5C00567DB7 /* PostLikeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeDataManager.swift; sourceTree = "<group>"; };
 		22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHostingController.swift; sourceTree = "<group>"; };
 		22C9221225814CA40063B5D4 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendsPopularityRatingViewController.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 		224BC43D259FEE11003F147F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				22BF1A1425A5FC2C00567DB7 /* General Managers */,
 				2253EE252569D1C500103C86 /* Main Screen Managers */,
 				22A0534B256BCDE10016B40A /* Activity Line Managers */,
 				22A0534C256BCDFC0016B40A /* Activity Point Managers */,
@@ -273,7 +276,6 @@
 				22CE4F9025869E690060E9DF /* Vendor Managers */,
 				22A155E72584E408000EAB64 /* Auth Managers */,
 				22423E9A259131F80097C9E6 /* Menu Managers */,
-				227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -623,6 +625,15 @@
 			path = TextLabelCell;
 			sourceTree = "<group>";
 		};
+		22BF1A1425A5FC2C00567DB7 /* General Managers */ = {
+			isa = PBXGroup;
+			children = (
+				227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */,
+				22BF1A1625A5FD5C00567DB7 /* PostLikeDataManager.swift */,
+			);
+			path = "General Managers";
+			sourceTree = "<group>";
+		};
 		22C9221725814DBC0063B5D4 /* Home Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -896,6 +907,7 @@
 				22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */,
 				22634AB625858CA800DF6FDB /* UserData.swift in Sources */,
 				22B7271325740E8C00B56249 /* LinePostsPaggingDataManager.swift in Sources */,
+				22BF1A1725A5FD5C00567DB7 /* PostLikeDataManager.swift in Sources */,
 				22BF1A0225A540F000567DB7 /* ActivityPointsTableViewController.swift in Sources */,
 				227828EE258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift in Sources */,
 				22A155E92584E43C000EAB64 /* AuthDataManager.swift in Sources */,

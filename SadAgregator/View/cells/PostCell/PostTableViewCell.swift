@@ -8,6 +8,7 @@
 import UIKit
 import SDWebImage
 import Hero
+import SwiftyJSON
 
 class PostTableViewCell: UITableViewCell  {
     
@@ -122,6 +123,12 @@ class PostTableViewCell: UITableViewCell  {
     
     var photoDelegate : PhotoCollectionViewCellDelegate?
     
+    lazy var postLikeDataManager = PostLikeDataManager()
+    
+    var like : String = ""
+    
+    var key : String?
+    var id : String?
     
     //MARK: - Cell Stuff
     
@@ -140,6 +147,8 @@ class PostTableViewCell: UITableViewCell  {
         collectionView.register(UINib(nibName: "TextLabelCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "textLabelCell")
         
         vigruzitImageView.layer.cornerRadius = 5
+        
+        postLikeDataManager.delegate = self
         
     }
     
@@ -526,8 +535,38 @@ class PostTableViewCell: UITableViewCell  {
     
     @IBAction func likeButtonPressed(_ sender : UIButton){
         
-        print("Like Pressed")
+        guard let safeId = id, let safeKey = key else {return}
         
+        let newStatus = like == "0" ? 1 : 0
+        
+        postLikeDataManager.getPostLikeData(key: safeKey, id: safeId, status: newStatus)
+        
+    }
+    
+}
+
+//MARK: - PostLikeDataManagerDelegate
+
+extension PostTableViewCell : PostLikeDataManagerDelegate{
+    
+    func didGetPostLikeData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                like == "0" ? (likeButtonImageView.image = UIImage(systemName: "heart.fill")) : (likeButtonImageView.image = UIImage(systemName: "heart"))
+                
+                like = like == "0" ? "1" : "0"
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingPostLikeDataWithError(error: String) {
+        print("Error with PostLikeDataManager : \(error)")
     }
     
 }

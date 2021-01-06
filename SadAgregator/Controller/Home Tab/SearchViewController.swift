@@ -313,6 +313,14 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         cell.photoDelegate = self
         
+        cell.key = key
+        cell.id = data["id"].stringValue
+        
+        let like = data["like"].stringValue
+        cell.like = like
+        
+        like == "0" ? (cell.likeButtonImageView.image = UIImage(systemName: "heart")) : (cell.likeButtonImageView.image = UIImage(systemName: "heart.fill"))
+        
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
         cell.byLabel.text = data["by"].stringValue
