@@ -9,11 +9,13 @@ import UIKit
 import SwiftyJSON
 import RealmSwift
 
-class ActivityPointsTableViewController: UITableViewController, TopPointsPaggingDataManagerDelegate, UISearchResultsUpdating, TopPointsPaggingSearchDataManagerDelegate {
+class ActivityPointsTableViewController: UITableViewController, TopPointsPaggingDataManagerDelegate, UISearchResultsUpdating, TopPointsPaggingSearchDataManagerDelegate, LinePointsPaggingSearchDataManagerDelegate, LinePointsPaggingDataManagerDelegate {
     
     let realm = try! Realm()
     
     var key = ""
+    
+    var lineId : String?
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -24,6 +26,8 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
     
     lazy var topPointsPaggingDataManager = TopPointsPaggingDataManager()
     lazy var topPointsPaggingSearchDataManager = TopPointsPaggingSearchDataManager()
+    lazy var linePointsPaggingDataManager = LinePointsPaggingDataManager()
+    lazy var linePostsPaggingSearchDataManager = LinePointsPaggingSearchDataManager()
     
     var points = [JSON](){
         didSet{
@@ -44,6 +48,8 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
         
         topPointsPaggingDataManager.delegate = self
         topPointsPaggingSearchDataManager.delegate = self
+        linePostsPaggingSearchDataManager.delegate = self
+        linePointsPaggingDataManager.delegate = self
         
         //Set up search controller
         searchController.searchResultsUpdater = self
@@ -54,7 +60,11 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
         
         tableView.separatorStyle = .none
         
-        topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
+        if lineId != nil{
+            linePointsPaggingDataManager.getLinePointsPaggingData(key: key, lineId: lineId!, page: page)
+        }else{
+            topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
+        }
         
     }
     
@@ -91,11 +101,19 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
         
         if searchText != ""{
             
-            topPointsPaggingSearchDataManager.getTopPointsPaggingSearchData(key: key, query: searchText, page: page)
+            if lineId != nil{
+                linePostsPaggingSearchDataManager.getLinePostsPaggingSearchData(key: key, lineId: lineId!, query: searchText, page: page)
+            }else{
+                topPointsPaggingSearchDataManager.getTopPointsPaggingSearchData(key: key, query: searchText, page: page)
+            }
             
         }else{
             
-            topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
+            if lineId != nil{
+                linePointsPaggingDataManager.getLinePointsPaggingData(key: key, lineId: lineId!, page: page)
+            }else{
+                topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
+            }
             
         }
         
@@ -139,6 +157,42 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
         print("Error with TopPointsPaggingSearchDataManager : \(error)")
     }
     
+    //MARK: - LinePointsPaggingDataManager
+    
+    func didGetLinePointsPaggingData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            points.append(contentsOf: data["points_top"].arrayValue)
+            
+            tableView.reloadSections([0], with: .automatic)
+            
+        }
+        
+    }
+    
+    func didFailGettingLinePointsPaggingDataWithError(error: String) {
+        print("Error with LinePointsPaggingDataManager : \(error)")
+    }
+    
+    //MARK: - LinePointsPaggingSearchDataManager
+    
+    func didgetLinePostsPaggingSearchData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            points.append(contentsOf: data["items"].arrayValue)
+            
+            tableView.reloadSections([0], with: .automatic)
+            
+        }
+        
+    }
+    
+    func didFailGettingLinePostsPaggingSearchDataWithError(error: String) {
+        print("Error with LinePointsPaggingSearchDataManager : \(error)")
+    }
+    
     // MARK: - Table View Stuff
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -176,11 +230,21 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             
             if searchController.searchBar.text! == "" || searchController.searchBar.text == nil{
                 
-                topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
+                if lineId != nil{
+                    linePointsPaggingDataManager.getLinePointsPaggingData(key: key, lineId: lineId!, page: page)
+                }else{
+                    topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
+                }
                 
             }else{
                 
-                topPointsPaggingSearchDataManager.getTopPointsPaggingSearchData(key: key, query: searchController.searchBar.text!, page: page)
+                if lineId != nil{
+                    linePostsPaggingSearchDataManager.getLinePostsPaggingSearchData(key: key, lineId: lineId!, query: searchController.searchBar.text!, page: page)
+                }else {
+                    
+                    topPointsPaggingSearchDataManager.getTopPointsPaggingSearchData(key: key, query: searchController.searchBar.text!, page: page)
+                    
+                }
                 
             }
             

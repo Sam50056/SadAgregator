@@ -86,6 +86,8 @@
 		22BF1A0225A540F000567DB7 /* ActivityPointsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A0125A540F000567DB7 /* ActivityPointsTableViewController.swift */; };
 		22BF1A0625A543C900567DB7 /* TopPointsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A0525A543C900567DB7 /* TopPointsPaggingDataManager.swift */; };
 		22BF1A0A25A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A0925A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift */; };
+		22BF1A0D25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A0C25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift */; };
+		22BF1A1125A5E19100567DB7 /* LinePointsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A1025A5E19100567DB7 /* LinePointsPaggingDataManager.swift */; };
 		22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */; };
 		22C9221325814CA40063B5D4 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9221225814CA40063B5D4 /* MenuView.swift */; };
 		22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */; };
@@ -194,6 +196,8 @@
 		22BF1A0125A540F000567DB7 /* ActivityPointsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityPointsTableViewController.swift; path = SadAgregator/Controller/ActivityPointsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		22BF1A0525A543C900567DB7 /* TopPointsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPointsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22BF1A0925A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPointsPaggingSearchDataManager.swift; sourceTree = "<group>"; };
+		22BF1A0C25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePointsPaggingSearchDataManager.swift; sourceTree = "<group>"; };
+		22BF1A1025A5E19100567DB7 /* LinePointsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePointsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHostingController.swift; sourceTree = "<group>"; };
 		22C9221225814CA40063B5D4 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendsPopularityRatingViewController.swift; sourceTree = "<group>"; };
@@ -516,6 +520,8 @@
 				22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */,
 				22BF1A0525A543C900567DB7 /* TopPointsPaggingDataManager.swift */,
 				22BF1A0925A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift */,
+				22BF1A1025A5E19100567DB7 /* LinePointsPaggingDataManager.swift */,
+				22BF1A0C25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift */,
 			);
 			path = "Activity Point Managers";
 			sourceTree = "<group>";
@@ -829,6 +835,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				225957A52596A2A70088C7E4 /* MasterViewModel.swift in Sources */,
+				22BF1A0D25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift in Sources */,
 				22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */,
 				221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */,
 				229FE69225706B6B0001FF54 /* GetSearchPageDataManager.swift in Sources */,
@@ -871,6 +878,7 @@
 				224BC43B259FE61E003F147F /* VkAuthService.swift in Sources */,
 				2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */,
 				22D90221259AC9EF009732CC /* AlbumsInProgressDataManager.swift in Sources */,
+				22BF1A1125A5E19100567DB7 /* LinePointsPaggingDataManager.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
 				22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */,
 				22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */,

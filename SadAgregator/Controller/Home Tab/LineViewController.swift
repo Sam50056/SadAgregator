@@ -322,7 +322,11 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         
         let index = indexPath.row
         
-        if indexPath.section == 3 {
+        if indexPath.section == 2{
+            
+            performSegue(withIdentifier: "goToActivityPoints", sender: self)
+            
+        }else if indexPath.section == 3 {
             
             let cellData = activityPointCellsArray[index]
             
@@ -489,6 +493,12 @@ extension LineViewController {
             let destinationVC = segue.destination as! PointViewController
             
             destinationVC.thisPointId = selectedPointId
+            
+        }else if segue.identifier == "goToActivityPoints"{
+            
+            let destinationVC = segue.destination as! ActivityPointsTableViewController
+            
+            destinationVC.lineId = thisLineId
             
         }
         

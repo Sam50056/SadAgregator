@@ -1473,6 +1473,7 @@
                     <connections>
                         <outlet property="tableView" destination="ftC-sG-ENj" id="ks5-fJ-e3l"/>
                         <segue destination="PU7-Gp-SMR" kind="show" identifier="goToTochka" id="3vK-wY-P32"/>
+                        <segue destination="uE5-6N-JCu" kind="show" identifier="goToActivityPoints" id="chw-zm-uhr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Vs-BG-wk6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2656,8 +2657,9 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
+        <segue reference="chw-zm-uhr"/>
         <segue reference="UT5-6g-K7A"/>
-        <segue reference="5f5-1E-ndJ"/>
+        <segue reference="3vK-wY-P32"/>
         <segue reference="3eo-7Z-uW5"/>
     </inferredMetricsTieBreakers>
     <resources>
