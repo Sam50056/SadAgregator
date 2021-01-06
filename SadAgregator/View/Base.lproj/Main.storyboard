@@ -2292,7 +2292,7 @@
             </objects>
             <point key="canvasLocation" x="3906" y="1636"/>
         </scene>
-        <!--Activity Points Table View Controller-->
+        <!--Активность поставщиков-->
         <scene sceneID="ffw-pF-a3h">
             <objects>
                 <tableViewController id="uE5-6N-JCu" customClass="ActivityPointsTableViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
@@ -2361,7 +2361,7 @@
                             <outlet property="delegate" destination="uE5-6N-JCu" id="7mF-0t-adq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Bd8-h9-4M1"/>
+                    <navigationItem key="navigationItem" title="Активность поставщиков" id="Bd8-h9-4M1"/>
                     <connections>
                         <segue destination="PU7-Gp-SMR" kind="show" identifier="goToPoint" id="5f5-1E-ndJ"/>
                     </connections>
