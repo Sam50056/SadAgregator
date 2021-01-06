@@ -111,6 +111,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         loadUserData()
         
         checkKeysDataManager.delegate = self
@@ -118,6 +119,8 @@ class MainViewController: UIViewController {
         mainPaggingDataManager.delegate = self
         
         searchTextField.delegate = self
+        
+        tabBarController?.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -159,6 +162,24 @@ class MainViewController: UIViewController {
         searchTextField.endEditing(true)
         
         disableHero()
+    }
+    
+}
+
+//MARK: - UITabBarControllerDelegate
+
+extension MainViewController : UITabBarControllerDelegate{
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        let index = tabBarController.selectedIndex
+        
+        if index == 0{
+            
+            self.tableView.setContentOffset( CGPoint(x: 0, y: 0) , animated: true)
+            
+        }
+        
     }
     
 }
