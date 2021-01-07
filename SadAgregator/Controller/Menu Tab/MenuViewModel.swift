@@ -51,7 +51,11 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
         
         if isLogged{
             
-            CheckKeysDataManager(delegate: self).getKeysData(key: key)
+            if let key = getUserDataObject()?.key{
+                
+                CheckKeysDataManager(delegate: self).getKeysData(key: key)
+                
+            }
             
         }
         
@@ -144,11 +148,36 @@ extension MenuViewModel : VKAuthServiceDelegate{
 extension MenuViewModel : AuthSocialDataManagerDelegate{
     
     func didGetAuthSocialData(data: JSON) {
-        print("New Key : \(data["key"].stringValue)")
+        
+        DispatchQueue.main.async { [self] in
+            
+            guard let newKey = data["token"].string else {return}
+            
+            showModalLogIn = false
+            showModalReg = false
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                
+                if let userDataObject = getUserDataObject(){
+                    
+                    try! realm.write{
+                        userDataObject.key = newKey
+                    }
+                    
+                }
+                
+                isLogged = true
+                
+                updateData()
+                
+            }
+            
+        }
+        
     }
     
     func didFailGettingAuthSocialDataWithError(error: String) {
-        
+        print("Error with AuthSocialDataManager : \(error)")
     }
     
 }
@@ -159,9 +188,7 @@ extension MenuViewModel {
     
     func loadUserData (){
         
-        let userData = realm.objects(UserData.self)
-        
-        if let userDataObject = userData.first{
+        if let userDataObject = getUserDataObject(){
             
             key = userDataObject.key
             
