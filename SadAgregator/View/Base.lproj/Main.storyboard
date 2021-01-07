@@ -1134,7 +1134,9 @@
                             <constraint firstItem="aTW-5m-YOr" firstAttribute="bottom" secondItem="kRI-vX-pSJ" secondAttribute="bottom" id="EXy-Pv-AgJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="sDZ-Kd-cXw"/>
+                    <navigationItem key="navigationItem" id="sDZ-Kd-cXw">
+                        <barButtonItem key="rightBarButtonItem" image="info.circle" catalog="system" id="vF2-UL-OBQ"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="kRI-vX-pSJ" id="H0Y-3i-sG1"/>
                         <segue destination="tgI-Wx-GfF" kind="show" identifier="goToPostavshik" id="3eo-7Z-uW5"/>

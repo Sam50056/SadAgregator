@@ -384,7 +384,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
+        
         switch section {
         case 0:
             return 1
@@ -680,7 +680,7 @@ extension MainViewController : PhotoCollectionViewCellDelegate{
         vc.selectedImageIndex = index
         
         vc.images = images
-
+        
         presentHero(vc, navigationAnimationType: .fade)
         
     }
