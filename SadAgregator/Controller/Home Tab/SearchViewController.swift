@@ -431,6 +431,12 @@ extension SearchViewController : SetPostActionsDataManagerDelegate{
             
             dismiss(animated: true, completion: nil)
             
+            if let message = data["msg"].string{
+                
+                showSimpleAlertWithOkButton(title: message, message: nil)
+                
+            }
+            
         }
         
     }

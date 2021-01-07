@@ -24,7 +24,7 @@ extension  UIImageView{
     }
 }
 
-//MARK: - UIViewController
+//MARK: - UIViewController (DB)
 
 extension UIViewController {
     
@@ -44,6 +44,28 @@ extension UIViewController {
     func getKey() -> String?{
         
         return getUserDataObject()?.key
+        
+    }
+    
+}
+
+//MARK: - UIViewController (Alerts)
+
+extension UIViewController{
+    
+    func showSimpleAlertWithOkButton(title : String? , message : String? , dismissButtonText : String = "Ок"){
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: dismissButtonText, style: .cancel) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+            
+        }
+        
+        alertController.addAction(action)
+        
+        self.present(alertController, animated: true, completion: nil)
         
     }
     
