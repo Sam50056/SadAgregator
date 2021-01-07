@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 //MARK: - UIImageView
 
@@ -27,11 +28,23 @@ extension  UIImageView{
 
 extension UIViewController {
     
-    func postSoobshitButtonClicked(key : String , postId : String){
+    func getUserDataObject () -> UserData?{
         
+        let realm = try! Realm()
         
+        let userData = realm.objects(UserData.self)
+        
+        if let userDataObject = userData.first{
+            return userDataObject
+        }
+        
+        return nil
+    }
+    
+    func getKey() -> String?{
+        
+        return getUserDataObject()?.key
         
     }
     
 }
-

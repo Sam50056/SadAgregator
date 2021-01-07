@@ -95,6 +95,8 @@ class SearchViewController: UIViewController {
         }
     }
     
+    var selectedPostId = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -314,7 +316,10 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         cell.photoDelegate = self
         
         cell.key = key
-        cell.id = data["id"].stringValue
+        
+        let postId = data["id"].stringValue
+        
+        cell.id = postId
         
         let like = data["like"].stringValue
         cell.like = like
@@ -322,6 +327,14 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         like == "0" ? (cell.likeButtonImageView.image = UIImage(systemName: "heart")) : (cell.likeButtonImageView.image = UIImage(systemName: "heart.fill"))
         
         cell.vkLinkUrlString = data["vk_post"].stringValue
+        
+        cell.soobshitButtonCallback = { [self] in
+            
+            GetPostActionsDataManager(delegate: self).getGetPostActionsData(key: key, postId: postId)
+            
+            selectedPostId = postId
+            
+        }
         
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
@@ -358,8 +371,74 @@ extension SearchViewController : PhotoCollectionViewCellDelegate{
         
         vc.images = images
         
-        presentHero(vc, navigationAnimationType: .none)
+        presentHero(vc, navigationAnimationType: .fade)
         
     }
     
 }
+
+//MARK: -  GetPostActionsDataManagerDelegate Stuff
+
+extension SearchViewController : GetPostActionsDataManagerDelegate{
+    
+    func didGetGetPostActionsData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            let actionsArray = data["actions"].arrayValue
+            
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            actionsArray.forEach { (action) in
+                
+                let alertAction = UIAlertAction(title: action["capt"].stringValue, style: .default) { (_) in
+                    
+                    let actionid = (action["id"].stringValue)
+                    
+                    SetPostActionsDataManager(delegate: self).getSetPostActionsData(key: key, actionId: actionid, postId: selectedPostId)
+                    
+                }
+                
+                alertController.addAction(alertAction)
+                
+            }
+            
+            let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in
+                alertController.dismiss(animated: true, completion: nil)
+            }
+            
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
+    func didFailGettingGetPostActionsDataWithError(error: String) {
+        print("Error with  GetPostActionsDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - SetPostActionsDataManagerDelegate
+
+extension SearchViewController : SetPostActionsDataManagerDelegate{
+    
+    func didGetSetPostActionsData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            dismiss(animated: true, completion: nil)
+            
+        }
+        
+    }
+    
+    func didFailGettingSetPostActionsDataWithError(error: String) {
+        print("Error with SetPostActionsDataManager : \(error)")
+    }
+    
+}
+
+
