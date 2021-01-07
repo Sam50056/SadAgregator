@@ -124,6 +124,8 @@ class PostavshikViewController: UIViewController {
     
     var infoCells : [InfoCellObject] = []
     
+    var refreshControl = UIRefreshControl()
+    
     var selectedPostId = ""
     var selectedPointId = ""
     
@@ -142,6 +144,10 @@ class PostavshikViewController: UIViewController {
         tableView.separatorStyle = .none
         
         tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
+        
+        //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl) // not required when using UITableViewController
         
         if let safeId = thisVendorId{
             vendorCardDataManager.getVendorCardData(key: key, vendorId: safeId)
@@ -271,6 +277,8 @@ extension PostavshikViewController : VendorCardDataManagerDelegate{
             setLikeBarButtonImage()
             
             tableView.reloadData()
+            
+            refreshControl.endRefreshing()
             
         }
         
