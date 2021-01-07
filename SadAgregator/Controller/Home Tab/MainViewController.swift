@@ -646,6 +646,14 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             
         }
         
+        cell.vendorLabelButtonCallBack = { [self] in
+            
+            selectedPointId = data["point_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToPoint", sender: self)
+            
+        }
+        
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
         cell.byLabel.text = data["by"].stringValue

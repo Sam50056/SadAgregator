@@ -132,6 +132,7 @@ class PostTableViewCell: UITableViewCell  {
     
     var vkLinkUrlString : String?
     
+    var vendorLabelButtonCallBack : (() -> ())?
     var soobshitButtonCallback : (() -> ())?
     
     //MARK: - Cell Stuff
@@ -524,6 +525,17 @@ class PostTableViewCell: UITableViewCell  {
     }
     
     //MARK: - Actions
+    
+    @IBAction func vendorLabelTapped(_ sender: UIButton) {
+        
+        guard let vendorLabelButtonCallBack = vendorLabelButtonCallBack else {
+            return
+        }
+        
+        vendorLabelButtonCallBack()
+        
+    }
+    
     
     @IBAction func imageCellTapped (_ sender : UIButton){
         

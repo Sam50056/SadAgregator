@@ -125,6 +125,7 @@ class PostavshikViewController: UIViewController {
     var infoCells : [InfoCellObject] = []
     
     var selectedPostId = ""
+    var selectedPointId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -208,6 +209,12 @@ class PostavshikViewController: UIViewController {
             destinationVC.key = key
             destinationVC.vendId = thisVendorId
             destinationVC.myRate = Double(vendorData!["my_rate"].stringValue)!
+            
+        }else if segue.identifier == "goToPoint"{
+            
+            let destinationVC = segue.destination as! PointViewController
+            
+            destinationVC.thisPointId = selectedPointId
             
         }
         
@@ -795,6 +802,14 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             GetPostActionsDataManager(delegate: self).getGetPostActionsData(key: key, postId: postId)
             
             selectedPostId = postId
+            
+        }
+        
+        cell.vendorLabelButtonCallBack = { [self] in
+            
+            selectedPointId = data["point_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToPoint", sender: self)
             
         }
         

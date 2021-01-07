@@ -657,6 +657,18 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             
         }
         
+        cell.vendorLabelButtonCallBack = { [self] in
+            
+            let newPointId = data["point_id"].stringValue
+            
+            thisPointId = newPointId
+            
+            refresh(self)
+            
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            
+        }
+        
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
         cell.byLabel.text = data["by"].stringValue

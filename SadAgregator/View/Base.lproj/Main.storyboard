@@ -780,6 +780,7 @@
                         <outlet property="likeBarButton" destination="I8y-uP-oWV" id="wct-57-J1I"/>
                         <outlet property="tableView" destination="gkI-HL-ayK" id="9el-eD-zhu"/>
                         <segue destination="s7e-YJ-ycF" kind="show" identifier="goToReviewUpdate" id="KJn-6B-Os0"/>
+                        <segue destination="PU7-Gp-SMR" kind="show" identifier="goToPoint" id="sY4-Z3-dlW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zpk-ph-JhD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1482,7 +1483,7 @@
                     <navigationItem key="navigationItem" id="wYe-Fc-DZU"/>
                     <connections>
                         <outlet property="tableView" destination="ftC-sG-ENj" id="ks5-fJ-e3l"/>
-                        <segue destination="PU7-Gp-SMR" kind="show" identifier="goToTochka" id="3vK-wY-P32"/>
+                        <segue destination="PU7-Gp-SMR" kind="show" identifier="goToPoint" id="3vK-wY-P32"/>
                         <segue destination="uE5-6N-JCu" kind="show" identifier="goToActivityPoints" id="chw-zm-uhr"/>
                     </connections>
                 </viewController>
@@ -2298,6 +2299,9 @@
                             <outlet property="delegate" destination="qX2-PD-Q56" id="eTW-kj-oAS"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="PU7-Gp-SMR" kind="show" identifier="goToPoint" id="FEb-r5-o0p"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dRw-bK-FJn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2607,6 +2611,7 @@
                         <outlet property="searchTextField" destination="rJu-Fk-XD1" id="5qx-XM-4fc"/>
                         <outlet property="searchView" destination="iXp-Gb-Eke" id="XSD-aR-ulk"/>
                         <outlet property="tableView" destination="hPT-z2-Xkj" id="j4i-yj-5YZ"/>
+                        <segue destination="PU7-Gp-SMR" kind="show" identifier="goToPoint" id="5co-KY-lmW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vqM-gC-Vi3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2668,7 +2673,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="chw-zm-uhr"/>
-        <segue reference="UT5-6g-K7A"/>
+        <segue reference="fsG-hP-Ak0"/>
         <segue reference="3vK-wY-P32"/>
         <segue reference="3eo-7Z-uW5"/>
     </inferredMetricsTieBreakers>

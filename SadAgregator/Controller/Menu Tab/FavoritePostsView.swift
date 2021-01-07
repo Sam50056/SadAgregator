@@ -45,6 +45,8 @@ class FavoritePostsViewController : UITableViewController {
     
     var selectedVendId : String?
     
+    var selectedPointId : String?
+    
     var sizes : Array<[String]> {
         get{
             var thisArray = Array<[String]>()
@@ -128,7 +130,15 @@ class FavoritePostsViewController : UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        
+        if segue.identifier == "goToPoint"{
+            
+            guard let selectedPointId = selectedPointId else {return}
+            
+            let destinationVC = segue.destination as! PointViewController
+            
+            destinationVC.thisPointId = selectedPointId
+            
+        }
         
     }
     
@@ -194,6 +204,14 @@ class FavoritePostsViewController : UITableViewController {
             GetPostActionsDataManager(delegate: self).getGetPostActionsData(key: key, postId: postId)
             
             selectedPostId = postId
+            
+        }
+        
+        cell.vendorLabelButtonCallBack = { [self] in
+            
+            selectedPointId = data["point_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToPoint", sender: self)
             
         }
         

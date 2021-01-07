@@ -96,6 +96,7 @@ class SearchViewController: UIViewController {
     }
     
     var selectedPostId = ""
+    var selectedPointId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,6 +131,24 @@ class SearchViewController: UIViewController {
         super.viewDidAppear(animated)
         
         loadUserData()
+    }
+    
+}
+
+//MARK: - Segue Stuff
+
+extension SearchViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "goToPoint"{
+            
+            let destinationVC = segue.destination as! PointViewController
+            
+            destinationVC.thisPointId = selectedPointId
+            
+        }
+        
     }
     
 }
@@ -333,6 +352,14 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             GetPostActionsDataManager(delegate: self).getGetPostActionsData(key: key, postId: postId)
             
             selectedPostId = postId
+            
+        }
+        
+        cell.vendorLabelButtonCallBack = { [self] in
+            
+            selectedPointId = data["point_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToPoint", sender: self)
             
         }
         

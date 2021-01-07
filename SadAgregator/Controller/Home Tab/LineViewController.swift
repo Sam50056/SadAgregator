@@ -345,7 +345,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             
             selectedPointId = cellData["point_id"].stringValue
             
-            self.performSegue(withIdentifier: "goToTochka", sender: self)
+            self.performSegue(withIdentifier: "goToPoint", sender: self)
             
         }
         
@@ -475,6 +475,14 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             
         }
         
+        cell.vendorLabelButtonCallBack = { [self] in
+            
+            selectedPointId = data["point_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToPoint", sender: self)
+            
+        }
+        
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
         cell.byLabel.text = data["by"].stringValue
@@ -576,7 +584,7 @@ extension LineViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "goToTochka" {
+        if segue.identifier == "goToPoint" {
             
             let destinationVC = segue.destination as! PointViewController
             

@@ -25,7 +25,7 @@
                                 <rect key="frame" x="16" y="8" width="331" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24-115" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="SSR-4S-9BF">
-                                        <rect key="frame" x="0.0" y="0.5" width="70" height="19.5"/>
+                                        <rect key="frame" x="0.0" y="-5" width="70" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="E2F-Hx-S5I"/>
                                         </constraints>
@@ -48,14 +48,26 @@
                                         <color key="textColor" red="0.34954202179999999" green="0.5620516539" blue="0.4352820516" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rN-K9-HCB" userLabel="Vendor Label Button">
+                                        <rect key="frame" x="0.0" y="-5" width="70" height="30"/>
+                                        <connections>
+                                            <action selector="vendorLabelTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="GIU-pY-FWJ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="F9Q-xC-IMV" firstAttribute="leading" secondItem="SSR-4S-9BF" secondAttribute="trailing" constant="8" id="5ZG-e2-rDK"/>
                                     <constraint firstAttribute="trailing" secondItem="2D9-dG-k9E" secondAttribute="trailing" constant="8" id="63c-w9-m1E"/>
                                     <constraint firstItem="2D9-dG-k9E" firstAttribute="centerY" secondItem="p91-BU-613" secondAttribute="centerY" id="6CW-sP-VED"/>
+                                    <constraint firstItem="5rN-K9-HCB" firstAttribute="centerX" secondItem="SSR-4S-9BF" secondAttribute="centerX" id="8XB-1r-jjM"/>
                                     <constraint firstAttribute="height" constant="20" id="Ebr-1S-eRx"/>
+                                    <constraint firstItem="5rN-K9-HCB" firstAttribute="centerY" secondItem="SSR-4S-9BF" secondAttribute="centerY" id="Jdr-Bk-9Wx"/>
+                                    <constraint firstItem="5rN-K9-HCB" firstAttribute="trailing" secondItem="SSR-4S-9BF" secondAttribute="trailing" id="Pov-YS-j2m"/>
                                     <constraint firstItem="SSR-4S-9BF" firstAttribute="centerY" secondItem="p91-BU-613" secondAttribute="centerY" id="Qh5-EG-azZ"/>
+                                    <constraint firstItem="5rN-K9-HCB" firstAttribute="leading" secondItem="SSR-4S-9BF" secondAttribute="leading" id="jy1-Bj-nud"/>
                                     <constraint firstItem="F9Q-xC-IMV" firstAttribute="centerY" secondItem="p91-BU-613" secondAttribute="centerY" id="lWX-JW-0vp"/>
+                                    <constraint firstItem="5rN-K9-HCB" firstAttribute="top" secondItem="SSR-4S-9BF" secondAttribute="top" id="qpm-g8-rcu"/>
+                                    <constraint firstItem="5rN-K9-HCB" firstAttribute="bottom" secondItem="SSR-4S-9BF" secondAttribute="bottom" id="szp-vw-6Gi"/>
                                     <constraint firstItem="SSR-4S-9BF" firstAttribute="leading" secondItem="p91-BU-613" secondAttribute="leading" id="zfl-Yy-xQx"/>
                                     <constraint firstItem="2D9-dG-k9E" firstAttribute="leading" secondItem="F9Q-xC-IMV" secondAttribute="trailing" constant="8" id="zim-VP-mEa"/>
                                 </constraints>
