@@ -29,6 +29,7 @@ class PostavshikViewController: UIViewController {
     lazy var vendorCardDataManager = VendorCardDataManager()
     lazy var vendorLikeDataManager = VendorLikeDataManager()
     lazy var reviewUpdateDataManager = ReviewUpdateDataManager()
+    lazy var getVendActionsDataManager = GetVendActionsDataManager()
     
     var vendorData : JSON?
     
@@ -132,6 +133,7 @@ class PostavshikViewController: UIViewController {
         
         vendorCardDataManager.delegate = self
         vendorLikeDataManager.delegate = self
+        getVendActionsDataManager.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -184,6 +186,14 @@ class PostavshikViewController: UIViewController {
         vendorLikeDataManager.getVendorLikeData(key: key, vendId: thisVendId, status: newStatus)
         
         vendorLikeStatus = newStatus
+        
+    }
+    
+    @IBAction func helpBarButtonPressed(_ sender : UIBarButtonItem){
+        
+        guard let thisVendorId = thisVendorId else {return}
+        
+        getVendActionsDataManager.getGetVendActionsData(key: key, vendId: thisVendorId)
         
     }
     
@@ -282,6 +292,58 @@ extension PostavshikViewController : VendorLikeDataManagerDelegate{
     
     func didFailGettingVendorLikeDataWithError(error: String) {
         print("Error with VendorLikeDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - GetVendActionsDataManagerDelegate Stuff
+
+extension PostavshikViewController : GetVendActionsDataManagerDelegate{
+    
+    func didGetGetVendActionsData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            let actionsArray = data["actions"].arrayValue
+            
+            showActionsSheet(actionsArray: actionsArray) { (action) in
+                
+                let actionid = (action["id"].stringValue)
+                
+                SetVendActionsDataManager(delegate: self).getSetVendActionsData(key: key, vendId: thisVendorId!, actionId: actionid)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingGetVendActionsData(error: String) {
+        print("Error with GetVendActionsDataManager : \(error)")
+    }
+    
+}
+
+extension PostavshikViewController : SetVendActionsDataManagerDelegate{
+    
+    func didGetSetVendActionsData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            dismiss(animated: true, completion: nil)
+            
+            if let message = data["msg"].string{
+                
+                showSimpleAlertWithOkButton(title: message, message: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingSetVendActionsDataWithError(error: String) {
+        print("Error with SetVendActionsDataManager : \(error)")
     }
     
 }
@@ -587,7 +649,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             //Set up the rating
             
-            let rating = Double(data["revs_info"]["rate"].stringValue)!
+            guard let rating = Double(data["revs_info"]["rate"].stringValue) else {return}
             
             if rating != 0 {
                 ratingView.rating = rating

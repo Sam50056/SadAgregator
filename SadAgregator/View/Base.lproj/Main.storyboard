@@ -769,7 +769,11 @@
                                     <action selector="likeBarButtonPressed:" destination="tgI-Wx-GfF" id="Xxj-J0-Sgd"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="info.circle" catalog="system" id="Pwl-Op-FRg"/>
+                            <barButtonItem image="info.circle" catalog="system" id="Pwl-Op-FRg">
+                                <connections>
+                                    <action selector="helpBarButtonPressed:" destination="tgI-Wx-GfF" id="wLB-KW-lhL"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>

@@ -11,6 +11,8 @@
 		2201672025A66E380072BFE7 /* SetPostActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */; };
 		2201672325A73FEA0072BFE7 /* GetPointActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201672225A73FEA0072BFE7 /* GetPointActionsDataManager.swift */; };
 		2201672625A771E10072BFE7 /* SetPointActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201672525A771E10072BFE7 /* SetPointActionsDataManager.swift */; };
+		2201672925A777A20072BFE7 /* GetVendActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201672825A777A20072BFE7 /* GetVendActionsDataManager.swift */; };
+		2201672C25A77BB50072BFE7 /* SetVendActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201672B25A77BB50072BFE7 /* SetVendActionsDataManager.swift */; };
 		221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221949FE256B1FBD00E0564D /* PointViewController.swift */; };
 		221C072C256E5ABB001BC842 /* PhoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C072A256E5ABB001BC842 /* PhoneTableViewCell.swift */; };
 		221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */; };
@@ -123,6 +125,8 @@
 		2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPostActionsDataManager.swift; sourceTree = "<group>"; };
 		2201672225A73FEA0072BFE7 /* GetPointActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPointActionsDataManager.swift; sourceTree = "<group>"; };
 		2201672525A771E10072BFE7 /* SetPointActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPointActionsDataManager.swift; sourceTree = "<group>"; };
+		2201672825A777A20072BFE7 /* GetVendActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVendActionsDataManager.swift; sourceTree = "<group>"; };
+		2201672B25A77BB50072BFE7 /* SetVendActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVendActionsDataManager.swift; sourceTree = "<group>"; };
 		221949FE256B1FBD00E0564D /* PointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointViewController.swift; sourceTree = "<group>"; };
 		221C072A256E5ABB001BC842 /* PhoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTableViewCell.swift; sourceTree = "<group>"; };
 		221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneTableViewCell.xib; sourceTree = "<group>"; };
@@ -718,6 +722,8 @@
 				22782909258BB60E00B435FA /* GetMyReviewDataManager.swift */,
 				2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */,
 				229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */,
+				2201672825A777A20072BFE7 /* GetVendActionsDataManager.swift */,
+				2201672B25A77BB50072BFE7 /* SetVendActionsDataManager.swift */,
 			);
 			path = "Vendor Managers";
 			sourceTree = "<group>";
@@ -913,6 +919,7 @@
 				22BF1A1125A5E19100567DB7 /* LinePointsPaggingDataManager.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
 				22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */,
+				2201672C25A77BB50072BFE7 /* SetVendActionsDataManager.swift in Sources */,
 				22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */,
 				22D9021D259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift in Sources */,
 				22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */,
@@ -944,6 +951,7 @@
 				22A155ED2584E766000EAB64 /* MenuViewModel.swift in Sources */,
 				22D90239259C1546009732CC /* SendQuestionView.swift in Sources */,
 				2201671C25A669790072BFE7 /* GetPostActionsDataManager.swift in Sources */,
+				2201672925A777A20072BFE7 /* GetVendActionsDataManager.swift in Sources */,
 				229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */,
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
 				2268869C25996B920079933D /* RefreshAlbsDataManager.swift in Sources */,
