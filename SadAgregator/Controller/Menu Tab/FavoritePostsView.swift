@@ -138,6 +138,12 @@ class FavoritePostsViewController : UITableViewController {
             
             destinationVC.thisPointId = selectedPointId
             
+        }else if segue.identifier == "goToVend"{
+            
+            let destinationVC = segue.destination as! PostavshikViewController
+            
+            destinationVC.thisVendorId = selectedVendId
+            
         }
         
     }
@@ -212,6 +218,14 @@ class FavoritePostsViewController : UITableViewController {
             selectedPointId = data["point_id"].stringValue
             
             self.performSegue(withIdentifier: "goToPoint", sender: self)
+            
+        }
+        
+        cell.byLabelButtonCallback = { [self] in
+            
+            selectedVendId = data["vendor_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToVend", sender: self)
             
         }
         

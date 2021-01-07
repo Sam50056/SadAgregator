@@ -97,6 +97,7 @@ class SearchViewController: UIViewController {
     
     var selectedPostId = ""
     var selectedPointId = ""
+    var selectedVendId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,6 +147,12 @@ extension SearchViewController {
             let destinationVC = segue.destination as! PointViewController
             
             destinationVC.thisPointId = selectedPointId
+            
+        }else if segue.identifier == "goToVend"{
+            
+            let destinationVC = segue.destination as! PostavshikViewController
+            
+            destinationVC.thisVendorId = selectedVendId
             
         }
         
@@ -360,6 +367,14 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             selectedPointId = data["point_id"].stringValue
             
             self.performSegue(withIdentifier: "goToPoint", sender: self)
+            
+        }
+        
+        cell.byLabelButtonCallback = { [self] in
+            
+            selectedVendId = data["vendor_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToVend", sender: self)
             
         }
         

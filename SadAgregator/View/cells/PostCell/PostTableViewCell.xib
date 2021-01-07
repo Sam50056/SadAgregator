@@ -34,7 +34,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Самвел Ерзнкян " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9Q-xC-IMV">
-                                        <rect key="frame" x="78" y="1" width="167" height="18"/>
+                                        <rect key="frame" x="78" y="-5" width="167" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.63528621200000002" green="0.63529002670000001" blue="0.63529998060000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -54,20 +54,32 @@
                                             <action selector="vendorLabelTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="GIU-pY-FWJ"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qtq-yb-8sg">
+                                        <rect key="frame" x="78" y="-5" width="167" height="30"/>
+                                        <connections>
+                                            <action selector="byLabelTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="l7s-41-GyT"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="qtq-yb-8sg" firstAttribute="trailing" secondItem="F9Q-xC-IMV" secondAttribute="trailing" id="08W-pD-UfG"/>
                                     <constraint firstItem="F9Q-xC-IMV" firstAttribute="leading" secondItem="SSR-4S-9BF" secondAttribute="trailing" constant="8" id="5ZG-e2-rDK"/>
                                     <constraint firstAttribute="trailing" secondItem="2D9-dG-k9E" secondAttribute="trailing" constant="8" id="63c-w9-m1E"/>
                                     <constraint firstItem="2D9-dG-k9E" firstAttribute="centerY" secondItem="p91-BU-613" secondAttribute="centerY" id="6CW-sP-VED"/>
                                     <constraint firstItem="5rN-K9-HCB" firstAttribute="centerX" secondItem="SSR-4S-9BF" secondAttribute="centerX" id="8XB-1r-jjM"/>
                                     <constraint firstAttribute="height" constant="20" id="Ebr-1S-eRx"/>
+                                    <constraint firstItem="qtq-yb-8sg" firstAttribute="bottom" secondItem="F9Q-xC-IMV" secondAttribute="bottom" id="FUq-xV-rVC"/>
                                     <constraint firstItem="5rN-K9-HCB" firstAttribute="centerY" secondItem="SSR-4S-9BF" secondAttribute="centerY" id="Jdr-Bk-9Wx"/>
                                     <constraint firstItem="5rN-K9-HCB" firstAttribute="trailing" secondItem="SSR-4S-9BF" secondAttribute="trailing" id="Pov-YS-j2m"/>
                                     <constraint firstItem="SSR-4S-9BF" firstAttribute="centerY" secondItem="p91-BU-613" secondAttribute="centerY" id="Qh5-EG-azZ"/>
+                                    <constraint firstItem="qtq-yb-8sg" firstAttribute="leading" secondItem="F9Q-xC-IMV" secondAttribute="leading" id="VTy-Bg-vNu"/>
+                                    <constraint firstItem="qtq-yb-8sg" firstAttribute="centerY" secondItem="F9Q-xC-IMV" secondAttribute="centerY" id="dZO-aX-w6i"/>
                                     <constraint firstItem="5rN-K9-HCB" firstAttribute="leading" secondItem="SSR-4S-9BF" secondAttribute="leading" id="jy1-Bj-nud"/>
                                     <constraint firstItem="F9Q-xC-IMV" firstAttribute="centerY" secondItem="p91-BU-613" secondAttribute="centerY" id="lWX-JW-0vp"/>
+                                    <constraint firstItem="qtq-yb-8sg" firstAttribute="centerX" secondItem="F9Q-xC-IMV" secondAttribute="centerX" id="ldR-vz-mLr"/>
                                     <constraint firstItem="5rN-K9-HCB" firstAttribute="top" secondItem="SSR-4S-9BF" secondAttribute="top" id="qpm-g8-rcu"/>
                                     <constraint firstItem="5rN-K9-HCB" firstAttribute="bottom" secondItem="SSR-4S-9BF" secondAttribute="bottom" id="szp-vw-6Gi"/>
+                                    <constraint firstItem="qtq-yb-8sg" firstAttribute="top" secondItem="F9Q-xC-IMV" secondAttribute="top" id="uIa-ex-4L4"/>
                                     <constraint firstItem="SSR-4S-9BF" firstAttribute="leading" secondItem="p91-BU-613" secondAttribute="leading" id="zfl-Yy-xQx"/>
                                     <constraint firstItem="2D9-dG-k9E" firstAttribute="leading" secondItem="F9Q-xC-IMV" secondAttribute="trailing" constant="8" id="zim-VP-mEa"/>
                                 </constraints>

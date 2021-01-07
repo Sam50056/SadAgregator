@@ -104,6 +104,7 @@ class MainViewController: UIViewController {
     
     var selectedLineId : String?
     var selectedPointId : String?
+    var selectedVendId : String?
     
     var userData : Results<UserData>!
     
@@ -654,6 +655,14 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             
         }
         
+        cell.byLabelButtonCallback = { [self] in
+            
+            selectedVendId = data["vendor_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToVend", sender: self)
+            
+        }
+        
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
         cell.byLabel.text = data["by"].stringValue
@@ -772,6 +781,12 @@ extension MainViewController {
             let destinationVC = segue.destination as! SearchViewController
             
             destinationVC.searchText = searchTextField.text!
+            
+        }else if segue.identifier == "goToVend"{
+            
+            let destinationVC = segue.destination as! PostavshikViewController
+            
+            destinationVC.thisVendorId = selectedVendId
             
         }
         

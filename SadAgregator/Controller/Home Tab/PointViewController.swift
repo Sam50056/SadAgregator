@@ -176,7 +176,7 @@ class PointViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "goToPostavshik"{
+        if segue.identifier == "goToVend"{
             
             let destinationVC = segue.destination as! PostavshikViewController
             
@@ -466,7 +466,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             
             selectedVendId = vendsArray[index]["id"].stringValue
             
-            self.performSegue(withIdentifier: "goToPostavshik", sender: self)
+            self.performSegue(withIdentifier: "goToVend", sender: self)
             
         }else if indexPath.section == 6{
             
@@ -666,6 +666,14 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             refresh(self)
             
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            
+        }
+        
+        cell.byLabelButtonCallback = { [self] in
+            
+            selectedVendId = data["vendor_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToVend", sender: self)
             
         }
         

@@ -105,6 +105,7 @@ class LineViewController: UIViewController {
     }
     
     var selectedPointId : String?
+    var selectedVendId : String?
     
     var selectedPostId = ""
     
@@ -483,6 +484,14 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             
         }
         
+        cell.byLabelButtonCallback = { [self] in
+            
+            selectedVendId = data["vendor_id"].stringValue
+            
+            self.performSegue(withIdentifier: "goToVend", sender: self)
+            
+        }
+        
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
         cell.byLabel.text = data["by"].stringValue
@@ -597,6 +606,12 @@ extension LineViewController {
             destinationVC.lineId = thisLineId
             
             navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
+            
+        }else if segue.identifier == "goToVend"{
+            
+            let destinationVC = segue.destination as! PostavshikViewController
+            
+            destinationVC.thisVendorId = selectedVendId
             
         }
         

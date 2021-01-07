@@ -152,6 +152,8 @@ class PostavshikViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.isNavigationBarHidden = false
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
     }
@@ -161,9 +163,7 @@ class PostavshikViewController: UIViewController {
         
         loadUserData()
         
-        if let safeId = thisVendorId{
-            vendorCardDataManager.getVendorCardData(key: key, vendorId: safeId)
-        }
+        refresh(self)
         
     }
     
@@ -238,6 +238,19 @@ extension PostavshikViewController {
     
 }
 
+//MARK: - Refresh func
+
+extension PostavshikViewController{
+    
+    @objc func refresh(_ sender: AnyObject) {
+        
+        if let safeId = thisVendorId{
+            vendorCardDataManager.getVendorCardData(key: key, vendorId: safeId)
+        }
+        
+    }
+    
+}
 
 //MARK: - VendorCardDataManagerDelegate Stuff
 
@@ -810,6 +823,14 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             selectedPointId = data["point_id"].stringValue
             
             self.performSegue(withIdentifier: "goToPoint", sender: self)
+            
+        }
+        
+        cell.byLabelButtonCallback = { [self] in
+            
+            refresh(self)
+            
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             
         }
         
