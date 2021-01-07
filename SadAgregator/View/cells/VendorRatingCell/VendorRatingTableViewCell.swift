@@ -129,7 +129,11 @@ class VendorRatingTableViewCell: UITableViewCell , UITableViewDelegate , UITable
     
     func setUpRatingCell(cell : RatingTableViewCell , data : String){
         
+        cell.ratingView.settings.fillMode = .precise
+        
         cell.ratingView.rating = Double(data)!
+        
+        cell.ratingLabel.text = data
         
     }
     

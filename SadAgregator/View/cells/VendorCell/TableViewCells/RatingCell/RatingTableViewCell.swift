@@ -11,6 +11,7 @@ import Cosmos
 class RatingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var ratingView : CosmosView!
+    @IBOutlet weak var ratingLabel : UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

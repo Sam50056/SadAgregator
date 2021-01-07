@@ -148,6 +148,8 @@ extension VendTableViewCell : UITableViewDataSource{
         
         cell.ratingView.rating = Double(data)!
         
+        cell.ratingLabel.text = data
+        
     }
     
     func setUpPhoneCell(cell : PhoneTableViewCell , data : String){

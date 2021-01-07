@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,8 +19,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Geb-sz-1Ol" customClass="CosmosView" customModule="Cosmos">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="25"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="121" id="44J-UZ-czW"/>
+                        </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
                             <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
@@ -33,16 +37,24 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7te-7a-MZj">
+                        <rect key="frame" x="128" y="5" width="21" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.7278061509" green="0.72791242599999995" blue="0.72778302429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="Geb-sz-1Ol" secondAttribute="trailing" id="GuF-wf-Bpo"/>
                     <constraint firstAttribute="bottom" secondItem="Geb-sz-1Ol" secondAttribute="bottom" id="Xqh-85-E2r"/>
                     <constraint firstItem="Geb-sz-1Ol" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="e6C-zG-UUb"/>
                     <constraint firstItem="Geb-sz-1Ol" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ggh-J1-Ua4"/>
+                    <constraint firstItem="7te-7a-MZj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="1" id="nTU-CK-yO1"/>
+                    <constraint firstItem="7te-7a-MZj" firstAttribute="leading" secondItem="Geb-sz-1Ol" secondAttribute="trailing" constant="8" id="p88-5y-onV"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="ratingLabel" destination="7te-7a-MZj" id="fuE-NN-z2O"/>
                 <outlet property="ratingView" destination="Geb-sz-1Ol" id="sGv-c1-dyy"/>
             </connections>
             <point key="canvasLocation" x="75.362318840579718" y="107.47767857142857"/>
