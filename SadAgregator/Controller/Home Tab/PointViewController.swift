@@ -28,6 +28,8 @@ class PointViewController: UIViewController {
     
     lazy var pointPostsPaggingDataManager = PointPostsPaggingDataManager()
     
+    lazy var getPointActionsDataManager = GetPointActionsDataManager()
+    
     var pointData : JSON?
     
     var vendsArray = [JSON]()
@@ -119,6 +121,7 @@ class PointViewController: UIViewController {
         
         activityPointDataManager.delegate = self
         pointPostsPaggingDataManager.delegate = self
+        getPointActionsDataManager.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -147,6 +150,16 @@ class PointViewController: UIViewController {
         super.viewDidAppear(animated)
         
         loadUserData()
+    }
+    
+    //MARK: - Actions
+    
+    @IBAction func helpBarButtonTapped(_ sender : UIBarButtonItem){
+        
+        guard let thisPointId = thisPointId else {return}
+        
+        getPointActionsDataManager.getGetPointActionsData(key: key, pointId: thisPointId)
+        
     }
     
     //MARK: - Refresh func
@@ -240,6 +253,58 @@ extension PointViewController : PointPostsPaggingDataManagerDelegate {
     
     func didFailGettingPointPostsPaggingDataWithError(error: String) {
         print("Error with PointPostsPaggingDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - GetPointActionsDataManagerDelegate Stuff
+
+extension PointViewController : GetPointActionsDataManagerDelegate{
+    
+    func didGetGetPointActionsData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            let actionsArray = data["actions"].arrayValue
+            
+            showActionsSheet(actionsArray: actionsArray) { (action) in
+                
+                let actionid = (action["id"].stringValue)
+                
+                SetPointActionsDataManager(delegate: self).getSetPointActionsData(key: key, pointId: thisPointId!, actionId: actionid)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingGetPointActionsDataWithError(error: String) {
+        print("Error with GetPointActionsDataManager : \(error)")
+    }
+    
+}
+
+extension PointViewController : SetPointActionsDataManagerDelegate{
+    
+    func didGetSetPointActionsData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            dismiss(animated: true, completion: nil)
+            
+            if let message = data["msg"].string{
+                
+                showSimpleAlertWithOkButton(title: message, message: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingSetPointActionsDataWithError(error: String) {
+        print("Error with SetPointActionsDataManager : \(error)")
     }
     
 }
@@ -643,29 +708,13 @@ extension PointViewController : GetPostActionsDataManagerDelegate{
             
             let actionsArray = data["actions"].arrayValue
             
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            
-            actionsArray.forEach { (action) in
+            showActionsSheet(actionsArray: actionsArray) { (action) in
                 
-                let alertAction = UIAlertAction(title: action["capt"].stringValue, style: .default) { (_) in
-                    
-                    let actionid = (action["id"].stringValue)
-                    
-                    SetPostActionsDataManager(delegate: self).getSetPostActionsData(key: key, actionId: actionid, postId: selectedPostId)
-                    
-                }
+                let actionid = (action["id"].stringValue)
                 
-                alertController.addAction(alertAction)
+                SetPostActionsDataManager(delegate: self).getSetPostActionsData(key: key, actionId: actionid, postId: selectedPostId)
                 
             }
-            
-            let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in
-                alertController.dismiss(animated: true, completion: nil)
-            }
-            
-            alertController.addAction(cancelAction)
-            
-            self.present(alertController, animated: true, completion: nil)
             
         }
         

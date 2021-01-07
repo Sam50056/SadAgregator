@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import SwiftyJSON
 
 //MARK: - UIImageView
 
@@ -64,6 +65,32 @@ extension UIViewController{
         }
         
         alertController.addAction(action)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func showActionsSheet(actionsArray : [JSON] , _ selectionCallBack : @escaping (_ action : JSON) -> Void){
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        actionsArray.forEach { (action) in
+            
+            let alertAction = UIAlertAction(title: action["capt"].stringValue, style: .default) { (_) in
+                
+                selectionCallBack(action)
+                
+            }
+            
+            alertController.addAction(alertAction)
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
         

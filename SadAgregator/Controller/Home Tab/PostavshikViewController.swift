@@ -787,29 +787,13 @@ extension PostavshikViewController : GetPostActionsDataManagerDelegate{
             
             let actionsArray = data["actions"].arrayValue
             
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            
-            actionsArray.forEach { (action) in
+            showActionsSheet(actionsArray: actionsArray) { (action) in
                 
-                let alertAction = UIAlertAction(title: action["capt"].stringValue, style: .default) { (_) in
-                    
-                    let actionid = (action["id"].stringValue)
-                    
-                    SetPostActionsDataManager(delegate: self).getSetPostActionsData(key: key, actionId: actionid, postId: selectedPostId)
-                    
-                }
+                let actionid = (action["id"].stringValue)
                 
-                alertController.addAction(alertAction)
+                SetPostActionsDataManager(delegate: self).getSetPostActionsData(key: key, actionId: actionid, postId: selectedPostId)
                 
             }
-            
-            let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in
-                alertController.dismiss(animated: true, completion: nil)
-            }
-            
-            alertController.addAction(cancelAction)
-            
-            self.present(alertController, animated: true, completion: nil)
             
         }
         

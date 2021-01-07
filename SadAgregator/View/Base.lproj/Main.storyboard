@@ -1135,7 +1135,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sDZ-Kd-cXw">
-                        <barButtonItem key="rightBarButtonItem" image="info.circle" catalog="system" id="vF2-UL-OBQ"/>
+                        <barButtonItem key="rightBarButtonItem" image="info.circle" catalog="system" id="vF2-UL-OBQ">
+                            <connections>
+                                <action selector="helpBarButtonTapped:" destination="PU7-Gp-SMR" id="chy-HP-eav"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="kRI-vX-pSJ" id="H0Y-3i-sG1"/>
