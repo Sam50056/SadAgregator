@@ -112,6 +112,8 @@ class FavoritePostsViewController : UITableViewController {
     
     var selectedPostId = ""
     
+    var searchText = ""
+    
     override func viewDidLoad() {
         
         loadUserData()
@@ -143,6 +145,12 @@ class FavoritePostsViewController : UITableViewController {
             let destinationVC = segue.destination as! PostavshikViewController
             
             destinationVC.thisVendorId = selectedVendId
+            
+        }else if segue.identifier == "goSearch" {
+            
+            let destinationVC = segue.destination as! SearchViewController
+            
+            destinationVC.searchText = searchText
             
         }
         
@@ -190,7 +198,7 @@ class FavoritePostsViewController : UITableViewController {
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
         
-        cell.photoDelegate = self
+        cell.delegate = self
         
         cell.key = key
         
@@ -254,9 +262,17 @@ class FavoritePostsViewController : UITableViewController {
 
 //MARK: - PhotoCollectionViewCellDelegate stuff
 
-extension FavoritePostsViewController : PhotoCollectionViewCellDelegate{
+extension FavoritePostsViewController : PostCellCollectionViewActionsDelegate{
     
-    func didTapOnCell(index: Int, images: [String]) {
+    func didTapOnOptionCell(option: String) {
+        
+        searchText = option
+        
+        performSegue(withIdentifier: "goSearch", sender: self)
+        
+    }
+    
+    func didTapOnImageCell(index: Int, images: [String]) {
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
         

@@ -109,6 +109,8 @@ class LineViewController: UIViewController {
     
     var selectedPostId = ""
     
+    var searchText = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -453,7 +455,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
         
-        cell.photoDelegate = self
+        cell.delegate = self
         
         cell.key = key
         
@@ -517,9 +519,17 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
 
 //MARK: - PhotoCollectionViewCellDelegate stuff
 
-extension LineViewController : PhotoCollectionViewCellDelegate{
+extension LineViewController : PostCellCollectionViewActionsDelegate{
     
-    func didTapOnCell(index: Int, images: [String]) {
+    func didTapOnOptionCell(option: String) {
+        
+        searchText = option
+        
+        performSegue(withIdentifier: "goSearch", sender: self)
+        
+    }
+    
+    func didTapOnImageCell(index: Int, images: [String]) {
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
         
@@ -612,6 +622,12 @@ extension LineViewController {
             let destinationVC = segue.destination as! PostavshikViewController
             
             destinationVC.thisVendorId = selectedVendId
+            
+        }else if segue.identifier == "goSearch" {
+            
+            let destinationVC = segue.destination as! SearchViewController
+            
+            destinationVC.searchText = searchText
             
         }
         

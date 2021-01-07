@@ -781,6 +781,7 @@
                         <outlet property="tableView" destination="gkI-HL-ayK" id="9el-eD-zhu"/>
                         <segue destination="s7e-YJ-ycF" kind="show" identifier="goToReviewUpdate" id="KJn-6B-Os0"/>
                         <segue destination="PU7-Gp-SMR" kind="show" identifier="goToPoint" id="sY4-Z3-dlW"/>
+                        <segue destination="iOY-jj-tLQ" kind="show" identifier="goSearch" id="wZb-pO-qG4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zpk-ph-JhD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1149,6 +1150,7 @@
                     <connections>
                         <outlet property="tableView" destination="kRI-vX-pSJ" id="H0Y-3i-sG1"/>
                         <segue destination="tgI-Wx-GfF" kind="show" identifier="goToVend" id="3eo-7Z-uW5"/>
+                        <segue destination="iOY-jj-tLQ" kind="show" identifier="goSearch" id="lNg-NF-ZhP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="koj-j9-MmD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1486,6 +1488,7 @@
                         <segue destination="PU7-Gp-SMR" kind="show" identifier="goToPoint" id="3vK-wY-P32"/>
                         <segue destination="uE5-6N-JCu" kind="show" identifier="goToActivityPoints" id="chw-zm-uhr"/>
                         <segue destination="tgI-Wx-GfF" kind="show" identifier="goToVend" id="jMw-Um-hkz"/>
+                        <segue destination="iOY-jj-tLQ" kind="show" identifier="goSearch" id="Sh6-kq-GeD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Vs-BG-wk6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2304,6 +2307,7 @@
                     <connections>
                         <segue destination="PU7-Gp-SMR" kind="show" identifier="goToPoint" id="FEb-r5-o0p"/>
                         <segue destination="tgI-Wx-GfF" kind="show" identifier="goToVend" id="4nT-MZ-xAF"/>
+                        <segue destination="iOY-jj-tLQ" kind="show" identifier="goSearch" id="hIu-vB-ACx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dRw-bK-FJn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2471,11 +2475,11 @@
             <objects>
                 <viewController id="iOY-jj-tLQ" customClass="SearchViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dVW-pV-I5v">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hPT-z2-Xkj">
-                                <rect key="frame" x="0.0" y="88" width="390" height="673"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="756"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="EKV-Bw-0tA">
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="75"/>
@@ -2676,6 +2680,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
+        <segue reference="hIu-vB-ACx"/>
         <segue reference="chw-zm-uhr"/>
         <segue reference="UT5-6g-K7A"/>
         <segue reference="FEb-r5-o0p"/>

@@ -624,7 +624,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
         
-        cell.photoDelegate = self
+        cell.delegate = self
         
         cell.key = key
         
@@ -688,9 +688,9 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
 
 //MARK: - PhotoCollectionViewCellDelegate stuff
 
-extension MainViewController : PhotoCollectionViewCellDelegate{
+extension MainViewController : PostCellCollectionViewActionsDelegate{
     
-    func didTapOnCell(index: Int, images: [String]) {
+    func didTapOnImageCell(index: Int, images: [String]) {
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
         
@@ -699,6 +699,14 @@ extension MainViewController : PhotoCollectionViewCellDelegate{
         vc.images = images
         
         presentHero(vc, navigationAnimationType: .fade)
+        
+    }
+    
+    func didTapOnOptionCell(option: String) {
+        
+        searchTextField.text = option
+        
+        self.performSegue(withIdentifier: "goSearch", sender: self)
         
     }
     

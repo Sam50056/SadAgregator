@@ -339,7 +339,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
         
-        cell.photoDelegate = self
+        cell.delegate = self
         
         cell.key = key
         
@@ -403,9 +403,25 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
 
 //MARK: - PhotoCollectionViewCellDelegate stuff
 
-extension SearchViewController : PhotoCollectionViewCellDelegate{
+extension SearchViewController : PostCellCollectionViewActionsDelegate{
     
-    func didTapOnCell(index: Int, images: [String]) {
+    func didTapOnOptionCell(option: String) {
+        
+        postsArray.removeAll()
+        
+        searchText = option
+        
+        searchTextField.text = option
+        
+        tableView.reloadSections([1], with: .automatic)
+        
+        getSearchPageDataManager.getSearchPageData(key: key, query: option, page: page)
+        
+        self.tableView.setContentOffset( CGPoint(x: 0, y: 0) , animated: true)
+        
+    }
+    
+    func didTapOnImageCell(index: Int, images: [String]) {
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
         

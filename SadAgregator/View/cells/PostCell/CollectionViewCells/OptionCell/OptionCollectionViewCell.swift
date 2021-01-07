@@ -11,6 +11,7 @@ class OptionCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var button : UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

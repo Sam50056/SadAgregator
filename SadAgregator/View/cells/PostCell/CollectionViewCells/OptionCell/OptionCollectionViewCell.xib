@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,13 +26,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y13-03-joY">
+                                <rect key="frame" x="0.0" y="0.0" width="124" height="34"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.89626395700000006" green="0.90821486709999999" blue="0.90771836039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="BTF-Rq-vFO" firstAttribute="leading" secondItem="LqG-aZ-LRz" secondAttribute="leading" constant="2" id="2px-8m-eiQ"/>
                             <constraint firstItem="BTF-Rq-vFO" firstAttribute="top" secondItem="LqG-aZ-LRz" secondAttribute="top" constant="2" id="OBn-CV-KEu"/>
+                            <constraint firstItem="y13-03-joY" firstAttribute="top" secondItem="LqG-aZ-LRz" secondAttribute="top" id="Oq3-Gl-Oil"/>
                             <constraint firstAttribute="trailing" secondItem="BTF-Rq-vFO" secondAttribute="trailing" constant="2" id="Qj4-Ou-09u"/>
+                            <constraint firstItem="y13-03-joY" firstAttribute="leading" secondItem="LqG-aZ-LRz" secondAttribute="leading" id="aWV-fP-tq4"/>
+                            <constraint firstAttribute="bottom" secondItem="y13-03-joY" secondAttribute="bottom" id="v0L-8c-AOl"/>
                             <constraint firstAttribute="bottom" secondItem="BTF-Rq-vFO" secondAttribute="bottom" constant="2" id="vUl-OJ-mR5"/>
+                            <constraint firstAttribute="trailing" secondItem="y13-03-joY" secondAttribute="trailing" id="yxA-K7-o9J"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -45,6 +53,7 @@
             </constraints>
             <size key="customSize" width="177" height="61"/>
             <connections>
+                <outlet property="button" destination="y13-03-joY" id="FOu-S6-aTF"/>
                 <outlet property="label" destination="BTF-Rq-vFO" id="e2D-Id-rtE"/>
                 <outlet property="view" destination="LqG-aZ-LRz" id="upY-6a-sqF"/>
             </connections>

@@ -121,7 +121,7 @@ class PostTableViewCell: UITableViewCell  {
         
     }
     
-    var photoDelegate : PhotoCollectionViewCellDelegate?
+    var delegate : PostCellCollectionViewActionsDelegate?
     
     lazy var postLikeDataManager = PostLikeDataManager()
     
@@ -477,6 +477,9 @@ class PostTableViewCell: UITableViewCell  {
                 
                 (cell as! OptionCollectionViewCell).label.text = item
                 
+                (cell as! OptionCollectionViewCell).button.tag = indexPath.row
+                (cell as! OptionCollectionViewCell).button.addTarget(self, action: #selector(self.optionCellTapped(_:)), for: .touchUpInside)
+                
             }else if section == .photo {
                 
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionViewCell
@@ -556,7 +559,19 @@ class PostTableViewCell: UITableViewCell  {
         
         print("Selected Image Link : \(imageURL)")
         
-        photoDelegate?.didTapOnCell(index: index, images: images)
+        delegate?.didTapOnImageCell(index: index, images: images)
+        
+    }
+    
+    @IBAction func optionCellTapped(_ sender : UIButton){
+        
+        let index = sender.tag
+        
+        let selectedOption = options[index]
+        
+        print("Selected option : \(selectedOption) with index in the array : \(index)")
+        
+        delegate?.didTapOnOptionCell(option: selectedOption)
         
     }
     
@@ -615,6 +630,7 @@ extension PostTableViewCell : PostLikeDataManagerDelegate{
 
 //MARK: - PhotoCollectionViewCellDelegate
 
-protocol PhotoCollectionViewCellDelegate {
-    func didTapOnCell(index: Int, images : [String])
+protocol PostCellCollectionViewActionsDelegate {
+    func didTapOnImageCell(index: Int, images : [String])
+    func didTapOnOptionCell(option : String)
 }
