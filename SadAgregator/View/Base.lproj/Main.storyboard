@@ -1552,7 +1552,7 @@
                                                             </constraints>
                                                         </scrollView>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="48V-yN-r4f" secondAttribute="trailing" id="A3t-Oe-pt5"/>
                                                         <constraint firstAttribute="bottom" secondItem="48V-yN-r4f" secondAttribute="bottom" id="j13-oD-dCa"/>
@@ -1628,7 +1628,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Tfq-hn-Uh2"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Tfq-hn-Uh2" firstAttribute="trailing" secondItem="PYB-ho-Bly" secondAttribute="trailing" id="3Ha-Xk-KZI"/>
                             <constraint firstItem="Tfq-hn-Uh2" firstAttribute="bottom" secondItem="gBK-3F-PIk" secondAttribute="bottom" constant="16" id="D5B-Nd-s89"/>
