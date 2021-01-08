@@ -26,6 +26,9 @@ class MainViewController: UIViewController {
     
     var isLogged : Bool = false
     
+    var imageHashSearch : String?
+    var imageHashServer : String?
+    
     lazy var checkKeysDataManager = CheckKeysDataManager()
     lazy var mainDataManager = MainDataManager()
     lazy var mainPaggingDataManager = MainPaggingDataManager()
@@ -106,8 +109,6 @@ class MainViewController: UIViewController {
     var selectedPointId : String?
     var selectedVendId : String?
     
-    var userData : Results<UserData>!
-    
     var selectedPostId = ""
     
     //MARK: - Lifecycle Methods
@@ -169,6 +170,18 @@ class MainViewController: UIViewController {
     
 }
 
+//MARK: - Actions
+
+extension MainViewController {
+    
+    @IBAction func photoSearchButtonPressed(_ sender : UIButton){
+        
+        showImagePickerController(sourceType: .photoLibrary)
+        
+    }
+    
+}
+
 //MARK: - UITabBarControllerDelegate
 
 extension MainViewController : UITabBarControllerDelegate{
@@ -197,12 +210,12 @@ extension MainViewController {
         
         let userDataFirst = userDataObject.first
         
-        userData = userDataObject
-        
         print("Key Realm: \(String(describing: userDataFirst?.key))")
         
         key = userDataFirst?.key
         isLogged = userDataFirst?.isLogged ?? false
+        imageHashServer = userDataFirst?.imageHashServer
+        imageHashSearch = userDataFirst?.imageHashSearch
         
     }
     
@@ -220,6 +233,58 @@ extension MainViewController {
         }
         
     }
+    
+}
+
+//MARK: - UIImagePickerControlller
+
+extension MainViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate{
+    
+    func showImagePickerController(sourceType : UIImagePickerController.SourceType) {
+        
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        imagePickerController.sourceType = sourceType
+        
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        
+        if let safeFileUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL , let imageHashServer = imageHashServer{
+            
+            SendPhotoDataManager(delegate: self).sendFileMultipart(urlString: imageHashServer, fileUrl: safeFileUrl)
+            
+        }
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+}
+
+//MARK: - SendPhotoDataManagerDelegate
+
+extension MainViewController : SendPhotoDataManagerDelegate{
+    
+    func didGetSendPhotoData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+            
+            
+        }
+        
+    }
+    
+    func didFailGettingSendPhotoDataWithErorr(error: String) {
+        print("Error with SendPhotoDataManager : \(error)")
+    }
+    
     
 }
 
@@ -255,6 +320,9 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                     userDataObject.isLogged = true
                     
                 }
+                
+                userDataObject.imageHashSearch = data["img_hash_srch"].stringValue
+                userDataObject.imageHashServer = data["img_hash_srv"].stringValue
                 
                 userDataObject.key = safeKey
                 

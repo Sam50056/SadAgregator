@@ -13,6 +13,7 @@
 		2201672625A771E10072BFE7 /* SetPointActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201672525A771E10072BFE7 /* SetPointActionsDataManager.swift */; };
 		2201672925A777A20072BFE7 /* GetVendActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201672825A777A20072BFE7 /* GetVendActionsDataManager.swift */; };
 		2201672C25A77BB50072BFE7 /* SetVendActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201672B25A77BB50072BFE7 /* SetVendActionsDataManager.swift */; };
+		2201673125A8BADD0072BFE7 /* SendPhotoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201673025A8BADD0072BFE7 /* SendPhotoDataManager.swift */; };
 		221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221949FE256B1FBD00E0564D /* PointViewController.swift */; };
 		221C072C256E5ABB001BC842 /* PhoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C072A256E5ABB001BC842 /* PhoneTableViewCell.swift */; };
 		221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */; };
@@ -127,6 +128,7 @@
 		2201672525A771E10072BFE7 /* SetPointActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPointActionsDataManager.swift; sourceTree = "<group>"; };
 		2201672825A777A20072BFE7 /* GetVendActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVendActionsDataManager.swift; sourceTree = "<group>"; };
 		2201672B25A77BB50072BFE7 /* SetVendActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVendActionsDataManager.swift; sourceTree = "<group>"; };
+		2201673025A8BADD0072BFE7 /* SendPhotoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPhotoDataManager.swift; sourceTree = "<group>"; };
 		221949FE256B1FBD00E0564D /* PointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointViewController.swift; sourceTree = "<group>"; };
 		221C072A256E5ABB001BC842 /* PhoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTableViewCell.swift; sourceTree = "<group>"; };
 		221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneTableViewCell.xib; sourceTree = "<group>"; };
@@ -290,7 +292,7 @@
 		224BC43D259FEE11003F147F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				22BF1A1425A5FC2C00567DB7 /* General Managers */,
+				22BF1A1425A5FC2C00567DB7 /* Photo Managers */,
 				2201671A25A669550072BFE7 /* Post Managers */,
 				2253EE252569D1C500103C86 /* Main Screen Managers */,
 				22A0534B256BCDE10016B40A /* Activity Line Managers */,
@@ -650,12 +652,13 @@
 			path = TextLabelCell;
 			sourceTree = "<group>";
 		};
-		22BF1A1425A5FC2C00567DB7 /* General Managers */ = {
+		22BF1A1425A5FC2C00567DB7 /* Photo Managers */ = {
 			isa = PBXGroup;
 			children = (
 				227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */,
+				2201673025A8BADD0072BFE7 /* SendPhotoDataManager.swift */,
 			);
-			path = "General Managers";
+			path = "Photo Managers";
 			sourceTree = "<group>";
 		};
 		22C9221725814DBC0063B5D4 /* Home Tab */ = {
@@ -965,6 +968,7 @@
 				22A155DD2582C5D8000EAB64 /* AuthView.swift in Sources */,
 				228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */,
 				228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */,
+				2201673125A8BADD0072BFE7 /* SendPhotoDataManager.swift in Sources */,
 				22A0534E256BCE350016B40A /* ActivityPointDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

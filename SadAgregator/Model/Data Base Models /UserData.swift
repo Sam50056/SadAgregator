@@ -16,5 +16,7 @@ class UserData : Object{
     @objc dynamic var name : String = ""
     @objc dynamic var lkVends : String = ""
     @objc dynamic var lkPosts : String = ""
+    @objc dynamic var imageHashSearch : String = ""
+    @objc dynamic var imageHashServer : String = ""
     
 }

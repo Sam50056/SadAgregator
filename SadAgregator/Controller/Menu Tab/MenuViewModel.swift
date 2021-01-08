@@ -85,6 +85,9 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
                 userDataObject.lkPosts = lkPosts
                 userDataObject.lkVends = lkVends
                 
+                userDataObject.imageHashSearch = data["img_hash_srch"].stringValue
+                userDataObject.imageHashServer = data["img_hash_srv"].stringValue
+                
                 deleteAllDataFromDB()
                 
                 do{
