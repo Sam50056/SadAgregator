@@ -49,6 +49,12 @@ class FavoriteVendsViewController : UITableViewController {
         
         tableView.register(UINib(nibName: "VendTableViewCell", bundle: nil), forCellReuseIdentifier: "vendCell")
         
+        refreshControl = UIRefreshControl()
+        
+        //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl!) // not required when using UITableViewController
+        
         tableView.separatorStyle = .none
         
         myVendorsDataManager.delegate = self
@@ -58,11 +64,7 @@ class FavoriteVendsViewController : UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        vendsArray.removeAll()
-        
-        tableView.reloadData()
-        
-        myVendorsDataManager.getMyVendorsData(key: key, page: page)
+        refresh(self)
     }
     
     //MARK: - Segue Stuff
@@ -76,6 +78,18 @@ class FavoriteVendsViewController : UITableViewController {
             destinationVC.thisVendorId = selectedVendId
             
         }
+        
+    }
+    
+    //MARK: - Refresh func
+    
+    @objc func refresh(_ sender: AnyObject) {
+        
+        vendsArray.removeAll()
+        
+        tableView.reloadData()
+        
+        myVendorsDataManager.getMyVendorsData(key: key, page: page)
         
     }
     
@@ -177,6 +191,8 @@ extension FavoriteVendsViewController : MyVendorsDataManagerDelegate {
             self.vendsArray.append(contentsOf: data["vends"].arrayValue)
             
             self.tableView.reloadSections([0], with: .automatic)
+            
+            self.refreshControl?.endRefreshing()
             
         }
         
