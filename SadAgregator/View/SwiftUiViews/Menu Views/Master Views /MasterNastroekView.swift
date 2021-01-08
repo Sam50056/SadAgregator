@@ -112,15 +112,21 @@ struct MasterNastroekView: View {
                                 }) {
                                     
                                     Image(systemName: "chevron.left")
+                                        .frame(minWidth: 20, minHeight: 20)
+                                        .contentShape(Rectangle())
+                                        .padding()
+                                }
+                            ,trailing:
+                                Button(action: {
+                                    self.masterViewModel.shouldShowMaster = false
+                                }){
                                     
-                                },trailing:
-                                    Button(action: {
-                                        self.masterViewModel.shouldShowMaster = false
-                                    }){
-                                        
-                                        Image(systemName: "multiply")
-                                        
-                                    })
+                                    Image(systemName: "multiply")
+                                        .frame(minWidth: 20, minHeight: 20)
+                                        .contentShape(Rectangle())
+                                        .padding()
+                                    
+                                })
         
         .onAppear{
             masterViewModel.getStepData()
