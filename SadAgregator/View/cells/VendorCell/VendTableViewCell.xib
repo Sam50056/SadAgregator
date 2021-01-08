@@ -21,15 +21,15 @@
                         <rect key="frame" x="20" y="8" width="301" height="19.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ольга Высоцкая" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rK-DH-s1f">
-                                <rect key="frame" x="0.0" y="0.0" width="175" height="19.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="165" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0u-v3-uZ6">
-                                <rect key="frame" x="191" y="0.0" width="110" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0u-v3-uZ6">
+                                <rect key="frame" x="181" y="0.0" width="120" height="19.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="xUn-4P-aqQ"/>
+                                    <constraint firstAttribute="width" constant="120" id="xUn-4P-aqQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
