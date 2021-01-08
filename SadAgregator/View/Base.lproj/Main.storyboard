@@ -665,7 +665,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="38" id="fUF-Pb-Rxz"/>
                                                     </constraints>
-                                                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -815,7 +815,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dJ-DS-tiw">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dJ-DS-tiw">
                                                     <rect key="frame" x="8" y="0.0" width="60" height="54"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="gfo-AZ-R1L"/>
@@ -839,24 +839,39 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKc-oc-G5y">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKc-oc-G5y">
                                                     <rect key="frame" x="322" y="0.0" width="60" height="54"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="JXD-Lz-qbk"/>
                                                     </constraints>
                                                     <state key="normal" image="chevron.right" catalog="system"/>
                                                 </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="tMF-rN-fF4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="54"/>
+                                                    <subviews>
+                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSB-6o-1Eh">
+                                                            <rect key="frame" x="0.0" y="0.0" width="195" height="54"/>
+                                                        </button>
+                                                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ciw-qf-ukn">
+                                                            <rect key="frame" x="195" y="0.0" width="195" height="54"/>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="3dJ-DS-tiw" firstAttribute="leading" secondItem="9iY-dR-wKu" secondAttribute="leading" constant="8" id="1ZH-yA-Kl6"/>
                                                 <constraint firstAttribute="bottom" secondItem="3dJ-DS-tiw" secondAttribute="bottom" id="4Nj-Ih-kO2"/>
                                                 <constraint firstAttribute="bottom" secondItem="rKc-oc-G5y" secondAttribute="bottom" id="4s9-iN-Trr"/>
+                                                <constraint firstAttribute="bottom" secondItem="tMF-rN-fF4" secondAttribute="bottom" id="5FN-cn-erP"/>
                                                 <constraint firstItem="p0Y-gb-jrs" firstAttribute="leading" secondItem="3dJ-DS-tiw" secondAttribute="trailing" constant="8" id="N4r-Cp-nVs"/>
                                                 <constraint firstItem="rKc-oc-G5y" firstAttribute="top" secondItem="9iY-dR-wKu" secondAttribute="top" id="WVD-1G-Bc3"/>
                                                 <constraint firstItem="rKc-oc-G5y" firstAttribute="leading" secondItem="p0Y-gb-jrs" secondAttribute="trailing" constant="8" id="aAU-sl-LBi"/>
                                                 <constraint firstAttribute="trailing" secondItem="rKc-oc-G5y" secondAttribute="trailing" constant="8" id="lMd-re-heZ"/>
                                                 <constraint firstItem="p0Y-gb-jrs" firstAttribute="centerY" secondItem="9iY-dR-wKu" secondAttribute="centerY" id="noW-pC-FbX"/>
+                                                <constraint firstAttribute="trailing" secondItem="tMF-rN-fF4" secondAttribute="trailing" id="qhp-sD-goo"/>
+                                                <constraint firstItem="tMF-rN-fF4" firstAttribute="top" secondItem="9iY-dR-wKu" secondAttribute="top" id="uLo-f3-BdU"/>
                                                 <constraint firstItem="3dJ-DS-tiw" firstAttribute="top" secondItem="9iY-dR-wKu" secondAttribute="top" id="uz0-FM-fSa"/>
+                                                <constraint firstItem="tMF-rN-fF4" firstAttribute="leading" secondItem="9iY-dR-wKu" secondAttribute="leading" id="vGh-50-guL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.960834682" green="0.96459835770000002" blue="0.97255879639999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1184,7 +1199,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHG-cy-r2H">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHG-cy-r2H">
                                                     <rect key="frame" x="8" y="0.0" width="60" height="54"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="54" id="FLA-Ob-XxW"/>
@@ -1212,7 +1227,7 @@
                                                         <constraint firstAttribute="height" constant="19.329999999999998" id="Dyw-mQ-6tf"/>
                                                     </constraints>
                                                 </stackView>
-                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWm-uU-NCg">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWm-uU-NCg">
                                                     <rect key="frame" x="322" y="0.0" width="60" height="54"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="54" id="Yf3-oF-g7q"/>
@@ -1220,16 +1235,31 @@
                                                     </constraints>
                                                     <state key="normal" image="chevron.right" catalog="system"/>
                                                 </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="EnK-LA-on6">
+                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="54"/>
+                                                    <subviews>
+                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GFH-2M-W6j">
+                                                            <rect key="frame" x="0.0" y="0.0" width="195" height="54"/>
+                                                        </button>
+                                                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7b8-j8-ddG">
+                                                            <rect key="frame" x="195" y="0.0" width="195" height="54"/>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="LWm-uU-NCg" secondAttribute="trailing" constant="8" id="5Mq-9r-geH"/>
                                                 <constraint firstAttribute="bottom" secondItem="gHG-cy-r2H" secondAttribute="bottom" id="6dW-WP-0ia"/>
                                                 <constraint firstItem="ngv-bG-rDy" firstAttribute="leading" secondItem="gHG-cy-r2H" secondAttribute="trailing" constant="8" id="91O-kP-eeS"/>
+                                                <constraint firstAttribute="bottom" secondItem="EnK-LA-on6" secondAttribute="bottom" id="L3R-ME-ZfI"/>
+                                                <constraint firstItem="EnK-LA-on6" firstAttribute="top" secondItem="muJ-Kg-RPf" secondAttribute="top" id="LAl-8z-drp"/>
                                                 <constraint firstItem="LWm-uU-NCg" firstAttribute="leading" secondItem="ngv-bG-rDy" secondAttribute="trailing" constant="8" id="PaH-hF-YSP"/>
+                                                <constraint firstAttribute="trailing" secondItem="EnK-LA-on6" secondAttribute="trailing" id="RaE-PF-yWL"/>
                                                 <constraint firstAttribute="bottom" secondItem="LWm-uU-NCg" secondAttribute="bottom" id="WBz-kG-xQv"/>
                                                 <constraint firstItem="gHG-cy-r2H" firstAttribute="top" secondItem="muJ-Kg-RPf" secondAttribute="top" id="ekb-LI-BA5"/>
                                                 <constraint firstItem="gHG-cy-r2H" firstAttribute="leading" secondItem="muJ-Kg-RPf" secondAttribute="leading" constant="8" id="hx6-Hs-Cds"/>
                                                 <constraint firstItem="ngv-bG-rDy" firstAttribute="centerY" secondItem="muJ-Kg-RPf" secondAttribute="centerY" id="n6a-WG-iEG"/>
+                                                <constraint firstItem="EnK-LA-on6" firstAttribute="leading" secondItem="muJ-Kg-RPf" secondAttribute="leading" id="ooa-ny-sS3"/>
                                                 <constraint firstItem="LWm-uU-NCg" firstAttribute="top" secondItem="muJ-Kg-RPf" secondAttribute="top" id="wU4-o4-hk5"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -2689,11 +2719,11 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="wZb-pO-qG4"/>
+        <segue reference="lNg-NF-ZhP"/>
         <segue reference="chw-zm-uhr"/>
         <segue reference="UT5-6g-K7A"/>
-        <segue reference="sY4-Z3-dlW"/>
-        <segue reference="BuK-hk-BZE"/>
+        <segue reference="3vK-wY-P32"/>
+        <segue reference="3eo-7Z-uW5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
