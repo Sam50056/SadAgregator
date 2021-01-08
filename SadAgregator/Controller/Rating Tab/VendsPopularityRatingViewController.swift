@@ -34,6 +34,8 @@ class VendsPopularityRatingViewController: UIViewController {
     var page = 1
     var rowForPaggingUpdate : Int = 14
     
+    var selectedVendId = ""
+    
     //MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
@@ -104,8 +106,21 @@ class VendsPopularityRatingViewController: UIViewController {
         
     }
     
+    //MARK: - Segue Stuff
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "goToVend"{
+            
+            let destinationVC = segue.destination as! PostavshikViewController
+            
+            destinationVC.thisVendorId = selectedVendId
+            
+        }
+        
+    }
+    
 }
-
 
 //MARK: - Data Manipulation Methods
 
@@ -224,7 +239,13 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        selectedVendId = items[indexPath.row]["vend_id"].stringValue
+        
+        performSegue(withIdentifier: "goToVend", sender: self)
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
