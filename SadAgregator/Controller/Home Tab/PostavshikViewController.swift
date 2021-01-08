@@ -570,6 +570,12 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                     
                 }
                 
+            }else if selectedInfoCell.image == UIImage(systemName: "paperplane.fill"){
+                
+                selectedPointId = vendorData!["place_id"].stringValue
+                
+                self.performSegue(withIdentifier: "goToPoint", sender: self)
+                
             }
             
         }
