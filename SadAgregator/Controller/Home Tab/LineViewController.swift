@@ -517,7 +517,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
     
 }
 
-//MARK: - PhotoCollectionViewCellDelegate stuff
+//MARK: - PostCellCollectionViewActionsDelegate stuff
 
 extension LineViewController : PostCellCollectionViewActionsDelegate{
     

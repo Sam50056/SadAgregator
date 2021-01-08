@@ -708,7 +708,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
     
 }
 
-//MARK: - PhotoCollectionViewCellDelegate stuff
+//MARK: - PostCellCollectionViewActionsDelegate stuff
 
 extension PointViewController : PostCellCollectionViewActionsDelegate{
     

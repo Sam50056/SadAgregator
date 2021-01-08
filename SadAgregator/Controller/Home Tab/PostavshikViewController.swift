@@ -879,7 +879,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
     
 }
 
-//MARK: - PhotoCollectionViewCellDelegate stuff
+//MARK: - PostCellCollectionViewActionsDelegate stuff
 
 extension PostavshikViewController : PostCellCollectionViewActionsDelegate{
     
@@ -905,7 +905,7 @@ extension PostavshikViewController : PostCellCollectionViewActionsDelegate{
     
 }
 
-//MARK: -  GetPostActionsDataManagerDelegate Stuff
+//MARK: - GetPostActionsDataManagerDelegate Stuff
 
 extension PostavshikViewController : GetPostActionsDataManagerDelegate{
     

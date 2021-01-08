@@ -686,7 +686,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
 }
 
-//MARK: - PhotoCollectionViewCellDelegate stuff
+//MARK: - PostCellCollectionViewActionsDelegate stuff
 
 extension MainViewController : PostCellCollectionViewActionsDelegate{
     

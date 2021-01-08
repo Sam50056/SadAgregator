@@ -401,7 +401,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
 }
 
-//MARK: - PhotoCollectionViewCellDelegate stuff
+//MARK: - PostCellCollectionViewActionsDelegate stuff
 
 extension SearchViewController : PostCellCollectionViewActionsDelegate{
     

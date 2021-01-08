@@ -260,7 +260,7 @@ class FavoritePostsViewController : UITableViewController {
     
 }
 
-//MARK: - PhotoCollectionViewCellDelegate stuff
+//MARK: - PostCellCollectionViewActionsDelegate stuff
 
 extension FavoritePostsViewController : PostCellCollectionViewActionsDelegate{
     
