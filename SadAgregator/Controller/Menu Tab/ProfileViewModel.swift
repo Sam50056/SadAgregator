@@ -45,6 +45,18 @@ class ProfileViewModel : ObservableObject{
     
 }
 
+//MARK: - Hide Keyboarf
+
+extension ProfileViewModel{
+    
+    func hideKeyboard(){
+        
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        
+    }
+    
+}
+
 //MARK: - GetProfileDataManagerDelegate
 
 extension ProfileViewModel : GetProfileDataManagerDelegate {

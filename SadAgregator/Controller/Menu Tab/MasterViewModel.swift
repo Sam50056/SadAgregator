@@ -107,6 +107,18 @@ class MasterViewModel : ObservableObject{
     
 }
 
+//MARK: - Hide Keyboarf
+
+extension MasterViewModel{
+    
+    func hideKeyboard(){
+        
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        
+    }
+    
+}
+
 //MARK: - Back Button
 
 extension MasterViewModel{

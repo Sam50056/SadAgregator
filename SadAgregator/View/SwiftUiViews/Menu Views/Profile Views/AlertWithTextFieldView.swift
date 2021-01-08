@@ -31,8 +31,12 @@ struct AlertWithTextFieldView: View {
             HStack{
                 
                 Button("Отмена"){
+                    
                     isShown = false
-                    text = "" 
+                    text = ""
+                    
+                    profileViewModel.hideKeyboard()
+                    
                 }.foregroundColor(.black)
                 
                 Spacer()
