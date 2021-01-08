@@ -59,7 +59,7 @@ struct AddPointRequestView: View {
             .padding()
             
         }
-        .navigationBarTitle(Text("Садовод - Агрегатор"), displayMode : .inline)
+        .navigationBarTitle(Text("Добавить поставщика"), displayMode : .inline)
         
     }
     

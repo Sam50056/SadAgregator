@@ -43,7 +43,7 @@ struct SendQuestionView : View {
                         
                     }){
                         
-                        Text("Добавить ссылку")
+                        Text("Задать вопрос")
                             .padding(10)
                             .background(Color(.systemBlue))
                             .foregroundColor(.white)
@@ -57,7 +57,7 @@ struct SendQuestionView : View {
             .padding()
             
         }
-        .navigationBarTitle(Text("Садовод - Агрегатор"), displayMode : .inline)
+        .navigationBarTitle(Text("Задать вопрос"), displayMode : .inline)
         
     }
     
