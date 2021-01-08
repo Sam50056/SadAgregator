@@ -60,6 +60,8 @@ class FavoriteVendsViewController : UITableViewController {
         
         vendsArray.removeAll()
         
+        tableView.reloadData()
+        
         myVendorsDataManager.getMyVendorsData(key: key, page: page)
     }
     
@@ -174,7 +176,7 @@ extension FavoriteVendsViewController : MyVendorsDataManagerDelegate {
             
             self.vendsArray.append(contentsOf: data["vends"].arrayValue)
             
-            self.tableView.reloadData()
+            self.tableView.reloadSections([0], with: .automatic)
             
         }
         
