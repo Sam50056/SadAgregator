@@ -16,6 +16,8 @@ struct AddPointRequestView: View {
     @State var text2 = ""
     @State var text3 = ""
     
+    @State var shouldShowAlert = false
+    
     var body: some View {
         
         ScrollView{
@@ -41,7 +43,11 @@ struct AddPointRequestView: View {
                     
                     Button(action: {
                         
-                        AddPointRequestDataManager(delegate: self).getAddPointRequestData(key: menuViewModel.key, place: text1, vkUrl: text2, comment: text3)
+                        if let _ = URL(string: text2) , text2.contains("vk.com"), !text2.contains("wall") , !text2.contains("photo"){
+                            
+                            AddPointRequestDataManager(delegate: self).getAddPointRequestData(key: menuViewModel.key, place: text1, vkUrl: text2, comment: text3)
+                            
+                        }
                         
                     }){
                         
@@ -58,6 +64,9 @@ struct AddPointRequestView: View {
             }
             .padding()
             
+        }
+        .alert(isPresented: $shouldShowAlert) {
+            Alert(title: Text("Ссылка не добавлена"), message: nil, dismissButton: .cancel(Text("Ок")))
         }
         .navigationBarTitle(Text("Добавить поставщика"), displayMode : .inline)
         
@@ -76,6 +85,10 @@ extension AddPointRequestView : AddPointRequestDataManagerDelegate{
             if data["result"].intValue == 1{
                 
                 menuViewModel.showAddPointRequestView = false
+                
+            }else{
+                
+                shouldShowAlert = true
                 
             }
             
