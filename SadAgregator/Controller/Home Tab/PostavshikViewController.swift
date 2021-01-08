@@ -576,6 +576,14 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 
                 self.performSegue(withIdentifier: "goToPoint", sender: self)
                 
+            }else if selectedInfoCell.image == UIImage(systemName: "phone.fill") {
+                
+                if let url = URL(string: "tel://\(vendorPhone!)") {
+                    
+                    UIApplication.shared.open(url ,  options: [:], completionHandler: nil)
+                    
+                }
+                
             }
             
         }
