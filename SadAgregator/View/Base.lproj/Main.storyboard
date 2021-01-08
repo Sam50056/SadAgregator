@@ -374,6 +374,12 @@
                                                         </stackView>
                                                     </subviews>
                                                 </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flJ-PQ-O0e">
+                                                    <rect key="frame" x="244" y="57" width="20.333333333333314" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.7278061509" green="0.72791242599999995" blue="0.72778302429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -386,7 +392,9 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="7Jd-Ni-43l" secondAttribute="trailing" id="S1X-iD-5QO"/>
                                                 <constraint firstItem="lxf-y1-BwG" firstAttribute="top" secondItem="S4G-Fj-x5Z" secondAttribute="bottom" constant="16" id="SBA-Oi-4FG"/>
                                                 <constraint firstItem="7Jd-Ni-43l" firstAttribute="leading" secondItem="S4G-Fj-x5Z" secondAttribute="trailing" constant="8" id="TNa-JH-0v2"/>
+                                                <constraint firstItem="flJ-PQ-O0e" firstAttribute="leading" secondItem="lxf-y1-BwG" secondAttribute="trailing" constant="8" id="dGy-Fs-IDC"/>
                                                 <constraint firstItem="S4G-Fj-x5Z" firstAttribute="top" secondItem="DGG-oK-t6V" secondAttribute="top" id="eYQ-69-b1E"/>
+                                                <constraint firstItem="flJ-PQ-O0e" firstAttribute="centerY" secondItem="lxf-y1-BwG" secondAttribute="centerY" id="vBU-q0-qC6"/>
                                                 <constraint firstItem="7Jd-Ni-43l" firstAttribute="top" secondItem="jzP-Cg-oUd" secondAttribute="topMargin" id="xWg-Uw-YPa"/>
                                             </constraints>
                                         </tableViewCellContentView>

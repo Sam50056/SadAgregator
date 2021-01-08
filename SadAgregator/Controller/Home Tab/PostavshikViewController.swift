@@ -639,7 +639,8 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
            let revImageView = cell.viewWithTag(6) as? UIImageView,
            let revLabel = cell.viewWithTag(7) as? UILabel,
            let imageCountImageView = cell.viewWithTag(8) as? UIImageView,
-           let imageCountLabel = cell.viewWithTag(9) as? UILabel
+           let imageCountLabel = cell.viewWithTag(9) as? UILabel,
+           let ratingLabel = cell.viewWithTag(10) as? UILabel
         {
             
             //Set up the name
@@ -685,10 +686,13 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             //Set up the rating
             
-            guard let rating = Double(data["revs_info"]["rate"].stringValue) else {return}
+            let ratingString = data["revs_info"]["rate"].stringValue
+            
+            guard let rating = Double(ratingString) else {return}
             
             if rating != 0 {
                 ratingView.rating = rating
+                ratingLabel.text = ratingString
             }else{
                 
                 if ratingView.tag != 1{
@@ -704,6 +708,8 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                     label.text = "Отзывов ещё нет"
                     
                     ratingView.tag = 1 //I put tag 1 to know that the label is already shown and when cell is rerendered , label should not be added again , it's already in there , that's why there is a check for tag above ( if ratingView.tag != 1)
+                    
+                    ratingLabel.isHidden = true
                 }
                 
             }
