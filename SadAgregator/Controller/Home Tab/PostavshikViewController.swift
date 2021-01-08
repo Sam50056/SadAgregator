@@ -812,6 +812,8 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             if revsCount % 10 == 1{
                 trailingText = "ОТЗЫВ"
+            }else if revsCount % 10 == 2 || revsCount % 10 == 3 || revsCount % 10 == 4{
+                trailingText = "ОТЗЫВА"
             }else{
                 trailingText = "ОТЗЫВОВ"
             }
