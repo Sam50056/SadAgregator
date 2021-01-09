@@ -115,6 +115,7 @@ struct MenuView: View {
                                     
                                 }
                                 
+                                NavigationLink(destination: HelpView() , isActive : $menuViewModel.showHelpView){
                                 
                                 HStack(spacing: 24){
                                     
@@ -128,6 +129,8 @@ struct MenuView: View {
                                     
                                 }
                                 .padding(.vertical, 5)
+                                    
+                                }
                                 
                             }
                             
@@ -301,18 +304,22 @@ struct MenuView: View {
                                     
                                 }
                                 
-                                HStack(spacing: 24){
+                                NavigationLink(destination: HelpView() , isActive : $menuViewModel.showHelpView){
                                     
-                                    Image(systemName: "questionmark.circle.fill")
-                                        .resizable()
-                                        .frame(width: 22, height: 20, alignment: .center)
-                                        .foregroundColor(Color(.systemBlue))
-                                    
-                                    Text("Помощь")
-                                        .font(.custom("", size: 16))
+                                    HStack(spacing: 24){
+                                        
+                                        Image(systemName: "questionmark.circle.fill")
+                                            .resizable()
+                                            .frame(width: 22, height: 20, alignment: .center)
+                                            .foregroundColor(Color(.systemBlue))
+                                        
+                                        Text("Помощь")
+                                            .font(.custom("", size: 16))
+                                        
+                                    }
+                                    .padding(.vertical, 5)
                                     
                                 }
-                                .padding(.vertical, 5)
                                 
                             }
                             

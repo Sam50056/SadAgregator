@@ -36,6 +36,8 @@ class MenuViewModel : ObservableObject{
     
     @Published var showSendQuestionView = false
     
+    @Published var showHelpView = false
+    
     init() {
         
         loadUserData()
