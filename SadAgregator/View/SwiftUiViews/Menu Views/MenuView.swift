@@ -314,22 +314,26 @@ struct MenuView: View {
                                 }
                                 .padding(.vertical, 5)
                                 
-                                HStack(spacing: 24){
-                                    
-                                    Image(systemName: "arrow.right.square")
-                                        .resizable()
-                                        .frame(width: 22, height: 20, alignment: .center)
-                                        .foregroundColor(Color(.systemBlue))
-                                    
-                                    Text("Выйти из аккаунта")
-                                        .font(.custom("", size: 16))
-                                    
-                                }
-                                .padding(.vertical, 5)
-                                
                             }
                             
                         } // Help
+                        
+                        Section{
+                            
+                            HStack(spacing: 24){
+                                
+                                Image(systemName: "arrow.right.square")
+                                    .resizable()
+                                    .frame(width: 22, height: 20, alignment: .center)
+                                    .foregroundColor(Color(.systemBlue))
+                                
+                                Text("Выйти из аккаунта")
+                                    .font(.custom("", size: 16))
+                                
+                            }
+                            .padding(.vertical, 5)
+                            
+                        } //Log Out
                         
                     }
                     
