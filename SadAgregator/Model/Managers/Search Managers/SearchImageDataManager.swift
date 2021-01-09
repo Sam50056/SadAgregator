@@ -39,7 +39,7 @@ struct SearchImageDataManager {
             
             guard let data = data else {delegate?.didFailGettingSearchImageDataWithError(error: "Data is empty"); return}
             
-            let json = String(data: data , encoding: String.Encoding.utf8)!
+            let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
             
             let jsonAnswer = JSON(parseJSON: json)
             

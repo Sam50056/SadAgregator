@@ -1740,7 +1740,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="TjX-3X-wgb"/>
                                                     </constraints>
                                                     <connections>
-                                                        <action selector="photoSearchButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wqW-6B-1MG"/>
+                                                        <action selector="photoSearchButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GMD-bB-opr"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -2556,16 +2556,28 @@
                                                     <rect key="frame" x="8.0000000000000018" y="15.666666666666664" width="19.666666666666671" height="18"/>
                                                     <color key="tintColor" red="0.79610997439999998" green="0.79994326829999995" blue="0.80392938849999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yuu-eM-dI7">
+                                                    <rect key="frame" x="309.66666666666669" y="9.6666666666666679" width="50" height="30.000000000000004"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="clv-Tp-lxz"/>
+                                                        <constraint firstAttribute="width" constant="50" id="dPt-wa-bhO"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="photoSearchButtonPressed:" destination="iOY-jj-tLQ" eventType="touchUpInside" id="d8M-D0-WbC"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.960834682" green="0.96459835770000002" blue="0.97255879639999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Yng-0i-1x4" secondAttribute="trailing" constant="8" id="Ah0-xf-nmT"/>
+                                                <constraint firstItem="yuu-eM-dI7" firstAttribute="centerY" secondItem="Yng-0i-1x4" secondAttribute="centerY" id="L3Y-yx-gA2"/>
                                                 <constraint firstItem="Yng-0i-1x4" firstAttribute="leading" secondItem="rJu-Fk-XD1" secondAttribute="trailing" constant="8" id="RyJ-jV-ZL4"/>
                                                 <constraint firstItem="Voi-pu-WKG" firstAttribute="centerY" secondItem="iXp-Gb-Eke" secondAttribute="centerY" id="aIY-tP-o53"/>
                                                 <constraint firstItem="rJu-Fk-XD1" firstAttribute="leading" secondItem="Voi-pu-WKG" secondAttribute="trailing" constant="8" id="cKh-k7-ZBq"/>
                                                 <constraint firstItem="rJu-Fk-XD1" firstAttribute="centerY" secondItem="iXp-Gb-Eke" secondAttribute="centerY" id="fjT-cM-SkT"/>
                                                 <constraint firstItem="Yng-0i-1x4" firstAttribute="centerY" secondItem="iXp-Gb-Eke" secondAttribute="centerY" id="hqU-6Y-YEd"/>
                                                 <constraint firstItem="Voi-pu-WKG" firstAttribute="leading" secondItem="iXp-Gb-Eke" secondAttribute="leading" constant="8" id="s0G-SZ-UZV"/>
+                                                <constraint firstItem="yuu-eM-dI7" firstAttribute="centerX" secondItem="Yng-0i-1x4" secondAttribute="centerX" id="xf1-LL-weE"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -2734,8 +2746,8 @@
         <segue reference="0O8-eQ-Bac"/>
         <segue reference="yR4-7g-u1L"/>
         <segue reference="UT5-6g-K7A"/>
-        <segue reference="LYd-3X-sUB"/>
-        <segue reference="ZSI-nF-15U"/>
+        <segue reference="5co-KY-lmW"/>
+        <segue reference="CqK-8r-UgW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>

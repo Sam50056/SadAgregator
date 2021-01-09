@@ -147,6 +147,74 @@ class SearchViewController: UIViewController {
     
 }
 
+//MARK: - Actions
+
+extension SearchViewController {
+    
+    @IBAction func photoSearchButtonPressed(_ sender : UIButton){
+        
+        showImagePickerController(sourceType: .photoLibrary)
+        
+    }
+    
+}
+
+//MARK: - UIImagePickerControlller
+
+extension SearchViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate{
+    
+    func showImagePickerController(sourceType : UIImagePickerController.SourceType) {
+        
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        imagePickerController.sourceType = sourceType
+        
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        
+        if let safeFileUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL , imageHashServer != ""{
+            
+            SendFileDataManager(delegate: self).sendPhotoMultipart(urlString: imageHashServer, fileUrl: safeFileUrl)
+            
+        }
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+}
+
+//MARK: - SendFileDataManagerDelegate
+
+extension SearchViewController : SendFileDataManagerDelegate{
+    
+    func didGetSendPhotoData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            let fullHash = data["hash"].stringValue
+            
+            imageHashText = fullHash
+            
+            imageSearch()
+            
+        }
+        
+    }
+    
+    func didFailGettingSendPhotoDataWithErorr(error: String) {
+        print("Error with SendFileDataManager : \(error)")
+    }
+    
+    
+}
+
 //MARK: - Image Search Stuff
 
 extension SearchViewController : SearchImageDataManagerDelegate{
