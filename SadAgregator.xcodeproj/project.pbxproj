@@ -267,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				22BF1A1625A5FD5C00567DB7 /* PostLikeDataManager.swift */,
+				22D90235259C0359009732CC /* MyPostsDataManager.swift */,
 				2201671B25A669790072BFE7 /* GetPostActionsDataManager.swift */,
 				2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */,
 			);
@@ -287,8 +288,6 @@
 			children = (
 				225957A72596A5770088C7E4 /* Profile Managers */,
 				225957A82596A5850088C7E4 /* Master Managers */,
-				2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */,
-				22D90235259C0359009732CC /* MyPostsDataManager.swift */,
 				224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */,
 				224EFC3025A9D209007CA45E /* SendQuestionDataManager.swift */,
 			);
@@ -728,6 +727,7 @@
 			children = (
 				22906B392578293500F00B0D /* VendorCardDataManager.swift */,
 				22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */,
+				2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */,
 				227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */,
 				22782909258BB60E00B435FA /* GetMyReviewDataManager.swift */,
 				229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */,
