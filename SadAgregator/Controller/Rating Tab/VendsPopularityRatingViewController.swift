@@ -240,9 +240,13 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        selectedVendId = items[indexPath.row]["vend_id"].stringValue
-        
-        performSegue(withIdentifier: "goToVend", sender: self)
+        if indexPath.section == 1{
+            
+            selectedVendId = items[indexPath.row]["vend_id"].stringValue
+            
+            performSegue(withIdentifier: "goToVend", sender: self)
+            
+        }
         
         tableView.deselectRow(at: indexPath, animated: true)
         
