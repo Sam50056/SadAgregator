@@ -22,7 +22,12 @@ class SearchViewController: UIViewController {
     
     var isLogged = false
     
+    var imageHashSearch = ""
+    var imageHashServer = ""
+    
     var searchText : String = ""
+    var imageHashText : String?
+    
     var page : Int = 1
     var rowForPaggingUpdate : Int = 15
     
@@ -117,7 +122,13 @@ class SearchViewController: UIViewController {
         
         searchTextField.text = searchText
         
-        getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
+        if imageHashText != nil{
+            
+            imageSearch()
+            
+        }else{
+            getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -132,6 +143,49 @@ class SearchViewController: UIViewController {
         super.viewDidAppear(animated)
         
         loadUserData()
+    }
+    
+}
+
+//MARK: - Image Search Stuff
+
+extension SearchViewController : SearchImageDataManagerDelegate{
+    
+    func imageSearch(){
+        
+        guard let imageHashText = imageHashText , imageHashSearch != "" , imageHashServer != "" else {return}
+        
+        var aCrop = ""
+        var aNoCrop = ""
+        
+        let indexOfDash = imageHashText.firstIndex(of: "-")!
+        
+        aCrop = String(imageHashText[imageHashText.startIndex..<indexOfDash])
+        
+        aNoCrop = String(imageHashText[indexOfDash..<imageHashText.endIndex])
+        
+        aNoCrop.removeFirst() //Remove "-" symbol
+        
+        print("A Crop : \(aCrop) , A No Crop : \(aNoCrop)")
+        
+        SearchImageDataManager(delegate : self).getSearchImageData(urlString: imageHashSearch, ACRop: aCrop, ANOCrop: aNoCrop)
+        
+    }
+    
+    func didGetSearchImageData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            postsArray = data["posts"].arrayValue
+            
+            tableView.reloadSections([0,1], with: .automatic)
+            
+        }
+        
+    }
+    
+    func didFailGettingSearchImageDataWithError(error: String) {
+        print("Error with  SearchImageDataManager : \(error)")
     }
     
 }
@@ -167,11 +221,14 @@ extension SearchViewController {
     
     func loadUserData (){
         
-        let userDataObject = realm.objects(UserData.self)
+        let userDataObjects = realm.objects(UserData.self)
         
-        key = userDataObject.first!.key
+        key = userDataObjects.first!.key
         
-        isLogged = userDataObject.first!.isLogged
+        isLogged = userDataObjects.first!.isLogged
+        
+        imageHashServer = userDataObjects.first!.imageHashServer
+        imageHashSearch = userDataObjects.first!.imageHashSearch
         
     }
     
@@ -183,11 +240,11 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
     
     func didGetSearchPageData(data: JSON) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             
-            self.postsArray.append(contentsOf: data["posts"].arrayValue)
+            postsArray.append(contentsOf: data["posts"].arrayValue)
             
-            self.tableView.reloadSections([0,1], with: .none)
+            tableView.reloadSections([0,1], with: .none)
             
         }
         
@@ -300,6 +357,8 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        guard imageHashText == nil else {return}
         
         if indexPath.section == 1{
             

@@ -111,6 +111,8 @@ class MainViewController: UIViewController {
     
     var selectedPostId = ""
     
+    var searchImageHash : String?
+    
     //MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
@@ -257,7 +259,7 @@ extension MainViewController : UIImagePickerControllerDelegate , UINavigationCon
         
         if let safeFileUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL , let imageHashServer = imageHashServer{
             
-            SendPhotoDataManager(delegate: self).sendFileMultipart(urlString: imageHashServer, fileUrl: safeFileUrl)
+            SendFileDataManager(delegate: self).sendPhotoMultipart(urlString: imageHashServer, fileUrl: safeFileUrl)
             
         }
         
@@ -267,22 +269,26 @@ extension MainViewController : UIImagePickerControllerDelegate , UINavigationCon
     
 }
 
-//MARK: - SendPhotoDataManagerDelegate
+//MARK: - SendFileDataManagerDelegate
 
-extension MainViewController : SendPhotoDataManagerDelegate{
+extension MainViewController : SendFileDataManagerDelegate{
     
     func didGetSendPhotoData(data: JSON) {
         
         DispatchQueue.main.async {
             
+            let fullHash = data["hash"].stringValue
             
+            self.searchImageHash = fullHash
+            
+            self.performSegue(withIdentifier: "goSearch", sender: self)
             
         }
         
     }
     
     func didFailGettingSendPhotoDataWithErorr(error: String) {
-        print("Error with SendPhotoDataManager : \(error)")
+        print("Error with SendFileDataManager : \(error)")
     }
     
     
@@ -857,6 +863,8 @@ extension MainViewController {
             let destinationVC = segue.destination as! SearchViewController
             
             destinationVC.searchText = searchTextField.text!
+            
+            destinationVC.imageHashText = searchImageHash
             
         }else if segue.identifier == "goToVend"{
             
