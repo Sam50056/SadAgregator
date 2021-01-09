@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import SwiftyJSON
 
 struct SendQuestionView : View {
+    
+    @EnvironmentObject var menuViewModel : MenuViewModel
     
     @State var text1 = ""
     
@@ -41,6 +44,10 @@ struct SendQuestionView : View {
                     
                     Button(action: {
                         
+                        guard let key = menuViewModel.getUserDataObject()?.key else {return}
+                        
+                        SendQuestionDataManager(delegate: self).getSendQuestionData(key: key, email: text1, question: text2)
+                        
                     }){
                         
                         Text("Задать вопрос")
@@ -63,3 +70,26 @@ struct SendQuestionView : View {
     
 }
 
+//MARK: - SendQuestionDataManagerDelegate
+
+extension SendQuestionView : SendQuestionDataManagerDelegate{
+    
+    func didGetSendQuestionData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+            if data["result"].intValue == 1{
+                
+                menuViewModel.showSendQuestionView = false
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingSendQuestionDataWithError(error: String) {
+        print("Error with SendQuestionDataManager : \(error)")
+    }
+    
+}

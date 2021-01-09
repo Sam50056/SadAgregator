@@ -34,6 +34,8 @@ class MenuViewModel : ObservableObject{
     
     @Published var showAddPointRequestView = false
     
+    @Published var showSendQuestionView = false
+    
     init() {
         
         loadUserData()

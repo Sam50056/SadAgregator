@@ -98,18 +98,22 @@ struct MenuView: View {
                             
                             List{
                                 
-                                HStack(spacing: 20){
+                                NavigationLink(destination: SendQuestionView(), isActive : $menuViewModel.showSendQuestionView){
                                     
-                                    Image(systemName: "bubble.left.and.bubble.right.fill")
-                                        .resizable()
-                                        .frame(width: 26, height: 20, alignment: .center)
-                                        .foregroundColor(Color(.systemBlue))
-                                    
-                                    Text("Задать вопрос")
-                                        .font(.custom("", size: 16))
+                                    HStack(spacing: 20){
+                                        
+                                        Image(systemName: "bubble.left.and.bubble.right.fill")
+                                            .resizable()
+                                            .frame(width: 26, height: 20, alignment: .center)
+                                            .foregroundColor(Color(.systemBlue))
+                                        
+                                        Text("Задать вопрос")
+                                            .font(.custom("", size: 16))
+                                        
+                                    }
+                                    .padding(.vertical, 5)
                                     
                                 }
-                                .padding(.vertical, 5)
                                 
                                 
                                 HStack(spacing: 24){
@@ -280,7 +284,7 @@ struct MenuView: View {
                             
                             List{
                                 
-                                NavigationLink(destination: SendQuestionView()){
+                                NavigationLink(destination: SendQuestionView(), isActive : $menuViewModel.showSendQuestionView){
                                     
                                     HStack(spacing: 20){
                                         
