@@ -117,7 +117,7 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             
         }
         
-        tableView.reloadSections([0], with: .automatic)
+        tableView.reloadData()
         
     }
     
@@ -129,7 +129,7 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             
             points.append(contentsOf: data["points_top"].arrayValue)
             
-            tableView.reloadSections([0], with: .automatic)
+            tableView.reloadData()
             
         }
         
@@ -147,7 +147,7 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             
             points.append(contentsOf: data["items"].arrayValue)
             
-            tableView.reloadSections([0], with: .automatic)
+            tableView.reloadData()
             
         }
         
@@ -165,7 +165,7 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             
             points.append(contentsOf: data["points_top"].arrayValue)
             
-            tableView.reloadSections([0], with: .automatic)
+            tableView.reloadData()
             
         }
         
@@ -183,7 +183,7 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             
             points.append(contentsOf: data["items"].arrayValue)
             
-            tableView.reloadSections([0], with: .automatic)
+            tableView.reloadData()
             
         }
         
