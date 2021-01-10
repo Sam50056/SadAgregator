@@ -2365,6 +2365,79 @@
             </objects>
             <point key="canvasLocation" x="3906" y="1636"/>
         </scene>
+        <!--Help View Controller-->
+        <scene sceneID="ZOq-Mg-VvE">
+            <objects>
+                <tableViewController storyboardIdentifier="HelpVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FPx-wO-B7x" customClass="HelpViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nnQ-VX-i3j">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="helpCell" rowHeight="70" id="tZD-fc-uoc">
+                                <rect key="frame" x="0.0" y="28" width="390" height="70"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tZD-fc-uoc" id="elJ-jm-WZB">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="70"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fVP-SE-7NL">
+                                            <rect key="frame" x="343.33333333333331" y="30" width="18.666666666666686" height="11"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="18.670000000000002" id="b21-4o-9lt"/>
+                                                <constraint firstAttribute="height" constant="21" id="qvJ-XT-WaN"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocn-YD-uG5">
+                                            <rect key="frame" x="20" y="26" width="315.33333333333331" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="fVP-SE-7NL" firstAttribute="centerY" secondItem="elJ-jm-WZB" secondAttribute="centerY" id="8cT-A7-O2u"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="fVP-SE-7NL" secondAttribute="trailing" constant="8" id="Hwx-9E-Lya"/>
+                                        <constraint firstItem="ocn-YD-uG5" firstAttribute="leading" secondItem="elJ-jm-WZB" secondAttribute="leadingMargin" id="LJ6-g3-Xv2"/>
+                                        <constraint firstItem="ocn-YD-uG5" firstAttribute="centerY" secondItem="elJ-jm-WZB" secondAttribute="centerY" id="jlR-kR-RpL"/>
+                                        <constraint firstItem="fVP-SE-7NL" firstAttribute="leading" secondItem="ocn-YD-uG5" secondAttribute="trailing" constant="8" id="lib-FK-mWu"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="helpTextViewCell" rowHeight="96" id="anN-eK-aXQ">
+                                <rect key="frame" x="0.0" y="98" width="390" height="96"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="anN-eK-aXQ" id="83X-8e-e9q">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="96"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qby-83-VuE">
+                                            <rect key="frame" x="17" y="8" width="353" height="80"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <color key="textColor" systemColor="labelColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Qby-83-VuE" secondAttribute="bottom" constant="8" id="4kX-zU-63F"/>
+                                        <constraint firstItem="Qby-83-VuE" firstAttribute="leading" secondItem="83X-8e-e9q" secondAttribute="leadingMargin" constant="-3" id="585-Bl-yIC"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Qby-83-VuE" secondAttribute="trailing" id="UTl-1G-H7i"/>
+                                        <constraint firstItem="Qby-83-VuE" firstAttribute="top" secondItem="83X-8e-e9q" secondAttribute="top" constant="8" id="pHm-0Y-M66"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="FPx-wO-B7x" id="Dcd-Iv-jc4"/>
+                            <outlet property="delegate" destination="FPx-wO-B7x" id="j6t-wI-b0L"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RcR-LY-bDA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5113.8461538461534" y="1635.7819905213269"/>
+        </scene>
         <!--Активность поставщиков-->
         <scene sceneID="ffw-pF-a3h">
             <objects>
@@ -2747,9 +2820,10 @@
         <segue reference="yR4-7g-u1L"/>
         <segue reference="UT5-6g-K7A"/>
         <segue reference="5co-KY-lmW"/>
-        <segue reference="CqK-8r-UgW"/>
+        <segue reference="BuK-hk-BZE"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>

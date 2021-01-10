@@ -431,7 +431,6 @@
 				22C9221225814CA40063B5D4 /* MenuView.swift */,
 				22D9022E259BFFC3009732CC /* AddPointRequestView.swift */,
 				22D90238259C1546009732CC /* SendQuestionView.swift */,
-				2245820225A9FB15008882A9 /* HelpView.swift */,
 				22A155E02582C746000EAB64 /* Auth Views */,
 				2265853B259017C8004587AA /* Profile Views */,
 				22595793259667C10088C7E4 /* Master Views  */,
@@ -697,6 +696,7 @@
 				2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */,
 				225957A42596A2A60088C7E4 /* MasterViewModel.swift */,
 				22D90232259C023B009732CC /* FavoritePostsView.swift */,
+				2245820225A9FB15008882A9 /* HelpView.swift */,
 			);
 			path = "Menu Tab";
 			sourceTree = "<group>";

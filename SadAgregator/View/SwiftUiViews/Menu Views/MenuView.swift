@@ -115,20 +115,20 @@ struct MenuView: View {
                                     
                                 }
                                 
-                                NavigationLink(destination: HelpView() , isActive : $menuViewModel.showHelpView){
-                                
-                                HStack(spacing: 24){
+                                NavigationLink(destination: HelpView().navigationBarTitle(Text("Часто задаваемые вопросы")), isActive : $menuViewModel.showHelpView){
                                     
-                                    Image(systemName: "questionmark.circle.fill")
-                                        .resizable()
-                                        .frame(width: 22, height: 20, alignment: .center)
-                                        .foregroundColor(Color(.systemBlue))
-                                    
-                                    Text("Помощь")
-                                        .font(.custom("", size: 16))
-                                    
-                                }
-                                .padding(.vertical, 5)
+                                    HStack(spacing: 24){
+                                        
+                                        Image(systemName: "questionmark.circle.fill")
+                                            .resizable()
+                                            .frame(width: 22, height: 20, alignment: .center)
+                                            .foregroundColor(Color(.systemBlue))
+                                        
+                                        Text("Помощь")
+                                            .font(.custom("", size: 16))
+                                        
+                                    }
+                                    .padding(.vertical, 5)
                                     
                                 }
                                 
@@ -304,7 +304,7 @@ struct MenuView: View {
                                     
                                 }
                                 
-                                NavigationLink(destination: HelpView() , isActive : $menuViewModel.showHelpView){
+                                NavigationLink(destination: HelpView().navigationBarTitle(Text("Часто задаваемые вопросы")), isActive : $menuViewModel.showHelpView){
                                     
                                     HStack(spacing: 24){
                                         
