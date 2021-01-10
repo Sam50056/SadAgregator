@@ -43,6 +43,8 @@ class HelpViewController : UITableViewController, HelpPageDataManagerDelegate {
     
     lazy var displayedRows = [HelpViewItem]()
     
+    lazy var imageViews = [UIImageView]()
+    
     override func viewDidLoad() {
         
         helpPageDataManager.delegate = self
@@ -130,6 +132,8 @@ class HelpViewController : UITableViewController, HelpPageDataManagerDelegate {
             
             displayedRows[indexPath.row].isTextViewCellShow.toggle()
             
+            imageViews[indexPath.row].image = displayedRows[indexPath.row].isTextViewCellShow ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
+            
         }else if !displayedRows[indexPath.row].isTextViewCell , displayedRows[indexPath.row].url != "" {
             
             if let url = URL(string: displayedRows[indexPath.row].url){
@@ -162,6 +166,8 @@ class HelpViewController : UITableViewController, HelpPageDataManagerDelegate {
                let imageView = cell.viewWithTag(2) as? UIImageView{
                 
                 captLabel.text = data.capt
+                
+                imageViews.append(imageView)
                 
                 if data.url != ""{
                     imageView.image = nil
