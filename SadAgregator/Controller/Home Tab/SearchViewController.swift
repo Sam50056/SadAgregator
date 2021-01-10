@@ -37,6 +37,8 @@ class SearchViewController: UIViewController {
     
     var postsArray = [JSON]()
     
+    var help : JSON?
+    
     var sizes : Array<[String]> {
         get{
             var thisArray = Array<[String]>()
@@ -312,6 +314,8 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
             
             postsArray.append(contentsOf: data["posts"].arrayValue)
             
+            help = data["help"]
+            
             tableView.reloadSections([0,1], with: .none)
             
         }
@@ -361,7 +365,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         switch section {
         
         case 0:
-            return hintCellShouldBeShown ? 1 : 0
+            return help != nil ? (hintCellShouldBeShown ? 1 : 0) : 0
         case 1:
             return postsArray.count
             
@@ -381,7 +385,9 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "hintCell", for: indexPath)
             
-            setUpHintCell(cell: cell)
+            guard let help = help else {return cell}
+            
+            setUpHintCell(cell: cell, data: help)
             
         case 1:
             
@@ -420,6 +426,16 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if indexPath.section == 0 {
+            
+            if let help = help , let url = URL(string: help["url"].stringValue){
+                
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                
+            }
+            
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
@@ -456,13 +472,19 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     //MARK: - Cell SetUp
     
-    func setUpHintCell(cell : UITableViewCell){
+    func setUpHintCell(cell : UITableViewCell , data : JSON){
         
-        if let closeButton = cell.viewWithTag(3) as? UIButton {
+        if let closeButton = cell.viewWithTag(3) as? UIButton,
+           let label = cell.viewWithTag(2) as? UILabel{
+            
+            label.text = data["str"].stringValue
+            
             closeButton.addTarget(self, action: #selector(removeHintCell(_: )), for: .touchUpInside)
+            
         }
         
     }
+    
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
         
