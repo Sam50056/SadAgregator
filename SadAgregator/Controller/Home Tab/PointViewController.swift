@@ -704,6 +704,8 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         
         isLogged ? (cell.likeButtonImageView.isHidden = false) : (cell.likeButtonImageView.isHidden = true)
         
+        !isLogged ? (cell.vigruzitView.alpha = 0.6) : (cell.vigruzitView.alpha = 1)
+        
     }
     
 }
