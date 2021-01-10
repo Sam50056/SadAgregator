@@ -30,6 +30,7 @@ class VendsPopularityRatingViewController: UIViewController {
     var topVendorsDataManager = TopVendorsDataManager()
     
     var items = [JSON]()
+    var help : JSON?
     
     var page = 1
     var rowForPaggingUpdate : Int = 14
@@ -148,6 +149,8 @@ extension VendsPopularityRatingViewController : TopVendorsDataManagerDelegate{
             
             items.append(contentsOf:data["items"].arrayValue)
             
+            help = data["help"]
+            
             tableView.reloadData()
             
             refreshControl.endRefreshing()
@@ -193,7 +196,7 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
-            return hintCellShouldBeShown ? 1 : 0
+            return help != nil ? (hintCellShouldBeShown ? 1 : 0) : 0
         }else {
             return items.count
         }
@@ -208,7 +211,9 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
             
             cell = tableView.dequeueReusableCell(withIdentifier: "hintCell", for: indexPath)
             
-            setUpHintCell(cell: cell)
+            guard let help = help else {return cell}
+            
+            setUpHintCell(cell: cell, data : help)
             
         }else {
             
@@ -246,6 +251,14 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
             
             performSegue(withIdentifier: "goToVend", sender: self)
             
+        }else if indexPath.section == 0 {
+            
+            if let help = help , let url = URL(string: help["url"].stringValue){
+                
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                
+            }
+            
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -282,10 +295,15 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
     
     //MARK: - Cells SetUp
     
-    func setUpHintCell(cell : UITableViewCell){
+    func setUpHintCell(cell : UITableViewCell , data : JSON){
         
-        if let closeButton = cell.viewWithTag(3) as? UIButton {
+        if let closeButton = cell.viewWithTag(3) as? UIButton,
+           let label = cell.viewWithTag(2) as? UILabel{
+            
+            label.text = data["str"].stringValue
+            
             closeButton.addTarget(self, action: #selector(removeHintCell(_: )), for: .touchUpInside)
+            
         }
         
     }
