@@ -168,7 +168,7 @@ extension SearchViewController : UIImagePickerControllerDelegate , UINavigationC
         let imagePickerController = UIImagePickerController()
         
         imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
+        imagePickerController.allowsEditing = false
         imagePickerController.sourceType = sourceType
         
         present(imagePickerController, animated: true, completion: nil)
