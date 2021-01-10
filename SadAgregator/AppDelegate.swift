@@ -55,9 +55,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Notifications
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let token = String(data : deviceToken, encoding: String.Encoding.windowsCP1251)
+        
+        let tokenParts = deviceToken.map { (data) -> String in
+            
+            return String(format: "%02.2hhx", data)
+            
+        }
+        
+        let token = tokenParts.joined()
+        
         print("UN Token : \(String(describing: token))")
         UserDefaults.standard.setValue(token, forKey: K.UNToken) //Saving token in memory
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        
+        print("Failed to register for Notifications : \(error.localizedDescription)")
+        
     }
     
     // this method enables user permission
