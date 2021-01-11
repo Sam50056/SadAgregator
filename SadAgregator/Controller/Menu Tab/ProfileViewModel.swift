@@ -43,8 +43,8 @@ class ProfileViewModel : ObservableObject{
     
     init() {
         
-//        loadUserData()
-        key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
+        loadUserData()
+        //        key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
         
         userChangeOptionDataManager.delegate = self
         
