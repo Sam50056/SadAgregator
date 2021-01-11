@@ -13,6 +13,8 @@ struct MenuView: View {
     
     @ObservedObject var menuViewModel = MenuViewModel()
     
+    @ObservedObject var profileViewModel = ProfileViewModel()
+    
     @ObservedObject var masterViewModel = MasterViewModel()
     
     var body: some View {
@@ -144,7 +146,7 @@ struct MenuView: View {
                         
                         Section{
                             
-                            NavigationLink(destination: ProfileView(), isActive: $menuViewModel.showProfile){
+                            NavigationLink(destination: ProfileView(), isActive: $profileViewModel.showProfile){
                                 
                                 VStack(alignment: .leading){
                                     
@@ -366,6 +368,7 @@ struct MenuView: View {
         }
         .environmentObject(menuViewModel)
         .environmentObject(masterViewModel)
+        .environmentObject(profileViewModel)
         
     }
     

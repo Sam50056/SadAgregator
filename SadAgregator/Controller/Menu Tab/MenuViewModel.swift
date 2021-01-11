@@ -26,11 +26,7 @@ class MenuViewModel : ObservableObject{
     @Published var showModalLogIn = false
     @Published var showModalReg = false
     
-    @Published var showProfile = false
-    
     @Published var showFavoriteVends = false
-    
-    @Published var showMaster = false
     
     @Published var showAddPointRequestView = false
     

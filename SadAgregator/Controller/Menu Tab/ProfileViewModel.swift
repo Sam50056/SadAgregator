@@ -13,6 +13,8 @@ class ProfileViewModel : ObservableObject{
     
     let realm = try! Realm()
     
+    @Published var showProfile = false
+    
     @Published var key = ""
     
     @Published var name = ""
