@@ -253,7 +253,7 @@ struct MenuView: View {
                         
                         Section{
                             
-                            NavigationLink(destination: MasterNastroekView() , isActive: $masterViewModel.shouldShowMaster){
+                            NavigationLink(destination: MasterNastroekView() , isActive: $masterViewModel.shouldShowMasterFromMenu){
                                 
                                 HStack(spacing: 16){
                                     

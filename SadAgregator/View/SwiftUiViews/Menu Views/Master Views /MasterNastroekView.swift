@@ -106,7 +106,7 @@ struct MasterNastroekView: View {
                                     if masterViewModel.shouldShowBackButton{
                                         masterViewModel.backButtonPressed()
                                     }else{
-                                        masterViewModel.shouldShowMaster = false
+                                        masterViewModel.hideMaster()
                                     }
                                     
                                 }) {
@@ -118,7 +118,7 @@ struct MasterNastroekView: View {
                                 }
                             ,trailing:
                                 Button(action: {
-                                    self.masterViewModel.shouldShowMaster = false
+                                    self.masterViewModel.hideMaster()
                                 }){
                                     
                                     Image(systemName: "multiply")

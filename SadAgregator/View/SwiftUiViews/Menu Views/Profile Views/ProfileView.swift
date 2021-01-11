@@ -13,6 +13,8 @@ struct ProfileView: View {
     
     @EnvironmentObject var profileViewModel : ProfileViewModel
     
+    @EnvironmentObject var masterViewModel : MasterViewModel
+    
     var body: some View {
         
         ZStack{
@@ -138,6 +140,8 @@ struct ProfileView: View {
                             
                             if profileViewModel.isOkConnected! || profileViewModel.isVkConnected! {
                                 
+                                NavigationLink(destination: MasterNastroekView() , isActive: $masterViewModel.shouldShowMasterFromProfile){
+                                    
                                 HStack{
                                     
                                     Image(systemName: "puzzlepiece.fill")
@@ -151,6 +155,8 @@ struct ProfileView: View {
                                 .foregroundColor(Color(.systemBlue))
                                 .background(Color(#colorLiteral(red: 0.9591086507, green: 0.9659582973, blue: 0.9731834531, alpha: 1)))
                                 .padding(.top , 8)
+                                    
+                                }
                                 
                                 
                                 HStack{
