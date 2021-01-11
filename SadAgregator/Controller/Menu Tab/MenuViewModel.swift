@@ -207,15 +207,17 @@ extension MenuViewModel : DelDeviceDataManagerDelegate{
         
         DelDeviceDataManager(delegate: self).getDelDeviceData(key: key, token: unToken)
         
+        deleteAllDataFromDB() //Delete the current userDataObject from DB
+        
+        CheckKeysDataManager(delegate: self).getKeysData(key: nil) // CheckKeysRequest with nil key because it's delete on the above line
+        
     }
     
     func didGetDelDeviceData(data: JSON) {
         
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async {
             
             if data["result"].intValue == 1{
-                
-                updateData()
                 
             }
             
