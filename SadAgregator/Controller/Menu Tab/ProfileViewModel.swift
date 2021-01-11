@@ -20,6 +20,10 @@ class ProfileViewModel : ObservableObject{
     @Published var email  = ""
     @Published var partnerCode = ""
     @Published var password = ""
+    @Published var vkExp = ""
+    @Published var autoVK = ""
+    @Published var okExp = ""
+    @Published var autoOK = ""
     
     @Published var alertTitle = ""
     @Published var isAlertShown = false
@@ -37,7 +41,8 @@ class ProfileViewModel : ObservableObject{
     
     init() {
         
-        loadUserData()
+//        loadUserData()
+        key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
         
         userChangeOptionDataManager.delegate = self
         
@@ -83,6 +88,12 @@ extension ProfileViewModel : GetProfileDataManagerDelegate {
             
             isOkConnected = data["user"]["ok_token"].stringValue != ""
             isVkConnected = data["user"]["vk_token"].stringValue != ""
+            
+            autoVK = data["user"]["auto_vk"].stringValue
+            autoOK = data["user"]["auto_ok"].stringValue
+            
+            vkExp = data["user"]["vk_exp"].stringValue
+            okExp = data["user"]["ok_exp"].stringValue
             
         }
         
@@ -177,7 +188,6 @@ extension ProfileViewModel {
         if let userDataObject = userData.first{
             
             key = userDataObject.key
-            
             
         }
         

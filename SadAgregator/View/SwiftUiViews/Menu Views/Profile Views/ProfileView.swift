@@ -62,7 +62,7 @@ struct ProfileView: View {
                                                 
                                                 Spacer()
                                                 
-                                                Text("114 дн.")
+                                                Text(profileViewModel.okExp)
                                                     .foregroundColor(Color(.systemGray))
                                                 
                                             }
@@ -75,7 +75,7 @@ struct ProfileView: View {
                                                 
                                                 Spacer()
                                                 
-                                                Text("112")
+                                                Text(profileViewModel.autoOK)
                                                     .foregroundColor(Color(.systemGray))
                                                 
                                             }
@@ -110,7 +110,7 @@ struct ProfileView: View {
                                             
                                             Spacer()
                                             
-                                            Text("114 дн.")
+                                            Text(profileViewModel.vkExp)
                                                 .foregroundColor(Color(.systemGray))
                                             
                                         }
@@ -123,7 +123,7 @@ struct ProfileView: View {
                                             
                                             Spacer()
                                             
-                                            Text("112")
+                                            Text(profileViewModel.autoVK)
                                                 .foregroundColor(Color(.systemGray))
                                             
                                         }
