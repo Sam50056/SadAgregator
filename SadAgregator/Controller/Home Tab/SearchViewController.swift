@@ -39,6 +39,8 @@ class SearchViewController: UIViewController {
     
     var help : JSON?
     
+    var cntList : [JSON]?
+    
     var sizes : Array<[String]> {
         get{
             var thisArray = Array<[String]>()
@@ -248,6 +250,10 @@ extension SearchViewController : SearchImageDataManagerDelegate{
             
             postsArray = data["posts"].arrayValue
             
+            help = data["help"]
+            
+            cntList = data["cnt_list"].arrayValue
+            
             tableView.reloadSections([0,1], with: .automatic)
             
         }
@@ -316,7 +322,9 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
             
             help = data["help"]
             
-            tableView.reloadSections([0,1], with: .none)
+            cntList = data["cnt_list"].arrayValue
+            
+            tableView.reloadSections([0,1,2], with: .none)
             
         }
         
@@ -357,7 +365,7 @@ extension SearchViewController : UITextFieldDelegate{
 extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -365,8 +373,10 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         switch section {
         
         case 0:
-            return help != nil ? (hintCellShouldBeShown ? 1 : 0) : 0
+            return cntList == nil ? 0 : 1
         case 1:
+            return help != nil ? (hintCellShouldBeShown ? 1 : 0) : 0
+        case 2:
             return postsArray.count
             
         default:
@@ -383,13 +393,21 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         case 0:
             
+            cell = tableView.dequeueReusableCell(withIdentifier: "searchResultsCell", for: indexPath)
+            
+            guard let cntList = cntList else { return cell }
+            
+            setUpSearchResultsCell(cell: cell, data: cntList)
+            
+        case 1:
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "hintCell", for: indexPath)
             
             guard let help = help else {return cell}
             
             setUpHintCell(cell: cell, data: help)
             
-        case 1:
+        case 2:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
             
@@ -412,9 +430,13 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         case 0:
             
-            return K.simpleCellHeight
+            return 40
             
         case 1:
+            
+            return K.simpleCellHeight
+            
+        case 2:
             
             return K.postHeight
             
@@ -426,7 +448,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             
             if let help = help , let url = URL(string: help["url"].stringValue){
                 
@@ -444,7 +466,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         guard imageHashText == nil else {return}
         
-        if indexPath.section == 1{
+        if indexPath.section == 2{
             
             if indexPath.row == rowForPaggingUpdate{
                 
@@ -472,6 +494,32 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     //MARK: - Cell SetUp
     
+    func setUpSearchResultsCell(cell : UITableViewCell , data : [JSON]){
+        
+        if let todayLabel = cell.viewWithTag(1) as? UILabel ,
+           let yesterdaylabel = cell.viewWithTag(2) as? UILabel ,
+           let othersLabel = cell.viewWithTag(3) as? UILabel{
+            
+            let cntList = data
+            
+            cntList.forEach { (item) in
+                
+                let itemType = item["type"].stringValue
+                
+                if itemType == "today"{
+                    todayLabel.text = "Сегодня: \(item["cnt"].stringValue)"
+                }else if itemType == "ystd"{
+                    yesterdaylabel.text = "Вчера: \(item["cnt"].stringValue)"
+                }else if itemType == "others"{
+                    othersLabel.text = "Всего: \(item["cnt"].stringValue)"
+                }
+                
+            }
+            
+        }
+        
+    }
+    
     func setUpHintCell(cell : UITableViewCell , data : JSON){
         
         if let closeButton = cell.viewWithTag(3) as? UIButton,
@@ -484,7 +532,6 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         }
         
     }
-    
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
         
@@ -560,11 +607,13 @@ extension SearchViewController : PostCellCollectionViewActionsDelegate{
         
         postsArray.removeAll()
         
+        cntList = nil
+        
         searchText = option
         
         searchTextField.text = option
         
-        tableView.reloadSections([1], with: .automatic)
+        tableView.reloadSections([0,2], with: .automatic)
         
         getSearchPageDataManager.getSearchPageData(key: key, query: option, page: page)
         
