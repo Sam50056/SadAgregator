@@ -325,6 +325,8 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                     
                     userDataObject.isLogged = true
                     
+                }else{
+                    userDataObject.isLogged = false
                 }
                 
                 userDataObject.imageHashSearch = data["img_hash_srch"].stringValue

@@ -60,6 +60,7 @@
 		228CB766255BF974002B4A96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228CB765255BF974002B4A96 /* Assets.xcassets */; };
 		228CB769255BF974002B4A96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228CB767255BF974002B4A96 /* LaunchScreen.storyboard */; };
 		228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */; };
+		228D2D3725ABE1D5000E9FAE /* DelDeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D2D3625ABE1D5000E9FAE /* DelDeviceDataManager.swift */; };
 		2290485C256DAC80000B7A28 /* VendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290485A256DAC80000B7A28 /* VendTableViewCell.swift */; };
 		2290485D256DAC80000B7A28 /* VendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2290485B256DAC80000B7A28 /* VendTableViewCell.xib */; };
 		22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22904860256DC701000B7A28 /* RatingTableViewCell.swift */; };
@@ -182,6 +183,7 @@
 		228CB768255BF974002B4A96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		228CB76A255BF974002B4A96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckKeysDataManager.swift; sourceTree = "<group>"; };
+		228D2D3625ABE1D5000E9FAE /* DelDeviceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelDeviceDataManager.swift; sourceTree = "<group>"; };
 		2290485A256DAC80000B7A28 /* VendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendTableViewCell.swift; sourceTree = "<group>"; };
 		2290485B256DAC80000B7A28 /* VendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VendTableViewCell.xib; sourceTree = "<group>"; };
 		22904860256DC701000B7A28 /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */,
 				224EFC3025A9D209007CA45E /* SendQuestionDataManager.swift */,
 				2245820C25AA2D6D008882A9 /* HelpPageDataManager.swift */,
+				228D2D3625ABE1D5000E9FAE /* DelDeviceDataManager.swift */,
 			);
 			path = "Menu Managers";
 			sourceTree = "<group>";
@@ -904,6 +907,7 @@
 				221C072C256E5ABB001BC842 /* PhoneTableViewCell.swift in Sources */,
 				22A49CBB2566650600CCC781 /* SizeCollectionViewCell.swift in Sources */,
 				2201672325A73FEA0072BFE7 /* GetPointActionsDataManager.swift in Sources */,
+				228D2D3725ABE1D5000E9FAE /* DelDeviceDataManager.swift in Sources */,
 				22A155E42583E11C000EAB64 /* Constants.swift in Sources */,
 				2290486B256E4978000B7A28 /* PopTableViewCell.swift in Sources */,
 				2290485C256DAC80000B7A28 /* VendTableViewCell.swift in Sources */,

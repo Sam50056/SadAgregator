@@ -73,24 +73,30 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
                 
                 let userDataObject = UserData()
                 
-                let name = data["name"].stringValue
-                let code = data["code"].stringValue
-                
-                let lkVends = data["lk_vends"].stringValue
-                let lkPosts = data["lk_posts"].stringValue
-                
-                userDataObject.name = name
-                userDataObject.code = code
-                
-                userDataObject.isLogged = true
-                
-                userDataObject.key = safeKey
-                
-                userDataObject.lkPosts = lkPosts
-                userDataObject.lkVends = lkVends
+                if data["anonym"].stringValue == "0"{
+                    
+                    let name = data["name"].stringValue
+                    let code = data["code"].stringValue
+                    
+                    let lkVends = data["lk_vends"].stringValue
+                    let lkPosts = data["lk_posts"].stringValue
+                    
+                    userDataObject.name = name
+                    userDataObject.code = code
+                    
+                    userDataObject.isLogged = true
+                    
+                    userDataObject.lkPosts = lkPosts
+                    userDataObject.lkVends = lkVends
+                    
+                }else{
+                    isLogged = false
+                }
                 
                 userDataObject.imageHashSearch = data["img_hash_srch"].stringValue
                 userDataObject.imageHashServer = data["img_hash_srv"].stringValue
+                
+                userDataObject.key = safeKey
                 
                 deleteAllDataFromDB()
                 
@@ -185,6 +191,40 @@ extension MenuViewModel : AuthSocialDataManagerDelegate{
     
     func didFailGettingAuthSocialDataWithError(error: String) {
         print("Error with AuthSocialDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - Logout
+
+extension MenuViewModel : DelDeviceDataManagerDelegate{
+    
+    func logout(){
+        
+        guard let unToken = UserDefaults.standard.string(forKey: K.UNToken) else {return}
+        
+        print("UN Token : \(unToken)")
+        
+        DelDeviceDataManager(delegate: self).getDelDeviceData(key: key, token: unToken)
+        
+    }
+    
+    func didGetDelDeviceData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                updateData()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingDelDeviceDataWithError(error: String) {
+        print("Error with DelDeviceDataManager : \(error)")
     }
     
 }
