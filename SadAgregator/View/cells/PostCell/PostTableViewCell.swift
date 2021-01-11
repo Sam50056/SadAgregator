@@ -591,7 +591,13 @@ class PostTableViewCell: UITableViewCell  {
         
         guard let urlString = vkLinkUrlString ,let url = URL(string: urlString) else {return}
         
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        UIApplication.shared.open(url, options: [:]){ [self] _ in
+            
+            guard let key = key , let id = id else {return}
+            
+            PostRedirectDataManager().sendPostRedirectRequest(key: key, postId: id)
+            
+        }
         
     }
     
