@@ -154,9 +154,6 @@ struct ListSelectView: View {
                 .frame(width: 50, height: 50, alignment: .center)
             
         }
-        .onAppear{
-            masterViewModel.filteredItems = masterViewModel.items
-        }
         .onDisappear{
             masterViewModel.listSelectTextFieldText = "" 
         }

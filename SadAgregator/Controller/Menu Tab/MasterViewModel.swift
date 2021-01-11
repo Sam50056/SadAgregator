@@ -38,7 +38,11 @@ class MasterViewModel : ObservableObject{
     
     @Published var answers = [SimpleReqAnswer]()
     
-    @Published var items = [ListSelectItem]()
+    @Published var items = [ListSelectItem](){
+        didSet{
+            filteredItems = items
+        }
+    }
     @Published var filteredItems = [ListSelectItem]()
     @Published var shouldShowAlertInListSelect = false
     @Published var shouldShowAlbomAlertInListSelect = false
