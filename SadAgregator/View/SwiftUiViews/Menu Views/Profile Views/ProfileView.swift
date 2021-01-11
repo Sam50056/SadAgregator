@@ -142,19 +142,19 @@ struct ProfileView: View {
                                 
                                 NavigationLink(destination: MasterNastroekView() , isActive: $masterViewModel.shouldShowMasterFromProfile){
                                     
-                                HStack{
-                                    
-                                    Image(systemName: "puzzlepiece.fill")
-                                    
-                                    Text("БЫСТРАЯ НАСТРОЙКА ПАРСЕРА")
-                                        .fontWeight(.semibold)
-                                    
-                                }
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .foregroundColor(Color(.systemBlue))
-                                .background(Color(#colorLiteral(red: 0.9591086507, green: 0.9659582973, blue: 0.9731834531, alpha: 1)))
-                                .padding(.top , 8)
+                                    HStack{
+                                        
+                                        Image(systemName: "puzzlepiece.fill")
+                                        
+                                        Text("БЫСТРАЯ НАСТРОЙКА ПАРСЕРА")
+                                            .fontWeight(.semibold)
+                                        
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .foregroundColor(Color(.systemBlue))
+                                    .background(Color(#colorLiteral(red: 0.9591086507, green: 0.9659582973, blue: 0.9731834531, alpha: 1)))
+                                    .padding(.top , 8)
                                     
                                 }
                                 
