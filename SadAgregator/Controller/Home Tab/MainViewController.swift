@@ -348,6 +348,10 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                 
                 refresh(self)
                 
+                if let unToken = UserDefaults.standard.string(forKey: K.UNToken){
+                    UpdateDeviceDataManager().updateDevice(key: key!, token: unToken )
+                }
+                
             }
             
             //Message field from api

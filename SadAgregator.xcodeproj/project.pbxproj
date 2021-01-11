@@ -61,6 +61,7 @@
 		228CB769255BF974002B4A96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228CB767255BF974002B4A96 /* LaunchScreen.storyboard */; };
 		228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */; };
 		228D2D3725ABE1D5000E9FAE /* DelDeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D2D3625ABE1D5000E9FAE /* DelDeviceDataManager.swift */; };
+		228D2D3B25AC9DED000E9FAE /* UpdateDeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D2D3A25AC9DED000E9FAE /* UpdateDeviceDataManager.swift */; };
 		2290485C256DAC80000B7A28 /* VendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290485A256DAC80000B7A28 /* VendTableViewCell.swift */; };
 		2290485D256DAC80000B7A28 /* VendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2290485B256DAC80000B7A28 /* VendTableViewCell.xib */; };
 		22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22904860256DC701000B7A28 /* RatingTableViewCell.swift */; };
@@ -184,6 +185,7 @@
 		228CB76A255BF974002B4A96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckKeysDataManager.swift; sourceTree = "<group>"; };
 		228D2D3625ABE1D5000E9FAE /* DelDeviceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelDeviceDataManager.swift; sourceTree = "<group>"; };
+		228D2D3A25AC9DED000E9FAE /* UpdateDeviceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDeviceDataManager.swift; sourceTree = "<group>"; };
 		2290485A256DAC80000B7A28 /* VendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendTableViewCell.swift; sourceTree = "<group>"; };
 		2290485B256DAC80000B7A28 /* VendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VendTableViewCell.xib; sourceTree = "<group>"; };
 		22904860256DC701000B7A28 /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 		224BC43D259FEE11003F147F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				228D2D3925AC9715000E9FAE /* General Managers */,
 				22BF1A1425A5FC2C00567DB7 /* Photo Managers */,
 				2201671A25A669550072BFE7 /* Post Managers */,
 				2253EE252569D1C500103C86 /* Main Screen Managers */,
@@ -344,8 +347,6 @@
 			children = (
 				2291BE442560620F004F55DF /* MainDataManager.swift */,
 				22B7270E2573189E00B56249 /* MainPaggingDataManager.swift */,
-				228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */,
-				22D60981255D41F000FC622B /* MessageReadedDataManager.swift */,
 			);
 			path = "Main Screen Managers";
 			sourceTree = "<group>";
@@ -507,6 +508,16 @@
 				224BC442259FEE94003F147F /* Social Media Stuff */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		228D2D3925AC9715000E9FAE /* General Managers */ = {
+			isa = PBXGroup;
+			children = (
+				228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */,
+				22D60981255D41F000FC622B /* MessageReadedDataManager.swift */,
+				228D2D3A25AC9DED000E9FAE /* UpdateDeviceDataManager.swift */,
+			);
+			path = "General Managers";
 			sourceTree = "<group>";
 		};
 		2290485F256DC6B7000B7A28 /* TableViewCells */ = {
@@ -946,6 +957,7 @@
 				22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */,
 				22D9021D259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift in Sources */,
 				22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */,
+				228D2D3B25AC9DED000E9FAE /* UpdateDeviceDataManager.swift in Sources */,
 				229A95CA25A16E100086EAD9 /* TopVendorsDataManager.swift in Sources */,
 				2259579F259668370088C7E4 /* InputValView.swift in Sources */,
 				22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */,

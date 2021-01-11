@@ -219,6 +219,8 @@ extension MenuViewModel : DelDeviceDataManagerDelegate{
             
             if data["result"].intValue == 1{
                 
+                print("Token Deleted From Server")
+                
             }
             
         }
