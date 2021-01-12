@@ -71,16 +71,16 @@
                         <rect key="frame" x="16" y="19" width="274" height="16"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CN5-8L-WIW">
-                                <rect key="frame" x="0.0" y="0.0" width="25" height="16"/>
+                                <rect key="frame" x="0.0" y="0.0" width="35" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="xS3-qA-iOZ"/>
+                                    <constraint firstAttribute="width" constant="35" id="xS3-qA-iOZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ольга Высоцкая" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7MB-ph-eUI">
-                                <rect key="frame" x="41" y="0.0" width="137" height="16"/>
+                                <rect key="frame" x="51" y="0.0" width="127" height="16"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

@@ -2891,11 +2891,11 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="Sh6-kq-GeD"/>
-        <segue reference="chw-zm-uhr"/>
+        <segue reference="0O8-eQ-Bac"/>
+        <segue reference="yR4-7g-u1L"/>
         <segue reference="UT5-6g-K7A"/>
-        <segue reference="3vK-wY-P32"/>
-        <segue reference="jMw-Um-hkz"/>
+        <segue reference="LYd-3X-sUB"/>
+        <segue reference="ZSI-nF-15U"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
