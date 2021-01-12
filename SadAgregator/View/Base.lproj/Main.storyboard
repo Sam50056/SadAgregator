@@ -261,7 +261,7 @@
         <!--Поставщик-->
         <scene sceneID="Mur-d3-iUu">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="tgI-Wx-GfF" customClass="PostavshikViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VendorVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tgI-Wx-GfF" customClass="PostavshikViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qTr-YV-iic">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -820,7 +820,7 @@
         <!--Point View Controller-->
         <scene sceneID="qQs-kk-Ska">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="PU7-Gp-SMR" customClass="PointViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PointVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PU7-Gp-SMR" customClass="PointViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dxZ-42-z6o">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2644,7 +2644,7 @@
         <!--Search View Controller-->
         <scene sceneID="Wua-F5-Agj">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="iOY-jj-tLQ" customClass="SearchViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iOY-jj-tLQ" customClass="SearchViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dVW-pV-I5v">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2912,11 +2912,11 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="wZb-pO-qG4"/>
+        <segue reference="lNg-NF-ZhP"/>
         <segue reference="yR4-7g-u1L"/>
         <segue reference="UT5-6g-K7A"/>
-        <segue reference="5co-KY-lmW"/>
-        <segue reference="CqK-8r-UgW"/>
+        <segue reference="sY4-Z3-dlW"/>
+        <segue reference="3eo-7Z-uW5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="72"/>

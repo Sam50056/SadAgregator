@@ -26,10 +26,6 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
     
     var postsArray = [JSON]()
     
-    var selectedVendId : String?
-    
-    var selectedPointId : String?
-    
     var sizes : Array<[String]> {
         get{
             var thisArray = Array<[String]>()
@@ -94,8 +90,6 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
     }
     
     var selectedPostId = ""
-    
-    var searchText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,17 +175,25 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
         
         cell.vendorLabelButtonCallBack = { [self] in
             
-            selectedPointId = data["point_id"].stringValue
+            let selectedPointId = data["point_id"].stringValue
             
-            self.performSegue(withIdentifier: "goToPoint", sender: self)
+            let pointVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PointVC") as! PointViewController
+            
+            pointVC.thisPointId = selectedPointId
+            
+            navigationController?.pushViewController(pointVC, animated: true)
             
         }
         
         cell.byLabelButtonCallback = { [self] in
             
-            selectedVendId = data["vendor_id"].stringValue
+            let selectedVendId = data["vendor_id"].stringValue
             
-            self.performSegue(withIdentifier: "goToVend", sender: self)
+            let vendorVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "VendorVC") as! PostavshikViewController
+            
+            vendorVC.thisVendorId = selectedVendId
+            
+            navigationController?.pushViewController(vendorVC, animated: true)
             
         }
         
@@ -235,9 +237,11 @@ extension VendorPostsTableViewController : PostCellCollectionViewActionsDelegate
     
     func didTapOnOptionCell(option: String) {
         
-        searchText = option
+        let searchVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "SearchVC") as! SearchViewController
         
-        performSegue(withIdentifier: "goSearch", sender: self)
+        searchVC.searchText = option
+        
+        self.navigationController?.pushViewController(searchVC, animated: true)
         
     }
     
