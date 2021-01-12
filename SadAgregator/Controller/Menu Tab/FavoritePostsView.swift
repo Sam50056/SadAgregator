@@ -41,6 +41,8 @@ class FavoritePostsViewController : UITableViewController {
     var page = 1
     var rowForPaggingUpdate : Int = 10
     
+    var favoritePostsData : JSON?
+    
     var postsArray = [JSON]()
     
     var selectedVendId : String?
@@ -168,7 +170,7 @@ class FavoritePostsViewController : UITableViewController {
         
         let post = postsArray[indexPath.row]
         
-        setUpPostCell(cell: cell, data: post, index: indexPath.row)
+        setUpPostCell(cell: cell, data: post, index: indexPath.row, export: favoritePostsData?["export"])
         
         return cell
         
@@ -196,7 +198,7 @@ class FavoritePostsViewController : UITableViewController {
     
     //MARK: - Cell Set up
     
-    func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
+    func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int, export : JSON?){
         
         cell.delegate = self
         
@@ -236,6 +238,15 @@ class FavoritePostsViewController : UITableViewController {
             self.performSegue(withIdentifier: "goToVend", sender: self)
             
         }
+        
+        if let export = export{
+            
+            let exportType = export["type"].stringValue
+            
+            cell.vigruzitImageView.image = exportType == "vk" ? UIImage(named: "vk") : UIImage(named: "odno")
+            
+        }
+        
         
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
@@ -351,6 +362,8 @@ extension FavoritePostsViewController : MyPostsDataManagerDelegate {
     func didGetMyPostsData(data: JSON) {
         
         DispatchQueue.main.async {
+            
+            self.favoritePostsData = data
             
             self.postsArray.append(contentsOf: data["posts"].arrayValue)
             

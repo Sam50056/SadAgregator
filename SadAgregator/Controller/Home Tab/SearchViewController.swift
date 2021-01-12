@@ -35,9 +35,9 @@ class SearchViewController: UIViewController {
     
     lazy var getSearchPageDataManager = GetSearchPageDataManager()
     
-    var postsArray = [JSON]()
+    var searchData : JSON?
     
-    var help : JSON?
+    var postsArray = [JSON]()
     
     var cntList : [JSON]?
     
@@ -248,9 +248,9 @@ extension SearchViewController : SearchImageDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            postsArray = data["posts"].arrayValue
+            searchData = data
             
-            help = data["help"]
+            postsArray = data["posts"].arrayValue
             
             cntList = data["cnt_list"].arrayValue
             
@@ -318,9 +318,9 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
         
         DispatchQueue.main.async { [self] in
             
-            postsArray.append(contentsOf: data["posts"].arrayValue)
+            searchData = data
             
-            help = data["help"]
+            postsArray.append(contentsOf: data["posts"].arrayValue)
             
             cntList = data["cnt_list"].arrayValue
             
@@ -375,7 +375,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         case 0:
             return cntList == nil ? 0 : 1
         case 1:
-            return help != nil ? (hintCellShouldBeShown ? 1 : 0) : 0
+            return searchData?["help"] != nil ? (hintCellShouldBeShown ? 1 : 0) : 0
         case 2:
             return postsArray.count
             
@@ -403,7 +403,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "hintCell", for: indexPath)
             
-            guard let help = help else {return cell}
+            guard let help = searchData?["help"] else {return cell}
             
             setUpHintCell(cell: cell, data: help)
             
@@ -413,7 +413,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
             let post = postsArray[indexPath.row]
             
-            setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: indexPath.row)
+            setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: indexPath.row , export: searchData?["export"])
             
         default:
             fatalError("Invalid Section")
@@ -450,7 +450,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         if indexPath.section == 1 {
             
-            if let help = help , let url = URL(string: help["url"].stringValue){
+            if let help = searchData?["help"] , let url = URL(string: help["url"].stringValue){
                 
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 
@@ -533,7 +533,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
     }
     
-    func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
+    func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int, export : JSON?){
         
         cell.delegate = self
         
@@ -571,6 +571,14 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             selectedVendId = data["vendor_id"].stringValue
             
             self.performSegue(withIdentifier: "goToVend", sender: self)
+            
+        }
+        
+        if let export = export{
+            
+            let exportType = export["type"].stringValue
+            
+            cell.vigruzitImageView.image = exportType == "vk" ? UIImage(named: "vk") : UIImage(named: "odno")
             
         }
         

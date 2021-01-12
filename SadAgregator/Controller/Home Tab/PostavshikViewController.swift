@@ -502,7 +502,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             let post = postsArray[index]
             
-            setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: index)
+            setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: index, export: vendorData["export"])
             
             
         default:
@@ -851,7 +851,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
     }
     
-    func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
+    func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int, export : JSON?){
         
         cell.delegate = self
         
@@ -891,6 +891,15 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             
         }
+        
+        if let export = export{
+            
+            let exportType = export["type"].stringValue
+            
+            cell.vigruzitImageView.image = exportType == "vk" ? UIImage(named: "vk") : UIImage(named: "odno")
+            
+        }
+        
         
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         

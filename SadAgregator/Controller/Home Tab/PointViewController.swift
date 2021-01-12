@@ -426,7 +426,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             
             let post = postsArray[index]
             
-            setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: index)
+            setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: index, export: pointData["export"])
             
         default:
             print("IndexPath out of switch: \(index)")
@@ -640,7 +640,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         
     }
     
-    func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int){
+    func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int, export : JSON?){
         
         cell.delegate = self
         
@@ -684,6 +684,15 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             self.performSegue(withIdentifier: "goToVend", sender: self)
             
         }
+        
+        if let export = export{
+            
+            let exportType = export["type"].stringValue
+            
+            cell.vigruzitImageView.image = exportType == "vk" ? UIImage(named: "vk") : UIImage(named: "odno")
+            
+        }
+        
         
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
