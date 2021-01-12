@@ -46,6 +46,8 @@
 		2268869725995C070079933D /* SearchListWorkDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2268869625995C070079933D /* SearchListWorkDataManager.swift */; };
 		2268869C25996B920079933D /* RefreshAlbsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2268869B25996B920079933D /* RefreshAlbsDataManager.swift */; };
 		226886A62599EDD00079933D /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226886A52599EDD00079933D /* ActivityIndicatorView.swift */; };
+		226973FD25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226973FC25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift */; };
+		2269740025AE394800C76BA6 /* VendorPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */; };
 		226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9444258D2179008CEC4A /* GalleryViewController.swift */; };
 		226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9447258D2EF9008CEC4A /* HeroHelper.swift */; };
 		227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */; };
@@ -168,6 +170,8 @@
 		2268869625995C070079933D /* SearchListWorkDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListWorkDataManager.swift; sourceTree = "<group>"; };
 		2268869B25996B920079933D /* RefreshAlbsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshAlbsDataManager.swift; sourceTree = "<group>"; };
 		226886A52599EDD00079933D /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		226973FC25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVendPostsPaggingDataManager.swift; sourceTree = "<group>"; };
+		226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorPostsTableViewController.swift; sourceTree = "<group>"; };
 		226D9444258D2179008CEC4A /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		226D9447258D2EF9008CEC4A /* HeroHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroHelper.swift; sourceTree = "<group>"; };
 		227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUpdateViewController.swift; sourceTree = "<group>"; };
@@ -698,6 +702,7 @@
 				221949FE256B1FBD00E0564D /* PointViewController.swift */,
 				229FE68D25700B120001FF54 /* SearchViewController.swift */,
 				22906B362578020300F00B0D /* PostavshikViewController.swift */,
+				226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */,
 				227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */,
 				226D9444258D2179008CEC4A /* GalleryViewController.swift */,
 			);
@@ -756,6 +761,7 @@
 				229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */,
 				2201672825A777A20072BFE7 /* GetVendActionsDataManager.swift */,
 				2201672B25A77BB50072BFE7 /* SetVendActionsDataManager.swift */,
+				226973FC25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift */,
 			);
 			path = "Vendor Managers";
 			sourceTree = "<group>";
@@ -998,6 +1004,8 @@
 				224EFC3125A9D209007CA45E /* SendQuestionDataManager.swift in Sources */,
 				2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */,
 				22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */,
+				2269740025AE394800C76BA6 /* VendorPostsTableViewController.swift in Sources */,
+				226973FD25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift in Sources */,
 				226886A62599EDD00079933D /* ActivityIndicatorView.swift in Sources */,
 				2201672025A66E380072BFE7 /* SetPostActionsDataManager.swift in Sources */,
 				22A155DD2582C5D8000EAB64 /* AuthView.swift in Sources */,

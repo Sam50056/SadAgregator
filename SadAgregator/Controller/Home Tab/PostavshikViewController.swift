@@ -568,6 +568,14 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             self.performSegue(withIdentifier: "goToReviewUpdate", sender: self)
             
+        }else if indexPath.section == 5 || indexPath.section == 7{
+            
+            let vendorPostsVc = VendorPostsTableViewController()
+            
+            vendorPostsVc.thisVendId = thisVendorId
+         
+            self.navigationController?.pushViewController(vendorPostsVc, animated: true)
+            
         }else if indexPath.section == 1{
             
             let selectedInfoCell = infoCells[indexPath.row]
