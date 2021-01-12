@@ -758,6 +758,27 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="allPostsCell" rowHeight="50" id="QJI-6f-1z8">
+                                        <rect key="frame" x="0.0" y="570.66666793823242" width="390" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QJI-6f-1z8" id="oQN-SW-Oql">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Смотреть все посты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SWW-Wp-o7c">
+                                                    <rect key="frame" x="116.33333333333333" y="15.333333333333334" width="157.66666666666669" height="19.333333333333329"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="SWW-Wp-o7c" firstAttribute="centerY" secondItem="oQN-SW-Oql" secondAttribute="centerY" id="4p8-bc-x0w"/>
+                                                <constraint firstItem="SWW-Wp-o7c" firstAttribute="centerX" secondItem="oQN-SW-Oql" secondAttribute="centerX" id="mAc-KH-ML1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.960834682" green="0.96459835770000002" blue="0.97255879639999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -2891,10 +2912,10 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="0O8-eQ-Bac"/>
+        <segue reference="wZb-pO-qG4"/>
         <segue reference="yR4-7g-u1L"/>
         <segue reference="UT5-6g-K7A"/>
-        <segue reference="LYd-3X-sUB"/>
+        <segue reference="sY4-Z3-dlW"/>
         <segue reference="ZSI-nF-15U"/>
     </inferredMetricsTieBreakers>
     <resources>

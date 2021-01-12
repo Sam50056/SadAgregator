@@ -389,7 +389,7 @@ extension PostavshikViewController : SetVendActionsDataManagerDelegate{
 extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
+        return 8
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -427,6 +427,10 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         case 6:
             
             return postsArray.count
+            
+        case 7:
+            
+            return postsArray.isEmpty ? 0 : 1
             
         default:
             fatalError("Invalid section")
@@ -504,6 +508,9 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: index, export: vendorData["export"])
             
+        case 7:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "allPostsCell", for: indexPath)
             
         default:
             print("Index Path Section out of switch : \(indexPath.section)")
@@ -544,6 +551,9 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             return K.postHeight
             
+        case 7:
+            
+            return 50
             
         default:
             fatalError("Invalid Section")
