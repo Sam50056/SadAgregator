@@ -59,12 +59,8 @@ class FavoriteVendsViewController : UITableViewController {
         
         myVendorsDataManager.delegate = self
         
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
         refresh(self)
+        
     }
     
     //MARK: - Segue Stuff
@@ -84,6 +80,8 @@ class FavoriteVendsViewController : UITableViewController {
     //MARK: - Refresh func
     
     @objc func refresh(_ sender: AnyObject) {
+        
+        page = 1
         
         vendsArray.removeAll()
         
