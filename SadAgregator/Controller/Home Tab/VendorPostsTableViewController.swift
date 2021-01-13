@@ -101,6 +101,12 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
         
         tableView.separatorStyle = .none
         
+        refreshControl = UIRefreshControl()
+        
+        //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl!.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl!) // not required when using UITableViewController
+        
         getVendPostsPaggingDataManager.delegate = self
         
         refresh(self)
@@ -135,6 +141,8 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             
             tableView.reloadData()
             
+            refreshControl!.endRefreshing()
+            
         }
         
     }
@@ -152,11 +160,17 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
+        var cell = UITableViewCell()
         
-        let post = postsArray[indexPath.row]
-        
-        setUpPostCell(cell: cell, data: post, index: indexPath.row, export: pageData?["export"])
+        if !postsArray.isEmpty{
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
+            
+            let post = postsArray[indexPath.row]
+            
+            setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: indexPath.row, export: pageData?["export"])
+            
+        }
         
         return cell
         
