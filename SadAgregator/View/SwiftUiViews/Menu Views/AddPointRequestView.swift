@@ -16,6 +16,7 @@ struct AddPointRequestView: View {
     @State var text2 = ""
     @State var text3 = ""
     
+    @State var alertTitle = ""
     @State var shouldShowAlert = false
     
     var body: some View {
@@ -47,6 +48,9 @@ struct AddPointRequestView: View {
                             
                             AddPointRequestDataManager(delegate: self).getAddPointRequestData(key: menuViewModel.key, place: text1, vkUrl: text2, comment: text3)
                             
+                        }else{
+                            alertTitle = "Некорректная ссылка"
+                            shouldShowAlert = true
                         }
                         
                     }){
@@ -66,7 +70,7 @@ struct AddPointRequestView: View {
             
         }
         .alert(isPresented: $shouldShowAlert) {
-            Alert(title: Text("Ссылка не добавлена"), message: nil, dismissButton: .cancel(Text("Ок")))
+            Alert(title: Text(alertTitle), message: nil, dismissButton: .cancel(Text("Ок")))
         }
         .navigationBarTitle(Text("Добавить поставщика"), displayMode : .inline)
         
@@ -88,6 +92,7 @@ extension AddPointRequestView : AddPointRequestDataManagerDelegate{
                 
             }else{
                 
+                alertTitle = "Ссылка не добавлена"
                 shouldShowAlert = true
                 
             }

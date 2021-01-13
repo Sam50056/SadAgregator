@@ -217,9 +217,12 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
             
         }else {
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "vendRatingCell", for: indexPath)
-            
-            setUpVendRatingCell(cell: cell as! VendorRatingTableViewCell, data: items[indexPath.row])
+            if !items.isEmpty{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "vendRatingCell", for: indexPath)
+                
+                setUpVendRatingCell(cell: cell as! VendorRatingTableViewCell, data: items[indexPath.row])
+            }
             
         }
         
