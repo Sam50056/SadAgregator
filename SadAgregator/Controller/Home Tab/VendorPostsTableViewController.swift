@@ -19,6 +19,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
     var isLogged = false
     
     var page = 1
+    var rowForPaggingUpdate = 15
     
     lazy var getVendPostsPaggingDataManager = GetVendPostsPaggingDataManager()
     
@@ -102,12 +103,25 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
         
         getVendPostsPaggingDataManager.delegate = self
         
+        refresh(self)
+       
+    }
+    
+    
+    //MARK: - Refresh func
+    
+    @objc func refresh(_ sender: AnyObject) {
+        
         if let thisVendId = thisVendId {
+            
+            postsArray.removeAll()
+            
+            page = 1
+            
             getVendPostsPaggingDataManager.getGetVendPostsPaggingData(key: key, vendId: thisVendId, page: page)
         }
         
     }
-    
     
     //MARK: - GetVendPostsPaggingDataManager
     
@@ -117,7 +131,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             
             pageData = data
             
-            postsArray = data["posts"].arrayValue
+            postsArray.append(contentsOf: data["posts"].arrayValue)
             
             tableView.reloadData()
             
@@ -147,6 +161,25 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
         return cell
         
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == rowForPaggingUpdate{
+            
+            page += 1
+            
+            rowForPaggingUpdate += 16
+            
+            getVendPostsPaggingDataManager.getGetVendPostsPaggingData(key: key, vendId: thisVendId!, page: page)
+            
+            print("Done a request for page: \(page)")
+            
+        }
+        
+    }
+    
+    
+    //MARK: - Cell Set Up
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int, export : JSON?){
         
