@@ -1,0 +1,282 @@
+
+/* Class = "UILabel"; text = "Активность - "; ObjectID = "3bq-BZ-r5P"; */
+"3bq-BZ-r5P.text" = "Активность - ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "3xa-7z-c4J"; */
+"3xa-7z-c4J.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "4AG-Yk-kPQ"; */
+"4AG-Yk-kPQ.text" = "Label";
+
+/* Class = "UILabel"; text = " Сегодня"; ObjectID = "5mR-D3-gnK"; */
+"5mR-D3-gnK.text" = " Сегодня";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6CJ-hY-qlL"; */
+"6CJ-hY-qlL.text" = "Label";
+
+/* Class = "UILabel"; text = "Добавить фото"; ObjectID = "79r-oI-irQ"; */
+"79r-oI-irQ.text" = "Добавить фото";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "8GA-4F-ecb"; */
+"8GA-4F-ecb.text" = "Label";
+
+/* Class = "UILabel"; text = "ОЦЕНИТЕ ПОСТАВЩИКА"; ObjectID = "8fk-YJ-apg"; */
+"8fk-YJ-apg.text" = "ОЦЕНИТЕ ПОСТАВЩИКА";
+
+/* Class = "UILabel"; text = "Последние посты"; ObjectID = "95Y-Wu-8dC"; */
+"95Y-Wu-8dC.text" = "Последние посты";
+
+/* Class = "UILabel"; text = "Последние посты"; ObjectID = "AuS-Qa-p8V"; */
+"AuS-Qa-p8V.text" = "Последние посты";
+
+/* Class = "UILabel"; text = "4 мин. назад"; ObjectID = "B28-VQ-UgA"; */
+"B28-VQ-UgA.text" = "4 мин. назад";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "BS9-KK-V1n"; */
+"BS9-KK-V1n.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Активность поставщиков"; ObjectID = "Bd8-h9-4M1"; */
+"Bd8-h9-4M1.title" = "Активность поставщиков";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "C4r-7W-Hzs"; */
+"C4r-7W-Hzs.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "CBh-cS-qSj"; */
+"CBh-cS-qSj.text" = "Label";
+
+/* Class = "UILabel"; text = "Вчера: 0"; ObjectID = "CVK-Xe-f9Z"; */
+"CVK-Xe-f9Z.text" = "Вчера: 0";
+
+/* Class = "UILabel"; text = "Фото 0 из 0"; ObjectID = "Ctr-GR-S9Y"; */
+"Ctr-GR-S9Y.text" = "Фото 0 из 0";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "EK3-Pw-bZJ"; */
+"EK3-Pw-bZJ.text" = "Label";
+
+/* Class = "UILabel"; text = "1 ОТЗЫВ"; ObjectID = "F5Y-8K-51p"; */
+"F5Y-8K-51p.text" = "1 ОТЗЫВ";
+
+/* Class = "UILabel"; text = "964"; ObjectID = "GwF-B0-jdK"; */
+"GwF-B0-jdK.text" = "964";
+
+/* Class = "UILabel"; text = "964"; ObjectID = "H9e-aJ-Aq9"; */
+"H9e-aJ-Aq9.text" = "964";
+
+/* Class = "UILabel"; text = "Как работает поиск? "; ObjectID = "JTB-hJ-uqV"; */
+"JTB-hJ-uqV.text" = "Как работает поиск? ";
+
+/* Class = "UILabel"; text = "4 мин. назад"; ObjectID = "Jso-yy-NAp"; */
+"Jso-yy-NAp.text" = "4 мин. назад";
+
+/* Class = "UILabel"; text = "Сегодня: 0"; ObjectID = "K6R-lp-Ccp"; */
+"K6R-lp-Ccp.text" = "Сегодня: 0";
+
+/* Class = "UILabel"; text = "Вчера"; ObjectID = "KDl-x6-Yxw"; */
+"KDl-x6-Yxw.text" = "Вчера";
+
+/* Class = "UILabel"; text = "Оценка"; ObjectID = "KxK-4Z-VEc"; */
+"KxK-4Z-VEc.text" = "Оценка";
+
+/* Class = "UILabel"; text = "label"; ObjectID = "MIU-Lz-LDV"; */
+"MIU-Lz-LDV.text" = "label";
+
+/* Class = "UILabel"; text = "57"; ObjectID = "Mej-dI-AWf"; */
+"Mej-dI-AWf.text" = "57";
+
+/* Class = "UILabel"; text = "4 мин. назад"; ObjectID = "Mvc-eo-FUX"; */
+"Mvc-eo-FUX.text" = "4 мин. назад";
+
+/* Class = "UILabel"; text = "label"; ObjectID = "MyB-TF-I7M"; */
+"MyB-TF-I7M.text" = "label";
+
+/* Class = "UILabel"; text = " Сегодня"; ObjectID = "O4w-pf-KWQ"; */
+"O4w-pf-KWQ.text" = " Сегодня";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "OkF-ad-hV1"; */
+"OkF-ad-hV1.text" = "Label";
+
+/* Class = "UILabel"; text = "4 мин. назад"; ObjectID = "PBB-GC-0bQ"; */
+"PBB-GC-0bQ.text" = "4 мин. назад";
+
+/* Class = "UILabel"; text = "Арендаторы"; ObjectID = "Pxa-9t-Nma"; */
+"Pxa-9t-Nma.text" = "Арендаторы";
+
+/* Class = "UILabel"; text = "3292 поставщиков"; ObjectID = "QFh-ip-3fd"; */
+"QFh-ip-3fd.text" = "3292 поставщиков";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "Qby-83-VuE"; */
+"Qby-83-VuE.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "Активность точек"; ObjectID = "Qcq-2a-EsW"; */
+"Qcq-2a-EsW.text" = "Активность точек";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Raa-zR-q5x"; */
+"Raa-zR-q5x.text" = "Label";
+
+/* Class = "UILabel"; text = "ОСТАВИТЬ ОТЗЫВ"; ObjectID = "RmU-Ug-kFs"; */
+"RmU-Ug-kFs.text" = "ОСТАВИТЬ ОТЗЫВ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "S4G-Fj-x5Z"; */
+"S4G-Fj-x5Z.text" = "Label";
+
+/* Class = "UILabel"; text = "Смотреть все посты"; ObjectID = "SWW-Wp-o7c"; */
+"SWW-Wp-o7c.text" = "Смотреть все посты";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "UoX-7O-pKf"; */
+"UoX-7O-pKf.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "VNL-oc-pr3"; */
+"VNL-oc-pr3.text" = "Label";
+
+/* Class = "UILabel"; text = "Фото"; ObjectID = "WEo-MB-TfI"; */
+"WEo-MB-TfI.text" = "Фото";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "X6t-bE-dq8"; */
+"X6t-bE-dq8.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Поиск по тексту и фото"; ObjectID = "XZE-DD-NK1"; */
+"XZE-DD-NK1.placeholder" = "Поиск по тексту и фото";
+
+/* Class = "UILabel"; text = "Скачать"; ObjectID = "XrB-Vm-Lh6"; */
+"XrB-Vm-Lh6.text" = "Скачать";
+
+/* Class = "UILabel"; text = "Фото"; ObjectID = "Xzo-ah-glL"; */
+"Xzo-ah-glL.text" = "Фото";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "YMw-ZY-IU9"; */
+"YMw-ZY-IU9.text" = "Label";
+
+/* Class = "UILabel"; text = "964"; ObjectID = "YqO-6O-ESb"; */
+"YqO-6O-ESb.text" = "964";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "YtI-Ib-4UF"; */
+"YtI-Ib-4UF.text" = "Label";
+
+/* Class = "UILabel"; text = "Активность поставщиков"; ObjectID = "ZBU-FM-6WV"; */
+"ZBU-FM-6WV.text" = "Активность поставщиков";
+
+/* Class = "UILabel"; text = "Как это работает? "; ObjectID = "ZIK-Ji-poC"; */
+"ZIK-Ji-poC.text" = "Как это работает? ";
+
+/* Class = "UILabel"; text = "Последние посты"; ObjectID = "Zno-h0-rOO"; */
+"Zno-h0-rOO.text" = "Последние посты";
+
+/* Class = "UILabel"; text = "Всего: 0"; ObjectID = "aDN-4Z-MQJ"; */
+"aDN-4Z-MQJ.text" = "Всего: 0";
+
+/* Class = "UILabel"; text = "Посты"; ObjectID = "aJh-q3-V2j"; */
+"aJh-q3-V2j.text" = "Посты";
+
+/* Class = "UILabel"; text = "964"; ObjectID = "aXq-q9-HK9"; */
+"aXq-q9-HK9.text" = "964";
+
+/* Class = "UILabel"; text = "Посты"; ObjectID = "cdb-lr-Lh5"; */
+"cdb-lr-Lh5.text" = "Посты";
+
+/* Class = "UILabel"; text = "Последние посты"; ObjectID = "clI-Mz-PHF"; */
+"clI-Mz-PHF.text" = "Последние посты";
+
+/* Class = "UILabel"; text = "Текст отзыва"; ObjectID = "dG8-1s-Uxv"; */
+"dG8-1s-Uxv.text" = "Текст отзыва";
+
+/* Class = "UINavigationItem"; title = "Поставщик"; ObjectID = "eLf-cF-6hX"; */
+"eLf-cF-6hX.title" = "Поставщик";
+
+/* Class = "UILabel"; text = "Заголовок отзыва"; ObjectID = "eTJ-xL-3QQ"; */
+"eTJ-xL-3QQ.text" = "Заголовок отзыва";
+
+/* Class = "UILabel"; text = "4 мин. назад"; ObjectID = "fJB-EI-GMW"; */
+"fJB-EI-GMW.text" = "4 мин. назад";
+
+/* Class = "UILabel"; text = "5.0"; ObjectID = "flJ-PQ-O0e"; */
+"flJ-PQ-O0e.text" = "5.0";
+
+/* Class = "UILabel"; text = "Посты"; ObjectID = "fyt-9z-JYG"; */
+"fyt-9z-JYG.text" = "Посты";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "gdS-2W-lXc"; */
+"gdS-2W-lXc.text" = "Label";
+
+/* Class = "UILabel"; text = "Активность линий"; ObjectID = "gjx-8j-zsN"; */
+"gjx-8j-zsN.text" = "Активность линий";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "hPi-s6-ZgP"; */
+"hPi-s6-ZgP.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "hZi-US-My2"; */
+"hZi-US-My2.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "hwK-ie-sBS"; */
+"hwK-ie-sBS.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "iuK-k8-YWx"; */
+"iuK-k8-YWx.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "lKI-js-wDV"; */
+"lKI-js-wDV.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Поиск по поставщикам"; ObjectID = "lWN-px-lT6"; */
+"lWN-px-lT6.placeholder" = "Поиск по поставщикам";
+
+/* Class = "UILabel"; text = "Фото"; ObjectID = "mHj-U4-ExG"; */
+"mHj-U4-ExG.text" = "Фото";
+
+/* Class = "UILabel"; text = "57"; ObjectID = "naE-CA-tcD"; */
+"naE-CA-tcD.text" = "57";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "obE-cK-5mM"; */
+"obE-cK-5mM.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ocn-YD-uG5"; */
+"ocn-YD-uG5.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "q0Y-0h-R0P"; */
+"q0Y-0h-R0P.text" = "Label";
+
+/* Class = "UILabel"; text = " Сегодня"; ObjectID = "q4S-71-jNu"; */
+"q4S-71-jNu.text" = " Сегодня";
+
+/* Class = "UITextField"; placeholder = "Поиск по тексту и фото"; ObjectID = "rJu-Fk-XD1"; */
+"rJu-Fk-XD1.placeholder" = "Поиск по тексту и фото";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "rkO-Pw-L05"; */
+"rkO-Pw-L05.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Активность линий"; ObjectID = "sIw-PM-G4A"; */
+"sIw-PM-G4A.title" = "Активность линий";
+
+/* Class = "UILabel"; text = "Вчера"; ObjectID = "sZt-Ii-taB"; */
+"sZt-Ii-taB.text" = "Вчера";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "t1d-EO-fzY"; */
+"t1d-EO-fzY.text" = "Label";
+
+/* Class = "UILabel"; text = "4 мин. назад"; ObjectID = "tx2-LT-Gq4"; */
+"tx2-LT-Gq4.text" = "4 мин. назад";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ugo-Ob-HdC"; */
+"ugo-Ob-HdC.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Сохранить"; ObjectID = "uqz-aI-sXG"; */
+"uqz-aI-sXG.normalTitle" = "Сохранить";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "v7Y-Eg-xbe"; */
+"v7Y-Eg-xbe.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "wnH-Ti-aLQ"; */
+"wnH-Ti-aLQ.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "xto-BQ-04E"; */
+"xto-BQ-04E.text" = "Label";
+
+/* Class = "UILabel"; text = "Активность точек"; ObjectID = "yGk-N1-duv"; */
+"yGk-N1-duv.text" = "Активность точек";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "yHs-o9-u4q"; */
+"yHs-o9-u4q.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "Вчера"; ObjectID = "ybZ-dH-5WP"; */
+"ybZ-dH-5WP.text" = "Вчера";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "zdL-n0-DC6"; */
+"zdL-n0-DC6.text" = "Label";
