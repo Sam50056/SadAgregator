@@ -78,6 +78,7 @@ class MasterViewModel : ObservableObject{
     @Published var listWorkData = JSON()
     @Published var list = [ListWorkItem]()
     @Published var list2 = [ListWorkItem]()
+    @Published var extButtonTitleCount = 0
     @Published var shouldShowSecondScreenInListWork = false
     @Published var listWorkSearchTextFieldText = ""{
         didSet{
@@ -200,6 +201,10 @@ extension MasterViewModel{
             
             list.append(ListWorkItem(id: item["id"].intValue, capt: item["capt"].stringValue, subCapt: item["sub_capt"].stringValue, act: item["act"].stringValue, ext: item["ext"].intValue))
             
+        }
+        
+        if Int(data["ext_list_cnt"].stringValue) != nil{
+            extButtonTitleCount = Int(data["ext_list_cnt"].stringValue)!
         }
         
         listWorkData = data

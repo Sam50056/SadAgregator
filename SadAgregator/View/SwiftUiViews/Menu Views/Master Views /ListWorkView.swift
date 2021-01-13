@@ -60,7 +60,7 @@ struct ListWorkView: View {
                         Text(masterViewModel.currentViewData!["capt_list_ext_button"].stringValue)
                             .foregroundColor(Color(.systemBlue))
                         
-                        Text(masterViewModel.currentViewData!["ext_list_cnt"].stringValue)
+                        Text("\(masterViewModel.extButtonTitleCount)")
                             .padding(.all , 8)
                             .font(.system(size: 14))
                             .foregroundColor(Color(.white))
@@ -222,6 +222,8 @@ struct ListWorkItemView : View , AddOrDeleteListWorkExtDataManagerDelegate{
         DispatchQueue.main.async { [self] in
             
             if data["result"].intValue == 1{
+                
+                masterViewModel.extButtonTitleCount = item.ext == 1 ? masterViewModel.extButtonTitleCount - 1 : masterViewModel.extButtonTitleCount + 1
                 
                 if isList1 {
                     masterViewModel.getSearchListWorkData()
