@@ -73,9 +73,6 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
         
         self.navigationController?.isNavigationBarHidden = false
         
-        //Setting back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
-        
         searchController.searchBar.setValue("Отмена", forKey: "cancelButtonText")
         
     }

@@ -625,8 +625,6 @@ extension LineViewController {
             
             destinationVC.lineId = thisLineId
             
-            navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
-            
         }else if segue.identifier == "goToVend"{
             
             let destinationVC = segue.destination as! PostavshikViewController

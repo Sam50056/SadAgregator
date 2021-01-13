@@ -38,9 +38,6 @@ class ActivityLinesTableViewController: UITableViewController, TopLinesDataManag
         
         self.navigationController?.isNavigationBarHidden = false
         
-        //Setting back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
-        
     }
     
     //MARK: - Data Manipulation Methods
