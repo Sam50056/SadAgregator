@@ -488,7 +488,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         hintCellShouldBeShown = false
         
-        tableView.reloadSections([0], with: .automatic)
+        tableView.reloadSections([1], with: .automatic)
         
     }
     
