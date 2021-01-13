@@ -51,6 +51,9 @@ struct SearchListWorkDataManager {
     }
     
     mutating func cancelTask(){
+        
+        guard task.originalRequest != nil else {return}
+        
         task.cancel()
     }
     
