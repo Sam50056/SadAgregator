@@ -11,6 +11,8 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    @EnvironmentObject var menuViewModel : MenuViewModel
+    
     @EnvironmentObject var profileViewModel : ProfileViewModel
     
     @EnvironmentObject var masterViewModel : MasterViewModel
@@ -291,6 +293,9 @@ struct ProfileView: View {
         
         .onAppear{
             profileViewModel.getProfileData()
+        }
+        .onDisappear{
+            menuViewModel.updateData()
         }
         
         .environmentObject(profileViewModel)

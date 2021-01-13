@@ -83,9 +83,16 @@ class MasterViewModel : ObservableObject{
         didSet{
             
             if listWorkSearchTextFieldText == ""{
+                searchListWorkDataManager.cancelTask()
                 list.removeAll()
             }else{
-                getSearchListWorkData()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [self] in
+                    
+                    getSearchListWorkData()
+                    
+                }
+                
             }
             
         }

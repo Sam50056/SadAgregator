@@ -17,7 +17,9 @@ struct SearchListWorkDataManager {
     
     var delegate : SearchListWorkDataManagerDelegate?
     
-    func getSearchListWorkData(key: String , stepId : Int , query : String){
+    var task = URLSessionTask()
+    
+    mutating func getSearchListWorkData(key: String , stepId : Int , query : String){
         
         let urlString = "https://agrapi.tk-sad.ru/agr_assist.Srch_ListWork?AKey=\(key)&AStep=\(stepId)&AQuery=\(query)"
         
@@ -25,7 +27,7 @@ struct SearchListWorkDataManager {
         
         guard let encodedURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: encodedURL)  else {return}
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        task = URLSession.shared.dataTask(with: url) { [self] (data, response, error) in
             
             //            print(String(data: data!, encoding: String.Encoding.windowsCP1251)!)
             
@@ -46,7 +48,10 @@ struct SearchListWorkDataManager {
         
         task.resume()
         
-        
+    }
+    
+    mutating func cancelTask(){
+        task.cancel()
     }
     
 }
