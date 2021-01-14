@@ -34,6 +34,8 @@ class MenuViewModel : ObservableObject{
     
     @Published var showHelpView = false
     
+    @Published var showAlert = false
+    
     init() {
         
         loadUserData()
@@ -84,6 +86,8 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
                     
                     userDataObject.lkPosts = lkPosts
                     userDataObject.lkVends = lkVends
+                    
+                    userDataObject.settings = data["settings"].stringValue
                     
                 }else{
                     isLogged = false

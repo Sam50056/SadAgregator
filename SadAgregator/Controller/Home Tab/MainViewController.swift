@@ -321,6 +321,8 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                     userDataObject.lkPosts = lkPosts
                     userDataObject.lkVends = lkVends
                     
+                    userDataObject.settings = data["settings"].stringValue
+                    
                     userDataObject.isLogged = true
                     
                 }else{

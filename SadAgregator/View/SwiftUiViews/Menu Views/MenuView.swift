@@ -270,18 +270,24 @@ struct MenuView: View {
                                 
                             }
                             
-                            HStack(spacing: 21){
+                            Button(action: {
+                                menuViewModel.showAlert = true
+                            }){
                                 
-                                Image(systemName: "menubar.arrow.up.rectangle")
-                                    .resizable()
-                                    .frame(width: 25, height: 20, alignment: .center)
-                                    .foregroundColor(Color(.systemBlue))
-                                
-                                Text("Парсер")
-                                    .font(.custom("", size: 16))
+                                HStack(spacing: 21){
+                                    
+                                    Image(systemName: "menubar.arrow.up.rectangle")
+                                        .resizable()
+                                        .frame(width: 25, height: 20, alignment: .center)
+                                        .foregroundColor(Color(.systemBlue))
+                                    
+                                    Text("Парсер")
+                                        .font(.custom("", size: 16))
+                                    
+                                }
+                                .padding(.vertical, 5)
                                 
                             }
-                            .padding(.vertical, 5)
                             
                         } //Parser
                         
@@ -356,6 +362,15 @@ struct MenuView: View {
                     
                 }
                 
+            }
+            .alert(isPresented: $menuViewModel.showAlert){
+                Alert(title: Text("Мы рекомендуем настраивать выгрузку через функцию БЫСТРОЙ НАСТРОЙКИ, это легко для новичков и не требует специальных знаний!"), message: nil, primaryButton: .default(Text("БЫСТРАЯ НАСТРОЙКА")){
+                    masterViewModel.shouldShowMasterFromMenu = true
+                }, secondaryButton: .default(Text("ВСЁ РАВНО ПЕРЕЙТИ В WEB")){
+                    if let settings =  menuViewModel.getUserDataObject()?.settings, let url = URL(string: settings){
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                })
             }
             .onAppear {
                 menuViewModel.loadUserData()

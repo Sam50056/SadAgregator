@@ -25,7 +25,7 @@ struct AlertWithTextFieldView: View {
             
             Text(title)
             
-            TextField(profileViewModel.alertTitle == "Имя" ? profileViewModel.name : profileViewModel.phone , text: $text)
+            TextField(profileViewModel.customAlertTitle == "Имя" ? profileViewModel.name : profileViewModel.phone , text: $text)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
             HStack{

@@ -16,6 +16,7 @@ class ProfileViewModel : ObservableObject{
     @Published var showProfile = false
     
     @Published var key = ""
+    @Published var settings = ""
     
     @Published var name = ""
     @Published var phone = ""
@@ -27,9 +28,11 @@ class ProfileViewModel : ObservableObject{
     @Published var okExp = ""
     @Published var autoOK = ""
     
-    @Published var alertTitle = ""
+    @Published var alertTitle = "Мы рекомендуем настраивать выгрузку через функцию БЫСТРОЙ НАСТРОЙКИ, это легко для новичков и не требует специальных знаний!"
     @Published var isAlertShown = false
-    @Published var alertTextFieldText = ""
+    @Published var customAlertTitle = ""
+    @Published var isCustomAlertShown = false
+    @Published var customAlertTextFieldText = ""
     
     @Published var isPassAlertShown = false
     @Published var oldPassText = ""
@@ -113,7 +116,7 @@ extension ProfileViewModel : UserChangeOptionDataManagerDelegate{
     
     func changeUserOption(){
         
-        userChangeOptionDataManager.getUserChangeOptionData(key: key, infoType: (alertTitle == "Имя" ? 1 : 2), newValue: alertTextFieldText)
+        userChangeOptionDataManager.getUserChangeOptionData(key: key, infoType: (customAlertTitle == "Имя" ? 1 : 2), newValue: customAlertTextFieldText)
         
     }
     
@@ -125,9 +128,9 @@ extension ProfileViewModel : UserChangeOptionDataManagerDelegate{
                 
                 self.getProfileData()
                 
-                self.isAlertShown = false
+                self.isCustomAlertShown = false
                 
-                self.alertTextFieldText = ""
+                self.customAlertTextFieldText = ""
                 
             }
             
@@ -190,6 +193,8 @@ extension ProfileViewModel {
         if let userDataObject = userData.first{
             
             key = userDataObject.key
+            
+            settings = userDataObject.settings
             
         }
         

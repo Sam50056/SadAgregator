@@ -29,15 +29,15 @@ struct ProfileView: View {
                         
                         VStack{
                             
-                            CellView(labelText: "Имя", buttonText: profileViewModel.name,shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Имя", buttonText: profileViewModel.name,shouldShowAlert: $profileViewModel.isCustomAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.customAlertTitle)
                             
-                            CellView(labelText: "Телефон", buttonText: profileViewModel.phone,shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Телефон", buttonText: profileViewModel.phone,shouldShowAlert: $profileViewModel.isCustomAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.customAlertTitle)
                             
-                            CellView(labelText: "Email", buttonText: profileViewModel.email,shouldShowImage: false, shouldShowAlert: $profileViewModel.isAlertShown , shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Email", buttonText: profileViewModel.email,shouldShowImage: false, shouldShowAlert: $profileViewModel.isCustomAlertShown , shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.customAlertTitle)
                             
-                            CellView(labelText: "Пароль", buttonText: profileViewModel.password,shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Пароль", buttonText: profileViewModel.password,shouldShowAlert: $profileViewModel.isCustomAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.customAlertTitle)
                             
-                            CellView(labelText: "Код партнера", buttonText: profileViewModel.partnerCode, shouldShowImage: false,shouldShowAlert: $profileViewModel.isAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.alertTitle)
+                            CellView(labelText: "Код партнера", buttonText: profileViewModel.partnerCode, shouldShowImage: false,shouldShowAlert: $profileViewModel.isCustomAlertShown, shouldShowPassAlert: $profileViewModel.isPassAlertShown, alertTitle: $profileViewModel.customAlertTitle)
                             
                         } //Cells
                         
@@ -161,17 +161,25 @@ struct ProfileView: View {
                                 }
                                 
                                 
-                                HStack{
+                                Button(action: {
                                     
-                                    Image(systemName: "menubar.arrow.up.rectangle")
+                                    profileViewModel.isAlertShown = true
                                     
-                                    Text("ВСЕ НАСТРОЙКИ ПАРСЕРА")
-                                        .fontWeight(.semibold)
+                                }){
+                                    
+                                    HStack{
+                                        
+                                        Image(systemName: "menubar.arrow.up.rectangle")
+                                        
+                                        Text("ВСЕ НАСТРОЙКИ ПАРСЕРА")
+                                            .fontWeight(.semibold)
+                                        
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .background(Color(#colorLiteral(red: 0.9591086507, green: 0.9659582973, blue: 0.9731834531, alpha: 1)))
                                     
                                 }
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color(#colorLiteral(red: 0.9591086507, green: 0.9659582973, blue: 0.9731834531, alpha: 1)))
                                 
                                 if profileViewModel.isVkConnected!{
                                     
@@ -285,10 +293,19 @@ struct ProfileView: View {
                 
             }
             
-            AlertWithTextFieldView(title: $profileViewModel.alertTitle , text: $profileViewModel.alertTextFieldText, isShown : $profileViewModel.isAlertShown)
+            AlertWithTextFieldView(title: $profileViewModel.customAlertTitle , text: $profileViewModel.customAlertTextFieldText, isShown : $profileViewModel.isCustomAlertShown)
             
             PassAlertWithTextFieldsView(title: .constant("Изменение пароля"), oldPassText: $profileViewModel.oldPassText, newPassText: $profileViewModel.newPassText, confirmPassText: $profileViewModel.confirmPassText, isShown: $profileViewModel.isPassAlertShown)
             
+        }
+        .alert(isPresented: $profileViewModel.isAlertShown){
+            Alert(title: Text(profileViewModel.alertTitle), message: nil, primaryButton: .default(Text("БЫСТРАЯ НАСТРОЙКА")){
+                masterViewModel.shouldShowMasterFromProfile = true
+            }, secondaryButton: .default(Text("ВСЁ РАВНО ПЕРЕЙТИ В WEB")){
+                if let url = URL(string: profileViewModel.settings){
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            })
         }
         
         .onAppear{
