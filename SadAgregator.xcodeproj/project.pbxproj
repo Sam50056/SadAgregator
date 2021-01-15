@@ -105,6 +105,9 @@
 		22BF1A0D25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A0C25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift */; };
 		22BF1A1125A5E19100567DB7 /* LinePointsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A1025A5E19100567DB7 /* LinePointsPaggingDataManager.swift */; };
 		22BF1A1725A5FD5C00567DB7 /* PostLikeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A1625A5FD5C00567DB7 /* PostLikeDataManager.swift */; };
+		22C5D02825B0E065001C69C6 /* PeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D02725B0E064001C69C6 /* PeerViewController.swift */; };
+		22C5D02B25B0E9DF001C69C6 /* ExportPeersDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D02A25B0E9DE001C69C6 /* ExportPeersDataManager.swift */; };
+		22C5D02E25B1EC9E001C69C6 /* SetDefaultPeerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D02D25B1EC9D001C69C6 /* SetDefaultPeerDataManager.swift */; };
 		22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */; };
 		22C9221325814CA40063B5D4 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9221225814CA40063B5D4 /* MenuView.swift */; };
 		22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */; };
@@ -233,6 +236,9 @@
 		22BF1A0C25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePointsPaggingSearchDataManager.swift; sourceTree = "<group>"; };
 		22BF1A1025A5E19100567DB7 /* LinePointsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePointsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22BF1A1625A5FD5C00567DB7 /* PostLikeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeDataManager.swift; sourceTree = "<group>"; };
+		22C5D02725B0E064001C69C6 /* PeerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerViewController.swift; sourceTree = "<group>"; };
+		22C5D02A25B0E9DE001C69C6 /* ExportPeersDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPeersDataManager.swift; sourceTree = "<group>"; };
+		22C5D02D25B1EC9D001C69C6 /* SetDefaultPeerDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDefaultPeerDataManager.swift; sourceTree = "<group>"; };
 		22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHostingController.swift; sourceTree = "<group>"; };
 		22C9221225814CA40063B5D4 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendsPopularityRatingViewController.swift; sourceTree = "<group>"; };
@@ -286,6 +292,8 @@
 				2201671B25A669790072BFE7 /* GetPostActionsDataManager.swift */,
 				2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */,
 				22943FE825ABDB1900A742B8 /* PostRedirectDataManager.swift */,
+				22C5D02A25B0E9DE001C69C6 /* ExportPeersDataManager.swift */,
+				22C5D02D25B1EC9D001C69C6 /* SetDefaultPeerDataManager.swift */,
 			);
 			path = "Post Managers";
 			sourceTree = "<group>";
@@ -706,6 +714,7 @@
 				226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */,
 				227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */,
 				226D9444258D2179008CEC4A /* GalleryViewController.swift */,
+				22C5D02725B0E064001C69C6 /* PeerViewController.swift */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
@@ -947,6 +956,7 @@
 				228CB761255BF96D002B4A96 /* MainViewController.swift in Sources */,
 				225957A2259668540088C7E4 /* ListSelectView.swift in Sources */,
 				2265853F259017FA004587AA /* ProfileView.swift in Sources */,
+				22C5D02E25B1EC9E001C69C6 /* SetDefaultPeerDataManager.swift in Sources */,
 				22CA694425A1475E00D21840 /* VendorRatingTableViewCell.swift in Sources */,
 				22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */,
 				227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */,
@@ -989,6 +999,7 @@
 				2201672625A771E10072BFE7 /* SetPointActionsDataManager.swift in Sources */,
 				22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */,
 				22C9221325814CA40063B5D4 /* MenuView.swift in Sources */,
+				22C5D02825B0E065001C69C6 /* PeerViewController.swift in Sources */,
 				2245820D25AA2D6D008882A9 /* HelpPageDataManager.swift in Sources */,
 				22A155CF2582925D000EAB64 /* RegView.swift in Sources */,
 				2268869725995C070079933D /* SearchListWorkDataManager.swift in Sources */,
@@ -1001,6 +1012,7 @@
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
 				2268869C25996B920079933D /* RefreshAlbsDataManager.swift in Sources */,
 				22782906258AC7FE00B435FA /* Extensions.swift in Sources */,
+				22C5D02B25B0E9DF001C69C6 /* ExportPeersDataManager.swift in Sources */,
 				22BF1A0625A543C900567DB7 /* TopPointsPaggingDataManager.swift in Sources */,
 				22D9023D259C1988009732CC /* MultilineTextView.swift in Sources */,
 				224EFC3125A9D209007CA45E /* SendQuestionDataManager.swift in Sources */,

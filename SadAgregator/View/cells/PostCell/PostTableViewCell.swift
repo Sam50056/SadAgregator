@@ -137,6 +137,7 @@ class PostTableViewCell: UITableViewCell  {
     var vendorLabelButtonCallBack : (() -> ())?
     var byLabelButtonCallback : (() -> ())?
     var soobshitButtonCallback : (() -> ())?
+    var peerButtonCallback : (() -> ())?
     
     //MARK: - Cell Stuff
     
@@ -606,6 +607,15 @@ class PostTableViewCell: UITableViewCell  {
         guard let soobshitButtonCallback = soobshitButtonCallback else {return}
         
         soobshitButtonCallback()
+    }
+    
+    
+    @IBAction func peerButtonPressed(_ sender: UIButton) {
+        
+        guard let peerButtonCallback = peerButtonCallback else {return}
+        
+        peerButtonCallback()
+        
     }
     
 }
