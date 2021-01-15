@@ -110,7 +110,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
         getVendPostsPaggingDataManager.delegate = self
         
         refresh(self)
-       
+        
     }
     
     
@@ -244,6 +244,12 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             
         }
         
+        cell.peerButtonCallback = { [self] in
+            
+            ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
+            
+        }
+        
         if let export = export{
             
             let exportType = export["type"].stringValue
@@ -356,6 +362,46 @@ extension VendorPostsTableViewController : SetPostActionsDataManagerDelegate{
     
     func didFailGettingSetPostActionsDataWithError(error: String) {
         print("Error with SetPostActionsDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - ExportPeersDataManager
+
+extension VendorPostsTableViewController : ExportPeersDataManagerDelegate{
+    
+    func didGetExportPeersData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                let peerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PeerVC") as! PeerViewController
+                
+                peerVC.peers = data["peers"].array
+                
+                peerVC.setPeerCallback = { (newType) in
+                    
+                    peerVC.dismiss(animated: true) {
+                        
+                        pageData!["export"]["type"].stringValue = newType
+                        
+                        tableView.reloadData()
+                        
+                    }
+                    
+                }
+                
+                present(peerVC, animated: true, completion: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingExportPeersDataWithError(error: String) {
+        print("Error with ExportPeersDataManager : \(error)")
     }
     
 }

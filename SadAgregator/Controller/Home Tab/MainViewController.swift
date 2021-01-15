@@ -878,10 +878,6 @@ extension MainViewController : ExportPeersDataManagerDelegate{
                 
                 peerVC.setPeerCallback = { (newType) in
                     
-                    //                    mainData!["export"]["type"] =
-                    //
-                    //                        tableView.reloadData()
-                    
                     peerVC.dismiss(animated: true) {
                         
                         mainData!["export"]["type"].stringValue = newType

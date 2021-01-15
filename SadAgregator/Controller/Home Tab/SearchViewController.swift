@@ -574,6 +574,12 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
         }
         
+        cell.peerButtonCallback = { [self] in
+            
+            ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
+            
+        }
+        
         if let export = export{
             
             let exportType = export["type"].stringValue
@@ -697,4 +703,42 @@ extension SearchViewController : SetPostActionsDataManagerDelegate{
     
 }
 
+//MARK: - ExportPeersDataManager
 
+extension SearchViewController : ExportPeersDataManagerDelegate{
+    
+    func didGetExportPeersData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                let peerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PeerVC") as! PeerViewController
+                
+                peerVC.peers = data["peers"].array
+                
+                peerVC.setPeerCallback = { (newType) in
+                    
+                    peerVC.dismiss(animated: true) {
+                        
+                        searchData!["export"]["type"].stringValue = newType
+                        
+                        tableView.reloadData()
+                        
+                    }
+                    
+                }
+                
+                present(peerVC, animated: true, completion: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingExportPeersDataWithError(error: String) {
+        print("Error with ExportPeersDataManager : \(error)")
+    }
+    
+}
