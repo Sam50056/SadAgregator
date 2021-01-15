@@ -101,6 +101,8 @@ extension PeerViewController : SetDefaultPeerDataManagerDelegate{
                 
                 setPeerCallback(newType)
                 
+                self.selectedPeerIndex = nil
+                
             }
             
         }
