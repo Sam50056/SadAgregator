@@ -8,10 +8,13 @@
 import Foundation
 import SwiftyJSON
 import RealmSwift
+import VK_ios_sdk
 
 class ProfileViewModel : ObservableObject{
     
     let realm = try! Realm()
+    
+    let vkAuthService = VKAuthService()
     
     @Published var showProfile = false
     
@@ -50,6 +53,9 @@ class ProfileViewModel : ObservableObject{
         //        key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
         
         userChangeOptionDataManager.delegate = self
+        
+        vkAuthService.delegate = self
+        vkAuthService.isPresentedInProfileView = true
         
     }
     
@@ -182,6 +188,80 @@ extension ProfileViewModel : UserChangePassDataManagerDelegate{
     
 }
 
+//MARK: - Vk Stuff
+
+extension ProfileViewModel : VKAuthServiceDelegate{
+    
+    func vkAuthServiceShouldShow(viewController: UIViewController) {
+        
+        //Presenting VK View Controller
+        SceneDelegate.shared().window?.rootViewController?.present(viewController, animated: true, completion: nil)
+        
+    }
+    
+    func vkAuthServiceSignIn() {
+        
+        guard let userId = vkAuthService.userId, let _ = vkAuthService.token else {return}
+        
+        AssignVkToAppIDDataManager(delegate: self).getAssignVkToAppIDData(key: key, vkId: userId, appId: vkAuthService.appId)
+        
+    }
+    
+    func vkAuthServiceSignInDidFail() {
+        print("Failed VK Sign In")
+    }
+    
+}
+
+//MARK: - Vigruzka
+
+extension ProfileViewModel : AssignVkToAppIDDataManagerDelegate, SaveVkInfoDataManagerDelegate{
+    
+    func addVkVigruzka(){
+        
+        vkAuthService.wakeUpSession()
+        
+    }
+    
+    func didGetAssignVkToAppIDData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                SaveVkInfoDataManager(delegate: self).getSaveVkInfoData(key: key, fieldId: "1", value: vkAuthService.userId!)
+                
+                SaveVkInfoDataManager(delegate: self).getSaveVkInfoData(key: key, fieldId: "2", value: vkAuthService.token!)
+                
+                SaveVkInfoDataManager(delegate: self).getSaveVkInfoData(key: key, fieldId: "3", value: email)
+                
+                getProfileData()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingAssignVkToAppIDDataWithError(error: String) {
+        print("Error with AssignVkToAppIDDataManager : \(error)")
+    }
+    
+    func didGetSaveVkInfoData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+            
+            
+        }
+        
+    }
+    
+    func didFailGettingSaveVkInfoDataWithError(error: String) {
+        print("Error with SaveVkInfoDataManager : \(error)")
+    }
+    
+}
 //MARK: - Data Manipulation Methods
 
 extension ProfileViewModel {

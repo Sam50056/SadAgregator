@@ -113,6 +113,8 @@
 		22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */; };
 		22CA694425A1475E00D21840 /* VendorRatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA694225A1475E00D21840 /* VendorRatingTableViewCell.swift */; };
 		22CA694525A1475E00D21840 /* VendorRatingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22CA694325A1475E00D21840 /* VendorRatingTableViewCell.xib */; };
+		22CADB1225B2484000A5E475 /* AssignVkToAppIDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CADB1125B2484000A5E475 /* AssignVkToAppIDDataManager.swift */; };
+		22CADB1825B24A9600A5E475 /* SaveVkInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CADB1725B24A9600A5E475 /* SaveVkInfoDataManager.swift */; };
 		22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */; };
 		22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */; };
 		22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */; };
@@ -244,6 +246,8 @@
 		22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendsPopularityRatingViewController.swift; sourceTree = "<group>"; };
 		22CA694225A1475E00D21840 /* VendorRatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorRatingTableViewCell.swift; sourceTree = "<group>"; };
 		22CA694325A1475E00D21840 /* VendorRatingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VendorRatingTableViewCell.xib; sourceTree = "<group>"; };
+		22CADB1125B2484000A5E475 /* AssignVkToAppIDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignVkToAppIDDataManager.swift; sourceTree = "<group>"; };
+		22CADB1725B24A9600A5E475 /* SaveVkInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveVkInfoDataManager.swift; sourceTree = "<group>"; };
 		22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorLikeDataManager.swift; sourceTree = "<group>"; };
 		22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -379,6 +383,7 @@
 		225957A72596A5770088C7E4 /* Profile Managers */ = {
 			isa = PBXGroup;
 			children = (
+				22CADB1025B2482800A5E475 /* Vigruzka Managers */,
 				22423E9B259135370097C9E6 /* GetProfileDataManager.swift */,
 				22423E9F25924BD70097C9E6 /* UserChangeOptionDataManager.swift */,
 				224584262592A6A60000B3D4 /* UserChangePassDataManager.swift */,
@@ -751,6 +756,15 @@
 			path = VendorRatingCell;
 			sourceTree = "<group>";
 		};
+		22CADB1025B2482800A5E475 /* Vigruzka Managers */ = {
+			isa = PBXGroup;
+			children = (
+				22CADB1125B2484000A5E475 /* AssignVkToAppIDDataManager.swift */,
+				22CADB1725B24A9600A5E475 /* SaveVkInfoDataManager.swift */,
+			);
+			path = "Vigruzka Managers";
+			sourceTree = "<group>";
+		};
 		22CE4F8F25869E5C0060E9DF /* Search Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -927,6 +941,7 @@
 				229FE69225706B6B0001FF54 /* GetSearchPageDataManager.swift in Sources */,
 				22D90236259C0359009732CC /* MyPostsDataManager.swift in Sources */,
 				2291BE452560620F004F55DF /* MainDataManager.swift in Sources */,
+				22CADB1225B2484000A5E475 /* AssignVkToAppIDDataManager.swift in Sources */,
 				22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */,
 				22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */,
 				2278290A258BB60E00B435FA /* GetMyReviewDataManager.swift in Sources */,
@@ -1024,6 +1039,7 @@
 				2201672025A66E380072BFE7 /* SetPostActionsDataManager.swift in Sources */,
 				22A155DD2582C5D8000EAB64 /* AuthView.swift in Sources */,
 				228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */,
+				22CADB1825B24A9600A5E475 /* SaveVkInfoDataManager.swift in Sources */,
 				228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */,
 				2201673125A8BADD0072BFE7 /* SendFileDataManager.swift in Sources */,
 				2201673C25A952040072BFE7 /* SearchImageDataManager.swift in Sources */,

@@ -131,9 +131,9 @@ extension VendsPopularityRatingViewController {
         
         let userDataObject = realm.objects(UserData.self)
         
-        key = userDataObject.first!.key
+        key = userDataObject.first?.key ?? ""
         
-        isLogged = userDataObject.first!.isLogged
+        isLogged = userDataObject.first?.isLogged ?? false
         
     }
     

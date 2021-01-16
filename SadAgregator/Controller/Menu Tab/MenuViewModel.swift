@@ -134,12 +134,17 @@ extension MenuViewModel : VKAuthServiceDelegate{
     
     func vkAuthServiceShouldShow(viewController: UIViewController) {
         
+        guard !vkAuthService.isPresentedInProfileView else {return}
+        
         //Presenting VK View Controller
         SceneDelegate.shared().window?.rootViewController?.present(viewController, animated: true, completion: nil)
         
     }
     
     func vkAuthServiceSignIn() {
+        
+        guard !vkAuthService.isPresentedInProfileView else {return}
+        
         print("Successfully Signed via VK")
         
         if let safeVkToken = vkAuthService.token{
@@ -150,7 +155,11 @@ extension MenuViewModel : VKAuthServiceDelegate{
     }
     
     func vkAuthServiceSignInDidFail() {
+        
+        guard !vkAuthService.isPresentedInProfileView else {return}
+        
         print("Failed VK Sign In")
+        
     }
     
     

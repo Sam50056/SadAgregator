@@ -16,7 +16,7 @@ protocol VKAuthServiceDelegate{
 
 class VKAuthService : NSObject ,  VKSdkDelegate , VKSdkUIDelegate{
     
-    private let appId = "7547797"
+    let appId = "7547797"
     private let vkSdk : VKSdk
     
     var delegate : VKAuthServiceDelegate?
@@ -24,6 +24,16 @@ class VKAuthService : NSObject ,  VKSdkDelegate , VKSdkUIDelegate{
     var token : String?{
         return VKSdk.accessToken()?.accessToken
     }
+    
+    var userId : String?{
+        return VKSdk.accessToken()?.userId
+    }
+    
+    var email : String?{
+        return VKSdk.accessToken()?.email
+    }
+    
+    var isPresentedInProfileView = false
     
     override init() {
         
@@ -50,7 +60,7 @@ class VKAuthService : NSObject ,  VKSdkDelegate , VKSdkUIDelegate{
                 VKSdk.authorize(scope)
             case .authorized:
                 print("Authorized")
-                self.delegate?.vkAuthServiceSignIn()
+                delegate?.vkAuthServiceSignIn()
             default:
                 delegate?.vkAuthServiceSignInDidFail()
                 

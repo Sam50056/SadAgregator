@@ -273,13 +273,27 @@ struct ProfileView: View {
                             
                             if !profileViewModel.isVkConnected!{
                                 
-                                PodkluchitVkVigruzkuView()
+                                Button(action:{
+                                    
+                                    profileViewModel.addVkVigruzka()
+                                    
+                                }){
+                                    
+                                    PodkluchitVkVigruzkuView()
+                                    
+                                }
                                 
                             }
                             
                             if !profileViewModel.isOkConnected!{
                                 
-                                PodkluchitOkVigruzkuView()
+                                Button(action:{
+                                    
+                                }){
+                                    
+                                    PodkluchitOkVigruzkuView()
+                                    
+                                }
                                 
                             }
                             
@@ -308,6 +322,7 @@ struct ProfileView: View {
         }
         
         .onAppear{
+            profileViewModel.loadUserData()
             profileViewModel.getProfileData()
         }
         .onDisappear{
