@@ -128,6 +128,7 @@ extension MenuViewModel : VKAuthServiceDelegate{
     
     func vkAuth(){
         
+        vkAuthService.isPresentedInProfileView = false
         vkAuthService.wakeUpSession()
         
     }

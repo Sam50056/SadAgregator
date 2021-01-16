@@ -55,7 +55,6 @@ class ProfileViewModel : ObservableObject{
         userChangeOptionDataManager.delegate = self
         
         vkAuthService.delegate = self
-        vkAuthService.isPresentedInProfileView = true
         
     }
     
@@ -194,12 +193,16 @@ extension ProfileViewModel : VKAuthServiceDelegate{
     
     func vkAuthServiceShouldShow(viewController: UIViewController) {
         
+        guard vkAuthService.isPresentedInProfileView else {return}
+        
         //Presenting VK View Controller
         SceneDelegate.shared().window?.rootViewController?.present(viewController, animated: true, completion: nil)
         
     }
     
     func vkAuthServiceSignIn() {
+        
+        guard vkAuthService.isPresentedInProfileView else {return}
         
         guard let userId = vkAuthService.userId, let _ = vkAuthService.token else {return}
         
@@ -208,7 +211,11 @@ extension ProfileViewModel : VKAuthServiceDelegate{
     }
     
     func vkAuthServiceSignInDidFail() {
+        
+        guard vkAuthService.isPresentedInProfileView else {return}
+        
         print("Failed VK Sign In")
+        
     }
     
 }
@@ -219,6 +226,7 @@ extension ProfileViewModel : AssignVkToAppIDDataManagerDelegate, SaveVkInfoDataM
     
     func addVkVigruzka(){
         
+        vkAuthService.isPresentedInProfileView = true
         vkAuthService.wakeUpSession()
         
     }
