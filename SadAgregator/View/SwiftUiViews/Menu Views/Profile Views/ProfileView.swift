@@ -326,7 +326,9 @@ struct ProfileView: View {
             profileViewModel.getProfileData()
         }
         .onDisappear{
-            menuViewModel.updateData()
+            if !masterViewModel.shouldShowMasterFromProfile{
+                menuViewModel.updateData()
+            }
         }
         
         .environmentObject(profileViewModel)
