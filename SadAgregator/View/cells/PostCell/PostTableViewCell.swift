@@ -31,17 +31,7 @@ class PostTableViewCell: UITableViewCell  {
     var dataSource: UICollectionViewDiffableDataSource<SectionLayoutKind, String>!
     
     enum SectionLayoutKind : Int , CaseIterable{
-        case size , option , photo
-        var widthDimension : NSCollectionLayoutDimension{
-            switch self {
-            case .option:
-                return .estimated(110)
-            case .size:
-                return .estimated(30)
-            case .photo:
-                return .fractionalWidth(0.5)
-            }
-        }
+        case size , option , photo , text
     }
     
     var sizes = [String](){
@@ -178,9 +168,7 @@ class PostTableViewCell: UITableViewCell  {
             
             if sectionLayoutKind == .option{
                 
-                let widthDimension = sectionLayoutKind.widthDimension
-                
-                let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension:.fractionalHeight(0.8))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(110), heightDimension:.fractionalHeight(0.8))
                 
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
@@ -198,9 +186,7 @@ class PostTableViewCell: UITableViewCell  {
                 
             } else if sectionLayoutKind == .size {
                 
-                let widthDimension = sectionLayoutKind.widthDimension
-                
-                let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension: .fractionalHeight(1))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(30), heightDimension: .fractionalHeight(1))
                 
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 0.5, leading: 0.5, bottom: 0.5, trailing: 0.5)
