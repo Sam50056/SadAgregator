@@ -16,7 +16,7 @@ struct K {
     
     //MARK: - Design vars
     
-    static let postHeight : CGFloat = 500
+    static let postHeight : CGFloat = 600
     
     static let simpleCellHeight : CGFloat = 60
     

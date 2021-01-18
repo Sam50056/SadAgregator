@@ -31,7 +31,7 @@ class PostTableViewCell: UITableViewCell  {
     var dataSource: UICollectionViewDiffableDataSource<SectionLayoutKind, String>!
     
     enum SectionLayoutKind : Int , CaseIterable{
-        case size , option , photo , text
+        case size , option , showDesc, desc , photo
     }
     
     var sizes = [String](){
@@ -129,6 +129,9 @@ class PostTableViewCell: UITableViewCell  {
     var soobshitButtonCallback : (() -> ())?
     var peerButtonCallback : (() -> ())?
     
+    var postDescription : String?
+    var showDescription = false
+    
     //MARK: - Cell Stuff
     
     override func awakeFromNib() {
@@ -144,6 +147,10 @@ class PostTableViewCell: UITableViewCell  {
         collectionView.register(UINib(nibName: "PhotoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "photoCell")
         
         collectionView.register(UINib(nibName: "TextLabelCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "textLabelCell")
+        
+        collectionView.register(UINib(nibName: "DescriptionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "descCell")
+        
+        collectionView.register(UINib(nibName: "TextViewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "textViewCell")
         
         vigruzitImageView.layer.cornerRadius = 5
         
@@ -202,6 +209,30 @@ class PostTableViewCell: UITableViewCell  {
                 section.orthogonalScrollingBehavior = .continuous
                 
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 5, trailing: 0)
+                
+            }else if sectionLayoutKind == .showDesc{
+                
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+                
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: postDescription == nil ? .absolute(0) : .absolute(25))
+                
+                let group =  NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                section = NSCollectionLayoutSection(group: group)
+                
+            }else if sectionLayoutKind == .desc{
+                
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+                
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: ( showDescription ? .estimated((postDescription?.height(withConstrainedWidth: UIScreen.main.bounds.width - 16, font: UIFont.systemFont(ofSize: 15)))!) : .absolute(0)))
+                
+                let group =  NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                section = NSCollectionLayoutSection(group: group)
                 
             }else if sectionLayoutKind == .photo {
                 
@@ -469,6 +500,22 @@ class PostTableViewCell: UITableViewCell  {
                 (cell as! OptionCollectionViewCell).button.tag = indexPath.row
                 (cell as! OptionCollectionViewCell).button.addTarget(self, action: #selector(self.optionCellTapped(_:)), for: .touchUpInside)
                 
+            }else if section == .showDesc{
+                
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "descCell", for: indexPath) as! DescriptionCollectionViewCell
+                
+                (cell as! DescriptionCollectionViewCell).label.text = item
+                
+                (cell as! DescriptionCollectionViewCell).imageView.image = item.contains("Показать") ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
+                
+                (cell as! DescriptionCollectionViewCell).button.addTarget(self, action: #selector(self.descButtonPressed(_:)), for: .touchUpInside)
+                
+            }else if section == .desc{
+                
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "textViewCell", for: indexPath) as! TextViewCollectionViewCell
+                
+                (cell as! TextViewCollectionViewCell).textView.text = item
+                
             }else if section == .photo {
                 
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionViewCell
@@ -512,6 +559,8 @@ class PostTableViewCell: UITableViewCell  {
         snapshot.appendItems(sizes, toSection: .size)
         snapshot.appendItems(options, toSection: .option)
         snapshot.appendItems(images,toSection: .photo)
+        snapshot.appendItems([showDescription ? "Скрыть описание" : "Показать описание"], toSection: .showDesc)
+        snapshot.appendItems([postDescription ?? ""], toSection: .desc)
         
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
         
@@ -538,7 +587,6 @@ class PostTableViewCell: UITableViewCell  {
         byLabelButtonCallback()
         
     }
-    
     
     @IBAction func imageCellTapped (_ sender : UIButton){
         
@@ -595,12 +643,21 @@ class PostTableViewCell: UITableViewCell  {
         soobshitButtonCallback()
     }
     
-    
     @IBAction func peerButtonPressed(_ sender: UIButton) {
         
         guard let peerButtonCallback = peerButtonCallback else {return}
         
         peerButtonCallback()
+        
+    }
+    
+    @IBAction func descButtonPressed(_ sender : UIButton){
+        
+        guard let _ = postDescription else {return}
+        
+        showDescription.toggle()
+        
+        applySnapshot(animatingDifferences: true)
         
     }
     

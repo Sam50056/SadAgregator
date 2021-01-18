@@ -757,6 +757,10 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             
         }
         
+        cell.showDescription = false
+        
+        cell.postDescription = data["text"].stringValue == "" ?  nil : data["text"].stringValue
+        
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
         cell.byLabel.text = data["by"].stringValue

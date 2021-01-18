@@ -588,6 +588,10 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
         }
         
+        cell.showDescription = false
+        
+        cell.postDescription = data["text"].stringValue != "" ?  data["text"].stringValue : nil
+        
         cell.vendorLabel.text = data["vendor_capt"].stringValue
         
         cell.byLabel.text = data["by"].stringValue
