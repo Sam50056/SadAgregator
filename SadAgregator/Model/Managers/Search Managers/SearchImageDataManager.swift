@@ -39,7 +39,30 @@ struct SearchImageDataManager {
             
             guard let data = data else {delegate?.didFailGettingSearchImageDataWithError(error: "Data is empty"); return}
             
-            let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+            var json = ""
+            
+            print("WINDOWSCP ENCRYPTION : \(String(describing: String(data: data , encoding: String.Encoding.windowsCP1251)))")
+            
+            print("UTF8 ENCRYPTION : \(String(describing: String(data: data , encoding: String.Encoding.windowsCP1251)))")
+            
+            if let windowsCPEncodedText = String(data: data , encoding: String.Encoding.windowsCP1251){
+                
+                if windowsCPEncodedText.contains("А") || windowsCPEncodedText.contains("У") ||
+                    windowsCPEncodedText.contains("Е") ||
+                    windowsCPEncodedText.contains("И") ||
+                    windowsCPEncodedText.contains("О") {
+                    
+                    json = windowsCPEncodedText
+                    
+                }else{
+                    
+                    json = String(data: data , encoding: String.Encoding.utf16)!
+                    
+                }
+                
+            }else{
+                json = String(data: data , encoding: String.Encoding.utf16)!
+            }
             
             let jsonAnswer = JSON(parseJSON: json)
             
