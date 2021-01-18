@@ -106,7 +106,9 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
                
             }
             
-            reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: vendId, rating: Int(ratingView.rating), title: titleTextField.text!, text: textView.text, images : images)
+            let textViewTextWithTags = textView.text.replacingOccurrences(of: "\n", with: "<br>")
+            
+            reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: vendId, rating: Int(ratingView.rating), title: titleTextField.text!, text: textViewTextWithTags, images : images)
             
         }
         
@@ -266,7 +268,7 @@ extension ReviewUpdateViewController : NewPhotoPlaceDataManagerDelegate{
     
 }
 
-//MARK: - GetMyReviewDataManagerDelegate
+//MARK: - ReviewUpdateDataManagerDelegate
 
 extension ReviewUpdateViewController : ReviewUpdateDataManagerDelegate {
     
@@ -276,17 +278,7 @@ extension ReviewUpdateViewController : ReviewUpdateDataManagerDelegate {
             
             if let message = data["msg"].string{
                 
-                let alertController = UIAlertController(title: message, message: nil, preferredStyle: .alert)
-                
-                let action = UIAlertAction(title: "Ok", style: .default) { (_) in
-                    
-                    alertController.dismiss(animated: true, completion: nil)
-                    
-                }
-                
-                alertController.addAction(action)
-                
-                self.present(alertController, animated: true, completion: nil)
+                self.showSimpleAlertWithOkButton(title: message, message: nil)
                 
             }
             
