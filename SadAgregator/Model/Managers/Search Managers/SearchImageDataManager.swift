@@ -41,27 +41,27 @@ struct SearchImageDataManager {
             
             var json = ""
             
-            print("WINDOWSCP ENCRYPTION : \(String(describing: String(data: data , encoding: String.Encoding.windowsCP1251)))")
-            
-            print("UTF8 ENCRYPTION : \(String(describing: String(data: data , encoding: String.Encoding.windowsCP1251)))")
+            //            print("WINDOWSCP ENCRYPTION : \(String(describing: String(data: data , encoding: String.Encoding.windowsCP1251)))")
+            //
+            //            print("UTF8 ENCRYPTION : \(String(describing: String(data: data , encoding: String.Encoding.utf8)))")
             
             if let windowsCPEncodedText = String(data: data , encoding: String.Encoding.windowsCP1251){
                 
-                if windowsCPEncodedText.contains("А") || windowsCPEncodedText.contains("У") ||
-                    windowsCPEncodedText.contains("Е") ||
-                    windowsCPEncodedText.contains("И") ||
-                    windowsCPEncodedText.contains("О") {
+                if windowsCPEncodedText.lowercased().contains("а") || windowsCPEncodedText.lowercased().contains("у") ||
+                    windowsCPEncodedText.lowercased().contains("е") ||
+                    windowsCPEncodedText.lowercased().contains("и") ||
+                    windowsCPEncodedText.lowercased().contains("о") {
                     
                     json = windowsCPEncodedText
                     
                 }else{
                     
-                    json = String(data: data , encoding: String.Encoding.utf16)!
+                    json = String(data: data , encoding: String.Encoding.utf8)!
                     
                 }
                 
             }else{
-                json = String(data: data , encoding: String.Encoding.utf16)!
+                json = String(data: data , encoding: String.Encoding.utf8)!
             }
             
             let jsonAnswer = JSON(parseJSON: json)

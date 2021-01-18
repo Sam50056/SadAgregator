@@ -248,13 +248,13 @@ extension SearchViewController : SearchImageDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            searchData = data
+            searchData = nil
             
             postsArray = data["posts"].arrayValue
             
-            cntList = data["cnt_list"].arrayValue
+            cntList = nil
             
-            tableView.reloadSections([0,1], with: .automatic)
+            tableView.reloadSections([0,1,2], with: .none)
             
         }
         
