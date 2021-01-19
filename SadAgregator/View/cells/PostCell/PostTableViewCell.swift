@@ -506,7 +506,7 @@ class PostTableViewCell: UITableViewCell  {
                 
                 (cell as! DescriptionCollectionViewCell).label.text = item
                 
-                (cell as! DescriptionCollectionViewCell).imageView.image = item.contains("Показать") ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
+                (cell as! DescriptionCollectionViewCell).imageView.image = item.contains("Показать") ? UIImage(systemName: "chevron.down") : UIImage(systemName: "chevron.up")
                 
                 (cell as! DescriptionCollectionViewCell).button.addTarget(self, action: #selector(self.descButtonPressed(_:)), for: .touchUpInside)
                 
