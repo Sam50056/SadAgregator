@@ -212,11 +212,11 @@ class PostTableViewCell: UITableViewCell  {
                 
             }else if sectionLayoutKind == .showDesc{
                 
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.8))
                 
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: (postDescription == nil || postDescription == "") ? .absolute(0) : .absolute(25))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: (postDescription == nil || postDescription == "") ? .absolute(0) : .absolute(38))
                 
                 let group =  NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
@@ -503,6 +503,8 @@ class PostTableViewCell: UITableViewCell  {
             }else if section == .showDesc{
                 
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "descCell", for: indexPath) as! DescriptionCollectionViewCell
+                
+                (cell as! DescriptionCollectionViewCell).bgView.layer.cornerRadius = 12
                 
                 (cell as! DescriptionCollectionViewCell).label.text = item
                 
