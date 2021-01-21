@@ -514,7 +514,9 @@ class PostTableViewCell: UITableViewCell  {
                 
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "textViewCell", for: indexPath) as! TextViewCollectionViewCell
                 
-                (cell as! TextViewCollectionViewCell).textView.text = item
+                let newText = item.replacingOccurrences(of: "<br>", with: "\n")
+                
+                (cell as! TextViewCollectionViewCell).textView.text = newText
                 
             }else if section == .photo {
                 
