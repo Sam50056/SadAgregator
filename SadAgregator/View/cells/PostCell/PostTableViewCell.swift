@@ -216,7 +216,7 @@ class PostTableViewCell: UITableViewCell  {
                 
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: postDescription == nil ? .absolute(0) : .absolute(25))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: (postDescription == nil || postDescription == "") ? .absolute(0) : .absolute(25))
                 
                 let group =  NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
@@ -228,7 +228,7 @@ class PostTableViewCell: UITableViewCell  {
                 
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: ( showDescription ? .estimated((postDescription?.height(withConstrainedWidth: UIScreen.main.bounds.width - 16, font: UIFont.systemFont(ofSize: 15)))!) : .absolute(0)))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: ( showDescription ? .estimated((postDescription?.height(withConstrainedWidth: UIScreen.main.bounds.width - 32, font: UIFont.systemFont(ofSize: 15)))!) : .absolute(0)))
                 
                 let group =  NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
