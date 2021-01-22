@@ -9,6 +9,7 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 import VK_ios_sdk
+import ok_ios_sdk
 
 class ProfileViewModel : ObservableObject{
     
@@ -20,6 +21,8 @@ class ProfileViewModel : ObservableObject{
     
     @Published var key = ""
     @Published var settings = ""
+    
+    var okUserId = ""
     
     @Published var name = ""
     @Published var phone = ""
@@ -222,12 +225,43 @@ extension ProfileViewModel : VKAuthServiceDelegate{
 
 //MARK: - Vigruzka
 
-extension ProfileViewModel : AssignVkToAppIDDataManagerDelegate, SaveVkInfoDataManagerDelegate{
+extension ProfileViewModel : AssignVkToAppIDDataManagerDelegate, SaveVkInfoDataManagerDelegate , AssignOKToAppIDDataManagerDelegate , SaveOkInfoDataManagerDelegate{
     
     func addVkVigruzka(){
         
         vkAuthService.isPresentedInProfileView = true
         vkAuthService.wakeUpSession()
+        
+    }
+    
+    func addOkVigruzka(){
+        
+        OKSDK.authorize(withPermissions: ["LONG_ACCESS_TOKEN", "GROUP_CONTENT", "VALUABLE_ACCESS","PHOTO_CONTENT","PUBLISH_TO_STREAM", "GET_EMAIL"]) { [self] (result) in
+            
+            print("OK Token : \(String(describing: OKSDK.currentAccessToken()))")
+            
+            OKSDK.invokeMethod("users.getCurrentUser", arguments: [:]) { (data) in
+                
+                DispatchQueue.main.async { [self] in
+                    
+                    if let _ = OKSDK.currentAccessToken(),
+                       let userId = (data as! [String:Any])["uid"]{
+                        
+                        okUserId = userId as! String
+                        
+                        AssignOKToAppIDDataManager(delegate: self).getAssignOKToAppIDData(key: key, okId: userId as! String, appId: OKAuthService.appId)
+                        
+                    }
+                    
+                }
+                
+            } error: { (error) in
+                print("Error with OK INVOKE METHOD : \(String(describing: error?.localizedDescription))")
+            }
+            
+        } error: { (error) in
+            print("Error with OK SDK AUTH : \(String(describing: error?.localizedDescription))")
+        }
         
     }
     
@@ -241,7 +275,9 @@ extension ProfileViewModel : AssignVkToAppIDDataManagerDelegate, SaveVkInfoDataM
                 
                 SaveVkInfoDataManager(delegate: self).getSaveVkInfoData(key: key, fieldId: "2", value: vkAuthService.token!)
                 
-                SaveVkInfoDataManager(delegate: self).getSaveVkInfoData(key: key, fieldId: "3", value: email)
+                if let vkEmail = vkAuthService.email{
+                    SaveVkInfoDataManager(delegate: self).getSaveVkInfoData(key: key, fieldId: "3", value: vkEmail)
+                }
                 
                 getProfileData()
                 
@@ -251,8 +287,18 @@ extension ProfileViewModel : AssignVkToAppIDDataManagerDelegate, SaveVkInfoDataM
         
     }
     
-    func didFailGettingAssignVkToAppIDDataWithError(error: String) {
-        print("Error with AssignVkToAppIDDataManager : \(error)")
+    func didGetAssignOKToAppIDData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            SaveOkInfoDataManager(delegate: self).getSaveOkInfoData(key: key, fieldId: "1", value: okUserId)
+            
+            SaveOkInfoDataManager(delegate: self).getSaveOkInfoData(key: key, fieldId: "2", value: OKSDK.currentAccessToken()!)
+            
+            getProfileData()
+            
+        }
+        
     }
     
     func didGetSaveVkInfoData(data: JSON) {
@@ -265,8 +311,28 @@ extension ProfileViewModel : AssignVkToAppIDDataManagerDelegate, SaveVkInfoDataM
         
     }
     
+    func didGetSaveOkInfoData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+        }
+        
+    }
+    
+    func didFailGettingAssignVkToAppIDDataWithError(error: String) {
+        print("Error with AssignVkToAppIDDataManager : \(error)")
+    }
+    
+    func didFailGettingAssignOKToAppIDDataWithError(error: String) {
+        print("Error with AssignOKToAppIDDataManager : \(error)")
+    }
+    
     func didFailGettingSaveVkInfoDataWithError(error: String) {
         print("Error with SaveVkInfoDataManager : \(error)")
+    }
+    
+    func didFailGettingSaveOkInfoDataWithError(error: String) {
+        print("Error with SaveOkInfoDataManager : \(error)")
     }
     
 }

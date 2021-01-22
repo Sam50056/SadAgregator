@@ -143,19 +143,6 @@ extension MenuViewModel{
                 
             }
             
-            //            OKSDK.invokeMethod("users.getCurrentUser", arguments: [:]) { (data) in
-            //
-            //                DispatchQueue.main.async {
-            //
-            //                    print("Name : \(String(describing: (data as! [String:Any])["first_name"]))")
-            //
-            //                }
-            //
-            //            } error: { (error) in
-            //                print("Error with OK INVOKE METHOD : \(String(describing: error?.localizedDescription))")
-            //            }
-            
-            
         } error: { (error) in
             print("Error with OK SDK AUTH : \(String(describing: error?.localizedDescription))")
         }

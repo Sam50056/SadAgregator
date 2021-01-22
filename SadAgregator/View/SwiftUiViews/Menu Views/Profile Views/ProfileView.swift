@@ -289,6 +289,8 @@ struct ProfileView: View {
                                 
                                 Button(action:{
                                     
+                                    profileViewModel.addOkVigruzka()
+                                    
                                 }){
                                     
                                     PodkluchitOkVigruzkuView()

@@ -30,8 +30,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let settings = OKSDKInitSettings()
         
-        settings.appKey = "CPELHKJGDIHBABABA"
-        settings.appId = "512000358990"
+        settings.appKey = OKAuthService.appKey
+        settings.appId = OKAuthService.appId
         
         settings.controllerHandler = {
             return self.window!.rootViewController
