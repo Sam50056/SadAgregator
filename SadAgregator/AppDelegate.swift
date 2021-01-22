@@ -10,6 +10,7 @@ import IQKeyboardManagerSwift
 import YandexMobileMetrica
 import RealmSwift
 import VK_ios_sdk
+import ok_ios_sdk
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         VKSdk.processOpen(url, fromApplication: UIApplication.OpenURLOptionsKey.sourceApplication.rawValue)
+        
+        OKSDK.open(url)
         
         return true
         

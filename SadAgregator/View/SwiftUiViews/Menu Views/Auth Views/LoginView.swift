@@ -46,14 +46,22 @@ struct LoginView: View {
                         
                     }
                     
-                    HStack(spacing: 13){
+                    Button(action:{
                         
-                        Image("odno")
-                            .resizable()
-                            .frame(width: 28, height: 30, alignment: .center)
+                        menuViewModel.okAuth()
                         
+                    }){
                         
-                        Text("Войти через Одноклассники")
+                        HStack(spacing: 13){
+                            
+                            Image("odno")
+                                .resizable()
+                                .frame(width: 28, height: 30, alignment: .center)
+                            
+                            
+                            Text("Войти через Одноклассники")
+                            
+                        }
                         
                     }
                     

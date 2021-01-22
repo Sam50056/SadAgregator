@@ -8,3 +8,4 @@ ${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
 ${BUILT_PRODUCTS_DIR}/VK-ios-sdk/VK_ios_sdk.framework
+${BUILT_PRODUCTS_DIR}/ok-ios-sdk/ok_ios_sdk.framework

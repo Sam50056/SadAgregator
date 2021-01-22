@@ -23,6 +23,7 @@ pod 'RealmSwift', '~> 10.4.0'
 pod 'Hero'
 
 pod "VK-ios-sdk"
+pod 'ok-ios-sdk', '~> 2.0'
 
 
 end

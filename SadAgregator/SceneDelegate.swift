@@ -7,6 +7,7 @@
 
 import UIKit
 import VK_ios_sdk
+import ok_ios_sdk
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -27,7 +28,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
+        let settings = OKSDKInitSettings()
         
+        settings.appKey = "CPELHKJGDIHBABABA"
+        settings.appId = "512000358990"
+        
+        settings.controllerHandler = {
+            return self.window!.rootViewController
+        }
+        
+        OKSDK.initWith(settings)
         
     }
     
@@ -36,6 +46,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let url = URLContexts.first?.url{
             
             VKSdk.processOpen(url, fromApplication: UIApplication.OpenURLOptionsKey.sourceApplication.rawValue)
+            
+            OKSDK.open(url)
             
         }
         

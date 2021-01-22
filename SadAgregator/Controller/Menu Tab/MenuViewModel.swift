@@ -8,6 +8,7 @@
 import Foundation
 import SwiftyJSON
 import RealmSwift
+import ok_ios_sdk
 
 class MenuViewModel : ObservableObject{
     
@@ -118,6 +119,47 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
     
     func didFailGettingCheckKeysData(error: String) {
         print("Error with CheckKeysDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - OKAuth
+
+extension MenuViewModel{
+    
+    func okAuth(){
+        
+        print("OK PRESSED")
+        
+        //        OKSDK.clearAuth()
+        
+        OKSDK.authorize(withPermissions: ["LONG_ACCESS_TOKEN", "GROUP_CONTENT", "VALUABLE_ACCESS","PHOTO_CONTENT","PUBLISH_TO_STREAM", "GET_EMAIL"]) { [self] (result) in
+            
+            print("OK Token : \(String(describing: OKSDK.currentAccessToken()))")
+            
+            if let safeOkToken =  OKSDK.currentAccessToken(){
+                
+                AuthSocialDataManager(delegate: self).getGetAuthSocialData(social: "OK", token: safeOkToken, key: key)
+                
+            }
+            
+            //            OKSDK.invokeMethod("users.getCurrentUser", arguments: [:]) { (data) in
+            //
+            //                DispatchQueue.main.async {
+            //
+            //                    print("Name : \(String(describing: (data as! [String:Any])["first_name"]))")
+            //
+            //                }
+            //
+            //            } error: { (error) in
+            //                print("Error with OK INVOKE METHOD : \(String(describing: error?.localizedDescription))")
+            //            }
+            
+            
+        } error: { (error) in
+            print("Error with OK SDK AUTH : \(String(describing: error?.localizedDescription))")
+        }
+        
     }
     
 }
