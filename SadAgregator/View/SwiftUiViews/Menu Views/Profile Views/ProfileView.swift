@@ -206,19 +206,25 @@ struct ProfileView: View {
                                             .font(.caption)
                                             .foregroundColor(Color(.systemGray))
                                         
-                                        HStack{
+                                        Button(action:{
+                                            profileViewModel.addVkVigruzka()
+                                        }){
                                             
-                                            Text("Переподключить аккаунт VK.COM")
-                                                .font(.system(size: 18))
-                                                .foregroundColor(Color.gray)
-                                                .fontWeight(.semibold)
+                                            HStack{
+                                                
+                                                Text("Переподключить аккаунт VK.COM")
+                                                    .font(.system(size: 18))
+                                                    .foregroundColor(Color.gray)
+                                                    .fontWeight(.semibold)
+                                                
+                                            }
+                                            .frame(maxWidth: .infinity)
+                                            .padding(.vertical , 14)
+                                            .foregroundColor(Color(.systemBlue))
+                                            .background(Color(#colorLiteral(red: 0.9622963071, green: 0.9662981629, blue: 0.9730395675, alpha: 1)))
+                                            .cornerRadius(8)
                                             
                                         }
-                                        .frame(maxWidth: .infinity)
-                                        .padding(.vertical , 14)
-                                        .foregroundColor(Color(.systemBlue))
-                                        .background(Color(#colorLiteral(red: 0.9622963071, green: 0.9662981629, blue: 0.9730395675, alpha: 1)))
-                                        .cornerRadius(8)
                                         
                                     }.padding()
                                     
@@ -250,19 +256,25 @@ struct ProfileView: View {
                                             .font(.caption)
                                             .foregroundColor(Color(.systemGray))
                                         
-                                        HStack{
+                                        Button(action:{
+                                            profileViewModel.addOkVigruzka()
+                                        }){
                                             
-                                            Text("Переподключить аккаунт OK.RU")
-                                                .font(.system(size: 18))
-                                                .foregroundColor(Color.gray)
-                                                .fontWeight(.semibold)
+                                            HStack{
+                                                
+                                                Text("Переподключить аккаунт OK.RU")
+                                                    .font(.system(size: 18))
+                                                    .foregroundColor(Color.gray)
+                                                    .fontWeight(.semibold)
+                                                
+                                            }
+                                            .frame(maxWidth: .infinity)
+                                            .padding(.vertical , 14)
+                                            .foregroundColor(Color(.systemBlue))
+                                            .background(Color(#colorLiteral(red: 0.9622963071, green: 0.9662981629, blue: 0.9730395675, alpha: 1)))
+                                            .cornerRadius(8)
                                             
                                         }
-                                        .frame(maxWidth: .infinity)
-                                        .padding(.vertical , 14)
-                                        .foregroundColor(Color(.systemBlue))
-                                        .background(Color(#colorLiteral(red: 0.9622963071, green: 0.9662981629, blue: 0.9730395675, alpha: 1)))
-                                        .cornerRadius(8)
                                         
                                     }.padding(.horizontal).padding(.bottom , 16)
                                     
