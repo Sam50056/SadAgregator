@@ -15,6 +15,8 @@
 		2201672C25A77BB50072BFE7 /* SetVendActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201672B25A77BB50072BFE7 /* SetVendActionsDataManager.swift */; };
 		2201673125A8BADD0072BFE7 /* SendFileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201673025A8BADD0072BFE7 /* SendFileDataManager.swift */; };
 		2201673C25A952040072BFE7 /* SearchImageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201673B25A952040072BFE7 /* SearchImageDataManager.swift */; };
+		2203F15C25BF243A007DBFFD /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203F15A25BF243A007DBFFD /* EmptyTableViewCell.swift */; };
+		2203F15D25BF243A007DBFFD /* EmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203F15B25BF243A007DBFFD /* EmptyTableViewCell.xib */; };
 		221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221949FE256B1FBD00E0564D /* PointViewController.swift */; };
 		221C072C256E5ABB001BC842 /* PhoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C072A256E5ABB001BC842 /* PhoneTableViewCell.swift */; };
 		221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */; };
@@ -151,6 +153,8 @@
 		2201672B25A77BB50072BFE7 /* SetVendActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVendActionsDataManager.swift; sourceTree = "<group>"; };
 		2201673025A8BADD0072BFE7 /* SendFileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFileDataManager.swift; sourceTree = "<group>"; };
 		2201673B25A952040072BFE7 /* SearchImageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchImageDataManager.swift; sourceTree = "<group>"; };
+		2203F15A25BF243A007DBFFD /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
+		2203F15B25BF243A007DBFFD /* EmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyTableViewCell.xib; sourceTree = "<group>"; };
 		221949FE256B1FBD00E0564D /* PointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointViewController.swift; sourceTree = "<group>"; };
 		221C072A256E5ABB001BC842 /* PhoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTableViewCell.swift; sourceTree = "<group>"; };
 		221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneTableViewCell.xib; sourceTree = "<group>"; };
@@ -314,6 +318,15 @@
 				22C5D02D25B1EC9D001C69C6 /* SetDefaultPeerDataManager.swift */,
 			);
 			path = "Post Managers";
+			sourceTree = "<group>";
+		};
+		2203F15425BF2400007DBFFD /* EmptyCell */ = {
+			isa = PBXGroup;
+			children = (
+				2203F15A25BF243A007DBFFD /* EmptyTableViewCell.swift */,
+				2203F15B25BF243A007DBFFD /* EmptyTableViewCell.xib */,
+			);
+			path = EmptyCell;
 			sourceTree = "<group>";
 		};
 		221C0729256E5A91001BC842 /* PhoneCell */ = {
@@ -675,6 +688,7 @@
 		22A49CA7256661D700CCC781 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				2203F15425BF2400007DBFFD /* EmptyCell */,
 				22CA694125A1473E00D21840 /* VendorRatingCell */,
 				22A49CAE256663FA00CCC781 /* PostCell */,
 				22A05356256C17E60016B40A /* VendorCell */,
@@ -908,6 +922,7 @@
 				22CA694525A1475E00D21840 /* VendorRatingTableViewCell.xib in Resources */,
 				221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */,
 				229A95C725A161030086EAD9 /* PricesTableViewCell.xib in Resources */,
+				2203F15D25BF243A007DBFFD /* EmptyTableViewCell.xib in Resources */,
 				22A49CB52566645800CCC781 /* PostTableViewCell.xib in Resources */,
 				22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */,
 				22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */,
@@ -1026,6 +1041,7 @@
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
 				22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */,
 				2201672C25A77BB50072BFE7 /* SetVendActionsDataManager.swift in Sources */,
+				2203F15C25BF243A007DBFFD /* EmptyTableViewCell.swift in Sources */,
 				2245820325A9FB16008882A9 /* HelpView.swift in Sources */,
 				22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */,
 				22D9021D259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift in Sources */,

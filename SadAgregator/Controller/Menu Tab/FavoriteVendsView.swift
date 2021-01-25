@@ -49,6 +49,8 @@ class FavoriteVendsViewController : UITableViewController {
         
         tableView.register(UINib(nibName: "VendTableViewCell", bundle: nil), forCellReuseIdentifier: "vendCell")
         
+        tableView.register(UINib(nibName: "EmptyTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCell")
+        
         refreshControl = UIRefreshControl()
         
         //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -94,20 +96,36 @@ class FavoriteVendsViewController : UITableViewController {
     //MARK: - TableView Stuff
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return vendsArray.count
+        return vendsArray.count == 0 ? 1 : vendsArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "vendCell", for: indexPath) as! VendTableViewCell
+        var cell = UITableViewCell()
         
-        setUpVendCell(cell: cell, data: vendsArray[indexPath.row])
+        if vendsArray.isEmpty{
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath)
+            
+            (cell as! EmptyTableViewCell).label.text = "Вы еще не добавили поставщиков в избранное"
+            
+            return cell
+            
+        }
+        
+        cell = tableView.dequeueReusableCell(withIdentifier: "vendCell", for: indexPath) as! VendTableViewCell
+        
+        setUpVendCell(cell: cell as! VendTableViewCell, data: vendsArray[indexPath.row])
+        
+        //        EmptyTableViewCell
         
         return cell
         
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         
+        guard vendsArray.count != 0 else {return}
         
         selectedVendId = vendsArray[indexPath.row]["id"].stringValue
         
@@ -116,7 +134,7 @@ class FavoriteVendsViewController : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return K.makeHeightForVendCell(vend: vendsArray[indexPath.row])
+        return (vendsArray.count == 0) ? ((UIScreen.main.bounds.height / 2)) : (K.makeHeightForVendCell(vend: vendsArray[indexPath.row]))
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
