@@ -122,6 +122,8 @@ class FavoritePostsViewController : UITableViewController {
         
         tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
         
+        tableView.register(UINib(nibName: "EmptyTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCell")
+        
         tableView.separatorStyle = .none
         
         myPostsDataManager.delegate = self
@@ -161,23 +163,35 @@ class FavoritePostsViewController : UITableViewController {
     //MARK: - TableView Stuff
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postsArray.count
+        return postsArray.count == 0 ? 1 : postsArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
+        var cell = UITableViewCell()
+        
+        if postsArray.isEmpty{
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath)
+            
+            (cell as! EmptyTableViewCell).label.text = "Вы еще не добавили публикаций в избранное"
+            
+            return cell
+            
+        }
+        
+        cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
         
         let post = postsArray[indexPath.row]
         
-        setUpPostCell(cell: cell, data: post, index: indexPath.row, export: favoritePostsData?["export"])
+        setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: indexPath.row, export: favoritePostsData?["export"])
         
         return cell
         
     }
     
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return K.postHeight
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return (postsArray.count == 0) ? ((UIScreen.main.bounds.height / 2)) : K.postHeight
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
