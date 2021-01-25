@@ -131,7 +131,7 @@ extension MenuViewModel{
         
         print("OK PRESSED")
         
-        //        OKSDK.clearAuth()
+        OKSDK.clearAuth()
         
         OKSDK.authorize(withPermissions: ["LONG_ACCESS_TOKEN", "GROUP_CONTENT", "VALUABLE_ACCESS","PHOTO_CONTENT","PUBLISH_TO_STREAM", "GET_EMAIL"]) { [self] (result) in
             
