@@ -162,6 +162,8 @@ extension PeerViewController : UITableViewDelegate , UITableViewDataSource{
             
             imageView.image = type == "vk" ? UIImage(named: "vk") : UIImage(named: "odno")
             
+            imageView.layer.cornerRadius = 8
+            
             label.text = data["capt"].stringValue
             
         }

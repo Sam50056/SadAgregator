@@ -130,6 +130,8 @@ class FavoritePostsViewController : UITableViewController {
         
         myPostsDataManager.getMyPostsData(key: key, page: page)
         
+        showSimpleCircleAnimation()
+        
     }
     
     //MARK: - Segue Stuff
@@ -422,13 +424,13 @@ extension FavoritePostsViewController : MyPostsDataManagerDelegate {
     
     func didGetMyPostsData(data: JSON) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             
-            self.favoritePostsData = data
+            favoritePostsData = data
             
-            self.postsArray.append(contentsOf: data["posts"].arrayValue)
+            postsArray.append(contentsOf: data["posts"].arrayValue)
             
-            self.tableView.reloadData()
+            tableView.reloadData()
             
         }
         

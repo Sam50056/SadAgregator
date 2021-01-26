@@ -125,6 +125,9 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             page = 1
             
             getVendPostsPaggingDataManager.getGetVendPostsPaggingData(key: key, vendId: thisVendId, page: page)
+            
+            showSimpleCircleAnimation()
+            
         }
         
     }
@@ -142,6 +145,8 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             tableView.reloadData()
             
             refreshControl!.endRefreshing()
+            
+            stopSimpleCircleAnimation()
             
         }
         

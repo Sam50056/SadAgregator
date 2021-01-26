@@ -133,6 +133,9 @@ class SearchViewController: UIViewController {
         }else{
             getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
         }
+        
+        showSimpleCircleAnimation()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -256,6 +259,8 @@ extension SearchViewController : SearchImageDataManagerDelegate{
             
             tableView.reloadSections([0,1,2], with: .none)
             
+            stopSimpleCircleAnimation()
+            
         }
         
     }
@@ -325,6 +330,8 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
             cntList = data["cnt_list"].arrayValue
             
             tableView.reloadSections([0,1,2], with: .none)
+            
+            stopSimpleCircleAnimation()
             
         }
         

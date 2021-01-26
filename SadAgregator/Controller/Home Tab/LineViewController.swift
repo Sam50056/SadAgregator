@@ -175,20 +175,24 @@ extension LineViewController {
 extension LineViewController : ActivityLineDataManagerDelegate{
     
     func didGetActivityData(data: JSON) {
-        DispatchQueue.main.async{
+        
+        DispatchQueue.main.async{ [self] in
             
-            self.lineData = data
+            lineData = data
             
-            self.navigationItem.title = data["capt"].stringValue
+            navigationItem.title = data["capt"].stringValue
             
-            self.activityPointCellsArray = data["points_top"].arrayValue
+            activityPointCellsArray = data["points_top"].arrayValue
             
-            self.postsArray = data["posts"].arrayValue
+            postsArray = data["posts"].arrayValue
             
-            self.tableView.reloadData()
+            tableView.reloadData()
             
-            self.refreshControl.endRefreshing()
+            refreshControl.endRefreshing()
+            
+            stopSimpleCircleAnimation()
         }
+        
     }
     
     func didFailGettingActivityLineData(error: String) {
@@ -201,7 +205,11 @@ extension LineViewController : ActivityLineDataManagerDelegate{
     @objc func refresh(_ sender: AnyObject) {
         
         if let safeId = thisLineId{
+            
             activityLineDataManager.getActivityData(key: key, lineId: safeId)
+            
+            showSimpleCircleAnimation()
+            
         }
         
     }
@@ -214,11 +222,11 @@ extension LineViewController : LinePostsPaggingDataManagerDelegate {
     
     func didGetLinePostsPaggingData(data: JSON) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             
-            self.postsArray.append(contentsOf: data["posts"].arrayValue)
+            postsArray.append(contentsOf: data["posts"].arrayValue)
             
-            self.tableView.reloadSections([5], with: .none)
+            tableView.reloadSections([5], with: .none)
             
         }
         

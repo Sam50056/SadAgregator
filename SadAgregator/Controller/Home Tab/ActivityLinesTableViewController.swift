@@ -31,6 +31,9 @@ class ActivityLinesTableViewController: UITableViewController, TopLinesDataManag
         tableView.separatorStyle = .none
         
         topLinesDataManager.getTopLinesData(key: "")
+        
+        showSimpleCircleAnimation()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +62,8 @@ class ActivityLinesTableViewController: UITableViewController, TopLinesDataManag
             lines = data["lines_act_top"].arrayValue
             
             tableView.reloadSections([0], with: .automatic)
+            
+            stopSimpleCircleAnimation()
             
         }
         

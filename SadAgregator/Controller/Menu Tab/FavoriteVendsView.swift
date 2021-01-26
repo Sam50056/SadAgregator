@@ -91,6 +91,8 @@ class FavoriteVendsViewController : UITableViewController {
         
         myVendorsDataManager.getMyVendorsData(key: key, page: page)
         
+        showSimpleCircleAnimation()
+        
     }
     
     //MARK: - TableView Stuff
@@ -202,13 +204,15 @@ extension FavoriteVendsViewController : MyVendorsDataManagerDelegate {
     
     func didGetMyVendorsData(data : JSON){
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             
-            self.vendsArray.append(contentsOf: data["vends"].arrayValue)
+            vendsArray.append(contentsOf: data["vends"].arrayValue)
             
-            self.tableView.reloadSections([0], with: .automatic)
+            tableView.reloadSections([0], with: .automatic)
             
-            self.refreshControl?.endRefreshing()
+            refreshControl?.endRefreshing()
+            
+            stopSimpleCircleAnimation()
             
         }
         

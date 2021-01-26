@@ -169,7 +169,11 @@ class PointViewController: UIViewController {
     @objc func refresh(_ sender: AnyObject) {
         
         if let safeId = thisPointId{
+            
             activityPointDataManager.getActivityPointData(key: key, pointId: safeId)
+            
+            showSimpleCircleAnimation()
+            
         }
         
     }
@@ -218,21 +222,23 @@ extension PointViewController {
 extension PointViewController : ActivityPointDataManagerDelegate {
     
     func didGetActivityPointData(data: JSON) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             
-            self.pointData = data
+            pointData = data
             
-            self.navigationItem.title = data["capt"].stringValue
+            navigationItem.title = data["capt"].stringValue
             
-            self.vendsArray = data["vends"].arrayValue
+            vendsArray = data["vends"].arrayValue
             
-            self.activityPointCellsArray = data["points_top"].arrayValue
+            activityPointCellsArray = data["points_top"].arrayValue
             
-            self.postsArray = data["posts"].arrayValue
+            postsArray = data["posts"].arrayValue
             
-            self.tableView.reloadData()
+            tableView.reloadData()
             
-            self.refreshControl.endRefreshing()
+            refreshControl.endRefreshing()
+            
+            stopSimpleCircleAnimation()
             
         }
     }

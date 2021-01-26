@@ -152,7 +152,11 @@ class PostavshikViewController: UIViewController {
         tableView.addSubview(refreshControl) // not required when using UITableViewController
         
         if let safeId = thisVendorId{
+            
             vendorCardDataManager.getVendorCardData(key: key, vendorId: safeId)
+            
+            showSimpleCircleAnimation()
+            
         }
         
     }
@@ -287,6 +291,8 @@ extension PostavshikViewController : VendorCardDataManagerDelegate{
             tableView.reloadData()
             
             refreshControl.endRefreshing()
+            
+            stopSimpleCircleAnimation()
             
         }
         

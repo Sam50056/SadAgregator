@@ -66,6 +66,8 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
         }
         
+        showSimpleCircleAnimation()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,6 +130,8 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             
             tableView.reloadData()
             
+            stopSimpleCircleAnimation()
+            
         }
         
     }
@@ -163,6 +167,8 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             points.append(contentsOf: data["points_top"].arrayValue)
             
             tableView.reloadData()
+            
+            stopSimpleCircleAnimation()
             
         }
         
