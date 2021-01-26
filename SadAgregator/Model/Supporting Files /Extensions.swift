@@ -10,6 +10,8 @@ import RealmSwift
 import SwiftyJSON
 import MobileCoreServices
 
+fileprivate var loadingView : UIView?
+
 //MARK: - String
 
 extension String {
@@ -130,6 +132,35 @@ extension UIViewController{
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+}
+
+//MARK: - UIViewController(animations)
+
+extension UIViewController {
+    
+    func showSimpleCircleAnimation(){
+        
+        loadingView = UIView(frame: self.view.bounds)
+        
+        let activityController = UIActivityIndicatorView(style: .large)
+        
+        activityController.center = loadingView!.center
+        activityController.startAnimating()
+        
+        loadingView?.addSubview(activityController)
+        
+        self.view.addSubview(loadingView!)
+        
+    }
+    
+    func stopSimpleCircleAnimation(){
+        
+        loadingView?.removeFromSuperview()
+        
+        loadingView = nil
         
     }
     

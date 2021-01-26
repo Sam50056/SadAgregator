@@ -141,6 +141,8 @@ class MainViewController: UIViewController {
         searchView.layer.cornerRadius = 10
         
         checkKeysDataManager.getKeysData(key: key)
+        
+        showSimpleCircleAnimation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -381,6 +383,9 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                 alertController.addAction(action)
                 
             }
+            
+            stopSimpleCircleAnimation()
+            
         }
     }
     
