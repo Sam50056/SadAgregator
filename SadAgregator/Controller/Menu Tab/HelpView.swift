@@ -111,13 +111,24 @@ class HelpViewController : UITableViewController, HelpPageDataManagerDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        //Chaning cell bg color to gray or back to white
+        if !displayedRows[indexPath.row].isTextViewCell , displayedRows[indexPath.row].text != ""{
+            
+            displayedRows[indexPath.row].shouldBackgroundBeBlack.toggle()
+            
+            let cell = tableView.cellForRow(at: indexPath)
+            
+            cell?.backgroundColor = displayedRows[indexPath.row].shouldBackgroundBeBlack ? .systemGray5 : .white
+            
+        }
+        
         if !displayedRows[indexPath.row].isTextViewCell , displayedRows[indexPath.row].text != ""{
             
             tableView.beginUpdates()
             
             if !displayedRows[indexPath.row].isTextViewCellShow{
                 
-                displayedRows.insert(HelpViewItem(isTextViewCell: true, id: "", capt: "", text: displayedRows[indexPath.row].text, url: ""), at: (indexPath.row + 1))
+                displayedRows.insert(HelpViewItem(isTextViewCell: true, shouldBackgroundBeBlack : true, id: "", capt: "", text: displayedRows[indexPath.row].text, url: ""), at: (indexPath.row + 1))
                 
                 tableView.insertRows(at: [IndexPath(row: (indexPath.row + 1), section: 0)], with: .top)
                 
@@ -152,8 +163,13 @@ class HelpViewController : UITableViewController, HelpPageDataManagerDelegate {
     
     func setUpHelpCell(cell : UITableViewCell, data : HelpViewItem){
         
+        //Chaning BG color
+        if data.shouldBackgroundBeBlack {
+            cell.backgroundColor = .systemGray5
+        }
+        
         if data.isTextViewCell{
-            
+            //If cell is text cell , I just show text )
             if let textView = cell.viewWithTag(1) as? UITextView{
                 
                 textView.text = data.text
@@ -169,10 +185,15 @@ class HelpViewController : UITableViewController, HelpPageDataManagerDelegate {
                 
                 imageViews.append(imageView)
                 
+                //If there is some url , it means cell is not dropdown so imageView is not needed
                 if data.url != ""{
+                    
                     imageView.image = nil
+                    
                 }else if data.text != ""{
-                    imageView.image = UIImage(systemName: "chevron.down")
+                    
+                    imageView.image = data.isTextViewCellShow ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
+                    
                 }
                 
             }
@@ -187,6 +208,8 @@ class HelpViewController : UITableViewController, HelpPageDataManagerDelegate {
         
         let isTextViewCell : Bool
         var isTextViewCellShow = false
+        
+        var shouldBackgroundBeBlack = false
         
         let id : String
         let capt : String
