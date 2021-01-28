@@ -131,6 +131,9 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMJ-7j-aH6">
                                                 <rect key="frame" x="0.0" y="0.0" width="105" height="25"/>
+                                                <connections>
+                                                    <action selector="vigruzitButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="j5e-R0-ruc"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

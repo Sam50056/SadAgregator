@@ -128,6 +128,7 @@ class PostTableViewCell: UITableViewCell  {
     var byLabelButtonCallback : (() -> ())?
     var soobshitButtonCallback : (() -> ())?
     var peerButtonCallback : (() -> ())?
+    var vigruzitButtonCallback : (() -> ())?
     
     var postDescription : String?
     var showDescription = false
@@ -652,6 +653,14 @@ class PostTableViewCell: UITableViewCell  {
         guard let peerButtonCallback = peerButtonCallback else {return}
         
         peerButtonCallback()
+        
+    }
+    
+    @IBAction func vigruzitButtonPressed(_ sender: UIButton) {
+        
+        guard let vigruzitButtonCallback = vigruzitButtonCallback else {return}
+        
+        vigruzitButtonCallback()
         
     }
     
