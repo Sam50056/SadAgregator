@@ -383,6 +383,8 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                 }
                 
                 alertController.addAction(action)
+             
+                present(alertController, animated: true, completion: nil)
                 
             }
             
