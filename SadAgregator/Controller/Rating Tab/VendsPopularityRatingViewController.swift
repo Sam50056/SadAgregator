@@ -323,7 +323,7 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
         
         let peoples = data["peoples"].stringValue
         
-        if peoples == "0"{
+        if peoples == "" || peoples == "0"{
             cell.peoplesLabel.text = ""
             cell.peoplesImageView.isHidden = true
         }else{
