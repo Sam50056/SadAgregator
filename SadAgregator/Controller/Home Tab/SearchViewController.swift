@@ -235,11 +235,11 @@ extension SearchViewController : SearchImageDataManagerDelegate{
         
         let indexOfDash = imageHashText.firstIndex(of: "-")!
         
-        aCrop = String(imageHashText[imageHashText.startIndex..<indexOfDash])
+        aNoCrop = String(imageHashText[imageHashText.startIndex..<indexOfDash])
         
-        aNoCrop = String(imageHashText[indexOfDash..<imageHashText.endIndex])
+        aCrop = String(imageHashText[indexOfDash..<imageHashText.endIndex])
         
-        aNoCrop.removeFirst() //Remove "-" symbol
+        aCrop.removeFirst() //Remove "-" symbol
         
         print("A Crop : \(aCrop) , A No Crop : \(aNoCrop)")
         
