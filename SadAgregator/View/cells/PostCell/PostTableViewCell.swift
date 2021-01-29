@@ -229,7 +229,9 @@ class PostTableViewCell: UITableViewCell  {
                 
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: ( showDescription ? .estimated((postDescription?.height(withConstrainedWidth: UIScreen.main.bounds.width - 32, font: UIFont.systemFont(ofSize: 15)))!) : .absolute(0)))
+                let newText = postDescription?.replacingOccurrences(of: "<br>", with: "\n")
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: ( showDescription ? .absolute((newText?.height(withConstrainedWidth: UIScreen.main.bounds.width - 32, font: UIFont.systemFont(ofSize: 15)))! + 16) : .absolute(0)))
                 
                 let group =  NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
@@ -517,7 +519,9 @@ class PostTableViewCell: UITableViewCell  {
                 
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: "textViewCell", for: indexPath) as! TextViewCollectionViewCell
                 
-                let newText = item.replacingOccurrences(of: "<br>", with: "\n")
+                let textWithoutBr = item.replacingOccurrences(of: "<br>", with: "\n")
+                
+                let newText = textWithoutBr.replacingOccurrences(of: "<persent>", with: "%")
                 
                 (cell as! TextViewCollectionViewCell).textView.text = newText
                 
