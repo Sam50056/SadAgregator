@@ -869,7 +869,11 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             ratingView.rating = Double(data["rate"].stringValue)!
             
-            textView.text = data["text"].stringValue
+            let rateText = data["text"].stringValue
+            
+            let rateTextWithoutBr = rateText.replacingOccurrences(of: "<br>", with: "\n")
+            
+            textView.text = rateTextWithoutBr
             
             dateLabel.text = data["dt"].stringValue
             
