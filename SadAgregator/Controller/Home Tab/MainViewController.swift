@@ -20,6 +20,8 @@ class MainViewController: UIViewController {
     
     var refreshControl = UIRefreshControl()
     
+    let activityController = UIActivityIndicatorView()
+    
     let realm = try! Realm()
     
     var key : String?
@@ -142,7 +144,7 @@ class MainViewController: UIViewController {
         
         checkKeysDataManager.getKeysData(key: key)
         
-        showSimpleCircleAnimation()
+        showSimpleCircleAnimation(activityController: activityController)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -384,7 +386,7 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                 
             }
             
-            stopSimpleCircleAnimation()
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
     }

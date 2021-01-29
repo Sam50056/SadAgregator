@@ -90,6 +90,8 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
         }
     }
     
+    let activityController = UIActivityIndicatorView()
+    
     var selectedPostId = ""
     
     override func viewDidLoad() {
@@ -126,7 +128,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             
             getVendPostsPaggingDataManager.getGetVendPostsPaggingData(key: key, vendId: thisVendId, page: page)
             
-            showSimpleCircleAnimation()
+            showSimpleCircleAnimation(activityController: activityController)
             
         }
         
@@ -146,7 +148,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             
             refreshControl!.endRefreshing()
             
-            stopSimpleCircleAnimation()
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
         

@@ -10,8 +10,6 @@ import RealmSwift
 import SwiftyJSON
 import MobileCoreServices
 
-fileprivate var loadingView : UIView?
-
 //MARK: - String
 
 extension String {
@@ -143,26 +141,23 @@ extension UIViewController{
 
 extension UIViewController {
     
-    func showSimpleCircleAnimation(){
+    func showSimpleCircleAnimation(activityController : UIActivityIndicatorView){
         
-        loadingView = UIView(frame: self.view.bounds)
+        activityController.center = self.view.center
         
-        let activityController = UIActivityIndicatorView(style: .large)
+        activityController.style = .large
         
-        activityController.center = loadingView!.center
         activityController.startAnimating()
         
-        loadingView?.addSubview(activityController)
-        
-        self.view.addSubview(loadingView!)
+        self.view.addSubview(activityController)
         
     }
     
-    func stopSimpleCircleAnimation(){
+    func stopSimpleCircleAnimation(activityController : UIActivityIndicatorView){
         
-        loadingView?.removeFromSuperview()
+        activityController.removeFromSuperview()
         
-        loadingView = nil
+        activityController.stopAnimating()
         
     }
     

@@ -18,6 +18,8 @@ class PointViewController: UIViewController {
     
     var refreshControl = UIRefreshControl()
     
+    let activityController = UIActivityIndicatorView()
+    
     var key = ""
     
     var isLogged = false 
@@ -172,7 +174,7 @@ class PointViewController: UIViewController {
             
             activityPointDataManager.getActivityPointData(key: key, pointId: safeId)
             
-            showSimpleCircleAnimation()
+            showSimpleCircleAnimation(activityController: activityController)
             
         }
         
@@ -238,7 +240,7 @@ extension PointViewController : ActivityPointDataManagerDelegate {
             
             refreshControl.endRefreshing()
             
-            stopSimpleCircleAnimation()
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
     }

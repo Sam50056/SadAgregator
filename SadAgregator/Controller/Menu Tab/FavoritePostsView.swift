@@ -112,6 +112,8 @@ class FavoritePostsViewController : UITableViewController {
         }
     }
     
+    let activityController = UIActivityIndicatorView()
+    
     var selectedPostId = ""
     
     var searchText = ""
@@ -130,7 +132,7 @@ class FavoritePostsViewController : UITableViewController {
         
         myPostsDataManager.getMyPostsData(key: key, page: page)
         
-        showSimpleCircleAnimation()
+        showSimpleCircleAnimation(activityController: activityController)
         
     }
     
@@ -431,6 +433,8 @@ extension FavoritePostsViewController : MyPostsDataManagerDelegate {
             postsArray.append(contentsOf: data["posts"].arrayValue)
             
             tableView.reloadData()
+            
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
         

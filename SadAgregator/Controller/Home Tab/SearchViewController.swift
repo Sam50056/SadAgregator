@@ -18,6 +18,8 @@ class SearchViewController: UIViewController {
     
     let realm = try! Realm()
     
+    let activityController = UIActivityIndicatorView()
+    
     var key = ""
     
     var isLogged = false
@@ -134,7 +136,7 @@ class SearchViewController: UIViewController {
             getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
         }
         
-        showSimpleCircleAnimation()
+        showSimpleCircleAnimation(activityController: activityController)
         
     }
     
@@ -259,7 +261,7 @@ extension SearchViewController : SearchImageDataManagerDelegate{
             
             tableView.reloadSections([0,1,2], with: .none)
             
-            stopSimpleCircleAnimation()
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
         
@@ -331,7 +333,7 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
             
             tableView.reloadSections([0,1,2], with: .none)
             
-            stopSimpleCircleAnimation()
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
         

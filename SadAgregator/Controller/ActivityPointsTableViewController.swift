@@ -19,6 +19,8 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
     
     let searchController = UISearchController(searchResultsController: nil)
     
+    let activityController = UIActivityIndicatorView()
+    
     var searchBarIsEmpty : Bool{
         guard let text = searchController.searchBar.text else {return false}
         return text.isEmpty
@@ -66,7 +68,7 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
         }
         
-        showSimpleCircleAnimation()
+        showSimpleCircleAnimation(activityController: activityController)
         
     }
     
@@ -130,7 +132,7 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             
             tableView.reloadData()
             
-            stopSimpleCircleAnimation()
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
         
@@ -168,7 +170,7 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             
             tableView.reloadData()
             
-            stopSimpleCircleAnimation()
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
         

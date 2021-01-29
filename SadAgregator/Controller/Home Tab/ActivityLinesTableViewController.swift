@@ -11,6 +11,8 @@ import RealmSwift
 
 class ActivityLinesTableViewController: UITableViewController, TopLinesDataManagerDelegate {
     
+    let activityController = UIActivityIndicatorView()
+    
     let realm = try! Realm()
     
     var key = "" 
@@ -32,7 +34,7 @@ class ActivityLinesTableViewController: UITableViewController, TopLinesDataManag
         
         topLinesDataManager.getTopLinesData(key: "")
         
-        showSimpleCircleAnimation()
+        showSimpleCircleAnimation(activityController: activityController)
         
     }
     
@@ -63,7 +65,7 @@ class ActivityLinesTableViewController: UITableViewController, TopLinesDataManag
             
             tableView.reloadSections([0], with: .automatic)
             
-            stopSimpleCircleAnimation()
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
         

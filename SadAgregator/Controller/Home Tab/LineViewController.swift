@@ -17,6 +17,8 @@ class LineViewController: UIViewController {
     
     var refreshControl = UIRefreshControl()
     
+    let activityController = UIActivityIndicatorView()
+    
     var key : String = ""
     var thisLineId : String?
     
@@ -190,7 +192,7 @@ extension LineViewController : ActivityLineDataManagerDelegate{
             
             refreshControl.endRefreshing()
             
-            stopSimpleCircleAnimation()
+            stopSimpleCircleAnimation(activityController: activityController)
         }
         
     }
@@ -208,7 +210,7 @@ extension LineViewController : ActivityLineDataManagerDelegate{
             
             activityLineDataManager.getActivityData(key: key, lineId: safeId)
             
-            showSimpleCircleAnimation()
+            showSimpleCircleAnimation(activityController: activityController)
             
         }
         

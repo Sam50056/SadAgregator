@@ -32,6 +32,8 @@ class FavoriteVendsViewController : UITableViewController {
     
     let realm = try! Realm()
     
+    let activityController = UIActivityIndicatorView()
+    
     var key = ""
     
     lazy var myVendorsDataManager = MyVendorsDataManager()
@@ -91,7 +93,7 @@ class FavoriteVendsViewController : UITableViewController {
         
         myVendorsDataManager.getMyVendorsData(key: key, page: page)
         
-        showSimpleCircleAnimation()
+        showSimpleCircleAnimation(activityController: activityController)
         
     }
     
@@ -212,7 +214,7 @@ extension FavoriteVendsViewController : MyVendorsDataManagerDelegate {
             
             refreshControl?.endRefreshing()
             
-            stopSimpleCircleAnimation()
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
         

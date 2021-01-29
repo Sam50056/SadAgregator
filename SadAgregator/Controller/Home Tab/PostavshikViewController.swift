@@ -126,6 +126,8 @@ class PostavshikViewController: UIViewController {
     
     var refreshControl = UIRefreshControl()
     
+    let activityController = UIActivityIndicatorView()
+    
     var selectedPostId = ""
     var selectedPointId = ""
     
@@ -155,7 +157,7 @@ class PostavshikViewController: UIViewController {
             
             vendorCardDataManager.getVendorCardData(key: key, vendorId: safeId)
             
-            showSimpleCircleAnimation()
+            showSimpleCircleAnimation(activityController: activityController)
             
         }
         
@@ -292,7 +294,7 @@ extension PostavshikViewController : VendorCardDataManagerDelegate{
             
             refreshControl.endRefreshing()
             
-            stopSimpleCircleAnimation()
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
         
