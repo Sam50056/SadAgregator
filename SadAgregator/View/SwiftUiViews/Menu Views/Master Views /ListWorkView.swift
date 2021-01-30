@@ -52,6 +52,9 @@ struct ListWorkView: View {
                                 }.onAppear{
                                     masterViewModel.extButtonPressed()
                                 }
+                                .onDisappear{
+                                    masterViewModel.getSearchListWorkData()
+                                }
                                 .navigationBarTitle(Text(masterViewModel.currentViewData!["capt_list_exists"].stringValue), displayMode: .inline)
                                
                                , isActive : $masterViewModel.shouldShowSecondScreenInListWork){
