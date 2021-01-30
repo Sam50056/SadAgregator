@@ -177,6 +177,7 @@ struct ProfileView: View {
                                     .frame(maxWidth: .infinity)
                                     .padding()
                                     .background(Color(#colorLiteral(red: 0.9591086507, green: 0.9659582973, blue: 0.9731834531, alpha: 1)))
+                                    .foregroundColor(.black)
                                     
                                 }
                                 
