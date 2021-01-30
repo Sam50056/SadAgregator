@@ -352,8 +352,18 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                 
                 refresh(self)
                 
+                //Update UN token on server
                 if let unToken = UserDefaults.standard.string(forKey: K.UNToken){
-                    UpdateDeviceDataManager().updateDevice(key: key!, token: unToken)
+                    
+                    //                    print("IS TOKEN SAME? : -\(unToken == data["dev_ios"].arrayValue[0].stringValue)")
+                    
+                    //Checking if current token is the same as saved on server
+                    if unToken != data["dev_ios"].arrayValue[0].stringValue{
+                        
+                        UpdateDeviceDataManager().updateDevice(key: key!, token: unToken)
+                        
+                    }
+                    
                 }
                 
             }
@@ -383,7 +393,7 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                 }
                 
                 alertController.addAction(action)
-             
+                
                 present(alertController, animated: true, completion: nil)
                 
             }
