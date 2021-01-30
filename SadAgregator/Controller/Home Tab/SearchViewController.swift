@@ -515,12 +515,24 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
                 
                 let itemType = item["type"].stringValue
                 
-                if itemType == "today"{
-                    todayLabel.text = "Сегодня: \(item["cnt"].stringValue)"
-                }else if itemType == "ystd"{
-                    yesterdaylabel.text = "Вчера: \(item["cnt"].stringValue)"
-                }else if itemType == "others"{
-                    othersLabel.text = "Всего: \(item["cnt"].stringValue)"
+                let vsegoText = item["cnt"].stringValue
+                
+                if vsegoText == "0"{
+                    
+                    todayLabel.text = ""
+                    yesterdaylabel.text = "Нет результатов"
+                    othersLabel.text = ""
+                    
+                }else{
+                    
+                    if itemType == "today"{
+                        todayLabel.text = "Сегодня: \(item["cnt"].stringValue)"
+                    }else if itemType == "ystd"{
+                        yesterdaylabel.text = "Вчера: \(item["cnt"].stringValue)"
+                    }else if itemType == "others"{
+                        othersLabel.text = "Всего: \(vsegoText)"
+                    }
+                    
                 }
                 
             }
