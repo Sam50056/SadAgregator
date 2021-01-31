@@ -15,6 +15,8 @@
 		2201672C25A77BB50072BFE7 /* SetVendActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201672B25A77BB50072BFE7 /* SetVendActionsDataManager.swift */; };
 		2201673125A8BADD0072BFE7 /* SendFileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201673025A8BADD0072BFE7 /* SendFileDataManager.swift */; };
 		2201673C25A952040072BFE7 /* SearchImageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201673B25A952040072BFE7 /* SearchImageDataManager.swift */; };
+		22029C1B25C63ED600CE79BC /* GetForExportDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22029C1A25C63ED600CE79BC /* GetForExportDataManager.swift */; };
+		22029C1E25C64C0600CE79BC /* ToExpQueueDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22029C1D25C64C0500CE79BC /* ToExpQueueDataManager.swift */; };
 		2203F15C25BF243A007DBFFD /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203F15A25BF243A007DBFFD /* EmptyTableViewCell.swift */; };
 		2203F15D25BF243A007DBFFD /* EmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203F15B25BF243A007DBFFD /* EmptyTableViewCell.xib */; };
 		2203F16625BFC35D007DBFFD /* EditVigruzkaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203F16525BFC35D007DBFFD /* EditVigruzkaViewController.swift */; };
@@ -154,6 +156,8 @@
 		2201672B25A77BB50072BFE7 /* SetVendActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVendActionsDataManager.swift; sourceTree = "<group>"; };
 		2201673025A8BADD0072BFE7 /* SendFileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFileDataManager.swift; sourceTree = "<group>"; };
 		2201673B25A952040072BFE7 /* SearchImageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchImageDataManager.swift; sourceTree = "<group>"; };
+		22029C1A25C63ED600CE79BC /* GetForExportDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetForExportDataManager.swift; sourceTree = "<group>"; };
+		22029C1D25C64C0500CE79BC /* ToExpQueueDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToExpQueueDataManager.swift; sourceTree = "<group>"; };
 		2203F15A25BF243A007DBFFD /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		2203F15B25BF243A007DBFFD /* EmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyTableViewCell.xib; sourceTree = "<group>"; };
 		2203F16525BFC35D007DBFFD /* EditVigruzkaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVigruzkaViewController.swift; sourceTree = "<group>"; };
@@ -318,6 +322,8 @@
 				22943FE825ABDB1900A742B8 /* PostRedirectDataManager.swift */,
 				22C5D02A25B0E9DE001C69C6 /* ExportPeersDataManager.swift */,
 				22C5D02D25B1EC9D001C69C6 /* SetDefaultPeerDataManager.swift */,
+				22029C1A25C63ED600CE79BC /* GetForExportDataManager.swift */,
+				22029C1D25C64C0500CE79BC /* ToExpQueueDataManager.swift */,
 			);
 			path = "Post Managers";
 			sourceTree = "<group>";
@@ -1012,6 +1018,7 @@
 				2290486B256E4978000B7A28 /* PopTableViewCell.swift in Sources */,
 				2290485C256DAC80000B7A28 /* VendTableViewCell.swift in Sources */,
 				22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */,
+				22029C1E25C64C0600CE79BC /* ToExpQueueDataManager.swift in Sources */,
 				227ADAAA25892D8E009B32EC /* ReviewUpdateDataManager.swift in Sources */,
 				2284EADD25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift in Sources */,
 				226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */,
@@ -1075,6 +1082,7 @@
 				225957AA2596A6450088C7E4 /* GetStepDataManager.swift in Sources */,
 				2201672625A771E10072BFE7 /* SetPointActionsDataManager.swift in Sources */,
 				22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */,
+				22029C1B25C63ED600CE79BC /* GetForExportDataManager.swift in Sources */,
 				22C9221325814CA40063B5D4 /* MenuView.swift in Sources */,
 				2284EAD625BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift in Sources */,
 				22C5D02825B0E065001C69C6 /* PeerViewController.swift in Sources */,

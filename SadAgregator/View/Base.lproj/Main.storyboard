@@ -1568,10 +1568,10 @@
             </objects>
             <point key="canvasLocation" x="-2540" y="2376.5402843601896"/>
         </scene>
-        <!--Vigruzka View Controller-->
+        <!--Edit Vigruzka View Controller-->
         <scene sceneID="fzp-Ik-g11">
             <objects>
-                <viewController storyboardIdentifier="EditVigruzkaVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zb2-Up-m4m" customClass="VigruzkaViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditVigruzkaVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zb2-Up-m4m" customClass="EditVigruzkaViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3mb-rE-2fL">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1676,6 +1676,7 @@
                     <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="doneButton" destination="nBq-xP-x35" id="lnu-Du-Uvu"/>
+                        <outlet property="textView" destination="5iS-V7-XUk" id="AC0-6x-mXf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v2C-Wr-jEK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

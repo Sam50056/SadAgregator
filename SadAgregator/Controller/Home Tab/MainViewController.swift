@@ -107,6 +107,8 @@ class MainViewController: UIViewController {
         }
     }
     
+    var shouldPostDoVigruzka = false
+    
     var selectedLineId : String?
     var selectedPointId : String?
     var selectedVendId : String?
@@ -766,6 +768,18 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         
         cell.peerButtonCallback = { [self] in
             
+            shouldPostDoVigruzka = false
+            
+            ExportPeersDataManager(delegate: self).getExportPeersData(key: key!)
+            
+        }
+        
+        cell.vigruzitButtonCallback = { [self] in
+            
+            shouldPostDoVigruzka = true
+            
+            selectedPostId = postId
+            
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key!)
             
         }
@@ -909,6 +923,24 @@ extension MainViewController : ExportPeersDataManagerDelegate{
                         
                         tableView.reloadData()
                         
+                        if shouldPostDoVigruzka{
+                            
+                            if mainData!["export"]["fast"].intValue == 0{
+                                
+                                let editVigruzkaVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditVigruzkaVC") as! EditVigruzkaViewController
+                                
+                                editVigruzkaVC.thisPostId = selectedPostId
+                                
+                                present(editVigruzkaVC, animated: true, completion: nil)
+                                
+                            }else{
+                                
+                                ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key!, postId: selectedPostId)
+                                
+                            }
+                            
+                        }
+                        
                     }
                     
                 }
@@ -923,6 +955,34 @@ extension MainViewController : ExportPeersDataManagerDelegate{
     
     func didFailGettingExportPeersDataWithError(error: String) {
         print("Error with ExportPeersDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - ToExpQueueDataManagerDelegate
+
+extension MainViewController : ToExpQueueDataManagerDelegate{
+    
+    func didGetToExpQueueData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                print("ToExpQueueDataManager Request Sent")
+                
+            }else{
+                
+                showSimpleAlertWithOkButton(title: "Ошибка отправки запроса", message: nil, dismissButtonText: "Закрыть")
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingToExpQueueDataWithError(error: String) {
+        print("Error with ToExpQueueDataManager : \(error)")
     }
     
 }

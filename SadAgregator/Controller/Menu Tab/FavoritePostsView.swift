@@ -114,6 +114,8 @@ class FavoritePostsViewController : UITableViewController {
     
     let activityController = UIActivityIndicatorView()
     
+    var shouldPostDoVigruzka = false
+    
     var selectedPostId = ""
     
     var searchText = ""
@@ -259,8 +261,19 @@ class FavoritePostsViewController : UITableViewController {
         
         cell.peerButtonCallback = { [self] in
             
+            shouldPostDoVigruzka = false
+            
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
             
+        }
+        
+        cell.vigruzitButtonCallback = { [self] in
+            
+            shouldPostDoVigruzka = true
+            
+            selectedPostId = postId
+            
+            ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
         }
         
         if let export = export{
@@ -402,6 +415,24 @@ extension FavoritePostsViewController : ExportPeersDataManagerDelegate{
                         
                         tableView.reloadData()
                         
+                        if shouldPostDoVigruzka{
+                            
+                            if favoritePostsData!["export"]["fast"].intValue == 0{
+                                
+                                let editVigruzkaVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditVigruzkaVC") as! EditVigruzkaViewController
+                                
+                                editVigruzkaVC.thisPostId = selectedPostId
+                                
+                                present(editVigruzkaVC, animated: true, completion: nil)
+                                
+                            }else{
+                                
+                                ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: selectedPostId)
+                                
+                            }
+                            
+                        }
+                        
                     }
                     
                 }
@@ -419,6 +450,35 @@ extension FavoritePostsViewController : ExportPeersDataManagerDelegate{
     }
     
 }
+
+//MARK: - ToExpQueueDataManagerDelegate
+
+extension FavoritePostsViewController : ToExpQueueDataManagerDelegate{
+    
+    func didGetToExpQueueData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                print("ToExpQueueDataManager Request Sent")
+                
+            }else{
+                
+                showSimpleAlertWithOkButton(title: "Ошибка отправки запроса", message: nil, dismissButtonText: "Закрыть")
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingToExpQueueDataWithError(error: String) {
+        print("Error with ToExpQueueDataManager : \(error)")
+    }
+    
+}
+
 
 //MARK: - MyVendorsDataManagerDelegate
 
