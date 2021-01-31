@@ -358,7 +358,9 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                     //                    print("IS TOKEN SAME? : -\(unToken == data["dev_ios"].arrayValue[0].stringValue)")
                     
                     //Checking if current token is the same as saved on server
-                    if unToken != data["dev_ios"].arrayValue[0].stringValue{
+                    let devIos = data["dev_ios"].arrayValue
+                    
+                    if !devIos.isEmpty,unToken != devIos[0].stringValue{
                         
                         UpdateDeviceDataManager().updateDevice(key: key!, token: unToken)
                         
