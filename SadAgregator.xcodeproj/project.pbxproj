@@ -26,6 +26,7 @@
 		221C479C25B4C7E200290E09 /* DescriptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C479A25B4C7E200290E09 /* DescriptionCollectionViewCell.swift */; };
 		221C479D25B4C7E200290E09 /* DescriptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C479B25B4C7E200290E09 /* DescriptionCollectionViewCell.xib */; };
 		22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22216A4325853FCC00D5248B /* RegisterDataManager.swift */; };
+		222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */; };
 		2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */; };
 		2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */; };
 		22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E97259116270097C9E6 /* ProfileViewModel.swift */; };
@@ -167,6 +168,7 @@
 		221C479A25B4C7E200290E09 /* DescriptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		221C479B25B4C7E200290E09 /* DescriptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionCollectionViewCell.xib; sourceTree = "<group>"; };
 		22216A4325853FCC00D5248B /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
+		222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUpdateDataManager.swift; sourceTree = "<group>"; };
 		2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVendsView.swift; sourceTree = "<group>"; };
 		2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVendorsDataManager.swift; sourceTree = "<group>"; };
 		22423E97259116270097C9E6 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -841,6 +843,7 @@
 				22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */,
 				2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */,
 				227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */,
+				222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */,
 				22782909258BB60E00B435FA /* GetMyReviewDataManager.swift */,
 				229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */,
 				2201672825A777A20072BFE7 /* GetVendActionsDataManager.swift */,
@@ -999,6 +1002,7 @@
 			files = (
 				225957A52596A2A70088C7E4 /* MasterViewModel.swift in Sources */,
 				22BF1A0D25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift in Sources */,
+				222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */,
 				22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */,
 				221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */,
 				229FE69225706B6B0001FF54 /* GetSearchPageDataManager.swift in Sources */,
