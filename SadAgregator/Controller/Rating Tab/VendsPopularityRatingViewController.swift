@@ -341,6 +341,16 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
             cell.revImageView.isHidden = false
         }
         
+        let imgs = data["imgs"].stringValue
+        
+        if imgs == "0" || imgs == "" {
+            cell.imgsLabel.text = ""
+            cell.imgsImageView.isHidden = true
+        }else{
+            cell.imgsLabel.text = imgs
+            cell.imgsImageView.isHidden = false
+        }
+        
         let prices = data["prices"].stringValue
         let pricesAvg = data["prices_avg"].stringValue
         let pop = data["popularity"].intValue

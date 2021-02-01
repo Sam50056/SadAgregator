@@ -17,9 +17,11 @@ class VendorRatingTableViewCell: UITableViewCell , UITableViewDelegate , UITable
     
     @IBOutlet weak var peoplesLabel : UILabel!
     @IBOutlet weak var revLabel: UILabel!
+    @IBOutlet weak var imgsLabel : UILabel!
     
     @IBOutlet weak var peoplesImageView : UIImageView!
     @IBOutlet weak var revImageView: UIImageView!
+    @IBOutlet weak var imgsImageView : UIImageView!
     
     @IBOutlet weak var dateLabel: UILabel!
     
