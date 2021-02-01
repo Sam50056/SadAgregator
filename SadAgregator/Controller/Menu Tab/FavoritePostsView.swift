@@ -263,6 +263,8 @@ class FavoritePostsViewController : UITableViewController {
             
             shouldPostDoVigruzka = false
             
+            showSimpleCircleAnimation(activityController: activityController)
+            
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
             
         }
@@ -272,6 +274,8 @@ class FavoritePostsViewController : UITableViewController {
             shouldPostDoVigruzka = true
             
             selectedPostId = postId
+            
+            showSimpleCircleAnimation(activityController: activityController)
             
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
         }
@@ -400,6 +404,8 @@ extension FavoritePostsViewController : ExportPeersDataManagerDelegate{
     func didGetExportPeersData(data: JSON) {
         
         DispatchQueue.main.async { [self] in
+            
+            stopSimpleCircleAnimation(activityController: activityController)
             
             if data["result"].intValue == 1{
                 

@@ -257,6 +257,8 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             
             shouldPostDoVigruzka = false
             
+            showSimpleCircleAnimation(activityController: activityController)
+            
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
             
         }
@@ -266,6 +268,8 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             shouldPostDoVigruzka = true
             
             selectedPostId = postId
+            
+            showSimpleCircleAnimation(activityController: activityController)
             
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
         }
@@ -396,6 +400,8 @@ extension VendorPostsTableViewController : ExportPeersDataManagerDelegate{
     func didGetExportPeersData(data: JSON) {
         
         DispatchQueue.main.async { [self] in
+            
+            stopSimpleCircleAnimation(activityController: activityController)
             
             if data["result"].intValue == 1{
                 

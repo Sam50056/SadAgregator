@@ -699,6 +699,8 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             
             shouldPostDoVigruzka = false
             
+            showSimpleCircleAnimation(activityController: activityController)
+            
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
             
         }
@@ -708,6 +710,8 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             shouldPostDoVigruzka = true
             
             selectedPostId = postId
+            
+            showSimpleCircleAnimation(activityController: activityController)
             
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
         }
@@ -836,6 +840,8 @@ extension PointViewController : ExportPeersDataManagerDelegate{
     func didGetExportPeersData(data: JSON) {
         
         DispatchQueue.main.async { [self] in
+            
+            stopSimpleCircleAnimation(activityController: activityController)
             
             if data["result"].intValue == 1{
                 
