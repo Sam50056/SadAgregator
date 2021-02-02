@@ -106,8 +106,6 @@ class SearchViewController: UIViewController {
         }
     }
     
-    var shouldPostDoVigruzka = false
-    
     var selectedPostId = ""
     var selectedPointId = ""
     var selectedVendId = ""
@@ -599,8 +597,6 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         cell.peerButtonCallback = { [self] in
             
-            shouldPostDoVigruzka = false
-            
             showSimpleCircleAnimation(activityController: activityController)
             
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
@@ -609,13 +605,20 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         cell.vigruzitButtonCallback = { [self] in
             
-            shouldPostDoVigruzka = true
+            if searchData!["export"]["fast"].intValue == 0{
+                
+                let editVigruzkaVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditVigruzkaVC") as! EditVigruzkaViewController
+                
+                editVigruzkaVC.thisPostId = selectedPostId
+                
+                present(editVigruzkaVC, animated: true, completion: nil)
+                
+            }else{
+                
+                ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: selectedPostId)
+                
+            }
             
-            selectedPostId = postId
-            
-            showSimpleCircleAnimation(activityController: activityController)
-            
-            ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
         }
         
         if let export = export{
@@ -768,24 +771,6 @@ extension SearchViewController : ExportPeersDataManagerDelegate{
                         searchData!["export"]["type"].stringValue = newType
                         
                         tableView.reloadData()
-                        
-                        if shouldPostDoVigruzka{
-                            
-                            if searchData!["export"]["fast"].intValue == 0{
-                                
-                                let editVigruzkaVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditVigruzkaVC") as! EditVigruzkaViewController
-                                
-                                editVigruzkaVC.thisPostId = selectedPostId
-                                
-                                present(editVigruzkaVC, animated: true, completion: nil)
-                                
-                            }else{
-                                
-                                ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: selectedPostId)
-                                
-                            }
-                            
-                        }
                         
                     }
                     

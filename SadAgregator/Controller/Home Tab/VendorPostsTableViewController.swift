@@ -92,8 +92,6 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
     
     let activityController = UIActivityIndicatorView()
     
-    var shouldPostDoVigruzka = false
-    
     var selectedPostId = ""
     
     override func viewDidLoad() {
@@ -255,8 +253,6 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
         
         cell.peerButtonCallback = { [self] in
             
-            shouldPostDoVigruzka = false
-            
             showSimpleCircleAnimation(activityController: activityController)
             
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
@@ -265,13 +261,20 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
         
         cell.vigruzitButtonCallback = { [self] in
             
-            shouldPostDoVigruzka = true
+            if pageData!["export"]["fast"].intValue == 0{
+                
+                let editVigruzkaVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditVigruzkaVC") as! EditVigruzkaViewController
+                
+                editVigruzkaVC.thisPostId = selectedPostId
+                
+                present(editVigruzkaVC, animated: true, completion: nil)
+                
+            }else{
+                
+                ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: selectedPostId)
+                
+            }
             
-            selectedPostId = postId
-            
-            showSimpleCircleAnimation(activityController: activityController)
-            
-            ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
         }
         
         if let export = export{
@@ -416,24 +419,6 @@ extension VendorPostsTableViewController : ExportPeersDataManagerDelegate{
                         pageData!["export"]["type"].stringValue = newType
                         
                         tableView.reloadData()
-                        
-                        if shouldPostDoVigruzka{
-                            
-                            if pageData!["export"]["fast"].intValue == 0{
-                                
-                                let editVigruzkaVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditVigruzkaVC") as! EditVigruzkaViewController
-                                
-                                editVigruzkaVC.thisPostId = selectedPostId
-                                
-                                present(editVigruzkaVC, animated: true, completion: nil)
-                                
-                            }else{
-                                
-                                ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: selectedPostId)
-                                
-                            }
-                            
-                        }
                         
                     }
                     
