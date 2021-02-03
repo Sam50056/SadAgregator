@@ -129,6 +129,7 @@ struct MasterNastroekView: View {
                                 })
         
         .onAppear{
+            masterViewModel.loadUserData()
             masterViewModel.getStepData()
         }
         .onDisappear{

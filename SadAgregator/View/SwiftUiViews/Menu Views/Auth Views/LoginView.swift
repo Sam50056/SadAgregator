@@ -190,6 +190,8 @@ extension LoginView : AuthDataManagerDelegate {
                         userDataObject.key = data["key"].stringValue
                     }
                     
+                    menuViewModel.loadUserData()
+                    
                 }
                 
                 menuViewModel.isLogged = true

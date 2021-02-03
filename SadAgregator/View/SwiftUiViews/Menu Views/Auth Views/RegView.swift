@@ -204,6 +204,8 @@ extension RegView : RegisterDataManagerDelegate {
                         userDataObject.key = data["key"].stringValue
                     }
                     
+                    menuViewModel.loadUserData()
+                    
                 }
                 
                 menuViewModel.isLogged = true

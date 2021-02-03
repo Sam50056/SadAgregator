@@ -203,7 +203,10 @@ extension MenuViewModel : AuthSocialDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            guard let newKey = data["token"].string else {return}
+            guard let newKey = data["token"].string else {
+                print("Error with token in AuthSocialDataManager")
+                return
+            }
             
             showModalLogIn = false
             showModalReg = false
@@ -215,6 +218,8 @@ extension MenuViewModel : AuthSocialDataManagerDelegate{
                     try! realm.write{
                         userDataObject.key = newKey
                     }
+                    
+                    loadUserData()
                     
                 }
                 

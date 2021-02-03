@@ -100,8 +100,6 @@ class MasterViewModel : ObservableObject{
     }
     
     init() {
-        
-        loadUserData()
         //        key = "MtwFLkIHlHWZXwRsBVFHqYL141455244"
         
         //Setting Delegates
