@@ -588,7 +588,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             let selectedInfoCell = infoCells[indexPath.row]
             
-            if selectedInfoCell.image == UIImage(named: "vk-2"){
+            if selectedInfoCell.image == UIImage(named: "vk-3"){
                 let urlString = "https://vk.com/\((vendorData!["vk_link"].stringValue).dropFirst())"
                 if let url = URL(string: urlString){
                     
@@ -663,7 +663,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 leftLabelText = "Группа"
             }
             
-            infoCells.append(InfoCellObject(image: UIImage(named: "vk-2")!, leftLabelText: leftLabelText, rightLabelText: vkLink, shouldRightLabelBeBlue: true))
+            infoCells.append(InfoCellObject(image: UIImage(named: "vk-3")!, leftLabelText: leftLabelText, rightLabelText: vkLink, shouldRightLabelBeBlue: true))
             
         }
         
