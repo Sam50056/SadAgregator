@@ -154,7 +154,7 @@ struct ProfileView: View {
                                     .frame(maxWidth: .infinity)
                                     .padding()
                                     .foregroundColor(Color(.systemBlue))
-                                    .background(Color(#colorLiteral(red: 0.9591086507, green: 0.9659582973, blue: 0.9731834531, alpha: 1)))
+                                    .background(Color("gray"))
                                     .padding(.top , 8)
                                     
                                 }
@@ -169,15 +169,16 @@ struct ProfileView: View {
                                     HStack{
                                         
                                         Image(systemName: "menubar.arrow.up.rectangle")
+                                            .foregroundColor(Color("blackwhite"))
                                         
                                         Text("ВСЕ НАСТРОЙКИ ПАРСЕРА")
                                             .fontWeight(.semibold)
+                                            .foregroundColor(Color("blackwhite"))
                                         
                                     }
                                     .frame(maxWidth: .infinity)
                                     .padding()
-                                    .background(Color(#colorLiteral(red: 0.9591086507, green: 0.9659582973, blue: 0.9731834531, alpha: 1)))
-                                    .foregroundColor(.black)
+                                    .background(Color("gray"))
                                     
                                 }
                                 
@@ -222,7 +223,7 @@ struct ProfileView: View {
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical , 14)
                                             .foregroundColor(Color(.systemBlue))
-                                            .background(Color(#colorLiteral(red: 0.9622963071, green: 0.9662981629, blue: 0.9730395675, alpha: 1)))
+                                            .background(Color("gray"))
                                             .cornerRadius(8)
                                             
                                         }
@@ -272,7 +273,7 @@ struct ProfileView: View {
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical , 14)
                                             .foregroundColor(Color(.systemBlue))
-                                            .background(Color(#colorLiteral(red: 0.9622963071, green: 0.9662981629, blue: 0.9730395675, alpha: 1)))
+                                            .background(Color("gray"))
                                             .cornerRadius(8)
                                             
                                         }
@@ -438,7 +439,7 @@ struct PodkluchitVkVigruzkuView : View{
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
             .foregroundColor(Color(.systemBlue))
-            .background(Color(.white))
+            .background(Color("whiteblack"))
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color(#colorLiteral(red: 0.3157836497, green: 0.5058068037, blue: 0.7203877568, alpha: 1)))
@@ -476,7 +477,7 @@ struct PodkluchitOkVigruzkuView : View{
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
             .foregroundColor(Color(.systemOrange))
-            .background(Color(.white))
+            .background(Color("whiteblack"))
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color(.systemOrange))

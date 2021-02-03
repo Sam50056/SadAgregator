@@ -62,11 +62,11 @@ struct SimpleReqView: View {
                         .font(.system(size: 18))
                         .padding(16)
                         .frame(maxWidth: .infinity)
-                        .background(answer.rec == 1 ? Color(#colorLiteral(red: 0.9177419543, green: 0.9516320825, blue: 0.9884006381, alpha: 1)) : Color.white)
+                        .background(answer.rec == 1 ? Color("highlited") : Color("gray"))
                         .cornerRadius(8)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color(#colorLiteral(red: 0.8500244617, green: 0.8551172614, blue: 0.854884088, alpha: 1)))
+                                .stroke(Color("gray"))
                         )
                         
                     }

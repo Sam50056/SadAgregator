@@ -16,8 +16,8 @@ class OptionCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        view.backgroundColor = #colorLiteral(red: 0.9598904252, green: 0.9648228288, blue: 0.9732922912, alpha: 1)
         view.layer.cornerRadius = 8
+        
     }
 
 }

@@ -285,7 +285,7 @@ struct MenuView: View {
                                         .font(.custom("", size: 16))
                                     
                                 }
-                                .foregroundColor(.black)
+                                .foregroundColor(Color("blackwhite"))
                                 .padding(.vertical, 5)
                                 
                             }

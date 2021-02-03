@@ -46,7 +46,7 @@ struct ListWorkView: View {
                                         
                                     }
                                     .padding()
-                                    .background(Color(.white))
+                                    .background(Color("whiteblack"))
                                     .frame(maxWidth: .infinity)
                                     
                                 }.onAppear{
@@ -66,18 +66,18 @@ struct ListWorkView: View {
                         Text("\(masterViewModel.extButtonTitleCount)")
                             .padding(.all , 8)
                             .font(.system(size: 14))
-                            .foregroundColor(Color(.white))
+                            .foregroundColor(Color("whiteblack"))
                             .background(Circle().foregroundColor(Color(.systemBlue)))
                         
                     }
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color(.white))
-                    .foregroundColor(Color.white)
+                    .background(Color("whiteblack"))
+                    .foregroundColor(Color("whiteblack"))
                     .cornerRadius(8)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color(#colorLiteral(red: 0.8500244617, green: 0.8551172614, blue: 0.854884088, alpha: 1)))
+                            .stroke(Color("searchbargray"))
                     )
                     
                 }
@@ -91,7 +91,7 @@ struct ListWorkView: View {
                     Image(systemName: "magnifyingglass")
                         .resizable()
                         .frame(width: 20, height: 20, alignment: .center)
-                        .foregroundColor(Color(.systemGray))
+                        .foregroundColor(Color("searchbargray"))
                     
                     TextField(masterViewModel.currentViewData!["edt_place_holder"].stringValue, text: $masterViewModel.listWorkSearchTextFieldText)
                     
@@ -102,7 +102,7 @@ struct ListWorkView: View {
                 .cornerRadius(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color(#colorLiteral(red: 0.8500244617, green: 0.8551172614, blue: 0.854884088, alpha: 1)))
+                        .stroke(Color("searchbargray"))
                 )
                 
             }
@@ -119,7 +119,7 @@ struct ListWorkView: View {
                     
                 }
                 .padding()
-                .background(Color(.white))
+                .background(Color("whiteblack"))
                 .cornerRadius(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
@@ -189,6 +189,7 @@ struct ListWorkItemView : View , AddOrDeleteListWorkExtDataManagerDelegate{
                 VStack(alignment: .leading, spacing: 8){
                     
                     Text(item.capt)
+                        .foregroundColor(Color("whiteblack"))
                     
                     if item.subCapt != ""{
                         Text(item.subCapt)
@@ -243,6 +244,5 @@ struct ListWorkItemView : View , AddOrDeleteListWorkExtDataManagerDelegate{
     func didFailGettingAddOrDeleteListWorkExtDataWithError(error: String) {
         print("Error with AddOrDeleteListWorkExtDataManager : \(error)")
     }
-    
     
 }

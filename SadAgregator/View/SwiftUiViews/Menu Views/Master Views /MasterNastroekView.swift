@@ -15,7 +15,7 @@ struct MasterNastroekView: View {
         
         ZStack{
             
-            Color(#colorLiteral(red: 0.9590891004, green: 0.9660314918, blue: 0.9695957303, alpha: 1))
+            Color("whiteblack")
                 .edgesIgnoringSafeArea(.all)
             
             GeometryReader { geometry in

@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -86,13 +87,13 @@
                     </tableView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4wW-on-pIP">
                         <rect key="frame" x="0.0" y="121" width="341" height="1"/>
-                        <color key="backgroundColor" red="0.86005309133818653" green="0.86005309133818653" blue="0.86005309133818653" alpha="0.7731075665808671" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" name="gray"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="dng-bg-Omu"/>
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" name="whiteblack"/>
                 <constraints>
                     <constraint firstItem="p37-af-azI" firstAttribute="top" secondItem="qjw-mj-pfX" secondAttribute="bottom" constant="8" id="1aq-PF-6xU"/>
                     <constraint firstItem="qjw-mj-pfX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="74Y-4G-FpS"/>
@@ -124,5 +125,11 @@
     <resources>
         <image name="person.fill.checkmark" catalog="system" width="128" height="88"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
+        <namedColor name="gray">
+            <color red="0.960834682" green="0.96459835770000002" blue="0.97255879639999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="whiteblack">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

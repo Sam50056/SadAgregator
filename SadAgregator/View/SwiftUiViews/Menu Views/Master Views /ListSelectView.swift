@@ -57,18 +57,18 @@ struct ListSelectView: View {
                         Image(systemName: "magnifyingglass")
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .center)
-                            .foregroundColor(Color(.systemGray))
+                            .foregroundColor(Color("searchbargray"))
                         
                         TextField("Поиск по списку", text: $masterViewModel.listSelectTextFieldText)
                         
                     }
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color(.white))
+                    .background(Color("whiteblack"))
                     .cornerRadius(8)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color(#colorLiteral(red: 0.8500244617, green: 0.8551172614, blue: 0.854884088, alpha: 1)))
+                            .stroke(Color("searchbargray"))
                     )
                     
                 }
@@ -86,6 +86,7 @@ struct ListSelectView: View {
                                     VStack(alignment: .leading, spacing: 8){
                                         
                                         Text(item.capt)
+                                            .foregroundColor(Color("blackwhite"))
                                         
                                         if item.hint != ""{
                                             Text(item.hint)
@@ -107,7 +108,7 @@ struct ListSelectView: View {
                                 Divider()
                                 
                             }
-                            .background(item.rec == 1 ? Color(#colorLiteral(red: 0.9177419543, green: 0.9516320825, blue: 0.9884006381, alpha: 1)) : Color.white)
+                            .background(item.rec == 1 ? Color("highlited") : Color("whiteblack"))
                             .onTapGesture {
                                 masterViewModel.selectListSelectViewAnswer(id: item.id)
                             }
@@ -117,11 +118,11 @@ struct ListSelectView: View {
                     }
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color(.white))
+                    .background(Color("whiteblack"))
                     .cornerRadius(8)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color(#colorLiteral(red: 0.8500244617, green: 0.8551172614, blue: 0.854884088, alpha: 1)))
+                            .stroke(Color("searchbargray"))
                     )
                     
                 }

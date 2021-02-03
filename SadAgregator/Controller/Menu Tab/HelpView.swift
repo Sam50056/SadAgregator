@@ -190,7 +190,7 @@ class HelpViewController : UITableViewController, HelpPageDataManagerDelegate {
                 
                 if data.shouldBackgroundBeWhite{
                     
-                    cell.backgroundColor = .white
+                    cell.backgroundColor = UIColor(named: "whiteblack")
                     
                 }else{
                     
