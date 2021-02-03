@@ -418,7 +418,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 3:
             
-            return vendorRevs.count
+            return vendorRevs.count < 3 ? vendorRevs.count : 3
             
         case 4:
             
@@ -575,6 +575,10 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         if indexPath.section == 2, indexPath.row == 1{
             
             self.performSegue(withIdentifier: "goToReviewUpdate", sender: self)
+           
+        }else if indexPath.section == 2, indexPath.row == 2{
+            
+            
             
         }else if indexPath.section == 5 || indexPath.section == 7{
             
@@ -838,7 +842,9 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
     
     func setUpRevCountLabel(cell : UITableViewCell) {
         
-        if let label = cell.viewWithTag(1) as? UILabel{
+        if let label = cell.viewWithTag(1) as? UILabel,
+           let smVseLabel = cell.viewWithTag(2) as? UILabel,
+           let smVseImageView = cell.viewWithTag(3) as? UIImageView{
             
             let revsCount = vendorRevs.count
             
@@ -853,6 +859,14 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             }
             
             label.text = "\(revsCount) \(trailingText)"
+            
+            if vendorRevs.count >= 3{
+                smVseLabel.isHidden = false
+                smVseImageView.isHidden = false
+            }else{
+                smVseLabel.isHidden = true
+                smVseImageView.isHidden = true
+            }
             
         }
         

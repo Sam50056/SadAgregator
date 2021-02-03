@@ -583,9 +583,29 @@
                                                         <constraint firstAttribute="height" constant="1" id="YNT-0A-W0D"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="См. все" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOR-Zf-qpv">
+                                                    <rect key="frame" x="297.66666666666669" y="13.333333333333336" width="51.666666666666686" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="QwC-aS-Lcl"/>
+                                                        <constraint firstAttribute="width" constant="51.670000000000002" id="ZDI-FO-BHx"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" systemColor="systemBlueColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="28y-Nf-xKP">
+                                                    <rect key="frame" x="349.33333333333331" y="15.33333333333333" width="12.666666666666686" height="13.333333333333337"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16.670000000000002" id="Bll-cl-mRK"/>
+                                                        <constraint firstAttribute="width" constant="12.67" id="WFA-d8-ca0"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="F5Y-8K-51p" firstAttribute="centerY" secondItem="eAC-LP-Lsl" secondAttribute="centerY" id="8L9-xt-wjG"/>
+                                                <constraint firstItem="QOR-Zf-qpv" firstAttribute="centerY" secondItem="eAC-LP-Lsl" secondAttribute="centerY" id="EVE-o2-fN0"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="28y-Nf-xKP" secondAttribute="trailing" constant="8" id="H4E-NU-A4w"/>
+                                                <constraint firstItem="28y-Nf-xKP" firstAttribute="leading" secondItem="QOR-Zf-qpv" secondAttribute="trailing" id="IcN-vg-3ZR"/>
                                                 <constraint firstItem="ATm-Bn-dGb" firstAttribute="leading" secondItem="eAC-LP-Lsl" secondAttribute="leading" id="Pu5-pG-5uR"/>
                                                 <constraint firstAttribute="bottom" secondItem="6S0-NZ-NER" secondAttribute="bottom" id="Xhc-j9-i3u"/>
                                                 <constraint firstItem="F5Y-8K-51p" firstAttribute="leading" secondItem="eAC-LP-Lsl" secondAttribute="leadingMargin" id="do3-y5-jCh"/>
@@ -593,6 +613,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="ATm-Bn-dGb" secondAttribute="trailing" id="hdB-UH-iVZ"/>
                                                 <constraint firstItem="ATm-Bn-dGb" firstAttribute="top" secondItem="eAC-LP-Lsl" secondAttribute="top" id="mFJ-qZ-HaJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="6S0-NZ-NER" secondAttribute="trailing" id="oDk-Lc-X3A"/>
+                                                <constraint firstItem="28y-Nf-xKP" firstAttribute="centerY" secondItem="QOR-Zf-qpv" secondAttribute="centerY" id="vHa-rh-AsG"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -3183,7 +3204,7 @@
         <image name="house.fill" catalog="system" width="128" height="106"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="menuIcon" width="24" height="24"/>
+        <image name="menuIcon" width="30" height="30"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <image name="person.fill.checkmark" catalog="system" width="128" height="88"/>
         <image name="photo" catalog="system" width="128" height="93"/>
@@ -3198,7 +3219,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="gray">
-            <color red="0.960834682" green="0.96459835770000002" blue="0.97255879639999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.96100002527236938" green="0.9649999737739563" blue="0.97299998998641968" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="whiteblack">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

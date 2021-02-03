@@ -68,6 +68,8 @@
 		2284EAD625BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284EAD525BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift */; };
 		2284EADA25BB196B00CC1D58 /* OKAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284EAD925BB196B00CC1D58 /* OKAuthService.swift */; };
 		2284EADD25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284EADC25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift */; };
+		2286AD0B25CB5EEE004EF0D7 /* VendorRevsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2286AD0A25CB5EEE004EF0D7 /* VendorRevsViewController.swift */; };
+		2286AD0F25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2286AD0E25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift */; };
 		228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB75C255BF96D002B4A96 /* AppDelegate.swift */; };
 		228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB75E255BF96D002B4A96 /* SceneDelegate.swift */; };
 		228CB761255BF96D002B4A96 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB760255BF96D002B4A96 /* MainViewController.swift */; };
@@ -211,6 +213,8 @@
 		2284EAD525BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignOKToAppIDDataManager.swift; sourceTree = "<group>"; };
 		2284EAD925BB196B00CC1D58 /* OKAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKAuthService.swift; sourceTree = "<group>"; };
 		2284EADC25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOkInfoDataManager.swift; sourceTree = "<group>"; };
+		2286AD0A25CB5EEE004EF0D7 /* VendorRevsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorRevsViewController.swift; sourceTree = "<group>"; };
+		2286AD0E25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVendRevsPagingDataManager.swift; sourceTree = "<group>"; };
 		228CB759255BF96D002B4A96 /* SadAgregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SadAgregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228CB75C255BF96D002B4A96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		228CB75E255BF96D002B4A96 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -776,6 +780,7 @@
 				229FE68D25700B120001FF54 /* SearchViewController.swift */,
 				22906B362578020300F00B0D /* PostavshikViewController.swift */,
 				226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */,
+				2286AD0A25CB5EEE004EF0D7 /* VendorRevsViewController.swift */,
 				227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */,
 				226D9444258D2179008CEC4A /* GalleryViewController.swift */,
 				22C5D02725B0E064001C69C6 /* PeerViewController.swift */,
@@ -849,6 +854,7 @@
 				2201672825A777A20072BFE7 /* GetVendActionsDataManager.swift */,
 				2201672B25A77BB50072BFE7 /* SetVendActionsDataManager.swift */,
 				226973FC25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift */,
+				2286AD0E25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift */,
 			);
 			path = "Vendor Managers";
 			sourceTree = "<group>";
@@ -1053,6 +1059,7 @@
 				22D90221259AC9EF009732CC /* AlbumsInProgressDataManager.swift in Sources */,
 				22BF1A1125A5E19100567DB7 /* LinePointsPaggingDataManager.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
+				2286AD0F25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift in Sources */,
 				22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */,
 				2201672C25A77BB50072BFE7 /* SetVendActionsDataManager.swift in Sources */,
 				2203F15C25BF243A007DBFFD /* EmptyTableViewCell.swift in Sources */,
@@ -1100,6 +1107,7 @@
 				2201671C25A669790072BFE7 /* GetPostActionsDataManager.swift in Sources */,
 				2201672925A777A20072BFE7 /* GetVendActionsDataManager.swift in Sources */,
 				229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */,
+				2286AD0B25CB5EEE004EF0D7 /* VendorRevsViewController.swift in Sources */,
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
 				2268869C25996B920079933D /* RefreshAlbsDataManager.swift in Sources */,
 				22782906258AC7FE00B435FA /* Extensions.swift in Sources */,
