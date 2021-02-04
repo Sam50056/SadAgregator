@@ -194,6 +194,10 @@ extension SearchViewController : UIImagePickerControllerDelegate , UINavigationC
             
             searchData = nil
             
+            searchTextField.text = ""
+            
+            searchText = ""
+            
             SendFileDataManager(delegate: self).sendPhotoMultipart(urlString: imageHashServer, fileUrl: safeFileUrl)
             
         }
