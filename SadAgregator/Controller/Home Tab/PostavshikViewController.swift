@@ -575,10 +575,18 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         if indexPath.section == 2, indexPath.row == 1{
             
             self.performSegue(withIdentifier: "goToReviewUpdate", sender: self)
-           
+            
         }else if indexPath.section == 2, indexPath.row == 2{
             
-            
+            if vendorRevs.count >= 3 {
+                
+                let vendorRevsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VendorRevsVC") as! VendorRevsViewController
+                
+                vendorRevsVC.thisVendId = thisVendorId
+                
+                navigationController?.pushViewController(vendorRevsVC, animated: true)
+                
+            }
             
         }else if indexPath.section == 5 || indexPath.section == 7{
             
