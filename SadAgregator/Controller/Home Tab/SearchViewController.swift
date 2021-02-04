@@ -120,7 +120,10 @@ class SearchViewController: UIViewController {
         searchView.layer.cornerRadius = 10
         
         tableView.separatorStyle = .none
+        
         tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
+        tableView.register(UINib(nibName: "EmptyTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCell")
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -374,7 +377,7 @@ extension SearchViewController : UITextFieldDelegate{
 extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -387,6 +390,8 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             return searchData?["help"] != nil ? (hintCellShouldBeShown ? 1 : 0) : 0
         case 2:
             return postsArray.count
+        case 3:
+            return searchData == nil ? 0 : (postsArray.count == 0 ? 1 : 0)
             
         default:
             fatalError("Invalid section")
@@ -424,6 +429,14 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
             setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: indexPath.row , export: searchData?["export"])
             
+        case 3:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath)
+            
+            (cell as! EmptyTableViewCell).label.text = "Нет результатов"
+            
+            (cell as! EmptyTableViewCell).imageView?.image = UIImage(systemName: "photo")
+            
         default:
             fatalError("Invalid Section")
             
@@ -448,6 +461,10 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         case 2:
             
             return K.postHeight
+            
+        case 3:
+            
+            return (UIScreen.main.bounds.height / 2)
             
         default:
             fatalError("Invalid Section")
