@@ -364,6 +364,8 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                         
                         UpdateDeviceDataManager().updateDevice(key: key!, token: unToken)
                         
+                    }else if devIos.isEmpty{
+                        UpdateDeviceDataManager().updateDevice(key: key!, token: unToken)
                     }
                     
                 }
