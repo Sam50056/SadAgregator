@@ -192,6 +192,8 @@ extension SearchViewController : UIImagePickerControllerDelegate , UINavigationC
         
         if let safeFileUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL , imageHashServer != ""{
             
+            searchData = nil
+            
             SendFileDataManager(delegate: self).sendPhotoMultipart(urlString: imageHashServer, fileUrl: safeFileUrl)
             
         }
@@ -256,13 +258,13 @@ extension SearchViewController : SearchImageDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            searchData = nil
+            searchData = data
             
             postsArray = data["posts"].arrayValue
             
             cntList = nil
             
-            tableView.reloadSections([0,1,2], with: .none)
+            tableView.reloadSections([0,1,2,3], with: .none)
             
             stopSimpleCircleAnimation(activityController: activityController)
             
@@ -334,7 +336,7 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
             
             cntList = data["cnt_list"].arrayValue
             
-            tableView.reloadSections([0,1,2], with: .none)
+            tableView.reloadSections([0,1,2,3], with: .none)
             
             stopSimpleCircleAnimation(activityController: activityController)
             
@@ -362,6 +364,8 @@ extension SearchViewController : UITextFieldDelegate{
             
             postsArray.removeAll()
             
+            searchData = nil
+            
             getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
             
         }
@@ -387,7 +391,13 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         case 0:
             return cntList == nil ? 0 : 1
         case 1:
-            return searchData?["help"] != nil ? (hintCellShouldBeShown ? 1 : 0) : 0
+            
+            if searchData != nil , searchData!["help"]["str"].stringValue != "" , hintCellShouldBeShown{
+                return 1
+            }else{
+                return 0
+            }
+            
         case 2:
             return postsArray.count
         case 3:
@@ -435,7 +445,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
             (cell as! EmptyTableViewCell).label.text = "Нет результатов"
             
-            (cell as! EmptyTableViewCell).imageView?.image = UIImage(systemName: "photo")
+            (cell as! EmptyTableViewCell).emptyImageView.image = UIImage(systemName: "photo")
             
         default:
             fatalError("Invalid Section")
