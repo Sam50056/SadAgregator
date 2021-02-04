@@ -44,7 +44,7 @@ class EditVigruzkaViewController: UIViewController {
         
         guard let thisPostId = thisPostId else { return }
         
-        let textWithBr = text.replacingOccurrences(of: "\n", with: "<br>")
+        let textWithBr = textView.text.replacingOccurrences(of: "\n", with: "<br>")
         let textWithPersent = textWithBr.replacingOccurrences(of: "%", with: "<persent>")
         
         ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: thisPostId, text: textWithPersent)
