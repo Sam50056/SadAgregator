@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 import IQKeyboardManagerSwift
 import YandexMobileMetrica
 import RealmSwift
@@ -77,14 +78,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        guard let aps = userInfo["aps"] as? [String: AnyObject] else {
+            completionHandler(.failed)
+            return
+        }
+        
+    }
+    
     // this method enables user permission
     func configureNotification(application: UIApplication) {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.badge, .sound, .alert]) { granted, _ in
             guard granted else { return }
+            self.getNotificationSettings()
+        }
+    }
+    
+    func getNotificationSettings() {
+        
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            
+            print("Notification settings: \(settings)")
+            
+            guard settings.authorizationStatus == .authorized else { return }
+            
             DispatchQueue.main.async {
-                application.registerForRemoteNotifications()
+                UIApplication.shared.registerForRemoteNotifications()
             }
+            
         }
     }
     
