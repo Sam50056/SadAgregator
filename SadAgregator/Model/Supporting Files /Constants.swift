@@ -10,6 +10,18 @@ import SwiftyJSON
 
 struct K {
     
+    //MARK: - Device Info
+    
+    static var appVersion : String {
+        
+        guard let safeAppVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else { fatalError("Can't get app's version") }
+        
+        // print("APP VERSION: \(safeAppVersion)")
+        
+        return safeAppVersion
+        
+    }
+    
     //MARK: - UserDefaults keys
     
     static let UNToken = "UNtoken" //User Notifications Token

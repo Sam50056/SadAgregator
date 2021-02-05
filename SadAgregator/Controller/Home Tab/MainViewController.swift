@@ -370,6 +370,20 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                     
                 }
                 
+                let appVersionFromServer = data["ios_app_ver"].stringValue
+                
+                if appVersionFromServer != "" , let appVersionFromServerDouble = Double(appVersionFromServer){
+                    
+                    if appVersionFromServerDouble > Double(K.appVersion)!{
+                        
+                        let newVersionVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewVersionVC") as! NewVersionViewController
+                        
+                        self.present(newVersionVC, animated: true, completion: nil)
+                        
+                    }
+                    
+                }
+                
             }
             
             //Message field from api
