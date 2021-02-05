@@ -23,6 +23,8 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     
+    @IBOutlet weak var addPhotoView : UIView!
+    
     var key : String?
     var vendId : String?
     var myRate : Double?
@@ -67,7 +69,7 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
             
         }
         
-        
+        addPhotoView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,7 +108,7 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
                
             }
             
-            let textViewTextWithTags = textView.text.replacingOccurrences(of: "\n", with: "<br>")
+            let textViewTextWithTags = (textView.text.replacingOccurrences(of: "\n", with: "<br>")).replacingOccurrences(of: "%", with: "<persent>")
             
             reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: vendId, rating: Int(ratingView.rating), title: titleTextField.text!, text: textViewTextWithTags, images : images)
             
@@ -205,7 +207,9 @@ extension ReviewUpdateViewController : GetMyReviewDataManagerDelegate{
             
             titleTextField.text = title
             
-            textView.text = text
+            let newText = (text.replacingOccurrences(of: "<br>", with: "\n")).replacingOccurrences(of: "<persent>", with: "%")
+            
+            textView.text = newText
             
             ratingView.rating = rate
             

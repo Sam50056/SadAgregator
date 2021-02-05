@@ -367,6 +367,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="qGQ-H1-zsO"/>
                     <connections>
+                        <outlet property="addPhotoView" destination="XKV-Py-OHO" id="Xzb-dX-mGO"/>
                         <outlet property="imagesCollectionView" destination="jVj-mn-5Pm" id="K0G-DY-UAt"/>
                         <outlet property="ratingView" destination="ShL-Z3-9Ko" id="ey8-38-nR6"/>
                         <outlet property="saveButton" destination="uqz-aI-sXG" id="9bd-gm-tTX"/>
