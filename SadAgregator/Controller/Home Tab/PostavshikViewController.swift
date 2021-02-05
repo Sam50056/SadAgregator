@@ -854,7 +854,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
            let smVseLabel = cell.viewWithTag(2) as? UILabel,
            let smVseImageView = cell.viewWithTag(3) as? UIImageView{
             
-            let revsCount = vendorRevs.count
+            let revsCount = Int(vendorData!["revs_info"]["cnt"].stringValue)!
             
             var trailingText = ""
             
