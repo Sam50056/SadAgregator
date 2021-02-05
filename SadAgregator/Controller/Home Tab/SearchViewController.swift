@@ -33,7 +33,7 @@ class SearchViewController: UIViewController {
     var page : Int = 1
     var rowForPaggingUpdate : Int = 15
     
-    var hintCellShouldBeShown = true
+    var hintCellShouldBeShown = false
     
     lazy var getSearchPageDataManager = GetSearchPageDataManager()
     
@@ -268,7 +268,7 @@ extension SearchViewController : SearchImageDataManagerDelegate{
             
             cntList = nil
             
-            tableView.reloadSections([0,1,2,3], with: .none)
+            tableView.reloadSections([0,1,2], with: .none)
             
             stopSimpleCircleAnimation(activityController: activityController)
             
@@ -336,11 +336,13 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
             
             searchData = data
             
+            hintCellShouldBeShown.toggle()
+            
             postsArray.append(contentsOf: data["posts"].arrayValue)
             
             cntList = data["cnt_list"].arrayValue
             
-            tableView.reloadSections([0,1,2,3], with: .none)
+            tableView.reloadSections([0,1,2], with: .none)
             
             stopSimpleCircleAnimation(activityController: activityController)
             
@@ -385,7 +387,7 @@ extension SearchViewController : UITextFieldDelegate{
 extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -403,9 +405,14 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             }
             
         case 2:
-            return postsArray.count
-        case 3:
-            return searchData == nil ? 0 : (postsArray.count == 0 ? 1 : 0)
+            
+            if searchData != nil , postsArray.isEmpty{
+                return 1
+            }else if searchData != nil{
+                return postsArray.count
+            }
+            
+            return 0
             
         default:
             fatalError("Invalid section")
@@ -437,19 +444,23 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
         case 2:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
-            
-            let post = postsArray[indexPath.row]
-            
-            setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: indexPath.row , export: searchData?["export"])
-            
-        case 3:
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath)
-            
-            (cell as! EmptyTableViewCell).label.text = "Нет результатов"
-            
-            (cell as! EmptyTableViewCell).emptyImageView.image = UIImage(systemName: "photo")
+            if postsArray.isEmpty{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath)
+                
+                (cell as! EmptyTableViewCell).label.text = "Нет результатов"
+                
+                (cell as! EmptyTableViewCell).emptyImageView.image = UIImage(systemName: "photo")
+                
+            }else{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
+                
+                let post = postsArray[indexPath.row]
+                
+                setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: indexPath.row , export: searchData?["export"])
+                
+            }
             
         default:
             fatalError("Invalid Section")
@@ -474,11 +485,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
         case 2:
             
-            return K.postHeight
-            
-        case 3:
-            
-            return (UIScreen.main.bounds.height / 2)
+            return postsArray.isEmpty ? (UIScreen.main.bounds.height / 2) :  K.postHeight
             
         default:
             fatalError("Invalid Section")
@@ -699,11 +706,15 @@ extension SearchViewController : PostCellCollectionViewActionsDelegate{
         
         cntList = nil
         
+        searchData = nil
+        
+        hintCellShouldBeShown.toggle()
+        
         searchText = option
         
         searchTextField.text = option
         
-        tableView.reloadSections([0,2], with: .automatic)
+        tableView.reloadSections([0,1,2], with: .automatic)
         
         getSearchPageDataManager.getSearchPageData(key: key, query: option, page: page)
         
