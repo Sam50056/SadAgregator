@@ -24,6 +24,8 @@ class SearchViewController: UIViewController {
     
     var isLogged = false
     
+    var exportType = ""
+    
     var imageHashSearch = ""
     var imageHashServer = ""
     
@@ -321,6 +323,8 @@ extension SearchViewController {
         
         imageHashServer = userDataObjects.first!.imageHashServer
         imageHashSearch = userDataObjects.first!.imageHashSearch
+        
+        exportType = userDataObjects.first!.exportType
         
     }
     
@@ -663,7 +667,12 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
             let exportType = export["type"].stringValue
             
-            cell.vigruzitImageView.image = exportType == "vk" ? UIImage(named: "vk") : UIImage(named: "odno")
+            if exportType != ""{
+                cell.vigruzitImageView.image = exportType == "vk" ? UIImage(named: "vk") : UIImage(named: "odno")
+            }else{
+                //If local export type is empty , we take export type from checkKeysDataManager
+                cell.vigruzitImageView.image = self.exportType == "vk" ? UIImage(named: "vk") : UIImage(named: "odno")
+            }
             
         }
         

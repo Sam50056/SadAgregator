@@ -94,6 +94,8 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
                     isLogged = false
                 }
                 
+                userDataObject.exportType = data["export"]["type"].stringValue
+                
                 userDataObject.imageHashSearch = data["img_hash_srch"].stringValue
                 userDataObject.imageHashServer = data["img_hash_srv"].stringValue
                 
