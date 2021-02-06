@@ -26,12 +26,20 @@ struct SendQuestionView : View {
                     
                     TextFieldWithDividerView(text: $text1, placeholderText: "Email")
                     
-                    MultilineTextView(text: $text2)
-                        .frame(height: 120)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color(#colorLiteral(red: 0.8500244617, green: 0.8551172614, blue: 0.854884088, alpha: 1)))
-                        )
+                    VStack{
+                        
+                        TextField("",text: $text2)
+                            .frame(maxWidth: .infinity, minHeight: 100, maxHeight: .infinity, alignment: .topLeading)
+                            .padding(.horizontal, 4)
+                            .padding(.vertical , 4)
+                            .lineLimit(4)
+                            .multilineTextAlignment(.leading)
+                        
+                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("searchbargray"))
+                    )
                     
                 }
                 
@@ -81,6 +89,10 @@ extension SendQuestionView : SendQuestionDataManagerDelegate{
             if data["result"].intValue == 1{
                 
                 menuViewModel.showSendQuestionView = false
+                
+            }else{
+                
+                
                 
             }
             
