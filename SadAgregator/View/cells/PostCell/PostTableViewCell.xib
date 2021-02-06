@@ -270,6 +270,7 @@
                 <outlet property="priceLabel" destination="2D9-dG-k9E" id="o87-Hv-JUL"/>
                 <outlet property="vendorLabel" destination="SSR-4S-9BF" id="PqE-PW-DhV"/>
                 <outlet property="vigruzitImageView" destination="SgS-Tb-JH2" id="sxU-hf-4TK"/>
+                <outlet property="vigruzitLabel" destination="SzE-iO-8hf" id="tyw-6J-Oie"/>
                 <outlet property="vigruzitView" destination="zhE-qm-INE" id="l8m-1S-Uaz"/>
             </connections>
             <point key="canvasLocation" x="52.898550724637687" y="316.74107142857139"/>
@@ -283,7 +284,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="gray">
-            <color red="0.960834682" green="0.96459835770000002" blue="0.97255879639999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.96100002527236938" green="0.9649999737739563" blue="0.97299998998641968" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="whiteblack">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

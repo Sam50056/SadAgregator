@@ -20,6 +20,7 @@ class PostTableViewCell: UITableViewCell  {
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var vigruzitImageView: UIImageView!
+    @IBOutlet weak var vigruzitLabel : UILabel!
     @IBOutlet weak var vigruzitView : UIView!
     
     @IBOutlet weak var likeButtonImageView: UIImageView!

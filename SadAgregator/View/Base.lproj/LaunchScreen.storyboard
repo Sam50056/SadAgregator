@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="PS0-u1-qCr">
-                                <rect key="frame" x="32" y="323" width="350" height="250"/>
+                                <rect key="frame" x="0.0" y="323" width="414" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="ieA-f5-Tvb"/>
                                 </constraints>
@@ -40,8 +40,8 @@
                             <constraint firstItem="PS0-u1-qCr" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Qe5-Sv-zZT"/>
                             <constraint firstItem="jR0-s7-qY7" firstAttribute="centerX" secondItem="PS0-u1-qCr" secondAttribute="centerX" constant="-3" id="XNO-nC-PzS"/>
                             <constraint firstItem="jR0-s7-qY7" firstAttribute="bottom" secondItem="PS0-u1-qCr" secondAttribute="bottom" id="mBR-VI-aPS"/>
-                            <constraint firstAttribute="trailing" secondItem="PS0-u1-qCr" secondAttribute="trailing" constant="32" id="nNm-lK-PPB"/>
-                            <constraint firstItem="PS0-u1-qCr" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="32" id="u7V-lC-x0b"/>
+                            <constraint firstAttribute="trailing" secondItem="PS0-u1-qCr" secondAttribute="trailing" id="nNm-lK-PPB"/>
+                            <constraint firstItem="PS0-u1-qCr" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="u7V-lC-x0b"/>
                             <constraint firstItem="PS0-u1-qCr" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="wrc-LC-frm"/>
                         </constraints>
                     </view>
