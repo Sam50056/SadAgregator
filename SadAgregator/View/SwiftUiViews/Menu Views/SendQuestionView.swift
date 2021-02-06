@@ -29,10 +29,10 @@ struct SendQuestionView : View {
                     VStack{
                         
                         TextField("",text: $text2)
-                            .frame(maxWidth: .infinity, minHeight: 100, maxHeight: .infinity, alignment: .topLeading)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                             .padding(.horizontal, 4)
                             .padding(.vertical , 4)
-                            .lineLimit(4)
+                            .lineLimit(12)
                             .multilineTextAlignment(.leading)
                         
                     }
