@@ -23,7 +23,7 @@ struct TopPointsPaggingDataManager {
         
         print("URLString for TopPointsPaggingDataManager: \(urlString)")
         
-        guard let url = URL(string: urlString) else {   guard let encodedURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: encodedURL)  else {return}
+        guard let encodedURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: encodedURL)  else {return}
         
         let session = URLSession(configuration: .default)
         
