@@ -1019,6 +1019,8 @@ extension MainViewController {
             
             destinationVC.imageHashText = searchImageHash
             
+            searchImageHash = nil
+            
         }else if segue.identifier == "goToVend"{
             
             let destinationVC = segue.destination as! PostavshikViewController
