@@ -23,10 +23,7 @@ struct TopPointsPaggingSearchDataManager {
         
         print("URLString for TopPointsPaggingSearchDataManager: \(urlString)")
         
-        guard let url = URL(string: urlString) else {
-            delegate?.didFailGettingTopPointsPaggingSearchDataWithError(error: "Wrong URL")
-            return
-        }
+        guard let encodedURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: encodedURL)  else {return}
         
         let session = URLSession(configuration: .default)
         

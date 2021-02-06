@@ -23,10 +23,7 @@ struct LinePointsPaggingDataManager {
         
         print("URLString for LinePointsPaggingDataManager: \(urlString)")
         
-        guard let url = URL(string: urlString) else {
-            delegate?.didFailGettingLinePointsPaggingDataWithError(error: "Wrong URL")
-            return
-        }
+        guard let encodedURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: encodedURL)  else {return}
         
         let session = URLSession(configuration: .default)
         
