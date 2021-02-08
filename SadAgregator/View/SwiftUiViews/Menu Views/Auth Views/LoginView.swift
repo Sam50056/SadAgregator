@@ -65,6 +65,10 @@ struct LoginView: View {
                         
                     }
                     
+                    SignInWithApple()
+                        .frame(width: 270, height: 45)
+                        .onTapGesture(perform: menuViewModel.showAppleLogin)
+                    
                 }
                 .padding()
                 

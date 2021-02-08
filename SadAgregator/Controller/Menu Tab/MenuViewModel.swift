@@ -9,12 +9,14 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 import ok_ios_sdk
+import AuthenticationServices
 
 class MenuViewModel : ObservableObject{
     
     let realm = try! Realm()
     
     let vkAuthService = VKAuthService()
+    @Published var appleSignInDelegates: SignInWithAppleDelegates! = nil
     
     @Published var key = "" 
     
@@ -121,6 +123,44 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
     
     func didFailGettingCheckKeysData(error: String) {
         print("Error with CheckKeysDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - Apple Login
+
+extension MenuViewModel{
+    
+    func showAppleLogin() {
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        performSignIn(using: [request])
+    }
+    
+    func performSignIn(using requests: [ASAuthorizationRequest]) {
+        
+        appleSignInDelegates = SignInWithAppleDelegates(window: SceneDelegate.shared().window) { success in
+            
+            if success {
+                
+                //Success
+                
+                print("FUCK THIS : \(self.appleSignInDelegates.user)")
+                
+            } else {
+                
+                //Error
+                
+            }
+            
+        }
+        
+        let controller = ASAuthorizationController(authorizationRequests: requests)
+        controller.delegate = appleSignInDelegates
+        controller.presentationContextProvider = appleSignInDelegates
+        
+        controller.performRequests()
     }
     
 }

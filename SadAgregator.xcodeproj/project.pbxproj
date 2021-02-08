@@ -41,6 +41,8 @@
 		224EFC3125A9D209007CA45E /* SendQuestionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224EFC3025A9D209007CA45E /* SendQuestionDataManager.swift */; };
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
+		22582C7525D1C1DC005E341C /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7425D1C1DB005E341C /* SignInWithApple.swift */; };
+		22582C7C25D1E832005E341C /* SignInWithAppleDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7B25D1E832005E341C /* SignInWithAppleDelegates.swift */; };
 		22595798259667F90088C7E4 /* MasterNastroekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22595797259667F90088C7E4 /* MasterNastroekView.swift */; };
 		2259579C259668220088C7E4 /* SimpleReqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259579B259668220088C7E4 /* SimpleReqView.swift */; };
 		2259579F259668370088C7E4 /* InputValView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259579E259668370088C7E4 /* InputValView.swift */; };
@@ -186,6 +188,8 @@
 		224EFC3025A9D209007CA45E /* SendQuestionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendQuestionDataManager.swift; sourceTree = "<group>"; };
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
+		22582C7425D1C1DB005E341C /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
+		22582C7B25D1E832005E341C /* SignInWithAppleDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleDelegates.swift; sourceTree = "<group>"; };
 		22595797259667F90088C7E4 /* MasterNastroekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterNastroekView.swift; sourceTree = "<group>"; };
 		2259579B259668220088C7E4 /* SimpleReqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleReqView.swift; sourceTree = "<group>"; };
 		2259579E259668370088C7E4 /* InputValView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValView.swift; sourceTree = "<group>"; };
@@ -403,13 +407,14 @@
 			path = "Supporting Files ";
 			sourceTree = "<group>";
 		};
-		224BC442259FEE94003F147F /* Social Media Stuff */ = {
+		224BC442259FEE94003F147F /* Auth  */ = {
 			isa = PBXGroup;
 			children = (
 				224BC43A259FE61E003F147F /* VkAuthService.swift */,
 				2284EAD925BB196B00CC1D58 /* OKAuthService.swift */,
+				22582C7B25D1E832005E341C /* SignInWithAppleDelegates.swift */,
 			);
-			path = "Social Media Stuff";
+			path = "Auth ";
 			sourceTree = "<group>";
 		};
 		2253EE252569D1C500103C86 /* Main Screen Managers */ = {
@@ -508,6 +513,7 @@
 			children = (
 				226886A52599EDD00079933D /* ActivityIndicatorView.swift */,
 				22D9023C259C1988009732CC /* MultilineTextView.swift */,
+				22582C7425D1C1DB005E341C /* SignInWithApple.swift */,
 			);
 			path = "UIKit VIews";
 			sourceTree = "<group>";
@@ -585,7 +591,7 @@
 				224BC441259FEE42003F147F /* Supporting Files  */,
 				22634AB425858C7300DF6FDB /* Data Base Models  */,
 				224BC43D259FEE11003F147F /* Managers */,
-				224BC442259FEE94003F147F /* Social Media Stuff */,
+				224BC442259FEE94003F147F /* Auth  */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1062,6 +1068,7 @@
 				2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */,
 				22D90221259AC9EF009732CC /* AlbumsInProgressDataManager.swift in Sources */,
 				22BF1A1125A5E19100567DB7 /* LinePointsPaggingDataManager.swift in Sources */,
+				22582C7C25D1E832005E341C /* SignInWithAppleDelegates.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
 				2286AD0F25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift in Sources */,
 				22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */,
@@ -1123,6 +1130,7 @@
 				22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */,
 				2269740025AE394800C76BA6 /* VendorPostsTableViewController.swift in Sources */,
 				226973FD25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift in Sources */,
+				22582C7525D1C1DC005E341C /* SignInWithApple.swift in Sources */,
 				226886A62599EDD00079933D /* ActivityIndicatorView.swift in Sources */,
 				2201672025A66E380072BFE7 /* SetPostActionsDataManager.swift in Sources */,
 				22A155DD2582C5D8000EAB64 /* AuthView.swift in Sources */,
