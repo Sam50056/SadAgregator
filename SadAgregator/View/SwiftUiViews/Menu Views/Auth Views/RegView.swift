@@ -193,23 +193,14 @@ extension RegView : RegisterDataManagerDelegate {
         
         DispatchQueue.main.async {
             
-            menuViewModel.showModalLogIn = false
-            menuViewModel.showModalReg = false
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if data["result"].intValue == 1{
                 
-                if let userDataObject = menuViewModel.getUserDataObject(){
-                    
-                    try! realm.write{
-                        userDataObject.key = data["key"].stringValue
-                    }
-                    
-                    menuViewModel.loadUserData()
-                    
-                }
+                menuViewModel.login(newKey:  data["key"].stringValue)
                 
-                menuViewModel.isLogged = true
-                menuViewModel.updateData()
+            }else{
+                
+                
+                
             }
             
         }

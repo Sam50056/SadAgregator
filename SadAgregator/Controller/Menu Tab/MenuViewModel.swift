@@ -127,9 +127,40 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
     
 }
 
-//MARK: - Apple Login
+//MARK: - Login
 
 extension MenuViewModel{
+    
+    func login(newKey : String){
+        
+        showModalLogIn = false
+        showModalReg = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            
+            if let userDataObject = getUserDataObject(){
+                
+                try! realm.write{
+                    userDataObject.key = newKey
+                }
+                
+                loadUserData()
+                
+            }
+            
+            isLogged = true
+            
+            updateData()
+            
+        }
+        
+    }
+    
+}
+
+//MARK: - Apple Login
+
+extension MenuViewModel : SignInWIthAppleIdDataManagerDelegate{
     
     func showAppleLogin() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
@@ -140,13 +171,21 @@ extension MenuViewModel{
     
     func performSignIn(using requests: [ASAuthorizationRequest]) {
         
-        appleSignInDelegates = SignInWithAppleDelegates(window: SceneDelegate.shared().window) { success in
+        appleSignInDelegates = SignInWithAppleDelegates(window: SceneDelegate.shared().window) { [self] success in
             
             if success {
                 
                 //Success
                 
-                print("FUCK THIS : \(self.appleSignInDelegates.user)")
+                if let userId = appleSignInDelegates.user{
+                
+                    SignInWIthAppleIdDataManager(delegate: self).getSignInWIthAppleIdData(userId: userId, name: self.appleSignInDelegates.name ?? "")
+                    
+                }else if let username = appleSignInDelegates.username , let password = appleSignInDelegates.password{
+                    
+                    
+                    
+                }
                 
             } else {
                 
@@ -162,6 +201,30 @@ extension MenuViewModel{
         
         controller.performRequests()
     }
+    
+    //SignInWIthAppleIdDataManagerDelegate
+    func didGetSignInWIthAppleIdData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                login(newKey: data["set_key"].stringValue)
+                
+            }else{
+                
+                
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingSignInWIthAppleIdDataWithError(error: String) {
+        print("Error with SignInWIthAppleIdDataManager : \(error)")
+    }
+    
     
 }
 
@@ -250,26 +313,7 @@ extension MenuViewModel : AuthSocialDataManagerDelegate{
                 return
             }
             
-            showModalLogIn = false
-            showModalReg = false
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                
-                if let userDataObject = getUserDataObject(){
-                    
-                    try! realm.write{
-                        userDataObject.key = newKey
-                    }
-                    
-                    loadUserData()
-                    
-                }
-                
-                isLogged = true
-                
-                updateData()
-                
-            }
+            login(newKey: newKey)
             
         }
         

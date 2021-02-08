@@ -43,6 +43,7 @@
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		22582C7525D1C1DC005E341C /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7425D1C1DB005E341C /* SignInWithApple.swift */; };
 		22582C7C25D1E832005E341C /* SignInWithAppleDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7B25D1E832005E341C /* SignInWithAppleDelegates.swift */; };
+		22582C7F25D20170005E341C /* SignInWIthAppleIdDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7E25D20170005E341C /* SignInWIthAppleIdDataManager.swift */; };
 		22595798259667F90088C7E4 /* MasterNastroekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22595797259667F90088C7E4 /* MasterNastroekView.swift */; };
 		2259579C259668220088C7E4 /* SimpleReqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259579B259668220088C7E4 /* SimpleReqView.swift */; };
 		2259579F259668370088C7E4 /* InputValView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259579E259668370088C7E4 /* InputValView.swift */; };
@@ -190,6 +191,7 @@
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		22582C7425D1C1DB005E341C /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
 		22582C7B25D1E832005E341C /* SignInWithAppleDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleDelegates.swift; sourceTree = "<group>"; };
+		22582C7E25D20170005E341C /* SignInWIthAppleIdDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWIthAppleIdDataManager.swift; sourceTree = "<group>"; };
 		22595797259667F90088C7E4 /* MasterNastroekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterNastroekView.swift; sourceTree = "<group>"; };
 		2259579B259668220088C7E4 /* SimpleReqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleReqView.swift; sourceTree = "<group>"; };
 		2259579E259668370088C7E4 /* InputValView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValView.swift; sourceTree = "<group>"; };
@@ -703,6 +705,7 @@
 				22A155E82584E43C000EAB64 /* AuthDataManager.swift */,
 				22216A4325853FCC00D5248B /* RegisterDataManager.swift */,
 				224BC44925A013C3003F147F /* AuthSocialDataManager.swift */,
+				22582C7E25D20170005E341C /* SignInWIthAppleIdDataManager.swift */,
 			);
 			path = "Auth Managers";
 			sourceTree = "<group>";
@@ -1080,6 +1083,7 @@
 				22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */,
 				228D2D3B25AC9DED000E9FAE /* UpdateDeviceDataManager.swift in Sources */,
 				229A95CA25A16E100086EAD9 /* TopVendorsDataManager.swift in Sources */,
+				22582C7F25D20170005E341C /* SignInWIthAppleIdDataManager.swift in Sources */,
 				2259579F259668370088C7E4 /* InputValView.swift in Sources */,
 				22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */,
 				22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */,

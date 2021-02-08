@@ -181,26 +181,13 @@ extension LoginView : AuthDataManagerDelegate {
     
     func didGetAuthData(data: JSON) {
         
-        DispatchQueue.main.async {
+        if data["result"].intValue == 1{
             
-            menuViewModel.showModalLogIn = false
-            menuViewModel.showModalReg = false
+            menuViewModel.login(newKey: data["key"].stringValue)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                
-                if let userDataObject = menuViewModel.getUserDataObject(){
-                    
-                    try! realm.write{
-                        userDataObject.key = data["key"].stringValue
-                    }
-                    
-                    menuViewModel.loadUserData()
-                    
-                }
-                
-                menuViewModel.isLogged = true
-                menuViewModel.updateData()
-            }
+        }else{
+            
+            
             
         }
         
