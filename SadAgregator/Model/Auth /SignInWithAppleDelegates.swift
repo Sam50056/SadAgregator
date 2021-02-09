@@ -39,6 +39,7 @@ extension SignInWithAppleDelegates: ASAuthorizationControllerDelegate {
         print("USER NAME : \(String(describing: name))")
         
         user = credential.user
+        self.name = credential.fullName?.givenName
         
         print(#function)
         
@@ -54,6 +55,7 @@ extension SignInWithAppleDelegates: ASAuthorizationControllerDelegate {
         print("USER NAME : \(String(describing: credential.fullName?.givenName))")
         
         user = credential.user
+        name = credential.fullName?.givenName
         
         self.signInSucceeded(true)
     }

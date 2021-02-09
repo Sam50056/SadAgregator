@@ -178,18 +178,16 @@ extension MenuViewModel : SignInWIthAppleIdDataManagerDelegate{
                 //Success
                 
                 if let userId = appleSignInDelegates.user{
-                
+                    
                     SignInWIthAppleIdDataManager(delegate: self).getSignInWIthAppleIdData(userId: userId, name: self.appleSignInDelegates.name ?? "")
-                    
-                }else if let username = appleSignInDelegates.username , let password = appleSignInDelegates.password{
-                    
-                    
                     
                 }
                 
             } else {
                 
                 //Error
+                
+                print("Error with Apple Sign In (")
                 
             }
             

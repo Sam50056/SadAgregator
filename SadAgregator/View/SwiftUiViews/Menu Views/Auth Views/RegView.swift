@@ -64,6 +64,18 @@ struct RegView: View {
                         
                     }
                     
+                    HStack{
+                        
+                        Spacer()
+                        
+                        SignInWithApple()
+                            .frame(width: 270, height: 45)
+                            .onTapGesture(perform: menuViewModel.showAppleLogin)
+                        
+                        Spacer()
+                        
+                    }
+                    
                 }
                 .padding()
                 
