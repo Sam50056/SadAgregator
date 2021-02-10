@@ -329,15 +329,15 @@ extension MenuViewModel : DelDeviceDataManagerDelegate{
     
     func logout(){
         
+        deleteAllDataFromDB() //Delete the current userDataObject from DB
+        
+        CheckKeysDataManager(delegate: self).getKeysData(key: nil) // CheckKeysRequest with nil key because it's delete on the above line
+        
         guard let unToken = UserDefaults.standard.string(forKey: K.UNToken) else {return}
         
         print("UN Token : \(unToken)")
         
         DelDeviceDataManager(delegate: self).getDelDeviceData(key: key, token: unToken)
-        
-        deleteAllDataFromDB() //Delete the current userDataObject from DB
-        
-        CheckKeysDataManager(delegate: self).getKeysData(key: nil) // CheckKeysRequest with nil key because it's delete on the above line
         
     }
     
@@ -346,6 +346,8 @@ extension MenuViewModel : DelDeviceDataManagerDelegate{
         DispatchQueue.main.async {
             
             if data["result"].intValue == 1{
+                
+                UserDefaults.standard.setValue(nil, forKey: K.UNToken)
                 
                 print("Token Deleted From Server")
                 
