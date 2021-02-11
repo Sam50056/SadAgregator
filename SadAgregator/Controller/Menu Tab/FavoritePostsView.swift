@@ -466,6 +466,8 @@ extension FavoritePostsViewController : ToExpQueueDataManagerDelegate{
             
             if data["result"].intValue == 1{
                 
+                showSimpleAlertWithOkButton(title: "Готово!", message: "Закрыть")
+                
                 print("ToExpQueueDataManager Request Sent")
                 
             }else{
