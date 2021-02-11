@@ -15,6 +15,8 @@ class PeerViewController: UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     
+    let activityController = UIActivityIndicatorView()
+    
     let realm = try! Realm()
     
     var key = ""
@@ -47,38 +49,68 @@ class PeerViewController: UIViewController{
     
     @IBAction func listUpdateButtonPressed(_ sender: UIButton) {
         
-        ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
+        refreshAlbsData()
         
     }
     
 }
 
-//MARK: - ExportPeersDataManagerDelegate
+//MARK: - RefreshAlbsDataManager
 
-extension PeerViewController : ExportPeersDataManagerDelegate{
+extension PeerViewController : RefreshAlbsDataManagerDelegate{
     
-    func didGetExportPeersData(data: JSON) {
+    func refreshAlbsData(){
         
-        DispatchQueue.main.async { [self] in
+        RefreshAlbsDataManager(delegate: self).getRefreshAlbsData(key: key)
+        
+        showSimpleCircleAnimation(activityController: activityController)
+        
+    }
+    
+    func didGetRefreshAlbsData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            self.checkAlbumRefreshProgress()
+        }
+        
+    }
+    
+    func didFailGettingRefreshAlbsDataWithError(error: String) {
+        print("Error with RefreshAlbsDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - AlbumsInProgressDataManager
+
+extension PeerViewController : AlbumsInProgressDataManagerDelegate{
+    
+    func checkAlbumRefreshProgress(){
+        AlbumsInProgressDataManager(delegate: self).getAlbumsInProgressData(key: key)
+    }
+    
+    func didGetAlbumsInProgressData(data: JSON) {
+        
+        DispatchQueue.main.async {
             
             if data["result"].intValue == 1{
                 
-                peers = data["peers"].arrayValue
+                self.stopSimpleCircleAnimation(activityController: self.activityController)
                 
-                tableView.reloadData()
+                self.dismiss(animated: true, completion: nil)
                 
             }else{
-                
-                showSimpleAlertWithOkButton(title: "Ошибка обновления страницы", message: nil)
-                
+                Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
+                    self.checkAlbumRefreshProgress()
+                }
             }
             
         }
         
     }
     
-    func didFailGettingExportPeersDataWithError(error: String) {
-        print("Error with ExportPeersDataManager : \(error)")
+    func didFailGettingAlbumsInProgressDataWithError(error: String) {
+        print("Error with AlbumsInProgressDataManager : \(error)")
     }
     
 }
