@@ -259,6 +259,13 @@ class FavoritePostsViewController : UITableViewController {
         
         cell.peerButtonCallback = { [self] in
             
+            guard isLogged else {
+                
+                showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
+                
+                return
+            }
+            
             showSimpleCircleAnimation(activityController: activityController)
             
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
@@ -266,6 +273,13 @@ class FavoritePostsViewController : UITableViewController {
         }
         
         cell.vigruzitButtonCallback = { [self] in
+            
+            guard isLogged else {
+                
+                showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
+                
+                return
+            }
             
             if favoritePostsData!["export"]["fast"].intValue == 0{
                 

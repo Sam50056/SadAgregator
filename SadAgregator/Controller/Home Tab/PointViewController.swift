@@ -695,6 +695,13 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         
         cell.peerButtonCallback = { [self] in
             
+            guard isLogged else {
+                
+                showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
+                
+                return
+            }
+            
             showSimpleCircleAnimation(activityController: activityController)
             
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
@@ -702,6 +709,13 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
         }
         
         cell.vigruzitButtonCallback = { [self] in
+            
+            guard isLogged else {
+                
+                showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
+                
+                return
+            }
             
             if pointData!["export"]["fast"].intValue == 0{
                 

@@ -639,6 +639,13 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         cell.peerButtonCallback = { [self] in
             
+            guard isLogged else {
+                
+                showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
+                
+                return
+            }
+            
             showSimpleCircleAnimation(activityController: activityController)
             
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
@@ -646,6 +653,13 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         }
         
         cell.vigruzitButtonCallback = { [self] in
+            
+            guard isLogged else {
+                
+                showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
+                
+                return
+            }
             
             if searchData!["export"]["fast"].intValue == 0{
                 
