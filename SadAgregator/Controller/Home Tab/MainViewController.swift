@@ -221,6 +221,10 @@ extension MainViewController {
         imageHashServer = userDataFirst?.imageHashServer
         imageHashSearch = userDataFirst?.imageHashSearch
         
+        if key != "" {
+            tableView.reloadData()
+        }
+        
     }
     
     func deleteAllDataFromDB(){
