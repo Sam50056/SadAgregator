@@ -1983,7 +1983,7 @@
                                         <color key="tintColor" red="0.79999023680000003" green="0.79999488590000001" blue="0.80000716449999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.960834682" green="0.96459835770000002" blue="0.97255879639999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" name="gray"/>
                                 <constraints>
                                     <constraint firstItem="SFb-jB-Xko" firstAttribute="centerY" secondItem="kdJ-Hb-m5X" secondAttribute="centerY" id="Va3-Bc-1Qu"/>
                                     <constraint firstItem="MVc-vb-cji" firstAttribute="centerY" secondItem="kdJ-Hb-m5X" secondAttribute="centerY" id="cak-Iy-BUD"/>
