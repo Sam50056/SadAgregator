@@ -22,6 +22,7 @@ class EditVigruzkaViewController: UIViewController {
     var thisPostId : String?
     
     var doneButtonCallback : (() -> ())?
+    var toExpQueueDataManagerCallback : (() -> ())?
     
     var text = ""
     
@@ -49,9 +50,7 @@ class EditVigruzkaViewController: UIViewController {
         
         ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: thisPostId, text: textWithPersent)
         
-        guard let doneButtonCallback = doneButtonCallback else {return}
-        
-        doneButtonCallback()
+        doneButtonCallback?()
         
     }
     
@@ -110,6 +109,8 @@ extension EditVigruzkaViewController : ToExpQueueDataManagerDelegate{
             if data["result"].intValue == 1{
                 
                 dismiss(animated: true, completion: nil)
+                
+                toExpQueueDataManagerCallback?()
                 
             }else{
                 
