@@ -112,6 +112,8 @@ class SearchViewController: UIViewController {
     var selectedPointId = ""
     var selectedVendId = ""
     
+    var thisPeerId = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -652,6 +654,11 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
         }
         
+        if thisPeerId != cell.peerId {
+            cell.vigruzitLabel.text = "Выгрузить"
+            cell.peerId = thisPeerId
+        }
+        
         cell.vigruzitButtonCallback = { [self] in
             
             guard isLogged else {
@@ -858,11 +865,13 @@ extension SearchViewController : ExportPeersDataManagerDelegate{
                 
                 peerVC.peers = data["peers"].array
                 
-                peerVC.setPeerCallback = { (newType) in
+                peerVC.setPeerCallback = { (newType , newPeerId) in
                     
                     peerVC.dismiss(animated: true) {
                         
                         searchData!["export"]["type"].stringValue = newType
+                        
+                        thisPeerId = newPeerId
                         
                         tableView.reloadData()
                         

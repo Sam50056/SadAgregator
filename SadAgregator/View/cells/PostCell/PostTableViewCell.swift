@@ -120,6 +120,8 @@ class PostTableViewCell: UITableViewCell  {
     
     var like : String = ""
     
+    var peerId = "" 
+    
     var key : String?
     var id : String?
     

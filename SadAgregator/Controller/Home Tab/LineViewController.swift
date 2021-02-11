@@ -113,6 +113,8 @@ class LineViewController: UIViewController {
     
     var searchText = ""
     
+    var thisPeerId = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -519,6 +521,11 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             
         }
         
+        if thisPeerId != cell.peerId {
+            cell.vigruzitLabel.text = "Выгрузить"
+            cell.peerId = thisPeerId
+        }
+        
         cell.vigruzitButtonCallback = { [self] in
             
             guard isLogged else {
@@ -706,11 +713,13 @@ extension LineViewController : ExportPeersDataManagerDelegate{
                 
                 peerVC.peers = data["peers"].array
                 
-                peerVC.setPeerCallback = { (newType) in
+                peerVC.setPeerCallback = { (newType , newPeerId) in
                     
                     peerVC.dismiss(animated: true) {
                         
                         lineData!["export"]["type"].stringValue = newType
+                        
+                        thisPeerId = newPeerId
                         
                         tableView.reloadData()
                         

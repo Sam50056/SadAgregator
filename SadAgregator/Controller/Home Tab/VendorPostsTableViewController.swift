@@ -94,6 +94,8 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
     
     var selectedPostId = ""
     
+    var thisPeerId = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -264,6 +266,11 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
             
+        }
+        
+        if thisPeerId != cell.peerId {
+            cell.vigruzitLabel.text = "Выгрузить"
+            cell.peerId = thisPeerId
         }
         
         cell.vigruzitButtonCallback = { [self] in
@@ -455,11 +462,13 @@ extension VendorPostsTableViewController : ExportPeersDataManagerDelegate{
                 
                 peerVC.peers = data["peers"].array
                 
-                peerVC.setPeerCallback = { (newType) in
+                peerVC.setPeerCallback = { (newType , newPeerId) in
                     
                     peerVC.dismiss(animated: true) {
                         
                         pageData!["export"]["type"].stringValue = newType
+                        
+                        thisPeerId = newPeerId
                         
                         tableView.reloadData()
                         

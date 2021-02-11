@@ -115,6 +115,8 @@ class MainViewController: UIViewController {
     
     var searchImageHash : String?
     
+    var thisPeerId = ""
+    
     //MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
@@ -801,6 +803,11 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             
         }
         
+        if thisPeerId != cell.peerId {
+            cell.vigruzitLabel.text = "Выгрузить"
+            cell.peerId = thisPeerId
+        }
+        
         cell.vigruzitButtonCallback = { [self] in
             
             guard isLogged else {
@@ -988,11 +995,13 @@ extension MainViewController : ExportPeersDataManagerDelegate{
                 
                 peerVC.peers = data["peers"].array
                 
-                peerVC.setPeerCallback = { (newType) in
+                peerVC.setPeerCallback = { (newType , newPeerId) in
                     
                     peerVC.dismiss(animated: true) {
                         
                         mainData!["export"]["type"].stringValue = newType
+                        
+                        thisPeerId = newPeerId
                         
                         tableView.reloadData()
                         

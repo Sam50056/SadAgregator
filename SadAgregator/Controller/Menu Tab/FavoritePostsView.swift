@@ -118,6 +118,8 @@ class FavoritePostsViewController : UITableViewController {
     
     var searchText = ""
     
+    var thisPeerId = ""
+    
     override func viewDidLoad() {
         
         loadUserData()
@@ -270,6 +272,11 @@ class FavoritePostsViewController : UITableViewController {
             
             ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
             
+        }
+        
+        if thisPeerId != cell.peerId {
+            cell.vigruzitLabel.text = "Выгрузить"
+            cell.peerId = thisPeerId
         }
         
         cell.vigruzitButtonCallback = { [self] in
@@ -459,11 +466,13 @@ extension FavoritePostsViewController : ExportPeersDataManagerDelegate{
                 
                 peerVC.peers = data["peers"].array
                 
-                peerVC.setPeerCallback = { (newType) in
+                peerVC.setPeerCallback = { (newType , newPeerId) in
                     
                     peerVC.dismiss(animated: true) {
                         
                         favoritePostsData!["export"]["type"].stringValue = newType
+                        
+                        thisPeerId = newPeerId
                         
                         tableView.reloadData()
                         

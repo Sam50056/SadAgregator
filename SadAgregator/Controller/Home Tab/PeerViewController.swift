@@ -23,7 +23,7 @@ class PeerViewController: UIViewController{
     
     var selectedPeerIndex : Int?
     
-    var setPeerCallback : ((_ type : String) -> ())?
+    var setPeerCallback : ((_ type : String , _ newPeerId : String) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +99,7 @@ extension PeerViewController : SetDefaultPeerDataManagerDelegate{
                 
                 //                print("New Type : \(newType)")
                 
-                setPeerCallback(newType)
+                setPeerCallback(newType, peers[selectedPeerIndex]["peer_id"].stringValue)
                 
                 self.selectedPeerIndex = nil
                 
