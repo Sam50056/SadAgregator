@@ -964,7 +964,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 
             }else{
                 
-                ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: selectedPostId)
+                ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: postId)
                 
             }
             

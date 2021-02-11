@@ -277,7 +277,7 @@ class FavoritePostsViewController : UITableViewController {
                 
             }else{
                 
-                ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: selectedPostId)
+                ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: postId)
                 
             }
             
