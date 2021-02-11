@@ -723,11 +723,40 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
                 
                 editVigruzkaVC.thisPostId = selectedPostId
                 
+                editVigruzkaVC.toExpQueueDataManagerCallback = {
+                    
+                    cell.vigruzitLabel.text = "Готово"
+                   
+                }
+                
                 present(editVigruzkaVC, animated: true, completion: nil)
                 
             }else{
                 
-                ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: postId)
+                ToExpQueueDataManager().getToExpQueueData(key: key, postId: postId, completionHandler: { data , error in
+                    
+                    DispatchQueue.main.async {
+                        
+                        if error != nil , data == nil {
+                            print("Error with ToExpQueueDataManager : \(error!)")
+                            return
+                        }
+                        
+                        if data!["result"].intValue == 1{
+                            
+                            cell.vigruzitLabel.text = "Готово"
+                            
+                            print("ToExpQueueDataManager Request Sent")
+                            
+                        }else{
+                            
+                            showSimpleAlertWithOkButton(title: "Ошибка отправки запроса", message: nil, dismissButtonText: "Закрыть")
+                            
+                        }
+                        
+                    }
+                    
+                })
                 
             }
             
@@ -891,34 +920,3 @@ extension PointViewController : ExportPeersDataManagerDelegate{
     }
     
 }
-
-//MARK: - ToExpQueueDataManagerDelegate
-
-extension PointViewController : ToExpQueueDataManagerDelegate{
-    
-    func didGetToExpQueueData(data: JSON) {
-        
-        DispatchQueue.main.async { [self] in
-            
-            if data["result"].intValue == 1{
-                
-                showSimpleAlertWithOkButton(title: "Готово!", message: "Закрыть")
-                
-                print("ToExpQueueDataManager Request Sent")
-                
-            }else{
-                
-                showSimpleAlertWithOkButton(title: "Ошибка отправки запроса", message: nil, dismissButtonText: "Закрыть")
-                
-            }
-            
-        }
-        
-    }
-    
-    func didFailGettingToExpQueueDataWithError(error: String) {
-        print("Error with ToExpQueueDataManager : \(error)")
-    }
-    
-}
-

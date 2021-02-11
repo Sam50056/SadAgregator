@@ -17,7 +17,7 @@ struct ToExpQueueDataManager {
     
     var delegate : ToExpQueueDataManagerDelegate?
     
-    func getToExpQueueData(key : String , postId : String , text : String = ""){
+    func getToExpQueueData(key : String , postId : String , text : String = "", completionHandler: @escaping (JSON?, String?) -> Void){
         
         let urlString = "https://agrapi.tk-sad.ru/agr_utils.ToExpQueue?AKey=\(key)&APostID=\(postId)&AText=\(text)"
         
@@ -30,17 +30,17 @@ struct ToExpQueueDataManager {
         let task = session.dataTask(with: url) { (data, response, error) in
             
             if error != nil {
-                delegate?.didFailGettingToExpQueueDataWithError(error: error!.localizedDescription)
+                completionHandler(nil, error?.localizedDescription)
                 return
             }
             
-            guard let data = data else {delegate?.didFailGettingToExpQueueDataWithError(error: "Data is empty"); return}
+            guard let data = data else { completionHandler(nil, "Data is empty"); return}
             
             let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
             
             let jsonAnswer = JSON(parseJSON: json)
             
-            delegate?.didGetToExpQueueData(data: jsonAnswer)
+            completionHandler(jsonAnswer, nil)
             
         }
         

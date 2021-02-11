@@ -48,7 +48,30 @@ class EditVigruzkaViewController: UIViewController {
         let textWithBr = textView.text.replacingOccurrences(of: "\n", with: "<br>")
         let textWithPersent = textWithBr.replacingOccurrences(of: "%", with: "<persent>")
         
-        ToExpQueueDataManager(delegate: self).getToExpQueueData(key: key, postId: thisPostId, text: textWithPersent)
+        ToExpQueueDataManager().getToExpQueueData(key: key, postId: thisPostId, text: textWithPersent ,completionHandler: { data , error in
+            
+            DispatchQueue.main.async { [self] in
+                
+                if error != nil , data == nil {
+                    print("Error with ToExpQueueDataManager : \(error!)")
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    dismiss(animated: true, completion: nil)
+                    
+                    toExpQueueDataManagerCallback?()
+                    
+                }else{
+                    
+                    showSimpleAlertWithOkButton(title: "Ошибка отправки запроса", message: nil, dismissButtonText: "Закрыть")
+                    
+                }
+                
+            }
+            
+        })
         
         doneButtonCallback?()
         
@@ -94,36 +117,6 @@ extension EditVigruzkaViewController : GetForExportDataManagerDelegate{
     
     func didFailGettingGetForExportDataWithError(error: String) {
         print("Error with GetForExportDataManager : \(error)")
-    }
-    
-}
-
-//MARK: - ToExpQueueDataManagerDelegate
-
-extension EditVigruzkaViewController : ToExpQueueDataManagerDelegate{
-    
-    func didGetToExpQueueData(data: JSON) {
-        
-        DispatchQueue.main.async { [self] in
-            
-            if data["result"].intValue == 1{
-                
-                dismiss(animated: true, completion: nil)
-                
-                toExpQueueDataManagerCallback?()
-                
-            }else{
-                
-                showSimpleAlertWithOkButton(title: "Ошибка отправки запроса", message: nil, dismissButtonText: "Закрыть")
-                
-            }
-            
-        }
-        
-    }
-    
-    func didFailGettingToExpQueueDataWithError(error: String) {
-        print("Error with ToExpQueueDataManager : \(error)")
     }
     
 }
