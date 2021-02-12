@@ -22,7 +22,7 @@ class NewVersionViewController: UIViewController {
     
     @IBAction func updateButtonTapped(_ sender: UIButton) {
         
-        if let url = URL(string: "itms-apps://apple.com/app/id376771144") {
+        if let url = URL(string: "itms-apps://apple.com/app/id1517897960") {
             UIApplication.shared.open(url)
             dismiss(animated: true, completion: nil)
         }
