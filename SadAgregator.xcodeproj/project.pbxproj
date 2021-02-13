@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2200942825D831C00001F7B3 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200942625D831C00001F7B3 /* CategoriesTableViewCell.swift */; };
+		2200942925D831C00001F7B3 /* CategoriesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2200942725D831C00001F7B3 /* CategoriesTableViewCell.xib */; };
+		2200943025D837530001F7B3 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200942E25D837530001F7B3 /* CategoryCollectionViewCell.swift */; };
+		2200943125D837530001F7B3 /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2200942F25D837530001F7B3 /* CategoryCollectionViewCell.xib */; };
 		2201671C25A669790072BFE7 /* GetPostActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201671B25A669790072BFE7 /* GetPostActionsDataManager.swift */; };
 		2201672025A66E380072BFE7 /* SetPostActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */; };
 		2201672325A73FEA0072BFE7 /* GetPointActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201672225A73FEA0072BFE7 /* GetPointActionsDataManager.swift */; };
@@ -155,6 +159,10 @@
 
 /* Begin PBXFileReference section */
 		0F53D53512395AE77F62F84F /* Pods-SadAgregator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.release.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.release.xcconfig"; sourceTree = "<group>"; };
+		2200942625D831C00001F7B3 /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; };
+		2200942725D831C00001F7B3 /* CategoriesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesTableViewCell.xib; sourceTree = "<group>"; };
+		2200942E25D837530001F7B3 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		2200942F25D837530001F7B3 /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		2201671B25A669790072BFE7 /* GetPostActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostActionsDataManager.swift; sourceTree = "<group>"; };
 		2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPostActionsDataManager.swift; sourceTree = "<group>"; };
 		2201672225A73FEA0072BFE7 /* GetPointActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPointActionsDataManager.swift; sourceTree = "<group>"; };
@@ -324,6 +332,25 @@
 				DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2200942525D831900001F7B3 /* CategoriesCell */ = {
+			isa = PBXGroup;
+			children = (
+				2200942C25D836C80001F7B3 /* CategoryCell */,
+				2200942625D831C00001F7B3 /* CategoriesTableViewCell.swift */,
+				2200942725D831C00001F7B3 /* CategoriesTableViewCell.xib */,
+			);
+			path = CategoriesCell;
+			sourceTree = "<group>";
+		};
+		2200942C25D836C80001F7B3 /* CategoryCell */ = {
+			isa = PBXGroup;
+			children = (
+				2200942E25D837530001F7B3 /* CategoryCollectionViewCell.swift */,
+				2200942F25D837530001F7B3 /* CategoryCollectionViewCell.xib */,
+			);
+			path = CategoryCell;
 			sourceTree = "<group>";
 		};
 		2201671A25A669550072BFE7 /* Post Managers */ = {
@@ -713,6 +740,7 @@
 		22A49CA7256661D700CCC781 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				2200942525D831900001F7B3 /* CategoriesCell */,
 				2203F15425BF2400007DBFFD /* EmptyCell */,
 				22CA694125A1473E00D21840 /* VendorRatingCell */,
 				22A49CAE256663FA00CCC781 /* PostCell */,
@@ -952,6 +980,8 @@
 				22CA694525A1475E00D21840 /* VendorRatingTableViewCell.xib in Resources */,
 				221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */,
 				229A95C725A161030086EAD9 /* PricesTableViewCell.xib in Resources */,
+				2200942925D831C00001F7B3 /* CategoriesTableViewCell.xib in Resources */,
+				2200943125D837530001F7B3 /* CategoryCollectionViewCell.xib in Resources */,
 				2203F15D25BF243A007DBFFD /* EmptyTableViewCell.xib in Resources */,
 				22A49CB52566645800CCC781 /* PostTableViewCell.xib in Resources */,
 				22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */,
@@ -1070,6 +1100,7 @@
 				224BC43B259FE61E003F147F /* VkAuthService.swift in Sources */,
 				2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */,
 				22D90221259AC9EF009732CC /* AlbumsInProgressDataManager.swift in Sources */,
+				2200942825D831C00001F7B3 /* CategoriesTableViewCell.swift in Sources */,
 				22BF1A1125A5E19100567DB7 /* LinePointsPaggingDataManager.swift in Sources */,
 				22582C7C25D1E832005E341C /* SignInWithAppleDelegates.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
@@ -1081,6 +1112,7 @@
 				22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */,
 				22D9021D259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift in Sources */,
 				22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */,
+				2200943025D837530001F7B3 /* CategoryCollectionViewCell.swift in Sources */,
 				228D2D3B25AC9DED000E9FAE /* UpdateDeviceDataManager.swift in Sources */,
 				229A95CA25A16E100086EAD9 /* TopVendorsDataManager.swift in Sources */,
 				22582C7F25D20170005E341C /* SignInWIthAppleIdDataManager.swift in Sources */,

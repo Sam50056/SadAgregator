@@ -26,12 +26,12 @@ class PostTableViewCell: UITableViewCell  {
     @IBOutlet weak var likeButtonImageView: UIImageView!
     @IBOutlet weak var likeButton : UIButton!
     
-    typealias DataSource =  UICollectionViewDiffableDataSource<SectionLayoutKind, String>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, String>
+    typealias PostCellCollectionViewDataSource =  UICollectionViewDiffableDataSource<PostCellCollectionViewSectionLayoutKind, String>
+    typealias PostCellCollectionViewSnapshot = NSDiffableDataSourceSnapshot<PostCellCollectionViewSectionLayoutKind, String>
     
-    var dataSource: UICollectionViewDiffableDataSource<SectionLayoutKind, String>!
+    var dataSource: UICollectionViewDiffableDataSource<PostCellCollectionViewSectionLayoutKind, String>!
     
-    enum SectionLayoutKind : Int , CaseIterable{
+    enum PostCellCollectionViewSectionLayoutKind : Int , CaseIterable{
         case size , option , showDesc, desc , photo
     }
     
@@ -173,7 +173,7 @@ class PostTableViewCell: UITableViewCell  {
         
         let layout = UICollectionViewCompositionalLayout { [self] (sectionIndex, NSCollectionViewLayoutEnvironment) -> NSCollectionLayoutSection? in
             
-            guard let sectionLayoutKind = SectionLayoutKind(rawValue: sectionIndex)else{return nil}
+            guard let sectionLayoutKind = PostCellCollectionViewSectionLayoutKind(rawValue: sectionIndex)else{return nil}
             
             let section: NSCollectionLayoutSection
             
@@ -473,11 +473,11 @@ class PostTableViewCell: UITableViewCell  {
     
     func makeDataSource() {
         
-        self.dataSource = DataSource(collectionView: collectionView){ (collectionView, indexPath, item) -> UICollectionViewCell? in
+        self.dataSource = PostCellCollectionViewDataSource(collectionView: collectionView){ (collectionView, indexPath, item) -> UICollectionViewCell? in
             
             var cell = UICollectionViewCell()
             
-            guard let section = SectionLayoutKind(rawValue: indexPath.section) else {return cell}
+            guard let section = PostCellCollectionViewSectionLayoutKind(rawValue: indexPath.section) else {return cell}
             
             if section == .size {
                 
@@ -564,9 +564,9 @@ class PostTableViewCell: UITableViewCell  {
     
     func applySnapshot(animatingDifferences: Bool = false) {
         
-        var snapshot = Snapshot()
+        var snapshot = PostCellCollectionViewSnapshot()
         
-        snapshot.appendSections(SectionLayoutKind.allCases)
+        snapshot.appendSections(PostCellCollectionViewSectionLayoutKind.allCases)
         
         snapshot.appendItems(sizes, toSection: .size)
         snapshot.appendItems(options, toSection: .option)
