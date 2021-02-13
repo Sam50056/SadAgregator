@@ -10,6 +10,7 @@ import SwiftUI
 struct MasterNastroekView: View {
     
     @EnvironmentObject var masterViewModel : MasterViewModel
+    @EnvironmentObject var menuViewModel : MenuViewModel
     
     var body: some View {
         
@@ -119,6 +120,7 @@ struct MasterNastroekView: View {
                             ,trailing:
                                 Button(action: {
                                     self.masterViewModel.hideMaster()
+                                    menuViewModel.updateData()
                                 }){
                                     
                                     Image(systemName: "multiply")

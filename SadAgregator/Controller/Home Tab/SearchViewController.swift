@@ -25,6 +25,7 @@ class SearchViewController: UIViewController {
     var isLogged = false
     
     var exportType = ""
+    var exportFast = ""
     
     var imageHashSearch = ""
     var imageHashServer = ""
@@ -327,6 +328,7 @@ extension SearchViewController {
         imageHashSearch = userDataObjects.first!.imageHashSearch
         
         exportType = userDataObjects.first!.exportType
+        exportFast = userDataObjects.first!.exportFast
         
     }
     
@@ -668,7 +670,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
                 return
             }
             
-            if searchData!["export"]["fast"].intValue == 0{
+            if exportFast == "0"{
                 
                 let editVigruzkaVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditVigruzkaVC") as! EditVigruzkaViewController
                 

@@ -340,6 +340,7 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                 }
                 
                 userDataObject.exportType = data["export"]["type"].stringValue
+                userDataObject.exportFast = data["export"]["fast"].stringValue
                 
                 userDataObject.imageHashSearch = data["img_hash_srch"].stringValue
                 userDataObject.imageHashServer = data["img_hash_srv"].stringValue
