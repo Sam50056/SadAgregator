@@ -672,7 +672,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
                 
                 let editVigruzkaVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditVigruzkaVC") as! EditVigruzkaViewController
                 
-                editVigruzkaVC.thisPostId = selectedPostId
+                editVigruzkaVC.thisPostId = postId
                 
                 editVigruzkaVC.toExpQueueDataManagerCallback = {
                     
