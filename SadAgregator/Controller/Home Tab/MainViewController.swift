@@ -618,7 +618,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.section == 0{
-            return 116
+            return 96
         }else if indexPath.section == 2 {
             return 126
         }else if indexPath.section == 8{
