@@ -135,6 +135,7 @@ class MainViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
+        tableView.register(UINib(nibName: "CategoriesTableViewCell", bundle: nil), forCellReuseIdentifier: "categoriesCell")
         
         //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
@@ -507,7 +508,7 @@ extension MainViewController : UITextFieldDelegate {
 extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 8
+        return 9
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -520,14 +521,16 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         case 2:
             return 1
         case 3:
-            return activityLineCellsArray.count
+            return 1
         case 4:
-            return 1
+            return activityLineCellsArray.count
         case 5:
-            return activityPointCellsArray.count
-        case 6:
             return 1
+        case 6:
+            return activityPointCellsArray.count
         case 7:
+            return 1
+        case 8:
             return postsArray.count
         default:
             fatalError("Invalid Section")
@@ -547,23 +550,27 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         
         case 0:
             
+            cell = tableView.dequeueReusableCell(withIdentifier: "categoriesCell", for: indexPath)
+        
+        case 1:
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "firstCell", for: indexPath)
             
             if let label = cell.viewWithTag(1) as? UILabel {
                 label.text = mainPageData["activity"].stringValue
             }
             
-        case 1:
+        case 2:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "generalPostsPhotosCell", for: indexPath)
             
             setUpGeneralPostsPhotosCell(cell: cell, data: mainPageData["total_activity"])
             
-        case 2:
+        case 3:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "linesActivityCell", for: indexPath)
             
-        case 3:
+        case 4:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "activityLineCell", for: indexPath)
             
@@ -573,11 +580,11 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             
             setUpActivityLineCell(cell: cell, data: activityLine)
             
-        case 4:
+        case 5:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postavshikiActivityCell", for: indexPath)
             
-        case 5:
+        case 6:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "activityPointCell", for: indexPath)
             
@@ -587,11 +594,11 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             
             setUpActivityPointCell(cell: cell, data: activityPointCell)
             
-        case 6:
+        case 7:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
             
-        case 7:
+        case 8:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
             
@@ -610,13 +617,15 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 1 {
+        if indexPath.section == 0{
+            return 116
+        }else if indexPath.section == 2 {
             return 126
-        }else if indexPath.section == 7{
+        }else if indexPath.section == 8{
             
             return K.postHeight
             
-        }else if indexPath.section == 0 || indexPath.section == 2 || indexPath.section == 4 || indexPath.section == 6{
+        }else if indexPath.section == 1 || indexPath.section == 3 || indexPath.section == 5 || indexPath.section == 7{
             
             return K.simpleHeaderCellHeight
             
@@ -629,11 +638,11 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         
         let index = indexPath.row
         
-        if indexPath.section == 2{
+        if indexPath.section == 3{
             
             self.performSegue(withIdentifier: "goToActivityLines", sender: self)
             
-        }else if indexPath.section == 3{
+        }else if indexPath.section == 4{
             
             let indexForCell = index
             
@@ -643,11 +652,11 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             
             self.performSegue(withIdentifier: "goToLine", sender: self)
             
-        }else if indexPath.section == 4{
+        }else if indexPath.section == 5{
             
             self.performSegue(withIdentifier: "goToActivityPoints", sender: self)
             
-        }else if indexPath.section == 5{
+        }else if indexPath.section == 6{
             
             let indexForCell = index
             
@@ -664,7 +673,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 7{
+        if indexPath.section == 8{
             
             if indexPath.row == rowForPaggingUpdate{
                 

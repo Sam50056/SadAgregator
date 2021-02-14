@@ -13,23 +13,23 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CategoryCollectionViewCell" customModule="SadAgregator" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="183" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="183" height="77"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="183" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="183" height="77"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yqU-E2-sRW">
-                        <rect key="frame" x="0.0" y="0.0" width="183" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="183" height="77"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9p-Tr-nhn">
-                                <rect key="frame" x="8" y="16" width="167" height="40"/>
+                                <rect key="frame" x="8" y="16" width="167" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <color key="textColor" name="blackwhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaO-Rb-xx9">
-                                <rect key="frame" x="8" y="64" width="167" height="20"/>
+                                <rect key="frame" x="8" y="41" width="167" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="YS6-qY-Xo3"/>
                                 </constraints>
@@ -58,12 +58,13 @@
                 <constraint firstAttribute="bottom" secondItem="yqU-E2-sRW" secondAttribute="bottom" id="wql-SF-Ls7"/>
                 <constraint firstAttribute="trailing" secondItem="yqU-E2-sRW" secondAttribute="trailing" id="z3g-Zk-6ro"/>
             </constraints>
-            <size key="customSize" width="183" height="100"/>
+            <size key="customSize" width="183" height="77"/>
             <connections>
                 <outlet property="firstLabel" destination="y9p-Tr-nhn" id="Jfw-if-EtH"/>
                 <outlet property="secondLabel" destination="JaO-Rb-xx9" id="j2i-jF-her"/>
+                <outlet property="view" destination="yqU-E2-sRW" id="FXF-Da-6pH"/>
             </connections>
-            <point key="canvasLocation" x="234.05797101449278" y="147.99107142857142"/>
+            <point key="canvasLocation" x="234.05797101449278" y="140.29017857142856"/>
         </collectionViewCell>
     </objects>
     <resources>
