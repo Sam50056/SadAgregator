@@ -17,7 +17,10 @@ class CategoryCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        firstLabel.text = ""
+        secondLabel.text = ""
+        
     }
 
 }

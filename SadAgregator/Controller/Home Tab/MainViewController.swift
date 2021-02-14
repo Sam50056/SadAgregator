@@ -40,6 +40,7 @@ class MainViewController: UIViewController {
     var activityLineCellsArray = [JSON]()
     var activityPointCellsArray = [JSON]()
     var postsArray = [JSON]()
+    var categoriesArray = [JSON]()
     
     var page = 1
     var rowForPaggingUpdate : Int = 15
@@ -443,19 +444,21 @@ extension MainViewController : MainDataManagerDelegate{
     
     func didGetMainData(data: JSON) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             
-            self.mainData = data //Saving main page data from api to this var
+            mainData = data //Saving main page data from api to this var
             
-            self.activityLineCellsArray = data["lines_act_top"].arrayValue
+            activityLineCellsArray = data["lines_act_top"].arrayValue
             
-            self.activityPointCellsArray = data["points_top"].arrayValue
+            activityPointCellsArray = data["points_top"].arrayValue
             
-            self.postsArray = data["posts"].arrayValue
+            categoriesArray = data["cats_list"].arrayValue
             
-            self.tableView.reloadData()
+            postsArray = data["posts"].arrayValue
             
-            self.refreshControl.endRefreshing()
+            tableView.reloadData()
+            
+            refreshControl.endRefreshing()
         }
     }
     
@@ -515,7 +518,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         
         switch section {
         case 0:
-            return 1
+            return categoriesArray.isEmpty ? 0 : 1
         case 1:
             return 1
         case 2:
@@ -550,7 +553,9 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         
         case 0:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "categoriesCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "categoriesCell", for: indexPath) as! CategoriesTableViewCell
+            
+            (cell as! CategoriesTableViewCell).categories = categoriesArray
         
         case 1:
             

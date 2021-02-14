@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class CategoriesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView : UICollectionView!
+    
+    var categories = [JSON]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,16 +36,18 @@ class CategoriesTableViewCell: UITableViewCell {
 extension CategoriesTableViewCell : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCollectionViewCell
+       
+        let category = categories[indexPath.row]
         
-        cell.firstLabel.text = (indexPath.row % 2 == 0) ? "From Sam" : "Sam is Sam That is Sam"
+        cell.firstLabel.text = category["capt"].stringValue
         
-        cell.secondLabel.text = "Hello Max!"
+        cell.secondLabel.text = category["descr"].stringValue
         
         cell.view.layer.cornerRadius = 8
         
