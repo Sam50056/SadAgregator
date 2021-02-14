@@ -383,7 +383,7 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                 
                 if appVersionFromServer != "" , let appVersionFromServerDouble = Double(appVersionFromServer){
                     
-                    if appVersionFromServerDouble > Double(K.appVersion)!{
+                    if let appVersion = Double(K.appVersion) , appVersionFromServerDouble > appVersion{
                         
                         let newVersionVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewVersionVC") as! NewVersionViewController
                         
