@@ -110,7 +110,7 @@ class CategoryViewController: UIViewController {
         
         navigationItem.title = "Категория"
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: ""), style: .plain, target: self, action: #selector(filterButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(filterButtonTapped))
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -142,7 +142,6 @@ class CategoryViewController: UIViewController {
     
 }
 
-
 //MARK: - Data Manipulation Methods
 
 extension CategoryViewController {
@@ -158,8 +157,6 @@ extension CategoryViewController {
     }
     
 }
-
-
 
 //MARK: - GetCatpageDataManagerDelegate
 
