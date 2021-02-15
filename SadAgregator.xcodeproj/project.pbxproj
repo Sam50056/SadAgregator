@@ -12,6 +12,7 @@
 		2200943025D837530001F7B3 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200942E25D837530001F7B3 /* CategoryCollectionViewCell.swift */; };
 		2200943125D837530001F7B3 /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2200942F25D837530001F7B3 /* CategoryCollectionViewCell.xib */; };
 		2200943925DACBE90001F7B3 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200943825DACBE90001F7B3 /* CategoryViewController.swift */; };
+		2200943D25DB26D00001F7B3 /* GetCatpageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200943C25DB26D00001F7B3 /* GetCatpageDataManager.swift */; };
 		2201671C25A669790072BFE7 /* GetPostActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201671B25A669790072BFE7 /* GetPostActionsDataManager.swift */; };
 		2201672025A66E380072BFE7 /* SetPostActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */; };
 		2201672325A73FEA0072BFE7 /* GetPointActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201672225A73FEA0072BFE7 /* GetPointActionsDataManager.swift */; };
@@ -165,6 +166,7 @@
 		2200942E25D837530001F7B3 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		2200942F25D837530001F7B3 /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		2200943825DACBE90001F7B3 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		2200943C25DB26D00001F7B3 /* GetCatpageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCatpageDataManager.swift; sourceTree = "<group>"; };
 		2201671B25A669790072BFE7 /* GetPostActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostActionsDataManager.swift; sourceTree = "<group>"; };
 		2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPostActionsDataManager.swift; sourceTree = "<group>"; };
 		2201672225A73FEA0072BFE7 /* GetPointActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPointActionsDataManager.swift; sourceTree = "<group>"; };
@@ -355,6 +357,14 @@
 			path = CategoryCell;
 			sourceTree = "<group>";
 		};
+		2200943B25DB26700001F7B3 /* Category Managers */ = {
+			isa = PBXGroup;
+			children = (
+				2200943C25DB26D00001F7B3 /* GetCatpageDataManager.swift */,
+			);
+			path = "Category Managers";
+			sourceTree = "<group>";
+		};
 		2201671A25A669550072BFE7 /* Post Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,6 +434,7 @@
 				22CE4F9025869E690060E9DF /* Vendor Managers */,
 				22A155E72584E408000EAB64 /* Auth Managers */,
 				22423E9A259131F80097C9E6 /* Menu Managers */,
+				2200943B25DB26700001F7B3 /* Category Managers */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1135,6 +1146,7 @@
 				22BF1A0225A540F000567DB7 /* ActivityPointsTableViewController.swift in Sources */,
 				2203F16625BFC35D007DBFFD /* EditVigruzkaViewController.swift in Sources */,
 				227828EE258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift in Sources */,
+				2200943D25DB26D00001F7B3 /* GetCatpageDataManager.swift in Sources */,
 				22A155E92584E43C000EAB64 /* AuthDataManager.swift in Sources */,
 				22BF19FB25A4DA9300567DB7 /* ActivityLinesTableViewController.swift in Sources */,
 				22943FE925ABDB1A00A742B8 /* PostRedirectDataManager.swift in Sources */,

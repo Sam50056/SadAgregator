@@ -563,6 +563,8 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
                 
                 let categoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CategoryVC") as! CategoryViewController
                 
+                categoryVC.thisCatId = id
+                
                 navigationController?.pushViewController(categoryVC, animated: true)
                 
             }
