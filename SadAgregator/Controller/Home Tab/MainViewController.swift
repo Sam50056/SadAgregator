@@ -169,6 +169,8 @@ class MainViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        navigationController?.isNavigationBarHidden = false
+        
         //Clear the searchTextField
         searchTextField.text = ""
         searchTextField.endEditing(true)
@@ -556,7 +558,15 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: "categoriesCell", for: indexPath) as! CategoriesTableViewCell
             
             (cell as! CategoriesTableViewCell).categories = categoriesArray
-        
+            
+            (cell as! CategoriesTableViewCell).categoryCellTapped = { [self] id in
+                
+                let categoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CategoryVC") as! CategoryViewController
+                
+                navigationController?.pushViewController(categoryVC, animated: true)
+                
+            }
+            
         case 1:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "firstCell", for: indexPath)

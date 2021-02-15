@@ -3419,17 +3419,32 @@
             </objects>
             <point key="canvasLocation" x="576.92307692307691" y="858.76777251184831"/>
         </scene>
-        <!--View Controller-->
+        <!--Category View Controller-->
         <scene sceneID="zO0-0c-Ln8">
             <objects>
-                <viewController id="DMm-dV-YVX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoryVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DMm-dV-YVX" customClass="CategoryViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eRU-ha-x0j">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TqF-hf-02R">
+                                <rect key="frame" x="0.0" y="44" width="390" height="800"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Szv-OD-d0d"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="TqF-hf-02R" secondAttribute="bottom" id="7XJ-mJ-ltd"/>
+                            <constraint firstItem="TqF-hf-02R" firstAttribute="leading" secondItem="Szv-OD-d0d" secondAttribute="leading" id="TLp-SW-dQo"/>
+                            <constraint firstItem="TqF-hf-02R" firstAttribute="top" secondItem="Szv-OD-d0d" secondAttribute="top" id="iRW-ZD-PXU"/>
+                            <constraint firstItem="Szv-OD-d0d" firstAttribute="trailing" secondItem="TqF-hf-02R" secondAttribute="trailing" id="nat-5v-0sQ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xhA-B7-eiS"/>
+                    <connections>
+                        <outlet property="tableView" destination="TqF-hf-02R" id="sky-2O-gAW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="njN-TE-Myl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

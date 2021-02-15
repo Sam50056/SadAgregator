@@ -11,6 +11,7 @@
 		2200942925D831C00001F7B3 /* CategoriesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2200942725D831C00001F7B3 /* CategoriesTableViewCell.xib */; };
 		2200943025D837530001F7B3 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200942E25D837530001F7B3 /* CategoryCollectionViewCell.swift */; };
 		2200943125D837530001F7B3 /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2200942F25D837530001F7B3 /* CategoryCollectionViewCell.xib */; };
+		2200943925DACBE90001F7B3 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200943825DACBE90001F7B3 /* CategoryViewController.swift */; };
 		2201671C25A669790072BFE7 /* GetPostActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201671B25A669790072BFE7 /* GetPostActionsDataManager.swift */; };
 		2201672025A66E380072BFE7 /* SetPostActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */; };
 		2201672325A73FEA0072BFE7 /* GetPointActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2201672225A73FEA0072BFE7 /* GetPointActionsDataManager.swift */; };
@@ -163,6 +164,7 @@
 		2200942725D831C00001F7B3 /* CategoriesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesTableViewCell.xib; sourceTree = "<group>"; };
 		2200942E25D837530001F7B3 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		2200942F25D837530001F7B3 /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		2200943825DACBE90001F7B3 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		2201671B25A669790072BFE7 /* GetPostActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostActionsDataManager.swift; sourceTree = "<group>"; };
 		2201671F25A66E380072BFE7 /* SetPostActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPostActionsDataManager.swift; sourceTree = "<group>"; };
 		2201672225A73FEA0072BFE7 /* GetPointActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPointActionsDataManager.swift; sourceTree = "<group>"; };
@@ -825,6 +827,7 @@
 				22C5D02725B0E064001C69C6 /* PeerViewController.swift */,
 				2203F16525BFC35D007DBFFD /* EditVigruzkaViewController.swift */,
 				22CADF4925CCE7EE001C4F31 /* NewVersionViewController.swift */,
+				2200943825DACBE90001F7B3 /* CategoryViewController.swift */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
@@ -1085,6 +1088,7 @@
 				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
 				2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
+				2200943925DACBE90001F7B3 /* CategoryViewController.swift in Sources */,
 				224584272592A6A60000B3D4 /* UserChangePassDataManager.swift in Sources */,
 				228CB761255BF96D002B4A96 /* MainViewController.swift in Sources */,
 				225957A2259668540088C7E4 /* ListSelectView.swift in Sources */,

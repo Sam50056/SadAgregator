@@ -12,6 +12,8 @@ class CategoriesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView : UICollectionView!
     
+    var categoryCellTapped : ((String) -> ())?
+    
     var categories = [JSON]()
     
     override func awakeFromNib() {
@@ -54,7 +56,7 @@ extension CategoriesTableViewCell : UICollectionViewDelegate, UICollectionViewDa
             return cell
         }
        
-        let category = categories[indexPath.row - 1] //We do -1 because we added one more cell above 
+        let category = categories[indexPath.row - 1] //We do -1 because we added one more cell above
         
         cell.firstLabel.text = category["capt"].stringValue
         
@@ -62,6 +64,10 @@ extension CategoriesTableViewCell : UICollectionViewDelegate, UICollectionViewDa
         
         return cell
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        categoryCellTapped?(categories[indexPath.row]["id"].stringValue)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
