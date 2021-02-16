@@ -136,11 +136,25 @@ class CategoryViewController: UIViewController {
     
     @objc func filterButtonTapped(){
         
-        print("FILTER")
+        let filterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FilterVC")
+        
+        filterVC.modalPresentationStyle = .custom
+        filterVC.transitioningDelegate = self
+        
+        present(filterVC, animated: true, completion: nil)
         
     }
     
 }
+
+//MARK: - UIViewControllerTransitioningDelegate
+
+extension CategoryViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        AboveViewControllerPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
+
 
 //MARK: - Data Manipulation Methods
 

@@ -115,6 +115,8 @@
 		22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */; };
 		22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */; };
 		22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */; };
+		22B6BC8A25DC6DF300EAE067 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8925DC6DF300EAE067 /* FilterViewController.swift */; };
+		22B6BC8D25DC721300EAE067 /* AboveViewControllerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */; };
 		22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7270E2573189E00B56249 /* MainPaggingDataManager.swift */; };
 		22B7271325740E8C00B56249 /* LinePostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7271225740E8C00B56249 /* LinePostsPaggingDataManager.swift */; };
 		22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */; };
@@ -272,6 +274,8 @@
 		22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SizeCollectionViewCell.xib; sourceTree = "<group>"; };
 		22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionCollectionViewCell.xib; sourceTree = "<group>"; };
+		22B6BC8925DC6DF300EAE067 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboveViewControllerPresentationController.swift; sourceTree = "<group>"; };
 		22B7270E2573189E00B56249 /* MainPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPaggingDataManager.swift; sourceTree = "<group>"; };
 		22B7271225740E8C00B56249 /* LinePostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePostsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointPostsPaggingDataManager.swift; sourceTree = "<group>"; };
@@ -839,6 +843,8 @@
 				2203F16525BFC35D007DBFFD /* EditVigruzkaViewController.swift */,
 				22CADF4925CCE7EE001C4F31 /* NewVersionViewController.swift */,
 				2200943825DACBE90001F7B3 /* CategoryViewController.swift */,
+				22B6BC8925DC6DF300EAE067 /* FilterViewController.swift */,
+				22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
@@ -1152,6 +1158,7 @@
 				22943FE925ABDB1A00A742B8 /* PostRedirectDataManager.swift in Sources */,
 				22D663D125823D9E0058B5CC /* LoginView.swift in Sources */,
 				221C479C25B4C7E200290E09 /* DescriptionCollectionViewCell.swift in Sources */,
+				22B6BC8A25DC6DF300EAE067 /* FilterViewController.swift in Sources */,
 				2284EADA25BB196B00CC1D58 /* OKAuthService.swift in Sources */,
 				225957AA2596A6450088C7E4 /* GetStepDataManager.swift in Sources */,
 				2201672625A771E10072BFE7 /* SetPointActionsDataManager.swift in Sources */,
@@ -1163,6 +1170,7 @@
 				2245820D25AA2D6D008882A9 /* HelpPageDataManager.swift in Sources */,
 				22A155CF2582925D000EAB64 /* RegView.swift in Sources */,
 				2267D0A025B4F3C600904C44 /* TextViewCollectionViewCell.swift in Sources */,
+				22B6BC8D25DC721300EAE067 /* AboveViewControllerPresentationController.swift in Sources */,
 				2268869725995C070079933D /* SearchListWorkDataManager.swift in Sources */,
 				22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */,
 				22A155ED2584E766000EAB64 /* MenuViewModel.swift in Sources */,
