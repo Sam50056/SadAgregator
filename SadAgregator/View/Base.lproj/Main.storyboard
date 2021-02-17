@@ -3432,15 +3432,15 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lxs-Ya-UL9">
                                     <size key="itemSize" width="105" height="93"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="filterItemCell" id="Vob-lH-Rj9">
-                                        <rect key="frame" x="0.0" y="0.0" width="105" height="93"/>
+                                        <rect key="frame" x="0.0" y="50" width="105" height="93"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7pZ-Jb-HE5">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7pZ-Jb-HE5" customClass="RoundedCornerView" customModule="SadAgregator" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="105" height="93"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -3470,10 +3470,41 @@
                                                 <constraint firstItem="B1y-aW-0rn" firstAttribute="top" secondItem="7pZ-Jb-HE5" secondAttribute="top" id="M45-Dz-DgU"/>
                                                 <constraint firstAttribute="trailing" secondItem="B1y-aW-0rn" secondAttribute="trailing" id="xbp-Ya-Dh0"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="105" height="93"/>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="header" id="7Rd-IH-ez9">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vki-is-HBG">
+                                            <rect key="frame" x="8" y="14.666666666666664" width="374" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGH-IE-9yD">
+                                            <rect key="frame" x="312" y="10" width="70" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="70" id="b9A-tG-eis"/>
+                                            </constraints>
+                                            <state key="normal" title="Сбросить"/>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Vki-is-HBG" firstAttribute="leading" secondItem="7Rd-IH-ez9" secondAttribute="leadingMargin" id="6P6-Oz-ALU"/>
+                                        <constraint firstItem="Vki-is-HBG" firstAttribute="centerY" secondItem="7Rd-IH-ez9" secondAttribute="centerY" id="JSv-sC-7nX"/>
+                                        <constraint firstItem="hGH-IE-9yD" firstAttribute="centerY" secondItem="7Rd-IH-ez9" secondAttribute="centerY" id="VaG-q6-d4P"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Vki-is-HBG" secondAttribute="trailing" id="Yrk-cC-f9U"/>
+                                        <constraint firstItem="hGH-IE-9yD" firstAttribute="trailing" secondItem="7Rd-IH-ez9" secondAttribute="trailingMargin" id="r1u-8J-b63"/>
+                                    </constraints>
+                                </collectionReusableView>
                             </collectionView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="maW-Ey-XPK">
                                 <rect key="frame" x="161" y="460.66666666666669" width="68" height="18"/>

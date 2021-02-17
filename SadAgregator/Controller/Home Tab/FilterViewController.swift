@@ -17,6 +17,8 @@ class FilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.collectionViewLayout = createLayout()
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -60,8 +62,55 @@ class FilterViewController: UIViewController {
 
 extension FilterViewController : UICollectionViewDelegate , UICollectionViewDataSource{
     
+    func createLayout() -> UICollectionViewLayout {
+        let sectionProvider = { (sectionIndex: Int,
+                                 layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                  heightDimension: .fractionalHeight(1.0))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(50),
+                                                   heightDimension: .estimated(50))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.orthogonalScrollingBehavior = .continuous
+            section.interGroupSpacing = 20
+            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+            
+            section.boundarySupplementaryItems = [self.createSectionHeader()]
+            
+            return section
+        }
+        
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 20
+        
+        let layout = UICollectionViewCompositionalLayout(
+            sectionProvider: sectionProvider, configuration: config)
+        
+        return layout
+    }
+    
+    func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        // 1
+        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                             heightDimension: .estimated(60))
+        
+        // 2
+        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize,
+                                                                              elementKind: UICollectionView.elementKindSectionHeader,
+                                                                              alignment: .top)
+        return layoutSectionHeader
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -76,6 +125,32 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         }
         
         return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header", for: indexPath)
+        
+        if let label = header.viewWithTag(1) as? UILabel , let button = header.viewWithTag(2) as? UIButton{
+            
+            if indexPath.section == 0 {
+                
+                label.textAlignment = .center
+                
+                label.text = "Джинсы"
+                
+                button.setTitle("", for: .normal)
+                
+                button.setImage(UIImage(systemName: "slider.horizontal.3"), for: .normal)
+                
+                button.contentHorizontalAlignment = .right
+                
+            }
+            
+        }
+        
+        return header
         
     }
     
