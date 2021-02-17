@@ -3484,7 +3484,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vki-is-HBG">
-                                            <rect key="frame" x="8" y="14.666666666666664" width="374" height="21"/>
+                                            <rect key="frame" x="8" y="14.666666666666664" width="288" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -3499,9 +3499,9 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Vki-is-HBG" firstAttribute="leading" secondItem="7Rd-IH-ez9" secondAttribute="leadingMargin" id="6P6-Oz-ALU"/>
+                                        <constraint firstItem="hGH-IE-9yD" firstAttribute="leading" secondItem="Vki-is-HBG" secondAttribute="trailing" constant="16" id="EKF-IO-P3f"/>
                                         <constraint firstItem="Vki-is-HBG" firstAttribute="centerY" secondItem="7Rd-IH-ez9" secondAttribute="centerY" id="JSv-sC-7nX"/>
                                         <constraint firstItem="hGH-IE-9yD" firstAttribute="centerY" secondItem="7Rd-IH-ez9" secondAttribute="centerY" id="VaG-q6-d4P"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Vki-is-HBG" secondAttribute="trailing" id="Yrk-cC-f9U"/>
                                         <constraint firstItem="hGH-IE-9yD" firstAttribute="trailing" secondItem="7Rd-IH-ez9" secondAttribute="trailingMargin" id="r1u-8J-b63"/>
                                     </constraints>
                                 </collectionReusableView>

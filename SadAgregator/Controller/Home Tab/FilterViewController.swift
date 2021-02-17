@@ -98,7 +98,7 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
             
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
-            section.interGroupSpacing = 20
+            section.interGroupSpacing = 16
             section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
             
             section.boundarySupplementaryItems = [self.createSectionHeader()]
@@ -107,7 +107,7 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         }
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 20
+        config.interSectionSpacing = 8
         
         let layout = UICollectionViewCompositionalLayout(
             sectionProvider: sectionProvider, configuration: config)
@@ -169,20 +169,18 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header", for: indexPath)
         
+        let section = indexPath.section
+        
         if let label = header.viewWithTag(1) as? UILabel , let button = header.viewWithTag(2) as? UIButton{
             
-            if indexPath.section == 0 {
-                
-                label.textAlignment = .center
-                
-                label.text = "Джинсы"
-                
-                button.setTitle("", for: .normal)
-                
-                button.setImage(UIImage(systemName: "slider.horizontal.3"), for: .normal)
-                
-                button.contentHorizontalAlignment = .right
-                
+            button.addTarget(self, action: #selector(sbrositButtonTapped), for: .touchUpInside)
+            
+            if section == 0{
+                label.text = "Цена"
+            }else if section == 1{
+                label.text = "Материал"
+            }else if section == 2{
+                label.text = "Размер"
             }
             
         }
