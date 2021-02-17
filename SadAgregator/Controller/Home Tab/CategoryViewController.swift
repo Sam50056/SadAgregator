@@ -108,6 +108,8 @@ class CategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadUserData()
+        
         navigationItem.title = "Категория"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(filterButtonTapped))
@@ -127,21 +129,25 @@ class CategoryViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         loadUserData()
-        
     }
     
     @objc func filterButtonTapped(){
         
-        let filterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FilterVC")
+        let filterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FilterVC") as! FilterViewController
         
         filterVC.modalPresentationStyle = .custom
         filterVC.transitioningDelegate = self
         
+        filterVC.materials = categoryData?["filter"]["materials"].arrayValue ?? [JSON]()
+        filterVC.sizes = categoryData?["filter"]["sizes"].arrayValue ?? [JSON]()
+        filterVC.prices = categoryData?["filter"]["prices"].arrayValue ?? [JSON]()
+        
         present(filterVC, animated: true, completion: nil)
+        
+        filterVC.collectionView.reloadData()
         
     }
     

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class FilterViewController: UIViewController {
     
@@ -13,6 +14,22 @@ class FilterViewController: UIViewController {
     
     var hasSetPointOrigin = false
     var pointOrigin: CGPoint?
+    
+    var prices = [JSON]()
+//        didSet{
+//            collectionView.reloadData()
+//        }
+//    }
+    var materials = [JSON]()
+//        didSet{
+//            collectionView.reloadData()
+//        }
+//    }
+    var sizes = [JSON]()
+//        didSet{
+//            collectionView.reloadData()
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +42,11 @@ class FilterViewController: UIViewController {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerAction))
         view.addGestureRecognizer(panGesture)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -110,17 +132,32 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        
+        if section == 0{
+            return prices.count
+        }else if section == 1{
+            return materials.count
+        }else if section == 2{
+            return sizes.count
+        }else{
+            fatalError("Error section")
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "filterItemCell", for: indexPath)
         
-        if let bgView = cell.viewWithTag(1),
-           let label = cell.viewWithTag(2) as? UILabel{
+        if let label = cell.viewWithTag(2) as? UILabel{
             
-            label.text = "SAM"
+            if indexPath.section == 0{
+                label.text = prices[indexPath.row]["c"].stringValue
+            }else if indexPath.section == 1{
+                label.text = materials[indexPath.row]["c"].stringValue
+            }else if indexPath.section == 2{
+                label.text = sizes[indexPath.row]["c"].stringValue
+            }
             
         }
         
@@ -152,6 +189,18 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         
         return header
         
+    }
+    
+    //MARK: - Callback funcs
+    
+    @objc func sbrositButtonTapped() {
+        
+        
+        
+    }
+    
+    @objc func filterButtonTapped(){
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
