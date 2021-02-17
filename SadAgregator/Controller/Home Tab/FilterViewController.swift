@@ -88,12 +88,12 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         let sectionProvider = { (sectionIndex: Int,
                                  layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+            let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(50),
                                                   heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
             let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(50),
-                                                   heightDimension: .estimated(50))
+                                                   heightDimension: .estimated(40))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
             let section = NSCollectionLayoutSection(group: group)

@@ -3448,7 +3448,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="93"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1P-VZ-RUM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="105" height="93"/>
+                                                            <rect key="frame" x="8" y="0.0" width="89" height="93"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.42931851473721594" green="0.42931851473721594" blue="0.42931851473721594" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -3456,8 +3456,8 @@
                                                     </subviews>
                                                     <color key="backgroundColor" name="gray"/>
                                                     <constraints>
-                                                        <constraint firstItem="d1P-VZ-RUM" firstAttribute="leading" secondItem="B1y-aW-0rn" secondAttribute="leading" id="9p7-JW-SlS"/>
-                                                        <constraint firstAttribute="trailing" secondItem="d1P-VZ-RUM" secondAttribute="trailing" id="UGr-ao-7Zy"/>
+                                                        <constraint firstItem="d1P-VZ-RUM" firstAttribute="leading" secondItem="B1y-aW-0rn" secondAttribute="leading" constant="8" id="9p7-JW-SlS"/>
+                                                        <constraint firstAttribute="trailing" secondItem="d1P-VZ-RUM" secondAttribute="trailing" constant="8" id="UGr-ao-7Zy"/>
                                                         <constraint firstAttribute="bottom" secondItem="d1P-VZ-RUM" secondAttribute="bottom" id="UbX-Af-TLn"/>
                                                         <constraint firstItem="d1P-VZ-RUM" firstAttribute="top" secondItem="B1y-aW-0rn" secondAttribute="top" id="iN8-qm-Xva"/>
                                                     </constraints>
