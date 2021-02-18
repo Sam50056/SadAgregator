@@ -561,6 +561,15 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             
             (cell as! CategoriesTableViewCell).categoryCellTapped = { [self] id in
                 
+                guard id != "" else {
+                    
+                    let allCategoriesVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AllCatVC") as! AllCategoriesViewController
+                    
+                    navigationController?.pushViewController(allCategoriesVC, animated: true)
+                    
+                    return
+                }
+                
                 let categoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CategoryVC") as! CategoryViewController
                 
                 categoryVC.thisCatId = id

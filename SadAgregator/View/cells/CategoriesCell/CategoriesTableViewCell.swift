@@ -67,6 +67,12 @@ extension CategoriesTableViewCell : UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard indexPath.row != 0 else {
+            categoryCellTapped?("")
+            return
+        }
+        
         categoryCellTapped?(categories[indexPath.row - 1]["id"].stringValue)
     }
     

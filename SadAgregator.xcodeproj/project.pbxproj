@@ -117,6 +117,8 @@
 		22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */; };
 		22B6BC8A25DC6DF300EAE067 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8925DC6DF300EAE067 /* FilterViewController.swift */; };
 		22B6BC8D25DC721300EAE067 /* AboveViewControllerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */; };
+		22B6BCAB25DEDA6A00EAE067 /* AllCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */; };
+		22B6BCAE25DEFD8200EAE067 /* GetCatListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BCAD25DEFD8100EAE067 /* GetCatListDataManager.swift */; };
 		22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7270E2573189E00B56249 /* MainPaggingDataManager.swift */; };
 		22B7271325740E8C00B56249 /* LinePostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7271225740E8C00B56249 /* LinePostsPaggingDataManager.swift */; };
 		22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */; };
@@ -276,6 +278,8 @@
 		22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionCollectionViewCell.xib; sourceTree = "<group>"; };
 		22B6BC8925DC6DF300EAE067 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboveViewControllerPresentationController.swift; sourceTree = "<group>"; };
+		22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoriesViewController.swift; sourceTree = "<group>"; };
+		22B6BCAD25DEFD8100EAE067 /* GetCatListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCatListDataManager.swift; sourceTree = "<group>"; };
 		22B7270E2573189E00B56249 /* MainPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPaggingDataManager.swift; sourceTree = "<group>"; };
 		22B7271225740E8C00B56249 /* LinePostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePostsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointPostsPaggingDataManager.swift; sourceTree = "<group>"; };
@@ -365,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				2200943C25DB26D00001F7B3 /* GetCatpageDataManager.swift */,
+				22B6BCAD25DEFD8100EAE067 /* GetCatListDataManager.swift */,
 			);
 			path = "Category Managers";
 			sourceTree = "<group>";
@@ -845,6 +850,7 @@
 				2200943825DACBE90001F7B3 /* CategoryViewController.swift */,
 				22B6BC8925DC6DF300EAE067 /* FilterViewController.swift */,
 				22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */,
+				22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
@@ -1095,6 +1101,7 @@
 				227ADAAA25892D8E009B32EC /* ReviewUpdateDataManager.swift in Sources */,
 				2284EADD25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift in Sources */,
 				226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */,
+				22B6BCAE25DEFD8200EAE067 /* GetCatListDataManager.swift in Sources */,
 				226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */,
 				224BC44D25A0C529003F147F /* AddPointRequestDataManager.swift in Sources */,
 				22595798259667F90088C7E4 /* MasterNastroekView.swift in Sources */,
@@ -1105,6 +1112,7 @@
 				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
 				2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
+				22B6BCAB25DEDA6A00EAE067 /* AllCategoriesViewController.swift in Sources */,
 				2200943925DACBE90001F7B3 /* CategoryViewController.swift in Sources */,
 				224584272592A6A60000B3D4 /* UserChangePassDataManager.swift in Sources */,
 				228CB761255BF96D002B4A96 /* MainViewController.swift in Sources */,
