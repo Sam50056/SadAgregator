@@ -229,7 +229,7 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
             let selectedPriceId = prices[indexPath.row]["v"].stringValue
             
             if selectedPrices.contains(selectedPriceId){
-                selectedPrices.remove(at: selectedPrices.first Index(of: selectedPriceId)!)
+                selectedPrices.remove(at: selectedPrices.firstIndex(of: selectedPriceId)!)
             }else{
                 selectedPrices.append(selectedPriceId)
             }
