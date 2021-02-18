@@ -105,6 +105,27 @@ class CategoryViewController: UIViewController {
     
     var getCatpageDataManager = GetCatpageDataManager()
     
+    var filter = ""
+    
+    var filters = [String]() {
+        didSet{
+            
+            if filters.isEmpty{
+                filter = ""
+                return
+            }
+            
+            filter = "|"
+            
+            for i in filters{
+                filter.append("\(i)|")
+            }
+            
+            print("HELLO FILTER : \(filter)")
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -144,6 +165,25 @@ class CategoryViewController: UIViewController {
         filterVC.materials = categoryData?["filter"]["materials"].arrayValue ?? [JSON]()
         filterVC.sizes = categoryData?["filter"]["sizes"].arrayValue ?? [JSON]()
         filterVC.prices = categoryData?["filter"]["prices"].arrayValue ?? [JSON]()
+        
+        filterVC.filterItemSelected = { [self] item in
+            
+            let id = item["v"].stringValue
+            
+            if filters.contains(id){
+                filters.remove(at: filters.firstIndex(of: id)!)
+            }else{
+                filters.append(id)
+            }
+            
+            if let safeId = thisCatId{
+                
+                postsArray.removeAll()
+                
+                getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter)
+            }
+            
+        }
         
         present(filterVC, animated: true, completion: nil)
         
@@ -186,9 +226,9 @@ extension CategoryViewController : GetCatpageDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            categoryData = data
+            if categoryData == nil { categoryData = data}
             
-            postsArray = data["posts"].arrayValue
+            postsArray.append(contentsOf: data["posts"].arrayValue)
             
             tableView.reloadData()
             
@@ -230,6 +270,24 @@ extension CategoryViewController : UITableViewDelegate , UITableViewDataSource{
         setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: indexPath.row, export: categoryData?["export"])
         
         return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == rowForPaggingUpdate{
+            
+            page += 1
+            
+            rowForPaggingUpdate += 16
+            
+            if let safeId = thisCatId{
+                getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter)
+            }
+            
+            print("Done a request for page: \(page)")
+            
+        }
         
     }
     

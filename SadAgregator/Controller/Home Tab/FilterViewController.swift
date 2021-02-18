@@ -25,6 +25,8 @@ class FilterViewController: UIViewController {
     var selectedMaterials = [String]()
     var selectedSizes = [String]()
     
+    var filterItemSelected : ((JSON) -> ())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -228,6 +230,8 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
             
             let selectedPriceId = prices[indexPath.row]["v"].stringValue
             
+            filterItemSelected?(prices[indexPath.row])
+            
             if selectedPrices.contains(selectedPriceId){
                 selectedPrices.remove(at: selectedPrices.firstIndex(of: selectedPriceId)!)
             }else{
@@ -238,6 +242,8 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
             
             let selectedMaterialId = materials[indexPath.row]["v"].stringValue
             
+            filterItemSelected?(materials[indexPath.row])
+            
             if selectedMaterials.contains(selectedMaterialId){
                 selectedMaterials.remove(at: selectedMaterials.firstIndex(of: selectedMaterialId)!)
             }else{
@@ -247,6 +253,8 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         }else if section == 2{
             
             let selectedSizeId = sizes[indexPath.row]["v"].stringValue
+            
+            filterItemSelected?(sizes[indexPath.row])
             
             if selectedSizes.contains(selectedSizeId){
                 selectedSizes.remove(at: selectedSizes.firstIndex(of: selectedSizeId)!)
