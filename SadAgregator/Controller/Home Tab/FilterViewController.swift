@@ -15,21 +15,15 @@ class FilterViewController: UIViewController {
     var hasSetPointOrigin = false
     var pointOrigin: CGPoint?
     
+    var darkGray = #colorLiteral(red: 0.4717689157, green: 0.4718403816, blue: 0.4717532396, alpha: 1)
+    
     var prices = [JSON]()
-//        didSet{
-//            collectionView.reloadData()
-//        }
-//    }
     var materials = [JSON]()
-//        didSet{
-//            collectionView.reloadData()
-//        }
-//    }
     var sizes = [JSON]()
-//        didSet{
-//            collectionView.reloadData()
-//        }
-//    }
+    
+    var selectedPrices = [String]()
+    var selectedMaterials = [String]()
+    var selectedSizes = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,14 +143,51 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "filterItemCell", for: indexPath)
         
-        if let label = cell.viewWithTag(2) as? UILabel{
+        if let label = cell.viewWithTag(2) as? UILabel,
+           let _ = cell.viewWithTag(1){
             
             if indexPath.section == 0{
+                
                 label.text = prices[indexPath.row]["c"].stringValue
+                
+                let id = prices[indexPath.row]["v"].stringValue
+                
+                if !selectedPrices.contains(id){
+                    (cell.viewWithTag(1))?.backgroundColor = UIColor(named: "gray")
+                    (cell.viewWithTag(2) as? UILabel)?.textColor = .darkGray
+                }else{
+                    (cell.viewWithTag(1))?.backgroundColor = .systemBlue
+                    (cell.viewWithTag(2) as? UILabel)?.textColor = .white
+                }
+                
             }else if indexPath.section == 1{
+                
                 label.text = materials[indexPath.row]["c"].stringValue
+                
+                let id = materials[indexPath.row]["v"].stringValue
+                
+                if !selectedMaterials.contains(id){
+                    (cell.viewWithTag(1))?.backgroundColor = UIColor(named: "gray")
+                    (cell.viewWithTag(2) as? UILabel)?.textColor = .darkGray
+                }else{
+                    (cell.viewWithTag(1))?.backgroundColor = .systemBlue
+                    (cell.viewWithTag(2) as? UILabel)?.textColor = .white
+                }
+                
             }else if indexPath.section == 2{
+                
                 label.text = sizes[indexPath.row]["c"].stringValue
+                
+                let id = sizes[indexPath.row]["v"].stringValue
+                
+                if !selectedSizes.contains(id){
+                    (cell.viewWithTag(1))?.backgroundColor = UIColor(named: "gray")
+                    (cell.viewWithTag(2) as? UILabel)?.textColor = .darkGray
+                }else{
+                    (cell.viewWithTag(1))?.backgroundColor = .systemBlue
+                    (cell.viewWithTag(2) as? UILabel)?.textColor = .white
+                }
+                
             }
             
         }
@@ -186,6 +217,46 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         }
         
         return header
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let section = indexPath.section
+        
+        if section == 0{
+            
+            let selectedPriceId = prices[indexPath.row]["v"].stringValue
+            
+            if selectedPrices.contains(selectedPriceId){
+                selectedPrices.remove(at: selectedPrices.first Index(of: selectedPriceId)!)
+            }else{
+                selectedPrices.append(selectedPriceId)
+            }
+            
+        }else if section == 1{
+            
+            let selectedMaterialId = materials[indexPath.row]["v"].stringValue
+            
+            if selectedMaterials.contains(selectedMaterialId){
+                selectedMaterials.remove(at: selectedMaterials.firstIndex(of: selectedMaterialId)!)
+            }else{
+                selectedMaterials.append(selectedMaterialId)
+            }
+            
+        }else if section == 2{
+            
+            let selectedSizeId = sizes[indexPath.row]["v"].stringValue
+            
+            if selectedSizes.contains(selectedSizeId){
+                selectedSizes.remove(at: selectedSizes.firstIndex(of: selectedSizeId)!)
+            }else{
+                selectedSizes.append(selectedSizeId)
+            }
+            
+        }
+        
+        collectionView.reloadItems(at: [indexPath])
         
     }
     
