@@ -67,7 +67,7 @@ extension CategoriesTableViewCell : UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        categoryCellTapped?(categories[indexPath.row]["id"].stringValue)
+        categoryCellTapped?(categories[indexPath.row - 1]["id"].stringValue)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
