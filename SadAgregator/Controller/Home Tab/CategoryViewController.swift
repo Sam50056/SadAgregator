@@ -185,6 +185,25 @@ class CategoryViewController: UIViewController {
             
         }
         
+        filterVC.sbrositPressed = { [self] items in
+            
+            for item in items{
+                
+                if filters.contains(item){
+                    filters.remove(at: filters.firstIndex(of: item)!)
+                }
+                
+            }
+            
+            if let safeId = thisCatId{
+                
+                postsArray.removeAll()
+                
+                getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter)
+            }
+            
+        }
+        
         present(filterVC, animated: true, completion: nil)
         
     }

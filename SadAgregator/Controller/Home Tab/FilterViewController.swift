@@ -29,13 +29,16 @@ class FilterViewController: UIViewController {
     
     var filterItemSelected : ((JSON) -> ())?
     
+    var sbrositPressed : (([String]) -> ())?
+//    var sectionForSbrosit : Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.collectionViewLayout = createLayout()
-        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        collectionView.collectionViewLayout = createLayout()
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerAction))
         view.addGestureRecognizer(panGesture)
@@ -44,7 +47,6 @@ class FilterViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        collectionView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -208,8 +210,6 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         
         if let label = header.viewWithTag(1) as? UILabel , let button = header.viewWithTag(2) as? UIButton{
             
-            button.addTarget(self, action: #selector(sbrositButtonTapped), for: .touchUpInside)
-            
             if section == 0{
                 
                 label.text = "Цена"
@@ -217,10 +217,14 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
                 sbrositButtons["0"] = button
                 
                 if selectedPrices.isEmpty{
-                    sbrositButtons["\(section)"]?.isHidden = true
+                    sbrositButtons["\(section)"]!.isHidden = true
                 }else{
-                    sbrositButtons["\(section)"]?.isHidden = false
+                    sbrositButtons["\(section)"]!.isHidden = false
                 }
+                
+                button.addTarget(self, action: #selector(sbrositButtonTapped(_:)), for: .touchUpInside)
+                
+                button.tag = section
                 
             }else if section == 1{
                 
@@ -229,10 +233,14 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
                 sbrositButtons["1"] = button
                 
                 if selectedMaterials.isEmpty{
-                    sbrositButtons["\(section)"]?.isHidden = true
+                    sbrositButtons["\(section)"]!.isHidden = true
                 }else{
-                    sbrositButtons["\(section)"]?.isHidden = false
+                    sbrositButtons["\(section)"]!.isHidden = false
                 }
+                
+                button.addTarget(self, action: #selector(sbrositButtonTapped(_:)), for: .touchUpInside)
+                
+                button.tag = section
                 
             }else if section == 2{
                 
@@ -241,10 +249,14 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
                 sbrositButtons["2"] = button
                 
                 if selectedSizes.isEmpty{
-                    sbrositButtons["\(section)"]?.isHidden = true
+                    sbrositButtons["\(section)"]!.isHidden = true
                 }else{
-                    sbrositButtons["\(section)"]?.isHidden = false
+                    sbrositButtons["\(section)"]!.isHidden = false
                 }
+                
+                button.addTarget(self, action: #selector(sbrositButtonTapped(_:)), for: .touchUpInside)
+                
+                button.tag = section
                 
             }
             
@@ -320,9 +332,24 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
     
     //MARK: - Callback funcs
     
-    @objc func sbrositButtonTapped() {
+    @objc func sbrositButtonTapped(_ sender : UIButton) {
         
+        let sectionForSbrosit = sender.tag
         
+        if sectionForSbrosit == 0{
+            sbrositPressed?(selectedPrices)
+            selectedPrices.removeAll()
+        }else if sectionForSbrosit == 1{
+            sbrositPressed?(selectedMaterials)
+            selectedMaterials.removeAll()
+        }else if sectionForSbrosit == 2{
+            sbrositPressed?(selectedSizes)
+            selectedSizes.removeAll()
+        }
+        
+        sbrositButtons["\(sectionForSbrosit)"]?.isHidden = true
+        
+        collectionView.reloadSections([sectionForSbrosit])
         
     }
     
