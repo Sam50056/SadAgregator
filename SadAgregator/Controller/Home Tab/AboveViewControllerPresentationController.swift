@@ -14,6 +14,9 @@ class AboveViewControllerPresentationController: UIPresentationController {
     
     var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
     
+    var navBarHeightY : CGFloat?
+    var navBarHeight : CGFloat?
+    
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
         let blurEffect = UIBlurEffect(style: .dark)
         blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -25,8 +28,8 @@ class AboveViewControllerPresentationController: UIPresentationController {
     }
     
     override var frameOfPresentedViewInContainerView: CGRect {
-        CGRect(origin: CGPoint(x: 0, y: 0),
-               size: CGSize(width: self.containerView!.frame.width, height: 430))
+        CGRect(origin: CGPoint(x: 0, y: navBarHeightY ?? 0),
+               size: CGSize(width: self.containerView!.frame.width, height: (430 - (navBarHeight ?? 0))))
     }
     
     override func presentationTransitionWillBegin() {
@@ -53,7 +56,8 @@ class AboveViewControllerPresentationController: UIPresentationController {
     override func containerViewDidLayoutSubviews() {
         super.containerViewDidLayoutSubviews()
         presentedView?.frame = frameOfPresentedViewInContainerView
-        blurEffectView.frame = containerView!.bounds
+        let containerViewRect = containerView!.bounds
+        blurEffectView.frame = CGRect(x: containerViewRect.minX, y: navBarHeightY ?? 0, width: containerViewRect.width, height: containerViewRect.height)
     }
     
     @objc func dismissController(){

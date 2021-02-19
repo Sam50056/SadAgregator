@@ -197,7 +197,14 @@ class CategoryViewController: UIViewController {
 
 extension CategoryViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        AboveViewControllerPresentationController(presentedViewController: presented, presenting: presenting)
+        
+        let aboveViewControllerPresentationController = AboveViewControllerPresentationController(presentedViewController: presented, presenting: presenting)
+        
+        aboveViewControllerPresentationController.navBarHeightY = self.navigationController?.navigationBar.frame.maxY
+        aboveViewControllerPresentationController.navBarHeight = self.navigationController?.navigationBar.frame.height
+        
+        return aboveViewControllerPresentationController
+        
     }
 }
 
@@ -262,6 +269,8 @@ extension CategoryViewController : UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = UITableViewCell()
+        
+        guard !postsArray.isEmpty else {return cell}
         
         cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
         
