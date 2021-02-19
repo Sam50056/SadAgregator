@@ -196,6 +196,7 @@ class CategoryViewController: UIViewController {
 //MARK: - UIViewControllerTransitioningDelegate
 
 extension CategoryViewController: UIViewControllerTransitioningDelegate {
+    
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         
         let aboveViewControllerPresentationController = AboveViewControllerPresentationController(presentedViewController: presented, presenting: presenting)
@@ -206,6 +207,21 @@ extension CategoryViewController: UIViewControllerTransitioningDelegate {
         return aboveViewControllerPresentationController
         
     }
+    
+    func animationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController,
+        source: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+        return SlideDownPresentationController(isPresentation: true)
+    }
+    
+    func animationController(
+        forDismissed dismissed: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+        return SlideDownPresentationController(isPresentation: false)
+    }
+    
 }
 
 

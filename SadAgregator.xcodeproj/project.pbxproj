@@ -109,6 +109,7 @@
 		22A155E42583E11C000EAB64 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A155E32583E11C000EAB64 /* Constants.swift */; };
 		22A155E92584E43C000EAB64 /* AuthDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A155E82584E43C000EAB64 /* AuthDataManager.swift */; };
 		22A155ED2584E766000EAB64 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A155EC2584E766000EAB64 /* MenuViewModel.swift */; };
+		22A2B56825E03200001359D6 /* SlideDownPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2B56725E03200001359D6 /* SlideDownPresentationController.swift */; };
 		22A49CB42566645800CCC781 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CB22566645800CCC781 /* PostTableViewCell.swift */; };
 		22A49CB52566645800CCC781 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CB32566645800CCC781 /* PostTableViewCell.xib */; };
 		22A49CBB2566650600CCC781 /* SizeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CB92566650600CCC781 /* SizeCollectionViewCell.swift */; };
@@ -270,6 +271,7 @@
 		22A155E32583E11C000EAB64 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		22A155E82584E43C000EAB64 /* AuthDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataManager.swift; sourceTree = "<group>"; };
 		22A155EC2584E766000EAB64 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		22A2B56725E03200001359D6 /* SlideDownPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideDownPresentationController.swift; sourceTree = "<group>"; };
 		22A49CB22566645800CCC781 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		22A49CB32566645800CCC781 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		22A49CB92566650600CCC781 /* SizeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -851,6 +853,7 @@
 				22B6BC8925DC6DF300EAE067 /* FilterViewController.swift */,
 				22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */,
 				22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */,
+				22A2B56725E03200001359D6 /* SlideDownPresentationController.swift */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
@@ -1186,6 +1189,7 @@
 				2201671C25A669790072BFE7 /* GetPostActionsDataManager.swift in Sources */,
 				2201672925A777A20072BFE7 /* GetVendActionsDataManager.swift in Sources */,
 				229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */,
+				22A2B56825E03200001359D6 /* SlideDownPresentationController.swift in Sources */,
 				2286AD0B25CB5EEE004EF0D7 /* VendorRevsViewController.swift in Sources */,
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
 				2268869C25996B920079933D /* RefreshAlbsDataManager.swift in Sources */,
