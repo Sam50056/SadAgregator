@@ -162,9 +162,9 @@ class CategoryViewController: UIViewController {
         filterVC.modalPresentationStyle = .custom
         filterVC.transitioningDelegate = self
         
+        filterVC.prices = categoryData?["filter"]["prices"].arrayValue ?? [JSON]()
         filterVC.materials = categoryData?["filter"]["materials"].arrayValue ?? [JSON]()
         filterVC.sizes = categoryData?["filter"]["sizes"].arrayValue ?? [JSON]()
-        filterVC.prices = categoryData?["filter"]["prices"].arrayValue ?? [JSON]()
         
         filterVC.filterItemSelected = { [self] item in
             
@@ -186,8 +186,6 @@ class CategoryViewController: UIViewController {
         }
         
         present(filterVC, animated: true, completion: nil)
-        
-        filterVC.collectionView.reloadData()
         
     }
     

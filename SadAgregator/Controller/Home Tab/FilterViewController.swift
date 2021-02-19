@@ -25,6 +25,8 @@ class FilterViewController: UIViewController {
     var selectedMaterials = [String]()
     var selectedSizes = [String]()
     
+    var sbrositButtons = [String : UIButton]()
+    
     var filterItemSelected : ((JSON) -> ())?
     
     override func viewDidLoad() {
@@ -209,11 +211,41 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
             button.addTarget(self, action: #selector(sbrositButtonTapped), for: .touchUpInside)
             
             if section == 0{
+                
                 label.text = "Цена"
+                
+                sbrositButtons["0"] = button
+                
+                if selectedPrices.isEmpty{
+                    sbrositButtons["\(section)"]?.isHidden = true
+                }else{
+                    sbrositButtons["\(section)"]?.isHidden = false
+                }
+                
             }else if section == 1{
+                
                 label.text = "Материал"
+                
+                sbrositButtons["1"] = button
+                
+                if selectedMaterials.isEmpty{
+                    sbrositButtons["\(section)"]?.isHidden = true
+                }else{
+                    sbrositButtons["\(section)"]?.isHidden = false
+                }
+                
             }else if section == 2{
+                
                 label.text = "Размер"
+                
+                sbrositButtons["2"] = button
+                
+                if selectedSizes.isEmpty{
+                    sbrositButtons["\(section)"]?.isHidden = true
+                }else{
+                    sbrositButtons["\(section)"]?.isHidden = false
+                }
+                
             }
             
         }
@@ -238,6 +270,12 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
                 selectedPrices.append(selectedPriceId)
             }
             
+            if selectedPrices.isEmpty{
+                sbrositButtons["\(section)"]?.isHidden = true
+            }else{
+                sbrositButtons["\(section)"]?.isHidden = false
+            }
+            
         }else if section == 1{
             
             let selectedMaterialId = materials[indexPath.row]["v"].stringValue
@@ -250,6 +288,12 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
                 selectedMaterials.append(selectedMaterialId)
             }
             
+            if selectedMaterials.isEmpty{
+                sbrositButtons["\(section)"]?.isHidden = true
+            }else{
+                sbrositButtons["\(section)"]?.isHidden = false
+            }
+            
         }else if section == 2{
             
             let selectedSizeId = sizes[indexPath.row]["v"].stringValue
@@ -260,6 +304,12 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
                 selectedSizes.remove(at: selectedSizes.firstIndex(of: selectedSizeId)!)
             }else{
                 selectedSizes.append(selectedSizeId)
+            }
+            
+            if selectedSizes.isEmpty{
+                sbrositButtons["\(section)"]?.isHidden = true
+            }else{
+                sbrositButtons["\(section)"]?.isHidden = false
             }
             
         }
