@@ -27,9 +27,9 @@ class FilterViewController: UIViewController {
     
     var sbrositButtons = [String : UIButton]()
     
-    var filterItemSelected : ((JSON) -> ())?
+    var filterItemSelected : ((JSON , Int) -> ())?
     
-    var sbrositPressed : (([String]) -> ())?
+    var sbrositPressed : (([String] , Int) -> ())?
 //    var sectionForSbrosit : Int?
     
     override func viewDidLoad() {
@@ -274,7 +274,7 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
             
             let selectedPriceId = prices[indexPath.row]["v"].stringValue
             
-            filterItemSelected?(prices[indexPath.row])
+            filterItemSelected?(prices[indexPath.row], section)
             
             if selectedPrices.contains(selectedPriceId){
                 selectedPrices.remove(at: selectedPrices.firstIndex(of: selectedPriceId)!)
@@ -292,7 +292,7 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
             
             let selectedMaterialId = materials[indexPath.row]["v"].stringValue
             
-            filterItemSelected?(materials[indexPath.row])
+            filterItemSelected?(materials[indexPath.row], section)
             
             if selectedMaterials.contains(selectedMaterialId){
                 selectedMaterials.remove(at: selectedMaterials.firstIndex(of: selectedMaterialId)!)
@@ -310,7 +310,7 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
             
             let selectedSizeId = sizes[indexPath.row]["v"].stringValue
             
-            filterItemSelected?(sizes[indexPath.row])
+            filterItemSelected?(sizes[indexPath.row], section)
             
             if selectedSizes.contains(selectedSizeId){
                 selectedSizes.remove(at: selectedSizes.firstIndex(of: selectedSizeId)!)
@@ -337,13 +337,13 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         let sectionForSbrosit = sender.tag
         
         if sectionForSbrosit == 0{
-            sbrositPressed?(selectedPrices)
+            sbrositPressed?(selectedPrices, sectionForSbrosit)
             selectedPrices.removeAll()
         }else if sectionForSbrosit == 1{
-            sbrositPressed?(selectedMaterials)
+            sbrositPressed?(selectedMaterials, sectionForSbrosit)
             selectedMaterials.removeAll()
         }else if sectionForSbrosit == 2{
-            sbrositPressed?(selectedSizes)
+            sbrositPressed?(selectedSizes, sectionForSbrosit)
             selectedSizes.removeAll()
         }
         

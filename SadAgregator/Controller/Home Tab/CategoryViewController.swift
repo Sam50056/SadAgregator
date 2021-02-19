@@ -126,6 +126,10 @@ class CategoryViewController: UIViewController {
         }
     }
     
+    var sizeFilters = [String]()
+    var priceFilters = [String]()
+    var materialFilters = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -166,9 +170,15 @@ class CategoryViewController: UIViewController {
         filterVC.materials = categoryData?["filter"]["materials"].arrayValue ?? [JSON]()
         filterVC.sizes = categoryData?["filter"]["sizes"].arrayValue ?? [JSON]()
         
-        filterVC.filterItemSelected = { [self] item in
+        filterVC.selectedPrices = priceFilters
+        filterVC.selectedMaterials = materialFilters
+        filterVC.selectedSizes = sizeFilters
+        
+        filterVC.filterItemSelected = { [self] item , type in
             
             let id = item["v"].stringValue
+            
+            sortFilterByType(type , item: id)
             
             if filters.contains(id){
                 filters.remove(at: filters.firstIndex(of: id)!)
@@ -185,9 +195,11 @@ class CategoryViewController: UIViewController {
             
         }
         
-        filterVC.sbrositPressed = { [self] items in
+        filterVC.sbrositPressed = { [self] items , type in
             
             for item in items{
+                
+                sortFilterByType(type , item: item)
                 
                 if filters.contains(item){
                     filters.remove(at: filters.firstIndex(of: item)!)
@@ -205,6 +217,36 @@ class CategoryViewController: UIViewController {
         }
         
         present(filterVC, animated: true, completion: nil)
+        
+    }
+    
+    func sortFilterByType(_ type : Int, item : String){
+        
+        switch type {
+        case 0:
+            
+            if priceFilters.contains(item){
+                priceFilters.remove(at: priceFilters.firstIndex(of: item)!)
+            }else{
+                priceFilters.append(item)
+            }
+        case 1:
+            
+            if materialFilters.contains(item){
+                materialFilters.remove(at: materialFilters.firstIndex(of: item)!)
+            }else{
+                materialFilters.append(item)
+            }
+        case 2:
+            
+            if sizeFilters.contains(item){
+                sizeFilters.remove(at: sizeFilters.firstIndex(of: item)!)
+            }else{
+                sizeFilters.append(item)
+            }
+        default:
+            break
+        }
         
     }
     
