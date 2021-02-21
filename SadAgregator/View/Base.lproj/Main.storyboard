@@ -436,19 +436,19 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7Jd-Ni-43l">
                                                     <rect key="frame" x="304.66666666666669" y="11" width="65.333333333333314" height="70"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="R8y-8D-6ph">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="82W-fC-K7Q">
                                                             <rect key="frame" x="0.0" y="0.0" width="65.333333333333329" height="18"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="8" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="863-oH-XOC">
-                                                                    <rect key="frame" x="0.0" y="1.6666666666666643" width="22" height="15.000000000000004"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="6" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="386-tN-oMz">
+                                                                    <rect key="frame" x="0.0" y="-0.33333333333333215" width="18" height="17.666666666666664"/>
                                                                     <color key="tintColor" red="0.79936379189999995" green="0.79947966339999998" blue="0.79933840040000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="18" id="8bh-Es-gjP"/>
-                                                                        <constraint firstAttribute="width" constant="22" id="POX-8V-U3N"/>
+                                                                        <constraint firstAttribute="width" constant="18" id="66O-zw-x9f"/>
+                                                                        <constraint firstAttribute="height" constant="18" id="8AB-Ul-9OS"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" tag="9" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="gdS-2W-lXc">
-                                                                    <rect key="frame" x="30.000000000000004" y="0.0" width="35.333333333333343" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" tag="7" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="4AG-Yk-kPQ">
+                                                                    <rect key="frame" x="26.000000000000004" y="0.0" width="39.333333333333343" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -474,19 +474,19 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="82W-fC-K7Q">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="R8y-8D-6ph">
                                                             <rect key="frame" x="0.0" y="52" width="65.333333333333329" height="18"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="6" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="386-tN-oMz">
-                                                                    <rect key="frame" x="0.0" y="-0.33333333333333215" width="18" height="17.666666666666664"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="8" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="863-oH-XOC">
+                                                                    <rect key="frame" x="0.0" y="1.6666666666666643" width="22" height="15.000000000000004"/>
                                                                     <color key="tintColor" red="0.79936379189999995" green="0.79947966339999998" blue="0.79933840040000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="18" id="66O-zw-x9f"/>
-                                                                        <constraint firstAttribute="height" constant="18" id="8AB-Ul-9OS"/>
+                                                                        <constraint firstAttribute="height" constant="18" id="8bh-Es-gjP"/>
+                                                                        <constraint firstAttribute="width" constant="22" id="POX-8V-U3N"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" tag="7" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="4AG-Yk-kPQ">
-                                                                    <rect key="frame" x="26.000000000000004" y="0.0" width="39.333333333333343" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" tag="9" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="gdS-2W-lXc">
+                                                                    <rect key="frame" x="30.000000000000004" y="0.0" width="35.333333333333343" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -3662,10 +3662,10 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="0O8-eQ-Bac"/>
+        <segue reference="wZb-pO-qG4"/>
         <segue reference="yR4-7g-u1L"/>
         <segue reference="UT5-6g-K7A"/>
-        <segue reference="LYd-3X-sUB"/>
+        <segue reference="sY4-Z3-dlW"/>
         <segue reference="ZSI-nF-15U"/>
     </inferredMetricsTieBreakers>
     <resources>
