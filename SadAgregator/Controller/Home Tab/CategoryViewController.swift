@@ -144,6 +144,21 @@ class CategoryViewController: UIViewController {
     
     var filterBarButton = UIBarButtonItem()
     
+    var shouldMakeRequest = false{
+        didSet{
+            if shouldMakeRequest{
+                if let safeId = thisCatId{
+                    
+                    postsArray.removeAll()
+                    
+                    getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter)
+                }
+            }
+        }
+    }
+    
+    var requestTimer = Timer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -192,6 +207,9 @@ class CategoryViewController: UIViewController {
         
         filterVC.filterItemSelected = { [self] item , type in
             
+            //Stoping the timer when a new filter is selected , we give time to user to select something else
+            requestTimer.invalidate()
+            
             let id = item["v"].stringValue
             
             sortFilterByType(type , item: id)
@@ -202,11 +220,12 @@ class CategoryViewController: UIViewController {
                 filters.append(id)
             }
             
-            if let safeId = thisCatId{
+            //Start counting 1 second to make a request, but if the user selects another filter again , the timer will be invalidated above
+            requestTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { timer in
                 
-                postsArray.removeAll()
+                shouldMakeRequest = true
+                print("Hello Timer")
                 
-                getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter)
             }
             
         }
