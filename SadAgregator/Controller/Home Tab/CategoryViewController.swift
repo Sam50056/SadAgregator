@@ -351,7 +351,7 @@ extension CategoryViewController : GetCatpageDataManagerDelegate{
             
             //This is only available when page is 1 , that's why it's in the if block ))
             if page == 1 {
-                navigationItem.title = data["cat_name"].stringValue
+                navigationItem.title = data["cat_name"].stringValue == "" ? "Категория" : data["cat_name"].stringValue
             }
             
         }
