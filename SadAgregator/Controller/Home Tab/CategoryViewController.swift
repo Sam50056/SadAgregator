@@ -350,8 +350,8 @@ extension CategoryViewController : GetCatpageDataManagerDelegate{
             tableView.reloadData()
             
             //This is only available when page is 1 , that's why it's in the if block ))
-            if let title = data["cat_name"].string {
-                navigationItem.title = title
+            if page == 1 {
+                navigationItem.title = data["cat_name"].stringValue
             }
             
         }
