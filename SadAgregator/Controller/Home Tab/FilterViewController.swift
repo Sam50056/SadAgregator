@@ -128,7 +128,27 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return getNumberOfSections()
+    }
+    
+    func getNumberOfSections() -> Int{
+        
+        var number = 0
+        
+        if !prices.isEmpty{
+            number = number + 1
+        }
+        
+        if !materials.isEmpty{
+            number = number + 1
+        }
+        
+        if !sizes.isEmpty {
+            number = number + 1
+        }
+        
+        return number
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
