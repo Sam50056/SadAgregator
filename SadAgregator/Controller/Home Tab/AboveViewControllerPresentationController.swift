@@ -14,6 +14,8 @@ class AboveViewControllerPresentationController: UIPresentationController {
     
     var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
     
+    var height : CGFloat?
+    
     var navBarHeightY : CGFloat?
     var navBarHeight : CGFloat?
     
@@ -29,7 +31,7 @@ class AboveViewControllerPresentationController: UIPresentationController {
     
     override var frameOfPresentedViewInContainerView: CGRect {
         CGRect(origin: CGPoint(x: 0, y: navBarHeightY ?? 0),
-               size: CGSize(width: self.containerView!.frame.width, height: (430 - (navBarHeight ?? 0))))
+               size: CGSize(width: self.containerView!.frame.width, height: ((height ?? 430) - (navBarHeight ?? 0))))
     }
     
     override func presentationTransitionWillBegin() {

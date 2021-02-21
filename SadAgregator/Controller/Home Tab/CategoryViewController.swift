@@ -298,6 +298,21 @@ extension CategoryViewController: UIViewControllerTransitioningDelegate {
 //        aboveViewControllerPresentationController.navBarHeightY = self.navigationController?.navigationBar.frame.maxY
 //        aboveViewControllerPresentationController.navBarHeight = self.navigationController?.navigationBar.frame.height
         
+        var height : CGFloat = 430
+        
+        if (categoryData?["filter"]["prices"].arrayValue.isEmpty)! {
+            height = height - 96
+        }
+        if(categoryData?["filter"]["materials"].arrayValue.isEmpty)!{
+            height = height - 96
+        }
+        
+        if (categoryData?["filter"]["sizes"].arrayValue.isEmpty)!{
+            height = height - 96
+        }
+        
+        aboveViewControllerPresentationController.height = height
+        
         return aboveViewControllerPresentationController
         
     }
