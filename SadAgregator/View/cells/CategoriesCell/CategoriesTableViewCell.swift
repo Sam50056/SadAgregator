@@ -50,8 +50,7 @@ extension CategoriesTableViewCell : UICollectionViewDelegate, UICollectionViewDa
         //This is an additional cell
         if indexPath.row == 0{
             
-            cell.firstLabel.text = "См. все"
-            cell.secondLabel.text = "Категории"
+            cell.firstLabel.text = "Категории"
             
             return cell
         }
@@ -59,8 +58,6 @@ extension CategoriesTableViewCell : UICollectionViewDelegate, UICollectionViewDa
         let category = categories[indexPath.row - 1] //We do -1 because we added one more cell above
         
         cell.firstLabel.text = category["capt"].stringValue
-        
-        cell.secondLabel.text = category["descr"].stringValue
         
         return cell
         
