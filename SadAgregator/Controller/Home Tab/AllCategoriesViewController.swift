@@ -19,6 +19,8 @@ class AllCategoriesViewController: UITableViewController {
     
     var categories = [JSON]()
     
+    var parentId : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,7 +30,7 @@ class AllCategoriesViewController: UITableViewController {
         
         getCatListDataManager.delegate = self
         
-        getCatListDataManager.getGetCatListData(key: key)
+        getCatListDataManager.getGetCatListData(key: key, parentId: parentId)
         
     }
     
@@ -61,11 +63,23 @@ class AllCategoriesViewController: UITableViewController {
         
         let id = categories[indexPath.row]["id"].stringValue
         
-        let categoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CategoryVC") as! CategoryViewController
-        
-        categoryVC.thisCatId = id
-        
-        navigationController?.pushViewController(categoryVC, animated: true)
+        if parentId != nil{
+            
+            let categoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CategoryVC") as! CategoryViewController
+            
+            categoryVC.thisCatId = id
+            
+            navigationController?.pushViewController(categoryVC, animated: true)
+            
+        }else {
+            
+            let allCategoriesVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AllCatVC") as! AllCategoriesViewController
+            
+            allCategoriesVC.parentId = id
+            
+            navigationController?.pushViewController(allCategoriesVC, animated: true)
+            
+        }
         
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -97,6 +111,10 @@ extension AllCategoriesViewController : GetCatListDataManagerDelegate{
             
             categories = data["list"].arrayValue
             
+            if let title = data["name"].string{
+                navigationItem.title = title
+            }
+            
             tableView.reloadData()
             
         }
@@ -106,5 +124,5 @@ extension AllCategoriesViewController : GetCatListDataManagerDelegate{
     func didFailGettingGetCatListDataWithError(error: String) {
         print("Error with GetCatListDataManager : \(error)")
     }
-       
+    
 }
