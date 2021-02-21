@@ -295,8 +295,8 @@ extension CategoryViewController: UIViewControllerTransitioningDelegate {
         
         let aboveViewControllerPresentationController = AboveViewControllerPresentationController(presentedViewController: presented, presenting: presenting)
         
-        aboveViewControllerPresentationController.navBarHeightY = self.navigationController?.navigationBar.frame.maxY
-        aboveViewControllerPresentationController.navBarHeight = self.navigationController?.navigationBar.frame.height
+//        aboveViewControllerPresentationController.navBarHeightY = self.navigationController?.navigationBar.frame.maxY
+//        aboveViewControllerPresentationController.navBarHeight = self.navigationController?.navigationBar.frame.height
         
         return aboveViewControllerPresentationController
         
