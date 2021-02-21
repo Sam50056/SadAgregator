@@ -21,7 +21,19 @@ class CategoryViewController: UIViewController {
     
     var isLogged = false
     
-    var categoryData : JSON?
+    var categoryData : JSON?{
+        
+        didSet{
+            
+            if (categoryData?["filter"]["prices"].arrayValue.isEmpty)! && (categoryData?["filter"]["materials"].arrayValue.isEmpty)! && (categoryData?["filter"]["sizes"].arrayValue.isEmpty)! {
+                
+                navigationItem.rightBarButtonItem = nil
+                
+            }
+            
+        }
+        
+    }
     
     var postsArray = [JSON]()
     
@@ -130,6 +142,8 @@ class CategoryViewController: UIViewController {
     var priceFilters = [String]()
     var materialFilters = [String]()
     
+    var filterBarButton = UIBarButtonItem()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -137,7 +151,9 @@ class CategoryViewController: UIViewController {
         
         navigationItem.title = "Категория"
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(filterButtonTapped))
+        filterBarButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(filterButtonTapped))
+        
+        navigationItem.rightBarButtonItem = filterBarButton
         
         tableView.delegate = self
         tableView.dataSource = self
