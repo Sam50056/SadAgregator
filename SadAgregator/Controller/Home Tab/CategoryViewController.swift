@@ -164,8 +164,6 @@ class CategoryViewController: UIViewController {
         
         loadUserData()
         
-        navigationItem.title = "Категория"
-        
         filterBarButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(filterButtonTapped))
         
         navigationItem.rightBarButtonItem = filterBarButton
