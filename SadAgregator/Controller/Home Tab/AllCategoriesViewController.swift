@@ -61,9 +61,11 @@ class AllCategoriesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let id = categories[indexPath.row]["id"].stringValue
+        let category = categories[indexPath.row]
         
-        if parentId != nil{
+        let id = category["id"].stringValue
+        
+        if parentId != nil || category["is_cat"].stringValue == "1"{
             
             let categoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CategoryVC") as! CategoryViewController
             

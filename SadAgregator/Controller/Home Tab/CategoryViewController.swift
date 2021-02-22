@@ -138,6 +138,9 @@ class CategoryViewController: UIViewController {
         }
     }
     
+    var max = 0
+    var min = 0
+    
     var sizeFilters = [String]()
     var priceFilters = [String]()
     var materialFilters = [String]()
@@ -151,7 +154,7 @@ class CategoryViewController: UIViewController {
                     
                     postsArray.removeAll()
                     
-                    getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter)
+                    getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
                 }
             }
         }
@@ -244,7 +247,7 @@ class CategoryViewController: UIViewController {
                 
                 postsArray.removeAll()
                 
-                getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter)
+                getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
             }
             
         }
@@ -414,7 +417,7 @@ extension CategoryViewController : UITableViewDelegate , UITableViewDataSource{
             rowForPaggingUpdate += 16
             
             if let safeId = thisCatId{
-                getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter)
+                getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
             }
             
             print("Done a request for page: \(page)")
