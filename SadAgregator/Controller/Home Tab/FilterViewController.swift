@@ -372,21 +372,34 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         
         let sectionForSbrosit = sender.tag
         
+        var indexPaths = [IndexPath]()
+        
         if sectionForSbrosit == 0{
             sbrositPressed?([min , max], sectionForSbrosit)
             min = ""
             max = ""
+            indexPaths.append(IndexPath(row: 0, section: sectionForSbrosit))
         }else if sectionForSbrosit == 1{
             sbrositPressed?(selectedMaterials, sectionForSbrosit)
             selectedMaterials.removeAll()
+            
+            for i in 0...materials.count - 1 {
+                indexPaths.append(IndexPath(row: i, section: sectionForSbrosit))
+            }
+            
         }else if sectionForSbrosit == 2{
             sbrositPressed?(selectedSizes, sectionForSbrosit)
             selectedSizes.removeAll()
+            
+            for i in 0...sizes.count - 1 {
+                indexPaths.append(IndexPath(row: i, section: sectionForSbrosit))
+            }
+            
         }
         
         sbrositButtons["\(sectionForSbrosit)"]?.isHidden = true
         
-        collectionView.reloadSections([sectionForSbrosit])
+        collectionView.reloadItems(at: indexPaths)
         
     }
     
