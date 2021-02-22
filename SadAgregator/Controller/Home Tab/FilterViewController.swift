@@ -17,20 +17,21 @@ class FilterViewController: UIViewController {
     
     var darkGray = #colorLiteral(red: 0.4717689157, green: 0.4718403816, blue: 0.4717532396, alpha: 1)
     
-    var prices = [JSON]()
     var materials = [JSON]()
     var sizes = [JSON]()
     
-    var selectedPrices = [String]()
+    var min = ""
+    var max = ""
+    
     var selectedMaterials = [String]()
     var selectedSizes = [String]()
     
     var sbrositButtons = [String : UIButton]()
     
     var filterItemSelected : ((JSON , Int) -> ())?
+    var minMaxChanged : ((String , String) -> ())?
     
     var sbrositPressed : (([String] , Int) -> ())?
-//    var sectionForSbrosit : Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +89,26 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         let sectionProvider = { (sectionIndex: Int,
                                  layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
+            if sectionIndex == 0{
+                
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                      heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                       heightDimension: .absolute(40))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                let section = NSCollectionLayoutSection(group: group)
+                
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+                
+                section.boundarySupplementaryItems = [self.createSectionHeader()]
+                
+                return section
+                
+            }
+            
             let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(50),
                                                   heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -135,9 +156,8 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         
         var number = 0
         
-        if !prices.isEmpty{
-            number = number + 1
-        }
+        //Always have price section
+        number = number + 1
         
         if !materials.isEmpty{
             number = number + 1
@@ -154,7 +174,7 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if section == 0{
-            return prices.count
+            return 1
         }else if section == 1{
             return materials.count
         }else if section == 2{
@@ -167,26 +187,40 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "filterItemCell", for: indexPath)
+        var cell = UICollectionViewCell()
+        
+        if indexPath.section == 0 {
+            
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pricesCell", for: indexPath)
+            
+            if let minView = cell.viewWithTag(1),
+               let maxView = cell.viewWithTag(3),
+               let minTextField = cell.viewWithTag(2) as? UITextField,
+               let maxTextField = cell.viewWithTag(4) as? UITextField{
+                
+                minView.layer.cornerRadius = 16
+                maxView.layer.cornerRadius = 16
+                
+                minTextField.placeholder = "0"
+                
+                minTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+                maxTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+                
+                minTextField.text = min
+                maxTextField.text = max
+                
+            }
+            
+            return cell
+            
+        }
+        
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "filterItemCell", for: indexPath)
         
         if let label = cell.viewWithTag(2) as? UILabel,
            let _ = cell.viewWithTag(1){
             
-            if indexPath.section == 0{
-                
-                label.text = prices[indexPath.row]["c"].stringValue
-                
-                let id = prices[indexPath.row]["v"].stringValue
-                
-                if !selectedPrices.contains(id){
-                    (cell.viewWithTag(1))?.backgroundColor = UIColor(named: "gray")
-                    (cell.viewWithTag(2) as? UILabel)?.textColor = .darkGray
-                }else{
-                    (cell.viewWithTag(1))?.backgroundColor = .systemBlue
-                    (cell.viewWithTag(2) as? UILabel)?.textColor = .white
-                }
-                
-            }else if indexPath.section == 1{
+             if indexPath.section == 1{
                 
                 label.text = materials[indexPath.row]["c"].stringValue
                 
@@ -236,10 +270,10 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
                 
                 sbrositButtons["0"] = button
                 
-                if selectedPrices.isEmpty{
-                    sbrositButtons["\(section)"]!.isHidden = true
+                if min == "" && max == ""{
+                    sbrositButtons["\(section)"]?.isHidden = true
                 }else{
-                    sbrositButtons["\(section)"]!.isHidden = false
+                    sbrositButtons["\(section)"]?.isHidden = false
                 }
                 
                 button.addTarget(self, action: #selector(sbrositButtonTapped(_:)), for: .touchUpInside)
@@ -290,25 +324,7 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         
         let section = indexPath.section
         
-        if section == 0{
-            
-            let selectedPriceId = prices[indexPath.row]["v"].stringValue
-            
-            filterItemSelected?(prices[indexPath.row], section)
-            
-            if selectedPrices.contains(selectedPriceId){
-                selectedPrices.remove(at: selectedPrices.firstIndex(of: selectedPriceId)!)
-            }else{
-                selectedPrices.append(selectedPriceId)
-            }
-            
-            if selectedPrices.isEmpty{
-                sbrositButtons["\(section)"]?.isHidden = true
-            }else{
-                sbrositButtons["\(section)"]?.isHidden = false
-            }
-            
-        }else if section == 1{
+        if section == 1{
             
             let selectedMaterialId = materials[indexPath.row]["v"].stringValue
             
@@ -357,8 +373,9 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         let sectionForSbrosit = sender.tag
         
         if sectionForSbrosit == 0{
-            sbrositPressed?(selectedPrices, sectionForSbrosit)
-            selectedPrices.removeAll()
+            sbrositPressed?([min , max], sectionForSbrosit)
+            min = ""
+            max = ""
         }else if sectionForSbrosit == 1{
             sbrositPressed?(selectedMaterials, sectionForSbrosit)
             selectedMaterials.removeAll()
@@ -375,6 +392,44 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
     
     @objc func filterButtonTapped(){
         self.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+//MARK: - UITextField
+
+extension FilterViewController : UITextFieldDelegate{
+    
+    @objc func textFieldEditingChanged(_ sender : UITextField){
+        
+        if sender.tag == 2{
+            
+            min = sender.text ?? ""
+            
+        }else if sender.tag == 4 {
+            
+            max = sender.text ?? ""
+            
+        }
+        
+        minMaxChanged?(min,max)
+        
+        if min == "" && max == ""{
+            sbrositButtons["0"]?.isHidden = true
+        }else{
+            sbrositButtons["0"]?.isHidden = false
+        }
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if min == "" && max == ""{
+            sbrositButtons["0"]?.isHidden = true
+        }else{
+            sbrositButtons["0"]?.isHidden = false
+        }
+        
     }
     
 }

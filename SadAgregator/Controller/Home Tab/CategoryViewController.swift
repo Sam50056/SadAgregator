@@ -138,11 +138,10 @@ class CategoryViewController: UIViewController {
         }
     }
     
-    var max = 0
-    var min = 0
+    var max = ""
+    var min = ""
     
     var sizeFilters = [String]()
-    var priceFilters = [String]()
     var materialFilters = [String]()
     
     var filterBarButton = UIBarButtonItem()
@@ -198,11 +197,9 @@ class CategoryViewController: UIViewController {
         filterVC.modalPresentationStyle = .custom
         filterVC.transitioningDelegate = self
         
-        filterVC.prices = categoryData?["filter"]["prices"].arrayValue ?? [JSON]()
         filterVC.materials = categoryData?["filter"]["materials"].arrayValue ?? [JSON]()
         filterVC.sizes = categoryData?["filter"]["sizes"].arrayValue ?? [JSON]()
         
-        filterVC.selectedPrices = priceFilters
         filterVC.selectedMaterials = materialFilters
         filterVC.selectedSizes = sizeFilters
         
@@ -231,14 +228,40 @@ class CategoryViewController: UIViewController {
             
         }
         
+        filterVC.minMaxChanged = { [self] minVal , maxVal in
+            
+            //Stoping the timer when a new filter is selected , we give time to user to select something else
+            requestTimer.invalidate()
+            
+            min = minVal
+            max = maxVal
+            
+            //Start counting 1 second to make a request, but if the user selects another filter again , the timer will be invalidated above
+            requestTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+                
+                shouldMakeRequest = true
+                print("Hello Timer")
+                
+            }
+            
+        }
+        
         filterVC.sbrositPressed = { [self] items , type in
             
-            for item in items{
+            //Type = 0 means it's price stuff
+            if type == 0 {
+                min = ""
+                max = ""
+            }else{
                 
-                sortFilterByType(type , item: item)
-                
-                if filters.contains(item){
-                    filters.remove(at: filters.firstIndex(of: item)!)
+                for item in items{
+                    
+                    sortFilterByType(type , item: item)
+                    
+                    if filters.contains(item){
+                        filters.remove(at: filters.firstIndex(of: item)!)
+                    }
+                    
                 }
                 
             }
@@ -259,13 +282,6 @@ class CategoryViewController: UIViewController {
     func sortFilterByType(_ type : Int, item : String){
         
         switch type {
-        case 0:
-            
-            if priceFilters.contains(item){
-                priceFilters.remove(at: priceFilters.firstIndex(of: item)!)
-            }else{
-                priceFilters.append(item)
-            }
         case 1:
             
             if materialFilters.contains(item){
@@ -296,14 +312,11 @@ extension CategoryViewController: UIViewControllerTransitioningDelegate {
         
         let aboveViewControllerPresentationController = AboveViewControllerPresentationController(presentedViewController: presented, presenting: presenting)
         
-//        aboveViewControllerPresentationController.navBarHeightY = self.navigationController?.navigationBar.frame.maxY
-//        aboveViewControllerPresentationController.navBarHeight = self.navigationController?.navigationBar.frame.height
+        //        aboveViewControllerPresentationController.navBarHeightY = self.navigationController?.navigationBar.frame.maxY
+        //        aboveViewControllerPresentationController.navBarHeight = self.navigationController?.navigationBar.frame.height
         
         var height : CGFloat = 430
         
-        if (categoryData?["filter"]["prices"].arrayValue.isEmpty)! {
-            height = height - 96
-        }
         if(categoryData?["filter"]["materials"].arrayValue.isEmpty)!{
             height = height - 96
         }

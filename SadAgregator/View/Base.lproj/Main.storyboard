@@ -3552,6 +3552,85 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="105" height="93"/>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="pricesCell" id="DLQ-Id-EZG">
+                                        <rect key="frame" x="115" y="50" width="268" height="93"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="pOD-ae-Uka">
+                                            <rect key="frame" x="0.0" y="0.0" width="268" height="93"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view clipsSubviews="YES" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eG6-ii-xSA">
+                                                    <rect key="frame" x="41" y="21.666666666666671" width="80" height="50"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Puo-Xb-YhB">
+                                                            <rect key="frame" x="3" y="0.0" width="74" height="50"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="gray"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="Puo-Xb-YhB" secondAttribute="bottom" id="B0Q-nY-2VL"/>
+                                                        <constraint firstItem="Puo-Xb-YhB" firstAttribute="top" secondItem="eG6-ii-xSA" secondAttribute="top" id="JyR-fk-G3i"/>
+                                                        <constraint firstAttribute="width" constant="80" id="U9d-Qj-iSR"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Puo-Xb-YhB" secondAttribute="trailing" constant="3" id="e9i-Oj-jGt"/>
+                                                        <constraint firstAttribute="height" constant="50" id="fWF-jK-EsS"/>
+                                                        <constraint firstItem="Puo-Xb-YhB" firstAttribute="leading" secondItem="eG6-ii-xSA" secondAttribute="leading" constant="3" id="p6v-WG-AEl"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="От" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vq8-UE-bZP">
+                                                    <rect key="frame" x="8" y="36" width="25" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="1V4-99-prb"/>
+                                                        <constraint firstAttribute="width" constant="25" id="gEM-Bc-a9t"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view clipsSubviews="YES" tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F8L-Mb-4DI">
+                                                    <rect key="frame" x="180" y="21.666666666666671" width="80" height="50"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NVX-8c-lOa">
+                                                            <rect key="frame" x="3" y="0.0" width="74" height="50"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="gray"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="NVX-8c-lOa" secondAttribute="trailing" constant="3" id="0Yn-zp-VpN"/>
+                                                        <constraint firstAttribute="width" constant="80" id="6Ig-cK-dz2"/>
+                                                        <constraint firstAttribute="bottom" secondItem="NVX-8c-lOa" secondAttribute="bottom" id="DCe-DW-BJy"/>
+                                                        <constraint firstAttribute="height" constant="50" id="IBs-Fb-czb"/>
+                                                        <constraint firstItem="NVX-8c-lOa" firstAttribute="leading" secondItem="F8L-Mb-4DI" secondAttribute="leading" constant="3" id="Z6F-Ir-mTf"/>
+                                                        <constraint firstItem="NVX-8c-lOa" firstAttribute="top" secondItem="F8L-Mb-4DI" secondAttribute="top" id="u19-VB-BtX"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="До" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIc-sj-JTH">
+                                                    <rect key="frame" x="147" y="36" width="25" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="P4a-IO-Sva"/>
+                                                        <constraint firstAttribute="width" constant="25" id="Vlf-VY-mfS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="eG6-ii-xSA" firstAttribute="leading" secondItem="vq8-UE-bZP" secondAttribute="trailing" constant="8" id="CqY-kM-hcM"/>
+                                                <constraint firstItem="F8L-Mb-4DI" firstAttribute="trailing" secondItem="pOD-ae-Uka" secondAttribute="trailingMargin" id="GD4-gf-7D9"/>
+                                                <constraint firstItem="F8L-Mb-4DI" firstAttribute="leading" secondItem="dIc-sj-JTH" secondAttribute="trailing" constant="8" id="KO9-pp-JuJ"/>
+                                                <constraint firstItem="dIc-sj-JTH" firstAttribute="centerY" secondItem="F8L-Mb-4DI" secondAttribute="centerY" id="KUW-DN-B51"/>
+                                                <constraint firstItem="vq8-UE-bZP" firstAttribute="leading" secondItem="pOD-ae-Uka" secondAttribute="leadingMargin" id="WvL-B7-DjK"/>
+                                                <constraint firstItem="F8L-Mb-4DI" firstAttribute="centerY" secondItem="pOD-ae-Uka" secondAttribute="centerY" id="lyv-wN-1DT"/>
+                                                <constraint firstItem="eG6-ii-xSA" firstAttribute="centerY" secondItem="pOD-ae-Uka" secondAttribute="centerY" id="pjN-nt-xV5"/>
+                                                <constraint firstItem="vq8-UE-bZP" firstAttribute="centerY" secondItem="eG6-ii-xSA" secondAttribute="centerY" id="qg8-Bu-TFd"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="268" height="93"/>
+                                    </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="header" id="7Rd-IH-ez9">
                                     <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
