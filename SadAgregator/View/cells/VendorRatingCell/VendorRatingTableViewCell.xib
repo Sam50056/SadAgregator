@@ -21,18 +21,18 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6hz-6C-Vkj">
                         <rect key="frame" x="224.5" y="43" width="65.5" height="70"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HWP-KX-IuH">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BPV-YH-eiL">
                                 <rect key="frame" x="0.0" y="0.0" width="65.5" height="18"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Llc-K2-j2j">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Eo4-aD-d7S">
                                         <rect key="frame" x="0.0" y="-0.5" width="18" height="18"/>
                                         <color key="tintColor" red="0.79936379189999995" green="0.79947966339999998" blue="0.79933840040000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="KmJ-Me-kkH"/>
-                                            <constraint firstAttribute="width" constant="18" id="MYb-8i-zau"/>
+                                            <constraint firstAttribute="height" constant="18" id="MKh-17-Ioe"/>
+                                            <constraint firstAttribute="width" constant="18" id="qbg-m0-yKH"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="HxS-20-Dlb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="yZO-o1-lH3">
                                         <rect key="frame" x="26" y="0.0" width="39.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
@@ -40,18 +40,18 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BPV-YH-eiL">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HWP-KX-IuH">
                                 <rect key="frame" x="0.0" y="26" width="65.5" height="18"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill.checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Eo4-aD-d7S">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill.checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Llc-K2-j2j">
                                         <rect key="frame" x="0.0" y="1.5" width="22" height="15"/>
                                         <color key="tintColor" red="0.79936379189999995" green="0.79947966339999998" blue="0.79933840040000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="MKh-17-Ioe"/>
-                                            <constraint firstAttribute="width" constant="22" id="qbg-m0-yKH"/>
+                                            <constraint firstAttribute="height" constant="18" id="KmJ-Me-kkH"/>
+                                            <constraint firstAttribute="width" constant="22" id="MYb-8i-zau"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="yZO-o1-lH3">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="HxS-20-Dlb">
                                         <rect key="frame" x="30" y="0.0" width="35.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
