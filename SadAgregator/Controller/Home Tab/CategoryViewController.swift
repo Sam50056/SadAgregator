@@ -203,6 +203,9 @@ class CategoryViewController: UIViewController {
         filterVC.selectedMaterials = materialFilters
         filterVC.selectedSizes = sizeFilters
         
+        filterVC.min = min
+        filterVC.max = max
+        
         filterVC.filterItemSelected = { [self] item , type in
             
             //Stoping the timer when a new filter is selected , we give time to user to select something else

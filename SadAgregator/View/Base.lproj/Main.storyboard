@@ -3571,7 +3571,7 @@
                                                                         <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Puo-Xb-YhB">
                                                                             <rect key="frame" x="3" y="0.0" width="86.666666666666671" height="50"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <textInputTraits key="textInputTraits"/>
+                                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                                         </textField>
                                                                     </subviews>
                                                                     <color key="backgroundColor" name="gray"/>
@@ -3613,7 +3613,7 @@
                                                                         <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NVX-8c-lOa">
                                                                             <rect key="frame" x="3" y="0.0" width="86.333333333333329" height="50"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <textInputTraits key="textInputTraits"/>
+                                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                                         </textField>
                                                                     </subviews>
                                                                     <color key="backgroundColor" name="gray"/>

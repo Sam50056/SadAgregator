@@ -201,8 +201,6 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
                 minView.layer.cornerRadius = 16
                 maxView.layer.cornerRadius = 16
                 
-                minTextField.placeholder = "0"
-                
                 minTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
                 maxTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
                 
