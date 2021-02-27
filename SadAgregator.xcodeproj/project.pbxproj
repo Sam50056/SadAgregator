@@ -419,6 +419,15 @@
 			path = DescCell;
 			sourceTree = "<group>";
 		};
+		22409F9B25EAC95700582576 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */,
+				22A2B56725E03200001359D6 /* SlideDownPresentationController.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
 		22423E9A259131F80097C9E6 /* Menu Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -641,6 +650,7 @@
 		228CB774255BF996002B4A96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				22409F9B25EAC95700582576 /* Animation */,
 				224BC441259FEE42003F147F /* Supporting Files  */,
 				22634AB425858C7300DF6FDB /* Data Base Models  */,
 				224BC43D259FEE11003F147F /* Managers */,
@@ -851,9 +861,7 @@
 				22CADF4925CCE7EE001C4F31 /* NewVersionViewController.swift */,
 				2200943825DACBE90001F7B3 /* CategoryViewController.swift */,
 				22B6BC8925DC6DF300EAE067 /* FilterViewController.swift */,
-				22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */,
 				22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */,
-				22A2B56725E03200001359D6 /* SlideDownPresentationController.swift */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
@@ -1364,7 +1372,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1388,7 +1396,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
