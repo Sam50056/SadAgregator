@@ -21,19 +21,7 @@ class CategoryViewController: UIViewController {
     
     var isLogged = false
     
-    var categoryData : JSON?{
-        
-        didSet{
-            
-            if (categoryData?["filter"]["prices"].arrayValue.isEmpty)! && (categoryData?["filter"]["materials"].arrayValue.isEmpty)! && (categoryData?["filter"]["sizes"].arrayValue.isEmpty)! {
-                
-                navigationItem.rightBarButtonItem = nil
-                
-            }
-            
-        }
-        
-    }
+    var categoryData : JSON?
     
     var postsArray = [JSON]()
     

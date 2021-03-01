@@ -68,15 +68,19 @@ class FilterViewController: UIViewController {
         if sender.state == .ended {
             let dragVelocity = sender.velocity(in: view)
             print("DRAG VELOCITY : \(dragVelocity)")
-            if dragVelocity.y >= -2550 {
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                // Set back to original position of the view controller
-                UIView.animate(withDuration: 0.3) {
-                    self.view.frame.origin = self.pointOrigin ?? CGPoint(x: 0, y: 400)
-                }
-            }
+            self.dismiss(animated: true, completion: nil)
+            //            if dragVelocity.y >= -2550 {
+            //                self.dismiss(animated: true, completion: nil)
+            //            } else {
+            //                // Set back to original position of the view controller
+            //                UIView.animate(withDuration: 0.3) {
+            //                    self.view.frame.origin = self.pointOrigin ?? CGPoint(x: 0, y: 400)
+            //                }
+            //            }
         }
+        
+        self.view.frame.origin = self.pointOrigin ?? CGPoint(x: 0, y: 400)
+        
     }
     
 }
@@ -218,7 +222,7 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
         if let label = cell.viewWithTag(2) as? UILabel,
            let _ = cell.viewWithTag(1){
             
-             if indexPath.section == 1{
+            if indexPath.section == 1{
                 
                 label.text = materials[indexPath.row]["c"].stringValue
                 
