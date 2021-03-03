@@ -148,6 +148,7 @@
 		22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */; };
 		22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */; };
 		22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */; };
+		22D604D225EFA6BC00102CB6 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */; };
 		22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D60981255D41F000FC622B /* MessageReadedDataManager.swift */; };
 		22D663D125823D9E0058B5CC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D663D025823D9E0058B5CC /* LoginView.swift */; };
 		22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90202259A953C009732CC /* GetListWorkExtDataManager.swift */; };
@@ -311,6 +312,7 @@
 		22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorLikeDataManager.swift; sourceTree = "<group>"; };
 		22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
+		22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
 		22D60981255D41F000FC622B /* MessageReadedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadedDataManager.swift; sourceTree = "<group>"; };
 		22D663D025823D9E0058B5CC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		22D90202259A953C009732CC /* GetListWorkExtDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListWorkExtDataManager.swift; sourceTree = "<group>"; };
@@ -641,7 +643,8 @@
 			isa = PBXGroup;
 			children = (
 				22C9221725814DBC0063B5D4 /* Home Tab */,
-				22CA693F25A1420E00D21840 /* Rating Tab */,
+				22D604CF25EFA3B800102CB6 /* Services Tab */,
+				22CA693F25A1420E00D21840 /* Chat Tab */,
 				22C9221825814DEA0063B5D4 /* Menu Tab */,
 			);
 			path = Controller;
@@ -880,12 +883,11 @@
 			path = "Menu Tab";
 			sourceTree = "<group>";
 		};
-		22CA693F25A1420E00D21840 /* Rating Tab */ = {
+		22CA693F25A1420E00D21840 /* Chat Tab */ = {
 			isa = PBXGroup;
 			children = (
-				22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */,
 			);
-			path = "Rating Tab";
+			path = "Chat Tab";
 			sourceTree = "<group>";
 		};
 		22CA694125A1473E00D21840 /* VendorRatingCell */ = {
@@ -943,6 +945,15 @@
 				22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */,
 			);
 			path = PhotoCell;
+			sourceTree = "<group>";
+		};
+		22D604CF25EFA3B800102CB6 /* Services Tab */ = {
+			isa = PBXGroup;
+			children = (
+				22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */,
+				22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */,
+			);
+			path = "Services Tab";
 			sourceTree = "<group>";
 		};
 		6358550D007648CA0215FE8A /* Pods */ = {
@@ -1143,6 +1154,7 @@
 				2200942825D831C00001F7B3 /* CategoriesTableViewCell.swift in Sources */,
 				22BF1A1125A5E19100567DB7 /* LinePointsPaggingDataManager.swift in Sources */,
 				22582C7C25D1E832005E341C /* SignInWithAppleDelegates.swift in Sources */,
+				22D604D225EFA6BC00102CB6 /* ServicesViewController.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
 				2286AD0F25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift in Sources */,
 				22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */,
