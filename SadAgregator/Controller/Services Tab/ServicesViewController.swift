@@ -23,6 +23,12 @@ class ServicesViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isNavigationBarHidden = false
+    }
+    
 }
 
 //MARK: - UICollectionView
@@ -76,7 +82,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -92,6 +98,8 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             
             secondView.layer.cornerRadius = 5
             
+            secondView.isHidden = true
+            
             switch indexPath.row {
             
             case 0:
@@ -102,34 +110,40 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 
             case 1:
                 
+                cellImageView.image = UIImage(systemName: "star.fill")
+                
+                serviceNameLabel.text = "Рейтинг Поставщиков"
+                
+            case 2:
+                
                 cellImageView.image = UIImage(systemName: "person.badge.plus")
                 
                 serviceNameLabel.text = "Поставщики"
                 
-            case 2:
+            case 3:
                 
                 cellImageView.image = UIImage(systemName: "person.3")
                 
                 serviceNameLabel.text = "Посредники"
                 
-            case 3:
+            case 4:
                 
                 cellImageView.image = UIImage(systemName: "person.2.square.stack")
                 
                 serviceNameLabel.text = "Закупки"
                 
-            case 4:
+            case 5:
                 
                 cellImageView.image = UIImage(systemName: "shippingbox")
                 
                 serviceNameLabel.text = "Сборка"
                 
-            case 5:
+            case 6:
                 
                 cellImageView.image = UIImage(systemName: "doc.text.viewfinder")
                 
                 serviceNameLabel.text = "Сортировка"
-                 
+                
                 
             default:
                 break
@@ -139,6 +153,18 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
         }
         
         return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath.row == 1{
+            
+            let ratingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VendsRatingVC") as! VendsPopularityRatingViewController
+            
+            navigationController?.pushViewController(ratingVC, animated: true)
+            
+        }
         
     }
     

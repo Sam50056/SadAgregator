@@ -2819,7 +2819,7 @@
         <!--Vends Popularity Rating View Controller-->
         <scene sceneID="gVf-w0-7Kq">
             <objects>
-                <viewController id="j0J-0w-FQb" customClass="VendsPopularityRatingViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VendsRatingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j0J-0w-FQb" customClass="VendsPopularityRatingViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1d2-aA-XrV">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3496,7 +3496,7 @@
         <scene sceneID="1lm-Fb-t3f">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nHV-3X-ZyB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="star.fill" catalog="system" id="XnW-2p-7Nk"/>
+                    <tabBarItem key="tabBarItem" title="" image="rectangle.grid.2x2.fill" catalog="system" id="XnW-2p-7Nk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ABm-fI-scE">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
@@ -3881,7 +3881,7 @@
         <segue reference="hIu-vB-ACx"/>
         <segue reference="yR4-7g-u1L"/>
         <segue reference="UT5-6g-K7A"/>
-        <segue reference="FEb-r5-o0p"/>
+        <segue reference="5co-KY-lmW"/>
         <segue reference="BuK-hk-BZE"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -3904,6 +3904,7 @@
         <image name="photo.on.rectangle.fill" catalog="system" width="128" height="96"/>
         <image name="plus.message.fill" catalog="system" width="128" height="113"/>
         <image name="rectangle.fill.on.rectangle.fill" catalog="system" width="128" height="96"/>
+        <image name="rectangle.grid.2x2.fill" catalog="system" width="128" height="99"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
