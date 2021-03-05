@@ -55,21 +55,6 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             
             return section
             
-            
-            //            let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(50),
-            //                                                  heightDimension: .fractionalHeight(1.0))
-            //            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            //
-            //            let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(50),
-            //                                                   heightDimension: .estimated(40))
-            //            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-            //
-            //            let section = NSCollectionLayoutSection(group: group)
-            //            section.orthogonalScrollingBehavior = .continuous
-            //            section.interGroupSpacing = 16
-            //            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
-            //
-            //            return section
         }
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
@@ -163,6 +148,12 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             let ratingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VendsRatingVC") as! VendsPopularityRatingViewController
             
             navigationController?.pushViewController(ratingVC, animated: true)
+            
+        }else if indexPath.row == 0{
+            
+            let clientsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientsVC") as! ClientsViewController
+            
+            navigationController?.pushViewController(clientsVC, animated: true)
             
         }
         

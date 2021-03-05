@@ -149,6 +149,7 @@
 		22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */; };
 		22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */; };
 		22D604D225EFA6BC00102CB6 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */; };
+		22D604D525F1784100102CB6 /* ClientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D604D425F1784100102CB6 /* ClientsViewController.swift */; };
 		22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D60981255D41F000FC622B /* MessageReadedDataManager.swift */; };
 		22D663D125823D9E0058B5CC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D663D025823D9E0058B5CC /* LoginView.swift */; };
 		22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90202259A953C009732CC /* GetListWorkExtDataManager.swift */; };
@@ -313,6 +314,7 @@
 		22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
+		22D604D425F1784100102CB6 /* ClientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsViewController.swift; sourceTree = "<group>"; };
 		22D60981255D41F000FC622B /* MessageReadedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadedDataManager.swift; sourceTree = "<group>"; };
 		22D663D025823D9E0058B5CC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		22D90202259A953C009732CC /* GetListWorkExtDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListWorkExtDataManager.swift; sourceTree = "<group>"; };
@@ -950,8 +952,9 @@
 		22D604CF25EFA3B800102CB6 /* Services Tab */ = {
 			isa = PBXGroup;
 			children = (
-				22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */,
 				22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */,
+				22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */,
+				22D604D425F1784100102CB6 /* ClientsViewController.swift */,
 			);
 			path = "Services Tab";
 			sourceTree = "<group>";
@@ -1124,6 +1127,7 @@
 				2284EADD25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift in Sources */,
 				226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */,
 				22B6BCAE25DEFD8200EAE067 /* GetCatListDataManager.swift in Sources */,
+				22D604D525F1784100102CB6 /* ClientsViewController.swift in Sources */,
 				226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */,
 				224BC44D25A0C529003F147F /* AddPointRequestDataManager.swift in Sources */,
 				22595798259667F90088C7E4 /* MasterNastroekView.swift in Sources */,
