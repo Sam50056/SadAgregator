@@ -29,10 +29,13 @@ class ClientsViewController: UIViewController {
     var page = 1
     var rowForPaggingUpdate : Int = 15
     
+    var clients = [JSON]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadUserData()
+//        loadUserData()
+        key = "part_2_test"
         
         //Set up search controller
         searchController.searchResultsUpdater = self
@@ -110,9 +113,9 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
         case 1:
             return areStatsShown ? 3 : 0
         case 2:
-            return 1
+            return clients.isEmpty ? 0 : 1
         case 3:
-            return 2
+            return clients.count
         default:
             return 0
         }
@@ -162,7 +165,9 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             
         case 3:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "clientCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "clientCell", for: indexPath) as! ClientTableViewCell
+            
+            (cell  as! ClientTableViewCell).client = clients[indexPath.row]
             
         default:
             return cell
@@ -198,7 +203,7 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 3{
-            return 78
+            return 85 - 20
         }
         return K.simpleHeaderCellHeight
     }
@@ -210,11 +215,29 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
 extension ClientsViewController : PagingClientsDataManagerDelegate{
     
     func didGetPagingClientsData(data: JSON) {
+        
         DispatchQueue.main.async { [self] in
             
-            
+            if data["result"].intValue == 1{
+                
+                clients = data["clients"].arrayValue
+                
+                var sectionsForUpdate : IndexSet = []
+                
+                if page == 1 {
+                    sectionsForUpdate = [2,3]
+                }else{
+                    sectionsForUpdate = [3]
+                }
+                
+                tableView.reloadSections(sectionsForUpdate, with: .automatic)
+                
+            }else{
+                print("Error with getting PagingClientsData , result : 0")
+            }
             
         }
+        
     }
     
     func didFailGettingPagingClientsDataWithErorr(error: String) {

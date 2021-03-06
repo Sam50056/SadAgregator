@@ -6,11 +6,32 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ClientTableViewCell: UITableViewCell {
     
     @IBOutlet weak var tableView : UITableView!
-
+    
+    private var tableViewItems = [TableViewItem]()
+    
+    var client : JSON?{
+        didSet{
+            
+            if client?["balance"].stringValue != "" /*, client?["balance"].stringValue != "0"*/{
+                
+                tableViewItems.append(TableViewItem(firstText: "Баланс", secondText: (client?["balance"].stringValue)!))
+                
+            }
+            
+            if client?["in_process"].stringValue != "" , client?["in_process"].stringValue != "0"{
+                
+                tableViewItems.append(TableViewItem(firstText: "В закупке", secondText: (client?["in_process"].stringValue)!))
+                
+            }
+            
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -23,7 +44,7 @@ class ClientTableViewCell: UITableViewCell {
         tableView.separatorStyle = .none
         
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -34,17 +55,27 @@ class ClientTableViewCell: UITableViewCell {
 
 extension ClientTableViewCell : UITableViewDelegate , UITableViewDataSource{
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        
+        if section == 0{
+            return 1
+        }else{
+            return tableViewItems.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = UITableViewCell()
         
-        if indexPath.row == 0{
+        if indexPath.section == 0{
             
-            cell.textLabel?.text = "Samvel Erznkyan"
+            cell.textLabel?.text = client?["name"].stringValue
             
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
             
@@ -52,9 +83,11 @@ extension ClientTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ClientTableViewCellTableViewCell
             
-            (cell as! ClientTableViewCellTableViewCell).firstLabel.text = "Баланс"
-            (cell as! ClientTableViewCellTableViewCell).secondLabel.text = "-400 руб."
-            (cell as! ClientTableViewCellTableViewCell).secondLabel.textColor = .red
+            let item = tableViewItems[indexPath.row]
+            
+            (cell as! ClientTableViewCellTableViewCell).firstLabel.text = item.firstText
+            (cell as! ClientTableViewCellTableViewCell).secondLabel.text = item.secondText
+            //            (cell as! ClientTableViewCellTableViewCell).secondLabel.textColor = .red
             
         }
         
@@ -68,6 +101,19 @@ extension ClientTableViewCell : UITableViewDelegate , UITableViewDataSource{
         }else{
             return 20
         }
+    }
+    
+}
+
+//MARK: - TableViewItem Struct
+
+extension ClientTableViewCell {
+    
+    private struct TableViewItem {
+        
+        var firstText : String
+        var secondText : String
+        
     }
     
 }
