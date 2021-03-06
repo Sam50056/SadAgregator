@@ -87,7 +87,14 @@ extension ClientTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             (cell as! ClientTableViewCellTableViewCell).firstLabel.text = item.firstText
             (cell as! ClientTableViewCellTableViewCell).secondLabel.text = item.secondText
-            //            (cell as! ClientTableViewCellTableViewCell).secondLabel.textColor = .red
+            
+            if item.firstText == "Баланс" ,
+               let balanceInt = Int(item.secondText),
+               balanceInt < 0{
+                (cell as! ClientTableViewCellTableViewCell).secondLabel.textColor = .red
+            }else{
+                (cell as! ClientTableViewCellTableViewCell).secondLabel.textColor = UIColor(named: "blackwhite")
+            }
             
         }
         
