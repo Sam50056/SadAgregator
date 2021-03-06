@@ -13,4 +13,6 @@ struct OKAuthService {
     
     static let appKey : String = "CPELHKJGDIHBABABA"
     
+    static let permissionsArray = ["LONG_ACCESS_TOKEN", "GROUP_CONTENT", "VALUABLE_ACCESS","PHOTO_CONTENT","PUBLISH_TO_STREAM", "GET_EMAIL" , "PUBLISH_NOTE"]
+    
 }
