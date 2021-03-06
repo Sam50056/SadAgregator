@@ -59,11 +59,20 @@ extension ClientsViewController : UISearchResultsUpdating{
 extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 1
+        default:
+            return 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,9 +86,22 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
         case 0:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "generalStatisticsCell", for: indexPath)
-        
+            
+        case 1:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "statCell", for: indexPath)
+            
+            if let firstLabel = cell.viewWithTag(1) as? UILabel ,
+               let secondLabel = cell.viewWithTag(2) as? UILabel{
+                
+                firstLabel.text = "Клиенты"
+                
+                secondLabel.text = "3"
+            }
+            
         default:
             return cell
+            
         }
         
         return cell
@@ -93,3 +115,4 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
     }
     
 }
+
