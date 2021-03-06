@@ -11,7 +11,12 @@ class ClientsViewController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
     
+    var hideLabel :  UILabel?
+    var hideLabelImageView : UIImageView?
+    
     let searchController = UISearchController(searchResultsController: nil)
+    
+    var areStatsShown = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +73,7 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
         case 0:
             return 1
         case 1:
-            return 3
+            return areStatsShown ? 3 : 0
         case 2:
             return 1
         default:
@@ -88,6 +93,19 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
         case 0:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "generalStatisticsCell", for: indexPath)
+            
+            if let hideLabel = cell.viewWithTag(1) as? UILabel,
+               let hideLabelImageView = cell.viewWithTag(2) as? UIImageView{
+                
+                hideLabel.text = areStatsShown ? "Скрыть" : "Показать"
+                
+                hideLabelImageView.image = areStatsShown ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
+                
+                self.hideLabel = hideLabel
+                
+                self.hideLabelImageView = hideLabelImageView
+                
+            }
             
         case 1:
             
@@ -115,6 +133,23 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let section = indexPath.section
+        
+        if section == 0{
+            
+            areStatsShown.toggle()
+            
+            tableView.reloadSections([1], with: .top)
+            
+            hideLabel?.text = areStatsShown ? "Скрыть" : "Показать"
+            hideLabelImageView?.image = areStatsShown ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
+            
+            UIView.animate(withDuration: 0.3){ [self] in
+                view.layoutIfNeeded()
+            }
+            
+        }
         
         tableView.deselectRow(at: indexPath, animated: true)
         
