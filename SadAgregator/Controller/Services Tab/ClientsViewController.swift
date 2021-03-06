@@ -63,12 +63,24 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell()
+        var cell = UITableViewCell()
+        
+        let section = indexPath.section
+        
+        switch section{
+        
+        case 0:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "generalStatisticsCell", for: indexPath)
+        
+        default:
+            return cell
+        }
         
         return cell
         
