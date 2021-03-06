@@ -96,6 +96,8 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
     
     var thisPeerId = ""
     
+    var doneArray = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -271,6 +273,13 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
         if thisPeerId != cell.peerId {
             cell.vigruzitLabel.text = "Выгрузить"
             cell.peerId = thisPeerId
+            doneArray.removeAll()
+        }
+        
+        if doneArray.contains(postId){
+            cell.vigruzitLabel.text = "Готово"
+        }else{
+            cell.vigruzitLabel.text = "Выгрузить"
         }
         
         cell.vigruzitButtonCallback = { [self] in
@@ -291,6 +300,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
                 editVigruzkaVC.toExpQueueDataManagerCallback = {
                     
                     cell.vigruzitLabel.text = "Готово"
+                    doneArray.append(postId)
                    
                 }
                 
@@ -310,6 +320,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
                         if data!["result"].intValue == 1{
                             
                             cell.vigruzitLabel.text = "Готово"
+                            doneArray.append(postId)
                             
                             print("ToExpQueueDataManager Request Sent")
                             

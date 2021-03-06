@@ -120,6 +120,8 @@ class FavoritePostsViewController : UITableViewController {
     
     var thisPeerId = ""
     
+    var doneArray = [String]()
+    
     override func viewDidLoad() {
         
         loadUserData()
@@ -277,6 +279,13 @@ class FavoritePostsViewController : UITableViewController {
         if thisPeerId != cell.peerId {
             cell.vigruzitLabel.text = "Выгрузить"
             cell.peerId = thisPeerId
+            doneArray.removeAll()
+        }
+        
+        if doneArray.contains(postId){
+            cell.vigruzitLabel.text = "Готово"
+        }else{
+            cell.vigruzitLabel.text = "Выгрузить"
         }
         
         cell.vigruzitButtonCallback = { [self] in
@@ -297,7 +306,8 @@ class FavoritePostsViewController : UITableViewController {
                 editVigruzkaVC.toExpQueueDataManagerCallback = {
                     
                     cell.vigruzitLabel.text = "Готово"
-                   
+                    doneArray.append(postId)
+                    
                 }
                 
                 present(editVigruzkaVC, animated: true, completion: nil)
@@ -316,6 +326,7 @@ class FavoritePostsViewController : UITableViewController {
                         if data!["result"].intValue == 1{
                             
                             cell.vigruzitLabel.text = "Готово"
+                            doneArray.append(postId)
                             
                             print("ToExpQueueDataManager Request Sent")
                             

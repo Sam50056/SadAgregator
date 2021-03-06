@@ -115,6 +115,8 @@ class SearchViewController: UIViewController {
     
     var thisPeerId = ""
     
+    var doneArray = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -659,6 +661,13 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         if thisPeerId != cell.peerId {
             cell.vigruzitLabel.text = "Выгрузить"
             cell.peerId = thisPeerId
+            doneArray.removeAll()
+        }
+        
+        if doneArray.contains(postId){
+            cell.vigruzitLabel.text = "Готово"
+        }else{
+            cell.vigruzitLabel.text = "Выгрузить"
         }
         
         cell.vigruzitButtonCallback = { [self] in
@@ -679,6 +688,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
                 editVigruzkaVC.toExpQueueDataManagerCallback = {
                     
                     cell.vigruzitLabel.text = "Готово"
+                    doneArray.append(postId)
                    
                 }
                 
@@ -698,6 +708,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
                         if data!["result"].intValue == 1{
                             
                             cell.vigruzitLabel.text = "Готово"
+                            doneArray.append(postId)
                             
                             print("ToExpQueueDataManager Request Sent")
                             
