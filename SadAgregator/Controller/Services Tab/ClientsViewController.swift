@@ -36,6 +36,8 @@ class ClientsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.register(UINib(nibName: "ClientTableViewCell", bundle: nil), forCellReuseIdentifier: "clientCell")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +66,7 @@ extension ClientsViewController : UISearchResultsUpdating{
 extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,6 +78,8 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             return areStatsShown ? 3 : 0
         case 2:
             return 1
+        case 3:
+            return 2
         default:
             return 0
         }
@@ -123,6 +127,10 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
+        case 3:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "clientCell", for: indexPath)
+            
         default:
             return cell
             
@@ -153,6 +161,13 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
         
         tableView.deselectRow(at: indexPath, animated: true)
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 3{
+            return 78
+        }
+        return K.simpleHeaderCellHeight
     }
     
 }
