@@ -59,7 +59,7 @@ extension ClientsViewController : UISearchResultsUpdating{
 extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,6 +68,8 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
         case 0:
             return 1
         case 1:
+            return 3
+        case 2:
             return 1
         default:
             return 0
@@ -98,6 +100,10 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
                 
                 secondLabel.text = "3"
             }
+            
+        case 2:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
         default:
             return cell
