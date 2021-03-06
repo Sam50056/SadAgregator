@@ -138,6 +138,7 @@
 		22C5499625F411A4008D941B /* ClientTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C5499425F411A3008D941B /* ClientTableViewCell.xib */; };
 		22C5499C25F41223008D941B /* ClientTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5499A25F41223008D941B /* ClientTableViewCellTableViewCell.swift */; };
 		22C5499D25F41223008D941B /* ClientTableViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C5499B25F41223008D941B /* ClientTableViewCellTableViewCell.xib */; };
+		22C549A225F41C99008D941B /* PagingClientsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C549A125F41C99008D941B /* PagingClientsDataManager.swift */; };
 		22C5D02825B0E065001C69C6 /* PeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D02725B0E064001C69C6 /* PeerViewController.swift */; };
 		22C5D02B25B0E9DF001C69C6 /* ExportPeersDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D02A25B0E9DE001C69C6 /* ExportPeersDataManager.swift */; };
 		22C5D02E25B1EC9E001C69C6 /* SetDefaultPeerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D02D25B1EC9D001C69C6 /* SetDefaultPeerDataManager.swift */; };
@@ -307,6 +308,7 @@
 		22C5499425F411A3008D941B /* ClientTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClientTableViewCell.xib; sourceTree = "<group>"; };
 		22C5499A25F41223008D941B /* ClientTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
 		22C5499B25F41223008D941B /* ClientTableViewCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClientTableViewCellTableViewCell.xib; sourceTree = "<group>"; };
+		22C549A125F41C99008D941B /* PagingClientsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingClientsDataManager.swift; sourceTree = "<group>"; };
 		22C5D02725B0E064001C69C6 /* PeerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerViewController.swift; sourceTree = "<group>"; };
 		22C5D02A25B0E9DE001C69C6 /* ExportPeersDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPeersDataManager.swift; sourceTree = "<group>"; };
 		22C5D02D25B1EC9D001C69C6 /* SetDefaultPeerDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDefaultPeerDataManager.swift; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 				22A155E72584E408000EAB64 /* Auth Managers */,
 				22423E9A259131F80097C9E6 /* Menu Managers */,
 				2200943B25DB26700001F7B3 /* Category Managers */,
+				22C549A025F41C30008D941B /* Clients Managers */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -875,6 +878,14 @@
 			path = ClientTableViewCellTableViewCell;
 			sourceTree = "<group>";
 		};
+		22C549A025F41C30008D941B /* Clients Managers */ = {
+			isa = PBXGroup;
+			children = (
+				22C549A125F41C99008D941B /* PagingClientsDataManager.swift */,
+			);
+			path = "Clients Managers";
+			sourceTree = "<group>";
+		};
 		22C9221725814DBC0063B5D4 /* Home Tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -1227,6 +1238,7 @@
 				22B6BC8A25DC6DF300EAE067 /* FilterViewController.swift in Sources */,
 				2284EADA25BB196B00CC1D58 /* OKAuthService.swift in Sources */,
 				225957AA2596A6450088C7E4 /* GetStepDataManager.swift in Sources */,
+				22C549A225F41C99008D941B /* PagingClientsDataManager.swift in Sources */,
 				2201672625A771E10072BFE7 /* SetPointActionsDataManager.swift in Sources */,
 				22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */,
 				22029C1B25C63ED600CE79BC /* GetForExportDataManager.swift in Sources */,

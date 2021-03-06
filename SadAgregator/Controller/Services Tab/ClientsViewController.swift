@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import SwiftyJSON
+import RealmSwift
 
 class ClientsViewController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
+    
+    let realm = try! Realm()
+    
+    var key = ""
     
     var hideLabel :  UILabel?
     var hideLabelImageView : UIImageView?
@@ -18,8 +24,15 @@ class ClientsViewController: UIViewController {
     
     var areStatsShown = true
     
+    var pagingClientsDataManager = PagingClientsDataManager()
+    
+    var page = 1
+    var rowForPaggingUpdate : Int = 15
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadUserData()
         
         //Set up search controller
         searchController.searchResultsUpdater = self
@@ -37,6 +50,10 @@ class ClientsViewController: UIViewController {
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: "ClientTableViewCell", bundle: nil), forCellReuseIdentifier: "clientCell")
+        
+        pagingClientsDataManager.delegate = self
+        
+        pagingClientsDataManager.getPagingClientsData(key: key, page: page)
         
     }
     
@@ -56,6 +73,22 @@ class ClientsViewController: UIViewController {
 extension ClientsViewController : UISearchResultsUpdating{
     
     func updateSearchResults(for searchController: UISearchController) {
+        
+    }
+    
+}
+
+//MARK: - Data Manipulation Methods
+
+extension ClientsViewController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        key = userDataObject.first!.key
+        
+        //        isLogged = userDataObject.first!.isLogged
         
     }
     
@@ -168,6 +201,24 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             return 78
         }
         return K.simpleHeaderCellHeight
+    }
+    
+}
+
+//MARK: - PagingClientsDataManagerDelegate
+
+extension ClientsViewController : PagingClientsDataManagerDelegate{
+    
+    func didGetPagingClientsData(data: JSON) {
+        DispatchQueue.main.async { [self] in
+            
+            
+            
+        }
+    }
+    
+    func didFailGettingPagingClientsDataWithErorr(error: String) {
+        print("Error with PagingClientsDataManager : \(error)")
     }
     
 }
