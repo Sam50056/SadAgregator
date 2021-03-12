@@ -994,9 +994,9 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                     
                     cell.vigruzitLabel.text = "Готово"
                     doneArray.append(postId)
-                   
-                }
                     
+                }
+                
                 present(editVigruzkaVC, animated: true, completion: nil)
                 
             }else{

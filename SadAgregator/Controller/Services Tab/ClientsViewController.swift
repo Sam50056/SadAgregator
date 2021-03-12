@@ -195,6 +195,12 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
                 view.layoutIfNeeded()
             }
             
+        }else if section == 3{
+            
+            let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
+            
+            self.navigationController?.pushViewController(clientVC, animated: true)
+            
         }
         
         tableView.deselectRow(at: indexPath, animated: true)

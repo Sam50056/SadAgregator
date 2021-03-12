@@ -33,6 +33,11 @@
 		221C479D25B4C7E200290E09 /* DescriptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C479B25B4C7E200290E09 /* DescriptionCollectionViewCell.xib */; };
 		22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22216A4325853FCC00D5248B /* RegisterDataManager.swift */; };
 		222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */; };
+		2237E77625FA32C500EBD919 /* PurchaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237E77425FA32C500EBD919 /* PurchaseTableViewCell.swift */; };
+		2237E77725FA32C500EBD919 /* PurchaseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2237E77525FA32C500EBD919 /* PurchaseTableViewCell.xib */; };
+		2237E77C25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237E77A25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift */; };
+		2237E77D25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2237E77B25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib */; };
+		2237E78025FBD15F00EBD919 /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237E77F25FBD15F00EBD919 /* ClientViewController.swift */; };
 		2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */; };
 		2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */; };
 		22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E97259116270097C9E6 /* ProfileViewModel.swift */; };
@@ -199,6 +204,11 @@
 		221C479B25B4C7E200290E09 /* DescriptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionCollectionViewCell.xib; sourceTree = "<group>"; };
 		22216A4325853FCC00D5248B /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUpdateDataManager.swift; sourceTree = "<group>"; };
+		2237E77425FA32C500EBD919 /* PurchaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCell.swift; sourceTree = "<group>"; };
+		2237E77525FA32C500EBD919 /* PurchaseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseTableViewCell.xib; sourceTree = "<group>"; };
+		2237E77A25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
+		2237E77B25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseTableViewCellTableViewCell.xib; sourceTree = "<group>"; };
+		2237E77F25FBD15F00EBD919 /* ClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
 		2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVendsView.swift; sourceTree = "<group>"; };
 		2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVendorsDataManager.swift; sourceTree = "<group>"; };
 		22423E97259116270097C9E6 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -431,6 +441,25 @@
 				221C479B25B4C7E200290E09 /* DescriptionCollectionViewCell.xib */,
 			);
 			path = DescCell;
+			sourceTree = "<group>";
+		};
+		2237E76F25FA325C00EBD919 /* PurchaseCell */ = {
+			isa = PBXGroup;
+			children = (
+				2237E77925FA359F00EBD919 /* PurchaseTableViewCellTableViewCell */,
+				2237E77425FA32C500EBD919 /* PurchaseTableViewCell.swift */,
+				2237E77525FA32C500EBD919 /* PurchaseTableViewCell.xib */,
+			);
+			path = PurchaseCell;
+			sourceTree = "<group>";
+		};
+		2237E77925FA359F00EBD919 /* PurchaseTableViewCellTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2237E77A25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift */,
+				2237E77B25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib */,
+			);
+			path = PurchaseTableViewCellTableViewCell;
 			sourceTree = "<group>";
 		};
 		22409F9B25EAC95700582576 /* Animation */ = {
@@ -790,6 +819,7 @@
 		22A49CA7256661D700CCC781 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				2237E76F25FA325C00EBD919 /* PurchaseCell */,
 				22C5499125F40F99008D941B /* ClientCell */,
 				2200942525D831900001F7B3 /* CategoriesCell */,
 				2203F15425BF2400007DBFFD /* EmptyCell */,
@@ -994,6 +1024,7 @@
 				22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */,
 				22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */,
 				22D604D425F1784100102CB6 /* ClientsViewController.swift */,
+				2237E77F25FBD15F00EBD919 /* ClientViewController.swift */,
 			);
 			path = "Services Tab";
 			sourceTree = "<group>";
@@ -1076,6 +1107,7 @@
 				2203F15D25BF243A007DBFFD /* EmptyTableViewCell.xib in Resources */,
 				22A49CB52566645800CCC781 /* PostTableViewCell.xib in Resources */,
 				22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */,
+				2237E77D25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib in Resources */,
 				22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */,
 				2267D0A125B4F3C600904C44 /* TextViewCollectionViewCell.xib in Resources */,
 				2290486C256E4978000B7A28 /* PopTableViewCell.xib in Resources */,
@@ -1083,6 +1115,7 @@
 				22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */,
 				221C479D25B4C7E200290E09 /* DescriptionCollectionViewCell.xib in Resources */,
 				228CB766255BF974002B4A96 /* Assets.xcassets in Resources */,
+				2237E77725FA32C500EBD919 /* PurchaseTableViewCell.xib in Resources */,
 				22BF19DA25A3DDC800567DB7 /* TextLabelCollectionViewCell.xib in Resources */,
 				22904863256DC702000B7A28 /* RatingTableViewCell.xib in Resources */,
 				2290485D256DAC80000B7A28 /* VendTableViewCell.xib in Resources */,
@@ -1185,6 +1218,7 @@
 				228CB761255BF96D002B4A96 /* MainViewController.swift in Sources */,
 				225957A2259668540088C7E4 /* ListSelectView.swift in Sources */,
 				2265853F259017FA004587AA /* ProfileView.swift in Sources */,
+				2237E78025FBD15F00EBD919 /* ClientViewController.swift in Sources */,
 				22C5D02E25B1EC9E001C69C6 /* SetDefaultPeerDataManager.swift in Sources */,
 				22CA694425A1475E00D21840 /* VendorRatingTableViewCell.swift in Sources */,
 				22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */,
@@ -1260,6 +1294,7 @@
 				2286AD0B25CB5EEE004EF0D7 /* VendorRevsViewController.swift in Sources */,
 				22C5499525F411A3008D941B /* ClientTableViewCell.swift in Sources */,
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
+				2237E77C25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift in Sources */,
 				2268869C25996B920079933D /* RefreshAlbsDataManager.swift in Sources */,
 				22782906258AC7FE00B435FA /* Extensions.swift in Sources */,
 				22C5D02B25B0E9DF001C69C6 /* ExportPeersDataManager.swift in Sources */,
@@ -1270,6 +1305,7 @@
 				22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */,
 				2269740025AE394800C76BA6 /* VendorPostsTableViewController.swift in Sources */,
 				226973FD25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift in Sources */,
+				2237E77625FA32C500EBD919 /* PurchaseTableViewCell.swift in Sources */,
 				22582C7525D1C1DC005E341C /* SignInWithApple.swift in Sources */,
 				226886A62599EDD00079933D /* ActivityIndicatorView.swift in Sources */,
 				2201672025A66E380072BFE7 /* SetPostActionsDataManager.swift in Sources */,

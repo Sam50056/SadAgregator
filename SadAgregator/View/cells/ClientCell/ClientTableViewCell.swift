@@ -42,6 +42,7 @@ class ClientTableViewCell: UITableViewCell {
         
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
+        tableView.isUserInteractionEnabled = false 
         
     }
     
