@@ -34,6 +34,10 @@ class ClientsViewController: UIViewController {
     
     private var stats = [StatItem]()
     
+    private var searchText : String{
+        return searchController.searchBar.text ?? ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -102,6 +106,21 @@ extension ClientsViewController{
 extension ClientsViewController : UISearchResultsUpdating{
     
     func updateSearchResults(for searchController: UISearchController) {
+        
+        if let searchText = searchController.searchBar.text , searchText != "" {
+            
+            clientsFilterDataManager.getClientsFIlterData(key: key , query: searchText)
+            
+        }else{
+            
+            clients.removeAll()
+            
+            page = 1
+            rowForPaggingUpdate = 15
+            
+            pagingClientsDataManager.getPagingClientsData(key: key, page: page)
+            
+        }
         
     }
     
@@ -191,6 +210,8 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             
         case 3:
             
+            guard !clients.isEmpty else {return cell}
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "clientCell", for: indexPath) as! ClientTableViewCell
             
             (cell  as! ClientTableViewCell).client = clients[indexPath.row]
@@ -245,7 +266,15 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
                 
                 rowForPaggingUpdate += 16
                 
-                pagingClientsDataManager.getPagingClientsData(key: key, page: page)
+                if searchText != ""{
+                    
+                    clientsFilterDataManager.getClientsFIlterData(key: key , query: searchText , page: page)
+                    
+                }else{
+                    
+                    pagingClientsDataManager.getPagingClientsData(key: key, page: page)
+                    
+                }
                 
                 print("Done a request for page: \(page)")
                 
@@ -345,7 +374,15 @@ extension ClientsViewController : ClientsFilterDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            
+            if data["result"].intValue == 1{
+                
+                clients += data["clients"].arrayValue
+                
+                tableView.reloadSections([3], with: .automatic)
+                
+            }else{
+                print("Error with getting ClientsFilterData , result : 0")
+            }
             
         }
         
