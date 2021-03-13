@@ -13,28 +13,30 @@ class ClientsViewController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
     
-    let realm = try! Realm()
+    private let realm = try! Realm()
     
-    var key = ""
+    private var key = ""
     
-    var hideLabel :  UILabel?
-    var hideLabelImageView : UIImageView?
+    private var hideLabel :  UILabel?
+    private var hideLabelImageView : UIImageView?
     
-    let searchController = UISearchController(searchResultsController: nil)
+    private let searchController = UISearchController(searchResultsController: nil)
     
-    var areStatsShown = true
+    private var areStatsShown = true
     
-    var pagingClientsDataManager = PagingClientsDataManager()
+    private var pagingClientsDataManager = PagingClientsDataManager()
     
-    var page = 1
-    var rowForPaggingUpdate : Int = 15
+    private var page = 1
+    private var rowForPaggingUpdate : Int = 15
     
-    var clients = [JSON]()
+    private var clients = [JSON]()
+    
+    private var stats = [StatItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        loadUserData()
+        //        loadUserData()
         key = "part_2_test"
         
         //Set up search controller
@@ -66,6 +68,28 @@ class ClientsViewController: UIViewController {
         navigationItem.title = "Клиенты"
         
         navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil) , UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: nil)]
+        
+    }
+    
+}
+
+//MARK: - Functions
+
+extension ClientsViewController{
+    
+    func makeStatsFrom(_ stat : JSON){
+        
+        if let clientsStat = stat["clients"].string , clientsStat != "" {
+            stats.append(StatItem(firstText: "Клиенты", secondText: clientsStat))
+        }
+        
+        if let balancesStat = stat["balances"].string , balancesStat != "" {
+            stats.append(StatItem(firstText: "Баланс", secondText: balancesStat))
+        }
+        
+        if let debetsStat = stat["debets"].string , debetsStat != "" {
+            stats.append(StatItem(firstText: "Задолженность", secondText: debetsStat))
+        }
         
     }
     
@@ -111,7 +135,7 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
         case 0:
             return 1
         case 1:
-            return areStatsShown ? 3 : 0
+            return areStatsShown ? stats.count : 0
         case 2:
             return clients.isEmpty ? 0 : 1
         case 3:
@@ -154,9 +178,9 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             if let firstLabel = cell.viewWithTag(1) as? UILabel ,
                let secondLabel = cell.viewWithTag(2) as? UILabel{
                 
-                firstLabel.text = "Клиенты"
+                firstLabel.text = stats[indexPath.row].firstText
                 
-                secondLabel.text = "3"
+                secondLabel.text = stats[indexPath.row].secondText
             }
             
         case 2:
@@ -238,6 +262,19 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
     
 }
 
+//MARK: - Statistics Item struct
+
+extension ClientsViewController{
+    
+    private struct StatItem {
+        
+        let firstText : String
+        let secondText : String
+        
+    }
+    
+}
+
 //MARK: - FormDataManagerDelegate
 
 extension ClientsViewController : FormDataManagerDelegate{
@@ -248,9 +285,13 @@ extension ClientsViewController : FormDataManagerDelegate{
             
             if data["result"].intValue == 1{
                 
+                let stat = data["stat"]
+                
+                makeStatsFrom(stat)
+                
                 clients = data["clients"].arrayValue
                 
-                tableView.reloadSections([2,3], with: .automatic)
+                tableView.reloadSections([1,2,3], with: .automatic)
                 
             }else{
                 print("Error with getting FormData , result : 0")

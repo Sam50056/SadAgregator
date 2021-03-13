@@ -12,14 +12,14 @@ class ClientViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var hideLabel :  UILabel?
-    var hideLabelImageView : UIImageView?
+    private var hideLabel :  UILabel?
+    private var hideLabelImageView : UIImageView?
     
-    var isInfoShown = true
+    private var isInfoShown = true
     
     var thisClientId : String?
     
-    var clientDataManager = ClientDataManager()
+    private var clientDataManager = ClientDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
