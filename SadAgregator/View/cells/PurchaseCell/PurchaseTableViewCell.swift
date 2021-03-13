@@ -76,7 +76,7 @@ extension PurchaseTableViewCell : UITableViewDelegate , UITableViewDataSource{
         
         if indexPath.section == 0{
             
-            //            cell.textLabel?.text = client?["name"].stringValue
+            cell.textLabel?.text = "Sam Yerz2006"//client?["name"].stringValue
             
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
             

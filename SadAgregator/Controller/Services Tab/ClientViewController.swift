@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ClientViewController: UIViewController {
     
@@ -16,8 +17,14 @@ class ClientViewController: UIViewController {
     
     var isInfoShown = true
     
+    var thisClientId : String?
+    
+    var clientDataManager = ClientDataManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        clientDataManager.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -25,6 +32,10 @@ class ClientViewController: UIViewController {
         tableView.separatorStyle = .none
         
         tableView.register(UINib(nibName: "PurchaseTableViewCell", bundle: nil), forCellReuseIdentifier: "purchaseCell")
+        
+        if let thisClientId = thisClientId{
+            clientDataManager.getClientData(key: "part_2_test", clientId: thisClientId)
+        }
         
     }
     
@@ -132,6 +143,43 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
             
         }
         
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 4{
+            return 85 - 20
+        }
+        return K.simpleHeaderCellHeight
+    }
+    
+}
+
+//MARK: - ClientDataManagerDelegate
+
+extension ClientViewController : ClientDataManagerDelegate{
+    
+    func didGetClientData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                let clientHeaderData = data["client_header"]
+                
+                if let name = clientHeaderData["name"].string , name != ""{
+                    navigationItem.title = name
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingClientDataWithError(error: String) {
+        print("Error with ClientDataManager : \(error)")
     }
     
 }

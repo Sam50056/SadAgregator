@@ -199,6 +199,8 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             
             let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
             
+            clientVC.thisClientId = clients[indexPath.row]["client_id"].string
+            
             self.navigationController?.pushViewController(clientVC, animated: true)
             
         }

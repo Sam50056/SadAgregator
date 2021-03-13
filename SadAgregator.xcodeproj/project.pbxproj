@@ -61,6 +61,7 @@
 		225957A2259668540088C7E4 /* ListSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225957A1259668540088C7E4 /* ListSelectView.swift */; };
 		225957A52596A2A70088C7E4 /* MasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225957A42596A2A60088C7E4 /* MasterViewModel.swift */; };
 		225957AA2596A6450088C7E4 /* GetStepDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225957A92596A6450088C7E4 /* GetStepDataManager.swift */; };
+		225C6CAD25FCBF5700CC621E /* ClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225C6CAC25FCBF5700CC621E /* ClientDataManager.swift */; };
 		22634AB625858CA800DF6FDB /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22634AB525858CA800DF6FDB /* UserData.swift */; };
 		2265853F259017FA004587AA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2265853E259017FA004587AA /* ProfileView.swift */; };
 		2265854325901812004587AA /* AlertWithTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2265854225901812004587AA /* AlertWithTextFieldView.swift */; };
@@ -232,6 +233,7 @@
 		225957A1259668540088C7E4 /* ListSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSelectView.swift; sourceTree = "<group>"; };
 		225957A42596A2A60088C7E4 /* MasterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewModel.swift; sourceTree = "<group>"; };
 		225957A92596A6450088C7E4 /* GetStepDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStepDataManager.swift; sourceTree = "<group>"; };
+		225C6CAC25FCBF5700CC621E /* ClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDataManager.swift; sourceTree = "<group>"; };
 		22634AB525858CA800DF6FDB /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		2265853E259017FA004587AA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		2265854225901812004587AA /* AlertWithTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertWithTextFieldView.swift; sourceTree = "<group>"; };
@@ -565,6 +567,14 @@
 				2268869525995BD60079933D /* ListWork Managers */,
 			);
 			path = "Master Managers";
+			sourceTree = "<group>";
+		};
+		225C6CAB25FCBF4900CC621E /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				225C6CAC25FCBF5700CC621E /* ClientDataManager.swift */,
+			);
+			path = Client;
 			sourceTree = "<group>";
 		};
 		22634AB425858C7300DF6FDB /* Data Base Models  */ = {
@@ -911,6 +921,7 @@
 		22C549A025F41C30008D941B /* Clients Managers */ = {
 			isa = PBXGroup;
 			children = (
+				225C6CAB25FCBF4900CC621E /* Client */,
 				22C549A125F41C99008D941B /* PagingClientsDataManager.swift */,
 			);
 			path = "Clients Managers";
@@ -1179,6 +1190,7 @@
 				22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */,
 				221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */,
 				229FE69225706B6B0001FF54 /* GetSearchPageDataManager.swift in Sources */,
+				225C6CAD25FCBF5700CC621E /* ClientDataManager.swift in Sources */,
 				22D90236259C0359009732CC /* MyPostsDataManager.swift in Sources */,
 				2291BE452560620F004F55DF /* MainDataManager.swift in Sources */,
 				22CADB1225B2484000A5E475 /* AssignVkToAppIDDataManager.swift in Sources */,
