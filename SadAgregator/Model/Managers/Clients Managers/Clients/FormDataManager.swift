@@ -19,7 +19,7 @@ struct FormDataManager {
     
     func getFormData(key : String){
         
-        let urlString = "https://agrapi.tk-sad.ru//agr_clients.Form?AKey=\(key)"
+        let urlString = "https://agrapi.tk-sad.ru/agr_clients.Form?AKey=\(key)"
         
         print("URLString for FormDataManager: \(urlString)")
         

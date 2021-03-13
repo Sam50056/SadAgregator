@@ -25,6 +25,7 @@ class ClientsViewController: UIViewController {
     private var areStatsShown = true
     
     private var pagingClientsDataManager = PagingClientsDataManager()
+    private var clientsFilterDataManager = ClientsFilterDataManager()
     
     private var page = 1
     private var rowForPaggingUpdate : Int = 15
@@ -57,6 +58,7 @@ class ClientsViewController: UIViewController {
         tableView.register(UINib(nibName: "ClientTableViewCell", bundle: nil), forCellReuseIdentifier: "clientCell")
         
         pagingClientsDataManager.delegate = self
+        clientsFilterDataManager.delegate = self
         
         FormDataManager(delegate: self).getFormData(key: key)
         
@@ -335,3 +337,22 @@ extension ClientsViewController : PagingClientsDataManagerDelegate{
     
 }
 
+//MARK: - ClientsFilterDataManager
+
+extension ClientsViewController : ClientsFilterDataManagerDelegate{
+    
+    func didGetClientsFIlterData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            
+            
+        }
+        
+    }
+    
+    func didFailGettingClientsFIlterDataWithError(error: String) {
+        print("Error with ClientsFilterDataManager : \(error)")
+    }
+        
+}

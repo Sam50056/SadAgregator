@@ -33,6 +33,7 @@
 		221C479D25B4C7E200290E09 /* DescriptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C479B25B4C7E200290E09 /* DescriptionCollectionViewCell.xib */; };
 		22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22216A4325853FCC00D5248B /* RegisterDataManager.swift */; };
 		222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */; };
+		22328CC725FD806300C51CC9 /* ClientsFIlterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */; };
 		2237E77625FA32C500EBD919 /* PurchaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237E77425FA32C500EBD919 /* PurchaseTableViewCell.swift */; };
 		2237E77725FA32C500EBD919 /* PurchaseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2237E77525FA32C500EBD919 /* PurchaseTableViewCell.xib */; };
 		2237E77C25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237E77A25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift */; };
@@ -206,6 +207,7 @@
 		221C479B25B4C7E200290E09 /* DescriptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionCollectionViewCell.xib; sourceTree = "<group>"; };
 		22216A4325853FCC00D5248B /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUpdateDataManager.swift; sourceTree = "<group>"; };
+		22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsFIlterDataManager.swift; sourceTree = "<group>"; };
 		2237E77425FA32C500EBD919 /* PurchaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCell.swift; sourceTree = "<group>"; };
 		2237E77525FA32C500EBD919 /* PurchaseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseTableViewCell.xib; sourceTree = "<group>"; };
 		2237E77A25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -445,6 +447,16 @@
 				221C479B25B4C7E200290E09 /* DescriptionCollectionViewCell.xib */,
 			);
 			path = DescCell;
+			sourceTree = "<group>";
+		};
+		22328CC525FD803F00C51CC9 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				22C549A125F41C99008D941B /* PagingClientsDataManager.swift */,
+				22B8E49125FCF49E002DDB73 /* FormDataManager.swift */,
+				22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */,
+			);
+			path = Clients;
 			sourceTree = "<group>";
 		};
 		2237E76F25FA325C00EBD919 /* PurchaseCell */ = {
@@ -923,9 +935,8 @@
 		22C549A025F41C30008D941B /* Clients Managers */ = {
 			isa = PBXGroup;
 			children = (
+				22328CC525FD803F00C51CC9 /* Clients */,
 				225C6CAB25FCBF4900CC621E /* Client */,
-				22C549A125F41C99008D941B /* PagingClientsDataManager.swift */,
-				22B8E49125FCF49E002DDB73 /* FormDataManager.swift */,
 			);
 			path = "Clients Managers";
 			sourceTree = "<group>";
@@ -1253,6 +1264,7 @@
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
 				2286AD0F25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift in Sources */,
 				22C5499C25F41223008D941B /* ClientTableViewCellTableViewCell.swift in Sources */,
+				22328CC725FD806300C51CC9 /* ClientsFIlterDataManager.swift in Sources */,
 				22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */,
 				2201672C25A77BB50072BFE7 /* SetVendActionsDataManager.swift in Sources */,
 				2203F15C25BF243A007DBFFD /* EmptyTableViewCell.swift in Sources */,
