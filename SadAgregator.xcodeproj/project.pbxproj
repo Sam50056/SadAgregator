@@ -129,6 +129,7 @@
 		22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7270E2573189E00B56249 /* MainPaggingDataManager.swift */; };
 		22B7271325740E8C00B56249 /* LinePostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7271225740E8C00B56249 /* LinePostsPaggingDataManager.swift */; };
 		22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */; };
+		22B8E49225FCF49E002DDB73 /* FormDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E49125FCF49E002DDB73 /* FormDataManager.swift */; };
 		22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD86512597FD690052956D /* SetInputValDataManager.swift */; };
 		22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF19D725A3DDC800567DB7 /* TextLabelCollectionViewCell.swift */; };
 		22BF19DA25A3DDC800567DB7 /* TextLabelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22BF19D825A3DDC800567DB7 /* TextLabelCollectionViewCell.xib */; };
@@ -304,6 +305,7 @@
 		22B7270E2573189E00B56249 /* MainPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPaggingDataManager.swift; sourceTree = "<group>"; };
 		22B7271225740E8C00B56249 /* LinePostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePostsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointPostsPaggingDataManager.swift; sourceTree = "<group>"; };
+		22B8E49125FCF49E002DDB73 /* FormDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataManager.swift; sourceTree = "<group>"; };
 		22BD86512597FD690052956D /* SetInputValDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInputValDataManager.swift; sourceTree = "<group>"; };
 		22BD86542598B4CD0052956D /* SadAgregator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SadAgregator.entitlements; sourceTree = "<group>"; };
 		22BF19D725A3DDC800567DB7 /* TextLabelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLabelCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -923,6 +925,7 @@
 			children = (
 				225C6CAB25FCBF4900CC621E /* Client */,
 				22C549A125F41C99008D941B /* PagingClientsDataManager.swift */,
+				22B8E49125FCF49E002DDB73 /* FormDataManager.swift */,
 			);
 			path = "Clients Managers";
 			sourceTree = "<group>";
@@ -1223,6 +1226,7 @@
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
 				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
 				2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */,
+				22B8E49225FCF49E002DDB73 /* FormDataManager.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
 				22B6BCAB25DEDA6A00EAE067 /* AllCategoriesViewController.swift in Sources */,
 				2200943925DACBE90001F7B3 /* CategoryViewController.swift in Sources */,

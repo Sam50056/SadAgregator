@@ -56,7 +56,7 @@ class ClientsViewController: UIViewController {
         
         pagingClientsDataManager.delegate = self
         
-        pagingClientsDataManager.getPagingClientsData(key: key, page: page)
+        FormDataManager(delegate: self).getFormData(key: key)
         
     }
     
@@ -209,11 +209,59 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
         
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 3{
+            
+            if indexPath.row == rowForPaggingUpdate{
+                
+                page += 1
+                
+                rowForPaggingUpdate += 16
+                
+                pagingClientsDataManager.getPagingClientsData(key: key, page: page)
+                
+                print("Done a request for page: \(page)")
+                
+            }
+            
+        }
+        
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 3{
             return 85 - 20
         }
         return K.simpleHeaderCellHeight
+    }
+    
+}
+
+//MARK: - FormDataManagerDelegate
+
+extension ClientsViewController : FormDataManagerDelegate{
+    
+    func didGetFormData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                clients = data["clients"].arrayValue
+                
+                tableView.reloadSections([2,3], with: .automatic)
+                
+            }else{
+                print("Error with getting FormData , result : 0")
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingFormDataWithError(error: String) {
+        print("Error with FormDataManager : \(error)")
     }
     
 }
@@ -228,17 +276,9 @@ extension ClientsViewController : PagingClientsDataManagerDelegate{
             
             if data["result"].intValue == 1{
                 
-                clients = data["clients"].arrayValue
+                clients += data["clients"].arrayValue
                 
-                var sectionsForUpdate : IndexSet = []
-                
-                if page == 1 {
-                    sectionsForUpdate = [2,3]
-                }else{
-                    sectionsForUpdate = [3]
-                }
-                
-                tableView.reloadSections(sectionsForUpdate, with: .automatic)
+                tableView.reloadSections([3], with: .automatic)
                 
             }else{
                 print("Error with getting PagingClientsData , result : 0")
