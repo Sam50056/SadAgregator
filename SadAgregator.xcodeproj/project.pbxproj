@@ -34,6 +34,8 @@
 		22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22216A4325853FCC00D5248B /* RegisterDataManager.swift */; };
 		222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */; };
 		22328CC725FD806300C51CC9 /* ClientsFIlterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */; };
+		22328CCA25FE70BE00C51CC9 /* PaymentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */; };
+		22328CCE25FE743E00C51CC9 /* ClientsPayments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */; };
 		2237E77625FA32C500EBD919 /* PurchaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237E77425FA32C500EBD919 /* PurchaseTableViewCell.swift */; };
 		2237E77725FA32C500EBD919 /* PurchaseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2237E77525FA32C500EBD919 /* PurchaseTableViewCell.xib */; };
 		2237E77C25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237E77A25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift */; };
@@ -208,6 +210,8 @@
 		22216A4325853FCC00D5248B /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUpdateDataManager.swift; sourceTree = "<group>"; };
 		22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsFIlterDataManager.swift; sourceTree = "<group>"; };
+		22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHistoryViewController.swift; sourceTree = "<group>"; };
+		22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsPayments.swift; sourceTree = "<group>"; };
 		2237E77425FA32C500EBD919 /* PurchaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCell.swift; sourceTree = "<group>"; };
 		2237E77525FA32C500EBD919 /* PurchaseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseTableViewCell.xib; sourceTree = "<group>"; };
 		2237E77A25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -452,11 +456,20 @@
 		22328CC525FD803F00C51CC9 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				22328CCC25FE73FB00C51CC9 /* Payment */,
 				22C549A125F41C99008D941B /* PagingClientsDataManager.swift */,
 				22B8E49125FCF49E002DDB73 /* FormDataManager.swift */,
 				22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */,
 			);
 			path = Clients;
+			sourceTree = "<group>";
+		};
+		22328CCC25FE73FB00C51CC9 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */,
+			);
+			path = Payment;
 			sourceTree = "<group>";
 		};
 		2237E76F25FA325C00EBD919 /* PurchaseCell */ = {
@@ -1050,6 +1063,7 @@
 				22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */,
 				22D604D425F1784100102CB6 /* ClientsViewController.swift */,
 				2237E77F25FBD15F00EBD919 /* ClientViewController.swift */,
+				22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */,
 			);
 			path = "Services Tab";
 			sourceTree = "<group>";
@@ -1249,6 +1263,7 @@
 				22C5D02E25B1EC9E001C69C6 /* SetDefaultPeerDataManager.swift in Sources */,
 				22CA694425A1475E00D21840 /* VendorRatingTableViewCell.swift in Sources */,
 				22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */,
+				22328CCA25FE70BE00C51CC9 /* PaymentHistoryViewController.swift in Sources */,
 				227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */,
 				22D9022F259BFFC3009732CC /* AddPointRequestView.swift in Sources */,
 				22A49CB42566645800CCC781 /* PostTableViewCell.swift in Sources */,
@@ -1344,6 +1359,7 @@
 				2201673125A8BADD0072BFE7 /* SendFileDataManager.swift in Sources */,
 				2201673C25A952040072BFE7 /* SearchImageDataManager.swift in Sources */,
 				22A0534E256BCE350016B40A /* ActivityPointDataManager.swift in Sources */,
+				22328CCE25FE743E00C51CC9 /* ClientsPayments.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

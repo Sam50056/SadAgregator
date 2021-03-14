@@ -242,6 +242,16 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
                 view.layoutIfNeeded()
             }
             
+        }else if section == 1{
+            
+            if stats[indexPath.row].firstText == "Баланс"{
+                
+                let paymentsHistoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentHistoryVC") as! PaymentHistoryViewController
+                
+                navigationController?.pushViewController(paymentsHistoryVC, animated: true)
+                
+            }
+            
         }else if section == 3{
             
             let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController

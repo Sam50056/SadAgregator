@@ -3115,6 +3115,33 @@
             </objects>
             <point key="canvasLocation" x="576.92307692307691" y="3126.5402843601896"/>
         </scene>
+        <!--Payment History View Controller-->
+        <scene sceneID="7A7-XU-Gbm">
+            <objects>
+                <viewController storyboardIdentifier="PaymentHistoryVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eVu-in-GZh" customClass="PaymentHistoryViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="52m-nb-eVJ">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yrp-Z6-rE4">
+                                <rect key="frame" x="0.0" y="44" width="390" height="766"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ajz-vz-0PM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ajz-vz-0PM" firstAttribute="bottom" secondItem="yrp-Z6-rE4" secondAttribute="bottom" id="4Ee-db-tY7"/>
+                            <constraint firstItem="ajz-vz-0PM" firstAttribute="trailing" secondItem="yrp-Z6-rE4" secondAttribute="trailing" id="cSZ-Z7-1mm"/>
+                            <constraint firstItem="yrp-Z6-rE4" firstAttribute="leading" secondItem="ajz-vz-0PM" secondAttribute="leading" id="oH2-0y-Ju9"/>
+                            <constraint firstItem="yrp-Z6-rE4" firstAttribute="top" secondItem="ajz-vz-0PM" secondAttribute="top" id="yIY-pB-bWE"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8qQ-Oc-EKo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-222" y="3518"/>
+        </scene>
         <!--Client View Controller-->
         <scene sceneID="3Ey-VJ-6Ki">
             <objects>
