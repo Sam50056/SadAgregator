@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="119" id="KGk-i7-Jjw" customClass="PaymentTableViewCell" customModule="SadAgregator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0KC-8z-YJb">
+                        <rect key="frame" x="0.0" y="5" width="320" height="114"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </tableView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBx-as-tHm">
+                        <rect key="frame" x="16" y="117" width="304" height="2"/>
+                        <color key="backgroundColor" name="gray"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="Knp-fI-UwZ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="dBx-as-tHm" secondAttribute="trailing" id="6Gq-jc-yM2"/>
+                    <constraint firstAttribute="trailing" secondItem="0KC-8z-YJb" secondAttribute="trailing" id="8GF-o3-P8V"/>
+                    <constraint firstAttribute="bottom" secondItem="dBx-as-tHm" secondAttribute="bottom" id="Aqn-Up-Y5x"/>
+                    <constraint firstAttribute="bottom" secondItem="0KC-8z-YJb" secondAttribute="bottom" id="W4t-4k-faU"/>
+                    <constraint firstItem="dBx-as-tHm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="eZE-e4-4lU"/>
+                    <constraint firstItem="0KC-8z-YJb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="f4g-0c-qpP"/>
+                    <constraint firstItem="0KC-8z-YJb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vdP-LL-Sjw"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="tableView" destination="0KC-8z-YJb" id="xIZ-ND-PCN"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="178.45982142857142"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="gray">
+            <color red="0.96100002527236938" green="0.9649999737739563" blue="0.97299998998641968" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

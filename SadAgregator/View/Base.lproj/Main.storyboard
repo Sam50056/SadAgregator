@@ -3137,6 +3137,9 @@
                             <constraint firstItem="yrp-Z6-rE4" firstAttribute="top" secondItem="ajz-vz-0PM" secondAttribute="top" id="yIY-pB-bWE"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="yrp-Z6-rE4" id="SXY-3V-C2i"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8qQ-Oc-EKo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

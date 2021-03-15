@@ -36,6 +36,12 @@
 		22328CC725FD806300C51CC9 /* ClientsFIlterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */; };
 		22328CCA25FE70BE00C51CC9 /* PaymentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */; };
 		22328CCE25FE743E00C51CC9 /* ClientsPayments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */; };
+		22328CD925FE857800C51CC9 /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CD725FE857800C51CC9 /* PaymentTableViewCell.swift */; };
+		22328CDA25FE857800C51CC9 /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22328CD825FE857800C51CC9 /* PaymentTableViewCell.xib */; };
+		22328CE025FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CDE25FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.swift */; };
+		22328CE125FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22328CDF25FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.xib */; };
+		22328CEC25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CEA25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.swift */; };
+		22328CED25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22328CEB25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.xib */; };
 		2237E77625FA32C500EBD919 /* PurchaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237E77425FA32C500EBD919 /* PurchaseTableViewCell.swift */; };
 		2237E77725FA32C500EBD919 /* PurchaseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2237E77525FA32C500EBD919 /* PurchaseTableViewCell.xib */; };
 		2237E77C25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237E77A25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift */; };
@@ -212,6 +218,12 @@
 		22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsFIlterDataManager.swift; sourceTree = "<group>"; };
 		22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHistoryViewController.swift; sourceTree = "<group>"; };
 		22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsPayments.swift; sourceTree = "<group>"; };
+		22328CD725FE857800C51CC9 /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
+		22328CD825FE857800C51CC9 /* PaymentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentTableViewCell.xib; sourceTree = "<group>"; };
+		22328CDE25FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
+		22328CDF25FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentTableViewCellTableViewCell.xib; sourceTree = "<group>"; };
+		22328CEA25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCellEditTableViewCell.swift; sourceTree = "<group>"; };
+		22328CEB25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentTableViewCellEditTableViewCell.xib; sourceTree = "<group>"; };
 		2237E77425FA32C500EBD919 /* PurchaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCell.swift; sourceTree = "<group>"; };
 		2237E77525FA32C500EBD919 /* PurchaseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseTableViewCell.xib; sourceTree = "<group>"; };
 		2237E77A25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -470,6 +482,43 @@
 				22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */,
 			);
 			path = Payment;
+			sourceTree = "<group>";
+		};
+		22328CD125FE854500C51CC9 /* PaymentCell */ = {
+			isa = PBXGroup;
+			children = (
+				22328CDC25FE868800C51CC9 /* cells */,
+				22328CD725FE857800C51CC9 /* PaymentTableViewCell.swift */,
+				22328CD825FE857800C51CC9 /* PaymentTableViewCell.xib */,
+			);
+			path = PaymentCell;
+			sourceTree = "<group>";
+		};
+		22328CDC25FE868800C51CC9 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				22328CE425FE877900C51CC9 /* PaymentTableViewCellEditCell */,
+				22328CDD25FE86D000C51CC9 /* PaymentTableViewCellTableViewCell */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
+		22328CDD25FE86D000C51CC9 /* PaymentTableViewCellTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				22328CDE25FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.swift */,
+				22328CDF25FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.xib */,
+			);
+			path = PaymentTableViewCellTableViewCell;
+			sourceTree = "<group>";
+		};
+		22328CE425FE877900C51CC9 /* PaymentTableViewCellEditCell */ = {
+			isa = PBXGroup;
+			children = (
+				22328CEA25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.swift */,
+				22328CEB25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.xib */,
+			);
+			path = PaymentTableViewCellEditCell;
 			sourceTree = "<group>";
 		};
 		2237E76F25FA325C00EBD919 /* PurchaseCell */ = {
@@ -856,6 +905,7 @@
 		22A49CA7256661D700CCC781 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				22328CD125FE854500C51CC9 /* PaymentCell */,
 				2237E76F25FA325C00EBD919 /* PurchaseCell */,
 				22C5499125F40F99008D941B /* ClientCell */,
 				2200942525D831900001F7B3 /* CategoriesCell */,
@@ -1139,6 +1189,7 @@
 			files = (
 				22CA694525A1475E00D21840 /* VendorRatingTableViewCell.xib in Resources */,
 				221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */,
+				22328CE125FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.xib in Resources */,
 				22C5499625F411A4008D941B /* ClientTableViewCell.xib in Resources */,
 				229A95C725A161030086EAD9 /* PricesTableViewCell.xib in Resources */,
 				2200942925D831C00001F7B3 /* CategoriesTableViewCell.xib in Resources */,
@@ -1155,8 +1206,10 @@
 				221C479D25B4C7E200290E09 /* DescriptionCollectionViewCell.xib in Resources */,
 				228CB766255BF974002B4A96 /* Assets.xcassets in Resources */,
 				2237E77725FA32C500EBD919 /* PurchaseTableViewCell.xib in Resources */,
+				22328CDA25FE857800C51CC9 /* PaymentTableViewCell.xib in Resources */,
 				22BF19DA25A3DDC800567DB7 /* TextLabelCollectionViewCell.xib in Resources */,
 				22904863256DC702000B7A28 /* RatingTableViewCell.xib in Resources */,
+				22328CED25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.xib in Resources */,
 				2290485D256DAC80000B7A28 /* VendTableViewCell.xib in Resources */,
 				228CB764255BF96D002B4A96 /* Main.storyboard in Resources */,
 				22C5499D25F41223008D941B /* ClientTableViewCellTableViewCell.xib in Resources */,
@@ -1224,6 +1277,7 @@
 				22CADB1225B2484000A5E475 /* AssignVkToAppIDDataManager.swift in Sources */,
 				22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */,
 				22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */,
+				22328CE025FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.swift in Sources */,
 				2278290A258BB60E00B435FA /* GetMyReviewDataManager.swift in Sources */,
 				2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */,
 				229FE68E25700B120001FF54 /* SearchViewController.swift in Sources */,
@@ -1293,6 +1347,7 @@
 				22582C7F25D20170005E341C /* SignInWIthAppleIdDataManager.swift in Sources */,
 				2259579F259668370088C7E4 /* InputValView.swift in Sources */,
 				22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */,
+				22328CEC25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.swift in Sources */,
 				22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */,
 				22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */,
 				22BF19FF25A4DF0C00567DB7 /* TopLinesDataManager .swift in Sources */,
@@ -1335,6 +1390,7 @@
 				229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */,
 				22A2B56825E03200001359D6 /* SlideDownPresentationController.swift in Sources */,
 				2286AD0B25CB5EEE004EF0D7 /* VendorRevsViewController.swift in Sources */,
+				22328CD925FE857800C51CC9 /* PaymentTableViewCell.swift in Sources */,
 				22C5499525F411A3008D941B /* ClientTableViewCell.swift in Sources */,
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
 				2237E77C25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift in Sources */,

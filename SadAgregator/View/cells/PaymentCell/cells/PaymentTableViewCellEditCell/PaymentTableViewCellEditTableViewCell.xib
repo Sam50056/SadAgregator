@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="KGk-i7-Jjw" customClass="PaymentTableViewCellEditTableViewCell" customModule="SadAgregator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k20-Gv-EKR">
+                        <rect key="frame" x="16" y="8" width="288" height="34"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fve-0o-scX">
+                                <rect key="frame" x="8" y="8" width="241" height="18.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ellipsis" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="xIz-aJ-EcD">
+                                <rect key="frame" x="257" y="14" width="23" height="6"/>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20.5" id="D07-Ks-Nr2"/>
+                                    <constraint firstAttribute="width" constant="23" id="h49-x9-sdR"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xIz-aJ-EcD" firstAttribute="centerY" secondItem="k20-Gv-EKR" secondAttribute="centerY" id="0Uh-xA-NFH"/>
+                            <constraint firstItem="fve-0o-scX" firstAttribute="centerY" secondItem="k20-Gv-EKR" secondAttribute="centerY" id="6Dh-5s-3Ji"/>
+                            <constraint firstAttribute="trailing" secondItem="xIz-aJ-EcD" secondAttribute="trailing" constant="8" id="LVv-m8-ZXx"/>
+                            <constraint firstItem="xIz-aJ-EcD" firstAttribute="leading" secondItem="fve-0o-scX" secondAttribute="trailing" constant="8" id="WbD-Dz-b5P"/>
+                            <constraint firstItem="fve-0o-scX" firstAttribute="leading" secondItem="k20-Gv-EKR" secondAttribute="leading" constant="8" id="XDM-sa-r61"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="k20-Gv-EKR" secondAttribute="trailing" id="6hP-sQ-meK"/>
+                    <constraint firstItem="k20-Gv-EKR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="BGK-Xy-LsP"/>
+                    <constraint firstAttribute="bottom" secondItem="k20-Gv-EKR" secondAttribute="bottom" constant="8" id="Plr-Tc-K7c"/>
+                    <constraint firstItem="k20-Gv-EKR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Tld-w1-pl1"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="bgView" destination="k20-Gv-EKR" id="BVg-XR-hvj"/>
+                <outlet property="buttonImageView" destination="xIz-aJ-EcD" id="pkQ-Xc-an2"/>
+                <outlet property="textField" destination="fve-0o-scX" id="Q3q-oq-hgs"/>
+            </connections>
+            <point key="canvasLocation" x="-23.188405797101453" y="83.035714285714278"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

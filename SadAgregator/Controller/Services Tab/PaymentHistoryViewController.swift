@@ -29,6 +29,11 @@ class PaymentHistoryViewController: UIViewController {
         
         clientsPaymentsDataManager.delegate = self
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.register(UINib(nibName: "PaymentTableViewCell", bundle: nil), forCellReuseIdentifier: "paymentCell")
+        
         //Set up search controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -89,6 +94,28 @@ extension PaymentHistoryViewController : ClientsPaymentsDataManagerDelegate{
     
     func didFailGettingClientsPaymentsDataWithError(error: String) {
         print("Error with ClientsPaymentsDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - TableView
+
+extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath)
+        
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 160
     }
     
 }
