@@ -21,6 +21,11 @@ class ClientViewController: UIViewController {
     
     private var clientDataManager = ClientDataManager()
     
+    private var infoItems = [InfoItem]()
+    
+    private var balance : Int?
+    private var balanceLabel : UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,13 +60,13 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
         case 0:
             return 1
         case 1:
-            return isInfoShown ? 3 : 0
+            return isInfoShown ? infoItems.count : 0
         case 2:
             return 0
         case 3:
-            return 1
+            return 0
         case 4:
-            return 5
+            return 0
         default:
             return 0
         }
@@ -95,14 +100,45 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
             
         case 1:
             
+            let item = infoItems[indexPath.row]
+            
+            //Balance cell is different from other info cells
+            if item.isBalance{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "infoCellBalance", for: indexPath)
+                
+                if let firstLabel = cell.viewWithTag(1) as? UILabel ,
+                   let secondLabel = cell.viewWithTag(2) as? UILabel,
+                   let stepper = cell.viewWithTag(3) as? UIStepper{
+                    
+                    firstLabel.text = item.firstText
+                    
+                    secondLabel.text = item.secondText
+                    
+                    balanceLabel = secondLabel
+                    
+                    stepper.maximumValue = Double.infinity
+                    
+                    stepper.stepValue = 1
+                    
+                    stepper.value = Double(balance ?? 0)
+                    
+                    stepper.addTarget(self, action: #selector(stepperPressed(_:)), for: .valueChanged)
+                    
+                }
+                
+                return cell
+                
+            }
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
             
             if let firstLabel = cell.viewWithTag(1) as? UILabel ,
                let secondLabel = cell.viewWithTag(2) as? UILabel{
                 
-                firstLabel.text = "Клиенты"
+                firstLabel.text = item.firstText
                 
-                secondLabel.text = "3"
+                secondLabel.text = item.secondText
             }
             
         case 3:
@@ -154,6 +190,16 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
         return K.simpleHeaderCellHeight
     }
     
+    @IBAction func stepperPressed(_ sender : UIStepper){
+        
+        guard balance != nil else {return}
+        
+        balance = Int(sender.value)
+        
+        balanceLabel?.text = "\(balance!)"
+        
+    }
+    
 }
 
 //MARK: - ClientDataManagerDelegate
@@ -172,6 +218,25 @@ extension ClientViewController : ClientDataManagerDelegate{
                     navigationItem.title = name
                 }
                 
+                if let balance = clientHeaderData["balance"].string , balance != "" {
+                    infoItems.append(InfoItem(firstText: "Баланс", secondText: balance, isBalance: true))
+                    self.balance = Int(balance)!
+                }
+                
+                if let phone = clientHeaderData["phone"].string , phone != "" {
+                    infoItems.append(InfoItem(firstText: "Телефон", secondText: phone))
+                }
+                
+                if let vk = clientHeaderData["vk"].string , vk != "" {
+                    infoItems.append(InfoItem(firstText: "ВКонтакте", secondText: vk))
+                }
+                
+                if let ok = clientHeaderData["ok"].string , ok != "" {
+                    infoItems.append(InfoItem(firstText: "Одноклассники", secondText: ok))
+                }
+                
+                tableView.reloadData()
+                
             }
             
         }
@@ -180,6 +245,20 @@ extension ClientViewController : ClientDataManagerDelegate{
     
     func didFailGettingClientDataWithError(error: String) {
         print("Error with ClientDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - Statistics Item struct
+
+extension ClientViewController{
+    
+    private struct InfoItem {
+        
+        let firstText : String
+        let secondText : String
+        var isBalance : Bool = false
+        
     }
     
 }
