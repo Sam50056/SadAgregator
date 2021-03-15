@@ -46,6 +46,33 @@ class ClientViewController: UIViewController {
     
 }
 
+//MARK: - Funtions
+
+extension ClientViewController{
+    
+    func makeInfoItemsFrom(_ clientHeaderData : JSON){
+        
+        if let balance = clientHeaderData["balance"].string , balance != "" {
+            infoItems.append(InfoItem(firstText: "Баланс", secondText: balance, isBalance: true))
+            self.balance = Int(balance)!
+        }
+        
+        if let phone = clientHeaderData["phone"].string , phone != "" {
+            infoItems.append(InfoItem(firstText: "Телефон", secondText: phone))
+        }
+        
+        if let vk = clientHeaderData["vk"].string , vk != "" {
+            infoItems.append(InfoItem(firstText: "ВКонтакте", secondText: vk))
+        }
+        
+        if let ok = clientHeaderData["ok"].string , ok != "" {
+            infoItems.append(InfoItem(firstText: "Одноклассники", secondText: ok))
+        }
+        
+    }
+    
+}
+
 //MARK: - TableView Stuff
 
 extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
@@ -190,6 +217,8 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
         return K.simpleHeaderCellHeight
     }
     
+    //MARK: - Stepper
+    
     @IBAction func stepperPressed(_ sender : UIStepper){
         
         guard balance != nil else {return}
@@ -218,22 +247,7 @@ extension ClientViewController : ClientDataManagerDelegate{
                     navigationItem.title = name
                 }
                 
-                if let balance = clientHeaderData["balance"].string , balance != "" {
-                    infoItems.append(InfoItem(firstText: "Баланс", secondText: balance, isBalance: true))
-                    self.balance = Int(balance)!
-                }
-                
-                if let phone = clientHeaderData["phone"].string , phone != "" {
-                    infoItems.append(InfoItem(firstText: "Телефон", secondText: phone))
-                }
-                
-                if let vk = clientHeaderData["vk"].string , vk != "" {
-                    infoItems.append(InfoItem(firstText: "ВКонтакте", secondText: vk))
-                }
-                
-                if let ok = clientHeaderData["ok"].string , ok != "" {
-                    infoItems.append(InfoItem(firstText: "Одноклассники", secondText: ok))
-                }
+                makeInfoItemsFrom(clientHeaderData)
                 
                 tableView.reloadData()
                 
