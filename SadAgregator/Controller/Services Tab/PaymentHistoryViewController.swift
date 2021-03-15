@@ -21,6 +21,8 @@ class PaymentHistoryViewController: UIViewController {
     
     private var clientsPaymentsDataManager = ClientsPaymentsDataManager()
     
+    private var payments = [JSON]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +30,8 @@ class PaymentHistoryViewController: UIViewController {
         key = "part_2_test"
         
         clientsPaymentsDataManager.delegate = self
+        
+        navigationItem.title = "История платежей"
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -84,9 +88,11 @@ extension PaymentHistoryViewController : ClientsPaymentsDataManagerDelegate{
     
     func didGetClientsPaymentsData(data: JSON) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             
+            payments = data["payments"].arrayValue
             
+            tableView.reloadData()
             
         }
         
@@ -103,12 +109,14 @@ extension PaymentHistoryViewController : ClientsPaymentsDataManagerDelegate{
 extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return payments.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath) as! PaymentTableViewCell
+        
+        cell.payment = payments[indexPath.row]
         
         return cell
         
