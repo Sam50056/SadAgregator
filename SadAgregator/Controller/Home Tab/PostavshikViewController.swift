@@ -401,7 +401,7 @@ extension PostavshikViewController : SetVendActionsDataManagerDelegate{
 extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 8
+        return 9
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -418,13 +418,17 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 2:
             
-            return getRevRowsCount()
+            return isLogged ? 2 : 0
             
         case 3:
             
-            return vendorRevs.count < 3 ? vendorRevs.count : 3
+            return vendorRevs.count != 0 ? 1 : 0
             
         case 4:
+            
+            return vendorRevs.count < 3 ? vendorRevs.count : 3
+            
+        case 5:
             
             if vendorData?["alert_text"].stringValue != "" || vendorData?["altert_text"].stringValue != "" {
                 return 1
@@ -432,15 +436,15 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 return 0
             }
             
-        case 5:
+        case 6:
             
             return postsArray.isEmpty ? 0 : 1
             
-        case 6:
+        case 7:
             
             return postsArray.count
             
-        case 7:
+        case 8:
             
             return postsArray.isEmpty ? 0 : 1
             
@@ -484,15 +488,15 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 
                 setUpLeaveARevCell(cell: cell, data: vendorData)
                 
-            }else if indexPath.row == 2{
-                
-                cell = tableView.dequeueReusableCell(withIdentifier: "revCountLabel", for: indexPath)
-                
-                setUpRevCountLabel(cell: cell)
-                
             }
             
         case 3:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "revCountLabel", for: indexPath)
+            
+            setUpRevCountLabel(cell: cell)
+            
+        case 4:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "revCell", for: indexPath)
             
@@ -500,17 +504,17 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             setUpRevCell(cell: cell, data: rev)
             
-        case 4:
+        case 5:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "alertCell", for: indexPath)
             
             setUpAlertCell(cell: cell, data: vendorData)
             
-        case 5:
+        case 6:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
             
-        case 6:
+        case 7:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
             
@@ -520,7 +524,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: index, export: vendorData["export"])
             
-        case 7:
+        case 8:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "allPostsCell", for: indexPath)
             
@@ -549,11 +553,11 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 3:
             
-            return 150
+            return 50
             
         case 4:
             
-            return 50
+            return 150
             
         case 5:
             
@@ -561,9 +565,13 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 6:
             
-            return K.postHeight
+            return 50
             
         case 7:
+            
+            return K.postHeight
+            
+        case 8:
             
             return 50
             
@@ -580,7 +588,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             self.performSegue(withIdentifier: "goToReviewUpdate", sender: self)
             
-        }else if indexPath.section == 2, indexPath.row == 2{
+        }else if indexPath.section == 3{
             
             if vendorRevs.count >= 3 {
                 
@@ -592,7 +600,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        }else if indexPath.section == 5 || indexPath.section == 7{
+        }else if indexPath.section == 6 || indexPath.section == 8{
             
             let vendorPostsVc = VendorPostsTableViewController()
             
@@ -680,23 +688,6 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             }
             
             infoCells.append(InfoCellObject(image: UIImage(named: "vk-3")!, leftLabelText: leftLabelText, rightLabelText: vkLink, shouldRightLabelBeBlue: true))
-            
-        }
-        
-        return count
-    }
-    
-    func getRevRowsCount() -> Int{
-        
-        var count = 0
-        
-        if self.isLogged {
-            
-            count += 2 //Two cells (rateVend , leaveARevCell)
-            
-            if vendorRevs.count != 0{
-                count += 1 // revCountCell should not be shown when there are no revs
-            }
             
         }
         
@@ -994,9 +985,9 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                     
                     cell.vigruzitLabel.text = "Готово"
                     doneArray.append(postId)
-                    
+                   
                 }
-                
+                    
                 present(editVigruzkaVC, animated: true, completion: nil)
                 
             }else{
