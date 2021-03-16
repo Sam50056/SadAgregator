@@ -418,7 +418,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 2:
             
-            return isLogged ? 2 : 0
+            return 2
             
         case 3:
             
@@ -586,7 +586,15 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         if indexPath.section == 2, indexPath.row == 1{
             
-            self.performSegue(withIdentifier: "goToReviewUpdate", sender: self)
+            if !isLogged{
+                
+                showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
+                
+            }else{
+                
+                self.performSegue(withIdentifier: "goToReviewUpdate", sender: self)
+                
+            }
             
         }else if indexPath.section == 3{
             
@@ -824,7 +832,17 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             ratingView.didFinishTouchingCosmos = { [self] rating in
                 
-                RateUpdateDataManager().getRateUpdateData(key: key, vendId: thisVendorId!, rate: Int(rating))
+                if isLogged{
+                    
+                    RateUpdateDataManager().getRateUpdateData(key: key, vendId: thisVendorId!, rate: Int(rating))
+                    
+                }else{
+                    
+                    showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
+                    
+                    ratingView.rating = userRating
+                    
+                }
                 
             }
             
