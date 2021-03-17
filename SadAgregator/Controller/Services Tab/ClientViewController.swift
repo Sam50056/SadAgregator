@@ -145,6 +145,7 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                     balanceLabel = secondLabel
                     
                     stepper.maximumValue = Double.infinity
+                    stepper.minimumValue = -Double.infinity
                     
                     stepper.stepValue = 1
                     
