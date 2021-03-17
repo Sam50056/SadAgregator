@@ -184,6 +184,7 @@
 		22D9023D259C1988009732CC /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9023C259C1988009732CC /* MultilineTextView.swift */; };
 		22DC987226028B160016A31B /* PaggingPaymentsByClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC987126028B160016A31B /* PaggingPaymentsByClientDataManager.swift */; };
 		22DC9876260293E90016A31B /* ClientsPagingPaymentsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */; };
+		22DC987F2602AFCB0016A31B /* UpdateClientInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */; };
 		22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */; };
 		22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */; };
 		44D7F3DB0392E9E53844BA25 /* Pods_SadAgregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */; };
@@ -372,6 +373,7 @@
 		22D9023C259C1988009732CC /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
 		22DC987126028B160016A31B /* PaggingPaymentsByClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaggingPaymentsByClientDataManager.swift; sourceTree = "<group>"; };
 		22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsPagingPaymentsDataManager.swift; sourceTree = "<group>"; };
+		22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateClientInfoDataManager.swift; sourceTree = "<group>"; };
 		22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSimpleReqDataManager.swift; sourceTree = "<group>"; };
 		22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListSelectDataManager.swift; sourceTree = "<group>"; };
 		8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.debug.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -655,6 +657,7 @@
 			children = (
 				22DC987026028ADB0016A31B /* Payment */,
 				225C6CAC25FCBF5700CC621E /* ClientDataManager.swift */,
+				22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -1338,6 +1341,7 @@
 				22906B3A2578293500F00B0D /* VendorCardDataManager.swift in Sources */,
 				2265854325901812004587AA /* AlertWithTextFieldView.swift in Sources */,
 				224BC43B259FE61E003F147F /* VkAuthService.swift in Sources */,
+				22DC987F2602AFCB0016A31B /* UpdateClientInfoDataManager.swift in Sources */,
 				2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */,
 				22D90221259AC9EF009732CC /* AlbumsInProgressDataManager.swift in Sources */,
 				2200942825D831C00001F7B3 /* CategoriesTableViewCell.swift in Sources */,
@@ -1584,7 +1588,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1592,7 +1596,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tk-sad.SadAgregator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1608,7 +1612,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1616,7 +1620,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tk-sad.SadAgregator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

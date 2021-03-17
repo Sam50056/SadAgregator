@@ -15,11 +15,17 @@ class ClientViewController: UIViewController {
     private var hideLabel :  UILabel?
     private var hideLabelImageView : UIImageView?
     
+    var key = ""
+    
     private var isInfoShown = true
     
     var thisClientId : String?
     
     private var clientDataManager = ClientDataManager()
+    
+    private var updateClientInfoDataManager = UpdateClientInfoDataManager()
+    
+    private var clientData : JSON?
     
     private var infoItems = [InfoItem]()
     
@@ -29,7 +35,10 @@ class ClientViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        key = "part_2_test"
+        
         clientDataManager.delegate = self
+        updateClientInfoDataManager.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -39,7 +48,7 @@ class ClientViewController: UIViewController {
         tableView.register(UINib(nibName: "PurchaseTableViewCell", bundle: nil), forCellReuseIdentifier: "purchaseCell")
         
         if let thisClientId = thisClientId{
-            clientDataManager.getClientData(key: "part_2_test", clientId: thisClientId)
+            clientDataManager.getClientData(key: key, clientId: thisClientId)
         }
         
     }
@@ -89,7 +98,7 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
         case 1:
             return isInfoShown ? infoItems.count : 0
         case 2:
-            return 0
+            return clientData == nil ? 0 : 1
         case 3:
             return 0
         case 4:
@@ -169,6 +178,16 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                 secondLabel.text = item.secondText
             }
             
+        case 2:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
+            
+            if let commentTextField = cell.viewWithTag(1) as? UITextField{
+                
+                commentTextField.delegate = self
+                
+            }
+            
         case 3:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
@@ -232,6 +251,20 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
     
 }
 
+//MARK: - TextField
+
+extension ClientViewController : UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        guard textField.text != nil , textField.text?.replacingOccurrences(of: " ", with: "") != "" else {return}
+        
+        updateClientInfoDataManager.getUpdateClientInfoData(key: key, clientId: thisClientId!, fieldId: "5", value: textField.text!.replacingOccurrences(of: "'", with: ""))
+        
+    }
+    
+}
+
 //MARK: - ClientDataManagerDelegate
 
 extension ClientViewController : ClientDataManagerDelegate{
@@ -241,6 +274,8 @@ extension ClientViewController : ClientDataManagerDelegate{
         DispatchQueue.main.async { [self] in
             
             if data["result"].intValue == 1{
+                
+                clientData = data
                 
                 let clientHeaderData = data["client_header"]
                 
@@ -260,6 +295,26 @@ extension ClientViewController : ClientDataManagerDelegate{
     
     func didFailGettingClientDataWithError(error: String) {
         print("Error with ClientDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - UpdateClientInfoDataManagerDelegate
+
+extension ClientViewController : UpdateClientInfoDataManagerDelegate{
+    
+    func didGetUpdateClientInfoData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+            print("Successfully sent : UpdateClientInfoDataManager request")
+            
+        }
+        
+    }
+    
+    func didFailGettingUpdateClientInfoDataWithError(error: String) {
+        print("Error with UpdateClientInfoDataManager : \(error)")
     }
     
 }

@@ -3308,8 +3308,29 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" rowHeight="64" id="KN9-tR-nZn">
+                                        <rect key="frame" x="0.0" y="204" width="390" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KN9-tR-nZn" id="Dgd-kd-7S8">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="64"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Оставить комментарий" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XCC-79-QkP">
+                                                    <rect key="frame" x="20" y="4" width="350" height="56"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="XCC-79-QkP" firstAttribute="leading" secondItem="Dgd-kd-7S8" secondAttribute="leadingMargin" id="Q3I-n5-zr4"/>
+                                                <constraint firstAttribute="bottom" secondItem="XCC-79-QkP" secondAttribute="bottom" constant="4" id="ge1-yc-1rJ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="XCC-79-QkP" secondAttribute="trailing" id="sHs-M3-Hdh"/>
+                                                <constraint firstItem="XCC-79-QkP" firstAttribute="top" secondItem="Dgd-kd-7S8" secondAttribute="top" constant="4" id="tc3-cw-PsK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell" rowHeight="59" id="gL7-3T-fQ7">
-                                        <rect key="frame" x="0.0" y="204" width="390" height="59"/>
+                                        <rect key="frame" x="0.0" y="268" width="390" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gL7-3T-fQ7" id="3Nj-tV-3JH">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="59"/>
