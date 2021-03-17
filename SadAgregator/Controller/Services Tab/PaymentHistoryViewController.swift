@@ -19,9 +19,16 @@ class PaymentHistoryViewController: UIViewController {
     
     private var key = ""
     
+    var thisClientId : String?
+    
     private var clientsPaymentsDataManager = ClientsPaymentsDataManager()
+    private var paggingPaymentsByClientDataManager = PaggingPaymentsByClientDataManager()
+    private var clientsPagingPaymentsDataManager = ClientsPagingPaymentsDataManager()
     
     private var payments = [JSON]()
+    
+    private var page = 1
+    private var rowForPaggingUpdate : Int = 15
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +37,8 @@ class PaymentHistoryViewController: UIViewController {
         key = "part_2_test"
         
         clientsPaymentsDataManager.delegate = self
+        paggingPaymentsByClientDataManager.delegate = self
+        clientsPagingPaymentsDataManager.delegate = self
         
         navigationItem.title = "История платежей"
         
@@ -47,7 +56,11 @@ class PaymentHistoryViewController: UIViewController {
         
         navigationItem.hidesSearchBarWhenScrolling = false
         
-        clientsPaymentsDataManager.getClientsPaymentsData(key: key)
+        if let thisClientId = thisClientId {
+            paggingPaymentsByClientDataManager.getPaggingPaymentsByClientData(key: key, clientId: thisClientId)
+        }else{
+            clientsPaymentsDataManager.getClientsPaymentsData(key: key)
+        }
         
     }
     
@@ -90,9 +103,13 @@ extension PaymentHistoryViewController : ClientsPaymentsDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            payments = data["payments"].arrayValue
-            
-            tableView.reloadData()
+            if data["result"].intValue == 1{
+                
+                payments = data["payments"].arrayValue
+                
+                tableView.reloadData()
+                
+            }
             
         }
         
@@ -100,6 +117,58 @@ extension PaymentHistoryViewController : ClientsPaymentsDataManagerDelegate{
     
     func didFailGettingClientsPaymentsDataWithError(error: String) {
         print("Error with ClientsPaymentsDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - PaggingPaymentsByClientDataManagerDelegate
+
+extension PaymentHistoryViewController : PaggingPaymentsByClientDataManagerDelegate{
+    
+    func didGetPaggingPaymentsByClientData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                payments += data["payments"].arrayValue
+                
+                tableView.reloadData()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingPaggingPaymentsByClientDataWithError(error: String) {
+        print("Error with PaggingPaymentsByClientDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - ClientsPagingPaymentsDataManagerDelegate
+
+extension PaymentHistoryViewController : ClientsPagingPaymentsDataManagerDelegate{
+    
+    func didGetClientsPagingPaymentsData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                payments += data["payments"].arrayValue
+                
+                tableView.reloadData()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingClientsPagingPaymentsDataWithError(error: String) {
+        print("Error with ClientsPagingPaymentsDataManager : \(error)")
     }
     
 }
@@ -124,6 +193,26 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == rowForPaggingUpdate{
+            
+            page += 1
+            
+            rowForPaggingUpdate += 16
+            
+            if let thisClientId = thisClientId {
+                paggingPaymentsByClientDataManager.getPaggingPaymentsByClientData(key: key, clientId: thisClientId,page: page)
+            }else{
+                clientsPagingPaymentsDataManager.getClientsPagingPaymentsData(key: key, page: page)
+            }
+            
+            print("Done a request for page: \(page)")
+            
+        }
+        
     }
     
 }

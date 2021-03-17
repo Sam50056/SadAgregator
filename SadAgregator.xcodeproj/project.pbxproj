@@ -182,6 +182,8 @@
 		22D90236259C0359009732CC /* MyPostsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90235259C0359009732CC /* MyPostsDataManager.swift */; };
 		22D90239259C1546009732CC /* SendQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90238259C1546009732CC /* SendQuestionView.swift */; };
 		22D9023D259C1988009732CC /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9023C259C1988009732CC /* MultilineTextView.swift */; };
+		22DC987226028B160016A31B /* PaggingPaymentsByClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC987126028B160016A31B /* PaggingPaymentsByClientDataManager.swift */; };
+		22DC9876260293E90016A31B /* ClientsPagingPaymentsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */; };
 		22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */; };
 		22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */; };
 		44D7F3DB0392E9E53844BA25 /* Pods_SadAgregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */; };
@@ -368,6 +370,8 @@
 		22D90235259C0359009732CC /* MyPostsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsDataManager.swift; sourceTree = "<group>"; };
 		22D90238259C1546009732CC /* SendQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendQuestionView.swift; sourceTree = "<group>"; };
 		22D9023C259C1988009732CC /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
+		22DC987126028B160016A31B /* PaggingPaymentsByClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaggingPaymentsByClientDataManager.swift; sourceTree = "<group>"; };
+		22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsPagingPaymentsDataManager.swift; sourceTree = "<group>"; };
 		22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSimpleReqDataManager.swift; sourceTree = "<group>"; };
 		22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListSelectDataManager.swift; sourceTree = "<group>"; };
 		8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.debug.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -480,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */,
+				22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -648,6 +653,7 @@
 		225C6CAB25FCBF4900CC621E /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				22DC987026028ADB0016A31B /* Payment */,
 				225C6CAC25FCBF5700CC621E /* ClientDataManager.swift */,
 			);
 			path = Client;
@@ -1118,6 +1124,14 @@
 			path = "Services Tab";
 			sourceTree = "<group>";
 		};
+		22DC987026028ADB0016A31B /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				22DC987126028B160016A31B /* PaggingPaymentsByClientDataManager.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
 		6358550D007648CA0215FE8A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1349,6 +1363,7 @@
 				22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */,
 				22328CEC25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.swift in Sources */,
 				22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */,
+				22DC9876260293E90016A31B /* ClientsPagingPaymentsDataManager.swift in Sources */,
 				22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */,
 				22BF19FF25A4DF0C00567DB7 /* TopLinesDataManager .swift in Sources */,
 				22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */,
@@ -1385,6 +1400,7 @@
 				22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */,
 				22A155ED2584E766000EAB64 /* MenuViewModel.swift in Sources */,
 				22D90239259C1546009732CC /* SendQuestionView.swift in Sources */,
+				22DC987226028B160016A31B /* PaggingPaymentsByClientDataManager.swift in Sources */,
 				2201671C25A669790072BFE7 /* GetPostActionsDataManager.swift in Sources */,
 				2201672925A777A20072BFE7 /* GetVendActionsDataManager.swift in Sources */,
 				229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */,
