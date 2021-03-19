@@ -38,6 +38,12 @@ class ClientsViewController: UIViewController {
         return searchController.searchBar.text ?? ""
     }
     
+    private var debetors : Bool = false {
+        didSet{
+            clientsFilterDataManager.getClientsFIlterData(key: key , query: searchText , debotors: debetors ? 1 : 0 , page : page)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -249,6 +255,10 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
                 let paymentsHistoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentHistoryVC") as! PaymentHistoryViewController
                 
                 navigationController?.pushViewController(paymentsHistoryVC, animated: true)
+                
+            }else if stats[indexPath.row].firstText == "Задолженность" {
+                
+                debetors.toggle()
                 
             }
             
