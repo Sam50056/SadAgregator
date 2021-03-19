@@ -19,7 +19,7 @@ class ClientTableViewCell: UITableViewCell {
             
             if client?["balance"].stringValue != "" /*, client?["balance"].stringValue != "0"*/{
                 
-                tableViewItems.append(TableViewItem(firstText: "Баланс", secondText: (client?["balance"].stringValue)!))
+                tableViewItems.append(TableViewItem(firstText: "Баланс", secondText: (client?["balance"].stringValue)! + " руб"))
                 
             }
             
@@ -90,7 +90,7 @@ extension ClientTableViewCell : UITableViewDelegate , UITableViewDataSource{
             (cell as! ClientTableViewCellTableViewCell).secondLabel.text = item.secondText
             
             if item.firstText == "Баланс" ,
-               let balanceInt = Int(item.secondText),
+               let balanceInt = Int(item.secondText.replacingOccurrences(of: " руб", with: "")),
                balanceInt < 0{
                 (cell as! ClientTableViewCellTableViewCell).secondLabel.textColor = .red
             }else{
