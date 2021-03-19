@@ -67,9 +67,9 @@ class VendsPopularityRatingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.isNavigationBarHidden = true
-        //Setting back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
+        navigationController?.isNavigationBarHidden = false
+        
+        navigationItem.title = "Рейтинг Поставщиков"
         
     }
     
