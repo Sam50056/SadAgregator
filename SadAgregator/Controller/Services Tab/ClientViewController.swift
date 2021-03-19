@@ -224,6 +224,18 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                 view.layoutIfNeeded()
             }
             
+        }else if section == 1{
+            
+            if infoItems[indexPath.row].isBalance{
+                
+                let paymentsHistoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentHistoryVC") as! PaymentHistoryViewController
+                
+                paymentsHistoryVC.thisClientId = thisClientId
+                
+                navigationController?.pushViewController(paymentsHistoryVC, animated: true)
+                
+            }
+            
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
