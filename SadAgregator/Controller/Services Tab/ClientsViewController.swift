@@ -370,7 +370,7 @@ extension ClientsViewController : PagingClientsDataManagerDelegate{
                 
                 clients += data["clients"].arrayValue
                 
-                tableView.reloadSections([3], with: .automatic)
+                tableView.reloadData()
                 
             }else{
                 print("Error with getting PagingClientsData , result : 0")
@@ -398,7 +398,7 @@ extension ClientsViewController : ClientsFilterDataManagerDelegate{
                 
                 clients += data["clients"].arrayValue
                 
-                tableView.reloadSections([3], with: .automatic)
+                tableView.reloadData()
                 
             }else{
                 print("Error with getting ClientsFilterData , result : 0")
