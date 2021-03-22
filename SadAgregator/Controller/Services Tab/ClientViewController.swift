@@ -307,7 +307,13 @@ extension ClientViewController{
                         intSumm = -intSumm
                     }
                     
-                    clientsChangeBalanceDataManager.getClientsChangeBalanceData(key: key, clientId: thisClientId!, summ: intSumm, comment: alertController.textFields![1].text ?? "")
+                    var comment = alertController.textFields![1].text ?? ""
+                    
+                    if comment.count > 200 {
+                        comment = String(comment.prefix(200))
+                    }
+                    
+                    clientsChangeBalanceDataManager.getClientsChangeBalanceData(key: key, clientId: thisClientId!, summ: intSumm, comment: comment)
                     
                 }
                 
