@@ -290,7 +290,7 @@ extension ClientViewController{
         
         alertController.addTextField { (textField) in
             
-            textField.placeholder = "Комментарий"
+            textField.placeholder = "Комментарий (необязат. поле)"
             
         }
         
@@ -303,12 +303,14 @@ extension ClientViewController{
                 
                 let secondAlertAction = UIAlertAction(title: "Да", style: .default) { (_) in
                     
+                    //If "-" was selected , it's not plus , so we make the value negative
                     if !isPlus{
                         intSumm = -intSumm
                     }
                     
                     var comment = alertController.textFields![1].text ?? ""
                     
+                    //Taking only first 200 characters from comment if it has more than 200 symbols
                     if comment.count > 200 {
                         comment = String(comment.prefix(200))
                     }
