@@ -3238,20 +3238,39 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ro-xF-foN">
-                                                    <rect key="frame" x="328" y="18.666666666666668" width="42" height="21.000000000000004"/>
+                                                    <rect key="frame" x="300.33333333333331" y="18.666666666666668" width="42" height="21.000000000000004"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="N41-j2-kbj">
+                                                    <rect key="frame" x="350.33333333333331" y="18" width="19.666666666666686" height="23.333333333333336"/>
+                                                    <color key="tintColor" systemColor="systemGrayColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="28.329999999999998" id="gyk-iz-WjS"/>
+                                                        <constraint firstAttribute="width" constant="19.670000000000002" id="irN-VU-cgi"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QR6-qD-9SW">
+                                                    <rect key="frame" x="345" y="14" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="7Qq-Zg-cMW"/>
+                                                        <constraint firstAttribute="height" constant="30" id="JvQ-M5-k4O"/>
+                                                    </constraints>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="N41-j2-kbj" secondAttribute="trailing" id="0r7-id-7hd"/>
                                                 <constraint firstAttribute="trailing" secondItem="Btn-GM-re9" secondAttribute="trailing" id="2GK-p3-dzf"/>
-                                                <constraint firstItem="1ro-xF-foN" firstAttribute="trailing" secondItem="Ntu-5C-s2M" secondAttribute="trailingMargin" id="34a-qb-5Iw"/>
+                                                <constraint firstItem="N41-j2-kbj" firstAttribute="centerY" secondItem="Ntu-5C-s2M" secondAttribute="centerY" id="EKx-u7-8nt"/>
                                                 <constraint firstAttribute="bottom" secondItem="Btn-GM-re9" secondAttribute="bottom" id="FwP-Sb-HDD"/>
                                                 <constraint firstItem="1ro-xF-foN" firstAttribute="centerY" secondItem="Ntu-5C-s2M" secondAttribute="centerY" id="Hel-VI-pST"/>
                                                 <constraint firstItem="TO1-Ir-QR7" firstAttribute="centerY" secondItem="Ntu-5C-s2M" secondAttribute="centerY" id="IgG-WS-NJg"/>
+                                                <constraint firstItem="N41-j2-kbj" firstAttribute="leading" secondItem="1ro-xF-foN" secondAttribute="trailing" constant="8" id="TMW-6G-Wx2"/>
                                                 <constraint firstItem="TO1-Ir-QR7" firstAttribute="leading" secondItem="Ntu-5C-s2M" secondAttribute="leadingMargin" id="U7F-86-xbv"/>
+                                                <constraint firstItem="QR6-qD-9SW" firstAttribute="centerX" secondItem="N41-j2-kbj" secondAttribute="centerX" id="VOX-dl-JiG"/>
                                                 <constraint firstItem="Btn-GM-re9" firstAttribute="leading" secondItem="Ntu-5C-s2M" secondAttribute="leadingMargin" id="WPt-Ia-rZT"/>
+                                                <constraint firstItem="QR6-qD-9SW" firstAttribute="centerY" secondItem="N41-j2-kbj" secondAttribute="centerY" id="mUa-Xp-975"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -4304,6 +4323,7 @@
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="person.fill.checkmark" catalog="system" width="128" height="88"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="photo.fill" catalog="system" width="128" height="93"/>

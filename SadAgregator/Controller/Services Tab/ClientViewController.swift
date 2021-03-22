@@ -57,6 +57,17 @@ class ClientViewController: UIViewController {
     
 }
 
+//MARK: - Refresh
+
+extension ClientViewController{
+    
+    func refreshClientData() {
+        infoItems.removeAll()
+        clientDataManager.getClientData(key: key, clientId: thisClientId!)
+    }
+    
+}
+
 //MARK: - Funtions
 
 extension ClientViewController{
@@ -68,17 +79,115 @@ extension ClientViewController{
             self.balance = Int(balance)!
         }
         
-        if let phone = clientHeaderData["phone"].string , phone != "" {
+        if let phone = clientHeaderData["phone"].string {
             infoItems.append(InfoItem(firstText: "Телефон", secondText: phone))
         }
         
-        if let vk = clientHeaderData["vk"].string , vk != "" {
+        if let vk = clientHeaderData["vk"].string {
             infoItems.append(InfoItem(firstText: "ВКонтакте", secondText: vk))
         }
         
-        if let ok = clientHeaderData["ok"].string , ok != "" {
+        if let ok = clientHeaderData["ok"].string {
             infoItems.append(InfoItem(firstText: "Одноклассники", secondText: ok))
         }
+        
+    }
+    
+    @IBAction func editButtonTappedForPhone(_ sender : UIButton){
+        
+        let alertController = UIAlertController(title: "Введите номер телефона", message: nil, preferredStyle: .alert)
+        
+        let alertAction = UIAlertAction(title: "Ок", style: .default) { [self] (_) in
+            
+            guard let value = alertController.textFields?[0].text else {return}
+            
+            updateClientInfoDataManager.getUpdateClientInfoData(key: key, clientId: thisClientId!, fieldId: "2", value: value)
+            
+        }
+        
+        alertController.addTextField { (textField) in
+            
+            textField.placeholder = "Номер телефона"
+            textField.keyboardType = .phonePad
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(alertAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func editButtonTappedForVK(_ sender : UIButton){
+        
+        let alertController = UIAlertController(title: "Введите ссылку на аккаунт ВК", message: nil, preferredStyle: .alert)
+        
+        let alertAction = UIAlertAction(title: "Ок", style: .default) { [self] (_) in
+            
+            guard let value = alertController.textFields?[0].text else {return}
+            
+            if let _ = URL(string: value) , value.contains("vk.com"){
+                updateClientInfoDataManager.getUpdateClientInfoData(key: key, clientId: thisClientId!, fieldId: "3", value: value)
+            }else{
+                showSimpleAlertWithOkButton(title: "Некорректная ссылка", message: "Повторите попытку")
+            }
+            
+        }
+        
+        alertController.addTextField { (textField) in
+            
+            textField.placeholder = "Ссылка"
+            textField.keyboardType = .URL
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(alertAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func editButtonTappedForOK(_ sender : UIButton){
+        
+        let alertController = UIAlertController(title: "Введите ссылку на аккаунт ОК", message: nil, preferredStyle: .alert)
+        
+        let alertAction = UIAlertAction(title: "Ок", style: .default) { [self] (_) in
+            
+            guard let value = alertController.textFields?[0].text else {return}
+            
+            if let _ = URL(string: value) , value.contains("ok.ru"){
+                updateClientInfoDataManager.getUpdateClientInfoData(key: key, clientId: thisClientId!, fieldId: "4", value: value)
+            }else{
+                showSimpleAlertWithOkButton(title: "Некорректная ссылка", message: "Повторите попытку")
+            }
+            
+        }
+        
+        alertController.addTextField { (textField) in
+            
+            textField.placeholder = "Ссылка"
+            textField.keyboardType = .URL
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(alertAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
         
     }
     
@@ -173,11 +282,21 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
             cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
             
             if let firstLabel = cell.viewWithTag(1) as? UILabel ,
-               let secondLabel = cell.viewWithTag(2) as? UILabel{
+               let secondLabel = cell.viewWithTag(2) as? UILabel,
+               let editButton = cell.viewWithTag(3) as? UIButton{
                 
                 firstLabel.text = item.firstText
                 
                 secondLabel.text = item.secondText
+                
+                if item.firstText == "Телефон"{
+                    editButton.addTarget(self, action: #selector(editButtonTappedForPhone(_:)), for: .touchUpInside)
+                }else if item.firstText == "ВКонтакте"{
+                    editButton.addTarget(self, action: #selector(editButtonTappedForVK(_:)), for: .touchUpInside)
+                }else if item.firstText == "Одноклассники"{
+                    editButton.addTarget(self, action: #selector(editButtonTappedForOK(_:)), for: .touchUpInside)
+                }
+                
             }
             
         case 2:
@@ -187,6 +306,8 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
             if let commentTextField = cell.viewWithTag(1) as? UITextField{
                 
                 commentTextField.delegate = self
+                
+                commentTextField.text = clientData?["client_header"]["comment"].string ?? ""
                 
             }
             
@@ -399,9 +520,18 @@ extension ClientViewController : UpdateClientInfoDataManagerDelegate{
     
     func didGetUpdateClientInfoData(data: JSON) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async {[self] in
             
-            print("Successfully sent : UpdateClientInfoDataManager request")
+            
+            if data["result"].intValue == 1{
+                
+                refreshClientData()
+                
+                print("Successfully sent : UpdateClientInfoDataManager request")
+                
+            }else{
+                
+            }
             
         }
         
@@ -425,8 +555,7 @@ extension ClientViewController : ClientsChangeBalanceDataManagerDelegate{
                 
                 print("ChangeBalanceData request sent")
                 
-                infoItems.removeAll()
-                clientDataManager.getClientData(key: key, clientId: thisClientId!)
+                refreshClientData()
                 
             }else{
                 print("ChangeBalanceData NOT request sent")
