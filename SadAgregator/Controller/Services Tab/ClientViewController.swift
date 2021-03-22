@@ -349,13 +349,33 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
             
         }else if section == 1{
             
-            if infoItems[indexPath.row].isBalance{
+            let item = infoItems[indexPath.row]
+            
+            if item.isBalance{
                 
                 let paymentsHistoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentHistoryVC") as! PaymentHistoryViewController
                 
                 paymentsHistoryVC.thisClientId = thisClientId
                 
                 navigationController?.pushViewController(paymentsHistoryVC, animated: true)
+                
+            }else if item.firstText == "Телефон"{
+                
+                if let url = URL(string: "tel://\(item.secondText)") {
+                    
+                    UIApplication.shared.open(url ,  options: [:], completionHandler: nil)
+                    
+                }
+                
+            }else{
+                
+                let urlString = item.secondText
+                
+                if let url = URL(string: urlString){
+                    
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    
+                }
                 
             }
             
