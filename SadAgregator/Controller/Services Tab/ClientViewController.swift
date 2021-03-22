@@ -24,6 +24,7 @@ class ClientViewController: UIViewController {
     private var clientDataManager = ClientDataManager()
     
     private var updateClientInfoDataManager = UpdateClientInfoDataManager()
+    private var clientsChangeBalanceDataManager = ClientsChangeBalanceDataManager()
     
     private var clientData : JSON?
     
@@ -39,6 +40,7 @@ class ClientViewController: UIViewController {
         
         clientDataManager.delegate = self
         updateClientInfoDataManager.delegate = self
+        clientsChangeBalanceDataManager.delegate = self
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -295,13 +297,17 @@ extension ClientViewController{
         let action = UIAlertAction(title: "Ок", style: .default) { [self] (_) in
             
             if let summ = alertController.textFields?.first?.text ,
-               let intSumm = Int(summ){
+               var intSumm = Int(summ){
                 
                 let secondAlertController = UIAlertController(title: isPlus ? "Начисление" : "Списание", message: "\(isPlus ? "Начислить" : "Списать") \(intSumm) руб?", preferredStyle: .alert)
                 
                 let secondAlertAction = UIAlertAction(title: "Да", style: .default) { (_) in
                     
+                    if !isPlus{
+                        intSumm = -intSumm
+                    }
                     
+                    clientsChangeBalanceDataManager.getClientsChangeBalanceData(key: key, clientId: thisClientId!, summ: intSumm, comment: alertController.textFields![1].text ?? "")
                     
                 }
                 
@@ -395,6 +401,35 @@ extension ClientViewController : UpdateClientInfoDataManagerDelegate{
     
     func didFailGettingUpdateClientInfoDataWithError(error: String) {
         print("Error with UpdateClientInfoDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - ClientsChangeBalanceDataManagerDelegate
+
+extension ClientViewController : ClientsChangeBalanceDataManagerDelegate{
+    
+    func didGetClientsChangeBalanceData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                print("ChangeBalanceData request sent")
+                
+                infoItems.removeAll()
+                clientDataManager.getClientData(key: key, clientId: thisClientId!)
+                
+            }else{
+                print("ChangeBalanceData NOT request sent")
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingClientsChangeBalanceDataWithError(error: String) {
+        print("Error with ClientsChangeBalanceDataManager : \(error)")
     }
     
 }

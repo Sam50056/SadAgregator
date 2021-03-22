@@ -59,6 +59,7 @@
 		224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC44925A013C3003F147F /* AuthSocialDataManager.swift */; };
 		224BC44D25A0C529003F147F /* AddPointRequestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */; };
 		224EFC3125A9D209007CA45E /* SendQuestionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224EFC3025A9D209007CA45E /* SendQuestionDataManager.swift */; };
+		224FE2A62608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2A52608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift */; };
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		22582C7525D1C1DC005E341C /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7425D1C1DB005E341C /* SignInWithApple.swift */; };
@@ -244,6 +245,7 @@
 		224BC44925A013C3003F147F /* AuthSocialDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSocialDataManager.swift; sourceTree = "<group>"; };
 		224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointRequestDataManager.swift; sourceTree = "<group>"; };
 		224EFC3025A9D209007CA45E /* SendQuestionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendQuestionDataManager.swift; sourceTree = "<group>"; };
+		224FE2A52608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsChangeBalanceDataManager.swift; sourceTree = "<group>"; };
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		22582C7425D1C1DB005E341C /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 				22DC987026028ADB0016A31B /* Payment */,
 				225C6CAC25FCBF5700CC621E /* ClientDataManager.swift */,
 				22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */,
+				224FE2A52608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -1303,6 +1306,7 @@
 				22A49CBB2566650600CCC781 /* SizeCollectionViewCell.swift in Sources */,
 				2201672325A73FEA0072BFE7 /* GetPointActionsDataManager.swift in Sources */,
 				228D2D3725ABE1D5000E9FAE /* DelDeviceDataManager.swift in Sources */,
+				224FE2A62608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift in Sources */,
 				22A155E42583E11C000EAB64 /* Constants.swift in Sources */,
 				2290486B256E4978000B7A28 /* PopTableViewCell.swift in Sources */,
 				2290485C256DAC80000B7A28 /* VendTableViewCell.swift in Sources */,
