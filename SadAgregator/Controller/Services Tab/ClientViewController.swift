@@ -158,7 +158,7 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                     
                     stepper.stepValue = 1
                     
-                    stepper.value = Double(balance ?? 0)
+                    stepper.value = 0
                     
                     stepper.addTarget(self, action: #selector(stepperPressed(_:)), for: .valueChanged)
                     
@@ -253,11 +253,79 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
     
     @IBAction func stepperPressed(_ sender : UIStepper){
         
-        guard balance != nil else {return}
-        
-        balance = Int(sender.value)
+        if sender.value > 0 {
+            
+            showBalanceChangingAlert(isPlus: true)
+            
+        }else{
+            
+            showBalanceChangingAlert(isPlus: false)
+            
+        }
         
         balanceLabel?.text = "\(balance!)"
+        
+        sender.value = 0
+        
+    }
+    
+}
+
+//MARK: - Alerts
+
+extension ClientViewController{
+    
+    func showBalanceChangingAlert(isPlus : Bool){
+        
+        let alertController = UIAlertController(title: (isPlus ? "Начисление" : "Списание"), message: "Введите сумму \(isPlus ? "начисления" : "списания")", preferredStyle: .alert)
+        
+        alertController.addTextField { (textField) in
+            
+            textField.placeholder = "Сумма (руб)"
+            textField.keyboardType = .numberPad
+            
+        }
+        
+        alertController.addTextField { (textField) in
+            
+            textField.placeholder = "Комментарий"
+            
+        }
+        
+        let action = UIAlertAction(title: "Ок", style: .default) { [self] (_) in
+            
+            if let summ = alertController.textFields?.first?.text ,
+               let intSumm = Int(summ){
+                
+                let secondAlertController = UIAlertController(title: isPlus ? "Начисление" : "Списание", message: "\(isPlus ? "Начислить" : "Списать") \(intSumm) руб?", preferredStyle: .alert)
+                
+                let secondAlertAction = UIAlertAction(title: "Да", style: .default) { (_) in
+                    
+                    
+                    
+                }
+                
+                let secondAlertCancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in
+                    secondAlertController.dismiss(animated: true, completion: nil)
+                }
+                
+                secondAlertController.addAction(secondAlertAction)
+                secondAlertController.addAction(secondAlertCancelAction)
+                
+                present(secondAlertController, animated: true, completion: nil)
+                
+            }
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: { _ in
+            alertController.dismiss(animated: true, completion: nil)
+        })
+        
+        alertController.addAction(action)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
         
     }
     
