@@ -60,6 +60,8 @@
 		224BC44D25A0C529003F147F /* AddPointRequestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */; };
 		224EFC3125A9D209007CA45E /* SendQuestionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224EFC3025A9D209007CA45E /* SendQuestionDataManager.swift */; };
 		224FE2A62608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2A52608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift */; };
+		224FE2A926095FF400AE13B2 /* CreateClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */; };
+		224FE2AC2609644600AE13B2 /* CreateNewClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2AB2609644600AE13B2 /* CreateNewClientDataManager.swift */; };
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		22582C7525D1C1DC005E341C /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7425D1C1DB005E341C /* SignInWithApple.swift */; };
@@ -246,6 +248,8 @@
 		224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointRequestDataManager.swift; sourceTree = "<group>"; };
 		224EFC3025A9D209007CA45E /* SendQuestionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendQuestionDataManager.swift; sourceTree = "<group>"; };
 		224FE2A52608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsChangeBalanceDataManager.swift; sourceTree = "<group>"; };
+		224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClientViewController.swift; sourceTree = "<group>"; };
+		224FE2AB2609644600AE13B2 /* CreateNewClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewClientDataManager.swift; sourceTree = "<group>"; };
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		22582C7425D1C1DB005E341C /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
@@ -480,6 +484,7 @@
 				22C549A125F41C99008D941B /* PagingClientsDataManager.swift */,
 				22B8E49125FCF49E002DDB73 /* FormDataManager.swift */,
 				22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */,
+				224FE2AB2609644600AE13B2 /* CreateNewClientDataManager.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -1126,6 +1131,7 @@
 				22D604D425F1784100102CB6 /* ClientsViewController.swift */,
 				2237E77F25FBD15F00EBD919 /* ClientViewController.swift */,
 				22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */,
+				224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */,
 			);
 			path = "Services Tab";
 			sourceTree = "<group>";
@@ -1327,6 +1333,7 @@
 				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
 				2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */,
 				22B8E49225FCF49E002DDB73 /* FormDataManager.swift in Sources */,
+				224FE2A926095FF400AE13B2 /* CreateClientViewController.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
 				22B6BCAB25DEDA6A00EAE067 /* AllCategoriesViewController.swift in Sources */,
 				2200943925DACBE90001F7B3 /* CategoryViewController.swift in Sources */,
@@ -1386,6 +1393,7 @@
 				227828EE258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift in Sources */,
 				2200943D25DB26D00001F7B3 /* GetCatpageDataManager.swift in Sources */,
 				22A155E92584E43C000EAB64 /* AuthDataManager.swift in Sources */,
+				224FE2AC2609644600AE13B2 /* CreateNewClientDataManager.swift in Sources */,
 				22BF19FB25A4DA9300567DB7 /* ActivityLinesTableViewController.swift in Sources */,
 				22943FE925ABDB1A00A742B8 /* PostRedirectDataManager.swift in Sources */,
 				22D663D125823D9E0058B5CC /* LoginView.swift in Sources */,

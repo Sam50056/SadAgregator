@@ -79,7 +79,21 @@ class ClientsViewController: UIViewController {
         
         navigationItem.title = "Клиенты"
         
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil) , UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: nil)]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusBarButtonPressed(_:))) , UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: nil)]
+        
+    }
+    
+}
+
+//MARK: - Actions
+
+extension ClientsViewController {
+    
+    @IBAction func plusBarButtonPressed(_ sender : UIBarButtonItem){
+        
+        let createClientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateClientVC") as! CreateClientViewController
+        
+        navigationController?.pushViewController(createClientVC, animated: true)
         
     }
     
