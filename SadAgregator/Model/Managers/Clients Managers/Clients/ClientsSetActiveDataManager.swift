@@ -8,16 +8,9 @@
 import Foundation
 import SwiftyJSON
 
-protocol ClientsSetActiveDataManagerDelegate {
-    func didGetClientsSetActiveData(data : JSON)
-    func didFailGettingClientsSetActiveDataWithError(error : String)
-}
-
 struct ClientsSetActiveDataManager {
     
-    var delegate : ClientsSetActiveDataManagerDelegate?
-    
-    func getClientsSetActiveData(key : String , clientId id : String , state : Int){
+    func getClientsSetActiveData(key : String , clientId id : String , state : Int , completionHandler: @escaping (JSON?, String?) -> Void){
         
         let urlString = "https://agrapi.tk-sad.ru/agr_clients.SetActive?AKey=\(key)&AClientID=\(id)&AState=\(state)"
         
@@ -30,17 +23,17 @@ struct ClientsSetActiveDataManager {
             //            print(String(data: data!, encoding: String.Encoding.windowsCP1251)!)
             
             if error != nil {
-                delegate?.didFailGettingClientsSetActiveDataWithError(error: error!.localizedDescription)
+                completionHandler(nil , error?.localizedDescription)
                 return
             }
             
-            guard let data = data else {delegate?.didFailGettingClientsSetActiveDataWithError(error: "Data is empty");  return}
+            guard let data = data else {completionHandler(nil ,"Data is empty");  return}
             
             let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
             
             let jsonAnswer = JSON(parseJSON: json)
             
-            delegate?.didGetClientsSetActiveData(data: jsonAnswer)
+            completionHandler(jsonAnswer , nil)
             
         }
         

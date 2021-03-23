@@ -72,7 +72,6 @@ class ClientsViewController: UIViewController {
         
         pagingClientsDataManager.delegate = self
         clientsFilterDataManager.delegate = self
-        clientsSetActiveDataManager.delegate = self
         
         FormDataManager(delegate: self).getFormData(key: key)
         
@@ -273,9 +272,27 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             
             let action = UIContextualAction(style: .normal, title: (isActive ? "Не активен" : "Активен")) { [self] (action, view, completion) in
                 
-                clientsSetActiveDataManager.getClientsSetActiveData(key: key, clientId: client["client_id"].stringValue, state: isActive ? 0 : 1)
-                
-                //                clients[indexPath.row]["active"].stringValue = isActive ? "0" : "1"
+                clientsSetActiveDataManager.getClientsSetActiveData(key: key, clientId: client["client_id"].stringValue, state: isActive ? 0 : 1) { data , error in
+                    
+                    DispatchQueue.main.async { [self] in
+                        
+                        
+                        if error != nil , data == nil {
+                            print("Error with ToExpQueueDataManager : \(error!)")
+                            return
+                        }
+                        
+                        if data!["result"].intValue == 1{
+                            
+                            clients[indexPath.row]["active"].stringValue = isActive ? "0" : "1"
+                            
+                            tableView.reloadRows(at: [indexPath], with: .automatic)
+                            
+                        }
+                        
+                    }
+                    
+                }
                 
                 completion(true)
                 
@@ -472,24 +489,4 @@ extension ClientsViewController : ClientsFilterDataManagerDelegate{
         print("Error with ClientsFilterDataManager : \(error)")
     }
         
-}
-
-extension ClientsViewController : ClientsSetActiveDataManagerDelegate{
-    
-    func didGetClientsSetActiveData(data: JSON) {
-        
-        DispatchQueue.main.async{
-            
-            if data["result"].intValue == 1{
-                print("clientsSetActiveDataManager request sent")
-            }
-            
-        }
-        
-    }
-    
-    func didFailGettingClientsSetActiveDataWithError(error: String) {
-        print("Error with clientsSetActiveDataManager : \(error)")
-    }
-    
 }
