@@ -16,20 +16,47 @@ class ClientTableViewCell: UITableViewCell {
     
     var bgColor : UIColor?
     
-    var client : JSON?{
+    var clientName : String?{
+        didSet{
+            tableView.reloadData()
+        }
+    }
+    var clientBalance : String?{
         didSet{
             
-            if client?["balance"].stringValue != "" /*, client?["balance"].stringValue != "0"*/{
-                
-                tableViewItems.append(TableViewItem(firstText: "Баланс", secondText: (client?["balance"].stringValue)! + " руб"))
-                
+            var newItemsArray = [TableViewItem]()
+            
+            if clientBalance != nil , clientBalance != "" {
+                newItemsArray.append(TableViewItem(firstText: "Баланс", secondText: clientBalance ?? ""))
             }
             
-            if client?["in_process"].stringValue != "" , client?["in_process"].stringValue != "0"{
-                
-                tableViewItems.append(TableViewItem(firstText: "В закупке", secondText: (client?["in_process"].stringValue)!))
-                
+            if clientInProcess != nil, clientInProcess != "" , clientInProcess != "0"{
+                newItemsArray.append(TableViewItem(firstText: "В закупке", secondText: clientInProcess!))
             }
+            
+            tableViewItems = newItemsArray
+            
+            tableView.reloadData()
+            
+        }
+    }
+    
+    var clientInProcess : String?{
+        didSet{
+            
+            var newItemsArray = [TableViewItem]()
+            
+            if clientBalance != nil , clientBalance != "" {
+                newItemsArray.append(TableViewItem(firstText: "Баланс", secondText: clientBalance ?? ""))
+            }
+            
+            if clientInProcess != nil, clientInProcess != "" , clientInProcess != "0"{
+                newItemsArray.append(TableViewItem(firstText: "В закупке", secondText: clientInProcess!))
+            }
+            
+            tableViewItems = newItemsArray
+            
+            tableView.reloadData()
             
         }
     }
@@ -81,7 +108,7 @@ extension ClientTableViewCell : UITableViewDelegate , UITableViewDataSource{
         
         if indexPath.section == 0{
             
-            cell.textLabel?.text = client?["name"].stringValue
+            cell.textLabel?.text = clientName ?? ""
             
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
             

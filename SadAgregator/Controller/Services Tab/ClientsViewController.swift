@@ -42,6 +42,7 @@ class ClientsViewController: UIViewController {
     
     private var debetors : Bool = false {
         didSet{
+            clients.removeAll()
             clientsFilterDataManager.getClientsFIlterData(key: key , query: searchText , debotors: debetors ? 1 : 0 , page : page)
         }
     }
@@ -239,7 +240,9 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "clientCell", for: indexPath) as! ClientTableViewCell
             
-            (cell  as! ClientTableViewCell).client = client
+            (cell as! ClientTableViewCell).clientBalance = client["balance"].stringValue
+            (cell as! ClientTableViewCell).clientInProcess = client["in_process"].stringValue
+            (cell as! ClientTableViewCell).clientName = client["name"].stringValue
             
             if client["active"].stringValue == "1"{
                 (cell  as! ClientTableViewCell).bgColor = UIColor(named: "whiteblack")
@@ -425,7 +428,7 @@ extension ClientsViewController : PagingClientsDataManagerDelegate{
             
             if data["result"].intValue == 1{
                 
-                clients += data["clients"].arrayValue
+                clients.append(contentsOf: data["clients"].arrayValue)
                 
                 tableView.reloadData()
                 
@@ -453,7 +456,7 @@ extension ClientsViewController : ClientsFilterDataManagerDelegate{
             
             if data["result"].intValue == 1{
                 
-                clients += data["clients"].arrayValue
+                clients.append(contentsOf: data["clients"].arrayValue)
                 
                 tableView.reloadData()
                 
