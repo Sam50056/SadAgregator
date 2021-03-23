@@ -27,6 +27,8 @@ class ClientsViewController: UIViewController {
     private var pagingClientsDataManager = PagingClientsDataManager()
     private var clientsFilterDataManager = ClientsFilterDataManager()
     
+    private var clientsSetActiveDataManager = ClientsSetActiveDataManager()
+    
     private var page = 1
     private var rowForPaggingUpdate : Int = 15
     
@@ -69,6 +71,7 @@ class ClientsViewController: UIViewController {
         
         pagingClientsDataManager.delegate = self
         clientsFilterDataManager.delegate = self
+        clientsSetActiveDataManager.delegate = self
         
         FormDataManager(delegate: self).getFormData(key: key)
         
@@ -242,6 +245,32 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
         }
         
         return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        if indexPath.section == 3{
+            
+            let client = clients[indexPath.row]
+            
+            let isActive = client["active"].stringValue == "1" ? true : false
+            
+            let action = UIContextualAction(style: .normal, title: (isActive ? "Не активен" : "Активен")) { [self] (action, view, completion) in
+                
+                clientsSetActiveDataManager.getClientsSetActiveData(key: key, clientId: client["client_id"].stringValue, state: isActive ? 0 : 1)
+                
+                completion(true)
+                
+            }
+            
+            action.backgroundColor = isActive ? .gray : .systemGreen
+            
+            return UISwipeActionsConfiguration(actions: [action])
+            
+        }
+        
+        return nil
         
     }
     
@@ -426,4 +455,24 @@ extension ClientsViewController : ClientsFilterDataManagerDelegate{
         print("Error with ClientsFilterDataManager : \(error)")
     }
         
+}
+
+extension ClientsViewController : ClientsSetActiveDataManagerDelegate{
+    
+    func didGetClientsSetActiveData(data: JSON) {
+        
+        DispatchQueue.main.async{
+            
+            if data["result"].intValue == 1{
+                print("clientsSetActiveDataManager request sent")
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingClientsSetActiveDataWithError(error: String) {
+        print("Error with clientsSetActiveDataManager : \(error)")
+    }
+    
 }

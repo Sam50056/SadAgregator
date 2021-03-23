@@ -19,9 +19,9 @@ class CreateClientViewController: UIViewController {
     
     @IBOutlet weak var doneButton : UIButton!
     
-    let realm = try! Realm()
+    private let realm = try! Realm()
     
-    var key = ""
+    private var key = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -62,6 +62,7 @@
 		224FE2A62608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2A52608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift */; };
 		224FE2A926095FF400AE13B2 /* CreateClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */; };
 		224FE2AC2609644600AE13B2 /* CreateNewClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2AB2609644600AE13B2 /* CreateNewClientDataManager.swift */; };
+		224FE2AF2609738900AE13B2 /* ClientsSetActiveDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2AE2609738900AE13B2 /* ClientsSetActiveDataManager.swift */; };
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		22582C7525D1C1DC005E341C /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7425D1C1DB005E341C /* SignInWithApple.swift */; };
@@ -250,6 +251,7 @@
 		224FE2A52608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsChangeBalanceDataManager.swift; sourceTree = "<group>"; };
 		224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClientViewController.swift; sourceTree = "<group>"; };
 		224FE2AB2609644600AE13B2 /* CreateNewClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewClientDataManager.swift; sourceTree = "<group>"; };
+		224FE2AE2609738900AE13B2 /* ClientsSetActiveDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsSetActiveDataManager.swift; sourceTree = "<group>"; };
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		22582C7425D1C1DB005E341C /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 				22B8E49125FCF49E002DDB73 /* FormDataManager.swift */,
 				22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */,
 				224FE2AB2609644600AE13B2 /* CreateNewClientDataManager.swift */,
+				224FE2AE2609738900AE13B2 /* ClientsSetActiveDataManager.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -1368,6 +1371,7 @@
 				2203F15C25BF243A007DBFFD /* EmptyTableViewCell.swift in Sources */,
 				2245820325A9FB16008882A9 /* HelpView.swift in Sources */,
 				22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */,
+				224FE2AF2609738900AE13B2 /* ClientsSetActiveDataManager.swift in Sources */,
 				22D9021D259AA935009732CC /* AddOrDeleteListWorkExtDataManager.swift in Sources */,
 				22B7270F2573189E00B56249 /* MainPaggingDataManager.swift in Sources */,
 				2200943025D837530001F7B3 /* CategoryCollectionViewCell.swift in Sources */,
