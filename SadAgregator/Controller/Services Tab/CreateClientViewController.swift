@@ -15,6 +15,7 @@ class CreateClientViewController: UIViewController {
     @IBOutlet weak var phoneTextField : UITextField!
     @IBOutlet weak var vkTextField : UITextField!
     @IBOutlet weak var okTextField : UITextField!
+    @IBOutlet weak var balanceTextField : UITextField!
     
     @IBOutlet weak var doneButton : UIButton!
     
@@ -46,14 +47,10 @@ class CreateClientViewController: UIViewController {
             
             if let _ = URL(string: vkTextFieldText) , vkTextFieldText.contains("vk.com"){
                 vkValue = vkTextFieldText
-            }else{
-                showSimpleAlertWithOkButton(title: "Некорректная ссылка ВК", message: "Повторите попытку")
             }
             
             if let _ = URL(string: okTextFieldText) , okTextFieldText.contains("ok.ru"){
                 okValue = okTextFieldText
-            }else{
-                showSimpleAlertWithOkButton(title: "Некорректная ссылка ОК", message: "Повторите попытку")
             }
             
             CreateNewClientDataManager(delegate: self).getCreateNewClientData(key: key, name: nameValue, phone: phoneTextField.text ?? "", vk: vkValue, ok: okValue)
@@ -78,7 +75,17 @@ extension CreateClientViewController : CreateNewClientDataManagerDelegate{
             
             if data["result"].intValue == 1{
                 
-                navigationController?.popViewController(animated: true)
+                let clientId = data["client_id"].stringValue
+                
+                if let balanceValue = balanceTextField.text , balanceValue.replacingOccurrences(of: " ", with: "") != "" , let balanceIntValue = Int(balanceValue){
+                    
+                    ClientsChangeBalanceDataManager(delegate: self).getClientsChangeBalanceData(key: key, clientId: clientId, summ: balanceIntValue, comment: "")
+                    
+                }else{
+                    
+                    navigationController?.popViewController(animated: true)
+                    
+                }
                 
             }else{
                 
@@ -92,6 +99,30 @@ extension CreateClientViewController : CreateNewClientDataManagerDelegate{
     
     func didFailGettingCreateNewClientDataWithError(error: String) {
         print("Error with CreateNewClientDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - ClientsChangeBalanceDataManagerDelegate
+
+extension CreateClientViewController : ClientsChangeBalanceDataManagerDelegate{
+    
+    func didGetClientsChangeBalanceData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                navigationController?.popViewController(animated: true)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingClientsChangeBalanceDataWithError(error: String) {
+        print("Error with ClientsChangeBalanceDataManager : \(error)")
     }
     
 }
