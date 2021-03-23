@@ -14,6 +14,8 @@ class ClientTableViewCell: UITableViewCell {
     
     private var tableViewItems = [TableViewItem]()
     
+    var bgColor : UIColor?
+    
     var client : JSON?{
         didSet{
             
@@ -74,6 +76,9 @@ extension ClientTableViewCell : UITableViewDelegate , UITableViewDataSource{
         
         var cell = UITableViewCell()
         
+        //Setting bg color
+        cell.backgroundColor = bgColor
+        
         if indexPath.section == 0{
             
             cell.textLabel?.text = client?["name"].stringValue
@@ -83,6 +88,9 @@ extension ClientTableViewCell : UITableViewDelegate , UITableViewDataSource{
         }else{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ClientTableViewCellTableViewCell
+            
+            //Setting bgColor
+            (cell as! ClientTableViewCellTableViewCell).backgroundColor = bgColor
             
             let item = tableViewItems[indexPath.row]
             

@@ -235,10 +235,22 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             
             guard !clients.isEmpty else {return cell}
             
+            let client = clients[indexPath.row]
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "clientCell", for: indexPath) as! ClientTableViewCell
             
-            (cell  as! ClientTableViewCell).client = clients[indexPath.row]
+            (cell  as! ClientTableViewCell).client = client
             
+            if client["active"].stringValue == "1"{
+                (cell  as! ClientTableViewCell).bgColor = UIColor(named: "whiteblack")
+                (cell  as! ClientTableViewCell).tableView.reloadData()
+                (cell  as! ClientTableViewCell).tableView.backgroundColor = UIColor(named: "whiteblack")
+            }else{
+                (cell  as! ClientTableViewCell).bgColor = .systemGray5
+                (cell  as! ClientTableViewCell).tableView.reloadData()
+                (cell  as! ClientTableViewCell).tableView.backgroundColor = .systemGray5
+            }
+                
         default:
             return cell
             
@@ -259,6 +271,8 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             let action = UIContextualAction(style: .normal, title: (isActive ? "Не активен" : "Активен")) { [self] (action, view, completion) in
                 
                 clientsSetActiveDataManager.getClientsSetActiveData(key: key, clientId: client["client_id"].stringValue, state: isActive ? 0 : 1)
+                
+                //                clients[indexPath.row]["active"].stringValue = isActive ? "0" : "1"
                 
                 completion(true)
                 
