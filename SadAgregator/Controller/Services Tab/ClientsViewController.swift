@@ -96,6 +96,8 @@ extension ClientsViewController {
         
         let createClientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateClientVC") as! CreateClientViewController
         
+        createClientVC.delegate = self
+        
         navigationController?.pushViewController(createClientVC, animated: true)
         
     }
@@ -121,6 +123,17 @@ extension ClientsViewController{
         }
         
     }
+    
+    func goToClientVCWith(_ id : String?){
+        
+        let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
+        
+        clientVC.thisClientId = id
+        
+        self.navigationController?.pushViewController(clientVC, animated: true)
+        
+    }
+    
     
 }
 
@@ -252,7 +265,7 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
                 (cell  as! ClientTableViewCell).tableView.reloadData()
                 (cell  as! ClientTableViewCell).tableView.backgroundColor = .systemGray5
             }
-                
+            
         default:
             return cell
             
@@ -341,11 +354,7 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             
         }else if section == 3{
             
-            let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
-            
-            clientVC.thisClientId = clients[indexPath.row]["client_id"].string
-            
-            self.navigationController?.pushViewController(clientVC, animated: true)
+            goToClientVCWith(clients[indexPath.row]["client_id"].string)
             
         }
         
@@ -488,5 +497,34 @@ extension ClientsViewController : ClientsFilterDataManagerDelegate{
     func didFailGettingClientsFIlterDataWithError(error: String) {
         print("Error with ClientsFilterDataManager : \(error)")
     }
+    
+}
+
+//MARK: - CreateClientViewControllerDelegate
+
+extension ClientsViewController : CreateClientViewControllerDelegate{
+    
+    func didCloseVC(didCreateUser: Bool, clientId: String?) {
         
+        if didCreateUser{
+            
+            let alertController = UIAlertController(title: "Клиент создан!", message: nil, preferredStyle: .alert)
+            
+            let doneAction = UIAlertAction(title: "Готово", style: .cancel) { (_) in
+                alertController.dismiss(animated: true, completion: nil)
+            }
+            
+            let openAction = UIAlertAction(title: "Открыть", style: .default) { [self] (_) in
+                goToClientVCWith(clientId)
+            }
+            
+            alertController.addAction(doneAction)
+            alertController.addAction(openAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
 }

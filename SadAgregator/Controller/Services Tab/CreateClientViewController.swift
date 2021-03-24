@@ -23,6 +23,10 @@ class CreateClientViewController: UIViewController {
     
     private var key = ""
     
+    private var newClientId : String?
+    
+    var delegate : CreateClientViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,6 +81,8 @@ extension CreateClientViewController : CreateNewClientDataManagerDelegate{
                 
                 let clientId = data["client_id"].stringValue
                 
+                newClientId = clientId
+                
                 if let balanceValue = balanceTextField.text , balanceValue.replacingOccurrences(of: " ", with: "") != "" , let balanceIntValue = Int(balanceValue){
                     
                     ClientsChangeBalanceDataManager(delegate: self).getClientsChangeBalanceData(key: key, clientId: clientId, summ: balanceIntValue, comment: "")
@@ -84,6 +90,7 @@ extension CreateClientViewController : CreateNewClientDataManagerDelegate{
                 }else{
                     
                     navigationController?.popViewController(animated: true)
+                    delegate?.didCloseVC(didCreateUser: true, clientId: newClientId)
                     
                 }
                 
@@ -114,6 +121,7 @@ extension CreateClientViewController : ClientsChangeBalanceDataManagerDelegate{
             if data["result"].intValue == 1{
                 
                 navigationController?.popViewController(animated: true)
+                delegate?.didCloseVC(didCreateUser: true, clientId: newClientId)
                 
             }
             
@@ -141,4 +149,8 @@ extension CreateClientViewController {
         
     }
     
+}
+
+protocol CreateClientViewControllerDelegate {
+    func didCloseVC(didCreateUser : Bool , clientId : String?)
 }
