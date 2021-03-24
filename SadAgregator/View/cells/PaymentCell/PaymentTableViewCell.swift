@@ -17,7 +17,7 @@ class PaymentTableViewCell: UITableViewCell {
             
             if let sum = payment?["summ"].string , sum != "" {
                 
-                tableViewItems.append(TableViewItem(firstText: "Сумма", secondText: sum))
+                tableViewItems.append(TableViewItem(firstText: "Сумма", secondText: sum + " руб"))
                 
             }
             

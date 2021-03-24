@@ -115,11 +115,11 @@ extension ClientsViewController{
         }
         
         if let balancesStat = stat["balances"].string , balancesStat != "" {
-            stats.append(StatItem(firstText: "Баланс", secondText: balancesStat))
+            stats.append(StatItem(firstText: "Баланс", secondText: balancesStat + " руб"))
         }
         
         if let debetsStat = stat["debets"].string , debetsStat != "" {
-            stats.append(StatItem(firstText: "Задолженность", secondText: debetsStat))
+            stats.append(StatItem(firstText: "Задолженность", secondText: debetsStat + " руб"))
         }
         
     }
