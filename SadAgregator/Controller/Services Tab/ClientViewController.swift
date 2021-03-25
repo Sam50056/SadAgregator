@@ -75,7 +75,7 @@ extension ClientViewController{
     func makeInfoItemsFrom(_ clientHeaderData : JSON){
         
         if let balance = clientHeaderData["balance"].string , balance != "" {
-            infoItems.append(InfoItem(firstText: "Баланс", secondText: balance, isBalance: true))
+            infoItems.append(InfoItem(firstText: "Баланс", secondText: balance + " руб", isBalance: true))
             self.balance = Int(balance)!
         }
         
