@@ -145,6 +145,8 @@ extension ClientsViewController : UISearchResultsUpdating{
         
         if let searchText = searchController.searchBar.text , searchText != "" {
             
+            clients.removeAll()
+            
             clientsFilterDataManager.getClientsFIlterData(key: key , query: searchText)
             
         }else{
