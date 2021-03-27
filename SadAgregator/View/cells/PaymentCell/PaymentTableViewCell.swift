@@ -12,15 +12,45 @@ class PaymentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var tableView : UITableView!
     
-    var payment : JSON?{
+    var summ : String? {
         didSet{
             
-            if let sum = payment?["summ"].string , sum != "" {
+            if summ != nil , summ != "" {
                 
-                tableViewItems.append(TableViewItem(firstText: "Сумма", secondText: sum + " руб"))
+                var newItemsArray = [TableViewItem]()
+                
+                newItemsArray.append(TableViewItem(firstText: "Сумма", secondText: summ! + " руб"))
+                
+                tableViewItems = newItemsArray
+                
+                tableView.reloadData()
                 
             }
             
+        }
+    }
+    
+    var clientName : String? {
+        didSet{
+            tableView.reloadData()
+        }
+    }
+    
+    var comment : String? {
+        didSet{
+            tableView.reloadData()
+        }
+    }
+    
+    var pid : String?{
+        didSet{
+            tableView.reloadData()
+        }
+    }
+    
+    var dt : String?{
+        didSet{
+            tableView.reloadData()
         }
     }
     
@@ -53,21 +83,19 @@ class PaymentTableViewCell: UITableViewCell {
 extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch section {
         case 0:
-            return payment?["pid"].stringValue == "" ? 0 : 1
+            return pid == "" ? 0 : 1
         case 1:
-            return payment?["client_name"].stringValue == "" ? 0 : 1
+            return clientName == "" ? 0 : 1
         case 2:
             return tableViewItems.count
         case 3:
-            return payment?["comment"].stringValue == "" ? 0 : 1
-        case 4:
             return 1
         default:
             return 0
@@ -84,7 +112,7 @@ extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
         switch section {
         case 0:
             
-            guard let pid = payment?["pid"].string else { return cell }
+            guard let pid = pid else { return cell }
             
             cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! PaymentTableViewCellTableViewCell
             
@@ -96,11 +124,11 @@ extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
             (cell as! PaymentTableViewCellTableViewCell).secondLabel.font = UIFont.systemFont(ofSize: 15)
             (cell as! PaymentTableViewCellTableViewCell).secondLabel.textColor = .systemGray
             
-            (cell as! PaymentTableViewCellTableViewCell).secondLabel.text = payment?["dt"].string ?? ""
+            (cell as! PaymentTableViewCellTableViewCell).secondLabel.text = dt ?? ""
             
         case 1:
             
-            guard let name = payment?["client_name"].string else {return cell}
+            guard let name = clientName else {return cell}
             
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             cell.textLabel?.text = name
@@ -116,13 +144,6 @@ extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
             
         case 3:
             
-            guard let comment = payment?["comment"].string else {return cell}
-            
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 16)
-            cell.textLabel?.text = comment
-            
-        case 4:
-            
             cell = tableView.dequeueReusableCell(withIdentifier: "editCell", for: indexPath)
             
             (cell as! PaymentTableViewCellEditTableViewCell).textField.placeholder = "Редактировать"
@@ -130,6 +151,8 @@ extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
             (cell as! PaymentTableViewCellEditTableViewCell).bgView.layer.cornerRadius = 6
             
             (cell as! PaymentTableViewCellEditTableViewCell).bgView.backgroundColor = UIColor(named: "gray")
+            
+            (cell as! PaymentTableViewCellEditTableViewCell).textField.text = comment
             
         default:
             return cell
@@ -151,8 +174,6 @@ extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
         case 2:
             return 20
         case 3:
-            return 30
-        case 4:
             return 50
         default:
             return 0
@@ -174,4 +195,3 @@ extension PaymentTableViewCell {
     }
     
 }
-

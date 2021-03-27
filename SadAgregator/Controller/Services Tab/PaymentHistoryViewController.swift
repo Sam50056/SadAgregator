@@ -192,14 +192,22 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath) as! PaymentTableViewCell
         
-        cell.payment = payments[indexPath.row]
+        let payment = payments[indexPath.row]
+        
+        cell.pid = payment["pid"].stringValue
+        cell.dt =  payment["dt"].string
+        cell.clientName = payment["client_name"].stringValue
+        cell.comment =  payment["comment"].stringValue
+        cell.summ = payment["summ"].string
+        
+        //        cell.tableView.reloadData()
         
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 160
+        return 130
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
