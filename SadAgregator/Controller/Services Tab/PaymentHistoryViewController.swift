@@ -67,7 +67,23 @@ class PaymentHistoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(filterBarButtonTapped(_:)))
+        
+    }
+    
+}
+
+//MARK: - Actions
+
+extension PaymentHistoryViewController{
+    
+    @IBAction func filterBarButtonTapped(_ sender : UIBarButtonItem){
+        
+        let filterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentFilterVC") as! PaymentFilterViewController
+        
+        let navVC = UINavigationController(rootViewController: filterVC)
+        
+        presentHero(navVC, navigationAnimationType: .selectBy(presenting: .pull(direction: .down), dismissing: .pull(direction: .up)))
         
     }
     

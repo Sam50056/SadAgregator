@@ -1,5 +1,5 @@
 //
-//  FilterViewController.swift
+//  CategoryFilterViewController.swift
 //  SadAgregator
 //
 //  Created by Sam Yerznkyan on 17.02.2021.
@@ -8,7 +8,7 @@
 import UIKit
 import SwiftyJSON
 
-class FilterViewController: UIViewController {
+class CategoryFilterViewController: UIViewController {
     
     @IBOutlet weak var collectionView : UICollectionView!
     
@@ -87,7 +87,7 @@ class FilterViewController: UIViewController {
 
 //MARK: - UICollectionView
 
-extension FilterViewController : UICollectionViewDelegate , UICollectionViewDataSource{
+extension CategoryFilterViewController : UICollectionViewDelegate , UICollectionViewDataSource{
     
     func createLayout() -> UICollectionViewLayout {
         let sectionProvider = { (sectionIndex: Int,
@@ -413,7 +413,7 @@ extension FilterViewController : UICollectionViewDelegate , UICollectionViewData
 
 //MARK: - UITextField
 
-extension FilterViewController : UITextFieldDelegate{
+extension CategoryFilterViewController : UITextFieldDelegate{
     
     @objc func textFieldEditingChanged(_ sender : UITextField){
         

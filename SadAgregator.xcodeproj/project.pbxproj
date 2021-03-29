@@ -117,6 +117,7 @@
 		22906B3A2578293500F00B0D /* VendorCardDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22906B392578293500F00B0D /* VendorCardDataManager.swift */; };
 		2291BE452560620F004F55DF /* MainDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BE442560620F004F55DF /* MainDataManager.swift */; };
 		22943FE925ABDB1A00A742B8 /* PostRedirectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22943FE825ABDB1900A742B8 /* PostRedirectDataManager.swift */; };
+		2298DECB26111F2B002FA2A2 /* PaymentFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298DECA26111F2B002FA2A2 /* PaymentFilterViewController.swift */; };
 		229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A95C425A161030086EAD9 /* PricesTableViewCell.swift */; };
 		229A95C725A161030086EAD9 /* PricesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229A95C525A161030086EAD9 /* PricesTableViewCell.xib */; };
 		229A95CA25A16E100086EAD9 /* TopVendorsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */; };
@@ -135,7 +136,7 @@
 		22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */; };
 		22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */; };
 		22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */; };
-		22B6BC8A25DC6DF300EAE067 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8925DC6DF300EAE067 /* FilterViewController.swift */; };
+		22B6BC8A25DC6DF300EAE067 /* CategoryFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */; };
 		22B6BC8D25DC721300EAE067 /* AboveViewControllerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */; };
 		22B6BCAB25DEDA6A00EAE067 /* AllCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */; };
 		22B6BCAE25DEFD8200EAE067 /* GetCatListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BCAD25DEFD8100EAE067 /* GetCatListDataManager.swift */; };
@@ -309,6 +310,7 @@
 		22906B392578293500F00B0D /* VendorCardDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorCardDataManager.swift; sourceTree = "<group>"; };
 		2291BE442560620F004F55DF /* MainDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataManager.swift; sourceTree = "<group>"; };
 		22943FE825ABDB1900A742B8 /* PostRedirectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRedirectDataManager.swift; sourceTree = "<group>"; };
+		2298DECA26111F2B002FA2A2 /* PaymentFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFilterViewController.swift; sourceTree = "<group>"; };
 		229A95C425A161030086EAD9 /* PricesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesTableViewCell.swift; sourceTree = "<group>"; };
 		229A95C525A161030086EAD9 /* PricesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PricesTableViewCell.xib; sourceTree = "<group>"; };
 		229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopVendorsDataManager.swift; sourceTree = "<group>"; };
@@ -327,7 +329,7 @@
 		22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SizeCollectionViewCell.xib; sourceTree = "<group>"; };
 		22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionCollectionViewCell.xib; sourceTree = "<group>"; };
-		22B6BC8925DC6DF300EAE067 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterViewController.swift; sourceTree = "<group>"; };
 		22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboveViewControllerPresentationController.swift; sourceTree = "<group>"; };
 		22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoriesViewController.swift; sourceTree = "<group>"; };
 		22B6BCAD25DEFD8100EAE067 /* GetCatListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCatListDataManager.swift; sourceTree = "<group>"; };
@@ -560,6 +562,7 @@
 		22409F9B25EAC95700582576 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				226D9447258D2EF9008CEC4A /* HeroHelper.swift */,
 				22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */,
 				22A2B56725E03200001359D6 /* SlideDownPresentationController.swift */,
 			);
@@ -601,7 +604,6 @@
 		224BC441259FEE42003F147F /* Supporting Files  */ = {
 			isa = PBXGroup;
 			children = (
-				226D9447258D2EF9008CEC4A /* HeroHelper.swift */,
 				22782905258AC7FE00B435FA /* Extensions.swift */,
 				22A155E32583E11C000EAB64 /* Constants.swift */,
 			);
@@ -1042,7 +1044,7 @@
 				2203F16525BFC35D007DBFFD /* EditVigruzkaViewController.swift */,
 				22CADF4925CCE7EE001C4F31 /* NewVersionViewController.swift */,
 				2200943825DACBE90001F7B3 /* CategoryViewController.swift */,
-				22B6BC8925DC6DF300EAE067 /* FilterViewController.swift */,
+				22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */,
 				22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */,
 			);
 			path = "Home Tab";
@@ -1133,8 +1135,9 @@
 				22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */,
 				22D604D425F1784100102CB6 /* ClientsViewController.swift */,
 				2237E77F25FBD15F00EBD919 /* ClientViewController.swift */,
-				22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */,
 				224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */,
+				22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */,
+				2298DECA26111F2B002FA2A2 /* PaymentFilterViewController.swift */,
 			);
 			path = "Services Tab";
 			sourceTree = "<group>";
@@ -1381,6 +1384,7 @@
 				2259579F259668370088C7E4 /* InputValView.swift in Sources */,
 				22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */,
 				22328CEC25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.swift in Sources */,
+				2298DECB26111F2B002FA2A2 /* PaymentFilterViewController.swift in Sources */,
 				22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */,
 				22DC9876260293E90016A31B /* ClientsPagingPaymentsDataManager.swift in Sources */,
 				22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */,
@@ -1402,7 +1406,7 @@
 				22943FE925ABDB1A00A742B8 /* PostRedirectDataManager.swift in Sources */,
 				22D663D125823D9E0058B5CC /* LoginView.swift in Sources */,
 				221C479C25B4C7E200290E09 /* DescriptionCollectionViewCell.swift in Sources */,
-				22B6BC8A25DC6DF300EAE067 /* FilterViewController.swift in Sources */,
+				22B6BC8A25DC6DF300EAE067 /* CategoryFilterViewController.swift in Sources */,
 				2284EADA25BB196B00CC1D58 /* OKAuthService.swift in Sources */,
 				225957AA2596A6450088C7E4 /* GetStepDataManager.swift in Sources */,
 				22C549A225F41C99008D941B /* PagingClientsDataManager.swift in Sources */,

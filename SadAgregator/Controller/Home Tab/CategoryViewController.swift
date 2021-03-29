@@ -182,7 +182,7 @@ class CategoryViewController: UIViewController {
     
     @objc func filterButtonTapped(){
         
-        let filterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FilterVC") as! FilterViewController
+        let filterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CatFilterVC") as! CategoryFilterViewController
         
         filterVC.modalPresentationStyle = .custom
         filterVC.transitioningDelegate = self
