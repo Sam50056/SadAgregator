@@ -30,6 +30,9 @@ class PaymentHistoryViewController: UIViewController {
     private var page = 1
     private var rowForPaggingUpdate : Int = 15
     
+    var maxSumFromApi : String?
+    var minDateFromApi : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,6 +84,9 @@ extension PaymentHistoryViewController{
         
         let filterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentFilterVC") as! PaymentFilterViewController
         
+        filterVC.maxSumFromApi = maxSumFromApi
+        filterVC.minDateFromApi = minDateFromApi
+        
         let navVC = UINavigationController(rootViewController: filterVC)
         
         presentHero(navVC, navigationAnimationType: .selectBy(presenting: .pull(direction: .down), dismissing: .pull(direction: .up)))
@@ -127,6 +133,9 @@ extension PaymentHistoryViewController : ClientsPaymentsDataManagerDelegate{
         DispatchQueue.main.async { [self] in
             
             if data["result"].intValue == 1{
+                
+                maxSumFromApi = data["filter"]["max_sum"].string
+                minDateFromApi = data["filter"]["min_dt"].string
                 
                 payments = data["payments"].arrayValue
                 

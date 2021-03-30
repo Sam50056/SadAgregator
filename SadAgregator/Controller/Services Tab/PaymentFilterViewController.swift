@@ -11,6 +11,18 @@ class PaymentFilterViewController: UIViewController {
     
     @IBOutlet weak var collectionView : UICollectionView!
     
+    var maxSumFromApi : String?
+    var minDateFromApi : String?{
+        didSet{
+            
+            let firstIndex = minDateFromApi!.index(minDateFromApi!.startIndex, offsetBy: 2)
+            let secondIndex = minDateFromApi!.index(minDateFromApi!.startIndex, offsetBy: 5)
+            
+            minDateFromApi!.insert(".", at: firstIndex)
+            minDateFromApi!.insert(".", at: secondIndex)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,6 +91,22 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                                                       heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                       heightDimension: .absolute(40))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                let section = NSCollectionLayoutSection(group: group)
+                
+                section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 0, trailing: 0)
+                
+                return section
+                
+            }else if sectionIndex == 7{
+                
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                      heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.45),
                                                        heightDimension: .estimated(40))
                 
@@ -88,7 +116,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 section.orthogonalScrollingBehavior = .groupPagingCentered
                 section.interGroupSpacing = 16
-                section.contentInsets = NSDirectionalEdgeInsets(top: 32, leading: 10, bottom: 0, trailing: 10)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 10, bottom: 0, trailing: 10)
                 
                 return section
                 
@@ -122,14 +150,14 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 7
+        return 8
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if section == 0 || section == 2 || section == 4{
             return 1
-        }else if section == 6{
+        }else if section == 6 || section == 7{
             return 1
         }else{
             return 2
@@ -205,7 +233,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
                 
-                label.text = "до 25882"
+                label.text = "до \(maxSumFromApi ?? "")"
                 
                 cell.contentView.layer.cornerRadius = 8
                 cell.contentView.backgroundColor = UIColor(named: "gray")
@@ -229,7 +257,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
                 
-                label.text = "с 23.09.2020"
+                label.text = "с \(minDateFromApi ?? "")"
                 
                 cell.contentView.layer.cornerRadius = 8
                 cell.contentView.backgroundColor = UIColor(named: "gray")
@@ -250,6 +278,16 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             }
             
         }else if section == 6{
+            
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "textFIeldCell", for: indexPath)
+            
+            guard let bgView = cell.viewWithTag(1) , let textField = cell.viewWithTag(2) as? UITextField else {return cell}
+            
+            textField.placeholder = "Комментарий"
+            
+            bgView.layer.cornerRadius = 6
+            
+        }else if section == 7{
             
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleLabelCell", for: indexPath)
             

@@ -3620,6 +3620,42 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="85" height="49"/>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="textFIeldCell" id="B9T-9O-HV3">
+                                        <rect key="frame" x="10" y="118" width="370" height="66"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="aI3-gb-2Wx">
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view clipsSubviews="YES" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eep-Vv-szf">
+                                                    <rect key="frame" x="8" y="0.0" width="354" height="66"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="INw-tj-Gsc">
+                                                            <rect key="frame" x="3" y="0.0" width="348" height="66"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        </textField>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="gray"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="INw-tj-Gsc" secondAttribute="bottom" id="7n4-wx-4Hl"/>
+                                                        <constraint firstAttribute="width" constant="80" id="Jgb-SQ-6is"/>
+                                                        <constraint firstItem="INw-tj-Gsc" firstAttribute="leading" secondItem="Eep-Vv-szf" secondAttribute="leading" constant="3" id="Nno-34-sae"/>
+                                                        <constraint firstItem="INw-tj-Gsc" firstAttribute="top" secondItem="Eep-Vv-szf" secondAttribute="top" id="hab-RW-QcC"/>
+                                                        <constraint firstAttribute="height" constant="50" id="i6l-qI-Pho"/>
+                                                        <constraint firstAttribute="trailing" secondItem="INw-tj-Gsc" secondAttribute="trailing" constant="3" id="pcY-UU-CaZ"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Eep-Vv-szf" secondAttribute="bottom" id="9km-PD-axB"/>
+                                                <constraint firstItem="Eep-Vv-szf" firstAttribute="leading" secondItem="aI3-gb-2Wx" secondAttribute="leadingMargin" id="FiU-mI-Knf"/>
+                                                <constraint firstItem="Eep-Vv-szf" firstAttribute="top" secondItem="aI3-gb-2Wx" secondAttribute="top" id="O3b-9t-Vmt"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Eep-Vv-szf" secondAttribute="trailing" id="uUd-rb-9OO"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="370" height="66"/>
+                                    </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
@@ -3638,7 +3674,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ib2-xY-LtY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1000" y="3518"/>
+            <point key="canvasLocation" x="-1000" y="3517.5355450236966"/>
         </scene>
         <!--Menu Hosting Controller-->
         <scene sceneID="Gya-o8-FEd">
