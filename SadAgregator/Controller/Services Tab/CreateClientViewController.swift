@@ -37,6 +37,12 @@ class CreateClientViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.title = "Новый клиент"
+    }
+    
     //MARK: - Actions
     
     @IBAction func doneButtonTapped(_ sender : UIButton){

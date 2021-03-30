@@ -27,7 +27,7 @@ class ClientTableViewCell: UITableViewCell {
             var newItemsArray = [TableViewItem]()
             
             if clientBalance != nil , clientBalance != "" {
-                newItemsArray.append(TableViewItem(firstText: "Баланс", secondText: clientBalance ?? ""))
+                newItemsArray.append(TableViewItem(firstText: "Баланс", secondText: (clientBalance ?? "") + " руб"))
             }
             
             if clientInProcess != nil, clientInProcess != "" , clientInProcess != "0"{
@@ -47,7 +47,7 @@ class ClientTableViewCell: UITableViewCell {
             var newItemsArray = [TableViewItem]()
             
             if clientBalance != nil , clientBalance != "" {
-                newItemsArray.append(TableViewItem(firstText: "Баланс", secondText: clientBalance ?? ""))
+                newItemsArray.append(TableViewItem(firstText: "Баланс", secondText: (clientBalance ?? "") + " руб"))
             }
             
             if clientInProcess != nil, clientInProcess != "" , clientInProcess != "0"{

@@ -43,6 +43,8 @@ class ClientsViewController: UIViewController {
     private var debetors : Bool = false {
         didSet{
             clients.removeAll()
+            page = 1
+            rowForPaggingUpdate = 15
             clientsFilterDataManager.getClientsFIlterData(key: key , query: searchText , debotors: debetors ? 1 : 0 , page : page)
         }
     }
