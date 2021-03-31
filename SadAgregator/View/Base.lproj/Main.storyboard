@@ -3631,19 +3631,17 @@
                                                     <rect key="frame" x="8" y="0.0" width="354" height="66"/>
                                                     <subviews>
                                                         <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="INw-tj-Gsc">
-                                                            <rect key="frame" x="3" y="0.0" width="348" height="66"/>
+                                                            <rect key="frame" x="6" y="0.0" width="342" height="66"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                            <textInputTraits key="textInputTraits"/>
                                                         </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" name="gray"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="INw-tj-Gsc" secondAttribute="bottom" id="7n4-wx-4Hl"/>
-                                                        <constraint firstAttribute="width" constant="80" id="Jgb-SQ-6is"/>
-                                                        <constraint firstItem="INw-tj-Gsc" firstAttribute="leading" secondItem="Eep-Vv-szf" secondAttribute="leading" constant="3" id="Nno-34-sae"/>
+                                                        <constraint firstItem="INw-tj-Gsc" firstAttribute="leading" secondItem="Eep-Vv-szf" secondAttribute="leading" constant="6" id="Nno-34-sae"/>
                                                         <constraint firstItem="INw-tj-Gsc" firstAttribute="top" secondItem="Eep-Vv-szf" secondAttribute="top" id="hab-RW-QcC"/>
-                                                        <constraint firstAttribute="height" constant="50" id="i6l-qI-Pho"/>
-                                                        <constraint firstAttribute="trailing" secondItem="INw-tj-Gsc" secondAttribute="trailing" constant="3" id="pcY-UU-CaZ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="INw-tj-Gsc" secondAttribute="trailing" constant="6" id="pcY-UU-CaZ"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
