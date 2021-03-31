@@ -269,6 +269,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             let rangeSlider = RangeSlider(frame: CGRect(x: 0, y: 0,width: width, height: height))
             
             rangeSlider.trackHighlightTintColor = .systemBlue
+            rangeSlider.trackTintColor = UIColor(named: "gray")!
             rangeSlider.thumbImage = #imageLiteral(resourceName: "Oval")
             rangeSlider.highlightedThumbImage = #imageLiteral(resourceName: "HighlightedOval")
             
