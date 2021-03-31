@@ -58,6 +58,8 @@
 		224BC43B259FE61E003F147F /* VkAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC43A259FE61E003F147F /* VkAuthService.swift */; };
 		224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC44925A013C3003F147F /* AuthSocialDataManager.swift */; };
 		224BC44D25A0C529003F147F /* AddPointRequestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */; };
+		224D273D2613AED200BFAE30 /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224D273B2613AED100BFAE30 /* RangeSlider.swift */; };
+		224D273E2613AED200BFAE30 /* RangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224D273C2613AED200BFAE30 /* RangeSliderTrackLayer.swift */; };
 		224EFC3125A9D209007CA45E /* SendQuestionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224EFC3025A9D209007CA45E /* SendQuestionDataManager.swift */; };
 		224FE2A62608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2A52608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift */; };
 		224FE2A926095FF400AE13B2 /* CreateClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */; };
@@ -248,6 +250,8 @@
 		224BC43A259FE61E003F147F /* VkAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkAuthService.swift; sourceTree = "<group>"; };
 		224BC44925A013C3003F147F /* AuthSocialDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSocialDataManager.swift; sourceTree = "<group>"; };
 		224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointRequestDataManager.swift; sourceTree = "<group>"; };
+		224D273B2613AED100BFAE30 /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
+		224D273C2613AED200BFAE30 /* RangeSliderTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderTrackLayer.swift; sourceTree = "<group>"; };
 		224EFC3025A9D209007CA45E /* SendQuestionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendQuestionDataManager.swift; sourceTree = "<group>"; };
 		224FE2A52608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsChangeBalanceDataManager.swift; sourceTree = "<group>"; };
 		224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClientViewController.swift; sourceTree = "<group>"; };
@@ -620,6 +624,23 @@
 			path = "Auth ";
 			sourceTree = "<group>";
 		};
+		224D273A2613AEB600BFAE30 /* Custom Controls */ = {
+			isa = PBXGroup;
+			children = (
+				224D27402614016C00BFAE30 /* RangeSlider */,
+			);
+			path = "Custom Controls";
+			sourceTree = "<group>";
+		};
+		224D27402614016C00BFAE30 /* RangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				224D273B2613AED100BFAE30 /* RangeSlider.swift */,
+				224D273C2613AED200BFAE30 /* RangeSliderTrackLayer.swift */,
+			);
+			path = RangeSlider;
+			sourceTree = "<group>";
+		};
 		2253EE252569D1C500103C86 /* Main Screen Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -781,6 +802,7 @@
 		228CB770255BF981002B4A96 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				224D273A2613AEB600BFAE30 /* Custom Controls */,
 				22A49CA7256661D700CCC781 /* cells */,
 				22A155E12582C76E000EAB64 /* SwiftUiViews */,
 				228CB762255BF96D002B4A96 /* Main.storyboard */,
@@ -1369,6 +1391,7 @@
 				2286AD0F25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift in Sources */,
 				22C5499C25F41223008D941B /* ClientTableViewCellTableViewCell.swift in Sources */,
 				22328CC725FD806300C51CC9 /* ClientsFIlterDataManager.swift in Sources */,
+				224D273E2613AED200BFAE30 /* RangeSliderTrackLayer.swift in Sources */,
 				22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */,
 				2201672C25A77BB50072BFE7 /* SetVendActionsDataManager.swift in Sources */,
 				2203F15C25BF243A007DBFFD /* EmptyTableViewCell.swift in Sources */,
@@ -1453,6 +1476,7 @@
 				22CADB1825B24A9600A5E475 /* SaveVkInfoDataManager.swift in Sources */,
 				228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */,
 				2201673125A8BADD0072BFE7 /* SendFileDataManager.swift in Sources */,
+				224D273D2613AED200BFAE30 /* RangeSlider.swift in Sources */,
 				2201673C25A952040072BFE7 /* SearchImageDataManager.swift in Sources */,
 				22A0534E256BCE350016B40A /* ActivityPointDataManager.swift in Sources */,
 				22328CCE25FE743E00C51CC9 /* ClientsPayments.swift in Sources */,

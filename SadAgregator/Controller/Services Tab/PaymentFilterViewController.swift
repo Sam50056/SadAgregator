@@ -69,7 +69,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         let sectionProvider = { (sectionIndex: Int,
                                  layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
-            if sectionIndex == 0 || sectionIndex == 2 || sectionIndex == 4{
+            if sectionIndex == 0 || sectionIndex == 2 || sectionIndex == 5{
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1.0))
@@ -84,8 +84,24 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
                 
                 return section
+             
+            }else if sectionIndex == 4{
                 
-            }else if sectionIndex == 6{
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                      heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                       heightDimension: .absolute(40))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                let section = NSCollectionLayoutSection(group: group)
+                
+                section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 10, bottom: 0, trailing: 10)
+                
+                return section
+                
+            }else if sectionIndex == 7{
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1.0))
@@ -101,7 +117,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 return section
                 
-            }else if sectionIndex == 7{
+            }else if sectionIndex == 8{
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1.0))
@@ -150,14 +166,14 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 8
+        return 9
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if section == 0 || section == 2 || section == 4{
+        if section == 0 || section == 2 || section == 4 || section == 5 {
             return 1
-        }else if section == 6 || section == 7{
+        }else if section == 7 || section == 8{
             return 1
         }else{
             return 2
@@ -244,11 +260,43 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             
         }else if section == 4{
             
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyCell", for: indexPath)
+            
+            let margin: CGFloat = 4
+            let width = cell.bounds.width - (2 * margin)
+            let height: CGFloat = 12
+            
+            let rangeSlider = RangeSlider(frame: CGRect(x: 0, y: 0,width: width, height: height))
+            
+            rangeSlider.trackHighlightTintColor = .systemBlue
+            rangeSlider.thumbImage = #imageLiteral(resourceName: "Oval")
+            rangeSlider.highlightedThumbImage = #imageLiteral(resourceName: "HighlightedOval")
+            
+            cell.addSubview(rangeSlider)
+            
+            rangeSlider.translatesAutoresizingMaskIntoConstraints = false
+            
+            var constraints = [NSLayoutConstraint]()
+            
+            constraints.append(rangeSlider.centerYAnchor.constraint(equalTo: cell.centerYAnchor))
+            constraints.append(rangeSlider.centerXAnchor.constraint(equalTo: cell.centerXAnchor))
+            
+            constraints.append(rangeSlider.widthAnchor.constraint(equalToConstant: width))
+            constraints.append(rangeSlider.heightAnchor.constraint(equalToConstant: height))
+            
+            NSLayoutConstraint.activate(constraints)
+            
+            
+            rangeSlider.addTarget(self, action: #selector(rangeSliderValueChanged(_:)),
+                                  for: .valueChanged)
+          
+        }else if section == 5{
+            
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headerCell", for: indexPath)
             
             setUpHeaderCell(with: "Дата", for: cell)
             
-        }else if section == 5{
+        }else if section == 6{
             
             switch indexPath.row {
             case 0:
@@ -277,7 +325,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 return cell
             }
             
-        }else if section == 6{
+        }else if section == 7{
             
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "textFIeldCell", for: indexPath)
             
@@ -287,7 +335,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             
             bgView.layer.cornerRadius = 6
             
-        }else if section == 7{
+        }else if section == 8{
             
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleLabelCell", for: indexPath)
             
@@ -325,6 +373,11 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         cell.contentView.layer.cornerRadius = 8
         cell.contentView.backgroundColor = UIColor(named: "gray")
         
+    }
+    
+    @objc func rangeSliderValueChanged(_ rangeSlider: RangeSlider) {
+        let values = "(\(rangeSlider.lowerValue) \(rangeSlider.upperValue))"
+        print("Range slider value changed: \(values)")
     }
     
 }

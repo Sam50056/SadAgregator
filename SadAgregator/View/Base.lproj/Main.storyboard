@@ -3656,6 +3656,15 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="370" height="66"/>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="emptyCell" id="x6l-mM-j5c">
+                                        <rect key="frame" x="25.666666666666668" y="194" width="339" height="69"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3Y6-uU-jSo">
+                                            <rect key="frame" x="0.0" y="0.0" width="339" height="69"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="339" height="69"/>
+                                    </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
