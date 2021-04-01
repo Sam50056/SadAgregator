@@ -743,6 +743,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             }
             
             //Set up revs
+            let revsCountString = data["revs_info"]["cnt"].stringValue
             let revsArray = data["revs_info"]["revs"].arrayValue
             let rev = revsArray.count
             
@@ -750,7 +751,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 revLabel.text = ""
                 revImageView.isHidden = true
             }else{
-                revLabel.text = String(rev)
+                revLabel.text = revsCountString
                 revImageView.isHidden = false
             }
             
@@ -867,11 +868,14 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
            let smVseLabel = cell.viewWithTag(2) as? UILabel,
            let smVseImageView = cell.viewWithTag(3) as? UIImageView{
             
-            let revsCount = Int(vendorData!["revs_info"]["cnt"].stringValue)!
+            let revsCountString = vendorData!["revs_info"]["cnt"].stringValue
+            let revsCount = Int(revsCountString)!
             
             var trailingText = ""
             
-            if revsCount % 10 == 1{
+            if revsCountString.count == 2 && revsCountString[revsCountString.startIndex] == "1"{
+                trailingText = "ОТЗЫВОВ"
+            }else if revsCount % 10 == 1{
                 trailingText = "ОТЗЫВ"
             }else if revsCount % 10 == 2 || revsCount % 10 == 3 || revsCount % 10 == 4{
                 trailingText = "ОТЗЫВА"
