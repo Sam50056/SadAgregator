@@ -69,7 +69,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         let sectionProvider = { (sectionIndex: Int,
                                  layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
-            if sectionIndex == 0 || sectionIndex == 2 || sectionIndex == 5{
+            if sectionIndex == 0 || sectionIndex == 2 || sectionIndex == 4 || sectionIndex == 7{
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1.0))
@@ -84,8 +84,8 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
                 
                 return section
-             
-            }else if sectionIndex == 4{
+                
+            }else if sectionIndex == 6{
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1.0))
@@ -101,7 +101,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 return section
                 
-            }else if sectionIndex == 7{
+            }else if sectionIndex == 9{
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1.0))
@@ -117,7 +117,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 return section
                 
-            }else if sectionIndex == 8{
+            }else if sectionIndex == 10{
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1.0))
@@ -166,14 +166,14 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 9
+        return 11
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if section == 0 || section == 2 || section == 4 || section == 5 {
+        if section == 0 || section == 2 || section == 4 || section == 6 || section == 7 {
             return 1
-        }else if section == 7 || section == 8{
+        }else if section == 9 || section == 10{
             return 1
         }else{
             return 2
@@ -227,9 +227,46 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headerCell", for: indexPath)
             
-            setUpHeaderCell(with: "Цена", for: cell)
+            setUpHeaderCell(with: "Источник операции", for: cell)
+            
             
         }else if section == 3{
+            
+            switch indexPath.row {
+            case 0:
+                
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleLabelCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+                
+                label.text = "Ручная"
+                
+                cell.contentView.layer.cornerRadius = 8
+                cell.contentView.backgroundColor = UIColor(named: "gray")
+                
+            case 1:
+                
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleLabelCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+                
+                label.text = "Системная"
+                
+                cell.contentView.layer.cornerRadius = 8
+                cell.contentView.backgroundColor = UIColor(named: "gray")
+                
+            default:
+                return cell
+            }
+            
+            
+        }else if section == 4{
+            
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headerCell", for: indexPath)
+            
+            setUpHeaderCell(with: "Цена", for: cell)
+            
+        }else if section == 5{
             
             switch indexPath.row {
             case 0:
@@ -258,7 +295,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 return cell
             }
             
-        }else if section == 4{
+        }else if section == 6{
             
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyCell", for: indexPath)
             
@@ -290,14 +327,14 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             
             rangeSlider.addTarget(self, action: #selector(rangeSliderValueChanged(_:)),
                                   for: .valueChanged)
-          
-        }else if section == 5{
+            
+        }else if section == 7{
             
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headerCell", for: indexPath)
             
             setUpHeaderCell(with: "Дата", for: cell)
             
-        }else if section == 6{
+        }else if section == 8{
             
             switch indexPath.row {
             case 0:
@@ -326,7 +363,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 return cell
             }
             
-        }else if section == 7{
+        }else if section == 9{
             
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "textFIeldCell", for: indexPath)
             
@@ -336,7 +373,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             
             bgView.layer.cornerRadius = 6
             
-        }else if section == 8{
+        }else if section == 10{
             
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleLabelCell", for: indexPath)
             
