@@ -23,6 +23,10 @@ class PaymentFilterViewController: UIViewController {
         }
     }
     
+    var source : Int?
+    var opType : Int?
+    var commentQuery : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -206,7 +210,9 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 label.text = "Пополнение"
                 
                 cell.contentView.layer.cornerRadius = 8
-                cell.contentView.backgroundColor = UIColor(named: "gray")
+                
+                cell.contentView.backgroundColor = opType != indexPath.row ? UIColor(named: "gray") : .systemBlue
+                label.textColor = opType != indexPath.row ? UIColor(named: "blackwhite") : .white
                 
             case 1:
                 
@@ -217,7 +223,9 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 label.text = "Списание"
                 
                 cell.contentView.layer.cornerRadius = 8
-                cell.contentView.backgroundColor = UIColor(named: "gray")
+                
+                cell.contentView.backgroundColor = opType != indexPath.row ? UIColor(named: "gray") : .systemBlue
+                label.textColor = opType != indexPath.row ? UIColor(named: "blackwhite") : .white
                 
             default:
                 return cell
@@ -242,7 +250,9 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 label.text = "Ручная"
                 
                 cell.contentView.layer.cornerRadius = 8
-                cell.contentView.backgroundColor = UIColor(named: "gray")
+                
+                cell.contentView.backgroundColor = source != indexPath.row ? UIColor(named: "gray") : .systemBlue
+                label.textColor = source != indexPath.row ? UIColor(named: "blackwhite") : .white
                 
             case 1:
                 
@@ -253,7 +263,9 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 label.text = "Системная"
                 
                 cell.contentView.layer.cornerRadius = 8
-                cell.contentView.backgroundColor = UIColor(named: "gray")
+                
+                cell.contentView.backgroundColor = source != indexPath.row ? UIColor(named: "gray") : .systemBlue
+                label.textColor = source != indexPath.row ? UIColor(named: "blackwhite") : .white
                 
             default:
                 return cell
@@ -389,6 +401,22 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         }
         
         return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let section = indexPath.section
+        
+        if section == 1{
+            opType = indexPath.row
+            collectionView.reloadSections([section])
+        }else if section == 3{
+            source = indexPath.row
+            collectionView.reloadSections([section])
+        }
+        
+        print("Index path row : \(indexPath.row) , section : \(indexPath.section)")
         
     }
     
