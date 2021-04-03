@@ -26,6 +26,8 @@
 		2203F15C25BF243A007DBFFD /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203F15A25BF243A007DBFFD /* EmptyTableViewCell.swift */; };
 		2203F15D25BF243A007DBFFD /* EmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203F15B25BF243A007DBFFD /* EmptyTableViewCell.xib */; };
 		2203F16625BFC35D007DBFFD /* EditVigruzkaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203F16525BFC35D007DBFFD /* EditVigruzkaViewController.swift */; };
+		220DF1802617EAAE008F5873 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DF17F2617EAAE008F5873 /* DatePickerViewController.swift */; };
+		220DF1842617F863008F5873 /* BottomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DF1832617F863008F5873 /* BottomPresentationController.swift */; };
 		221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221949FE256B1FBD00E0564D /* PointViewController.swift */; };
 		221C072C256E5ABB001BC842 /* PhoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C072A256E5ABB001BC842 /* PhoneTableViewCell.swift */; };
 		221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */; };
@@ -218,6 +220,8 @@
 		2203F15A25BF243A007DBFFD /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		2203F15B25BF243A007DBFFD /* EmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyTableViewCell.xib; sourceTree = "<group>"; };
 		2203F16525BFC35D007DBFFD /* EditVigruzkaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVigruzkaViewController.swift; sourceTree = "<group>"; };
+		220DF17F2617EAAE008F5873 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		220DF1832617F863008F5873 /* BottomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPresentationController.swift; sourceTree = "<group>"; };
 		221949FE256B1FBD00E0564D /* PointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointViewController.swift; sourceTree = "<group>"; };
 		221C072A256E5ABB001BC842 /* PhoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTableViewCell.swift; sourceTree = "<group>"; };
 		221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneTableViewCell.xib; sourceTree = "<group>"; };
@@ -467,6 +471,16 @@
 			path = EmptyCell;
 			sourceTree = "<group>";
 		};
+		220DF17E2617E960008F5873 /* PaymentHistory */ = {
+			isa = PBXGroup;
+			children = (
+				22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */,
+				2298DECA26111F2B002FA2A2 /* PaymentFilterViewController.swift */,
+				220DF17F2617EAAE008F5873 /* DatePickerViewController.swift */,
+			);
+			path = PaymentHistory;
+			sourceTree = "<group>";
+		};
 		221C0729256E5A91001BC842 /* PhoneCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,6 +583,7 @@
 				226D9447258D2EF9008CEC4A /* HeroHelper.swift */,
 				22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */,
 				22A2B56725E03200001359D6 /* SlideDownPresentationController.swift */,
+				220DF1832617F863008F5873 /* BottomPresentationController.swift */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -1158,8 +1173,7 @@
 				22D604D425F1784100102CB6 /* ClientsViewController.swift */,
 				2237E77F25FBD15F00EBD919 /* ClientViewController.swift */,
 				224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */,
-				22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */,
-				2298DECA26111F2B002FA2A2 /* PaymentFilterViewController.swift */,
+				220DF17E2617E960008F5873 /* PaymentHistory */,
 			);
 			path = "Services Tab";
 			sourceTree = "<group>";
@@ -1338,6 +1352,7 @@
 				221C072C256E5ABB001BC842 /* PhoneTableViewCell.swift in Sources */,
 				22CADF4A25CCE7EE001C4F31 /* NewVersionViewController.swift in Sources */,
 				22A49CBB2566650600CCC781 /* SizeCollectionViewCell.swift in Sources */,
+				220DF1842617F863008F5873 /* BottomPresentationController.swift in Sources */,
 				2201672325A73FEA0072BFE7 /* GetPointActionsDataManager.swift in Sources */,
 				228D2D3725ABE1D5000E9FAE /* DelDeviceDataManager.swift in Sources */,
 				224FE2A62608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift in Sources */,
@@ -1429,6 +1444,7 @@
 				22943FE925ABDB1A00A742B8 /* PostRedirectDataManager.swift in Sources */,
 				22D663D125823D9E0058B5CC /* LoginView.swift in Sources */,
 				221C479C25B4C7E200290E09 /* DescriptionCollectionViewCell.swift in Sources */,
+				220DF1802617EAAE008F5873 /* DatePickerViewController.swift in Sources */,
 				22B6BC8A25DC6DF300EAE067 /* CategoryFilterViewController.swift in Sources */,
 				2284EADA25BB196B00CC1D58 /* OKAuthService.swift in Sources */,
 				225957AA2596A6450088C7E4 /* GetStepDataManager.swift in Sources */,

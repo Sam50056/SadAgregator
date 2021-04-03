@@ -3559,6 +3559,78 @@
             </objects>
             <point key="canvasLocation" x="576.92307692307691" y="3898.5781990521327"/>
         </scene>
+        <!--Date Picker View Controller-->
+        <scene sceneID="z4a-Je-IOi">
+            <objects>
+                <viewController storyboardIdentifier="DatePickerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Jgu-2a-fKm" customClass="DatePickerViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Nc-am-97t">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="350"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zij-a8-zXF">
+                                <rect key="frame" x="0.0" y="60" width="390" height="162"/>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выбор даты" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVe-p3-TFY">
+                                <rect key="frame" x="144.66666666666666" y="16" width="101" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="lZC-dx-AhP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHz-57-4ml">
+                                <rect key="frame" x="16" y="238" width="358" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="l87-Le-7Ff"/>
+                                </constraints>
+                                <state key="normal" title="Выбрать">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectButtonTapped:" destination="Jgu-2a-fKm" eventType="touchUpInside" id="GHB-4m-ghk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMz-Ny-Ru7">
+                                <rect key="frame" x="16" y="294" width="358" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="TpB-5A-S60"/>
+                                </constraints>
+                                <state key="normal" title="Отмена"/>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="Jgu-2a-fKm" eventType="touchUpInside" id="iAy-pq-vhT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="d50-tL-dkU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zij-a8-zXF" firstAttribute="trailing" secondItem="d50-tL-dkU" secondAttribute="trailing" id="5d8-2x-1W4"/>
+                            <constraint firstItem="zij-a8-zXF" firstAttribute="leading" secondItem="d50-tL-dkU" secondAttribute="leading" id="73U-Pg-M8w"/>
+                            <constraint firstItem="zij-a8-zXF" firstAttribute="top" secondItem="d50-tL-dkU" secondAttribute="top" constant="16" id="FES-bJ-dID"/>
+                            <constraint firstItem="d50-tL-dkU" firstAttribute="trailing" secondItem="uHz-57-4ml" secondAttribute="trailing" constant="16" id="Gc0-cz-u1L"/>
+                            <constraint firstItem="cVe-p3-TFY" firstAttribute="centerX" secondItem="5Nc-am-97t" secondAttribute="centerX" id="K9G-aj-Fdy"/>
+                            <constraint firstItem="DMz-Ny-Ru7" firstAttribute="leading" secondItem="d50-tL-dkU" secondAttribute="leading" constant="16" id="Ya5-iV-tfJ"/>
+                            <constraint firstItem="uHz-57-4ml" firstAttribute="top" secondItem="zij-a8-zXF" secondAttribute="bottom" constant="16" id="aQo-6A-wvf"/>
+                            <constraint firstItem="d50-tL-dkU" firstAttribute="trailing" secondItem="DMz-Ny-Ru7" secondAttribute="trailing" constant="16" id="iXC-l3-DCI"/>
+                            <constraint firstItem="DMz-Ny-Ru7" firstAttribute="top" secondItem="uHz-57-4ml" secondAttribute="bottom" constant="16" id="kaW-Wz-8cC"/>
+                            <constraint firstItem="cVe-p3-TFY" firstAttribute="top" secondItem="5Nc-am-97t" secondAttribute="top" constant="16" id="mhI-yf-8z1"/>
+                            <constraint firstItem="uHz-57-4ml" firstAttribute="leading" secondItem="d50-tL-dkU" secondAttribute="leading" constant="16" id="nc1-bY-otJ"/>
+                            <constraint firstItem="d50-tL-dkU" firstAttribute="bottom" secondItem="DMz-Ny-Ru7" secondAttribute="bottom" constant="16" id="net-qP-fP2"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="390" height="350"/>
+                    <connections>
+                        <outlet property="picker" destination="zij-a8-zXF" id="Ke3-jz-Qal"/>
+                        <outlet property="selectButton" destination="uHz-57-4ml" id="ogC-mP-7RD"/>
+                        <outlet property="topLabel" destination="cVe-p3-TFY" id="nrV-cS-sDK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0En-nZ-2ba" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1775.3846153846152" y="3517.5355450236966"/>
+        </scene>
         <!--Payment Filter View Controller-->
         <scene sceneID="pQl-hT-TWa">
             <objects>

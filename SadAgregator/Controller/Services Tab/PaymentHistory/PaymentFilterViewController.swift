@@ -11,21 +11,28 @@ class PaymentFilterViewController: UIViewController {
     
     @IBOutlet weak var collectionView : UICollectionView!
     
-    var maxSumFromApi : String?
-    var minDateFromApi : String?{
+    var maxSumFromApi : String?{
         didSet{
             
-            let firstIndex = minDateFromApi!.index(minDateFromApi!.startIndex, offsetBy: 2)
-            let secondIndex = minDateFromApi!.index(minDateFromApi!.startIndex, offsetBy: 5)
+            guard let safeSum = maxSumFromApi else {return}
             
-            minDateFromApi!.insert(".", at: firstIndex)
-            minDateFromApi!.insert(".", at: secondIndex)
+            maxPrice = Int(safeSum)!
+            
+        }
+    }
+    var minDateFromApi : String?{
+        didSet{
+            minDateFromApi = formatDate(minDateFromApi ?? "")
         }
     }
     
-    var source : Int?
     var opType : Int?
+    var source : Int?
     var commentQuery : String?
+    var minPrice : Int?
+    var maxPrice : Int?
+    var minDate : String?
+    var maxDate : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +68,40 @@ extension PaymentFilterViewController{
     
     @IBAction func closeBarButtonTapped(_ sender : UIBarButtonItem){
         self.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+//MARK: - Functions
+
+extension PaymentFilterViewController{
+    
+    func formatDate(_ date : Date , withDot : Bool = false) -> String{
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = withDot ? "dd.MM.yyyy" : "ddMMyyyy"
+        
+        //let date: NSDate? = dateFormatterGet.date(from: "2016-02-29 12:24:26") as NSDate?
+        let formattedDate = dateFormatterGet.string(from: date)
+        
+        return formattedDate
+        
+    }
+    
+    func formatDate(_ date : String?) -> String?{
+        
+        guard date != nil else {return nil}
+        
+        var date = date!
+        
+        let firstIndex = minDateFromApi!.index(minDateFromApi!.startIndex, offsetBy: 2)
+        let secondIndex = minDateFromApi!.index(minDateFromApi!.startIndex, offsetBy: 5)
+        
+        date.insert(".", at: firstIndex)
+        date.insert(".", at: secondIndex)
+        
+        return date
+        
     }
     
 }
@@ -287,7 +328,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
                 
-                label.text = "от 16477"
+                label.text = "от \(minPrice ?? 0)"
                 
                 cell.contentView.layer.cornerRadius = 8
                 cell.contentView.backgroundColor = UIColor(named: "gray")
@@ -298,7 +339,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
                 
-                label.text = "до \(maxSumFromApi ?? "")"
+                label.text = "до \(maxPrice ?? 0)"
                 
                 cell.contentView.layer.cornerRadius = 8
                 cell.contentView.backgroundColor = UIColor(named: "gray")
@@ -355,7 +396,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
                 
-                label.text = "с \(minDateFromApi ?? "")"
+                label.text = "с \(formatDate(minDate) ?? (minDateFromApi ?? ""))"
                 
                 cell.contentView.layer.cornerRadius = 8
                 cell.contentView.backgroundColor = UIColor(named: "gray")
@@ -366,7 +407,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
                 
-                label.text = "по 1.10.2020"
+                label.text = "по \(formatDate(maxDate) ?? formatDate(Date(), withDot: true))"
                 
                 cell.contentView.layer.cornerRadius = 8
                 cell.contentView.backgroundColor = UIColor(named: "gray")
@@ -414,6 +455,48 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         }else if section == 3{
             source = indexPath.row
             collectionView.reloadSections([section])
+        }else if section == 8{
+            
+            if indexPath.row == 0{
+                
+                let datePickerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DatePickerVC") as! DatePickerViewController
+                
+                datePickerVC.modalPresentationStyle = .custom
+                datePickerVC.transitioningDelegate = self
+                
+                datePickerVC.dateSelected = { [self] date in
+                    
+                    let dateString = formatDate(date)
+                    
+                    minDate = dateString
+                    
+                    collectionView.reloadItems(at: [indexPath])
+                    
+                }
+                
+                self.present(datePickerVC, animated: true, completion: nil)
+                
+            }else{
+                
+                let datePickerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DatePickerVC") as! DatePickerViewController
+                
+                datePickerVC.modalPresentationStyle = .custom
+                datePickerVC.transitioningDelegate = self
+                
+                datePickerVC.dateSelected = { [self] date in
+                    
+                    let dateString = formatDate(date)
+                    
+                    maxDate = dateString
+                    
+                    collectionView.reloadItems(at: [indexPath])
+                    
+                }
+                
+                self.present(datePickerVC, animated: true, completion: nil)
+                
+            }
+            
         }
         
         print("Index path row : \(indexPath.row) , section : \(indexPath.section)")
@@ -446,4 +529,12 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         print("Range slider value changed: \(values)")
     }
     
+}
+
+//MARK: - TransitioningDelegate
+
+extension PaymentFilterViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        BottomPresentationController(presentedViewController: presented, presenting: presenting)
+    }
 }
