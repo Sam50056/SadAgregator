@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import RealmSwift
+import SwiftyJSON
 
 class PaymentFilterViewController: UIViewController {
     
     @IBOutlet weak var collectionView : UICollectionView!
+    
+    private let realm = try! Realm()
+    
+    private var key = ""
     
     var maxSumFromApi : String?{
         didSet{
@@ -22,7 +28,7 @@ class PaymentFilterViewController: UIViewController {
     }
     var minDateFromApi : String?{
         didSet{
-            minDateFromApi = formatDate(minDateFromApi ?? "")
+            minDate = minDateFromApi
         }
     }
     
@@ -33,9 +39,12 @@ class PaymentFilterViewController: UIViewController {
     var maxPrice : Int?
     var minDate : String?
     var maxDate : String?
+    var commentTextField : UITextField?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        key = "part_2_test"
         
         collectionView.collectionViewLayout = createLayout()
         
@@ -79,7 +88,7 @@ extension PaymentFilterViewController{
     func formatDate(_ date : Date , withDot : Bool = false) -> String{
         
         let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = withDot ? "dd.MM.yyyy" : "ddMMyyyy"
+        dateFormatterGet.dateFormat = withDot ? "dd.MM.yy" : "ddMMyy"
         
         //let date: NSDate? = dateFormatterGet.date(from: "2016-02-29 12:24:26") as NSDate?
         let formattedDate = dateFormatterGet.string(from: date)
@@ -396,7 +405,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
                 
-                label.text = "с \(formatDate(minDate) ?? (minDateFromApi ?? ""))"
+                label.text = "с \(formatDate(minDate) ?? "")"
                 
                 cell.contentView.layer.cornerRadius = 8
                 cell.contentView.backgroundColor = UIColor(named: "gray")
@@ -423,6 +432,8 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             guard let bgView = cell.viewWithTag(1) , let textField = cell.viewWithTag(2) as? UITextField else {return cell}
             
             textField.placeholder = "Комментарий"
+            
+            commentTextField = textField
             
             bgView.layer.cornerRadius = 6
             
@@ -497,6 +508,10 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
             }
             
+        }else if section == 10{
+            
+            ClientsFilterPayHistoryCountDataManager(delegate: self).getClientsFilterPayHistoryCountData(key: key, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice ?? 0, sumMax: maxPrice ?? 0, startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+            
         }
         
         print("Index path row : \(indexPath.row) , section : \(indexPath.section)")
@@ -531,10 +546,58 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
     
 }
 
+//MARK: - Data Manipulation Methods
+
+extension PaymentFilterViewController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        key = userDataObject.first!.key
+        
+        //        isLogged = userDataObject.first!.isLogged
+        
+    }
+    
+}
+
 //MARK: - TransitioningDelegate
 
 extension PaymentFilterViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         BottomPresentationController(presentedViewController: presented, presenting: presenting)
     }
+}
+
+//MARK: - ClientsFilterPayHistoryCountDataManager
+
+extension PaymentFilterViewController : ClientsFilterPayHistoryCountDataManagerDelegate{
+    
+    func didGetClientsFilterPayHistoryCountData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                if data["payments_count"].stringValue == "" || data["payments_count"].stringValue == "0"{
+                    
+                    showSimpleAlertWithOkButton(title: "Нет результатов", message: "Нет результатов поиска с введёнными параметрами")
+                    
+                }else{
+                    
+                    
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingClientsFilterPayHistoryCountDataWithError(error: String) {
+        print("Error with ClientsFilterPayHistoryCountDataManager : \(error)")
+    }
+    
 }
