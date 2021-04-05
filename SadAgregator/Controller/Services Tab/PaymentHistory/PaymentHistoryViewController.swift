@@ -107,9 +107,16 @@ extension PaymentHistoryViewController{
         
         filterVC.opType = opType
         filterVC.source = source
+        
         filterVC.commentQuery = comment
-        filterVC.minPrice = minPrice
-        filterVC.maxPrice = maxPrice ?? Int(maxSumFromApi ?? "")
+        
+        let maxSumFormApiInt = Int(maxSumFromApi ?? "")
+        
+        filterVC.lowPrice = minPrice
+        filterVC.upPrice = maxPrice
+        
+        filterVC.maxPrice = maxSumFormApiInt
+        
         filterVC.minDate = minDate ?? minDateFromApi
         filterVC.maxDate = maxDate
         

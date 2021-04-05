@@ -30,7 +30,7 @@ class PaymentFilterViewController: UIViewController {
             
             guard let safeSum = maxSumFromApi else {return}
             
-            maxPrice = Int(safeSum)!
+            upPrice = Int(safeSum)!
             
         }
     }
@@ -43,8 +43,17 @@ class PaymentFilterViewController: UIViewController {
     var opType : Int?
     var source : Int?
     var commentQuery : String?
-    var minPrice : Int?
-    var maxPrice : Int?
+    var lowPrice : Int? = 0
+    var upPrice : Int?
+    var maxPrice : Int?{
+        didSet{
+            guard let maxPrice = maxPrice else {return}
+            
+            lowPrice = Int(Double(maxPrice) * 0.2)
+            upPrice = Int(Double(maxPrice) * 0.8)
+            
+        }
+    }
     var minDate : String?
     var maxDate : String?
     var commentTextField : UITextField?
@@ -345,7 +354,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
                 
-                label.text = "от \(minPrice ?? 0)"
+                label.text = "от \(lowPrice ?? 0)"
                 
                 cell.contentView.layer.cornerRadius = 8
                 cell.contentView.backgroundColor = UIColor(named: "gray")
@@ -356,7 +365,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
                 
-                label.text = "до \(maxPrice ?? 0)"
+                label.text = "до \(upPrice ?? maxPrice ?? 0)"
                 
                 cell.contentView.layer.cornerRadius = 8
                 cell.contentView.backgroundColor = UIColor(named: "gray")
@@ -379,6 +388,26 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             rangeSlider.trackTintColor = UIColor(named: "gray")!
             rangeSlider.thumbImage = #imageLiteral(resourceName: "Oval")
             rangeSlider.highlightedThumbImage = #imageLiteral(resourceName: "HighlightedOval")
+            
+            if let lowPrice = lowPrice , let maxPrice = maxPrice{
+                
+                let lowKoeficent = CGFloat(lowPrice) / CGFloat(maxPrice)
+                
+                rangeSlider.lowerValue = lowKoeficent
+                
+            }else{
+                rangeSlider.lowerValue = 0.4
+            }
+            
+            if let upPrice = upPrice , let maxPrice = maxPrice{
+                
+                let upKoeficent = CGFloat(upPrice) / CGFloat(maxPrice)
+                
+                rangeSlider.upperValue = CGFloat(upKoeficent)
+                
+            }else{
+                rangeSlider.upperValue = 0.8
+            }
             
             cell.addSubview(rangeSlider)
             
@@ -474,10 +503,10 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         
         if section == 1{
             opType = indexPath.row
-            collectionView.reloadData()
+            collectionView.reloadItems(at: [IndexPath(row: 0, section: 1),IndexPath(row: 1, section: 1)])
         }else if section == 3{
             source = indexPath.row
-            collectionView.reloadData()
+            collectionView.reloadItems(at: [IndexPath(row: 0, section: 3),IndexPath(row: 1, section: 3)])
         }else if section == 8{
             
             if indexPath.row == 0{
@@ -523,9 +552,9 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         }else if section == 10{
             
             if thisClientId != nil {
-                ClientsFilterPayHistByClientCountDataManager(delegate: self).getClientsFilterPayHistByClientCountData(key: key, clientId: thisClientId!, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice == nil ? "" : String(maxPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+                ClientsFilterPayHistByClientCountDataManager(delegate: self).getClientsFilterPayHistByClientCountData(key: key, clientId: thisClientId!, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
             }else{
-                ClientsFilterPayHistoryCountDataManager(delegate: self).getClientsFilterPayHistoryCountData(key: key, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice == nil ? "" : String(maxPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+                ClientsFilterPayHistoryCountDataManager(delegate: self).getClientsFilterPayHistoryCountData(key: key, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
             }
             
         }
@@ -555,9 +584,28 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         
     }
     
+    //MARK: - RangeSlider
+    
     @objc func rangeSliderValueChanged(_ rangeSlider: RangeSlider) {
         let values = "(\(rangeSlider.lowerValue) \(rangeSlider.upperValue))"
         print("Range slider value changed: \(values)")
+        
+        guard let maxPrice = maxPrice else {return}
+        
+        let sliderLowValue = rangeSlider.lowerValue
+        let sliderUpperValue = rangeSlider.upperValue
+        
+        let lowKoeficent = sliderLowValue / rangeSlider.maximumValue
+        let upKoeficent = sliderUpperValue / rangeSlider.maximumValue
+        
+        let lowValue = Int(CGFloat(maxPrice) * lowKoeficent)
+        let upValue = Int(CGFloat(maxPrice) * upKoeficent)
+        
+        self.lowPrice = lowValue
+        self.upPrice = upValue
+        
+        collectionView.reloadItems(at: [IndexPath(row: 0, section: 5),IndexPath(row: 1, section: 5)])
+        
     }
     
 }
@@ -602,7 +650,7 @@ extension PaymentFilterViewController : ClientsFilterPayHistoryCountDataManagerD
                     
                 }else{
                     
-                    delegate?.didFilterStuff(source: source, opType: opType , sumMin: minPrice, sumMax: maxPrice, startDate: minDate, endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+                    delegate?.didFilterStuff(source: source, opType: opType , sumMin: lowPrice, sumMax: upPrice, startDate: minDate, endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
                     
                     dismiss(animated: true, completion: nil)
                     
@@ -636,7 +684,7 @@ extension PaymentFilterViewController : ClientsFilterPayHistByClientCountDataMan
                     
                 }else{
                     
-                    delegate?.didFilterStuff(source: source, opType: opType , sumMin: minPrice, sumMax: maxPrice, startDate: minDate, endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+                    delegate?.didFilterStuff(source: source, opType: opType , sumMin: lowPrice, sumMax: upPrice, startDate: minDate, endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
                     
                     dismiss(animated: true, completion: nil)
                     
