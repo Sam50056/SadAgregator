@@ -24,6 +24,7 @@ class PaymentHistoryViewController: UIViewController {
     private var clientsPaymentsDataManager = ClientsPaymentsDataManager()
     private var paggingPaymentsByClientDataManager = PaggingPaymentsByClientDataManager()
     private var clientsPagingPaymentsDataManager = ClientsPagingPaymentsDataManager()
+    private var clientsFilterPayListDataManager = ClientsFilterPayListDataManager()
     
     private var payments = [JSON]()
     
@@ -32,6 +33,15 @@ class PaymentHistoryViewController: UIViewController {
     
     var maxSumFromApi : String?
     var minDateFromApi : String?
+    
+    private var isFiltering = false
+    private var opType : Int?
+    private var source : Int?
+    private var minPrice : Int?
+    private var maxPrice : Int?
+    private var minDate : String?
+    private var maxDate : String?
+    private var comment : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +52,7 @@ class PaymentHistoryViewController: UIViewController {
         clientsPaymentsDataManager.delegate = self
         paggingPaymentsByClientDataManager.delegate = self
         clientsPagingPaymentsDataManager.delegate = self
+        clientsFilterPayListDataManager.delegate = self
         
         navigationItem.title = "История платежей"
         
@@ -49,6 +60,7 @@ class PaymentHistoryViewController: UIViewController {
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: "PaymentTableViewCell", bundle: nil), forCellReuseIdentifier: "paymentCell")
+        tableView.allowsSelection = false
         
         //Set up search controller
         searchController.searchResultsUpdater = self
@@ -87,6 +99,16 @@ extension PaymentHistoryViewController{
         filterVC.maxSumFromApi = maxSumFromApi
         filterVC.minDateFromApi = minDateFromApi
         
+        filterVC.delegate = self
+        
+        filterVC.opType = opType
+        filterVC.source = source
+        filterVC.commentQuery = comment
+        filterVC.minPrice = minPrice
+        filterVC.maxPrice = maxPrice ?? Int(maxSumFromApi ?? "")
+        filterVC.minDate = minDate ?? minDateFromApi
+        filterVC.maxDate = maxDate
+        
         let navVC = UINavigationController(rootViewController: filterVC)
         
         presentHero(navVC, navigationAnimationType: .selectBy(presenting: .pull(direction: .down), dismissing: .pull(direction: .up)))
@@ -94,7 +116,6 @@ extension PaymentHistoryViewController{
     }
     
 }
-
 
 //MARK: - SearchBar
 
@@ -215,6 +236,8 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        guard !payments.isEmpty else { return UITableViewCell() }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "paymentCell", for: indexPath) as! PaymentTableViewCell
         
         let payment = payments[indexPath.row]
@@ -244,15 +267,80 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
             rowForPaggingUpdate += 16
             
             if let thisClientId = thisClientId {
+                
                 paggingPaymentsByClientDataManager.getPaggingPaymentsByClientData(key: key, clientId: thisClientId,page: page)
+                
             }else{
-                clientsPagingPaymentsDataManager.getClientsPagingPaymentsData(key: key, page: page)
+                
+                if isFiltering{
+                    
+                    clientsFilterPayListDataManager.getClientsFilterPayListData(key : key , page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice ?? 0, sumMax: maxPrice ?? 0, startDate: minDate ?? "", endDate: maxDate ?? Date().formatDate(), query: comment ?? "")
+                    
+                }else{
+                    
+                    clientsPagingPaymentsDataManager.getClientsPagingPaymentsData(key: key, page: page)
+                    
+                }
+                
             }
             
             print("Done a request for page: \(page)")
             
         }
         
+    }
+    
+}
+
+//MARK: - PaymentFilterViewControllerDelegate
+
+extension PaymentHistoryViewController : PaymentFilterViewControllerDelegate{
+    
+    func didFilterStuff(source: Int?, opType: Int?, sumMin: Int?, sumMax: Int?, startDate: String?, endDate: String?, query: String) {
+        
+        payments.removeAll()
+        
+        page = 1
+        rowForPaggingUpdate = 15
+        
+        isFiltering = true
+        
+        clientsFilterPayListDataManager.getClientsFilterPayListData(key: key, page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: sumMin ?? 0, sumMax: sumMax ?? 0, startDate: startDate ?? "", endDate: endDate ?? Date().formatDate(), query: query)
+        
+        self.opType = opType
+        self.source = source
+        self.comment = query
+        self.minPrice = sumMin
+        self.maxPrice = sumMin
+        self.minDate = startDate
+        self.maxDate = endDate
+        
+    }
+    
+}
+
+//MARK: - ClientsFilterPayListDataManager
+
+extension PaymentHistoryViewController : ClientsFilterPayListDataManagerDelegate{
+    
+    func didGetClientsFilterPayListData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                payments.append(contentsOf: data["payments"].arrayValue)
+                
+                tableView.reloadData()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingClientsFilterPayListDataWithError(error: String) {
+        print("Error with ClientsFilterPayListDataManager : \(error)")
     }
     
 }

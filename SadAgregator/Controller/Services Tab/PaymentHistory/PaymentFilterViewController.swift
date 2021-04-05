@@ -9,6 +9,10 @@ import UIKit
 import RealmSwift
 import SwiftyJSON
 
+protocol PaymentFilterViewControllerDelegate {
+    func didFilterStuff(source : Int? , opType : Int? , sumMin : Int? , sumMax : Int? , startDate : String? , endDate : String? , query : String)
+}
+
 class PaymentFilterViewController: UIViewController {
     
     @IBOutlet weak var collectionView : UICollectionView!
@@ -16,6 +20,8 @@ class PaymentFilterViewController: UIViewController {
     private let realm = try! Realm()
     
     private var key = ""
+    
+    var delegate : PaymentFilterViewControllerDelegate?
     
     var maxSumFromApi : String?{
         didSet{
@@ -103,8 +109,8 @@ extension PaymentFilterViewController{
         
         var date = date!
         
-        let firstIndex = minDateFromApi!.index(minDateFromApi!.startIndex, offsetBy: 2)
-        let secondIndex = minDateFromApi!.index(minDateFromApi!.startIndex, offsetBy: 5)
+        let firstIndex = date.index(date.startIndex, offsetBy: 2)
+        let secondIndex = date.index(date.startIndex, offsetBy: 5)
         
         date.insert(".", at: firstIndex)
         date.insert(".", at: secondIndex)
@@ -433,6 +439,10 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             
             textField.placeholder = "Комментарий"
             
+            if let commentQuery = commentQuery {
+                textField.text = commentQuery
+            }
+                
             commentTextField = textField
             
             bgView.layer.cornerRadius = 6
@@ -462,10 +472,10 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         
         if section == 1{
             opType = indexPath.row
-            collectionView.reloadSections([section])
+            collectionView.reloadData()
         }else if section == 3{
             source = indexPath.row
-            collectionView.reloadSections([section])
+            collectionView.reloadData()
         }else if section == 8{
             
             if indexPath.row == 0{
@@ -586,7 +596,9 @@ extension PaymentFilterViewController : ClientsFilterPayHistoryCountDataManagerD
                     
                 }else{
                     
+                    delegate?.didFilterStuff(source: source, opType: opType , sumMin: minPrice, sumMax: maxPrice, startDate: minDate, endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
                     
+                    dismiss(animated: true, completion: nil)
                     
                 }
                 

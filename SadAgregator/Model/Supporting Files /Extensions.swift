@@ -30,6 +30,24 @@ extension String {
     
 }
 
+//MARK: - Date
+
+extension Date{
+    
+    func formatDate(withDot : Bool = false) -> String{
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = withDot ? "dd.MM.yy" : "ddMMyy"
+        
+        //let date: NSDate? = dateFormatterGet.date(from: "2016-02-29 12:24:26") as NSDate?
+        let formattedDate = dateFormatterGet.string(from: self)
+        
+        return formattedDate
+        
+    }
+    
+}
+
 //MARK: - URL
 
 extension URL {
