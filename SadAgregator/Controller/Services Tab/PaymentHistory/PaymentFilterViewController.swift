@@ -265,7 +265,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
                 
-                label.text = "Списание"
+                label.text = "Пополнение"
                 
                 cell.contentView.layer.cornerRadius = 8
                 
@@ -278,7 +278,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
                 
-                label.text = "Пополнение"
+                label.text = "Списание"
                 
                 cell.contentView.layer.cornerRadius = 8
                 
