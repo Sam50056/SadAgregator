@@ -17,7 +17,7 @@ struct ClientsFilterPayHistoryCountDataManager{
     
     var delegate : ClientsFilterPayHistoryCountDataManagerDelegate?
     
-    func getClientsFilterPayHistoryCountData(key : String , source : String , opType : String , sumMin : Int , sumMax : Int , startDate : String , endDate : String , query : String){
+    func getClientsFilterPayHistoryCountData(key : String , source : String , opType : String , sumMin : String , sumMax : String , startDate : String , endDate : String , query : String){
         
         let urlString = "https://agrapi.tk-sad.ru/agr_clients.FilterPayHistCount?AKey=\(key)&asource=\(source)&aoptype=\(opType)&asummmin=\(sumMin)&asummmax=\(sumMax)&adtstart=\(startDate)&adtend=\(endDate)&aquery=\(query)"
         

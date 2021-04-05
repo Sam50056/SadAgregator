@@ -23,6 +23,8 @@ class PaymentFilterViewController: UIViewController {
     
     var delegate : PaymentFilterViewControllerDelegate?
     
+    var thisClientId : String?
+    
     var maxSumFromApi : String?{
         didSet{
             
@@ -442,7 +444,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             if let commentQuery = commentQuery {
                 textField.text = commentQuery
             }
-                
+            
             commentTextField = textField
             
             bgView.layer.cornerRadius = 6
@@ -520,7 +522,11 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             
         }else if section == 10{
             
-            ClientsFilterPayHistoryCountDataManager(delegate: self).getClientsFilterPayHistoryCountData(key: key, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice ?? 0, sumMax: maxPrice ?? 0, startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+            if thisClientId != nil {
+                ClientsFilterPayHistByClientCountDataManager(delegate: self).getClientsFilterPayHistByClientCountData(key: key, clientId: thisClientId!, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice == nil ? "" : String(maxPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+            }else{
+                ClientsFilterPayHistoryCountDataManager(delegate: self).getClientsFilterPayHistoryCountData(key: key, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice == nil ? "" : String(maxPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+            }
             
         }
         
@@ -610,6 +616,40 @@ extension PaymentFilterViewController : ClientsFilterPayHistoryCountDataManagerD
     
     func didFailGettingClientsFilterPayHistoryCountDataWithError(error: String) {
         print("Error with ClientsFilterPayHistoryCountDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - ClientsFilterPayHistByClientCountDataManager
+
+extension PaymentFilterViewController : ClientsFilterPayHistByClientCountDataManagerDelegate {
+    
+    func didGetClientsFilterPayHistByClientCountData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                if data["payments_count"].stringValue == "" || data["payments_count"].stringValue == "0"{
+                    
+                    showSimpleAlertWithOkButton(title: "Нет результатов", message: "Нет результатов поиска с введёнными параметрами")
+                    
+                }else{
+                    
+                    delegate?.didFilterStuff(source: source, opType: opType , sumMin: minPrice, sumMax: maxPrice, startDate: minDate, endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+                    
+                    dismiss(animated: true, completion: nil)
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingClientsFilterPayHistByClientCountDataWithError(error: String) {
+        print("Error with ClientsFilterPayHistByClientCountDataManager : \(error)")
     }
     
 }

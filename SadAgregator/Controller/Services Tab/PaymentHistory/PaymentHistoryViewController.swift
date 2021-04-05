@@ -25,6 +25,7 @@ class PaymentHistoryViewController: UIViewController {
     private var paggingPaymentsByClientDataManager = PaggingPaymentsByClientDataManager()
     private var clientsPagingPaymentsDataManager = ClientsPagingPaymentsDataManager()
     private var clientsFilterPayListDataManager = ClientsFilterPayListDataManager()
+    private var clientsFilterPayHistByClientDataManager = ClientsFilterPayHistByClientDataManager()
     
     private var payments = [JSON]()
     
@@ -53,6 +54,7 @@ class PaymentHistoryViewController: UIViewController {
         paggingPaymentsByClientDataManager.delegate = self
         clientsPagingPaymentsDataManager.delegate = self
         clientsFilterPayListDataManager.delegate = self
+        clientsFilterPayHistByClientDataManager.delegate = self
         
         navigationItem.title = "История платежей"
         
@@ -100,6 +102,8 @@ extension PaymentHistoryViewController{
         filterVC.minDateFromApi = minDateFromApi
         
         filterVC.delegate = self
+        
+        filterVC.thisClientId = thisClientId
         
         filterVC.opType = opType
         filterVC.source = source
@@ -268,13 +272,21 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
             
             if let thisClientId = thisClientId {
                 
-                paggingPaymentsByClientDataManager.getPaggingPaymentsByClientData(key: key, clientId: thisClientId,page: page)
+                if isFiltering{
+                    
+                    clientsFilterPayHistByClientDataManager.getClientsFilterPayHistByClientData(key : key , clientId: thisClientId , page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice ==  nil ? "" : String(maxPrice!) , startDate: minDate ?? "", endDate: maxDate ?? Date().formatDate(), query: comment ?? "")
+                    
+                }else{
+                    
+                    paggingPaymentsByClientDataManager.getPaggingPaymentsByClientData(key: key, clientId: thisClientId,page: page)
+                    
+                }
                 
             }else{
                 
                 if isFiltering{
                     
-                    clientsFilterPayListDataManager.getClientsFilterPayListData(key : key , page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice ?? 0, sumMax: maxPrice ?? 0, startDate: minDate ?? "", endDate: maxDate ?? Date().formatDate(), query: comment ?? "")
+                    clientsFilterPayListDataManager.getClientsFilterPayListData(key : key , page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice ==  nil ? "" : String(maxPrice!) , startDate: minDate ?? "", endDate: maxDate ?? Date().formatDate(), query: comment ?? "")
                     
                 }else{
                     
@@ -305,7 +317,11 @@ extension PaymentHistoryViewController : PaymentFilterViewControllerDelegate{
         
         isFiltering = true
         
-        clientsFilterPayListDataManager.getClientsFilterPayListData(key: key, page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: sumMin ?? 0, sumMax: sumMax ?? 0, startDate: startDate ?? "", endDate: endDate ?? Date().formatDate(), query: query)
+        if thisClientId != nil{
+            clientsFilterPayHistByClientDataManager.getClientsFilterPayHistByClientData(key: key, clientId: thisClientId!, page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: sumMin == nil ? "" : String(sumMin!) , sumMax: sumMax == nil ? "" : String(sumMax!), startDate: startDate ?? "", endDate: endDate ?? Date().formatDate(), query: query)
+        }else{
+            clientsFilterPayListDataManager.getClientsFilterPayListData(key: key, page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: sumMin == nil ? "" : String(sumMin!) , sumMax: sumMax == nil ? "" : String(sumMax!), startDate: startDate ?? "", endDate: endDate ?? Date().formatDate(), query: query)
+        }
         
         self.opType = opType
         self.source = source
@@ -341,6 +357,31 @@ extension PaymentHistoryViewController : ClientsFilterPayListDataManagerDelegate
     
     func didFailGettingClientsFilterPayListDataWithError(error: String) {
         print("Error with ClientsFilterPayListDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - ClientsFilterPayHistByClientDataManager
+
+extension PaymentHistoryViewController : ClientsFilterPayHistByClientDataManagerDelegate{
+    
+    func didGetClientsFilterPayHistByClientData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                payments.append(contentsOf: data["payments"].arrayValue)
+                
+                tableView.reloadData()
+                
+            }
+            
+        }
+    }
+    
+    func didFailGettingClientsFilterPayHistByClientDataWithError(error: String) {
+        print("Error with ClientsFilterPayHistByClientDataManager : \(error)")
     }
     
 }

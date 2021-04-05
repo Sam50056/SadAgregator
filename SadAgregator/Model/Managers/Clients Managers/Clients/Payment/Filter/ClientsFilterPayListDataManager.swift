@@ -17,7 +17,7 @@ struct ClientsFilterPayListDataManager {
     
     var delegate : ClientsFilterPayListDataManagerDelegate?
     
-    func getClientsFilterPayListData(key : String , page : Int , source : String , opType : String , sumMin : Int , sumMax : Int , startDate : String , endDate : String , query : String){
+    func getClientsFilterPayListData(key : String , page : Int , source : String , opType : String , sumMin : String , sumMax : String , startDate : String , endDate : String , query : String){
         
         let urlString = "https://agrapi.tk-sad.ru/agr_clients.filterpayhist?AKey=\(key)&apage=\(page)&asource=\(source)&aoptype=\(opType)&asummmin=\(sumMin)&asummmax=\(sumMax)&adtstart=\(startDate)&adtend=\(endDate)&aquery=\(query)"
         
