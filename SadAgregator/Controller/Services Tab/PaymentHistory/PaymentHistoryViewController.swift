@@ -134,7 +134,19 @@ extension PaymentHistoryViewController : UISearchResultsUpdating{
     
     func updateSearchResults(for searchController: UISearchController) {
         
+        guard let text = searchController.searchBar.text else {return}
         
+        comment = text
+        
+        if let thisClientId = thisClientId {
+            
+            clientsFilterPayHistByClientDataManager.getClientsFilterPayHistByClientData(key : key , clientId: thisClientId , page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice ==  nil ? "" : String(maxPrice!) , startDate: minDate ?? "", endDate: maxDate ?? Date().formatDate(), query: comment ?? "")
+            
+        }else{
+            
+            clientsFilterPayListDataManager.getClientsFilterPayListData(key : key , page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice ==  nil ? "" : String(maxPrice!) , startDate: minDate ?? "", endDate: maxDate ?? Date().formatDate(), query: comment ?? "")
+            
+        }
         
     }
     
@@ -337,6 +349,8 @@ extension PaymentHistoryViewController : PaymentFilterViewControllerDelegate{
         self.maxPrice = sumMin
         self.minDate = startDate
         self.maxDate = endDate
+        
+        self.searchController.searchBar.text = comment
         
     }
     
