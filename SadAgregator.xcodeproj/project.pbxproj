@@ -144,6 +144,7 @@
 		22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */; };
 		22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */; };
 		22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */; };
+		22B518E5261E46C100A7176F /* DobavlenieVZakupkuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */; };
 		22B6BC8A25DC6DF300EAE067 /* CategoryFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */; };
 		22B6BC8D25DC721300EAE067 /* AboveViewControllerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */; };
 		22B6BCAB25DEDA6A00EAE067 /* AllCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */; };
@@ -200,6 +201,8 @@
 		22DC987F2602AFCB0016A31B /* UpdateClientInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */; };
 		22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */; };
 		22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */; };
+		22F7426A26226561009128AF /* PurchasesItemInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F7426926226561009128AF /* PurchasesItemInfoDataManager.swift */; };
+		22F7426E26226DA3009128AF /* PostImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F7426D26226DA3009128AF /* PostImage.swift */; };
 		44D7F3DB0392E9E53844BA25 /* Pods_SadAgregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */; };
 /* End PBXBuildFile section */
 
@@ -345,6 +348,7 @@
 		22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SizeCollectionViewCell.xib; sourceTree = "<group>"; };
 		22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionCollectionViewCell.xib; sourceTree = "<group>"; };
+		22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DobavlenieVZakupkuViewController.swift; sourceTree = "<group>"; };
 		22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterViewController.swift; sourceTree = "<group>"; };
 		22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboveViewControllerPresentationController.swift; sourceTree = "<group>"; };
 		22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoriesViewController.swift; sourceTree = "<group>"; };
@@ -402,6 +406,8 @@
 		22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateClientInfoDataManager.swift; sourceTree = "<group>"; };
 		22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSimpleReqDataManager.swift; sourceTree = "<group>"; };
 		22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListSelectDataManager.swift; sourceTree = "<group>"; };
+		22F7426926226561009128AF /* PurchasesItemInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesItemInfoDataManager.swift; sourceTree = "<group>"; };
+		22F7426D26226DA3009128AF /* PostImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImage.swift; sourceTree = "<group>"; };
 		8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.debug.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.debug.xcconfig"; sourceTree = "<group>"; };
 		DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SadAgregator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -625,6 +631,7 @@
 				22423E9A259131F80097C9E6 /* Menu Managers */,
 				2200943B25DB26700001F7B3 /* Category Managers */,
 				22C549A025F41C30008D941B /* Clients Managers */,
+				22F742682622653F009128AF /* Purchases */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -867,6 +874,7 @@
 		228CB774255BF996002B4A96 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				22F7426C26226D93009128AF /* Structs */,
 				22409F9B25EAC95700582576 /* Animation */,
 				224BC441259FEE42003F147F /* Supporting Files  */,
 				22634AB425858C7300DF6FDB /* Data Base Models  */,
@@ -1110,6 +1118,7 @@
 				2200943825DACBE90001F7B3 /* CategoryViewController.swift */,
 				22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */,
 				22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */,
+				22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
@@ -1212,6 +1221,22 @@
 				2255301F261AA6EE0017B9CF /* Filter */,
 			);
 			path = Payment;
+			sourceTree = "<group>";
+		};
+		22F742682622653F009128AF /* Purchases */ = {
+			isa = PBXGroup;
+			children = (
+				22F7426926226561009128AF /* PurchasesItemInfoDataManager.swift */,
+			);
+			path = Purchases;
+			sourceTree = "<group>";
+		};
+		22F7426C26226D93009128AF /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				22F7426D26226DA3009128AF /* PostImage.swift */,
+			);
+			path = Structs;
 			sourceTree = "<group>";
 		};
 		6358550D007648CA0215FE8A /* Pods */ = {
@@ -1463,6 +1488,7 @@
 				224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */,
 				2268869325994F030079933D /* ListWorkView.swift in Sources */,
 				22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */,
+				22F7426A26226561009128AF /* PurchasesItemInfoDataManager.swift in Sources */,
 				22634AB625858CA800DF6FDB /* UserData.swift in Sources */,
 				22B7271325740E8C00B56249 /* LinePostsPaggingDataManager.swift in Sources */,
 				22BF1A1725A5FD5C00567DB7 /* PostLikeDataManager.swift in Sources */,
@@ -1473,8 +1499,10 @@
 				22A155E92584E43C000EAB64 /* AuthDataManager.swift in Sources */,
 				224FE2AC2609644600AE13B2 /* CreateNewClientDataManager.swift in Sources */,
 				22BF19FB25A4DA9300567DB7 /* ActivityLinesTableViewController.swift in Sources */,
+				22F7426E26226DA3009128AF /* PostImage.swift in Sources */,
 				22943FE925ABDB1A00A742B8 /* PostRedirectDataManager.swift in Sources */,
 				22D663D125823D9E0058B5CC /* LoginView.swift in Sources */,
+				22B518E5261E46C100A7176F /* DobavlenieVZakupkuViewController.swift in Sources */,
 				221C479C25B4C7E200290E09 /* DescriptionCollectionViewCell.swift in Sources */,
 				220DF1802617EAAE008F5873 /* DatePickerViewController.swift in Sources */,
 				22B6BC8A25DC6DF300EAE067 /* CategoryFilterViewController.swift in Sources */,
