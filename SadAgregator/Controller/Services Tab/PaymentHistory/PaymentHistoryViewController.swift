@@ -138,6 +138,8 @@ extension PaymentHistoryViewController : UISearchResultsUpdating{
         
         comment = text
         
+        if text != "" {payments.removeAll()}
+        
         if let thisClientId = thisClientId {
             
             clientsFilterPayHistByClientDataManager.getClientsFilterPayHistByClientData(key : key , clientId: thisClientId , page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice ==  nil ? "" : String(maxPrice!) , startDate: minDate ?? "", endDate: maxDate ?? Date().formatDate(), query: comment ?? "")

@@ -347,7 +347,7 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                 view.layoutIfNeeded()
             }
             
-        }else if section == 1{
+        }else if section == 1 , infoItems[indexPath.row].secondText != ""{
             
             let item = infoItems[indexPath.row]
             

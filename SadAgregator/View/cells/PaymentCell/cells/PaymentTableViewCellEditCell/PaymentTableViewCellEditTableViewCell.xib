@@ -22,25 +22,15 @@
                         <rect key="frame" x="16" y="8" width="288" height="34"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fve-0o-scX">
-                                <rect key="frame" x="8" y="8" width="241" height="18.5"/>
+                                <rect key="frame" x="8" y="8" width="272" height="18.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ellipsis" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="xIz-aJ-EcD">
-                                <rect key="frame" x="257" y="14" width="23" height="6"/>
-                                <color key="tintColor" systemColor="systemGrayColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20.5" id="D07-Ks-Nr2"/>
-                                    <constraint firstAttribute="width" constant="23" id="h49-x9-sdR"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="xIz-aJ-EcD" firstAttribute="centerY" secondItem="k20-Gv-EKR" secondAttribute="centerY" id="0Uh-xA-NFH"/>
+                            <constraint firstAttribute="trailing" secondItem="fve-0o-scX" secondAttribute="trailing" constant="8" id="1n7-qc-Dpp"/>
                             <constraint firstItem="fve-0o-scX" firstAttribute="centerY" secondItem="k20-Gv-EKR" secondAttribute="centerY" id="6Dh-5s-3Ji"/>
-                            <constraint firstAttribute="trailing" secondItem="xIz-aJ-EcD" secondAttribute="trailing" constant="8" id="LVv-m8-ZXx"/>
-                            <constraint firstItem="xIz-aJ-EcD" firstAttribute="leading" secondItem="fve-0o-scX" secondAttribute="trailing" constant="8" id="WbD-Dz-b5P"/>
                             <constraint firstItem="fve-0o-scX" firstAttribute="leading" secondItem="k20-Gv-EKR" secondAttribute="leading" constant="8" id="XDM-sa-r61"/>
                         </constraints>
                     </view>
@@ -55,19 +45,14 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="bgView" destination="k20-Gv-EKR" id="BVg-XR-hvj"/>
-                <outlet property="buttonImageView" destination="xIz-aJ-EcD" id="pkQ-Xc-an2"/>
                 <outlet property="textField" destination="fve-0o-scX" id="Q3q-oq-hgs"/>
             </connections>
             <point key="canvasLocation" x="-23.188405797101453" y="83.035714285714278"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -3453,32 +3453,22 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1f-SO-Q78">
-                                                    <rect key="frame" x="198.33333333333334" y="18.666666666666668" width="42" height="21.000000000000004"/>
+                                                    <rect key="frame" x="226" y="18.666666666666668" width="42" height="21.000000000000004"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stepper opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="cjn-2j-JvW">
-                                                    <rect key="frame" x="248.33333333333337" y="13" width="94" height="32"/>
+                                                    <rect key="frame" x="276" y="13" width="94" height="32"/>
                                                 </stepper>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ebE-Dv-7Im">
-                                                    <rect key="frame" x="350.33333333333331" y="15.999999999999998" width="19.666666666666686" height="27"/>
-                                                    <color key="tintColor" systemColor="systemGrayColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="19.670000000000002" id="dsp-2A-Ei6"/>
-                                                        <constraint firstAttribute="height" constant="28.329999999999998" id="qFl-Tx-NY9"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="hvc-gZ-dsO" firstAttribute="leading" secondItem="jlq-WV-P4u" secondAttribute="leadingMargin" id="1if-oE-al4"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ebE-Dv-7Im" secondAttribute="trailing" id="1lH-tR-Cqh"/>
-                                                <constraint firstItem="ebE-Dv-7Im" firstAttribute="leading" secondItem="cjn-2j-JvW" secondAttribute="trailing" constant="8" id="C24-UB-b8i"/>
                                                 <constraint firstItem="kqI-et-N2w" firstAttribute="leading" secondItem="jlq-WV-P4u" secondAttribute="leadingMargin" id="HGX-ss-DGK"/>
                                                 <constraint firstAttribute="trailing" secondItem="hvc-gZ-dsO" secondAttribute="trailing" id="He4-BF-xOk"/>
-                                                <constraint firstItem="ebE-Dv-7Im" firstAttribute="centerY" secondItem="jlq-WV-P4u" secondAttribute="centerY" id="L2c-K0-YE5"/>
                                                 <constraint firstItem="h1f-SO-Q78" firstAttribute="centerY" secondItem="jlq-WV-P4u" secondAttribute="centerY" id="LF8-Fc-MRo"/>
                                                 <constraint firstItem="cjn-2j-JvW" firstAttribute="centerY" secondItem="jlq-WV-P4u" secondAttribute="centerY" id="LMc-D4-4Ta"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="cjn-2j-JvW" secondAttribute="trailing" id="cd4-NW-3WL"/>
                                                 <constraint firstAttribute="bottom" secondItem="hvc-gZ-dsO" secondAttribute="bottom" id="cxH-df-GPh"/>
                                                 <constraint firstItem="kqI-et-N2w" firstAttribute="centerY" secondItem="jlq-WV-P4u" secondAttribute="centerY" id="eF0-PP-t37"/>
                                                 <constraint firstItem="cjn-2j-JvW" firstAttribute="leading" secondItem="h1f-SO-Q78" secondAttribute="trailing" constant="8" id="yTa-S6-JEB"/>
