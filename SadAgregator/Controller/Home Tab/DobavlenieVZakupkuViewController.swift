@@ -24,6 +24,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
     
     private var osnovnoeCellItemsArray = [OsnovnoeCellItem]()
     private var dopolnitelnoCellItemsArray = [DopolnitelnoSwitchCellItem]()
+    private var klientiCellItemsArray = [KlientiCellItem]()
     
     private var purchasesItemInfoDataManager = PurchasesItemInfoDataManager()
     
@@ -36,11 +37,11 @@ class DobavlenieVZakupkuViewController: UIViewController {
             
             var newArray = [OsnovnoeCellItem]()
             
-            if let price = itemInfo["price"].string{
+            if let price = itemInfo["pur_price"].string{
                 newArray.append(OsnovnoeCellItem(firstLabelText: "Закупка", secondLabelText: price + " руб.", hasImageView: true))
             }
             
-            if let cenaProdazhi = cenaProdazhi {
+            if let cenaProdazhi = itemInfo["sell_price"].string {
                 newArray.append(OsnovnoeCellItem(firstLabelText: "Цена продажи", secondLabelText: String(cenaProdazhi) + " руб.", hasImageView: true,isCenaProdazhi: true))
             }
             
@@ -108,6 +109,12 @@ class DobavlenieVZakupkuViewController: UIViewController {
             DopolnitelnoSwitchCellItem(labelText: "Проверка на брак", isSwitch: true),
             DopolnitelnoSwitchCellItem(labelText: "Комментарий", isComment: true, isSwitch: false, shouldLabelTextBeBlue: false),
             DopolnitelnoSwitchCellItem(labelText: "Свой комментарий", isComment: true, isSwitch: false, shouldLabelTextBeBlue: false)
+        ]
+        
+        klientiCellItemsArray = [
+            KlientiCellItem(labelText: "Выбрать клиента..."),
+            KlientiCellItem(labelText: "Замена для..."),
+            KlientiCellItem(labelText: "Выбрать выкуп")
         ]
         
         tableView.delegate = self
@@ -178,9 +185,17 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 return 0
             }
             
+        case 2:
+            
+            return itemInfo != nil ? 2 : 0
+            
         case 3:
             
             return dopolnitelnoCellItemsArray.count
+            
+        case 4:
+            
+            return klientiCellItemsArray.count
             
         default:
             return 0
@@ -219,7 +234,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 else {return cell}
                 
                 captLabel.text = itemInfo["capt"].stringValue
-                priceLabel.text = itemInfo["price"].stringValue + " руб."
+                priceLabel.text = itemInfo["pur_price"].stringValue + " руб."
                 
                 if let imageURLString = itemInfo["img"].string ,
                    let imageURL = URL(string: imageURLString) {
@@ -282,6 +297,24 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 }
                 
             }
+            
+        case 2:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelCell", for: indexPath)
+            
+            guard let label1 = cell.viewWithTag(1) as? UILabel,
+                  let label2 = cell.viewWithTag(2) as? UILabel
+            else {return cell}
+            
+            label1.text = index == 0 ? "Итого товары" : "Итого с клиентов"
+            
+            label2.text = (index == 0 ? "500" : "750") + " руб."
+            
+            label1.textColor = UIColor(named: "blackwhite")
+            label2.textColor = UIColor(named: "blackwhite")
+            
+            label1.font = UIFont.boldSystemFont(ofSize: label1.font.pointSize)
+            label2.font = UIFont.boldSystemFont(ofSize: label2.font.pointSize)
             
         case 3:
             
@@ -350,6 +383,20 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
             }
             
+        case 4:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelCell", for: indexPath)
+            
+            let item = klientiCellItemsArray[index]
+            
+            guard let label1 = cell.viewWithTag(1) as? UILabel,
+                  let label2 = cell.viewWithTag(2) as? UILabel
+            else {return cell}
+            
+            label1.text = item.labelText
+            label2.text = ""
+            
+            label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
             
         default:
             return cell
@@ -376,7 +423,34 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let section = indexPath.section
+        let index = indexPath.row
+        
+        if section == 4{
+            
+            if klientiCellItemsArray[index].labelText == "Выбрать выкуп"{
+                
+                let vibratVikupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VibratVikupVC") as! VibratVikupViewController
+                
+                let navVC = UINavigationController(rootViewController: vibratVikupVC)
+                
+                present(navVC, animated: true, completion: nil)
+                
+            }else if klientiCellItemsArray[index].labelText == "Выбрать клиента..."{
+                
+                let vibratKlientaVC = VibratKlientaViewController()
+                
+                let navVC = UINavigationController(rootViewController: vibratKlientaVC)
+                
+                present(navVC, animated: true, completion: nil)
+                
+            }
+            
+        }
+        
     }
     
 }
@@ -423,6 +497,13 @@ extension DobavlenieVZakupkuViewController {
         var isComment : Bool = false
         var isSwitch : Bool = true
         var shouldLabelTextBeBlue : Bool = false
+        
+    }
+    
+    private struct KlientiCellItem{
+        
+        var labelText : String
+        var shouldLabelTextBeBlue : Bool = true
         
     }
     
