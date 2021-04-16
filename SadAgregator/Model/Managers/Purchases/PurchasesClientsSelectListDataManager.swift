@@ -17,9 +17,9 @@ struct PurchasesClientsSelectListDataManager {
     
     var delegate : PurchasesClientsSelectListDataManagerDelegate?
     
-    func getPurchasesClientsSelectListData(key : String , page : Int){
+    func getPurchasesClientsSelectListData(key : String , page : Int , query : String = ""){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_purchases.ClientsSelectList?AKey=\(key)&APurSYSID=&APage=\(page)&AQuery=&AForReplace="
+        let urlString = "https://agrapi.tk-sad.ru/agr_purchases.ClientsSelectList?AKey=\(key)&APurSYSID=&APage=\(page)&AQuery=\(query)&AForReplace="
         
         print("URLString for PurchasesClientsSelectListDataManager: \(urlString)")
         

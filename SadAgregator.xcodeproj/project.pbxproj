@@ -126,6 +126,8 @@
 		22906B372578020300F00B0D /* PostavshikViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22906B362578020300F00B0D /* PostavshikViewController.swift */; };
 		22906B3A2578293500F00B0D /* VendorCardDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22906B392578293500F00B0D /* VendorCardDataManager.swift */; };
 		2291BE452560620F004F55DF /* MainDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BE442560620F004F55DF /* MainDataManager.swift */; };
+		22941A3F262A478C00119844 /* TovarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A3D262A478C00119844 /* TovarTableViewCell.swift */; };
+		22941A40262A478C00119844 /* TovarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22941A3E262A478C00119844 /* TovarTableViewCell.xib */; };
 		22943FE925ABDB1A00A742B8 /* PostRedirectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22943FE825ABDB1900A742B8 /* PostRedirectDataManager.swift */; };
 		2298DECB26111F2B002FA2A2 /* PaymentFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298DECA26111F2B002FA2A2 /* PaymentFilterViewController.swift */; };
 		229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A95C425A161030086EAD9 /* PricesTableViewCell.swift */; };
@@ -334,6 +336,8 @@
 		22906B362578020300F00B0D /* PostavshikViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostavshikViewController.swift; sourceTree = "<group>"; };
 		22906B392578293500F00B0D /* VendorCardDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorCardDataManager.swift; sourceTree = "<group>"; };
 		2291BE442560620F004F55DF /* MainDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataManager.swift; sourceTree = "<group>"; };
+		22941A3D262A478C00119844 /* TovarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCell.swift; sourceTree = "<group>"; };
+		22941A3E262A478C00119844 /* TovarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCell.xib; sourceTree = "<group>"; };
 		22943FE825ABDB1900A742B8 /* PostRedirectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRedirectDataManager.swift; sourceTree = "<group>"; };
 		2298DECA26111F2B002FA2A2 /* PaymentFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFilterViewController.swift; sourceTree = "<group>"; };
 		229A95C425A161030086EAD9 /* PricesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesTableViewCell.swift; sourceTree = "<group>"; };
@@ -930,6 +934,15 @@
 			path = PopCell;
 			sourceTree = "<group>";
 		};
+		22941A3B26299E9D00119844 /* TovarCell */ = {
+			isa = PBXGroup;
+			children = (
+				22941A3D262A478C00119844 /* TovarTableViewCell.swift */,
+				22941A3E262A478C00119844 /* TovarTableViewCell.xib */,
+			);
+			path = TovarCell;
+			sourceTree = "<group>";
+		};
 		229A95C325A160E00086EAD9 /* PricesTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1007,6 +1020,7 @@
 		22A49CA7256661D700CCC781 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				22941A3B26299E9D00119844 /* TovarCell */,
 				22328CD125FE854500C51CC9 /* PaymentCell */,
 				2237E76F25FA325C00EBD919 /* PurchaseCell */,
 				22C5499125F40F99008D941B /* ClientCell */,
@@ -1331,6 +1345,7 @@
 				22A49CB52566645800CCC781 /* PostTableViewCell.xib in Resources */,
 				22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */,
 				2237E77D25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib in Resources */,
+				22941A40262A478C00119844 /* TovarTableViewCell.xib in Resources */,
 				22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */,
 				2267D0A125B4F3C600904C44 /* TextViewCollectionViewCell.xib in Resources */,
 				2290486C256E4978000B7A28 /* PopTableViewCell.xib in Resources */,
@@ -1543,6 +1558,7 @@
 				2201671C25A669790072BFE7 /* GetPostActionsDataManager.swift in Sources */,
 				2201672925A777A20072BFE7 /* GetVendActionsDataManager.swift in Sources */,
 				229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */,
+				22941A3F262A478C00119844 /* TovarTableViewCell.swift in Sources */,
 				22A2B56825E03200001359D6 /* SlideDownPresentationController.swift in Sources */,
 				2286AD0B25CB5EEE004EF0D7 /* VendorRevsViewController.swift in Sources */,
 				22328CD925FE857800C51CC9 /* PaymentTableViewCell.swift in Sources */,

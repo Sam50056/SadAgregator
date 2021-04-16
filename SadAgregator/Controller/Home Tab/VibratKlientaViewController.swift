@@ -15,8 +15,12 @@ class VibratKlientaViewController: UITableViewController{
     
     private var key = ""
     
+    private let searchController = UISearchController(searchResultsController: nil)
+    
     private var page = 1
     private var rowForPaggingUpdate : Int = 15
+    
+    private var purchasesClientsSelectListDataManager = PurchasesClientsSelectListDataManager()
     
     private var clients = [JSON]()
     
@@ -26,7 +30,16 @@ class VibratKlientaViewController: UITableViewController{
         //        loadUserData()
         key = "part_2_test"
         
-        PurchasesClientsSelectListDataManager(delegate : self).getPurchasesClientsSelectListData(key: key, page: page)
+        //Set up search controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Быстрый поиск по именам"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        purchasesClientsSelectListDataManager.delegate = self
+        
+        purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page)
         
     }
     
@@ -51,6 +64,33 @@ extension VibratKlientaViewController{
     
 }
 
+//MARK: - SearchBar
+
+extension VibratKlientaViewController : UISearchResultsUpdating{
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        if let searchText = searchController.searchBar.text , searchText != "" {
+            
+            clients.removeAll()
+            
+            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, query: searchText)
+            
+        }else{
+            
+            clients.removeAll()
+            
+            page = 1
+            rowForPaggingUpdate = 15
+            
+            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page)
+            
+        }
+        
+    }
+    
+}
+
 
 //MARK: - TableView
 
@@ -62,9 +102,11 @@ extension VibratKlientaViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let client = clients[indexPath.row]
-        
         let cell = UITableViewCell()
+        
+        guard !clients.isEmpty else {return cell}
+        
+        let client = clients[indexPath.row]
         
         cell.textLabel?.text = client["name"].stringValue
         
@@ -84,7 +126,7 @@ extension VibratKlientaViewController{
             
             rowForPaggingUpdate += 16
             
-            PurchasesClientsSelectListDataManager(delegate : self).getPurchasesClientsSelectListData(key: key, page: page)
+            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, query: searchController.searchBar.text ?? "")
             
             print("Done a request for page: \(page)")
             
