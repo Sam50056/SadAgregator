@@ -128,6 +128,8 @@
 		2291BE452560620F004F55DF /* MainDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BE442560620F004F55DF /* MainDataManager.swift */; };
 		22941A3F262A478C00119844 /* TovarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A3D262A478C00119844 /* TovarTableViewCell.swift */; };
 		22941A40262A478C00119844 /* TovarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22941A3E262A478C00119844 /* TovarTableViewCell.xib */; };
+		22941A48262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A46262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift */; };
+		22941A49262B6F3400119844 /* TovarTableViewCellCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22941A47262B6F3400119844 /* TovarTableViewCellCollectionViewCell.xib */; };
 		22943FE925ABDB1A00A742B8 /* PostRedirectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22943FE825ABDB1900A742B8 /* PostRedirectDataManager.swift */; };
 		2298DECB26111F2B002FA2A2 /* PaymentFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298DECA26111F2B002FA2A2 /* PaymentFilterViewController.swift */; };
 		229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A95C425A161030086EAD9 /* PricesTableViewCell.swift */; };
@@ -148,6 +150,9 @@
 		22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */; };
 		22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */; };
 		22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */; };
+		22ACF1A9262B828B00F9584D /* ZamenaDlyaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */; };
+		22ACF1AE262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */; };
+		22ACF1AF262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */; };
 		22B518E5261E46C100A7176F /* DobavlenieVZakupkuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */; };
 		22B6BC8A25DC6DF300EAE067 /* CategoryFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */; };
 		22B6BC8D25DC721300EAE067 /* AboveViewControllerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */; };
@@ -338,6 +343,8 @@
 		2291BE442560620F004F55DF /* MainDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataManager.swift; sourceTree = "<group>"; };
 		22941A3D262A478C00119844 /* TovarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCell.swift; sourceTree = "<group>"; };
 		22941A3E262A478C00119844 /* TovarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCell.xib; sourceTree = "<group>"; };
+		22941A46262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCellCollectionViewCell.swift; sourceTree = "<group>"; };
+		22941A47262B6F3400119844 /* TovarTableViewCellCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCellCollectionViewCell.xib; sourceTree = "<group>"; };
 		22943FE825ABDB1900A742B8 /* PostRedirectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRedirectDataManager.swift; sourceTree = "<group>"; };
 		2298DECA26111F2B002FA2A2 /* PaymentFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFilterViewController.swift; sourceTree = "<group>"; };
 		229A95C425A161030086EAD9 /* PricesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesTableViewCell.swift; sourceTree = "<group>"; };
@@ -358,6 +365,9 @@
 		22A49CBA2566650600CCC781 /* SizeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SizeCollectionViewCell.xib; sourceTree = "<group>"; };
 		22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionCollectionViewCell.xib; sourceTree = "<group>"; };
+		22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZamenaDlyaTableViewController.swift; sourceTree = "<group>"; };
+		22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCellTwoLabelTableViewCell.swift; sourceTree = "<group>"; };
+		22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCellTwoLabelTableViewCell.xib; sourceTree = "<group>"; };
 		22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DobavlenieVZakupkuViewController.swift; sourceTree = "<group>"; };
 		22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterViewController.swift; sourceTree = "<group>"; };
 		22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboveViewControllerPresentationController.swift; sourceTree = "<group>"; };
@@ -937,10 +947,29 @@
 		22941A3B26299E9D00119844 /* TovarCell */ = {
 			isa = PBXGroup;
 			children = (
+				22941A44262B6E9A00119844 /* tableViewCells */,
+				22941A43262B6E8F00119844 /* collectionViewCells */,
 				22941A3D262A478C00119844 /* TovarTableViewCell.swift */,
 				22941A3E262A478C00119844 /* TovarTableViewCell.xib */,
 			);
 			path = TovarCell;
+			sourceTree = "<group>";
+		};
+		22941A43262B6E8F00119844 /* collectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				22941A46262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift */,
+				22941A47262B6F3400119844 /* TovarTableViewCellCollectionViewCell.xib */,
+			);
+			path = collectionViewCells;
+			sourceTree = "<group>";
+		};
+		22941A44262B6E9A00119844 /* tableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				22ACF1AB262B966200F9584D /* New Group */,
+			);
+			path = tableViewCells;
 			sourceTree = "<group>";
 		};
 		229A95C325A160E00086EAD9 /* PricesTableViewCell */ = {
@@ -1074,6 +1103,15 @@
 			path = OptionCell;
 			sourceTree = "<group>";
 		};
+		22ACF1AB262B966200F9584D /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */,
+				22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		22BF19D125A3DD2300567DB7 /* TextLabelCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1143,6 +1181,7 @@
 				22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */,
 				22D636EF2624E8A400987E3F /* VibratVikupViewController.swift */,
 				22703261262711510068BD82 /* VibratKlientaViewController.swift */,
+				22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
@@ -1349,10 +1388,12 @@
 				22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */,
 				2267D0A125B4F3C600904C44 /* TextViewCollectionViewCell.xib in Resources */,
 				2290486C256E4978000B7A28 /* PopTableViewCell.xib in Resources */,
+				22ACF1AF262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib in Resources */,
 				228CB769255BF974002B4A96 /* LaunchScreen.storyboard in Resources */,
 				22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */,
 				221C479D25B4C7E200290E09 /* DescriptionCollectionViewCell.xib in Resources */,
 				228CB766255BF974002B4A96 /* Assets.xcassets in Resources */,
+				22941A49262B6F3400119844 /* TovarTableViewCellCollectionViewCell.xib in Resources */,
 				2237E77725FA32C500EBD919 /* PurchaseTableViewCell.xib in Resources */,
 				22328CDA25FE857800C51CC9 /* PaymentTableViewCell.xib in Resources */,
 				22BF19DA25A3DDC800567DB7 /* TextLabelCollectionViewCell.xib in Resources */,
@@ -1489,6 +1530,7 @@
 				22D604D225EFA6BC00102CB6 /* ServicesViewController.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
 				2286AD0F25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift in Sources */,
+				22ACF1A9262B828B00F9584D /* ZamenaDlyaTableViewController.swift in Sources */,
 				22C5499C25F41223008D941B /* ClientTableViewCellTableViewCell.swift in Sources */,
 				22328CC725FD806300C51CC9 /* ClientsFIlterDataManager.swift in Sources */,
 				224D273E2613AED200BFAE30 /* RangeSliderTrackLayer.swift in Sources */,
@@ -1552,6 +1594,7 @@
 				22B6BC8D25DC721300EAE067 /* AboveViewControllerPresentationController.swift in Sources */,
 				2268869725995C070079933D /* SearchListWorkDataManager.swift in Sources */,
 				22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */,
+				22941A48262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift in Sources */,
 				22A155ED2584E766000EAB64 /* MenuViewModel.swift in Sources */,
 				22D90239259C1546009732CC /* SendQuestionView.swift in Sources */,
 				22DC987226028B160016A31B /* PaggingPaymentsByClientDataManager.swift in Sources */,
@@ -1569,6 +1612,7 @@
 				22782906258AC7FE00B435FA /* Extensions.swift in Sources */,
 				22C5D02B25B0E9DF001C69C6 /* ExportPeersDataManager.swift in Sources */,
 				22BF1A0625A543C900567DB7 /* TopPointsPaggingDataManager.swift in Sources */,
+				22ACF1AE262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift in Sources */,
 				22D9023D259C1988009732CC /* MultilineTextView.swift in Sources */,
 				224EFC3125A9D209007CA45E /* SendQuestionDataManager.swift in Sources */,
 				2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */,

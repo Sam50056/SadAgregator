@@ -25,6 +25,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
     private var osnovnoeCellItemsArray = [OsnovnoeCellItem]()
     private var dopolnitelnoCellItemsArray = [DopolnitelnoSwitchCellItem]()
     private var klientiCellItemsArray = [KlientiCellItem]()
+    private var clients = [KlientiCellKlientItem]()
     
     private var purchasesItemInfoDataManager = PurchasesItemInfoDataManager()
     
@@ -114,7 +115,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
         klientiCellItemsArray = [
             KlientiCellItem(labelText: "Выбрать клиента..."),
             KlientiCellItem(labelText: "Замена для..."),
-            KlientiCellItem(labelText: "Выбрать выкуп")
+            KlientiCellItem(labelText: "Выбрать закупку")
         ]
         
         tableView.delegate = self
@@ -195,7 +196,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
             
         case 4:
             
-            return klientiCellItemsArray.count
+            return klientiCellItemsArray.count + clients.count
             
         default:
             return 0
@@ -385,9 +386,27 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
             
         case 4:
             
+            if !clients.isEmpty && index + 1 <= clients.count{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "clientCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel ,
+                      let countLabel = cell.viewWithTag(2) as? UILabel ,
+                      let stepper = cell.viewWithTag(3) as? UIStepper,
+                      let imageView = cell.viewWithTag(4) as? UIImageView ,
+                      let imageViewButton = cell.viewWithTag(5) as? UIButton
+                else {return cell}
+                
+                label.text = clients[index].name
+                countLabel.text = String(clients[index].count)
+                
+                return cell
+                
+            }
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelCell", for: indexPath)
             
-            let item = klientiCellItemsArray[index]
+            let item = klientiCellItemsArray[index - clients.count]
             
             guard let label1 = cell.viewWithTag(1) as? UILabel,
                   let label2 = cell.viewWithTag(2) as? UILabel
@@ -396,7 +415,13 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
             label1.text = item.labelText
             label2.text = ""
             
-            label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
+            
+            //If there's more or less than one client selected , "Замена для..." should be gray and not be selectable
+            if item.labelText == "Замена для..." && clients.count != 1 {
+                label1.textColor = .systemGray
+            }else{
+                label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
+            }
             
         default:
             return cell
@@ -431,7 +456,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
         
         if section == 4{
             
-            if klientiCellItemsArray[index].labelText == "Выбрать выкуп"{
+            if klientiCellItemsArray[index - clients.count].labelText == "Выбрать закупку"{
                 
                 let vibratVikupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VibratVikupVC") as! VibratVikupViewController
                 
@@ -439,11 +464,27 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
                 present(navVC, animated: true, completion: nil)
                 
-            }else if klientiCellItemsArray[index].labelText == "Выбрать клиента..."{
+            }else if klientiCellItemsArray[index - clients.count].labelText == "Выбрать клиента..."{
                 
                 let vibratKlientaVC = VibratKlientaViewController()
                 
+                vibratKlientaVC.clientSelected = { [self] name , id in
+                    
+                    clients.append(KlientiCellKlientItem(name: name, id: id, count: 1))
+                    
+                    tableView.reloadSections([4], with: .automatic)
+                    
+                }
+                
                 let navVC = UINavigationController(rootViewController: vibratKlientaVC)
+                
+                present(navVC, animated: true, completion: nil)
+                
+            }else if klientiCellItemsArray[index - clients.count].labelText == "Замена для..." && clients.count == 1{
+                
+                let zamenaDlyaVC = ZamenaDlyaTableViewController()
+                
+                let navVC = UINavigationController(rootViewController: zamenaDlyaVC)
                 
                 present(navVC, animated: true, completion: nil)
                 
@@ -504,6 +545,14 @@ extension DobavlenieVZakupkuViewController {
         
         var labelText : String
         var shouldLabelTextBeBlue : Bool = true
+        
+    }
+    
+    private struct KlientiCellKlientItem{
+        
+        var name : String
+        var id : String
+        var count : Int
         
     }
     

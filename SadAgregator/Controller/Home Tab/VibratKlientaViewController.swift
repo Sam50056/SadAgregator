@@ -24,6 +24,8 @@ class VibratKlientaViewController: UITableViewController{
     
     private var clients = [JSON]()
     
+    var clientSelected : ((String , String) -> ())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -115,7 +117,15 @@ extension VibratKlientaViewController{
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let client = clients[indexPath.row]
+        
+        clientSelected?(client["name"].stringValue, client["id"].stringValue)
+        
+        dismiss(animated: true, completion: nil)
+        
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
