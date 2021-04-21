@@ -163,6 +163,16 @@ extension DobavlenieVZakupkuViewController {
         //        print("PROVERKA : \(proverkaNaBrakSwitch)")
     }
     
+    @IBAction func closeClientInfoButtonPressed(_ sender : UIButtonWithInfo){
+        
+        guard let index = Int(sender.info) else {return}
+        
+        clients.remove(at: index)
+        
+        tableView.reloadData()
+        
+    }
+    
 }
 
 //MARK: - TableView
@@ -394,11 +404,15 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                       let countLabel = cell.viewWithTag(2) as? UILabel ,
                       let stepper = cell.viewWithTag(3) as? UIStepper,
                       let imageView = cell.viewWithTag(4) as? UIImageView ,
-                      let imageViewButton = cell.viewWithTag(5) as? UIButton
+                      let imageViewButton = cell.viewWithTag(5) as? UIButtonWithInfo
                 else {return cell}
                 
                 label.text = clients[index].name
                 countLabel.text = String(clients[index].count)
+                
+                imageViewButton.info = String(index)
+                
+                imageViewButton.addTarget(self, action: #selector(closeClientInfoButtonPressed(_:)), for: .touchUpInside)
                 
                 return cell
                 
@@ -456,39 +470,45 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
         
         if section == 4{
             
-            if klientiCellItemsArray[index - clients.count].labelText == "Выбрать закупку"{
+            if index <= clients.count - 1{
                 
-                let vibratVikupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VibratVikupVC") as! VibratVikupViewController
+            }else{
                 
-                let navVC = UINavigationController(rootViewController: vibratVikupVC)
-                
-                present(navVC, animated: true, completion: nil)
-                
-            }else if klientiCellItemsArray[index - clients.count].labelText == "Выбрать клиента..."{
-                
-                let vibratKlientaVC = VibratKlientaViewController()
-                
-                vibratKlientaVC.clientSelected = { [self] name , id in
+                if klientiCellItemsArray[index - clients.count].labelText == "Выбрать закупку"{
                     
-                    clients.append(KlientiCellKlientItem(name: name, id: id, count: 1))
+                    let vibratVikupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VibratVikupVC") as! VibratVikupViewController
                     
-                    tableView.reloadSections([4], with: .automatic)
+                    let navVC = UINavigationController(rootViewController: vibratVikupVC)
+                    
+                    present(navVC, animated: true, completion: nil)
+                    
+                }else if klientiCellItemsArray[index - clients.count].labelText == "Выбрать клиента..."{
+                    
+                    let vibratKlientaVC = VibratKlientaViewController()
+                    
+                    vibratKlientaVC.clientSelected = { [self] name , id in
+                        
+                        clients.append(KlientiCellKlientItem(name: name, id: id, count: 1))
+                        
+                        tableView.reloadSections([4], with: .automatic)
+                        
+                    }
+                    
+                    let navVC = UINavigationController(rootViewController: vibratKlientaVC)
+                    
+                    present(navVC, animated: true, completion: nil)
+                    
+                }else if klientiCellItemsArray[index - clients.count].labelText == "Замена для..." && clients.count == 1{
+                    
+                    let zamenaDlyaVC = ZamenaDlyaTableViewController()
+                    
+                    zamenaDlyaVC.thisClientId = clients[0].id
+                    
+                    let navVC = UINavigationController(rootViewController: zamenaDlyaVC)
+                    
+                    present(navVC, animated: true, completion: nil)
                     
                 }
-                
-                let navVC = UINavigationController(rootViewController: vibratKlientaVC)
-                
-                present(navVC, animated: true, completion: nil)
-                
-            }else if klientiCellItemsArray[index - clients.count].labelText == "Замена для..." && clients.count == 1{
-                
-                let zamenaDlyaVC = ZamenaDlyaTableViewController()
-                
-                zamenaDlyaVC.thisClientId = clients[0].id
-                
-                let navVC = UINavigationController(rootViewController: zamenaDlyaVC)
-                
-                present(navVC, animated: true, completion: nil)
                 
             }
             

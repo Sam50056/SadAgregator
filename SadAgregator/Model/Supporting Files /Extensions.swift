@@ -209,4 +209,10 @@ class RoundedCornerView: UIView {
     
 }
 
+//MARK: - UIButtonWithInfo
 
+class UIButtonWithInfo : UIButton{
+    
+    @IBInspectable var info : String = ""
+    
+}
