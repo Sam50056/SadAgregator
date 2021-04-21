@@ -484,6 +484,8 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
                 let zamenaDlyaVC = ZamenaDlyaTableViewController()
                 
+                zamenaDlyaVC.thisClientId = clients[0].id
+                
                 let navVC = UINavigationController(rootViewController: zamenaDlyaVC)
                 
                 present(navVC, animated: true, completion: nil)

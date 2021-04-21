@@ -173,3 +173,19 @@ extension VibratKlientaViewController : PurchasesClientsSelectListDataManagerDel
     }
     
 }
+
+//MARK: - Data Manipulation Methods
+
+extension VibratKlientaViewController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        key = userDataObject.first!.key
+        
+        //        isLogged = userDataObject.first!.isLogged
+        
+    }
+    
+}

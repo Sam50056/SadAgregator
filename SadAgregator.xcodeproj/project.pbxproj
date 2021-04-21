@@ -98,6 +98,7 @@
 		226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9447258D2EF9008CEC4A /* HeroHelper.swift */; };
 		22703262262711510068BD82 /* VibratKlientaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22703261262711510068BD82 /* VibratKlientaViewController.swift */; };
 		22703265262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22703264262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift */; };
+		22729F61262F017200C19EF3 /* PurchasesProdsByClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22729F60262F017100C19EF3 /* PurchasesProdsByClientDataManager.swift */; };
 		227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */; };
 		227828EE258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */; };
 		22782906258AC7FE00B435FA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22782905258AC7FE00B435FA /* Extensions.swift */; };
@@ -311,6 +312,7 @@
 		226D9447258D2EF9008CEC4A /* HeroHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroHelper.swift; sourceTree = "<group>"; };
 		22703261262711510068BD82 /* VibratKlientaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibratKlientaViewController.swift; sourceTree = "<group>"; };
 		22703264262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesClientsSelectListDataManager.swift; sourceTree = "<group>"; };
+		22729F60262F017100C19EF3 /* PurchasesProdsByClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesProdsByClientDataManager.swift; sourceTree = "<group>"; };
 		227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUpdateViewController.swift; sourceTree = "<group>"; };
 		227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPhotoPlaceDataManager.swift; sourceTree = "<group>"; };
 		22782905258AC7FE00B435FA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -967,7 +969,7 @@
 		22941A44262B6E9A00119844 /* tableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				22ACF1AB262B966200F9584D /* New Group */,
+				22ACF1AB262B966200F9584D /* TwoLabelCell */,
 			);
 			path = tableViewCells;
 			sourceTree = "<group>";
@@ -1103,13 +1105,13 @@
 			path = OptionCell;
 			sourceTree = "<group>";
 		};
-		22ACF1AB262B966200F9584D /* New Group */ = {
+		22ACF1AB262B966200F9584D /* TwoLabelCell */ = {
 			isa = PBXGroup;
 			children = (
 				22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */,
 				22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */,
 			);
-			path = "New Group";
+			path = TwoLabelCell;
 			sourceTree = "<group>";
 		};
 		22BF19D125A3DD2300567DB7 /* TextLabelCell */ = {
@@ -1292,6 +1294,7 @@
 				22F7426926226561009128AF /* PurchasesItemInfoDataManager.swift */,
 				22D636F22625CB0000987E3F /* PurchasesPursListDataManager.swift */,
 				22703264262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift */,
+				22729F60262F017100C19EF3 /* PurchasesProdsByClientDataManager.swift */,
 			);
 			path = Purchases;
 			sourceTree = "<group>";
@@ -1551,6 +1554,7 @@
 				22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */,
 				22328CEC25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.swift in Sources */,
 				2298DECB26111F2B002FA2A2 /* PaymentFilterViewController.swift in Sources */,
+				22729F61262F017200C19EF3 /* PurchasesProdsByClientDataManager.swift in Sources */,
 				22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */,
 				22DC9876260293E90016A31B /* ClientsPagingPaymentsDataManager.swift in Sources */,
 				22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */,
