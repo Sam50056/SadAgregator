@@ -25,15 +25,6 @@ class PaymentFilterViewController: UIViewController {
     
     var thisClientId : String?
     
-    var maxSumFromApi : String?{
-        didSet{
-            
-            guard let safeSum = maxSumFromApi else {return}
-            
-            upPrice = Int(safeSum)!
-            
-        }
-    }
     var minDateFromApi : String?{
         didSet{
             minDate = minDateFromApi
@@ -45,15 +36,7 @@ class PaymentFilterViewController: UIViewController {
     var commentQuery : String?
     var lowPrice : Int? = 0
     var upPrice : Int?
-    var maxPrice : Int?{
-        didSet{
-            guard let maxPrice = maxPrice else {return}
-            
-            lowPrice = Int(Double(maxPrice) * 0.2)
-            upPrice = Int(Double(maxPrice) * 0.8)
-            
-        }
-    }
+    var maxPrice : Int?
     var minDate : String?
     var maxDate : String?
     var commentTextField : UITextField?
@@ -94,6 +77,21 @@ extension PaymentFilterViewController{
     
     @IBAction func closeBarButtonTapped(_ sender : UIBarButtonItem){
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func textFieldEditingChanged(_ sender : UITextField){
+        
+        if sender.tag == 2{
+            
+            lowPrice = Int(sender.text ?? "")
+            
+        }else if sender.tag == 4 {
+            
+            upPrice = Int(sender.text ?? "")
+            
+        }
+        
+        
     }
     
 }
@@ -140,7 +138,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         let sectionProvider = { (sectionIndex: Int,
                                  layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
-            if sectionIndex == 0 || sectionIndex == 2 || sectionIndex == 4 {
+            if sectionIndex == 0 || sectionIndex == 2 || sectionIndex == 3 || sectionIndex == 4 {
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .fractionalHeight(1.0))
@@ -191,7 +189,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 10, bottom: 0, trailing: 10)
                 
                 return section
-               
+                
             }
             
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -227,7 +225,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if section == 0 || section == 2 || section == 4 || section == 6 || section == 7{
+        if section == 0 || section == 2 || section == 3 || section == 4 || section == 6 || section == 7{
             return 1
         }else{
             return 2
@@ -290,31 +288,22 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             
         }else if section == 3{
             
-            switch indexPath.row {
-            case 0:
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pricesCell", for: indexPath)
+            
+            if let minView = cell.viewWithTag(1),
+               let maxView = cell.viewWithTag(3),
+               let minTextField = cell.viewWithTag(2) as? UITextField,
+               let maxTextField = cell.viewWithTag(4) as? UITextField{
                 
-                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleLabelCell", for: indexPath)
+                minView.layer.cornerRadius = 10
+                maxView.layer.cornerRadius = 10
                 
-                guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+                minTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+                maxTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
                 
-                label.text = "от \(lowPrice ?? 0)"
+                minTextField.text = lowPrice == nil ? "" : String(lowPrice!)
+                maxTextField.text = upPrice == nil ? maxPrice == nil ? "" : String(maxPrice!) : String(upPrice!)
                 
-                cell.contentView.layer.cornerRadius = 8
-                cell.contentView.backgroundColor = UIColor(named: "gray")
-                
-            case 1:
-                
-                cell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleLabelCell", for: indexPath)
-                
-                guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
-                
-                label.text = "до \(upPrice ?? maxPrice ?? 0)"
-                
-                cell.contentView.layer.cornerRadius = 8
-                cell.contentView.backgroundColor = UIColor(named: "gray")
-                
-            default:
-                return cell
             }
             
         }else if section == 4{
@@ -367,7 +356,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             commentTextField = textField
             
             bgView.layer.cornerRadius = 6
-           
+            
         }else if section == 7{
             
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleLabelCell", for: indexPath)
@@ -468,30 +457,6 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         
         cell.contentView.layer.cornerRadius = 8
         cell.contentView.backgroundColor = UIColor(named: "gray")
-        
-    }
-    
-    //MARK: - RangeSlider
-    
-    @objc func rangeSliderValueChanged(_ rangeSlider: RangeSlider) {
-        let values = "(\(rangeSlider.lowerValue) \(rangeSlider.upperValue))"
-        print("Range slider value changed: \(values)")
-        
-        guard let maxPrice = maxPrice else {return}
-        
-        let sliderLowValue = rangeSlider.lowerValue
-        let sliderUpperValue = rangeSlider.upperValue
-        
-        let lowKoeficent = sliderLowValue / rangeSlider.maximumValue
-        let upKoeficent = sliderUpperValue / rangeSlider.maximumValue
-        
-        let lowValue = Int(CGFloat(maxPrice) * lowKoeficent)
-        let upValue = Int(CGFloat(maxPrice) * upKoeficent)
-        
-        self.lowPrice = lowValue
-        self.upPrice = upValue
-        
-        collectionView.reloadItems(at: [IndexPath(row: 0, section: 5),IndexPath(row: 1, section: 5)])
         
     }
     

@@ -98,7 +98,6 @@ extension PaymentHistoryViewController{
         
         let filterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentFilterVC") as! PaymentFilterViewController
         
-        filterVC.maxSumFromApi = maxSumFromApi
         filterVC.minDateFromApi = minDateFromApi
         
         filterVC.delegate = self
@@ -112,7 +111,7 @@ extension PaymentHistoryViewController{
         
         let maxSumFormApiInt = Int(maxSumFromApi ?? "")
         
-        filterVC.lowPrice = minPrice
+        filterVC.lowPrice = minPrice ?? 0
         filterVC.upPrice = maxPrice
         
         filterVC.maxPrice = maxSumFormApiInt
@@ -348,11 +347,11 @@ extension PaymentHistoryViewController : PaymentFilterViewControllerDelegate{
         self.source = source
         self.comment = query
         self.minPrice = sumMin
-        self.maxPrice = sumMin
+        self.maxPrice = sumMax
         self.minDate = startDate
         self.maxDate = endDate
         
-        self.searchController.searchBar.text = comment
+        self.searchController.searchBar.text = query
         
     }
     
