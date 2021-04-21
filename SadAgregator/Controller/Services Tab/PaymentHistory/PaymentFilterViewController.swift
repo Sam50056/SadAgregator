@@ -40,8 +40,8 @@ class PaymentFilterViewController: UIViewController {
         }
     }
     
-    var opType : Int?
-    var source : Int?
+    var opType : Int? //Тип операции
+    var source : Int? //Источник операции
     var commentQuery : String?
     var lowPrice : Int? = 0
     var upPrice : Int?
@@ -394,10 +394,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
         if section == 1{
             opType = indexPath.row
             collectionView.reloadItems(at: [IndexPath(row: 0, section: 1),IndexPath(row: 1, section: 1)])
-        }else if section == 3{
-            source = indexPath.row
-            collectionView.reloadItems(at: [IndexPath(row: 0, section: 3),IndexPath(row: 1, section: 3)])
-        }else if section == 8{
+        }else if section == 5{
             
             if indexPath.row == 0{
                 
@@ -439,7 +436,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
             }
             
-        }else if section == 10{
+        }else if section == 7{
             
             if thisClientId != nil {
                 ClientsFilterPayHistByClientCountDataManager(delegate: self).getClientsFilterPayHistByClientCountData(key: key, clientId: thisClientId!, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
