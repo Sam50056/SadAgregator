@@ -112,7 +112,7 @@ class TovarTableViewCell: UITableViewCell {
         
         //        collectionView.isScrollEnabled = false
         
-        tovarImageView.image = UIImage(systemName: "person.fill")
+        tovarImageView.tintColor = .systemGray2
         
     }
     
@@ -122,6 +122,8 @@ class TovarTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        thisTovar = nil
         
         tableView.reloadData()
     }
