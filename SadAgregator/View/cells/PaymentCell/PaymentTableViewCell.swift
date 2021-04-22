@@ -36,6 +36,8 @@ class PaymentTableViewCell: UITableViewCell {
         }
     }
     
+    var clientId : String?
+    
     var comment : String? {
         didSet{
             tableView.reloadData()
@@ -53,6 +55,8 @@ class PaymentTableViewCell: UITableViewCell {
             tableView.reloadData()
         }
     }
+    
+    var clientSelected : ((String) -> ())?
     
     private var tableViewItems = [TableViewItem]()
     
@@ -74,6 +78,20 @@ class PaymentTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+}
+
+//MARK: - Actions
+
+extension PaymentTableViewCell{
+    
+    @objc func clientCellTapped(_ sender : UIButton){
+        
+        guard let clientId = clientId else {return}
+        
+        clientSelected?(clientId)
+        
     }
     
 }
@@ -132,6 +150,16 @@ extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
             
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             cell.textLabel?.text = name
+            
+            let button = UIButton(frame: cell.contentView.frame)
+            
+            cell.contentView.translatesAutoresizingMaskIntoConstraints = false
+            
+            cell.contentView.addSubview(button)
+            
+            NSLayoutConstraint.activate([button.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor), button.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor),button.topAnchor.constraint(equalTo: cell.contentView.topAnchor),button.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor)])
+            
+            button.addTarget(self, action: #selector(clientCellTapped(_:)), for: .touchUpInside)
             
         case 2:
             

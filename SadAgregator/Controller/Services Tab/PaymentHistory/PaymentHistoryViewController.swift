@@ -269,8 +269,19 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
         cell.pid = payment["pid"].stringValue
         cell.dt =  payment["dt"].string
         cell.clientName = payment["client_name"].stringValue
+        cell.clientId = payment["client_id"].stringValue
         cell.comment =  payment["comment"].stringValue
         cell.summ = payment["summ"].string
+        
+        cell.clientSelected = { [self] clientId in
+            print("CL")
+            let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
+            
+            clientVC.thisClientId = clientId
+            
+            self.navigationController?.pushViewController(clientVC, animated: true)
+            
+        }
         
         //        cell.tableView.reloadData()
         
