@@ -98,6 +98,13 @@ class DobavlenieVZakupkuViewController: UIViewController {
         }
     }
     
+    private var commentTextView : UITextView?
+    private var myCommentTextView : UITextView?
+    private var commentSymbolsCount = 0
+    private var myCommentSymbolsCount = 0
+    private var commentCountLabel : UILabel?
+    private var myCommentCountLabel : UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -175,6 +182,27 @@ extension DobavlenieVZakupkuViewController {
         
     }
     
+}
+
+//MARK: - TextView
+
+extension DobavlenieVZakupkuViewController : UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        
+        if textView == commentTextView{
+            commentCountLabel?.text = "\(textView.text.count)/150"
+            commentSymbolsCount = textView.text.count
+        }else{
+            myCommentCountLabel?.text = "\(textView.text.count)/150"
+            myCommentSymbolsCount = textView.text.count
+        }
+        
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return textView.text.count + (text.count - range.length) <= 150
+    }
 }
 
 //MARK: - TableView
@@ -375,7 +403,17 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
                 label.text = item.labelText
                 
-                secondLabel.text = "23/150"
+                textView.delegate = self
+                
+                if item.labelText == "Комментарий"{
+                    secondLabel.text = "\(commentSymbolsCount)/150"
+                    commentCountLabel = secondLabel
+                    commentTextView = textView
+                }else{
+                    secondLabel.text = "\(myCommentSymbolsCount)/150"
+                    myCommentCountLabel = secondLabel
+                    myCommentTextView = textView
+                }
                 
                 textView.text = ""
                 
