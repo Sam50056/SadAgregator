@@ -196,7 +196,7 @@
 		22D604D225EFA6BC00102CB6 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */; };
 		22D604D525F1784100102CB6 /* ClientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D604D425F1784100102CB6 /* ClientsViewController.swift */; };
 		22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D60981255D41F000FC622B /* MessageReadedDataManager.swift */; };
-		22D636F02624E8A400987E3F /* VibratVikupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D636EF2624E8A400987E3F /* VibratVikupViewController.swift */; };
+		22D636F02624E8A400987E3F /* VibratZakupkuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D636EF2624E8A400987E3F /* VibratZakupkuViewController.swift */; };
 		22D636F32625CB0000987E3F /* PurchasesPursListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D636F22625CB0000987E3F /* PurchasesPursListDataManager.swift */; };
 		22D663D125823D9E0058B5CC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D663D025823D9E0058B5CC /* LoginView.swift */; };
 		22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D90202259A953C009732CC /* GetListWorkExtDataManager.swift */; };
@@ -413,7 +413,7 @@
 		22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
 		22D604D425F1784100102CB6 /* ClientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsViewController.swift; sourceTree = "<group>"; };
 		22D60981255D41F000FC622B /* MessageReadedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReadedDataManager.swift; sourceTree = "<group>"; };
-		22D636EF2624E8A400987E3F /* VibratVikupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibratVikupViewController.swift; sourceTree = "<group>"; };
+		22D636EF2624E8A400987E3F /* VibratZakupkuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibratZakupkuViewController.swift; sourceTree = "<group>"; };
 		22D636F22625CB0000987E3F /* PurchasesPursListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesPursListDataManager.swift; sourceTree = "<group>"; };
 		22D663D025823D9E0058B5CC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		22D90202259A953C009732CC /* GetListWorkExtDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListWorkExtDataManager.swift; sourceTree = "<group>"; };
@@ -1181,7 +1181,7 @@
 				22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */,
 				22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */,
 				22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */,
-				22D636EF2624E8A400987E3F /* VibratVikupViewController.swift */,
+				22D636EF2624E8A400987E3F /* VibratZakupkuViewController.swift */,
 				22703261262711510068BD82 /* VibratKlientaViewController.swift */,
 				22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */,
 			);
@@ -1566,7 +1566,7 @@
 				22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */,
 				22F7426A26226561009128AF /* PurchasesItemInfoDataManager.swift in Sources */,
 				22634AB625858CA800DF6FDB /* UserData.swift in Sources */,
-				22D636F02624E8A400987E3F /* VibratVikupViewController.swift in Sources */,
+				22D636F02624E8A400987E3F /* VibratZakupkuViewController.swift in Sources */,
 				22B7271325740E8C00B56249 /* LinePostsPaggingDataManager.swift in Sources */,
 				22BF1A1725A5FD5C00567DB7 /* PostLikeDataManager.swift in Sources */,
 				22BF1A0225A540F000567DB7 /* ActivityPointsTableViewController.swift in Sources */,
@@ -1788,7 +1788,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1812,7 +1812,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

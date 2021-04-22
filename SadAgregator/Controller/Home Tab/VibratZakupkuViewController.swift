@@ -9,7 +9,7 @@ import UIKit
 import SwiftyJSON
 import RealmSwift
 
-class VibratVikupViewController: UITableViewController {
+class VibratZakupkuViewController: UITableViewController {
     
     private let realm = try! Realm()
     
@@ -19,6 +19,8 @@ class VibratVikupViewController: UITableViewController {
     private var rowForPaggingUpdate : Int = 15
     
     private var purs = [JSON]()
+    
+    var purSelected : ((String, String) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +45,7 @@ class VibratVikupViewController: UITableViewController {
 
 //MARK: - Actions
 
-extension VibratVikupViewController{
+extension VibratZakupkuViewController{
     
     @IBAction func otmenaTapped(_ sender : Any){
         dismiss(animated: true, completion: nil)
@@ -53,7 +55,7 @@ extension VibratVikupViewController{
 
 //MARK: - TableView
 
-extension VibratVikupViewController {
+extension VibratZakupkuViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return purs.count
@@ -78,6 +80,13 @@ extension VibratVikupViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let pur = purs[indexPath.row]
+        
+        purSelected?(pur["pur_sys_id"].stringValue, pur["pur_name"].stringValue)
+        
+        dismiss(animated: true, completion: nil)
+        
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -100,7 +109,7 @@ extension VibratVikupViewController {
 
 //MARK: - PurchasesPursListDataManager
 
-extension VibratVikupViewController : PurchasesPursListDataManagerDelegate{
+extension VibratZakupkuViewController : PurchasesPursListDataManagerDelegate{
     
     func didGetPurchasesPursListData(data: JSON) {
         
@@ -130,7 +139,7 @@ extension VibratVikupViewController : PurchasesPursListDataManagerDelegate{
 
 //MARK: - Data Manipulation Methods
 
-extension VibratVikupViewController {
+extension VibratZakupkuViewController {
     
     func loadUserData (){
         

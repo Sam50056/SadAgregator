@@ -27,6 +27,8 @@ class DobavlenieVZakupkuViewController: UIViewController {
     private var klientiCellItemsArray = [KlientiCellItem]()
     private var clients = [KlientiCellKlientItem]()
     
+    private var selectedZakupka : Zakupka?
+    
     private var purchasesItemInfoDataManager = PurchasesItemInfoDataManager()
     
     private var cenaProdazhi : Int?
@@ -429,6 +431,12 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
             label1.text = item.labelText
             label2.text = ""
             
+            if item.labelText == "Выбрать закупку" ,
+               let selectedZakupka = selectedZakupka{
+                
+                label1.text = "Закупка: \(selectedZakupka.name)"
+                
+            }
             
             //If there's more or less than one client selected , "Замена для..." should be gray and not be selectable
             if item.labelText == "Замена для..." && clients.count != 1 {
@@ -476,9 +484,19 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
                 if klientiCellItemsArray[index - clients.count].labelText == "Выбрать закупку"{
                     
-                    let vibratVikupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VibratVikupVC") as! VibratVikupViewController
+                    let vibratZakupkuVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VibratZakupkuVC") as! VibratZakupkuViewController
                     
-                    let navVC = UINavigationController(rootViewController: vibratVikupVC)
+                    vibratZakupkuVC.purSelected = { [self] id , name in
+                        
+                        selectedZakupka = Zakupka(name: name, id: id)
+                        
+                        tableView.reloadData()
+                        
+                        print("Selected pur ID : \(id)")
+                        
+                    }
+                    
+                    let navVC = UINavigationController(rootViewController: vibratZakupkuVC)
                     
                     present(navVC, animated: true, completion: nil)
                     
@@ -575,6 +593,13 @@ extension DobavlenieVZakupkuViewController {
         var name : String
         var id : String
         var count : Int
+        
+    }
+    
+    private struct Zakupka{
+        
+        var name : String
+        var id : String
         
     }
     
