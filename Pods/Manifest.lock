@@ -1,7 +1,7 @@
 PODS:
-  - Alamofire (5.4.0)
+  - Alamofire (5.4.3)
   - Cosmos (23.0.0)
-  - Hero (1.5.0)
+  - Hero (1.6.1)
   - IQKeyboardManagerSwift (6.5.6)
   - ok-ios-sdk (2.0.14)
   - Realm (10.4.0):
@@ -9,11 +9,11 @@ PODS:
   - Realm/Headers (10.4.0)
   - RealmSwift (10.4.0):
     - Realm (= 10.4.0)
-  - SDWebImage (5.10.0):
-    - SDWebImage/Core (= 5.10.0)
-  - SDWebImage/Core (5.10.0)
-  - SwiftyJSON (5.0.0)
-  - VK-ios-sdk (1.6.1)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - SwiftyJSON (5.0.1)
+  - VK-ios-sdk (1.6.2)
   - YandexMobileMetrica (3.12.0):
     - YandexMobileMetrica/Static (= 3.12.0)
   - YandexMobileMetrica/Static (3.12.0):
@@ -50,18 +50,18 @@ SPEC REPOS:
     - YandexMobileMetrica
 
 SPEC CHECKSUMS:
-  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
-  Hero: b7385b75e7259da62f4f85462f59a5082d66b058
+  Hero: 215865ba3ae41dd9bb08cd6c60a645529c6fc94b
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   ok-ios-sdk: 30c84b4026386f21f21a3f956e1bd51fa5540b7d
   Realm: d8466b2238f034a5ff7a031aed63b7dacdf0dd10
   RealmSwift: 37a93ae742667948cc094a3c6ae3d006db32b66f
-  SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
-  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
-  VK-ios-sdk: 104a8bc259199fb1fc621c1c93d7a9a6befb4ca0
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 7ba67267e1ef841f77d5db17a5091b8e9eba911f
 
 PODFILE CHECKSUM: aadf220c3448eef857b20dc8a1d22d64b6e1f0fb
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1
