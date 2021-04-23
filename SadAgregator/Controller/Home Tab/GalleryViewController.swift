@@ -15,17 +15,20 @@ class GalleryViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var imageIndexLabel: UILabel!
-    
     @IBOutlet weak var buttonView: UIView!
     
-    @IBOutlet weak var downloadButton: UIButton!
+    @IBOutlet weak var buyButton: UIButton!
+    @IBOutlet weak var buyButtonLabel: UILabel!
     
-    var images : [String]  = []
+    var images : [PostImage]  = []
+    
+    var sizes : [String] = []
     
     var selectedImageIndex = 0
     
-    var viewHasShownSelectedImage = false
+    private var viewHasShownSelectedImage = false
+    
+    private var selectedSize : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +41,33 @@ class GalleryViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         view.addGestureRecognizer(tap)
         
-        heroView.heroID = images[selectedImageIndex]
+        heroView.heroID = images[selectedImageIndex].image
         
         buttonView.layer.cornerRadius = 8
+        
+        buyButtonLabel.text = "Купить"
+        
+        var menuSizeItems = [UIAction]()
+        
+        for size in sizes{
+            
+            let newMenuSizeItem = UIAction(title: size) { [self] (_) in
+                
+                selectedSize = size
+                
+                buyButtonPressed(self)
+                
+            }
+            
+            menuSizeItems.append(newMenuSizeItem)
+            
+        }
+        
+        let menu = UIMenu(title: "Размеры", children: menuSizeItems)
+        
+        buyButton.menu = menu
+        //        buyButton.showsMenuAsPrimaryAction = true
+
         
     }
     
@@ -51,7 +78,7 @@ class GalleryViewController: UIViewController {
             
             self.collectionView.scrollToItem(at: IndexPath(row: selectedImageIndex, section: 0), at: .centeredHorizontally, animated: false)
             
-            imageIndexLabel.text = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
+            navigationItem.title = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
             
             viewHasShownSelectedImage = true
             
@@ -61,6 +88,10 @@ class GalleryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(downloadButtonPressed(_:)))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .plain, target: self, action: #selector(closeButtonPressed(_:)))
         
         enableHero()
         
@@ -87,17 +118,11 @@ class GalleryViewController: UIViewController {
                             self.buttonView.isHidden.toggle()
                           })
         
-        UIView.transition(with: imageIndexLabel, duration: 0.4,
-                          options: .transitionCrossDissolve,
-                          animations: {
-                            self.imageIndexLabel.isHidden.toggle()
-                          })
-        
     }
     
-    @IBAction func downloadButtonPressed(_ sender: UIButton) {
+    @IBAction func downloadButtonPressed(_ sender: Any) {
         
-        let currentImageLink = images[(currentIndexPathOf(collectionView).row)]
+        let currentImageLink = images[(currentIndexPathOf(collectionView).row)].image
         
         guard let imageData = try? Data(contentsOf: URL(string: currentImageLink)!) else {return}
         
@@ -114,6 +139,22 @@ class GalleryViewController: UIViewController {
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
         
+    }
+    
+    @IBAction func buyButtonPressed(_ sender : Any){
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DobavlenieVZakupkuVC") as! DobavlenieVZakupkuViewController
+        
+        vc.thisImageId = images[(currentIndexPathOf(collectionView).row)].imageId
+        
+        vc.thisSize = selectedSize
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    @IBAction func closeButtonPressed(_ sender : Any){
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
@@ -145,7 +186,7 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
             
             imageView.clipsToBounds = true
             
-            let originalUrlString = images[indexPath.row]
+            let originalUrlString = images[indexPath.row].image
             
             let indexOfLastSlash = originalUrlString.lastIndex(of: "/")
             let indexOfDot = originalUrlString.lastIndex(of: ".")
@@ -190,9 +231,9 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
-        imageIndexLabel.text = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
+        navigationItem.title = "Фото \(currentIndexPathOf(collectionView).row + 1) из \(images.count)"
         
-        heroView.heroID = images[currentIndexPathOf(collectionView).row]
+        heroView.heroID = images[currentIndexPathOf(collectionView).row].image
         
     }
     

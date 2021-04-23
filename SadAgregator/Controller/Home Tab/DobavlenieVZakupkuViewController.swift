@@ -332,6 +332,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                         secondLabel.text = item.secondLabelText
                         
                         secondLabel.textColor = item.shouldSecondLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
+                        firstLabel.textColor = UIColor(named: "blackwhite")
                         
                     }
                     

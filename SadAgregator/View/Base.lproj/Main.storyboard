@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="S5b-Tx-8f9">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -2176,14 +2175,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBK-3F-PIk">
                                 <rect key="frame" x="244" y="754" width="114" height="40"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7rG-TM-xKe">
-                                        <rect key="frame" x="8" y="7.0000000000000018" width="20" height="24.666666666666671"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7rG-TM-xKe">
+                                        <rect key="frame" x="8" y="9.6666666666666643" width="20" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="O4r-lW-L4U"/>
                                             <constraint firstAttribute="height" constant="24" id="qne-Sr-yPs"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Скачать" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XrB-Vm-Lh6">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Купить" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XrB-Vm-Lh6">
                                         <rect key="frame" x="36" y="9.6666666666666288" width="70" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="AXd-zz-JsJ"/>
@@ -2195,7 +2194,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Quz-uF-CM4">
                                         <rect key="frame" x="0.0" y="0.0" width="114" height="40"/>
                                         <connections>
-                                            <action selector="downloadButtonPressed:" destination="1ko-Tn-5vx" eventType="touchUpInside" id="fe0-2t-L1c"/>
+                                            <action selector="buyButtonPressed:" destination="1ko-Tn-5vx" eventType="touchUpInside" id="ARK-mm-gOP"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2232,8 +2231,9 @@
                     </view>
                     <connections>
                         <outlet property="buttonView" destination="gBK-3F-PIk" id="vHI-Es-bzR"/>
+                        <outlet property="buyButton" destination="Quz-uF-CM4" id="8R2-SS-dRS"/>
+                        <outlet property="buyButtonLabel" destination="XrB-Vm-Lh6" id="dNA-mN-N0X"/>
                         <outlet property="collectionView" destination="PYB-ho-Bly" id="OYY-kS-ZWQ"/>
-                        <outlet property="downloadButton" destination="Quz-uF-CM4" id="QDh-Sn-IeN"/>
                         <outlet property="heroView" destination="Btq-FN-grI" id="lEX-hN-uk8"/>
                     </connections>
                 </viewController>
@@ -5209,6 +5209,7 @@
         <segue reference="ZSI-nF-15U"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="cart.fill" catalog="system" width="128" height="102"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
@@ -5232,7 +5233,6 @@
         <image name="rectangle.fill.on.rectangle.fill" catalog="system" width="128" height="96"/>
         <image name="rectangle.grid.2x2.fill" catalog="system" width="128" height="99"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
-        <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="vk" width="2500" height="2500"/>
         <namedColor name="alertRed">
