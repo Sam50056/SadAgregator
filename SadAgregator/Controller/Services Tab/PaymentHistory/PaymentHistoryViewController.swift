@@ -44,6 +44,8 @@ class PaymentHistoryViewController: UIViewController {
     private var maxDate : String?
     private var comment : String?
     
+    private var refreshTimer = Timer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -135,19 +137,29 @@ extension PaymentHistoryViewController : UISearchResultsUpdating{
         
         guard let text = searchController.searchBar.text else {return}
         
-        comment = text
+        refreshTimer.invalidate()
         
-        if text != "" {payments.removeAll()}
+        refreshTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [self] (timer) in
+            
+            comment = text
+            
+            payments.removeAll()
+            
+            tableView.reloadData()
+            
+            if let thisClientId = thisClientId {
+                
+                clientsFilterPayHistByClientDataManager.getClientsFilterPayHistByClientData(key : key , clientId: thisClientId , page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice ==  nil ? "" : String(maxPrice!) , startDate: minDate ?? "", endDate: maxDate ?? Date().formatDate(), query: comment ?? "")
+                
+            }else{
+                
+                clientsFilterPayListDataManager.getClientsFilterPayListData(key : key , page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice ==  nil ? "" : String(maxPrice!) , startDate: minDate ?? "", endDate: maxDate ?? Date().formatDate(), query: comment ?? "")
+                
+            }
+            
+        })
         
-        if let thisClientId = thisClientId {
-            
-            clientsFilterPayHistByClientDataManager.getClientsFilterPayHistByClientData(key : key , clientId: thisClientId , page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice ==  nil ? "" : String(maxPrice!) , startDate: minDate ?? "", endDate: maxDate ?? Date().formatDate(), query: comment ?? "")
-            
-        }else{
-            
-            clientsFilterPayListDataManager.getClientsFilterPayListData(key : key , page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice ==  nil ? "" : String(maxPrice!) , startDate: minDate ?? "", endDate: maxDate ?? Date().formatDate(), query: comment ?? "")
-            
-        }
+        
         
     }
     
