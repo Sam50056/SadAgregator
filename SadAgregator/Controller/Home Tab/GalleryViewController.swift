@@ -66,7 +66,9 @@ class GalleryViewController: UIViewController {
         let menu = UIMenu(title: "Размеры", children: menuSizeItems)
         
         buyButton.menu = menu
-        //        buyButton.showsMenuAsPrimaryAction = true
+        
+        //If there are sizes , menu shows up after tapping a button and if not , it just taps without menu
+        buyButton.showsMenuAsPrimaryAction = sizes.isEmpty ? false : true
 
         
     }
@@ -97,6 +99,14 @@ class GalleryViewController: UIViewController {
         
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return navigationController?.isNavigationBarHidden == true
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return UIStatusBarAnimation.slide
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -117,6 +127,8 @@ class GalleryViewController: UIViewController {
                           animations: {
                             self.buttonView.isHidden.toggle()
                           })
+        
+        navigationController?.setNavigationBarHidden(navigationController?.isNavigationBarHidden == false, animated: true)
         
     }
     

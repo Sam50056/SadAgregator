@@ -35,25 +35,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
     
     private var itemInfo : JSON?{
         didSet{
-            
-            guard let itemInfo = itemInfo else {return}
-            
-            var newArray = [OsnovnoeCellItem]()
-            
-            if let price = itemInfo["pur_price"].string{
-                newArray.append(OsnovnoeCellItem(firstLabelText: "Закупка", secondLabelText: price + " руб.", hasImageView: true))
-            }
-            
-            if let cenaProdazhi = itemInfo["sell_price"].string {
-                newArray.append(OsnovnoeCellItem(firstLabelText: "Цена продажи", secondLabelText: String(cenaProdazhi) + " руб.", hasImageView: true,isCenaProdazhi: true))
-            }
-            
-            if let size = thisSize {
-                newArray.append(OsnovnoeCellItem(firstLabelText: "Размер", secondLabelText: size, hasImageView: false))
-            }
-            
-            osnovnoeCellItemsArray = newArray
-            
+            makeOsnovnoeCellItemsArray()
         }
     }
     
@@ -144,6 +126,34 @@ class DobavlenieVZakupkuViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(otmenaTapped(_:)))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Готово", style: .done, target: self, action: nil)
+        
+    }
+    
+}
+
+//MARK: - Functions
+
+extension DobavlenieVZakupkuViewController {
+    
+    func makeOsnovnoeCellItemsArray() {
+        
+        guard let itemInfo = itemInfo else {return}
+        
+        var newArray = [OsnovnoeCellItem]()
+        
+        if let price = itemInfo["pur_price"].string{
+            newArray.append(OsnovnoeCellItem(firstLabelText: "Закупка", secondLabelText: price + " руб.", hasImageView: true))
+        }
+        
+        if let cenaProdazhi = itemInfo["sell_price"].string {
+            newArray.append(OsnovnoeCellItem(firstLabelText: "Цена продажи", secondLabelText: String(cenaProdazhi) + " руб.", hasImageView: true,isCenaProdazhi: true))
+        }
+        
+        newArray.append(OsnovnoeCellItem(firstLabelText: "Размер", secondLabelText: thisSize ?? "Нет размера", hasImageView: false))
+        
+        osnovnoeCellItemsArray = newArray
+        
+        tableView.reloadData()
         
     }
     
