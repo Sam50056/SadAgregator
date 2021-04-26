@@ -358,7 +358,9 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             
         }else if section == 3{
             
-            goToClientVCWith(clients[indexPath.row]["client_id"].string)
+            let id = clients[indexPath.row]["client_id"].string ?? clients[indexPath.row]["id"].string
+            
+            goToClientVCWith(id)
             
         }
         
