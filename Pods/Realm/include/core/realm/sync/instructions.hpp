@@ -17,7 +17,7 @@
 #include <realm/sync/object_id.hpp>
 #include <realm/impl/input_stream.hpp>
 #include <realm/table_ref.hpp>
-#include <realm/util/overloaded.hpp>
+#include <realm/util/overload.hpp>
 
 namespace realm {
 
@@ -80,7 +80,7 @@ struct Instruction;
 
 namespace instr {
 
-using PrimaryKey = mpark::variant<mpark::monostate, int64_t, InternString, GlobalKey, ObjectId>;
+using PrimaryKey = mpark::variant<mpark::monostate, int64_t, GlobalKey, InternString, ObjectId, UUID>;
 
 struct Path {
     using Element = mpark::variant<InternString, uint32_t>;
@@ -147,10 +147,27 @@ struct Path {
     {
         return lhs.m_path == rhs.m_path;
     }
+
+    using const_iterator = typename std::vector<Element>::const_iterator;
+    const_iterator begin() const noexcept
+    {
+        return m_path.begin();
+    }
+    const_iterator end() const noexcept
+    {
+        return m_path.end();
+    }
 };
 
 struct Payload {
+    /// Create a new object in-place (embedded object).
     struct ObjectValue {
+    };
+    /// Create an empty dictionary in-place (does not clear an existing dictionary).
+    struct Dictionary {
+    };
+    /// Sentinel value for an erased dictionary element.
+    struct Erased {
     };
 
     /// Payload data types, corresponding loosely to the `DataType` enum in
@@ -159,14 +176,24 @@ struct Payload {
     /// - Null (0) indicates a NULL value of any type.
     /// - GlobalKey (-1) indicates an internally generated object ID.
     /// - ObjectValue (-2) indicates the creation of an embedded object.
+    /// - Dictionary (-3) indicates the creation of a dictionary.
+    /// - Erased (-4) indicates that a dictionary element should be erased.
+    /// - Undefined (-5) indicates the
     ///
     /// Furthermore, link values for both Link and LinkList columns are
     /// represented by a single Link type.
+    ///
+    /// Note: For Mixed columns (including typed links), no separate value is required, because the
+    /// instruction set encodes the type of each value in the instruction.
     enum class Type : int8_t {
+        // Special value indicating that a dictionary element should be erased.
+        Erased = -4,
+
+        // Special value indicating that a dictionary should be created at the position.
+        Dictionary = -3,
+
         // Special value indicating that an embedded object should be created at
         // the position.
-        Erased = -4,
-        Dictionary = -3,
         ObjectValue = -2,
         GlobalKey = -1,
         Null = 0,
@@ -180,6 +207,7 @@ struct Payload {
         Decimal = 8,
         Link = 9,
         ObjectId = 10,
+        UUID = 11,
     };
 
     struct Link {
@@ -203,7 +231,9 @@ struct Payload {
         double dnum;
         Decimal128 decimal;
         ObjectId object_id;
+        UUID uuid;
         Link link;
+        ObjLink typed_link;
 
         Data() {}
     };
@@ -261,6 +291,12 @@ struct Payload {
     {
     }
 
+    // Note: Intentionally implicit.
+    Payload(const Erased&) noexcept
+        : type(Type::Erased)
+    {
+    }
+
     explicit Payload(Timestamp value) noexcept
         : type(value.is_null() ? Type::Null : Type::Timestamp)
     {
@@ -290,6 +326,12 @@ struct Payload {
         }
     }
 
+    explicit Payload(UUID value) noexcept
+        : type(Type::UUID)
+    {
+        data.uuid = value;
+    }
+
     Payload(const Payload&) noexcept = default;
     Payload& operator=(const Payload&) noexcept = default;
 
@@ -305,7 +347,7 @@ struct Payload {
                 case Type::Erased:
                     return true;
                 case Type::Dictionary:
-                    return true;
+                    return lhs.data.key == rhs.data.key;
                 case Type::ObjectValue:
                     return true;
                 case Type::GlobalKey:
@@ -332,6 +374,8 @@ struct Payload {
                     return lhs.data.link == rhs.data.link;
                 case Type::ObjectId:
                     return lhs.data.object_id == rhs.data.object_id;
+                case Type::UUID:
+                    return lhs.data.uuid == rhs.data.uuid;
             }
         }
         return false;
@@ -428,16 +472,31 @@ struct EraseTable : TableInstruction {
 struct AddColumn : TableInstruction {
     using TableInstruction::TableInstruction;
 
+    // This is backwards compatible with previous boolean type where 0
+    // indicated simple type and 1 indicated list.
+    enum class CollectionType : uint8_t { Single, List, Dictionary, Set };
+
     InternString field;
+
+    // `Type::Null` for Mixed columns. Mixed columns are always nullable.
     Payload::Type type;
+    // `Type::Null` for other than dictionary columns
+    Payload::Type key_type;
+
     bool nullable;
-    bool list;
+
+    // For Mixed columns, this is `none`. Mixed columns are always nullable.
+    //
+    // For dictionaries, this must always be `Type::String`.
+    CollectionType collection_type;
+
     InternString link_target_table;
 
     bool operator==(const AddColumn& rhs) const noexcept
     {
         return TableInstruction::operator==(rhs) && field == rhs.field && type == rhs.type &&
-               nullable == rhs.nullable && list == rhs.list && link_target_table == rhs.link_target_table;
+               key_type == rhs.key_type && nullable == rhs.nullable && collection_type == rhs.collection_type &&
+               link_target_table == rhs.link_target_table;
     }
 };
 
@@ -472,11 +531,11 @@ struct EraseObject : ObjectInstruction {
 struct Update : PathInstruction {
     using PathInstruction::PathInstruction;
 
-    // Note: For "ArraySet", the path ends with an integer.
+    // Note: For "ArrayUpdate", the path ends with an integer.
     Payload value;
     union {
         bool is_default;     // For fields
-        uint32_t prior_size; // For "ArraySet"
+        uint32_t prior_size; // For "ArrayUpdate"
     };
 
     Update()
@@ -484,7 +543,7 @@ struct Update : PathInstruction {
     {
     }
 
-    bool is_array_set() const noexcept
+    bool is_array_update() const noexcept
     {
         return path.is_array_index();
     }
@@ -492,7 +551,7 @@ struct Update : PathInstruction {
     bool operator==(const Update& rhs) const noexcept
     {
         return PathInstruction::operator==(rhs) && value == rhs.value &&
-               (is_array_set() ? is_default == rhs.is_default : prior_size == rhs.prior_size);
+               (is_array_update() ? is_default == rhs.is_default : prior_size == rhs.prior_size);
     }
 };
 
@@ -729,8 +788,36 @@ inline const char* get_type_name(Instruction::Payload::Type type)
             return "Link";
         case Type::ObjectId:
             return "ObjectId";
+        case Type::UUID:
+            return "UUID";
     }
     return "(unknown)";
+}
+
+inline const char* get_collection_type(Instruction::AddColumn::CollectionType type)
+{
+    using Type = Instruction::AddColumn::CollectionType;
+    switch (type) {
+        case Type::Single:
+            return "Single";
+        case Type::List:
+            return "List";
+        case Type::Dictionary:
+            return "Dictionary";
+        case Type::Set:
+            return "Set";
+    }
+    return "(unknown)";
+}
+
+inline const char* get_type_name(util::Optional<Instruction::Payload::Type> type)
+{
+    if (type) {
+        return get_type_name(*type);
+    }
+    else {
+        return "Mixed";
+    }
 }
 
 inline std::ostream& operator<<(std::ostream& os, Instruction::Payload::Type type)
@@ -749,6 +836,8 @@ inline bool is_valid_key_type(Instruction::Payload::Type type) noexcept
         case Type::String:
             [[fallthrough]];
         case Type::ObjectId:
+            [[fallthrough]];
+        case Type::UUID:
             [[fallthrough]];
         case Type::GlobalKey:
             return true;
@@ -781,10 +870,16 @@ inline DataType get_data_type(Instruction::Payload::Type type) noexcept
             return type_Link;
         case Type::ObjectId:
             return type_ObjectId;
+        case Type::UUID:
+            return type_UUID;
         case Type::Erased:
+            [[fallthrough]];
         case Type::Dictionary:
+            [[fallthrough]];
         case Type::ObjectValue:
+            [[fallthrough]];
         case Type::GlobalKey:
+            [[fallthrough]];
         case Type::Null:
             REALM_TERMINATE("Invalid data type");
     }
@@ -934,7 +1029,7 @@ inline T* Instruction::get_if() noexcept
     }
     else if constexpr (std::is_same_v<ObjectInstruction, T>) {
         // This should compile to nothing but a comparison of the type.
-        return visit(util::overloaded{
+        return visit(util::overload{
             [](AddTable&) -> ObjectInstruction* {
                 return nullptr;
             },
@@ -954,7 +1049,7 @@ inline T* Instruction::get_if() noexcept
     }
     else if constexpr (std::is_same_v<PathInstruction, T>) {
         // This should compile to nothing but a comparison of the type.
-        return visit(util::overloaded{
+        return visit(util::overload{
             [](AddTable&) -> PathInstruction* {
                 return nullptr;
             },

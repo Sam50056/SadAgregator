@@ -7,6 +7,7 @@ target 'SadAgregator' do
 
   # Pods for SadAgregator
 
+
 pod 'Alamofire', '~> 5.2'
 pod 'SwiftyJSON' 
 
@@ -18,12 +19,11 @@ pod 'Cosmos', '~> 23.0'
 
 pod 'YandexMobileMetrica', '3.12.0'
 
-pod 'RealmSwift', '~> 10.4.0'
+pod 'RealmSwift', '~> 10.5.2'
 
 pod 'Hero'
 
 pod "VK-ios-sdk"
 pod 'ok-ios-sdk', '~> 2.0'
-
 
 end

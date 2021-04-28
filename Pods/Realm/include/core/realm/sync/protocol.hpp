@@ -20,6 +20,9 @@ namespace sync {
 //
 //   2 Restored erase-always-wins OT behavior.
 //
+//  XX Changes:
+//     - Add support for Mixed and TypedLinks columns.
+//
 constexpr int get_current_protocol_version() noexcept
 {
     return 2;

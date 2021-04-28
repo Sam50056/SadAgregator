@@ -4,11 +4,11 @@ PODS:
   - Hero (1.6.1)
   - IQKeyboardManagerSwift (6.5.6)
   - ok-ios-sdk (2.0.14)
-  - Realm (10.4.0):
-    - Realm/Headers (= 10.4.0)
-  - Realm/Headers (10.4.0)
-  - RealmSwift (10.4.0):
-    - Realm (= 10.4.0)
+  - Realm (10.5.2):
+    - Realm/Headers (= 10.5.2)
+  - Realm/Headers (10.5.2)
+  - RealmSwift (10.5.2):
+    - Realm (= 10.5.2)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
@@ -29,7 +29,7 @@ DEPENDENCIES:
   - Hero
   - IQKeyboardManagerSwift
   - ok-ios-sdk (~> 2.0)
-  - RealmSwift (~> 10.4.0)
+  - RealmSwift (~> 10.5.2)
   - SDWebImage (~> 5.0)
   - SwiftyJSON
   - VK-ios-sdk
@@ -55,13 +55,13 @@ SPEC CHECKSUMS:
   Hero: 215865ba3ae41dd9bb08cd6c60a645529c6fc94b
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   ok-ios-sdk: 30c84b4026386f21f21a3f956e1bd51fa5540b7d
-  Realm: d8466b2238f034a5ff7a031aed63b7dacdf0dd10
-  RealmSwift: 37a93ae742667948cc094a3c6ae3d006db32b66f
+  Realm: 2e1bc0d28301006176692da234deff51f867d5ae
+  RealmSwift: a522ad39715e8b4e491af4460059bc32b84f5a9b
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 7ba67267e1ef841f77d5db17a5091b8e9eba911f
 
-PODFILE CHECKSUM: aadf220c3448eef857b20dc8a1d22d64b6e1f0fb
+PODFILE CHECKSUM: eacbc5c0d4e2b60e3a1e89ae4f180e20a620a5ce
 
 COCOAPODS: 1.10.1

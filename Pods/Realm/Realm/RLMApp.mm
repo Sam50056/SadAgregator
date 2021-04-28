@@ -18,16 +18,16 @@
 
 #import "RLMApp_Private.hpp"
 
-#import "RLMCredentials_Private.hpp"
 #import "RLMBSON_Private.hpp"
-#import "RLMPushClient_Private.hpp"
-#import "RLMUser_Private.hpp"
-#import "RLMSyncManager_Private.hpp"
-#import "RLMUtil.hpp"
+#import "RLMCredentials_Private.hpp"
 #import "RLMEmailPasswordAuth.h"
+#import "RLMPushClient_Private.hpp"
+#import "RLMSyncManager_Private.hpp"
+#import "RLMUser_Private.hpp"
+#import "RLMUtil.hpp"
 
-#include "sync/sync_config.hpp"
-#include "sync/sync_manager.hpp"
+#import <realm/object-store/sync/sync_manager.hpp>
+#import <realm/sync/config.hpp>
 
 #if !defined(REALM_COCOA_VERSION)
 #import "RLMVersion.h"
@@ -57,7 +57,7 @@ namespace {
             rlmRequest.timeout = request.timeout_ms / 1000;
 
             // Send the request through to the Cocoa level transport
-            [m_transport sendRequestToServer:rlmRequest completion:^(RLMResponse * response) {
+            [m_transport sendRequestToServer:rlmRequest completion:^(RLMResponse *response) {
                 __block std::map<std::string, std::string> bridgingHeaders;
                 [response.headers enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *) {
                     bridgingHeaders[key.UTF8String] = value.UTF8String;
@@ -66,7 +66,9 @@ namespace {
                 // Convert the RLMResponse to an app:Response and pass downstream to
                 // the object store
                 completion({
-                    .body = response.body.UTF8String,
+                    .status = response.body ? app::ResponseResult::Success : app::ResponseResult::Failure,
+                    .body = response.body ? util::make_optional<std::string>(response.body.UTF8String) : util::Optional<std::string>(),
+                    .error = util::none,
                     .headers = bridgingHeaders,
                     .http_status_code = static_cast<int>(response.httpStatusCode),
                     .custom_status_code = static_cast<int>(response.customStatusCode)

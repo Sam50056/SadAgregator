@@ -36,6 +36,8 @@ struct ObjKey;
 class StringData;
 class Timestamp;
 class LinkMap;
+class UUID;
+class TypeOfValue;
 enum class ExpressionComparisonType : unsigned char;
 
 namespace util {
@@ -65,6 +67,10 @@ template <>
 std::string print_value<>(realm::ObjectId);
 template <>
 std::string print_value<>(realm::ObjKey);
+template <>
+std::string print_value<>(realm::UUID);
+template <>
+std::string print_value<>(realm::TypeOfValue);
 
 // General implementation for most types
 template <typename T>
@@ -84,6 +90,8 @@ std::string print_value(Optional<T> value)
         return "NULL";
     }
 }
+
+StringData get_printable_table_name(StringData name);
 
 struct SerialisationState {
     std::string describe_column(ConstTableRef table, ColKey col_key);
