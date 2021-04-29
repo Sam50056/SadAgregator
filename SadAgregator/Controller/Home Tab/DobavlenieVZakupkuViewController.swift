@@ -35,7 +35,15 @@ class DobavlenieVZakupkuViewController: UIViewController {
     
     private var itemInfo : JSON?{
         didSet{
+            
+            guard let itemInfo = itemInfo else {return}
+            
             makeOsnovnoeCellItemsArray()
+            
+            if let zakupka = itemInfo["def_pur"]["name"].string{
+                selectedZakupka = Zakupka(name: zakupka, id:  itemInfo["def_pur"]["id"].stringValue)
+            }
+            
         }
     }
     
