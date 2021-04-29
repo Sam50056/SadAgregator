@@ -93,7 +93,7 @@ extension ClientViewController{
         
     }
     
-    @IBAction func editButtonTappedForPhone(_ sender : UIButton){
+    @IBAction func editButtonTappedForPhone(_ sender : Any){
         
         let alertController = UIAlertController(title: "Введите номер телефона", message: nil, preferredStyle: .alert)
         
@@ -347,7 +347,7 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                 view.layoutIfNeeded()
             }
             
-        }else if section == 1 , infoItems[indexPath.row].secondText != ""{
+        }else if section == 1{
             
             let item = infoItems[indexPath.row]
             
@@ -361,13 +361,21 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                 
             }else if item.firstText == "Телефон"{
                 
-                if let url = URL(string: "tel://\(item.secondText)") {
+                if item.secondText.replacingOccurrences(of: " ", with: "") == "" {
                     
-                    UIApplication.shared.open(url ,  options: [:], completionHandler: nil)
+                    editButtonTappedForPhone(self)
+                    
+                }else{
+                    
+                    if let url = URL(string: "tel://\(item.secondText)") {
+                        
+                        UIApplication.shared.open(url ,  options: [:], completionHandler: nil)
+                        
+                    }
                     
                 }
                 
-            }else{
+            }else if item.secondText != "" {
                 
                 let urlString = item.secondText
                 
