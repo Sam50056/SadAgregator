@@ -223,6 +223,24 @@ extension DobavlenieVZakupkuViewController : UITextViewDelegate {
     }
 }
 
+//MARK: - UIStepper
+
+extension DobavlenieVZakupkuViewController {
+    
+    @IBAction func clientStepperValueChanged(_ sender : UIStepperWithInfo){
+        
+        //        print("New Value = \(sender.value)")
+        
+        guard let index = Int(sender.info) else {return}
+        
+        clients[index].count = Int(sender.value)
+        
+        tableView.reloadData()
+        
+    }
+    
+}
+
 //MARK: - TableView
 
 extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDataSource{
@@ -461,8 +479,8 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
                 guard let label = cell.viewWithTag(1) as? UILabel ,
                       let countLabel = cell.viewWithTag(2) as? UILabel ,
-                      let stepper = cell.viewWithTag(3) as? UIStepper,
-                      let imageView = cell.viewWithTag(4) as? UIImageView ,
+                      let stepper = cell.viewWithTag(3) as? UIStepperWithInfo,
+                      let _ = cell.viewWithTag(4) as? UIImageView ,
                       let imageViewButton = cell.viewWithTag(5) as? UIButtonWithInfo
                 else {return cell}
                 
@@ -472,6 +490,18 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 imageViewButton.info = String(index)
                 
                 imageViewButton.addTarget(self, action: #selector(closeClientInfoButtonPressed(_:)), for: .touchUpInside)
+                
+                stepper.value = Double(clients[index].count)
+                
+                stepper.stepValue = 1
+                
+                stepper.minimumValue = 1
+                
+                stepper.maximumValue = .infinity
+                
+                stepper.info = "\(index)"
+                
+                stepper.addTarget(self, action: #selector(clientStepperValueChanged(_:)), for: .valueChanged)
                 
                 return cell
                 

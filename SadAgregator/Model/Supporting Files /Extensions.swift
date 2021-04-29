@@ -216,3 +216,11 @@ class UIButtonWithInfo : UIButton{
     @IBInspectable var info : String = ""
     
 }
+
+//MARK: - UIStepper
+
+class UIStepperWithInfo : UIStepper{
+    
+    @IBInspectable var info : String = ""
+    
+}
