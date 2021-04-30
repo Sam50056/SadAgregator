@@ -48,7 +48,7 @@ class PostTableViewCell: UITableViewCell  {
         }
     }
     
-    var images = [String](){
+    var images = [PostImage](){
         didSet{
             applySnapshot()
         }
@@ -570,7 +570,10 @@ class PostTableViewCell: UITableViewCell  {
         
         snapshot.appendItems(sizes, toSection: .size)
         snapshot.appendItems(options, toSection: .option)
-        snapshot.appendItems(images,toSection: .photo)
+        
+        snapshot.appendItems(images.map({ (imageItem) -> String in
+            return imageItem.image
+        }),toSection: .photo)
         snapshot.appendItems([showDescription ? "Скрыть описание" : "Показать описание"], toSection: .showDesc)
         snapshot.appendItems([postDescription ?? ""], toSection: .desc)
         
@@ -608,7 +611,13 @@ class PostTableViewCell: UITableViewCell  {
         
         print("Selected Image Link : \(imageURL)")
         
-        delegate?.didTapOnImageCell(index: index, images: images)
+        var sizesWithoutFirstItem = sizes
+        
+        if !sizes.isEmpty{
+            sizesWithoutFirstItem.remove(at: 0)//We delete the first item because we add "Размеры" at 0 index when we just get the sizes array
+        }
+        
+        delegate?.didTapOnImageCell(index: index, images: images, sizes: sizesWithoutFirstItem)
         
     }
     
@@ -712,6 +721,6 @@ extension PostTableViewCell : PostLikeDataManagerDelegate{
 //MARK: - PhotoCollectionViewCellDelegate
 
 protocol PostCellCollectionViewActionsDelegate {
-    func didTapOnImageCell(index: Int, images : [String])
+    func didTapOnImageCell(index: Int, images : [PostImage], sizes : [String])
     func didTapOnOptionCell(option : String)
 }

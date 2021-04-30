@@ -87,21 +87,21 @@ class MainViewController: UIViewController {
         }
     }
     
-    var images : Array<[String]> {
+    var images : Array<[PostImage]> {
         get{
-            var thisArray = Array<[String]>()
+            var thisArray = Array<[PostImage]>()
             
             for post in postsArray {
                 
-                let imagesForThisPost = post["images"].arrayValue
+                let jsonImagesForThisPost = post["images"].arrayValue
                 
-                var stringImagesForThisPost = [String]()
+                var ImagesForThisPost = [PostImage]()
                 
-                for image in imagesForThisPost {
-                    stringImagesForThisPost.append(image["img"].stringValue)
+                for image in jsonImagesForThisPost {
+                    ImagesForThisPost.append(PostImage(image: image["img"].stringValue, imageId: image["img_id"].stringValue))
                 }
                 
-                thisArray.append(stringImagesForThisPost)
+                thisArray.append(ImagesForThisPost)
             }
             
             return thisArray
@@ -950,15 +950,19 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
 
 extension MainViewController : PostCellCollectionViewActionsDelegate{
     
-    func didTapOnImageCell(index: Int, images: [String]) {
+    func didTapOnImageCell(index: Int, images: [PostImage] , sizes : [String]) {
         
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
+        let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
         
-        vc.selectedImageIndex = index
+        galleryVC.selectedImageIndex = index
         
-        vc.images = images
+        galleryVC.images = images
         
-        presentHero(vc, navigationAnimationType: .fade)
+        galleryVC.sizes = sizes
+        
+        let navVC = UINavigationController(rootViewController: galleryVC)
+        
+        presentHero(navVC, navigationAnimationType: .fade)
         
     }
     
