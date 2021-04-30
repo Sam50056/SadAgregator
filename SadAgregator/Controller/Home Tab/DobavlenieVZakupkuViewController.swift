@@ -111,11 +111,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
             DopolnitelnoSwitchCellItem(labelText: "Свой комментарий", isComment: true, isSwitch: false, shouldLabelTextBeBlue: false)
         ]
         
-        klientiCellItemsArray = [
-            KlientiCellItem(labelText: "Выбрать клиента..."),
-            KlientiCellItem(labelText: "Замена для..."),
-            KlientiCellItem(labelText: "Выбрать закупку")
-        ]
+        makeKlientiCellItemsArray()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -162,6 +158,16 @@ extension DobavlenieVZakupkuViewController {
         osnovnoeCellItemsArray = newArray
         
         tableView.reloadData()
+        
+    }
+    
+    func makeKlientiCellItemsArray() {
+        
+        klientiCellItemsArray = [
+            KlientiCellItem(labelText: "Выбрать клиента..."),
+            KlientiCellItem(labelText: "Замена для..."),
+            KlientiCellItem(labelText: selectedZakupka == nil ? "Выбрать закупку" : "Закупка: \(selectedZakupka!.name)")
+        ]
         
     }
     
@@ -518,13 +524,6 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
             label1.text = item.labelText
             label2.text = ""
             
-            if item.labelText == "Выбрать закупку" ,
-               let selectedZakupka = selectedZakupka{
-                
-                label1.text = "Закупка: \(selectedZakupka.name)"
-                
-            }
-            
             //If there's more or less than one client selected , "Замена для..." should be gray and not be selectable
             if item.labelText == "Замена для..." && clients.count != 1 {
                 label1.textColor = .systemGray
@@ -576,6 +575,8 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     vibratZakupkuVC.purSelected = { [self] id , name in
                         
                         selectedZakupka = Zakupka(name: name, id: id)
+                        
+                        makeKlientiCellItemsArray()
                         
                         tableView.reloadData()
                         
