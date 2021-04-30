@@ -71,8 +71,8 @@ class DobavlenieVZakupkuViewController: UIViewController {
                 
                 tableView.beginUpdates()
                 
-                dopolnitelnoCellItemsArray.remove(at: 3)
                 dopolnitelnoCellItemsArray.remove(at: 4)
+                dopolnitelnoCellItemsArray.remove(at: 3)
                 
                 tableView.deleteRows(at: [IndexPath(row: 3, section: 3),IndexPath(row: 4, section: 3)], with: .automatic)
                 
