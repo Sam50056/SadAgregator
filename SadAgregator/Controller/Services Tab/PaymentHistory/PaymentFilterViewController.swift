@@ -184,7 +184,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 let section = NSCollectionLayoutSection(group: group)
                 
-                section.orthogonalScrollingBehavior = .groupPagingCentered
+//                section.orthogonalScrollingBehavior = .groupPagingCentered
                 section.interGroupSpacing = 16
                 section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 10, bottom: 0, trailing: 10)
                 
@@ -283,7 +283,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "headerCell", for: indexPath)
             
-            setUpHeaderCell(with: "Цена", for: cell)
+            setUpHeaderCell(with: "Сумма", for: cell)
             
             
         }else if section == 3{
