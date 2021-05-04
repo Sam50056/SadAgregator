@@ -123,7 +123,7 @@ extension ClientViewController{
         
     }
     
-    @IBAction func editButtonTappedForVK(_ sender : UIButton){
+    @IBAction func editButtonTappedForVK(_ sender : Any){
         
         let alertController = UIAlertController(title: "Введите ссылку на аккаунт ВК", message: nil, preferredStyle: .alert)
         
@@ -157,7 +157,7 @@ extension ClientViewController{
         
     }
     
-    @IBAction func editButtonTappedForOK(_ sender : UIButton){
+    @IBAction func editButtonTappedForOK(_ sender : Any){
         
         let alertController = UIAlertController(title: "Введите ссылку на аккаунт ОК", message: nil, preferredStyle: .alert)
         
@@ -375,13 +375,39 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                     
                 }
                 
-            }else if item.secondText != "" {
+            }else if item.firstText == "ВКонтакте" {
                 
-                let urlString = item.secondText
-                
-                if let url = URL(string: urlString){
+                if item.secondText == "" {
                     
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    editButtonTappedForVK(self)
+                    
+                }else{
+                    
+                    let urlString = item.secondText
+                    
+                    if let url = URL(string: urlString){
+                        
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        
+                    }
+                    
+                }
+                
+            }else if item.firstText == "Одноклассники"{
+                
+                if item.secondText == "" {
+                    
+                    editButtonTappedForOK(self)
+                    
+                }else{
+                    
+                    let urlString = item.secondText
+                    
+                    if let url = URL(string: urlString){
+                        
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        
+                    }
                     
                 }
                 
