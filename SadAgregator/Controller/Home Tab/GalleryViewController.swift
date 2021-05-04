@@ -91,6 +91,10 @@ class GalleryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.navigationBar.barTintColor = UIColor.black
+        
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(downloadButtonPressed(_:)))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .plain, target: self, action: #selector(closeButtonPressed(_:)))
@@ -163,7 +167,11 @@ class GalleryViewController: UIViewController {
         
         vc.sizes = sizes
         
-        navigationController?.pushViewController(vc, animated: true)
+        let navVC = UINavigationController(rootViewController: vc)
+        
+        navVC.modalPresentationStyle = .fullScreen
+        
+        present(navVC, animated: true, completion: nil)
         
     }
     
