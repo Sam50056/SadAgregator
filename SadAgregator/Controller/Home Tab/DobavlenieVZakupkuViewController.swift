@@ -21,6 +21,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
     var thisImageId : String?
     
     var thisSize : String?
+    var sizes : [String] = []
     
     private var osnovnoeCellItemsArray = [OsnovnoeCellItem]()
     private var dopolnitelnoCellItemsArray = [DopolnitelnoSwitchCellItem]()
@@ -562,7 +563,34 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
         let section = indexPath.section
         let index = indexPath.row
         
-        if section == 4{
+        if section == 1, index != 0{
+            
+            if osnovnoeCellItemsArray[index - 1].firstLabelText == "Размер" && !sizes.isEmpty{
+                
+                let alertControlelr = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                
+                for size in sizes {
+                    
+                    let action = UIAlertAction(title: size, style: .default) { [self] _ in
+                        thisSize = size
+                        makeOsnovnoeCellItemsArray()
+                    }
+                    
+                    alertControlelr.addAction(action)
+                    
+                }
+                
+                let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _IOFBF in
+                    alertControlelr.dismiss(animated: true, completion: nil)
+                }
+                
+                alertControlelr.addAction(cancelAction)
+                
+                present(alertControlelr, animated: true, completion: nil)
+                
+            }
+            
+        }else if section == 4{
             
             if index <= clients.count - 1{
                 

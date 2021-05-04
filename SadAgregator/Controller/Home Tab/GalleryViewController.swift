@@ -161,6 +161,8 @@ class GalleryViewController: UIViewController {
         
         vc.thisSize = selectedSize
         
+        vc.sizes = sizes
+        
         navigationController?.pushViewController(vc, animated: true)
         
     }
