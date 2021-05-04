@@ -139,9 +139,12 @@ extension PaymentHistoryViewController : UISearchResultsUpdating{
         
         refreshTimer.invalidate()
         
-        refreshTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [self] (timer) in
+        refreshTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [self] (timer) in
             
             comment = text
+            
+            page = 1
+            rowForPaggingUpdate = 15
             
             payments.removeAll()
             
