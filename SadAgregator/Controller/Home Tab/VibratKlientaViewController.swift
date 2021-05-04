@@ -76,6 +76,9 @@ extension VibratKlientaViewController : UISearchResultsUpdating{
             
             clients.removeAll()
             
+            page = 1
+            rowForPaggingUpdate = 15
+            
             purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, query: searchText)
             
         }else{
