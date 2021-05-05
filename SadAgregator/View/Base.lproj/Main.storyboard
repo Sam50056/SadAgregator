@@ -3666,26 +3666,26 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cenaProdazhiCell" id="bYY-46-BYY">
-                                        <rect key="frame" x="0.0" y="273.33333587646484" width="390" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="273.33333587646484" width="390" height="44.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bYY-46-BYY" id="fUM-Bm-avV">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="44.333332061767578"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5F-GA-E6X">
-                                                    <rect key="frame" x="20.000000000000004" y="11.666666666666666" width="41.333333333333343" height="20.333333333333336"/>
+                                                    <rect key="frame" x="20.000000000000004" y="11.999999999999998" width="41.333333333333343" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvk-8i-Ctx">
-                                                    <rect key="frame" x="273.33333333333331" y="11.666666666666666" width="41.333333333333314" height="20.333333333333336"/>
+                                                    <rect key="frame" x="273.33333333333331" y="11.999999999999998" width="41.333333333333314" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="X3G-Ql-sAj">
-                                                    <rect key="frame" x="350.33333333333331" y="8.6666666666666643" width="19.666666666666686" height="26.999999999999986"/>
+                                                    <rect key="frame" x="350.33333333333331" y="9" width="19.666666666666686" height="27"/>
                                                     <color key="tintColor" systemColor="systemGrayColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="28.329999999999998" id="CbF-LD-sU1"/>
@@ -3693,23 +3693,30 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gear" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="f32-G2-qHk">
-                                                    <rect key="frame" x="322.66666666666669" y="7.6666666666666643" width="19.666666666666686" height="28.666666666666671"/>
+                                                    <rect key="frame" x="322.66666666666669" y="7.9999999999999964" width="19.666666666666686" height="28.666666666666675"/>
                                                     <color key="tintColor" systemColor="systemGrayColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="28.329999999999998" id="OJf-za-WXd"/>
                                                         <constraint firstAttribute="width" constant="19.670000000000002" id="kIU-iB-Mf8"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="luh-M3-ELu">
+                                                    <rect key="frame" x="314.66666666666669" y="6.9999999999999982" width="35.666666666666686" height="30.333333333333329"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="luh-M3-ELu" firstAttribute="leading" secondItem="pvk-8i-Ctx" secondAttribute="trailing" id="5vd-TL-OXY"/>
                                                 <constraint firstItem="X3G-Ql-sAj" firstAttribute="leading" secondItem="f32-G2-qHk" secondAttribute="trailing" constant="8" id="BVg-Gl-vJR"/>
                                                 <constraint firstItem="V5F-GA-E6X" firstAttribute="leading" secondItem="fUM-Bm-avV" secondAttribute="leadingMargin" id="DXl-XP-xyw"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="X3G-Ql-sAj" secondAttribute="trailing" id="Qa8-bC-Kr1"/>
                                                 <constraint firstItem="pvk-8i-Ctx" firstAttribute="centerY" secondItem="fUM-Bm-avV" secondAttribute="centerY" id="SeH-KQ-tcQ"/>
                                                 <constraint firstItem="f32-G2-qHk" firstAttribute="centerY" secondItem="fUM-Bm-avV" secondAttribute="centerY" id="bbt-ut-Az6"/>
                                                 <constraint firstItem="V5F-GA-E6X" firstAttribute="centerY" secondItem="fUM-Bm-avV" secondAttribute="centerY" id="beE-Rj-cuh"/>
+                                                <constraint firstItem="luh-M3-ELu" firstAttribute="centerY" secondItem="f32-G2-qHk" secondAttribute="centerY" id="dNX-cD-Q2e"/>
+                                                <constraint firstItem="luh-M3-ELu" firstAttribute="top" secondItem="fUM-Bm-avV" secondAttribute="topMargin" constant="-4" id="ffH-zm-qPA"/>
                                                 <constraint firstItem="X3G-Ql-sAj" firstAttribute="centerY" secondItem="fUM-Bm-avV" secondAttribute="centerY" id="nwQ-Py-AqK"/>
                                                 <constraint firstItem="f32-G2-qHk" firstAttribute="leading" secondItem="pvk-8i-Ctx" secondAttribute="trailing" constant="8" id="sO6-Cc-LR6"/>
+                                                <constraint firstItem="X3G-Ql-sAj" firstAttribute="leading" secondItem="luh-M3-ELu" secondAttribute="trailing" id="zFC-Wy-tRl"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <userDefinedRuntimeAttributes>
@@ -3717,7 +3724,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="twoLabelCell" id="5LV-FI-XI3">
-                                        <rect key="frame" x="0.0" y="317.00000381469727" width="390" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="317.66666793823242" width="390" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5LV-FI-XI3" id="Bge-0R-hzA">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
@@ -3745,7 +3752,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="labelImageViewCell" id="RaX-6B-oJa">
-                                        <rect key="frame" x="0.0" y="360.66667175292969" width="390" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="361.33333587646484" width="390" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RaX-6B-oJa" id="zVh-Cx-KJF">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
@@ -3775,7 +3782,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="labelSwitchCell" id="0tP-Ot-UKO">
-                                        <rect key="frame" x="0.0" y="404.33333969116211" width="390" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="405.00000381469727" width="390" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0tP-Ot-UKO" id="4fa-SN-fx1">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
@@ -3810,7 +3817,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" rowHeight="160" id="a6Z-MQ-8yN">
-                                        <rect key="frame" x="0.0" y="448.00000762939453" width="390" height="160"/>
+                                        <rect key="frame" x="0.0" y="448.66667175292969" width="390" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a6Z-MQ-8yN" id="Htn-2x-JpC">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="160"/>
@@ -3863,7 +3870,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="clientCell" id="0zK-Bt-LPa">
-                                        <rect key="frame" x="0.0" y="608.00000762939453" width="390" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="608.66667175292969" width="390" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0zK-Bt-LPa" id="6vX-EC-MSA">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
