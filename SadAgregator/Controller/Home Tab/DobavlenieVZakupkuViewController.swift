@@ -601,7 +601,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
             
             if osnovnoeCellItemsArray[index - 1].firstLabelText == "Закупка"{
                 
-                let alertController = UIAlertController(title: "Редактировать цену продажи?", message: nil, preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Изменить закупочную цену?", message: nil, preferredStyle: .alert)
                 
                 let yesAction = UIAlertAction(title: "Да", style: .default) { [self] _ in
                     
