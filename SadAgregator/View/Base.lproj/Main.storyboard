@@ -3992,8 +3992,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="350"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zij-a8-zXF">
-                                <rect key="frame" x="0.0" y="60" width="390" height="162"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="zij-a8-zXF">
+                                <rect key="frame" x="0.0" y="76" width="390" height="146"/>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выбор даты" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVe-p3-TFY">
                                 <rect key="frame" x="144.66666666666666" y="16" width="101" height="25"/>
@@ -4033,7 +4033,7 @@
                         <constraints>
                             <constraint firstItem="zij-a8-zXF" firstAttribute="trailing" secondItem="d50-tL-dkU" secondAttribute="trailing" id="5d8-2x-1W4"/>
                             <constraint firstItem="zij-a8-zXF" firstAttribute="leading" secondItem="d50-tL-dkU" secondAttribute="leading" id="73U-Pg-M8w"/>
-                            <constraint firstItem="zij-a8-zXF" firstAttribute="top" secondItem="d50-tL-dkU" secondAttribute="top" constant="16" id="FES-bJ-dID"/>
+                            <constraint firstItem="zij-a8-zXF" firstAttribute="top" secondItem="d50-tL-dkU" secondAttribute="top" constant="32" id="FES-bJ-dID"/>
                             <constraint firstItem="d50-tL-dkU" firstAttribute="trailing" secondItem="uHz-57-4ml" secondAttribute="trailing" constant="16" id="Gc0-cz-u1L"/>
                             <constraint firstItem="cVe-p3-TFY" firstAttribute="centerX" secondItem="5Nc-am-97t" secondAttribute="centerX" id="K9G-aj-Fdy"/>
                             <constraint firstItem="DMz-Ny-Ru7" firstAttribute="leading" secondItem="d50-tL-dkU" secondAttribute="leading" constant="16" id="Ya5-iV-tfJ"/>
