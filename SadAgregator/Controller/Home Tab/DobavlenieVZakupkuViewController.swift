@@ -33,11 +33,36 @@ class DobavlenieVZakupkuViewController: UIViewController {
     private var purchasesItemInfoDataManager = PurchasesItemInfoDataManager()
     
     private var cenaProdazhi : Int?
+    private var cenaZakupki : Int?
+    
+    private var itogoTovari : Int?{
+        return tovarsCount * (cenaZakupki ?? 0)
+    }
+    private var itogoSKlientov : Int?{
+        return tovarsCount * (cenaProdazhi ?? 0)
+    }
+    
+    private var tovarsCount : Int{
+        
+        var count = 0
+        
+        for client in clients{
+            
+            count += client.count
+            
+        }
+        
+        return count
+        
+    }
     
     private var itemInfo : JSON?{
         didSet{
             
             guard let itemInfo = itemInfo else {return}
+            
+            cenaProdazhi = Int(itemInfo["sell_price"].stringValue)
+            cenaZakupki = Int(itemInfo["pur_price"].stringValue)
             
             makeOsnovnoeCellItemsArray()
             
@@ -142,15 +167,15 @@ extension DobavlenieVZakupkuViewController {
     
     func makeOsnovnoeCellItemsArray() {
         
-        guard let itemInfo = itemInfo else {return}
+        guard let _ = itemInfo else {return}
         
         var newArray = [OsnovnoeCellItem]()
         
-        if let price = itemInfo["pur_price"].string{
-            newArray.append(OsnovnoeCellItem(firstLabelText: "Закупка", secondLabelText: price + " руб.", hasImageView: true))
+        if let price = cenaZakupki{
+            newArray.append(OsnovnoeCellItem(firstLabelText: "Закупка", secondLabelText: String(price) + " руб.", hasImageView: true))
         }
         
-        if let cenaProdazhi = itemInfo["sell_price"].string {
+        if let cenaProdazhi = cenaProdazhi {
             newArray.append(OsnovnoeCellItem(firstLabelText: "Цена продажи", secondLabelText: String(cenaProdazhi) + " руб.", hasImageView: true,isCenaProdazhi: true))
         }
         
@@ -179,7 +204,7 @@ extension DobavlenieVZakupkuViewController {
 extension DobavlenieVZakupkuViewController {
     
     @IBAction func otmenaTapped(_ sender : Any){
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func bezZamenSwitchValueChanged(_ sender : UISwitch){
@@ -377,6 +402,9 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                         secondLabel.textColor = item.shouldSecondLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
                         firstLabel.textColor = UIColor(named: "blackwhite")
                         
+                        firstLabel.font = UIFont.systemFont(ofSize: 17)
+                        secondLabel.font = UIFont.systemFont(ofSize: 17)
+                        
                     }
                     
                 }
@@ -393,7 +421,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
             
             label1.text = index == 0 ? "Итого товары" : "Итого с клиентов"
             
-            label2.text = (index == 0 ? "500" : "750") + " руб."
+            label2.text = (index == 0 ? "\(itogoTovari ?? 0)" : "\(itogoSKlientov ?? 0)") + " руб."
             
             label1.textColor = UIColor(named: "blackwhite")
             label2.textColor = UIColor(named: "blackwhite")
@@ -476,6 +504,9 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
                 label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
                 
+                label1.font = UIFont.systemFont(ofSize: 17)
+                label2.font = UIFont.systemFont(ofSize: 17)
+                
             }
             
         case 4:
@@ -532,6 +563,9 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
             }
             
+            label1.font = UIFont.systemFont(ofSize: 17)
+            label2.font = UIFont.systemFont(ofSize: 17)
+            
         default:
             return cell
         }
@@ -565,7 +599,48 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
         
         if section == 1, index != 0{
             
-            if osnovnoeCellItemsArray[index - 1].firstLabelText == "Размер" && !sizes.isEmpty{
+            if osnovnoeCellItemsArray[index - 1].firstLabelText == "Закупка"{
+                
+                let alertController = UIAlertController(title: "Редактировать цену продажи?", message: nil, preferredStyle: .alert)
+                
+                let yesAction = UIAlertAction(title: "Да", style: .default) { [self] _ in
+                    
+                    let secondAlertController = UIAlertController(title: "Цена закупки", message: nil, preferredStyle: .alert)
+                    
+                    secondAlertController.addTextField { field in
+                        
+                        field.placeholder = "500 руб."
+                        
+                        field.keyboardType = .numberPad
+                        
+                    }
+                    
+                    secondAlertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { _ in
+                        
+                        if let newCena = Int(secondAlertController.textFields![0].text ?? ""){
+                            
+                            cenaZakupki = newCena
+                            
+                            tableView.reloadData()
+                            
+                        }
+                        
+                    }))
+                    
+                    present(secondAlertController, animated: true, completion: nil)
+                    
+                }
+                
+                let noAction = UIAlertAction(title: "Нет", style: .cancel) { _ in
+                    alertController.dismiss(animated: true, completion: nil)
+                }
+                
+                alertController.addAction(yesAction)
+                alertController.addAction(noAction)
+                
+                present(alertController, animated: true, completion: nil)
+                
+            }else if osnovnoeCellItemsArray[index - 1].firstLabelText == "Размер" && !sizes.isEmpty{
                 
                 let alertControlelr = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
                 
@@ -624,7 +699,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                         
                         clients.append(KlientiCellKlientItem(name: name, id: id, count: 1))
                         
-                        tableView.reloadSections([4], with: .automatic)
+                        tableView.reloadData()
                         
                     }
                     
