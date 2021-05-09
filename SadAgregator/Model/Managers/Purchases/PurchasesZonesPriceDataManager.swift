@@ -21,7 +21,7 @@ struct PurchasesZonesPriceDataManager{
         
         let urlString = "https://agrapi.tk-sad.ru/agr_purchases.ZonesPrice?AKey=\(key)"
         
-        print("URLString for PurchasesProdsByClientDataManager: \(urlString)")
+        print("URLString for PurchasesZonesPriceDataManager: \(urlString)")
         
         guard let encodedURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: encodedURL)  else {return}
         

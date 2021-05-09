@@ -14,6 +14,8 @@ class CenovieDiapazoniViewController: UIViewController {
     
     private var purchasesZonesPriceDataManager = PurchasesZonesPriceDataManager()
     
+    private var purchasesDelZonePriceDataManager = PurchasesDelZonePriceDataManager()
+    
     private var key = ""
     
     private var zones = [Zone]()
@@ -97,6 +99,54 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let editAction = UIContextualAction(style: .normal, title: nil) { action, view, completion in
+            
+            completion(true)
+            
+        }
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [self] action, view, completion in
+            
+            let zone = zones[indexPath.row]
+            
+            purchasesDelZonePriceDataManager.getPurchasesDelZonePriceData(key: key, zoneId: zone.id) { data, error in
+                
+                if let error = error , data == nil {
+                    print("Error with purchasesDelZonePriceDataManager : \(error)")
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                if data["result"].intValue == 1{
+                    
+                    DispatchQueue.main.async { [self] in
+                        
+                        zones.remove(at: indexPath.row)
+                        
+                        completion(true)
+                        
+                        tableView.reloadSections([0], with: .automatic)
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        editAction.backgroundColor = .gray
+        editAction.image = UIImage(systemName: "pencil")
+        
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction,editAction])
+        
     }
     
 }

@@ -156,6 +156,7 @@
 		22ACF1AE262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */; };
 		22ACF1AF262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */; };
 		22B41BA726476EA000F7DC30 /* CenovieDiapazoniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B41BA626476EA000F7DC30 /* CenovieDiapazoniViewController.swift */; };
+		22B41BA926486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B41BA826486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift */; };
 		22B518E5261E46C100A7176F /* DobavlenieVZakupkuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */; };
 		22B6BC8A25DC6DF300EAE067 /* CategoryFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */; };
 		22B6BC8D25DC721300EAE067 /* AboveViewControllerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */; };
@@ -374,6 +375,7 @@
 		22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCellTwoLabelTableViewCell.swift; sourceTree = "<group>"; };
 		22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCellTwoLabelTableViewCell.xib; sourceTree = "<group>"; };
 		22B41BA626476EA000F7DC30 /* CenovieDiapazoniViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenovieDiapazoniViewController.swift; sourceTree = "<group>"; };
+		22B41BA826486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesDelZonePriceDataManager.swift; sourceTree = "<group>"; };
 		22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DobavlenieVZakupkuViewController.swift; sourceTree = "<group>"; };
 		22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterViewController.swift; sourceTree = "<group>"; };
 		22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboveViewControllerPresentationController.swift; sourceTree = "<group>"; };
@@ -1301,6 +1303,7 @@
 				22703264262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift */,
 				22729F60262F017100C19EF3 /* PurchasesProdsByClientDataManager.swift */,
 				228004A32645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift */,
+				22B41BA826486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift */,
 			);
 			path = Purchases;
 			sourceTree = "<group>";
@@ -1473,6 +1476,7 @@
 				22044EB2261AA9BF0032C67F /* ClientsFilterPayHistByClientDataManager.swift in Sources */,
 				229FE69225706B6B0001FF54 /* GetSearchPageDataManager.swift in Sources */,
 				225C6CAD25FCBF5700CC621E /* ClientDataManager.swift in Sources */,
+				22B41BA926486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift in Sources */,
 				22D90236259C0359009732CC /* MyPostsDataManager.swift in Sources */,
 				2291BE452560620F004F55DF /* MainDataManager.swift in Sources */,
 				22CADB1225B2484000A5E475 /* AssignVkToAppIDDataManager.swift in Sources */,
