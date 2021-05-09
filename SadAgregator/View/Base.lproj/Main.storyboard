@@ -4000,7 +4000,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hyP-mM-yu8">
-                                <rect key="frame" x="0.0" y="44" width="390" height="766"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="800"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="diapazonCell" rowHeight="145" id="5lg-dv-Rmv">
@@ -4132,7 +4132,7 @@
                         <constraints>
                             <constraint firstItem="qAb-XH-jwr" firstAttribute="trailing" secondItem="hyP-mM-yu8" secondAttribute="trailing" id="5bl-Yk-Ica"/>
                             <constraint firstItem="hyP-mM-yu8" firstAttribute="top" secondItem="qAb-XH-jwr" secondAttribute="top" id="9vq-V7-dFn"/>
-                            <constraint firstItem="qAb-XH-jwr" firstAttribute="bottom" secondItem="hyP-mM-yu8" secondAttribute="bottom" id="NVo-el-qyR"/>
+                            <constraint firstAttribute="bottom" secondItem="hyP-mM-yu8" secondAttribute="bottom" id="PAE-5S-qIw"/>
                             <constraint firstItem="hyP-mM-yu8" firstAttribute="leading" secondItem="qAb-XH-jwr" secondAttribute="leading" id="Wk0-ce-Ykh"/>
                         </constraints>
                     </view>

@@ -79,9 +79,9 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
             
             doLabel.text = zone.to + " руб."
             
-            nacenkaLabel.text = zone.trunc
+            nacenkaLabel.text = zone.marge
             
-            okruglenieLabel.text = zone.marge
+            okruglenieLabel.text = zone.trunc
             
             fixNadbavkaLabel.text = zone.fix
             
