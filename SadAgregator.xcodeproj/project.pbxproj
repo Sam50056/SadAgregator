@@ -104,6 +104,7 @@
 		22782906258AC7FE00B435FA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22782905258AC7FE00B435FA /* Extensions.swift */; };
 		2278290A258BB60E00B435FA /* GetMyReviewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22782909258BB60E00B435FA /* GetMyReviewDataManager.swift */; };
 		227ADAAA25892D8E009B32EC /* ReviewUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */; };
+		228004A42645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228004A32645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift */; };
 		2284EAD625BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284EAD525BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift */; };
 		2284EADA25BB196B00CC1D58 /* OKAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284EAD925BB196B00CC1D58 /* OKAuthService.swift */; };
 		2284EADD25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284EADC25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift */; };
@@ -318,6 +319,7 @@
 		22782905258AC7FE00B435FA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		22782909258BB60E00B435FA /* GetMyReviewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyReviewDataManager.swift; sourceTree = "<group>"; };
 		227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUpdateDataManager.swift; sourceTree = "<group>"; };
+		228004A32645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesZonesPriceDataManager.swift; sourceTree = "<group>"; };
 		2284EAD525BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignOKToAppIDDataManager.swift; sourceTree = "<group>"; };
 		2284EAD925BB196B00CC1D58 /* OKAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKAuthService.swift; sourceTree = "<group>"; };
 		2284EADC25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOkInfoDataManager.swift; sourceTree = "<group>"; };
@@ -1295,6 +1297,7 @@
 				22D636F22625CB0000987E3F /* PurchasesPursListDataManager.swift */,
 				22703264262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift */,
 				22729F60262F017100C19EF3 /* PurchasesProdsByClientDataManager.swift */,
+				228004A32645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift */,
 			);
 			path = Purchases;
 			sourceTree = "<group>";
@@ -1503,6 +1506,7 @@
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
 				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
 				2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */,
+				228004A42645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift in Sources */,
 				22B8E49225FCF49E002DDB73 /* FormDataManager.swift in Sources */,
 				224FE2A926095FF400AE13B2 /* CreateClientViewController.swift in Sources */,
 				228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */,
