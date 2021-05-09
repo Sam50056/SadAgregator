@@ -232,6 +232,14 @@ extension DobavlenieVZakupkuViewController {
         
     }
     
+    @IBAction func gearButtonPressed(_ sender : Any){
+        
+        let cenovieDiapazoniVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CenovieDiapazoniVC") as! CenovieDiapazoniViewController
+        
+        navigationController?.pushViewController(cenovieDiapazoniVC, animated: true)
+        
+    }
+    
 }
 
 //MARK: - TextView
@@ -364,13 +372,16 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     guard let firstLabel = cell.viewWithTag(1) as? UILabel ,
                           let secondLabel = cell.viewWithTag(2) as? UILabel,
                           let _ = cell.viewWithTag(3) as? UIImageView,
-                          let _ = cell.viewWithTag(4) as? UIImageView
+                          let _ = cell.viewWithTag(4) as? UIImageView,
+                          let gearButton = cell.viewWithTag(5) as? UIButton
                     else {return cell}
                     
                     firstLabel.text = item.firstLabelText
                     secondLabel.text = item.secondLabelText
                     
                     secondLabel.textColor = item.shouldSecondLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
+                    
+                    gearButton.addTarget(self, action: #selector(gearButtonPressed(_:)), for: .touchUpInside)
                     
                 }else{
                     

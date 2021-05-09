@@ -155,6 +155,7 @@
 		22ACF1A9262B828B00F9584D /* ZamenaDlyaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */; };
 		22ACF1AE262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */; };
 		22ACF1AF262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */; };
+		22B41BA726476EA000F7DC30 /* CenovieDiapazoniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B41BA626476EA000F7DC30 /* CenovieDiapazoniViewController.swift */; };
 		22B518E5261E46C100A7176F /* DobavlenieVZakupkuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */; };
 		22B6BC8A25DC6DF300EAE067 /* CategoryFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */; };
 		22B6BC8D25DC721300EAE067 /* AboveViewControllerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */; };
@@ -372,6 +373,7 @@
 		22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZamenaDlyaTableViewController.swift; sourceTree = "<group>"; };
 		22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCellTwoLabelTableViewCell.swift; sourceTree = "<group>"; };
 		22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCellTwoLabelTableViewCell.xib; sourceTree = "<group>"; };
+		22B41BA626476EA000F7DC30 /* CenovieDiapazoniViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenovieDiapazoniViewController.swift; sourceTree = "<group>"; };
 		22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DobavlenieVZakupkuViewController.swift; sourceTree = "<group>"; };
 		22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterViewController.swift; sourceTree = "<group>"; };
 		22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboveViewControllerPresentationController.swift; sourceTree = "<group>"; };
@@ -1186,6 +1188,7 @@
 				22D636EF2624E8A400987E3F /* VibratZakupkuViewController.swift */,
 				22703261262711510068BD82 /* VibratKlientaViewController.swift */,
 				22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */,
+				22B41BA626476EA000F7DC30 /* CenovieDiapazoniViewController.swift */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
@@ -1506,6 +1509,7 @@
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
 				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
 				2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */,
+				22B41BA726476EA000F7DC30 /* CenovieDiapazoniViewController.swift in Sources */,
 				228004A42645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift in Sources */,
 				22B8E49225FCF49E002DDB73 /* FormDataManager.swift in Sources */,
 				224FE2A926095FF400AE13B2 /* CreateClientViewController.swift in Sources */,
