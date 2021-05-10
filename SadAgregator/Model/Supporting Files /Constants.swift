@@ -79,4 +79,57 @@ struct K {
         
     }
     
+    static func makeHeightForTovarCell(thisTovar : TovarCellItem , isZamena : Bool) -> CGFloat{
+        
+        var height : CGFloat = 0
+        let cellHeight : CGFloat = 48
+        
+        if thisTovar.capt != "" {
+            height += cellHeight
+        }
+        
+        if thisTovar.size != "" {
+            height += cellHeight
+        }
+        
+        if thisTovar.payed != "" , thisTovar.payed != "0"{
+            height += cellHeight
+        }
+        
+        if thisTovar.purCost != ""{
+            height += cellHeight
+        }
+        
+        if thisTovar.sellCost != "" {
+            height += cellHeight
+        }
+        
+        if thisTovar.clientName != "" {
+            height += cellHeight
+        }
+        
+        if thisTovar.qr != "" , !isZamena{
+            height += cellHeight
+        }
+        
+        if thisTovar.status != "" , !isZamena{
+            height += cellHeight
+        }
+        
+        if thisTovar.isReplace != "" , thisTovar.isReplace != "0" {
+            height += cellHeight
+        }
+        
+        if thisTovar.status != "" {
+            height += cellHeight
+        }
+        
+        if thisTovar.replaces != "" , thisTovar.replaces != "0"{
+            height += cellHeight
+        }
+        
+        return height
+        
+    }
+    
 }

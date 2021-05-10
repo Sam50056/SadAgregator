@@ -152,10 +152,10 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         
         (cell as! TovarTableViewCellTwoLabelTableViewCell).label2.text = item.label2Text
         
-        (cell as! TovarTableViewCellTwoLabelTableViewCell).label1.font = UIFont.boldSystemFont(ofSize: 15)
+        (cell as! TovarTableViewCellTwoLabelTableViewCell).label1.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         (cell as! TovarTableViewCellTwoLabelTableViewCell).label1.textColor = .systemGray
         
-        (cell as! TovarTableViewCellTwoLabelTableViewCell).label2.font = UIFont.boldSystemFont(ofSize: 15)
+        (cell as! TovarTableViewCellTwoLabelTableViewCell).label2.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         (cell as! TovarTableViewCellTwoLabelTableViewCell).label2.textColor = UIColor(named: "blackwhite")
         
         return cell
