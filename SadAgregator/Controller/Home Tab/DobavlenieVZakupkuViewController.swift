@@ -238,7 +238,7 @@ extension DobavlenieVZakupkuViewController {
         
         cenovieDiapazoniVC.doneChanges = { [self] in
             
-            PurchasesSellPriceRecalcDataManager(delegate: self).getPurchasesSellPriceRecalcData(key: key, buyPrice: "", imgId: thisImageId!)
+            PurchasesSellPriceRecalcDataManager(delegate: self).getPurchasesSellPriceRecalcData(key: key, buyPrice: String(cenaZakupki ?? 0), imgId: thisImageId!)
             
         }
         
