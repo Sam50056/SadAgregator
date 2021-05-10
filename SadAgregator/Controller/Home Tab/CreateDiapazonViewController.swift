@@ -26,6 +26,8 @@ class CreateDiapazonViewController: UIViewController {
     
     private var key = ""
     
+    var thisZone : CenovieDiapazoniViewController.PurchaseZone?
+    
     var createdDiapazon : (() -> ())?
     
     private var isInRubles = true{
@@ -60,14 +62,25 @@ class CreateDiapazonViewController: UIViewController {
         picker.delegate = self
         picker.dataSource = self
         
-        picker.selectRow(1, inComponent: 0, animated: false)
-        
         sozdatButton.layer.cornerRadius = 8
         
         inRublesButton.layer.cornerRadius = 8
         inPercentsButton.layer.cornerRadius = 8
         
-        selectRubles()
+        if thisZone != nil {
+            sozdatButton.setTitle("Изменить", for: .normal)
+            prewriteParameters()
+        }else{
+            picker.selectRow(1, inComponent: 0, animated: false)
+            selectRubles()
+        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.title = thisZone == nil ? "Создать диапазон" : "Изменить диапазон"
         
     }
     
@@ -105,6 +118,28 @@ extension CreateDiapazonViewController{
         
     }
     
+    func prewriteParameters(){
+        
+        guard let zone = thisZone else {return}
+        
+        otTextField.text = zone.from
+        
+        doTextField.text = zone.to
+        
+        nacenkaTextField.text = zone.marge
+        
+        if zone.marge.contains("%"){
+            selectPercents()
+        }else{
+            selectRubles()
+        }
+        
+        picker.selectRow(okruglenieArray.firstIndex(of: zone.trunc) ?? 1, inComponent: 0, animated: false)
+        
+        fixNadbavkaTextField.text = zone.fix
+        
+    }
+    
 }
 
 //MARK: - Actions
@@ -131,8 +166,12 @@ extension CreateDiapazonViewController{
     
     @IBAction func createButtonTapped(_ sender : UIButton){
         
-        PurchasesAddZonePriceDataManager(delegate: self).getPurchasesAddZonePriceDataManager(key: key, from: otTextField.text ?? "", to: doTextField.text ?? "", merge: nacenkaTextField.text ?? "", fix: fixNadbavkaTextField.text ?? "", trunc: okruglenieArray[picker.selectedRow(inComponent: 0)])
-        
+        if let zone = thisZone {
+            PurchasesUpdateZonePriceDataManager(delegate: self).getPurchasesUpdateZonePriceDataManager(key: key, zoneId : zone.id , from: otTextField.text ?? "", to: doTextField.text ?? "", merge: nacenkaTextField.text ?? "", fix: fixNadbavkaTextField.text ?? "", trunc: okruglenieArray[picker.selectedRow(inComponent: 0)])
+        }else{
+            PurchasesAddZonePriceDataManager(delegate: self).getPurchasesAddZonePriceDataManager(key: key, from: otTextField.text ?? "", to: doTextField.text ?? "", merge: nacenkaTextField.text ?? "", fix: fixNadbavkaTextField.text ?? "", trunc: okruglenieArray[picker.selectedRow(inComponent: 0)])
+        }
+            
     }
     
 }
@@ -182,6 +221,36 @@ extension CreateDiapazonViewController : PurchasesAddZonePriceDataManagerDelegat
     
     func didFailGettingPurchasesAddZonePriceDataWithError(error: String) {
         print("Error with PurchasesAddZonePriceDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - PurchasesUpdateZonePriceDataManagerDelegate
+
+extension CreateDiapazonViewController : PurchasesUpdateZonePriceDataManagerDelegate{
+    
+    func didGetPurchasesUpdateZonePriceData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                navigationController?.popViewController(animated: true)
+                
+                createdDiapazon?()
+                
+            }else{
+                
+                showSimpleAlertWithOkButton(title: "Ошибка запроса", message: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingPurchasesUpdateZonePriceDataWithError(error: String) {
+        print("Error with PurchasesUpdateZonePriceDataManager : \(error)")
     }
     
 }

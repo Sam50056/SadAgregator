@@ -18,7 +18,7 @@ class CenovieDiapazoniViewController: UIViewController {
     
     private var key = ""
     
-    private var zones = [Zone]()
+    private var zones = [PurchaseZone]()
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -119,7 +119,17 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let editAction = UIContextualAction(style: .normal, title: nil) { action, view, completion in
+        let editAction = UIContextualAction(style: .normal, title: nil) { [self] action, view, completion in
+            
+            let createDiapazonVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateDiapazonVC") as! CreateDiapazonViewController
+            
+            createDiapazonVC.createdDiapazon = { [self] in
+                update()
+            }
+            
+            createDiapazonVC.thisZone = zones[indexPath.row]
+            
+            navigationController?.pushViewController(createDiapazonVC, animated: true)
             
             completion(true)
             
@@ -179,11 +189,11 @@ extension CenovieDiapazoniViewController : PurchasesZonesPriceDataManagerDelegat
                 
                 let jsonZones = data["zones"].arrayValue
                 
-                var newZones = [Zone]()
+                var newZones = [PurchaseZone]()
                 
                 for jsonZone in jsonZones{
                     
-                    let zone = Zone(id: jsonZone["zone_id"].stringValue, from: jsonZone["from"].stringValue, to: jsonZone["to"].stringValue, marge: jsonZone["marge"].stringValue, fix: jsonZone["fix"].stringValue, trunc: jsonZone["trunc"].stringValue)
+                    let zone = PurchaseZone(id: jsonZone["zone_id"].stringValue, from: jsonZone["from"].stringValue, to: jsonZone["to"].stringValue, marge: jsonZone["marge"].stringValue, fix: jsonZone["fix"].stringValue, trunc: jsonZone["trunc"].stringValue)
                     
                     newZones.append(zone)
                     
@@ -209,7 +219,7 @@ extension CenovieDiapazoniViewController : PurchasesZonesPriceDataManagerDelegat
 
 extension CenovieDiapazoniViewController {
     
-    private struct Zone{
+     struct PurchaseZone{
         
         let id : String
         let from : String
