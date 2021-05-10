@@ -51,7 +51,9 @@ extension CenovieDiapazoniViewController {
     
     @IBAction func plusTapped(_ sender : Any){
         
-        navigationController?.popViewController(animated: true)
+        let createDiapazonVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateDiapazonVC") as! CreateDiapazonViewController
+        
+        navigationController?.pushViewController(createDiapazonVC, animated: true)
         
     }
     

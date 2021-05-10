@@ -157,6 +157,7 @@
 		22ACF1AF262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */; };
 		22B41BA726476EA000F7DC30 /* CenovieDiapazoniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B41BA626476EA000F7DC30 /* CenovieDiapazoniViewController.swift */; };
 		22B41BA926486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B41BA826486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift */; };
+		22B41BAB2648808600F7DC30 /* CreateDiapazonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B41BAA2648808600F7DC30 /* CreateDiapazonViewController.swift */; };
 		22B518E5261E46C100A7176F /* DobavlenieVZakupkuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */; };
 		22B6BC8A25DC6DF300EAE067 /* CategoryFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */; };
 		22B6BC8D25DC721300EAE067 /* AboveViewControllerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */; };
@@ -376,6 +377,7 @@
 		22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCellTwoLabelTableViewCell.xib; sourceTree = "<group>"; };
 		22B41BA626476EA000F7DC30 /* CenovieDiapazoniViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenovieDiapazoniViewController.swift; sourceTree = "<group>"; };
 		22B41BA826486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesDelZonePriceDataManager.swift; sourceTree = "<group>"; };
+		22B41BAA2648808600F7DC30 /* CreateDiapazonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiapazonViewController.swift; sourceTree = "<group>"; };
 		22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DobavlenieVZakupkuViewController.swift; sourceTree = "<group>"; };
 		22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterViewController.swift; sourceTree = "<group>"; };
 		22B6BC8C25DC721300EAE067 /* AboveViewControllerPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboveViewControllerPresentationController.swift; sourceTree = "<group>"; };
@@ -1191,6 +1193,7 @@
 				22703261262711510068BD82 /* VibratKlientaViewController.swift */,
 				22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */,
 				22B41BA626476EA000F7DC30 /* CenovieDiapazoniViewController.swift */,
+				22B41BAA2648808600F7DC30 /* CreateDiapazonViewController.swift */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
@@ -1469,6 +1472,7 @@
 				225957A52596A2A70088C7E4 /* MasterViewModel.swift in Sources */,
 				22BF1A0D25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift in Sources */,
 				22553015261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift in Sources */,
+				22B41BAB2648808600F7DC30 /* CreateDiapazonViewController.swift in Sources */,
 				222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */,
 				22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */,
 				221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */,
