@@ -166,6 +166,40 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
+        
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        footerView.backgroundColor = .none
+        
+        let bgView = UIView(frame: CGRect(x: 8, y: 8, width: footerView.bounds.width - 16, height: footerView.bounds.height - 16))
+        
+        bgView.backgroundColor = UIColor(named: "gray")
+        
+        bgView.layer.cornerRadius = 6
+        
+        footerView.addSubview(bgView)
+        
+        let button = UIButton(frame: CGRect(x: 8, y: 8, width: bgView.bounds.width - 16, height: bgView.bounds.height - 16))
+        
+        button.setTitle("ВЫБРАТЬ ДЛЯ ЗАМЕНЫ", for: .normal)
+        
+        button.setTitleColor(.systemBlue, for: .normal)
+        
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        
+        bgView.addSubview(button)
+        
+        return footerView
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 60
+    }
+    
 }
 
 //MARK: - CollectionView

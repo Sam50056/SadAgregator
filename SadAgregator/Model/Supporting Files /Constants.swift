@@ -128,6 +128,8 @@ struct K {
             height += cellHeight
         }
         
+        height += 62//This is for the footer button
+        
         return height
         
     }
