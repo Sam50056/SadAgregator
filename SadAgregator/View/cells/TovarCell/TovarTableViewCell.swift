@@ -35,7 +35,7 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Размер", label2Text: thisTovar.size))
             }
             
-            if thisTovar.payed != "" {
+            if thisTovar.payed != "" , thisTovar.payed != "0"{
                 newItems.append(TableViewItem(label1Text: "Оплачено", label2Text: thisTovar.payed == "1" ? "Да" : "Нет" ))
             }
             
@@ -51,15 +51,15 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Клиент", label2Text: thisTovar.clientName))
             }
             
-            if thisTovar.qr != "" {
+            if thisTovar.qr != "" , !isZamena{
                 newItems.append(TableViewItem(label1Text: "QR-код", label2Text: "", hasImage: true, image: "qrcode"))
             }
             
-            if thisTovar.status != "" {
+            if thisTovar.status != "" , !isZamena{
                 newItems.append(TableViewItem(label1Text: "Статус", label2Text: thisTovar.status))
             }
             
-            if thisTovar.isReplace != "" {
+            if thisTovar.isReplace != "" , thisTovar.isReplace != "0" {
                 newItems.append(TableViewItem(label1Text: "Это замена", label2Text: thisTovar.isReplace == "1" ? "Да" : "Нет" ))
             }
             
@@ -67,7 +67,7 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Статус", label2Text: thisTovar.status))
             }
             
-            if thisTovar.replaces != "" {
+            if thisTovar.replaces != "" , thisTovar.replaces != "0"{
                 newItems.append(TableViewItem(label1Text: "Замен по товару ", label2Text: thisTovar.replaces))
             }
             
@@ -91,6 +91,8 @@ class TovarTableViewCell: UITableViewCell {
         }
         
     }
+    
+    var isZamena = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -150,10 +152,10 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         
         (cell as! TovarTableViewCellTwoLabelTableViewCell).label2.text = item.label2Text
         
-        (cell as! TovarTableViewCellTwoLabelTableViewCell).label1.font = UIFont.boldSystemFont(ofSize: 17)
+        (cell as! TovarTableViewCellTwoLabelTableViewCell).label1.font = UIFont.boldSystemFont(ofSize: 15)
         (cell as! TovarTableViewCellTwoLabelTableViewCell).label1.textColor = .systemGray
         
-        (cell as! TovarTableViewCellTwoLabelTableViewCell).label2.font = UIFont.boldSystemFont(ofSize: 17)
+        (cell as! TovarTableViewCellTwoLabelTableViewCell).label2.font = UIFont.boldSystemFont(ofSize: 15)
         (cell as! TovarTableViewCellTwoLabelTableViewCell).label2.textColor = UIColor(named: "blackwhite")
         
         return cell
@@ -206,7 +208,7 @@ extension TovarTableViewCell : UICollectionViewDataSource , UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionViewItems.count
+        return !isZamena ? collectionViewItems.count : 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
