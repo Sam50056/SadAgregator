@@ -27,7 +27,7 @@ class CenovieDiapazoniViewController: UIViewController {
             
             purchasesZonesPriceDataManager.delegate = self
             
-            purchasesZonesPriceDataManager.getPurchasesZonesPrice(key: key)
+            update()
             
             tableView.delegate = self
             tableView.dataSource = self
@@ -45,6 +45,16 @@ class CenovieDiapazoniViewController: UIViewController {
     
 }
 
+//MARK: - Functions
+
+extension CenovieDiapazoniViewController{
+    
+    func update() {
+        purchasesZonesPriceDataManager.getPurchasesZonesPrice(key: key)
+    }
+    
+}
+
 //MARK: - Actions
 
 extension CenovieDiapazoniViewController {
@@ -52,6 +62,10 @@ extension CenovieDiapazoniViewController {
     @IBAction func plusTapped(_ sender : Any){
         
         let createDiapazonVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateDiapazonVC") as! CreateDiapazonViewController
+        
+        createDiapazonVC.createdDiapazon = { [self] in
+            update()
+        }
         
         navigationController?.pushViewController(createDiapazonVC, animated: true)
         

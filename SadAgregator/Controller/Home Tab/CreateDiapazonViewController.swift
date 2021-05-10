@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class CreateDiapazonViewController: UIViewController {
     
@@ -22,6 +23,10 @@ class CreateDiapazonViewController: UIViewController {
     @IBOutlet weak var createButton: UIButton!
     
     @IBOutlet weak var picker: UIPickerView!
+    
+    private var key = ""
+    
+    var createdDiapazon : (() -> ())?
     
     private var isInRubles = true{
         didSet{
@@ -44,6 +49,8 @@ class CreateDiapazonViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        key = "part_2_test"
         
         inRublesButton.addTarget(self, action: #selector(inRublesButtonTapped(_:)), for: .touchUpInside)
         inPercentsButton.addTarget(self, action: #selector(inPersentsButtonTapped(_:)), for: .touchUpInside)
@@ -124,7 +131,7 @@ extension CreateDiapazonViewController{
     
     @IBAction func createButtonTapped(_ sender : UIButton){
         
-        
+        PurchasesAddZonePriceDataManager(delegate: self).getPurchasesAddZonePriceDataManager(key: key, from: otTextField.text ?? "", to: doTextField.text ?? "", merge: nacenkaTextField.text ?? "", fix: fixNadbavkaTextField.text ?? "", trunc: okruglenieArray[picker.selectedRow(inComponent: 0)])
         
     }
     
@@ -145,6 +152,36 @@ extension CreateDiapazonViewController : UIPickerViewDelegate, UIPickerViewDataS
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return okruglenieArray[row]
+    }
+    
+}
+
+//MARK: - PurchasesAddZonePriceDataManagerDelegate
+
+extension CreateDiapazonViewController : PurchasesAddZonePriceDataManagerDelegate{
+    
+    func didGetPurchasesAddZonePriceData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                navigationController?.popViewController(animated: true)
+                
+                createdDiapazon?()
+                
+            }else{
+                
+                showSimpleAlertWithOkButton(title: "Ошибка запроса", message: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingPurchasesAddZonePriceDataWithError(error: String) {
+        print("Error with PurchasesAddZonePriceDataManager : \(error)")
     }
     
 }
