@@ -132,6 +132,18 @@ class TovarTableViewCell: UITableViewCell {
     
 }
 
+//MARK: - Actions
+
+extension TovarTableViewCell{
+    
+    @IBAction func selectButtonTapped(_ sender : Any){
+        
+        print("HEY")
+        
+    }
+    
+}
+
 //MARK: - TableView
 
 extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
@@ -183,6 +195,8 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         footerView.addSubview(bgView)
         
         let button = UIButton(frame: CGRect(x: 8, y: 8, width: bgView.bounds.width - 16, height: bgView.bounds.height - 16))
+        
+        button.addTarget(self, action: #selector(selectButtonTapped(_:)), for: .touchUpInside)
         
         button.setTitle("ВЫБРАТЬ ДЛЯ ЗАМЕНЫ", for: .normal)
         
