@@ -19,6 +19,10 @@ class CenovieDiapazoniViewController: UIViewController {
     private var key = ""
     
     private var zones = [PurchaseZone]()
+    
+    var doneChanges : (() -> Void)?
+    
+    var hasDoneChanges = false
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -43,6 +47,15 @@ class CenovieDiapazoniViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if hasDoneChanges{
+            doneChanges?()
+        }
+        
+    }
+    
 }
 
 //MARK: - Functions
@@ -64,6 +77,7 @@ extension CenovieDiapazoniViewController {
         let createDiapazonVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateDiapazonVC") as! CreateDiapazonViewController
         
         createDiapazonVC.createdDiapazon = { [self] in
+            hasDoneChanges = true
             update()
         }
         
@@ -124,6 +138,7 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
             let createDiapazonVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateDiapazonVC") as! CreateDiapazonViewController
             
             createDiapazonVC.createdDiapazon = { [self] in
+                hasDoneChanges = true
                 update()
             }
             
@@ -151,6 +166,8 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
                 if data["result"].intValue == 1{
                     
                     DispatchQueue.main.async { [self] in
+                        
+                        hasDoneChanges = true
                         
                         zones.remove(at: indexPath.row)
                         

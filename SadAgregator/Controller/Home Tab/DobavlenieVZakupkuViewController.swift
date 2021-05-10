@@ -236,6 +236,12 @@ extension DobavlenieVZakupkuViewController {
         
         let cenovieDiapazoniVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CenovieDiapazoniVC") as! CenovieDiapazoniViewController
         
+        cenovieDiapazoniVC.doneChanges = { [self] in
+            
+            PurchasesSellPriceRecalcDataManager(delegate: self).getPurchasesSellPriceRecalcData(key: key, buyPrice: "", imgId: thisImageId!)
+            
+        }
+        
         navigationController?.pushViewController(cenovieDiapazoniVC, animated: true)
         
     }
@@ -630,9 +636,11 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                         
                         if let newCena = Int(secondAlertController.textFields![0].text ?? ""){
                             
+                            PurchasesSellPriceRecalcDataManager(delegate: self).getPurchasesSellPriceRecalcData(key: key, buyPrice: String(newCena), imgId: thisImageId!)
+                            
                             cenaZakupki = newCena
                             
-                            tableView.reloadData()
+                            makeOsnovnoeCellItemsArray()
                             
                         }
                         
@@ -756,6 +764,32 @@ extension DobavlenieVZakupkuViewController : PurchasesItemInfoDataManagerDelegat
     
     func didFailGettingPurchasesItemInfoDataWithError(error: String) {
         print("Error with PurchasesItemInfoDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - PurchasesSellPriceRecalcDataManagerDelegate
+
+extension DobavlenieVZakupkuViewController : PurchasesSellPriceRecalcDataManagerDelegate{
+    
+    func didGetPurchasesSellPriceRecalcData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                cenaProdazhi = data["sell_price"].intValue
+                
+                makeOsnovnoeCellItemsArray()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingPurchasesSellPriceRecalcDataWithError(error: String) {
+        print("Error with PurchasesSellPriceRecalcDataManager : \(error)")
     }
     
 }
