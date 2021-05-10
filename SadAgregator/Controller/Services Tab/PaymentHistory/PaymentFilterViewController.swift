@@ -91,6 +91,15 @@ extension PaymentFilterViewController{
             
         }
         
+    }
+    
+    @IBAction func pokazatOperaciiButtonPressed(_ sender : UIButton){
+        
+        if thisClientId != nil {
+            ClientsFilterPayHistByClientCountDataManager(delegate: self).getClientsFilterPayHistByClientCountData(key: key, clientId: thisClientId!, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+        }else{
+            ClientsFilterPayHistoryCountDataManager(delegate: self).getClientsFilterPayHistoryCountData(key: key, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+        }
         
     }
     
@@ -177,16 +186,13 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                                                       heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.45),
-                                                       heightDimension: .estimated(40))
-                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                       heightDimension: .estimated(55))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
                 let section = NSCollectionLayoutSection(group: group)
                 
-//                section.orthogonalScrollingBehavior = .groupPagingCentered
-                section.interGroupSpacing = 16
-                section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 10, bottom: 0, trailing: 10)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 0, trailing: 0)
                 
                 return section
                 
@@ -359,16 +365,13 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             
         }else if section == 7{
             
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleLabelCell", for: indexPath)
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pokazatOperaciiButtonCell", for: indexPath)
             
-            guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+            guard let button = cell.viewWithTag(1) as? UIButton else {return cell}
             
-            label.text = "Показать операции"
-            label.textColor = .white
-            label.font = UIFont.boldSystemFont(ofSize: 17)
+            button.layer.cornerRadius = 8
             
-            cell.contentView.layer.cornerRadius = 8
-            cell.contentView.backgroundColor = .systemBlue
+            button.addTarget(self, action: #selector(pokazatOperaciiButtonPressed(_:)), for: .touchUpInside)
             
         }
         
@@ -423,14 +426,6 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 self.present(datePickerVC, animated: true, completion: nil)
                 
-            }
-            
-        }else if section == 7{
-            
-            if thisClientId != nil {
-                ClientsFilterPayHistByClientCountDataManager(delegate: self).getClientsFilterPayHistByClientCountData(key: key, clientId: thisClientId!, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
-            }else{
-                ClientsFilterPayHistoryCountDataManager(delegate: self).getClientsFilterPayHistoryCountData(key: key, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
             }
             
         }

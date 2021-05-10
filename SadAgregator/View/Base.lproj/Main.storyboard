@@ -4565,6 +4565,33 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="347" height="93"/>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="pokazatOperaciiButtonCell" id="w8x-aT-856">
+                                        <rect key="frame" x="25.666666666666668" y="376" width="339" height="69"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DXh-mI-SHE">
+                                            <rect key="frame" x="0.0" y="0.0" width="339" height="69"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akQ-AG-Yc0">
+                                                    <rect key="frame" x="82.666666666666686" y="8" width="174" height="53"/>
+                                                    <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="174" id="Fx9-rO-CXz"/>
+                                                        <constraint firstAttribute="height" constant="45" id="RAE-6k-efd"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Показать операции">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="akQ-AG-Yc0" firstAttribute="top" secondItem="DXh-mI-SHE" secondAttribute="topMargin" id="7jE-jI-G2S"/>
+                                                <constraint firstItem="akQ-AG-Yc0" firstAttribute="centerX" secondItem="DXh-mI-SHE" secondAttribute="centerX" id="X6j-MW-STP"/>
+                                                <constraint firstItem="akQ-AG-Yc0" firstAttribute="bottom" secondItem="DXh-mI-SHE" secondAttribute="bottomMargin" id="t5c-le-qba"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="339" height="69"/>
+                                    </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
