@@ -121,6 +121,8 @@ class DobavlenieVZakupkuViewController: UIViewController {
     private var commentCountLabel : UILabel?
     private var myCommentCountLabel : UILabel?
     
+    private var replaceTovarId : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -191,7 +193,7 @@ extension DobavlenieVZakupkuViewController {
         
         klientiCellItemsArray = [
             KlientiCellItem(labelText: "Выбрать клиента..."),
-            KlientiCellItem(labelText: "Замена для..."),
+            KlientiCellItem(labelText: replaceTovarId == nil ? "Замена для..." : "Замена выбрана"),
             KlientiCellItem(labelText: selectedZakupka == nil ? "Выбрать закупку" : "Закупка: \(selectedZakupka!.name)")
         ]
         
@@ -224,7 +226,7 @@ extension DobavlenieVZakupkuViewController {
             }
         }
         
-        PurchasesAddItemDataManager(delegate: self).getPurchasesAddItemData(key: key, imgId: thisImageId, zakupkaId: selectedZakupka?.id ?? "" , size: thisSize ?? "", purPrice: cenaZakupki == nil ? "" : String(cenaZakupki!), sellPrice: cenaProdazhi == nil ? "" : String(cenaProdazhi!), withoutReplace: bezZamenSwitch ? "1" : "0", paid: oplachenoSwitch ? "1" : "0", checkDefect: proverkaNaBrakSwitch ? "1" : "0", checkImgId: "", parselImgId: "", clients: clientsString, replaceTovarId: "")
+        PurchasesAddItemDataManager(delegate: self).getPurchasesAddItemData(key: key, imgId: thisImageId, zakupkaId: selectedZakupka?.id ?? "" , size: thisSize ?? "", purPrice: cenaZakupki == nil ? "" : String(cenaZakupki!), sellPrice: cenaProdazhi == nil ? "" : String(cenaProdazhi!), withoutReplace: bezZamenSwitch ? "1" : "0", paid: oplachenoSwitch ? "1" : "0", checkDefect: proverkaNaBrakSwitch ? "1" : "0", checkImgId: "", parselImgId: "", clients: clientsString, replaceTovarId: replaceTovarId ?? "")
         
     }
     
@@ -257,6 +259,14 @@ extension DobavlenieVZakupkuViewController {
         
         clients.remove(at: index)
         
+        tableView.reloadData()
+        
+    }
+    
+    @IBAction func removeZamenaPressed(_ sender :Any){
+        
+        replaceTovarId = nil
+        makeKlientiCellItemsArray()
         tableView.reloadData()
         
     }
@@ -591,9 +601,43 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
             }
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelCell", for: indexPath)
-            
             let item = klientiCellItemsArray[index - clients.count]
+            
+            if item.labelText == "Замена для..." || item.labelText == "Замена выбрана"{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "labelOneButtonCell", for: indexPath)
+                
+                guard let label1 = cell.viewWithTag(1) as? UILabel,
+                      let imageView = cell.viewWithTag(2) as? UIImageView,
+                      let button = cell.viewWithTag(3) as? UIButtonWithInfo
+                else {return cell}
+                
+                label1.text = item.labelText
+                
+                if replaceTovarId == nil {
+                    imageView.isHidden = true
+                    button.isHidden = true
+                }else{
+                    imageView.isHidden = false
+                    button.isHidden = false
+                }
+                
+                button.addTarget(self, action: #selector(removeZamenaPressed(_:)), for: .touchUpInside)
+                
+                //If there's more or less than one client selected , "Замена для..." should be gray and not be selectable
+                if clients.count != 1 {
+                    label1.textColor = .systemGray
+                }else{
+                    label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
+                }
+                
+                label1.font = UIFont.systemFont(ofSize: 17)
+                
+                return cell
+                
+            }
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelCell", for: indexPath)
             
             guard let label1 = cell.viewWithTag(1) as? UILabel,
                   let label2 = cell.viewWithTag(2) as? UILabel
@@ -602,15 +646,10 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
             label1.text = item.labelText
             label2.text = ""
             
-            //If there's more or less than one client selected , "Замена для..." should be gray and not be selectable
-            if item.labelText == "Замена для..." && clients.count != 1 {
-                label1.textColor = .systemGray
-            }else{
-                label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
-            }
-            
             label1.font = UIFont.systemFont(ofSize: 17)
             label2.font = UIFont.systemFont(ofSize: 17)
+            
+            label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
             
         default:
             return cell
@@ -764,6 +803,13 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     let zamenaDlyaVC = ZamenaDlyaTableViewController()
                     
                     zamenaDlyaVC.thisClientId = clients[0].id
+                    
+                    zamenaDlyaVC.tovarSelected = { [self] pid in
+                        print("Selected tovar pid : \(pid)")
+                        replaceTovarId = pid
+                        makeKlientiCellItemsArray()
+                        tableView.reloadData()
+                    }
                     
                     let navVC = UINavigationController(rootViewController: zamenaDlyaVC)
                     

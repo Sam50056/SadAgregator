@@ -94,6 +94,8 @@ class TovarTableViewCell: UITableViewCell {
     
     var isZamena = false
     
+    var tovarSelected : (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -138,7 +140,9 @@ extension TovarTableViewCell{
     
     @IBAction func selectButtonTapped(_ sender : Any){
         
-        print("HEY")
+        guard let _ = thisTovar else {return}
+        
+        tovarSelected?()
         
     }
     

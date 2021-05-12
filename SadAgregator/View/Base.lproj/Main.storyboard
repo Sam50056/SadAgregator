@@ -3920,6 +3920,43 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="labelOneButtonCell" id="UAk-vY-onc">
+                                        <rect key="frame" x="0.0" y="652.33333969116211" width="390" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UAk-vY-onc" id="E6u-0H-WXX">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pS0-aj-eWV">
+                                                    <rect key="frame" x="20.000000000000004" y="11.666666666666666" width="41.333333333333343" height="20.333333333333336"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multiply" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="afb-dt-vka">
+                                                    <rect key="frame" x="345" y="12.999999999999996" width="25" height="18.000000000000011"/>
+                                                    <color key="tintColor" systemColor="systemGrayColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="K2R-gG-oFH"/>
+                                                        <constraint firstAttribute="height" constant="25" id="Rwm-TV-m6l"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsl-5n-4HF" customClass="UIButtonWithInfo" customModule="SadAgregator" customModuleProvider="target">
+                                                    <rect key="frame" x="340" y="9.3333333333333357" width="30" height="25"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="afb-dt-vka" firstAttribute="trailing" secondItem="E6u-0H-WXX" secondAttribute="trailingMargin" id="7nD-kL-NPg"/>
+                                                <constraint firstItem="pS0-aj-eWV" firstAttribute="centerY" secondItem="E6u-0H-WXX" secondAttribute="centerY" id="HfV-rt-hlO"/>
+                                                <constraint firstItem="Bsl-5n-4HF" firstAttribute="bottom" secondItem="afb-dt-vka" secondAttribute="bottom" id="K10-gz-6uP"/>
+                                                <constraint firstItem="pS0-aj-eWV" firstAttribute="leading" secondItem="E6u-0H-WXX" secondAttribute="leadingMargin" id="VOX-28-jjO"/>
+                                                <constraint firstAttribute="trailing" secondItem="Bsl-5n-4HF" secondAttribute="trailing" constant="20" symbolic="YES" id="ina-Rf-6Pb"/>
+                                                <constraint firstItem="Bsl-5n-4HF" firstAttribute="centerY" secondItem="E6u-0H-WXX" secondAttribute="centerY" id="mdd-QM-eLj"/>
+                                                <constraint firstItem="Bsl-5n-4HF" firstAttribute="top" secondItem="afb-dt-vka" secondAttribute="top" id="o1C-pr-HjU"/>
+                                                <constraint firstItem="afb-dt-vka" firstAttribute="centerY" secondItem="E6u-0H-WXX" secondAttribute="centerY" id="xfq-Yb-93I"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
