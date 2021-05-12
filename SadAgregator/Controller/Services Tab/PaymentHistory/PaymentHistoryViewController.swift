@@ -281,6 +281,8 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
         
         let payment = payments[indexPath.row]
         
+        cell.key = key
+        
         cell.pid = payment["pid"].stringValue
         cell.dt =  payment["dt"].string
         cell.clientName = payment["client_name"].stringValue

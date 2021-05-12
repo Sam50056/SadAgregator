@@ -12,6 +12,8 @@ class PaymentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var tableView : UITableView!
     
+    var key : String?
+    
     var summ : String? {
         didSet{
             
@@ -96,6 +98,20 @@ extension PaymentTableViewCell{
     
 }
 
+//MARK: - UITextField
+
+extension PaymentTableViewCell : UITextFieldDelegate{
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        guard let com = textField.text , let pid = pid, let key = key else {return}
+        
+        ClientsUpdatePaymentComDataManager(delegate: nil).getClientsUpdatePaymentComData(key: key, paymentId: pid, com: com)
+        
+    }
+    
+}
+
 //MARK: - UITableView
 
 extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
@@ -173,6 +189,8 @@ extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
         case 3:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "editCell", for: indexPath)
+            
+            (cell as! PaymentTableViewCellEditTableViewCell).textField.delegate = self
             
             (cell as! PaymentTableViewCellEditTableViewCell).textField.placeholder = "Редактировать"
             

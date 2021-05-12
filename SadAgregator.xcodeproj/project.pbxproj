@@ -39,6 +39,7 @@
 		2231DB6D2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB6C2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift */; };
 		2231DB6F2649CB600075228E /* PurchasesAddItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB6E2649CB600075228E /* PurchasesAddItemDataManager.swift */; };
 		2231DB71264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB70264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift */; };
+		2231DB73264C64480075228E /* ClientsUpdatePaymentComDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB72264C64480075228E /* ClientsUpdatePaymentComDataManager.swift */; };
 		22328CC725FD806300C51CC9 /* ClientsFIlterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */; };
 		22328CCA25FE70BE00C51CC9 /* PaymentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */; };
 		22328CCE25FE743E00C51CC9 /* ClientsPayments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */; };
@@ -261,6 +262,7 @@
 		2231DB6C2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesSellPriceRecalcDataManager.swift; sourceTree = "<group>"; };
 		2231DB6E2649CB600075228E /* PurchasesAddItemDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesAddItemDataManager.swift; sourceTree = "<group>"; };
 		2231DB70264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesAddItemForYourselfDataManager.swift; sourceTree = "<group>"; };
+		2231DB72264C64480075228E /* ClientsUpdatePaymentComDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsUpdatePaymentComDataManager.swift; sourceTree = "<group>"; };
 		22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsFIlterDataManager.swift; sourceTree = "<group>"; };
 		22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHistoryViewController.swift; sourceTree = "<group>"; };
 		22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsPayments.swift; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				22553013261930510017B9CF /* Filter */,
 				22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */,
 				22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */,
+				2231DB72264C64480075228E /* ClientsUpdatePaymentComDataManager.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -1573,6 +1576,7 @@
 				224D273E2613AED200BFAE30 /* RangeSliderTrackLayer.swift in Sources */,
 				22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */,
 				2201672C25A77BB50072BFE7 /* SetVendActionsDataManager.swift in Sources */,
+				2231DB73264C64480075228E /* ClientsUpdatePaymentComDataManager.swift in Sources */,
 				2203F15C25BF243A007DBFFD /* EmptyTableViewCell.swift in Sources */,
 				2245820325A9FB16008882A9 /* HelpView.swift in Sources */,
 				22D90203259A953C009732CC /* GetListWorkExtDataManager.swift in Sources */,
