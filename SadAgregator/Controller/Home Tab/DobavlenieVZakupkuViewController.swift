@@ -155,7 +155,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(otmenaTapped(_:)))
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Готово", style: .done, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(gotovoTapped(_:)))
         
     }
     
@@ -205,6 +205,35 @@ extension DobavlenieVZakupkuViewController {
     
     @IBAction func otmenaTapped(_ sender : Any){
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func gotovoTapped(_ sender : Any){
+        
+        guard let thisImageId = thisImageId else {return}
+        
+        //Making client string from clients array
+        var clientsString = ""
+        for i in 0..<clients.count{
+            
+            let client = clients[i]
+            
+            if i == clients.count - 1{
+                clientsString.append("|\(client.id)-\(client.count)|")
+            }else{
+                clientsString.append("|\(client.id)-\(client.count)")
+            }
+        }
+        
+        PurchasesAddItemDataManager(delegate: self).getPurchasesAddItemData(key: key, imgId: thisImageId, zakupkaId: selectedZakupka?.id ?? "" , size: thisSize ?? "", purPrice: cenaZakupki == nil ? "" : String(cenaZakupki!), sellPrice: cenaProdazhi == nil ? "" : String(cenaProdazhi!), withoutReplace: bezZamenSwitch ? "1" : "0", paid: oplachenoSwitch ? "1" : "0", checkDefect: proverkaNaBrakSwitch ? "1" : "0", checkImgId: "", parselImgId: "", clients: clientsString, replaceTovarId: "")
+        
+    }
+    
+    func dlyaSebyaPressed() {
+        
+        guard let thisImageId = thisImageId else {return}
+        
+        PurchasesAddItemForYourselfDataManager(delegate: self).getPurchasesAddItemForYourselfData(key: key , imgId: thisImageId)
+            
     }
     
     @IBAction func bezZamenSwitchValueChanged(_ sender : UISwitch){
@@ -614,7 +643,11 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
         let section = indexPath.section
         let index = indexPath.row
         
-        if section == 1, index != 0{
+        if section == 0{
+            
+            dlyaSebyaPressed()
+            
+        }else if section == 1, index != 0{
             
             if osnovnoeCellItemsArray[index - 1].firstLabelText == "Закупка"{
                 
@@ -790,6 +823,54 @@ extension DobavlenieVZakupkuViewController : PurchasesSellPriceRecalcDataManager
     
     func didFailGettingPurchasesSellPriceRecalcDataWithError(error: String) {
         print("Error with PurchasesSellPriceRecalcDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - PurchasesAddItemDataManager
+
+extension DobavlenieVZakupkuViewController : PurchasesAddItemDataManagerDelegate{
+    
+    func didGetPurchasesAddItemData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                dismiss(animated: true, completion: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingPurchasesAddItemDataWithError(error: String) {
+        print("Error with PurchasesAddItemDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - PurchasesAddItemForYourselfDataManagerDelegate
+
+extension DobavlenieVZakupkuViewController : PurchasesAddItemForYourselfDataManagerDelegate{
+    
+    func didGetPurchasesAddItemForYourselfData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                dismiss(animated: true, completion: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingPurchasesAddItemForYourselfDataWithError(error: String) {
+        print("Error with PurchasesAddItemForYourselfDataManager : \(error)")
     }
     
 }

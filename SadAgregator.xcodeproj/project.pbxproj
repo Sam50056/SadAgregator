@@ -37,6 +37,8 @@
 		22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22216A4325853FCC00D5248B /* RegisterDataManager.swift */; };
 		222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */; };
 		2231DB6D2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB6C2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift */; };
+		2231DB6F2649CB600075228E /* PurchasesAddItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB6E2649CB600075228E /* PurchasesAddItemDataManager.swift */; };
+		2231DB71264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB70264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift */; };
 		22328CC725FD806300C51CC9 /* ClientsFIlterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */; };
 		22328CCA25FE70BE00C51CC9 /* PaymentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */; };
 		22328CCE25FE743E00C51CC9 /* ClientsPayments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */; };
@@ -257,6 +259,8 @@
 		22216A4325853FCC00D5248B /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUpdateDataManager.swift; sourceTree = "<group>"; };
 		2231DB6C2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesSellPriceRecalcDataManager.swift; sourceTree = "<group>"; };
+		2231DB6E2649CB600075228E /* PurchasesAddItemDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesAddItemDataManager.swift; sourceTree = "<group>"; };
+		2231DB70264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesAddItemForYourselfDataManager.swift; sourceTree = "<group>"; };
 		22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsFIlterDataManager.swift; sourceTree = "<group>"; };
 		22328CC925FE70BE00C51CC9 /* PaymentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHistoryViewController.swift; sourceTree = "<group>"; };
 		22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsPayments.swift; sourceTree = "<group>"; };
@@ -1316,6 +1320,8 @@
 				22A09BFD2648B81C009B9921 /* PurchasesAddZonePriceDataManager.swift */,
 				22A09BFF2648BCF3009B9921 /* PurchasesUpdateZonePriceDataManager.swift */,
 				2231DB6C2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift */,
+				2231DB6E2649CB600075228E /* PurchasesAddItemDataManager.swift */,
+				2231DB70264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift */,
 			);
 			path = Purchases;
 			sourceTree = "<group>";
@@ -1479,6 +1485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				225957A52596A2A70088C7E4 /* MasterViewModel.swift in Sources */,
+				2231DB6F2649CB600075228E /* PurchasesAddItemDataManager.swift in Sources */,
 				22BF1A0D25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift in Sources */,
 				22553015261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift in Sources */,
 				22B41BAB2648808600F7DC30 /* CreateDiapazonViewController.swift in Sources */,
@@ -1587,6 +1594,7 @@
 				22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */,
 				22BF19FF25A4DF0C00567DB7 /* TopLinesDataManager .swift in Sources */,
 				22703265262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift in Sources */,
+				2231DB71264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift in Sources */,
 				22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */,
 				224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */,
 				2268869325994F030079933D /* ListWorkView.swift in Sources */,
