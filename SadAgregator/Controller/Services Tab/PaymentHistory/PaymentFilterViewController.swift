@@ -34,7 +34,7 @@ class PaymentFilterViewController: UIViewController {
     var opType : Int? //Тип операции
     var source : Int? //Источник операции
     var commentQuery : String?
-    var lowPrice : Int? = 0
+    var lowPrice : Int?
     var upPrice : Int?
     var maxPrice : Int?
     var minDate : String?
@@ -307,7 +307,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 minTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
                 maxTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
                 
-                minTextField.text = lowPrice == nil ? "" : String(lowPrice!)
+                minTextField.text = lowPrice == nil ? "0" : String(lowPrice!)
                 maxTextField.text = upPrice == nil ? maxPrice == nil ? "" : String(maxPrice!) : String(upPrice!)
                 
             }

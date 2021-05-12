@@ -113,7 +113,7 @@ extension PaymentHistoryViewController{
         
         let maxSumFormApiInt = Int(maxSumFromApi ?? "")
         
-        filterVC.lowPrice = minPrice ?? 0
+        filterVC.lowPrice = minPrice
         filterVC.upPrice = maxPrice
         
         filterVC.maxPrice = maxSumFormApiInt
