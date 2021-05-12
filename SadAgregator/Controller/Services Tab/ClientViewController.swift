@@ -307,7 +307,7 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                 
                 commentTextField.delegate = self
                 
-                commentTextField.text = clientData?["client_header"]["comment"].string ?? ""
+                commentTextField.text = clientData?["client_header"]["comment"].string?.replacingOccurrences(of: "<br>", with: "\n") ?? ""
                 
             }
             
@@ -528,7 +528,7 @@ extension ClientViewController : UITextFieldDelegate {
         
         guard textField.text != nil , textField.text?.replacingOccurrences(of: " ", with: "") != "" else {return}
         
-        updateClientInfoDataManager.getUpdateClientInfoData(key: key, clientId: thisClientId!, fieldId: "5", value: textField.text!.replacingOccurrences(of: "'", with: ""))
+        updateClientInfoDataManager.getUpdateClientInfoData(key: key, clientId: thisClientId!, fieldId: "5", value: textField.text!.replacingOccurrences(of: "'", with: "").replacingOccurrences(of: "\n", with: "<br>"))
         
     }
     
