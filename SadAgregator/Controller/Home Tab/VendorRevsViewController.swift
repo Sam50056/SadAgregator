@@ -48,6 +48,9 @@ class VendorRevsViewController: UITableViewController {
         guard let vendId = thisVendId else {return}
         
         page = 1
+        rowForPaggingUpdate = 15
+        
+        revsArray.removeAll()
         
         showSimpleCircleAnimation(activityController: activityController)
         
@@ -123,7 +126,7 @@ extension VendorRevsViewController : GetVendRevsPagingDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            revsArray = data["revs"].arrayValue
+            revsArray.append(contentsOf: data["revs"].arrayValue)
             
             tableView.reloadData()
             
