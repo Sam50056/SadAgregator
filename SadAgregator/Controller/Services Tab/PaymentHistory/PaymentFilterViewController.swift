@@ -41,6 +41,8 @@ class PaymentFilterViewController: UIViewController {
     var maxDate : String?
     var commentTextField : UITextField?
     
+    private var resultsCount : Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -91,15 +93,17 @@ extension PaymentFilterViewController{
             
         }
         
+        checkForResults()
+        
     }
     
     @IBAction func pokazatOperaciiButtonPressed(_ sender : UIButton){
         
-        if thisClientId != nil {
-            ClientsFilterPayHistByClientCountDataManager(delegate: self).getClientsFilterPayHistByClientCountData(key: key, clientId: thisClientId!, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
-        }else{
-            ClientsFilterPayHistoryCountDataManager(delegate: self).getClientsFilterPayHistoryCountData(key: key, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
-        }
+        guard let _ = resultsCount else {return}
+        
+        delegate?.didFilterStuff(source: source, opType: opType , sumMin: lowPrice, sumMax: upPrice, startDate: minDate, endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+        
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -108,6 +112,16 @@ extension PaymentFilterViewController{
 //MARK: - Functions
 
 extension PaymentFilterViewController{
+    
+    func checkForResults(){
+        
+        if thisClientId != nil {
+            ClientsFilterPayHistByClientCountDataManager(delegate: self).getClientsFilterPayHistByClientCountData(key: key, clientId: thisClientId!, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+        }else{
+            ClientsFilterPayHistoryCountDataManager(delegate: self).getClientsFilterPayHistoryCountData(key: key, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+        }
+        
+    }
     
     func formatDate(_ date : Date , withDot : Bool = false) -> String{
         
@@ -329,6 +343,8 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 
                 label.text = "с \(formatDate(minDate) ?? "")"
                 
+                label.textColor = UIColor(named: "blackwhite")
+                
                 cell.contentView.layer.cornerRadius = 8
                 cell.contentView.backgroundColor = UIColor(named: "gray")
                 
@@ -339,6 +355,8 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
                 
                 label.text = "по \(formatDate(maxDate) ?? formatDate(Date(), withDot: true))"
+                
+                label.textColor = UIColor(named: "blackwhite")
                 
                 cell.contentView.layer.cornerRadius = 8
                 cell.contentView.backgroundColor = UIColor(named: "gray")
@@ -368,6 +386,8 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pokazatOperaciiButtonCell", for: indexPath)
             
             guard let button = cell.viewWithTag(1) as? UIButton else {return cell}
+            
+            button.setTitle("Показать операции" + (resultsCount == nil ? "" : " (\(resultsCount!))"), for: .normal)
             
             button.layer.cornerRadius = 8
             
@@ -403,6 +423,8 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                     
                     collectionView.reloadItems(at: [indexPath])
                     
+                    checkForResults()
+                    
                 }
                 
                 self.present(datePickerVC, animated: true, completion: nil)
@@ -422,6 +444,8 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                     
                     collectionView.reloadItems(at: [indexPath])
                     
+                    checkForResults()
+                    
                 }
                 
                 self.present(datePickerVC, animated: true, completion: nil)
@@ -429,6 +453,8 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
             }
             
         }
+        
+        checkForResults()
         
         print("Index path row : \(indexPath.row) , section : \(indexPath.section)")
         
@@ -491,19 +517,17 @@ extension PaymentFilterViewController : ClientsFilterPayHistoryCountDataManagerD
             
             if data["result"].intValue == 1{
                 
-                if data["payments_count"].stringValue == "" || data["payments_count"].stringValue == "0"{
+                if data["payments_count"].stringValue != "" {
                     
-                    showSimpleAlertWithOkButton(title: "Нет результатов", message: "Нет результатов поиска с введёнными параметрами")
+                    resultsCount = Int(data["payments_count"].stringValue)
                     
                 }else{
-                    
-                    delegate?.didFilterStuff(source: source, opType: opType , sumMin: lowPrice, sumMax: upPrice, startDate: minDate, endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
-                    
-                    dismiss(animated: true, completion: nil)
-                    
+                    resultsCount = 0
                 }
                 
             }
+            
+            collectionView.reloadSections([7])
             
         }
         
@@ -525,19 +549,17 @@ extension PaymentFilterViewController : ClientsFilterPayHistByClientCountDataMan
             
             if data["result"].intValue == 1{
                 
-                if data["payments_count"].stringValue == "" || data["payments_count"].stringValue == "0"{
+                if data["payments_count"].stringValue != ""{
                     
-                    showSimpleAlertWithOkButton(title: "Нет результатов", message: "Нет результатов поиска с введёнными параметрами")
+                    resultsCount = Int(data["payments_count"].stringValue)
                     
                 }else{
-                    
-                    delegate?.didFilterStuff(source: source, opType: opType , sumMin: lowPrice, sumMax: upPrice, startDate: minDate, endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
-                    
-                    dismiss(animated: true, completion: nil)
-                    
+                    resultsCount = 0
                 }
                 
             }
+            
+            collectionView.reloadSections([7])
             
         }
         
