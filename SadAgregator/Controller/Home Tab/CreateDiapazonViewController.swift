@@ -15,6 +15,8 @@ class CreateDiapazonViewController: UIViewController {
     @IBOutlet weak var doTextField: UITextField!
     @IBOutlet weak var fixNadbavkaTextField: UITextField!
     
+    @IBOutlet weak var fixNadbavkalabel : UILabel!
+    
     @IBOutlet weak var inRublesButton: UIButton!
     @IBOutlet weak var inPercentsButton: UIButton!
     
@@ -100,6 +102,9 @@ extension CreateDiapazonViewController{
             inPercentsButton.backgroundColor = .none
             inPercentsButton.setTitleColor(.systemBlue, for: .normal)
             
+            fixNadbavkaTextField.isHidden = true
+            fixNadbavkalabel.isHidden = true
+            
         }
         
     }
@@ -113,6 +118,9 @@ extension CreateDiapazonViewController{
             
             inRublesButton.backgroundColor = .none
             inRublesButton.setTitleColor(.systemBlue, for: .normal)
+            
+            fixNadbavkaTextField.isHidden = false
+            fixNadbavkalabel.isHidden = false
             
         }
         
