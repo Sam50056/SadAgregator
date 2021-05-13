@@ -103,7 +103,8 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
            let doLabel = cell.viewWithTag(2) as? UILabel,
            let nacenkaLabel = cell.viewWithTag(3) as? UILabel,
            let okruglenieLabel = cell.viewWithTag(4) as? UILabel ,
-           let fixNadbavkaLabel = cell.viewWithTag(5) as? UILabel {
+           let fixNadbavkaLabel = cell.viewWithTag(5) as? UILabel ,
+           let fixNadbavkaTextLabel = cell.viewWithTag(6) as? UILabel{
             
             let zone = zones[indexPath.row]
             
@@ -115,7 +116,16 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
             
             okruglenieLabel.text = zone.trunc
             
-            fixNadbavkaLabel.text = zone.fix
+            if zone.marge.contains("%"){
+                fixNadbavkaTextLabel.isHidden = false
+                fixNadbavkaLabel.isHidden = false
+                fixNadbavkaLabel.text = zone.fix
+            }else{
+                fixNadbavkaTextLabel.isHidden = true
+                fixNadbavkaLabel.text = ""
+                fixNadbavkaLabel.isHidden = true
+            }
+            
             
         }
         
@@ -124,7 +134,15 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        
+        let zone = zones[indexPath.row]
+        
+        if zone.marge.contains("%"){
+            return 150
+        }else{
+            return 115
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
