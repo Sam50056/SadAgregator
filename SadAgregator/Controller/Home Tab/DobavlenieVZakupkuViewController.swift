@@ -211,6 +211,11 @@ extension DobavlenieVZakupkuViewController {
     
     @IBAction func gotovoTapped(_ sender : Any){
         
+        guard !clients.isEmpty else {
+            showSimpleAlertWithOkButton(title: "Ошибка", message: "Нет добавленных клиентов")
+            return
+        }
+        
         guard let thisImageId = thisImageId else {return}
         
         //Making client string from clients array
