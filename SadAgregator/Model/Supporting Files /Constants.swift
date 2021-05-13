@@ -82,7 +82,7 @@ struct K {
     static func makeHeightForTovarCell(thisTovar : TovarCellItem , isZamena : Bool) -> CGFloat{
         
         var height : CGFloat = 0
-        let cellHeight : CGFloat = 48
+        let cellHeight : CGFloat = 38
         
         if thisTovar.capt != "" {
             height += cellHeight

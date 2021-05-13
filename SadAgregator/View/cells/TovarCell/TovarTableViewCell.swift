@@ -63,7 +63,7 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Это замена", label2Text: thisTovar.isReplace == "1" ? "Да" : "Нет" ))
             }
             
-            if thisTovar.status != "" {
+            if thisTovar.status != "" , !isZamena{
                 newItems.append(TableViewItem(label1Text: "Статус", label2Text: thisTovar.status))
             }
             
@@ -100,6 +100,7 @@ class TovarTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         tovarImageView.contentMode = .scaleAspectFill
+        tovarImageView.layer.cornerRadius = 6
         
         collectionView.register(UINib(nibName: "TovarTableViewCellCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
         
@@ -214,6 +215,10 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        42
+    }
+     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 60
     }
