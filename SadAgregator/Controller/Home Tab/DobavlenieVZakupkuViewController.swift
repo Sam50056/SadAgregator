@@ -114,6 +114,9 @@ class DobavlenieVZakupkuViewController: UIViewController {
         }
     }
     
+    private var comment : String?
+    private var myComment : String?
+    
     private var commentTextView : UITextView?
     private var myCommentTextView : UITextView?
     private var commentSymbolsCount = 0
@@ -301,9 +304,11 @@ extension DobavlenieVZakupkuViewController : UITextViewDelegate {
         if textView == commentTextView{
             commentCountLabel?.text = "\(textView.text.count)/150"
             commentSymbolsCount = textView.text.count
+            comment = textView.text
         }else{
             myCommentCountLabel?.text = "\(textView.text.count)/150"
             myCommentSymbolsCount = textView.text.count
+            myComment = textView.text
         }
         
     }
@@ -538,17 +543,19 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
                 textView.delegate = self
                 
+                textView.text = ""
+                
                 if item.labelText == "Комментарий"{
                     secondLabel.text = "\(commentSymbolsCount)/150"
                     commentCountLabel = secondLabel
                     commentTextView = textView
+                    textView.text = comment
                 }else{
                     secondLabel.text = "\(myCommentSymbolsCount)/150"
                     myCommentCountLabel = secondLabel
                     myCommentTextView = textView
+                    textView.text = myComment
                 }
-                
-                textView.text = ""
                 
                 textView.backgroundColor = .clear
                 
