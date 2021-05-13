@@ -791,6 +791,10 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     
                     let vibratKlientaVC = VibratKlientaViewController()
                     
+                    vibratKlientaVC.selectedClientsIds = clients.map({ item in
+                        return item.id
+                    })
+                    
                     vibratKlientaVC.clientSelected = { [self] name , id in
                         
                         clients.append(KlientiCellKlientItem(name: name, id: id, count: 1))
@@ -956,7 +960,7 @@ extension DobavlenieVZakupkuViewController {
         
     }
     
-    private struct KlientiCellKlientItem{
+    struct KlientiCellKlientItem{
         
         var name : String
         var id : String

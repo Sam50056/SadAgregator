@@ -22,7 +22,8 @@ class VibratKlientaViewController: UITableViewController{
     
     private var purchasesClientsSelectListDataManager = PurchasesClientsSelectListDataManager()
     
-    private var clients = [JSON]()
+    private var clients = [DobavlenieVZakupkuViewController.KlientiCellKlientItem]()
+    var selectedClientsIds = [String]()
     
     var clientSelected : ((String , String) -> ())?
     
@@ -63,6 +64,14 @@ extension VibratKlientaViewController{
     @IBAction func otmenaTapped(_ sender : Any){
         dismiss(animated: true, completion: nil)
     }
+    
+}
+
+//MARK: - Functions
+
+extension VibratKlientaViewController {
+    
+    
     
 }
 
@@ -113,7 +122,7 @@ extension VibratKlientaViewController{
         
         let client = clients[indexPath.row]
         
-        cell.textLabel?.text = client["name"].stringValue
+        cell.textLabel?.text = client.name
         
         return cell
         
@@ -125,7 +134,7 @@ extension VibratKlientaViewController{
         
         let client = clients[indexPath.row]
         
-        clientSelected?(client["name"].stringValue, client["id"].stringValue)
+        clientSelected?(client.name, client.id)
         
         dismiss(animated: true, completion: nil)
         
@@ -159,11 +168,49 @@ extension VibratKlientaViewController : PurchasesClientsSelectListDataManagerDel
             
             if data["result"].intValue == 1{
                 
-                clients.append(contentsOf: data["clients_select"].arrayValue)
+                let jsonArray = data["clients_select"].arrayValue
                 
-                tableView.reloadData()
+                let structArray = jsonArray.map { jsonClient in
+                    
+                    return DobavlenieVZakupkuViewController.KlientiCellKlientItem(name: jsonClient["name"].stringValue, id: jsonClient["id"].stringValue, count: 1)
+                    
+                }
                 
-            }else{
+                if !selectedClientsIds.isEmpty{
+                    
+                    var lastArray = [DobavlenieVZakupkuViewController.KlientiCellKlientItem]()
+                    
+                    for client in structArray{
+                        
+                        var hasIt = false
+                        
+                        for selectedClientId in selectedClientsIds{
+                            
+                            if client.id == selectedClientId{
+                                
+                                hasIt = true
+                                
+                            }
+                            
+                        }
+                        
+                        if !hasIt{
+                            lastArray.append(client)
+                        }
+                        
+                    }
+                    
+                    clients.append(contentsOf: lastArray)
+                    
+                    tableView.reloadData()
+                    
+                }else{
+                    
+                    clients.append(contentsOf: structArray)
+                    
+                    tableView.reloadData()
+                    
+                }
                 
             }
             
