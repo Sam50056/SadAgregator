@@ -85,11 +85,11 @@ class DobavlenieVZakupkuViewController: UIViewController {
                 
                 tableView.beginUpdates()
                 
-                dopolnitelnoCellItemsArray.insert(DopolnitelnoSwitchCellItem(labelText: "Загрузить фото посылки", isComment: false, isSwitch: false, shouldLabelTextBeBlue: true), at: 3)
+                dopolnitelnoCellItemsArray.insert(DopolnitelnoSwitchCellItem(labelText: "Загрузить фото посылки", isComment: false, isSwitch: false, shouldLabelTextBeBlue: true), at: 2)
                 
-                dopolnitelnoCellItemsArray.insert(DopolnitelnoSwitchCellItem(labelText: "Загрузить фото чека", isComment: false, isSwitch: false, shouldLabelTextBeBlue: true), at: 4)
+                dopolnitelnoCellItemsArray.insert(DopolnitelnoSwitchCellItem(labelText: "Загрузить фото чека", isComment: false, isSwitch: false, shouldLabelTextBeBlue: true), at: 3)
                 
-                tableView.insertRows(at: [IndexPath(row: 3, section: 3),IndexPath(row: 4, section: 3)], with: .automatic)
+                tableView.insertRows(at: [IndexPath(row: 2, section: 3),IndexPath(row: 3, section: 3)], with: .automatic)
                 
                 tableView.endUpdates()
                 
@@ -97,10 +97,10 @@ class DobavlenieVZakupkuViewController: UIViewController {
                 
                 tableView.beginUpdates()
                 
-                dopolnitelnoCellItemsArray.remove(at: 4)
                 dopolnitelnoCellItemsArray.remove(at: 3)
+                dopolnitelnoCellItemsArray.remove(at: 2)
                 
-                tableView.deleteRows(at: [IndexPath(row: 3, section: 3),IndexPath(row: 4, section: 3)], with: .automatic)
+                tableView.deleteRows(at: [IndexPath(row: 2, section: 3),IndexPath(row: 3, section: 3)], with: .automatic)
                 
                 tableView.endUpdates()
                 
