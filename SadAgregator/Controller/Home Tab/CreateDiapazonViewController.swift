@@ -16,6 +16,7 @@ class CreateDiapazonViewController: UIViewController {
     @IBOutlet weak var fixNadbavkaTextField: UITextField!
     
     @IBOutlet weak var fixNadbavkalabel : UILabel!
+    @IBOutlet weak var nacenkaTrailLabel : UILabel!
     
     @IBOutlet weak var inRublesButton: UIButton!
     @IBOutlet weak var inPercentsButton: UIButton!
@@ -102,6 +103,8 @@ extension CreateDiapazonViewController{
             inPercentsButton.backgroundColor = .none
             inPercentsButton.setTitleColor(.systemBlue, for: .normal)
             
+            nacenkaTrailLabel.text = "руб."
+            
             fixNadbavkaTextField.isHidden = true
             fixNadbavkalabel.isHidden = true
             
@@ -119,6 +122,8 @@ extension CreateDiapazonViewController{
             inRublesButton.backgroundColor = .none
             inRublesButton.setTitleColor(.systemBlue, for: .normal)
             
+            nacenkaTrailLabel.text = "%"
+            
             fixNadbavkaTextField.isHidden = false
             fixNadbavkalabel.isHidden = false
             
@@ -130,16 +135,16 @@ extension CreateDiapazonViewController{
         
         guard let zone = thisZone else {return}
         
-        otTextField.text = zone.from
+        otTextField.text = zone.from == "0" ? "" : zone.from
         
-        doTextField.text = zone.to
+        doTextField.text = zone.to == "0" ? "" : zone.to
         
-        nacenkaTextField.text = zone.marge
+        nacenkaTextField.text = zone.marge.replacingOccurrences(of: "%", with: "")
         
         if zone.marge.contains("%"){
-            selectPercents()
+            isInPercents = true
         }else{
-            selectRubles()
+            isInRubles = true
         }
         
         picker.selectRow(okruglenieArray.firstIndex(of: zone.trunc) ?? 1, inComponent: 0, animated: false)
@@ -174,10 +179,16 @@ extension CreateDiapazonViewController{
     
     @IBAction func createButtonTapped(_ sender : UIButton){
         
+        let from = otTextField.text!.isEmpty ? "0" : otTextField.text!
+        let to = doTextField.text!.isEmpty ? "0" : doTextField.text!
+        
+        let nacenka = nacenkaTextField.text! + (isInPercents ? "%" : "")
+        let fix = fixNadbavkaTextField.text!.isEmpty ? "0" : fixNadbavkaTextField.text!
+        
         if let zone = thisZone {
-            PurchasesUpdateZonePriceDataManager(delegate: self).getPurchasesUpdateZonePriceDataManager(key: key, zoneId : zone.id , from: otTextField.text ?? "", to: doTextField.text ?? "", merge: nacenkaTextField.text ?? "", fix: fixNadbavkaTextField.text ?? "", trunc: okruglenieArray[picker.selectedRow(inComponent: 0)])
+            PurchasesUpdateZonePriceDataManager(delegate: self).getPurchasesUpdateZonePriceDataManager(key: key, zoneId : zone.id , from: from, to: to, merge: nacenka, fix: fix, trunc: okruglenieArray[picker.selectedRow(inComponent: 0)])
         }else{
-            PurchasesAddZonePriceDataManager(delegate: self).getPurchasesAddZonePriceDataManager(key: key, from: otTextField.text ?? "", to: doTextField.text ?? "", merge: nacenkaTextField.text ?? "", fix: fixNadbavkaTextField.text ?? "", trunc: okruglenieArray[picker.selectedRow(inComponent: 0)])
+            PurchasesAddZonePriceDataManager(delegate: self).getPurchasesAddZonePriceDataManager(key: key, from: from, to: to, merge: nacenka, fix: fix, trunc: okruglenieArray[picker.selectedRow(inComponent: 0)])
         }
             
     }
