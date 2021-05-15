@@ -53,6 +53,8 @@ class VibratKlientaViewController: UITableViewController{
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(otmenaTapped(_:)))
         
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusBarButtonPressed(_:)))]
+        
     }
     
 }
@@ -63,6 +65,16 @@ extension VibratKlientaViewController{
     
     @IBAction func otmenaTapped(_ sender : Any){
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func plusBarButtonPressed(_ sender : UIBarButtonItem){
+        
+        let createClientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateClientVC") as! CreateClientViewController
+        
+        createClientVC.delegate = self
+        
+        navigationController?.pushViewController(createClientVC, animated: true)
+        
     }
     
 }
@@ -220,6 +232,36 @@ extension VibratKlientaViewController : PurchasesClientsSelectListDataManagerDel
     
     func didFailGettingPurchasesClientsSelectListDataWithError(error: String) {
         print("Error with PurchasesClientsSelectListDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - CreateClientViewControllerDelegate
+
+extension VibratKlientaViewController : CreateClientViewControllerDelegate{
+    
+    func didCloseVC(didCreateUser: Bool, clientId: String?) {
+        
+        if didCreateUser{
+            
+            let alertController = UIAlertController(title: "Клиент создан!", message: nil, preferredStyle: .alert)
+            
+            let doneAction = UIAlertAction(title: "Готово", style: .cancel) { [self] (_) in
+                alertController.dismiss(animated: true, completion: nil)
+                
+                page = 1
+                rowForPaggingUpdate = 15
+                
+                purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page)
+                
+            }
+            
+            alertController.addAction(doneAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+        }
+        
     }
     
 }
