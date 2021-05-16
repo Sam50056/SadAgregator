@@ -128,6 +128,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
     
     
     lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
+    lazy var photoSavedDataManager = PhotoSavedDataManager()
     
     private var checkImageId : String? //Id чека
     private var parselImageId : String? //Id посылки
@@ -211,6 +212,9 @@ class DobavlenieVZakupkuViewController: UIViewController {
         }
     }
     
+    private var hasSentCheckPhoto = false
+    private var hasSentParselPhoto = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -218,6 +222,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
         key = "part_2_test"
         
         purchasesItemInfoDataManager.delegate = self
+        newPhotoPlaceDataManager.delegate = self
         
         dopolnitelnoCellItemsArray = [
             DopolnitelnoSwitchCellItem(labelText: "Без замен", isSwitch: true),
@@ -287,6 +292,13 @@ extension DobavlenieVZakupkuViewController {
         
     }
     
+    func sendPhotosToServer(forCheck : Bool){
+        
+        isSendingCheck = forCheck
+        newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
+        
+    }
+    
 }
 
 //MARK: - Actions
@@ -297,7 +309,7 @@ extension DobavlenieVZakupkuViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func gotovoTapped(_ sender : Any){
+    @IBAction func gotovoTapped(_ sender : Any?){
         
         guard !clients.isEmpty else {
             showSimpleAlertWithOkButton(title: "Ошибка", message: "Нет добавленных клиентов")
@@ -305,6 +317,16 @@ extension DobavlenieVZakupkuViewController {
         }
         
         guard let thisImageId = thisImageId else {return}
+        
+        if checkImageURL != nil && !hasSentCheckPhoto{
+            sendPhotosToServer(forCheck: true)
+            return
+        }
+        
+        if parselImageURL != nil && !hasSentParselPhoto{
+            sendPhotosToServer(forCheck: false)
+            return
+        }
         
         //Making client string from clients array
         var clientsString = ""
@@ -319,7 +341,7 @@ extension DobavlenieVZakupkuViewController {
             }
         }
         
-        PurchasesAddItemDataManager(delegate: self).getPurchasesAddItemData(key: key, imgId: thisImageId, zakupkaId: selectedZakupka?.id ?? "" , size: thisSize ?? "", purPrice: cenaZakupki == nil ? "" : String(cenaZakupki!), sellPrice: cenaProdazhi == nil ? "" : String(cenaProdazhi!), withoutReplace: bezZamenSwitch ? "1" : "0", paid: oplachenoSwitch ? "1" : "0", checkDefect: proverkaNaBrakSwitch ? "1" : "0", checkImgId: "", parselImgId: "", clients: clientsString, replaceTovarId: replaceTovarId ?? "")
+        PurchasesAddItemDataManager(delegate: self).getPurchasesAddItemData(key: key, imgId: thisImageId, zakupkaId: selectedZakupka?.id ?? "" , size: thisSize ?? "", purPrice: cenaZakupki == nil ? "" : String(cenaZakupki!), sellPrice: cenaProdazhi == nil ? "" : String(cenaProdazhi!), withoutReplace: bezZamenSwitch ? "1" : "0", paid: oplachenoSwitch ? "1" : "0", checkDefect: proverkaNaBrakSwitch ? "1" : "0", checkImgId: checkImageId ?? "", parselImgId: parselImageId ?? "", clients: clientsString, replaceTovarId: replaceTovarId ?? "")
         
     }
     
@@ -1244,9 +1266,40 @@ extension DobavlenieVZakupkuViewController{
                 
                 print("Answer : \(json)")
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [self] in
                     
                     print("Got \(isSendingCheck ? "check sent" : "parsel sent") to server")
+                    
+                    photoSavedDataManager.getPhotoSavedData(key: key, photoId: (isSendingCheck ? checkImageId! : parselImageId!)) { data, error in
+                        
+                        if let error = error{
+                            print("Error with PhotoSavedDataManager : \(error)")
+                            return
+                        }
+                        
+                        guard let data = data else {return}
+                        
+                        if data["result"].intValue == 1{
+                            
+                            print("\(isSendingCheck ? "Check" : "Parsel") image successfuly saved to server")
+                            
+                            DispatchQueue.main.async { [self] in
+                                
+                                if isSendingCheck {
+                                    hasSentCheckPhoto = true
+                                    gotovoTapped(nil)
+                                }else{
+                                    hasSentParselPhoto = true
+                                    gotovoTapped(nil)
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    
                     
                 }
                 
