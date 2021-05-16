@@ -232,6 +232,8 @@ class DobavlenieVZakupkuViewController: UIViewController {
             DopolnitelnoSwitchCellItem(labelText: "Свой комментарий", isComment: true, isSwitch: false, shouldLabelTextBeBlue: false)
         ]
         
+        sizes.append("Другой размер")
+        
         makeKlientiCellItemsArray()
         
         tableView.delegate = self
@@ -896,8 +898,32 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 for size in sizes {
                     
                     let action = UIAlertAction(title: size, style: .default) { [self] _ in
-                        thisSize = size
-                        makeOsnovnoeCellItemsArray()
+                        
+                        if size == "Другой размер"{
+                            
+                            let sizeAlertController = UIAlertController(title: "Введите размер", message: nil, preferredStyle: .alert)
+                            
+                            sizeAlertController.addTextField { textField in
+                                textField.placeholder = "Размер"
+                            }
+                            
+                            sizeAlertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { _ in
+                                guard let newSize = sizeAlertController.textFields?[0].text else {return}
+                                sizes.insert(newSize, at: sizes.count - 1)
+                                thisSize = newSize
+                                makeOsnovnoeCellItemsArray()
+                            }))
+                            
+                            sizeAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { _ in
+                                sizeAlertController.dismiss(animated: true, completion: nil)
+                            }))
+                            
+                            present(sizeAlertController, animated: true, completion: nil)
+                            
+                        }else{
+                            thisSize = size
+                            makeOsnovnoeCellItemsArray()
+                        }
                     }
                     
                     alertControlelr.addAction(action)
