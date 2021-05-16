@@ -3957,6 +3957,54 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageLabelButtonCell" rowHeight="103" id="Uk2-Zz-d5I">
+                                        <rect key="frame" x="0.0" y="696.00000762939453" width="390" height="103"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uk2-Zz-d5I" id="vIv-Pq-IXj">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="103"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EM9-Qg-qPd">
+                                                    <rect key="frame" x="20" y="19" width="75" height="65"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="70" id="K6J-S1-9Jp"/>
+                                                        <constraint firstAttribute="width" constant="75" id="uPD-Sw-udD"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1V-ZL-5Xz">
+                                                    <rect key="frame" x="103" y="41.333333333333336" width="41.333333333333343" height="20.333333333333336"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multiply" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3yR-uc-dFb">
+                                                    <rect key="frame" x="345" y="42.666666666666664" width="25" height="18"/>
+                                                    <color key="tintColor" systemColor="systemGrayColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="evb-Wb-KeY"/>
+                                                        <constraint firstAttribute="height" constant="25" id="nks-5e-2DT"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3t-lw-Tw8" customClass="UIButtonWithInfo" customModule="SadAgregator" customModuleProvider="target">
+                                                    <rect key="frame" x="340" y="39" width="30" height="25"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EM9-Qg-qPd" firstAttribute="top" secondItem="vIv-Pq-IXj" secondAttribute="topMargin" constant="8" id="0Wk-QJ-YrY"/>
+                                                <constraint firstItem="3yR-uc-dFb" firstAttribute="centerY" secondItem="vIv-Pq-IXj" secondAttribute="centerY" id="2Kr-Hx-n4i"/>
+                                                <constraint firstItem="C3t-lw-Tw8" firstAttribute="trailing" secondItem="vIv-Pq-IXj" secondAttribute="trailingMargin" id="Gp4-oh-IWN"/>
+                                                <constraint firstItem="r1V-ZL-5Xz" firstAttribute="leading" secondItem="EM9-Qg-qPd" secondAttribute="trailing" constant="8" symbolic="YES" id="ND1-zv-TEU"/>
+                                                <constraint firstItem="EM9-Qg-qPd" firstAttribute="leading" secondItem="vIv-Pq-IXj" secondAttribute="leadingMargin" id="UfR-rT-VX0"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3yR-uc-dFb" secondAttribute="trailing" id="fwN-F9-lAn"/>
+                                                <constraint firstItem="C3t-lw-Tw8" firstAttribute="bottom" secondItem="3yR-uc-dFb" secondAttribute="bottom" id="pDr-VG-dcl"/>
+                                                <constraint firstItem="r1V-ZL-5Xz" firstAttribute="centerY" secondItem="EM9-Qg-qPd" secondAttribute="centerY" id="r20-tA-RTl"/>
+                                                <constraint firstItem="C3t-lw-Tw8" firstAttribute="centerY" secondItem="vIv-Pq-IXj" secondAttribute="centerY" id="rgM-6Q-ttK"/>
+                                                <constraint firstItem="EM9-Qg-qPd" firstAttribute="centerY" secondItem="vIv-Pq-IXj" secondAttribute="centerY" id="toc-DL-w5f"/>
+                                                <constraint firstItem="C3t-lw-Tw8" firstAttribute="top" secondItem="3yR-uc-dFb" secondAttribute="top" id="yRp-Xg-uMm"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="EM9-Qg-qPd" secondAttribute="bottom" constant="8" id="z9h-z9-dqz"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>

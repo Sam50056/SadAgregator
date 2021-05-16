@@ -126,6 +126,91 @@ class DobavlenieVZakupkuViewController: UIViewController {
     
     private var replaceTovarId : String?
     
+    
+    lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
+    
+    private var checkImageId : String? //Id чека
+    private var parselImageId : String? //Id посылки
+    private var isSendingCheck : Bool = true
+    private var checkImageURL : URL?{
+        didSet{
+            
+            if checkImageURL != nil {
+                
+                guard oplachenoSwitch else {return}
+                
+                tableView.beginUpdates()
+                
+                dopolnitelnoCellItemsArray.remove(at: 3)
+                
+                tableView.deleteRows(at: [IndexPath(row: 3, section: 3)], with: .automatic)
+                
+                dopolnitelnoCellItemsArray.insert(DopolnitelnoSwitchCellItem(labelText: "Фото чека", isComment: false, isSwitch: false, isPhotoCell: true, shouldLabelTextBeBlue: false), at: 3)
+                
+                tableView.insertRows(at: [IndexPath(row: 3, section: 3)], with: .automatic)
+                
+                tableView.endUpdates()
+                
+            }else{
+                
+                guard oplachenoSwitch else {return}
+                
+                tableView.beginUpdates()
+                
+                dopolnitelnoCellItemsArray.remove(at: 3)
+                
+                tableView.deleteRows(at: [IndexPath(row: 3, section: 3)], with: .automatic)
+                
+                dopolnitelnoCellItemsArray.insert(DopolnitelnoSwitchCellItem(labelText: "Загрузить фото чека", isComment: false, isSwitch: false, shouldLabelTextBeBlue: true), at: 3)
+                
+                tableView.insertRows(at: [IndexPath(row: 3, section: 3)], with: .automatic)
+                
+                tableView.endUpdates()
+                
+            }
+            
+        }
+    }
+    private var parselImageURL : URL?{
+        didSet{
+            
+            if parselImageURL != nil {
+                
+                guard oplachenoSwitch else {return}
+                
+                tableView.beginUpdates()
+                
+                dopolnitelnoCellItemsArray.remove(at: 2)
+                
+                tableView.deleteRows(at: [IndexPath(row: 2, section: 3)], with: .automatic)
+                
+                dopolnitelnoCellItemsArray.insert(DopolnitelnoSwitchCellItem(labelText: "Фото посылки", isComment: false, isSwitch: false, isPhotoCell: true, shouldLabelTextBeBlue: false), at: 2)
+                
+                tableView.insertRows(at: [IndexPath(row: 2, section: 3)], with: .automatic)
+                
+                tableView.endUpdates()
+                
+            }else {
+                
+                guard oplachenoSwitch else {return}
+                
+                tableView.beginUpdates()
+                
+                dopolnitelnoCellItemsArray.remove(at: 2)
+                
+                tableView.deleteRows(at: [IndexPath(row: 2, section: 3)], with: .automatic)
+                
+                dopolnitelnoCellItemsArray.insert(DopolnitelnoSwitchCellItem(labelText: "Загрузить фото посылки", isComment: false, isSwitch: false, shouldLabelTextBeBlue: true), at: 2)
+                
+                tableView.insertRows(at: [IndexPath(row: 2, section: 3)], with: .automatic)
+                
+                tableView.endUpdates()
+                
+            }
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -243,7 +328,7 @@ extension DobavlenieVZakupkuViewController {
         guard let thisImageId = thisImageId else {return}
         
         PurchasesAddItemForYourselfDataManager(delegate: self).getPurchasesAddItemForYourselfData(key: key , imgId: thisImageId)
-            
+        
     }
     
     @IBAction func bezZamenSwitchValueChanged(_ sender : UISwitch){
@@ -291,6 +376,14 @@ extension DobavlenieVZakupkuViewController {
         
         navigationController?.pushViewController(cenovieDiapazoniVC, animated: true)
         
+    }
+    
+    @IBAction func removeCheckImage(_ sender : Any){
+        checkImageURL = nil
+    }
+    
+    @IBAction func removeParselImage(_ sender : Any){
+        parselImageURL = nil
     }
     
 }
@@ -559,6 +652,37 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
                 textView.backgroundColor = .clear
                 
+            }else if item.isPhotoCell{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "imageLabelButtonCell", for: indexPath)
+                
+                guard let imageView = cell.viewWithTag(1) as? UIImageView ,
+                   let label = cell.viewWithTag(2) as? UILabel,
+                   let button = cell.viewWithTag(4) as? UIButton else {return cell}
+                
+                label.text = item.labelText
+                imageView.layer.cornerRadius = 6
+                
+                button.removeTarget(self, action: nil, for: .touchUpInside)
+                
+                if item.labelText == "Фото чека"{
+                    
+                    let checkImage = UIImage(data: try! Data(contentsOf: checkImageURL!))
+                    
+                    imageView.image = checkImage
+                    
+                    button.addTarget(self, action: #selector(removeCheckImage(_:)), for: .touchUpInside)
+                    
+                }else if item.labelText == "Фото посылки" {
+                    
+                    let parselImage = UIImage(data: try! Data(contentsOf: parselImageURL!))
+                    
+                    imageView.image = parselImage
+                    
+                    button.addTarget(self, action: #selector(removeParselImage(_:)), for: .touchUpInside)
+                    
+                }
+                
             }else{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelCell", for: indexPath)
@@ -768,6 +892,28 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
             }
             
+        }else if section == 3{
+            
+            if dopolnitelnoCellItemsArray[index].labelText == "Загрузить фото посылки"{
+                
+                parselImageId = nil
+                //                parselImageURL = nil
+                
+                isSendingCheck = false
+                
+                showImagePickerController(sourceType: .photoLibrary)
+                
+            }else if dopolnitelnoCellItemsArray[index].labelText == "Загрузить фото чека"{
+                
+                checkImageId = nil
+                //                checkImageURL = nil
+                
+                isSendingCheck = true
+                
+                showImagePickerController(sourceType: .photoLibrary)
+                
+            }
+            
         }else if section == 4{
             
             if index <= clients.count - 1{
@@ -956,6 +1102,7 @@ extension DobavlenieVZakupkuViewController {
         var labelText : String
         var isComment : Bool = false
         var isSwitch : Bool = true
+        var isPhotoCell : Bool = false
         var shouldLabelTextBeBlue : Bool = false
         
     }
@@ -979,6 +1126,137 @@ extension DobavlenieVZakupkuViewController {
         
         var name : String
         var id : String
+        
+    }
+    
+}
+
+//MARK: - UIImagePickerControllerDelegate
+
+extension DobavlenieVZakupkuViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func showImagePickerController(sourceType : UIImagePickerController.SourceType) {
+        
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = false
+        imagePickerController.sourceType = sourceType
+        
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let safeUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            
+            //            newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
+            
+            isSendingCheck ? (checkImageURL = safeUrl) : (parselImageURL = safeUrl)
+            
+        }
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+}
+
+
+//MARK: - NewPhotoPlaceDataManagerDelegate
+
+extension DobavlenieVZakupkuViewController : NewPhotoPlaceDataManagerDelegate{
+    
+    func didGetNewPhotoPlaceData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            let url = "\(data["post_to"].stringValue)/store?file_name=\(data["file_name"].stringValue)"
+            
+            print("URL FOR SENDING THE FILE: \(url)")
+            
+            if isSendingCheck{
+                guard let _ = checkImageURL else {return}
+            }else{
+                guard let _ = parselImageURL else {return}
+            }
+            
+            sendFileToServer(from: isSendingCheck ? checkImageURL! : parselImageURL!, to: url)
+            
+            let imageId = data["image_id"].stringValue
+            
+            let imageLinkWithPortAndWithoutFile = "\(data["post_to"].stringValue)"
+            let splitIndex = imageLinkWithPortAndWithoutFile.lastIndex(of: ":")!
+            let imageLink = "\(String(imageLinkWithPortAndWithoutFile[imageLinkWithPortAndWithoutFile.startIndex ..< splitIndex]))\(data["file_name"].stringValue)"
+            
+            print("Image Link: \(imageLink)")
+            
+            isSendingCheck ? (checkImageId = imageId) : (parselImageId = imageId)
+            
+        }
+        
+    }
+    
+    func didFailGettingNewPhotoPlaceDataWithError(error: String) {
+        print("Error with NewPhotoPlaceDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - File Sending
+
+extension DobavlenieVZakupkuViewController{
+    
+    func sendFileToServer(from fromUrl : URL, to toUrl : String){
+        
+        print("import result : \(fromUrl)")
+        
+        guard let toUrl = URL(string: toUrl) else {return}
+        
+        print("To URL: \(toUrl)")
+        
+        do{
+            
+            let data = try Data(contentsOf: fromUrl)
+            
+            let image = UIImage(data: data)!
+            
+            let imageData = image.jpegData(compressionQuality: 0.5)
+            
+            var request = URLRequest(url: toUrl)
+            
+            request.httpMethod = "POST"
+            request.setValue("text/plane", forHTTPHeaderField: "Content-Type")
+            request.httpBody = imageData
+            
+            let task = URLSession.shared.dataTask(with: request) { [self] (data, response, error) in
+                
+                if error != nil {
+                    print("Error sending file: \(error!.localizedDescription)")
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+                
+                print("Answer : \(json)")
+                
+                DispatchQueue.main.async {
+                    
+                    print("Got \(isSendingCheck ? "check sent" : "parsel sent") to server")
+                    
+                }
+                
+            }
+            
+            task.resume()
+            
+        }catch{
+            print(error)
+        }
         
     }
     
