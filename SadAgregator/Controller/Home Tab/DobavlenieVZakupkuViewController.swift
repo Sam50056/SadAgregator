@@ -1069,6 +1069,10 @@ extension DobavlenieVZakupkuViewController : PurchasesAddItemDataManagerDelegate
                 
                 dismiss(animated: true, completion: nil)
                 
+            }else{
+                
+                showSimpleAlertWithOkButton(title: "Ошибка", message: data["msg"].string)
+                
             }
             
         }
