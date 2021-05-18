@@ -106,7 +106,7 @@ extension PaymentHistoryViewController{
         
         filterVC.thisClientId = thisClientId
         
-        filterVC.opType = opType
+        filterVC.opType = opType ?? 0
         filterVC.source = source
         
         filterVC.commentQuery = comment
