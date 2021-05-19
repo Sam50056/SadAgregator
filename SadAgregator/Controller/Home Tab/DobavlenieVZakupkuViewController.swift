@@ -218,6 +218,8 @@ class DobavlenieVZakupkuViewController: UIViewController {
     
     var dobavlenoVZakupku : (() -> Void)?
     
+    private var boxView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -300,7 +302,36 @@ extension DobavlenieVZakupkuViewController {
     func sendPhotosToServer(forCheck : Bool){
         
         isSendingCheck = forCheck
+        showBoxView(with: forCheck ? "Загрузка фото чека" : "Загрузка фото посылки")
         newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
+        
+    }
+    
+    func showBoxView(with text : String) {
+        
+        let width = text.width(withConstrainedHeight: UIScreen.main.bounds.width - 16, font: UIFont.systemFont(ofSize: 17)) + 60
+        
+        // You only need to adjust this frame to move it anywhere you want
+        boxView = UIView(frame: CGRect(x: view.frame.midX - (width/2), y: view.frame.midY - 25, width: width, height: 50))
+        boxView.backgroundColor = UIColor(named: "gray")
+        boxView.alpha = 0.95
+        boxView.layer.cornerRadius = 10
+
+        //Here the spinnier is initialized
+        let activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        activityView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityView.startAnimating()
+
+        let textLabel = UILabel(frame: CGRect(x: 45, y: 0, width: 200, height: 50))
+        textLabel.textColor = UIColor.gray
+        textLabel.text = text
+
+        boxView.addSubview(activityView)
+        boxView.addSubview(textLabel)
+
+        view.addSubview(boxView)
+        
+        view.isUserInteractionEnabled = false
         
     }
     
@@ -1298,28 +1329,37 @@ extension DobavlenieVZakupkuViewController : NewPhotoPlaceDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
-            let url = "\(data["post_to"].stringValue)/store?file_name=\(data["file_name"].stringValue)"
-            
-            print("URL FOR SENDING THE FILE: \(url)")
-            
-            if isSendingCheck{
-                guard let _ = checkImageURL else {return}
+            if data["result"].intValue == 1{
+                
+                let url = "\(data["post_to"].stringValue)/store?file_name=\(data["file_name"].stringValue)"
+                
+                print("URL FOR SENDING THE FILE: \(url)")
+                
+                if isSendingCheck{
+                    guard let _ = checkImageURL else {return}
+                }else{
+                    guard let _ = parselImageURL else {return}
+                }
+                
+                sendFileToServer(from: isSendingCheck ? checkImageURL! : parselImageURL!, to: url)
+                
+                let imageId = data["image_id"].stringValue
+                
+                let imageLinkWithPortAndWithoutFile = "\(data["post_to"].stringValue)"
+                let splitIndex = imageLinkWithPortAndWithoutFile.lastIndex(of: ":")!
+                let imageLink = "\(String(imageLinkWithPortAndWithoutFile[imageLinkWithPortAndWithoutFile.startIndex ..< splitIndex]))\(data["file_name"].stringValue)"
+                
+                print("Image Link: \(imageLink)")
+                
+                isSendingCheck ? (checkImageId = imageId) : (parselImageId = imageId)
+                
             }else{
-                guard let _ = parselImageURL else {return}
+                
+                boxView.removeFromSuperview()
+                view.isUserInteractionEnabled = true
+                
             }
-            
-            sendFileToServer(from: isSendingCheck ? checkImageURL! : parselImageURL!, to: url)
-            
-            let imageId = data["image_id"].stringValue
-            
-            let imageLinkWithPortAndWithoutFile = "\(data["post_to"].stringValue)"
-            let splitIndex = imageLinkWithPortAndWithoutFile.lastIndex(of: ":")!
-            let imageLink = "\(String(imageLinkWithPortAndWithoutFile[imageLinkWithPortAndWithoutFile.startIndex ..< splitIndex]))\(data["file_name"].stringValue)"
-            
-            print("Image Link: \(imageLink)")
-            
-            isSendingCheck ? (checkImageId = imageId) : (parselImageId = imageId)
-            
+                
         }
         
     }
@@ -1387,6 +1427,9 @@ extension DobavlenieVZakupkuViewController{
                             print("\(isSendingCheck ? "Check" : "Parsel") image successfuly saved to server")
                             
                             DispatchQueue.main.async { [self] in
+                                
+                                boxView.removeFromSuperview()
+                                view.isUserInteractionEnabled = true
                                 
                                 if isSendingCheck {
                                     hasSentCheckPhoto = true
