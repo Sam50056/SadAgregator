@@ -86,6 +86,18 @@ extension ZamenaDlyaTableViewController : PurchasesProdsByClientDataManagerDeleg
                 
                 purProds.append(contentsOf: data["pur_prods"].arrayValue)
                 
+                if page == 1 && purProds.isEmpty{
+                    
+                    let alertController = UIAlertController(title: "У пользователя не добавлены товары", message: nil, preferredStyle: .alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { _ in
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                    
+                    present(alertController, animated: true, completion: nil)
+                    
+                }
+                
                 tableView.reloadData()
                 
             }else{
