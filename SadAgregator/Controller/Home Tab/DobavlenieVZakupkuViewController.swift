@@ -1098,7 +1098,7 @@ extension DobavlenieVZakupkuViewController : PurchasesAddItemDataManagerDelegate
                 
                 if !(comment ?? "").isEmpty || !(myComment ?? "").isEmpty{
                     
-                    PurchasesAddItemCommentsListDataManager().getPurchasesAddItemCommentsListData(key: key, comment: comment ?? "", myComment: myComment ?? "", items: data["items"].arrayValue.map({ jsonItem in
+                    PurchasesAddItemCommentsListDataManager().getPurchasesAddItemCommentsListData(key: key, comment: comment?.replacingOccurrences(of: "\n", with: "<br>") ?? "", myComment: myComment?.replacingOccurrences(of: "\n", with: "<br>") ?? "", items: data["items"].arrayValue.map({ jsonItem in
                         return jsonItem.stringValue
                     })) { commentData, commentError in
                         
