@@ -39,7 +39,6 @@ class PaymentFilterViewController: UIViewController {
     var maxPrice : Int?
     var minDate : String?
     var maxDate : String?
-    var commentTextField : UITextField?
     
     private var resultsCount : Int?
     
@@ -52,6 +51,10 @@ class PaymentFilterViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        if opType != nil || commentQuery != nil || lowPrice != nil || upPrice != nil || minDate != nil || maxDate != nil {
+            checkForResults()
+        }
         
     }
     
@@ -97,11 +100,21 @@ extension PaymentFilterViewController{
         
     }
     
+    @objc func commentTextFieldEditingChanged(_ sender : UITextField){
+        
+        commentQuery = sender.text ?? ""
+        
+        checkForResults()
+        
+    }
+    
     @IBAction func pokazatOperaciiButtonPressed(_ sender : UIButton){
         
         guard let _ = resultsCount else {return}
         
-        delegate?.didFilterStuff(source: source, opType: opType , sumMin: lowPrice, sumMax: upPrice, startDate: minDate, endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+        //        let commentText = (collectionView.cellForItem(at: IndexPath(row: 0, section: 6))?.viewWithTag(2) as! UITextField).text ?? ""
+        
+        delegate?.didFilterStuff(source: source, opType: opType , sumMin: lowPrice, sumMax: upPrice, startDate: minDate, endDate: maxDate ?? formatDate(Date()), query: commentQuery ?? "")
         
         dismiss(animated: true, completion: nil)
         
@@ -115,10 +128,12 @@ extension PaymentFilterViewController{
     
     func checkForResults(){
         
+        //        let commentText = (collectionView.cellForItem(at: IndexPath(row: 0, section: 6))?.viewWithTag(2) as? UITextField)?.text ?? ""
+        
         if thisClientId != nil {
-            ClientsFilterPayHistByClientCountDataManager(delegate: self).getClientsFilterPayHistByClientCountData(key: key, clientId: thisClientId!, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+            ClientsFilterPayHistByClientCountDataManager(delegate: self).getClientsFilterPayHistByClientCountData(key: key, clientId: thisClientId!, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentQuery ?? "")
         }else{
-            ClientsFilterPayHistoryCountDataManager(delegate: self).getClientsFilterPayHistoryCountData(key: key, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentTextField?.text ?? "")
+            ClientsFilterPayHistoryCountDataManager(delegate: self).getClientsFilterPayHistoryCountData(key: key, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentQuery ?? "")
         }
         
     }
@@ -377,7 +392,7 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 textField.text = commentQuery
             }
             
-            commentTextField = textField
+            textField.addTarget(self, action: #selector(commentTextFieldEditingChanged(_:)), for: .editingChanged)
             
             bgView.layer.cornerRadius = 6
             
