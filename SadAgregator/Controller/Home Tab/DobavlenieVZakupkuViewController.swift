@@ -941,6 +941,47 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
                 present(alertControlelr, animated: true, completion: nil)
                 
+            }else if osnovnoeCellItemsArray[index - 1].firstLabelText == "Цена продажи"{
+                
+                let alertController = UIAlertController(title: "Изменить продажную цену?", message: nil, preferredStyle: .alert)
+                
+                let yesAction = UIAlertAction(title: "Да", style: .default) { [self] _ in
+                    
+                    let secondAlertController = UIAlertController(title: "Цена продажи", message: nil, preferredStyle: .alert)
+                    
+                    secondAlertController.addTextField { field in
+                        
+                        field.placeholder = "500 руб."
+                        
+                        field.keyboardType = .numberPad
+                        
+                    }
+                    
+                    secondAlertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { _ in
+                        
+                        if let newCena = Int(secondAlertController.textFields![0].text ?? ""){
+                            
+                            cenaProdazhi = newCena
+                            
+                            makeOsnovnoeCellItemsArray()
+                            
+                        }
+                        
+                    }))
+                    
+                    present(secondAlertController, animated: true, completion: nil)
+                    
+                }
+                
+                let noAction = UIAlertAction(title: "Нет", style: .cancel) { _ in
+                    alertController.dismiss(animated: true, completion: nil)
+                }
+                
+                alertController.addAction(yesAction)
+                alertController.addAction(noAction)
+                
+                present(alertController, animated: true, completion: nil)
+                
             }
             
         }else if section == 3{
