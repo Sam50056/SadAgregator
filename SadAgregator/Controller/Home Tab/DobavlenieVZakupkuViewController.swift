@@ -68,6 +68,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
             
             if let zakupka = itemInfo["def_pur"]["name"].string{
                 selectedZakupka = Zakupka(name: zakupka, id:  itemInfo["def_pur"]["id"].stringValue)
+                makeKlientiCellItemsArray()
             }
             
         }
@@ -970,7 +971,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
             }else{
                 
-                if klientiCellItemsArray[index - clients.count].labelText == "Выбрать закупку"{
+                if klientiCellItemsArray[index - clients.count].labelText.lowercased().contains("закупк"){
                     
                     let vibratZakupkuVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VibratZakupkuVC") as! VibratZakupkuViewController
                     
