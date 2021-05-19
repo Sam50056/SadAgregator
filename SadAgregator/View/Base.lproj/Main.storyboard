@@ -3563,7 +3563,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="rSQ-XO-EX9">
-                                                    <rect key="frame" x="350.33333333333331" y="8.6666666666666643" width="19.666666666666686" height="26.999999999999986"/>
+                                                    <rect key="frame" x="350.33333333333331" y="8.6666666666666643" width="19.666666666666686" height="27"/>
                                                     <color key="tintColor" systemColor="systemGrayColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="28.329999999999998" id="bcL-YC-a04"/>
@@ -3641,7 +3641,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="H9l-u3-SdZ">
-                                                    <rect key="frame" x="350.33333333333331" y="8.6666666666666643" width="19.666666666666686" height="26.999999999999986"/>
+                                                    <rect key="frame" x="350.33333333333331" y="8.6666666666666643" width="19.666666666666686" height="27"/>
                                                     <color key="tintColor" systemColor="systemGrayColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="19.670000000000002" id="5Ze-RR-TpQ"/>
@@ -3765,7 +3765,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="OEX-ZL-vy9">
-                                                    <rect key="frame" x="350.33333333333331" y="8.6666666666666643" width="19.666666666666686" height="26.999999999999986"/>
+                                                    <rect key="frame" x="350.33333333333331" y="8.6666666666666643" width="19.666666666666686" height="27"/>
                                                     <color key="tintColor" systemColor="systemGrayColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="28.329999999999998" id="18O-Bb-6Yg"/>
@@ -3795,7 +3795,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eDI-lc-jjt">
-                                                    <rect key="frame" x="350.33333333333331" y="8.6666666666666643" width="19.666666666666686" height="26.999999999999986"/>
+                                                    <rect key="frame" x="350.33333333333331" y="8.6666666666666643" width="19.666666666666686" height="27"/>
                                                     <color key="tintColor" systemColor="systemGrayColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="19.670000000000002" id="Fxc-kS-MC6"/>
@@ -3900,13 +3900,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Omv-Uw-qFC" customClass="UIButtonWithInfo" customModule="SadAgregator" customModuleProvider="target">
-                                                    <rect key="frame" x="345" y="9.3333333333333357" width="25" height="25"/>
+                                                    <rect key="frame" x="345" y="9.3333333333333357" width="45" height="25"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Omv-Uw-qFC" secondAttribute="trailing" id="15m-Ey-dOc"/>
                                                 <constraint firstItem="F7T-1Q-OIq" firstAttribute="leading" secondItem="MAz-kz-lr0" secondAttribute="trailing" constant="8" id="1dB-6x-t3G"/>
                                                 <constraint firstItem="MAz-kz-lr0" firstAttribute="leading" secondItem="W8R-XR-j7s" secondAttribute="trailing" constant="8" id="1dR-E6-x2w"/>
-                                                <constraint firstAttribute="trailing" secondItem="Omv-Uw-qFC" secondAttribute="trailing" constant="20" symbolic="YES" id="Dja-le-sIx"/>
                                                 <constraint firstItem="W8R-XR-j7s" firstAttribute="centerY" secondItem="6vX-EC-MSA" secondAttribute="centerY" id="EdG-V4-IGR"/>
                                                 <constraint firstItem="Omv-Uw-qFC" firstAttribute="leading" secondItem="MAz-kz-lr0" secondAttribute="trailing" constant="8" symbolic="YES" id="Eik-X6-RNU"/>
                                                 <constraint firstItem="MAz-kz-lr0" firstAttribute="centerY" secondItem="6vX-EC-MSA" secondAttribute="centerY" id="KMQ-ST-2rY"/>
