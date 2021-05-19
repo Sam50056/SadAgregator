@@ -240,25 +240,15 @@ extension VibratKlientaViewController : PurchasesClientsSelectListDataManagerDel
 
 extension VibratKlientaViewController : CreateClientViewControllerDelegate{
     
-    func didCloseVC(didCreateUser: Bool, clientId: String?) {
+    func didCloseVC(didCreateUser: Bool, clientId: String?, clientName : String?) {
         
         if didCreateUser{
             
-            let alertController = UIAlertController(title: "Клиент создан!", message: nil, preferredStyle: .alert)
+            guard let clientName = clientName , let clientId = clientId else {return}
             
-            let doneAction = UIAlertAction(title: "Готово", style: .cancel) { [self] (_) in
-                alertController.dismiss(animated: true, completion: nil)
-                
-                page = 1
-                rowForPaggingUpdate = 15
-                
-                purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page)
-                
-            }
+            clientSelected?(clientName, clientId)
             
-            alertController.addAction(doneAction)
-            
-            present(alertController, animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
             
         }
         

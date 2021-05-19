@@ -96,7 +96,7 @@ extension CreateClientViewController : CreateNewClientDataManagerDelegate{
                 }else{
                     
                     navigationController?.popViewController(animated: true)
-                    delegate?.didCloseVC(didCreateUser: true, clientId: newClientId)
+                    delegate?.didCloseVC(didCreateUser: true, clientId: newClientId, clientName: nameTextField.text ?? "")
                     
                 }
                 
@@ -127,7 +127,7 @@ extension CreateClientViewController : ClientsChangeBalanceDataManagerDelegate{
             if data["result"].intValue == 1{
                 
                 navigationController?.popViewController(animated: true)
-                delegate?.didCloseVC(didCreateUser: true, clientId: newClientId)
+                delegate?.didCloseVC(didCreateUser: true, clientId: newClientId, clientName: nameTextField.text ?? "")
                 
             }
             
@@ -158,5 +158,5 @@ extension CreateClientViewController {
 }
 
 protocol CreateClientViewControllerDelegate {
-    func didCloseVC(didCreateUser : Bool , clientId : String?)
+    func didCloseVC(didCreateUser : Bool , clientId : String? , clientName : String?)
 }

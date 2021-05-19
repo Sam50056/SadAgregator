@@ -510,7 +510,7 @@ extension ClientsViewController : ClientsFilterDataManagerDelegate{
 
 extension ClientsViewController : CreateClientViewControllerDelegate{
     
-    func didCloseVC(didCreateUser: Bool, clientId: String?) {
+    func didCloseVC(didCreateUser: Bool, clientId: String?, clientName : String?) {
         
         if didCreateUser{
             
