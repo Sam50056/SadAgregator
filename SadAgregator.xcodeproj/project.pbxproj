@@ -133,6 +133,7 @@
 		22906B372578020300F00B0D /* PostavshikViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22906B362578020300F00B0D /* PostavshikViewController.swift */; };
 		22906B3A2578293500F00B0D /* VendorCardDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22906B392578293500F00B0D /* VendorCardDataManager.swift */; };
 		2291BE452560620F004F55DF /* MainDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BE442560620F004F55DF /* MainDataManager.swift */; };
+		2293745E2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2293745D2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift */; };
 		22941A3F262A478C00119844 /* TovarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A3D262A478C00119844 /* TovarTableViewCell.swift */; };
 		22941A40262A478C00119844 /* TovarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22941A3E262A478C00119844 /* TovarTableViewCell.xib */; };
 		22941A48262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A46262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift */; };
@@ -360,6 +361,7 @@
 		22906B362578020300F00B0D /* PostavshikViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostavshikViewController.swift; sourceTree = "<group>"; };
 		22906B392578293500F00B0D /* VendorCardDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorCardDataManager.swift; sourceTree = "<group>"; };
 		2291BE442560620F004F55DF /* MainDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataManager.swift; sourceTree = "<group>"; };
+		2293745D2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesAddItemCommentsListDataManager.swift; sourceTree = "<group>"; };
 		22941A3D262A478C00119844 /* TovarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCell.swift; sourceTree = "<group>"; };
 		22941A3E262A478C00119844 /* TovarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCell.xib; sourceTree = "<group>"; };
 		22941A46262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCellCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1328,6 +1330,7 @@
 				2231DB6C2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift */,
 				2231DB6E2649CB600075228E /* PurchasesAddItemDataManager.swift */,
 				2231DB70264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift */,
+				2293745D2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift */,
 			);
 			path = Purchases;
 			sourceTree = "<group>";
@@ -1528,6 +1531,7 @@
 				22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */,
 				22029C1E25C64C0600CE79BC /* ToExpQueueDataManager.swift in Sources */,
 				227ADAAA25892D8E009B32EC /* ReviewUpdateDataManager.swift in Sources */,
+				2293745E2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift in Sources */,
 				2284EADD25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift in Sources */,
 				226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */,
 				22B6BCAE25DEFD8200EAE067 /* GetCatListDataManager.swift in Sources */,

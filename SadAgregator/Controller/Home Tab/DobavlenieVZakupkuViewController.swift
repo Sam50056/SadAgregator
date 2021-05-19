@@ -1096,9 +1096,34 @@ extension DobavlenieVZakupkuViewController : PurchasesAddItemDataManagerDelegate
             
             if data["result"].intValue == 1{
                 
-                dismiss(animated: true, completion: nil)
-                
-                dobavlenoVZakupku?()
+                if !(comment ?? "").isEmpty || !(myComment ?? "").isEmpty{
+                    
+                    PurchasesAddItemCommentsListDataManager().getPurchasesAddItemCommentsListData(key: key, comment: comment ?? "", myComment: myComment ?? "", items: data["items"].arrayValue.map({ jsonItem in
+                        return jsonItem.stringValue
+                    })) { commentData, commentError in
+                        
+                        DispatchQueue.main.async { [self] in
+                            
+                            if commentError != nil , commentData == nil {
+                                print("Error with PurchasesAddItemCommentsListDataManager : \(commentError!)")
+                                return
+                            }
+                            
+                            dismiss(animated: true, completion: nil)
+                            
+                            dobavlenoVZakupku?()
+                            
+                        }
+                        
+                    }
+                    
+                }else{
+                    
+                    dismiss(animated: true, completion: nil)
+                    
+                    dobavlenoVZakupku?()
+                    
+                }
                 
             }else{
                 
