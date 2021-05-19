@@ -167,6 +167,12 @@ class GalleryViewController: UIViewController {
         
         vc.sizes = sizes
         
+        vc.dobavlenoVZakupku = { [self] in
+            
+            dismiss(animated: true, completion: nil)
+            
+        }
+        
         let navVC = UINavigationController(rootViewController: vc)
         
         navVC.modalPresentationStyle = .fullScreen

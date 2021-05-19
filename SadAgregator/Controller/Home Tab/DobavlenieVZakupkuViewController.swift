@@ -215,6 +215,8 @@ class DobavlenieVZakupkuViewController: UIViewController {
     private var hasSentCheckPhoto = false
     private var hasSentParselPhoto = false
     
+    var dobavlenoVZakupku : (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -1095,6 +1097,8 @@ extension DobavlenieVZakupkuViewController : PurchasesAddItemDataManagerDelegate
                 
                 dismiss(animated: true, completion: nil)
                 
+                dobavlenoVZakupku?()
+                
             }else{
                 
                 showSimpleAlertWithOkButton(title: "Ошибка", message: data["msg"].string)
@@ -1122,6 +1126,8 @@ extension DobavlenieVZakupkuViewController : PurchasesAddItemForYourselfDataMana
             if data["result"].intValue == 1{
                 
                 dismiss(animated: true, completion: nil)
+                
+                dobavlenoVZakupku?()
                 
             }
             
