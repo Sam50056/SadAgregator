@@ -46,9 +46,15 @@ class DobavlenieVZakupkuViewController: UIViewController {
         
         var count = 0
         
-        for client in clients{
+        if clients.isEmpty && clientForReplce != nil{
+            count = clientForReplce!.count
+        }else{
             
-            count += client.count
+            for client in clients{
+                
+                count += client.count
+                
+            }
             
         }
         
@@ -1101,6 +1107,11 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     
                 }else if klientiCellItemsArray[index - clients.count].labelText == "Добавить клиента в закупку"{
                     
+                    guard clientForReplce == nil else {
+                        showSimpleAlertWithOkButton(title: "Вы уже проводите замену товара", message: nil)
+                        return
+                    }
+                    
                     let vibratKlientaVC = VibratKlientaViewController()
                     
                     vibratKlientaVC.selectedClientsIds = clients.map({ item in
@@ -1145,6 +1156,11 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     present(navVC, animated: true, completion: nil)
                     
                 }else if klientiCellItemsArray[index - clients.count].labelText == "Выбрать товар под замену" && clientForReplce != nil{
+                    
+                    guard clients.isEmpty else {
+                        showSimpleAlertWithOkButton(title: "Вы уже добавляете товары в закупку", message: nil)
+                        return
+                    }
                     
                     let zamenaDlyaVC = ZamenaDlyaTableViewController()
                     
