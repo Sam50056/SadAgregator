@@ -127,6 +127,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
     
     private var replaceTovarId : String?
     
+    private var clientForReplce : KlientiCellKlientItem?
     
     lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
     lazy var photoSavedDataManager = PhotoSavedDataManager()
@@ -292,8 +293,9 @@ extension DobavlenieVZakupkuViewController {
     func makeKlientiCellItemsArray() {
         
         klientiCellItemsArray = [
-            KlientiCellItem(labelText: "Выбрать клиента..."),
-            KlientiCellItem(labelText: replaceTovarId == nil ? "Замена для..." : "Замена выбрана"),
+            KlientiCellItem(labelText: "Добавить клиента в закупку"),
+            KlientiCellItem(labelText: clientForReplce == nil ? "Выбрать клиента для замены" : "Клиент для замены:"),
+            KlientiCellItem(labelText: replaceTovarId == nil ? "Выбрать товар под замену" : "Замена выбрана"),
             KlientiCellItem(labelText: selectedZakupka == nil ? "Выбрать закупку" : "Закупка: \(selectedZakupka!.name)")
         ]
         
@@ -316,19 +318,19 @@ extension DobavlenieVZakupkuViewController {
         boxView.backgroundColor = UIColor(named: "gray")
         boxView.alpha = 0.95
         boxView.layer.cornerRadius = 10
-
+        
         //Here the spinnier is initialized
         let activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
         activityView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         activityView.startAnimating()
-
+        
         let textLabel = UILabel(frame: CGRect(x: 45, y: 0, width: 200, height: 50))
         textLabel.textColor = UIColor.gray
         textLabel.text = text
-
+        
         boxView.addSubview(activityView)
         boxView.addSubview(textLabel)
-
+        
         view.addSubview(boxView)
         
         view.isUserInteractionEnabled = false
@@ -442,6 +444,16 @@ extension DobavlenieVZakupkuViewController {
     
     @IBAction func removeParselImage(_ sender : Any){
         parselImageURL = nil
+    }
+    
+    @IBAction func removeClientForReplacePressed(_ sender : Any){
+        
+        clientForReplce = nil
+        
+        makeKlientiCellItemsArray()
+        
+        tableView.reloadData()
+        
     }
     
 }
@@ -715,8 +727,8 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 cell = tableView.dequeueReusableCell(withIdentifier: "imageLabelButtonCell", for: indexPath)
                 
                 guard let imageView = cell.viewWithTag(1) as? UIImageView ,
-                   let label = cell.viewWithTag(2) as? UILabel,
-                   let button = cell.viewWithTag(4) as? UIButton else {return cell}
+                      let label = cell.viewWithTag(2) as? UILabel,
+                      let button = cell.viewWithTag(4) as? UIButton else {return cell}
                 
                 label.text = item.labelText
                 imageView.layer.cornerRadius = 6
@@ -797,7 +809,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
             
             let item = klientiCellItemsArray[index - clients.count]
             
-            if item.labelText == "Замена для..." || item.labelText == "Замена выбрана"{
+            if item.labelText == "Выбрать товар под замену" || item.labelText == "Замена выбрана"{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "labelOneButtonCell", for: indexPath)
                 
@@ -818,14 +830,32 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
                 button.addTarget(self, action: #selector(removeZamenaPressed(_:)), for: .touchUpInside)
                 
-                //If there's more or less than one client selected , "Замена для..." should be gray and not be selectable
-                if clients.count != 1 {
+                //If there's more or less than one client selected , "Выбрать товар под замену" should be gray and not be selectable
+                if clientForReplce == nil {
                     label1.textColor = .systemGray
                 }else{
                     label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
                 }
                 
                 label1.font = UIFont.systemFont(ofSize: 17)
+                
+                return cell
+                
+            }else if item.labelText == "Клиент для замены:" {
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "twoStackLabelOneButtonCell", for: indexPath)
+                
+                guard let label1 = cell.viewWithTag(1) as? UILabel,
+                      let label2 = cell.viewWithTag(2) as? UILabel,
+                      let button = cell.viewWithTag(4) as? UIButtonWithInfo
+                else {return cell}
+                
+                label1.text = item.labelText
+                label2.text = clientForReplce!.name
+                
+                label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
+                
+                button.addTarget(self, action: #selector(removeClientForReplacePressed(_:)), for: .touchUpInside)
                 
                 return cell
                 
@@ -844,6 +874,12 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
             label2.font = UIFont.systemFont(ofSize: 17)
             
             label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
+            
+            if item.labelText == "Выбрать клиента для замены" , !clients.isEmpty{
+                label1.textColor = .systemGray
+            }else if item.labelText == "Добавить клиента в закупку" , clientForReplce != nil {
+                label1.textColor = .systemGray
+            }
             
         default:
             return cell
@@ -1043,7 +1079,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 
             }else{
                 
-                if klientiCellItemsArray[index - clients.count].labelText.lowercased().contains("закупк"){
+                if klientiCellItemsArray[index - clients.count].labelText.lowercased().contains("закупка") ||  klientiCellItemsArray[index - clients.count].labelText == "Выбрать закупку"{
                     
                     let vibratZakupkuVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VibratZakupkuVC") as! VibratZakupkuViewController
                     
@@ -1063,7 +1099,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     
                     present(navVC, animated: true, completion: nil)
                     
-                }else if klientiCellItemsArray[index - clients.count].labelText == "Выбрать клиента..."{
+                }else if klientiCellItemsArray[index - clients.count].labelText == "Добавить клиента в закупку"{
                     
                     let vibratKlientaVC = VibratKlientaViewController()
                     
@@ -1083,11 +1119,36 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     
                     present(navVC, animated: true, completion: nil)
                     
-                }else if klientiCellItemsArray[index - clients.count].labelText == "Замена для..." && clients.count == 1{
+                }else if klientiCellItemsArray[index - clients.count].labelText == "Выбрать клиента для замены"{
+                    
+                    guard clients.isEmpty else {
+                        showSimpleAlertWithOkButton(title: "Вы уже добавляете товары в закупку", message: nil)
+                        return
+                    }
+                    
+                    let vibratKlientaVC = VibratKlientaViewController()
+                    
+                    vibratKlientaVC.isForReplace = true
+                    
+                    vibratKlientaVC.clientSelected = { [self] name , id in
+                        
+                        clientForReplce = KlientiCellKlientItem(name: name, id: id, count: 1)
+                        
+                        makeKlientiCellItemsArray()
+                        
+                        tableView.reloadData()
+                        
+                    }
+                    
+                    let navVC = UINavigationController(rootViewController: vibratKlientaVC)
+                    
+                    present(navVC, animated: true, completion: nil)
+                    
+                }else if klientiCellItemsArray[index - clients.count].labelText == "Выбрать товар под замену" && clientForReplce != nil{
                     
                     let zamenaDlyaVC = ZamenaDlyaTableViewController()
                     
-                    zamenaDlyaVC.thisClientId = clients[0].id
+                    zamenaDlyaVC.thisClientId = clientForReplce!.id
                     
                     zamenaDlyaVC.tovarSelected = { [self] pid in
                         print("Selected tovar pid : \(pid)")
@@ -1359,7 +1420,7 @@ extension DobavlenieVZakupkuViewController : NewPhotoPlaceDataManagerDelegate{
                 view.isUserInteractionEnabled = true
                 
             }
-                
+            
         }
         
     }

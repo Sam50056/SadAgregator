@@ -27,6 +27,8 @@ class VibratKlientaViewController: UITableViewController{
     
     var clientSelected : ((String , String) -> ())?
     
+    var isForReplace : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +44,7 @@ class VibratKlientaViewController: UITableViewController{
         
         purchasesClientsSelectListDataManager.delegate = self
         
-        purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page)
+        purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, forReplace: isForReplace, isInZakupka: true)
         
     }
     
@@ -100,7 +102,7 @@ extension VibratKlientaViewController : UISearchResultsUpdating{
             page = 1
             rowForPaggingUpdate = 15
             
-            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, query: searchText)
+            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, query: searchText, forReplace: isForReplace, isInZakupka: true)
             
         }else{
             
@@ -109,7 +111,7 @@ extension VibratKlientaViewController : UISearchResultsUpdating{
             page = 1
             rowForPaggingUpdate = 15
             
-            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page)
+            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, forReplace: isForReplace, isInZakupka: true)
             
         }
         
@@ -160,7 +162,7 @@ extension VibratKlientaViewController{
             
             rowForPaggingUpdate += 16
             
-            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, query: searchController.searchBar.text ?? "")
+            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, query: searchController.searchBar.text ?? "", forReplace: isForReplace, isInZakupka: true)
             
             print("Done a request for page: \(page)")
             
