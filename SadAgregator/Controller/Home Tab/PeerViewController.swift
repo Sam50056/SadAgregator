@@ -13,6 +13,8 @@ class PeerViewController: UIViewController{
     
     @IBOutlet weak var searchView: UIView!
     
+    @IBOutlet weak var searchTextField : UITextField!
+    
     @IBOutlet weak var tableView: UITableView!
     
     let activityController = UIActivityIndicatorView()
@@ -21,7 +23,13 @@ class PeerViewController: UIViewController{
     
     var key = ""
     
-    var peers : [JSON]?
+    var peers : [JSON]?{
+        didSet{
+            filteredPeers = peers
+        }
+    }
+    
+    var filteredPeers : [JSON]?
     
     var selectedPeerIndex : Int?
     
@@ -37,11 +45,13 @@ class PeerViewController: UIViewController{
         tableView.delegate = self
         tableView.dataSource = self
         
+        searchTextField.addTarget(self, action: #selector(searchTextFieldValueChanged(_:)), for: .editingChanged)
+        
     }
     
     //MARK: - Actions
     
-    @IBAction func otmenaButtonPressed(_ sender: UIButton) {
+    @IBAction func otmenaButtonPressed(_ sendxer: UIButton) {
         
         self.dismiss(animated: true, completion: nil)
         
@@ -50,6 +60,32 @@ class PeerViewController: UIViewController{
     @IBAction func listUpdateButtonPressed(_ sender: UIButton) {
         
         refreshAlbsData()
+        
+    }
+    
+    @IBAction func searchTextFieldValueChanged(_ sender : UITextField){
+        
+        guard let searchText = sender.text , let peers = peers else {return}
+        
+        if searchText == ""{
+            
+            filteredPeers = peers
+            
+        }else{
+            
+            var newArray = [JSON]()
+            
+            peers.forEach { peer in
+                if peer["capt"].stringValue.lowercased().contains(searchText.lowercased()){
+                    newArray.append(peer)
+                }
+            }
+            
+            filteredPeers = newArray
+            
+        }
+        
+        tableView.reloadData()
         
     }
     
@@ -152,14 +188,14 @@ extension PeerViewController : SetDefaultPeerDataManagerDelegate{
 extension PeerViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return peers?.count ?? 0
+        return filteredPeers?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = UITableViewCell()
         
-        guard let peers = peers else { return cell }
+        guard let peers = filteredPeers else { return cell }
         
         cell = tableView.dequeueReusableCell(withIdentifier: "peerCell", for: indexPath)
         
@@ -171,7 +207,7 @@ extension PeerViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let id = peers?[indexPath.row]["peer_id"].stringValue{
+        if let id = filteredPeers?[indexPath.row]["peer_id"].stringValue{
             
             selectedPeerIndex = indexPath.row
             
