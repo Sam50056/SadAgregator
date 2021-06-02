@@ -2079,6 +2079,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchTextField" destination="SFb-jB-Xko" id="kg5-pU-TTE"/>
                         <outlet property="searchView" destination="kdJ-Hb-m5X" id="7Ce-Hw-dCu"/>
                         <outlet property="tableView" destination="Yu9-nw-W1C" id="cnu-QC-aId"/>
                     </connections>
