@@ -294,6 +294,27 @@ struct MenuView: View {
                         
                         Section{
                             
+                            NavigationLink(destination: NastroykiPosrednikaView() , isActive: $menuViewModel.showNastroykiPosrednikaView){
+                                
+                                HStack(spacing: 16){
+                                    
+                                    Image(systemName: "folder.badge.person.crop")
+                                        .resizable()
+                                        .frame(width: 30, height: 20, alignment: .center)
+                                        .foregroundColor(Color(.systemBlue))
+                                    
+                                    Text("Настройки посредника")
+                                        .font(.custom("", size: 16))
+                                    
+                                }
+                                .padding(.vertical, 5)
+                                
+                            }
+                            
+                        }
+                        
+                        Section{
+                            
                             List{
                                 
                                 NavigationLink(destination: SendQuestionView(), isActive : $menuViewModel.showSendQuestionView){

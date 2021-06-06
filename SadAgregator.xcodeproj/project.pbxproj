@@ -54,6 +54,7 @@
 		2237E77C25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237E77A25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift */; };
 		2237E77D25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2237E77B25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib */; };
 		2237E78025FBD15F00EBD919 /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237E77F25FBD15F00EBD919 /* ClientViewController.swift */; };
+		2238DC6F26683DB00037DFF5 /* NastroykiPosrednikaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238DC6E26683DB00037DFF5 /* NastroykiPosrednikaTableViewController.swift */; };
 		2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */; };
 		2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */; };
 		22423E98259116270097C9E6 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22423E97259116270097C9E6 /* ProfileViewModel.swift */; };
@@ -279,6 +280,7 @@
 		2237E77A25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
 		2237E77B25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseTableViewCellTableViewCell.xib; sourceTree = "<group>"; };
 		2237E77F25FBD15F00EBD919 /* ClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
+		2238DC6E26683DB00037DFF5 /* NastroykiPosrednikaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NastroykiPosrednikaTableViewController.swift; sourceTree = "<group>"; };
 		2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVendsView.swift; sourceTree = "<group>"; };
 		2238F7F825940B8A00CFF51D /* MyVendorsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVendorsDataManager.swift; sourceTree = "<group>"; };
 		22423E97259116270097C9E6 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -1226,6 +1228,7 @@
 				225957A42596A2A60088C7E4 /* MasterViewModel.swift */,
 				22D90232259C023B009732CC /* FavoritePostsView.swift */,
 				2245820225A9FB15008882A9 /* HelpView.swift */,
+				2238DC6E26683DB00037DFF5 /* NastroykiPosrednikaTableViewController.swift */,
 			);
 			path = "Menu Tab";
 			sourceTree = "<group>";
@@ -1559,6 +1562,7 @@
 				2237E78025FBD15F00EBD919 /* ClientViewController.swift in Sources */,
 				22C5D02E25B1EC9E001C69C6 /* SetDefaultPeerDataManager.swift in Sources */,
 				22CA694425A1475E00D21840 /* VendorRatingTableViewCell.swift in Sources */,
+				2238DC6F26683DB00037DFF5 /* NastroykiPosrednikaTableViewController.swift in Sources */,
 				22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */,
 				22328CCA25FE70BE00C51CC9 /* PaymentHistoryViewController.swift in Sources */,
 				227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */,
