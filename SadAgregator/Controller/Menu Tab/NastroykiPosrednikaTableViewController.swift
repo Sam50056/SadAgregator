@@ -146,10 +146,28 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let index = indexPath.row
-        let section = indexPath.section
+        if isPosrednikTab {
+            return makeForPosrednik(indexPath: indexPath)
+        }else{
+            return makeForORG(indexPath: indexPath)
+        }
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
+    
+    //MARK:- Cells SetUp
+    
+    func makeForPosrednik(indexPath : IndexPath) -> UITableViewCell{
         
         var cell = UITableViewCell()
+        
+        let index = indexPath.row
+        let section = indexPath.section
         
         if section == 0{
             
@@ -292,9 +310,47 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func makeForORG(indexPath : IndexPath) -> UITableViewCell{
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        var cell = UITableViewCell()
+        
+        let index = indexPath.row
+        let section = indexPath.section
+        
+        if section == 0{
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "segmentedControlCell", for: indexPath)
+            
+            guard let segmentedControl = cell.viewWithTag(1) as? UISegmentedControl else {return cell}
+            
+            segmentedControl.setTitle("Орг СП", forSegmentAt: 0)
+            segmentedControl.setTitle("Посредник", forSegmentAt: 1)
+            
+            segmentedControl.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
+            
+        }else if section == 1{
+            
+            guard !firstSectionItemsForOrg.isEmpty else {return cell}
+            
+            let item = firstSectionItemsForOrg[index]
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelOneImageCell", for: indexPath)
+            
+            guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                  let label2 = cell.viewWithTag(2) as? UILabel ,
+                  let imageView = cell.viewWithTag(3) as? UIImageView else {return cell}
+            
+            label1.text = item.label1Text
+            
+            label2.text = item.label2Text
+            
+            label2.textColor = .systemGray
+            
+            imageView.image = UIImage(systemName: item.imageName)
+            
+        }
+        
+        return cell
         
     }
     
