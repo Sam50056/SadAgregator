@@ -104,6 +104,7 @@
 		22703262262711510068BD82 /* VibratKlientaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22703261262711510068BD82 /* VibratKlientaViewController.swift */; };
 		22703265262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22703264262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift */; };
 		22729F61262F017200C19EF3 /* PurchasesProdsByClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22729F60262F017100C19EF3 /* PurchasesProdsByClientDataManager.swift */; };
+		2272FCD6266D36D6000B5B19 /* BrokersFormDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2272FCD5266D36D6000B5B19 /* BrokersFormDataManager.swift */; };
 		227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */; };
 		227828EE258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */; };
 		22782906258AC7FE00B435FA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22782905258AC7FE00B435FA /* Extensions.swift */; };
@@ -331,6 +332,7 @@
 		22703261262711510068BD82 /* VibratKlientaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibratKlientaViewController.swift; sourceTree = "<group>"; };
 		22703264262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesClientsSelectListDataManager.swift; sourceTree = "<group>"; };
 		22729F60262F017100C19EF3 /* PurchasesProdsByClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesProdsByClientDataManager.swift; sourceTree = "<group>"; };
+		2272FCD5266D36D6000B5B19 /* BrokersFormDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersFormDataManager.swift; sourceTree = "<group>"; };
 		227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUpdateViewController.swift; sourceTree = "<group>"; };
 		227828ED258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPhotoPlaceDataManager.swift; sourceTree = "<group>"; };
 		22782905258AC7FE00B435FA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -683,6 +685,7 @@
 				2200943B25DB26700001F7B3 /* Category Managers */,
 				22C549A025F41C30008D941B /* Clients Managers */,
 				22F742682622653F009128AF /* Purchases */,
+				2272FCD4266D36B3000B5B19 /* Brokers */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -864,6 +867,14 @@
 				22595793259667C10088C7E4 /* Master Views  */,
 			);
 			path = "Menu Views";
+			sourceTree = "<group>";
+		};
+		2272FCD4266D36B3000B5B19 /* Brokers */ = {
+			isa = PBXGroup;
+			children = (
+				2272FCD5266D36D6000B5B19 /* BrokersFormDataManager.swift */,
+			);
+			path = Brokers;
 			sourceTree = "<group>";
 		};
 		228CB750255BF96D002B4A96 = {
@@ -1670,6 +1681,7 @@
 				22BF1A0625A543C900567DB7 /* TopPointsPaggingDataManager.swift in Sources */,
 				22ACF1AE262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift in Sources */,
 				22D9023D259C1988009732CC /* MultilineTextView.swift in Sources */,
+				2272FCD6266D36D6000B5B19 /* BrokersFormDataManager.swift in Sources */,
 				224EFC3125A9D209007CA45E /* SendQuestionDataManager.swift in Sources */,
 				2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */,
 				22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */,

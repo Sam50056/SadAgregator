@@ -49,6 +49,8 @@ class VKAuthService : NSObject ,  VKSdkDelegate , VKSdkUIDelegate{
     
     func wakeUpSession() {
         
+        VKSdk.forceLogout()
+        
         let scope = ["photos","offline", "wall", "groups", "email"]
         
         VKSdk.wakeUpSession(scope) { [delegate](state, error) in
