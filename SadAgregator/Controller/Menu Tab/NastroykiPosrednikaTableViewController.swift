@@ -88,9 +88,9 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         if isPosrednikTab{
-            return 9
+            return 10
         }else{
-            return 3
+            return 4
         }
     }
     
@@ -100,23 +100,25 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             switch section {
             
-            case 0: return firstSectionItemsForPosrednik.count + 1
+            case 0: return 1
                 
-            case 1: return 1
+            case 1: return firstSectionItemsForPosrednik.count
                 
             case 2: return 1
                 
             case 3: return 1
                 
-            case 4: return 2
+            case 4: return 1
                 
-            case 5: return 1
+            case 5: return 2
                 
             case 6: return 1
                 
             case 7: return 1
                 
             case 8: return 1
+                
+            case 9: return 1
                 
             default: return 0
                 
@@ -126,11 +128,13 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             switch section {
             
-            case 0: return firstSectionItemsForOrg.count + 1
+            case 0: return 1
                 
-            case 1: return 6
+            case 1: return firstSectionItemsForOrg.count
                 
-            case 2: return 2
+            case 2: return 6
+                
+            case 3: return 2
                 
             default: return 0
                 
@@ -149,55 +153,51 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
         if section == 0{
             
-            if index == 0 {
+            cell = tableView.dequeueReusableCell(withIdentifier: "segmentedControlCell", for: indexPath)
+            
+            guard let segmentedControl = cell.viewWithTag(1) as? UISegmentedControl else {return cell}
+            
+            segmentedControl.setTitle("Орг СП", forSegmentAt: 0)
+            segmentedControl.setTitle("Посредник", forSegmentAt: 1)
+            
+            segmentedControl.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
+            
+        }else if section == 1{
+            
+            guard !firstSectionItemsForPosrednik.isEmpty else {return cell}
+            
+            let item = firstSectionItemsForPosrednik[index]
+            
+            if item.isDopInfo {
                 
-                cell = tableView.dequeueReusableCell(withIdentifier: "segmentedControlCell", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "labelTextFieldCell", for: indexPath)
                 
-                guard let segmentedControl = cell.viewWithTag(1) as? UISegmentedControl else {return cell}
+                guard let _ = cell.viewWithTag(1) as? UILabel ,
+                      let textField = cell.viewWithTag(2) as? UITextField else {return cell}
                 
-                segmentedControl.setTitle("Орг СП", forSegmentAt: 0)
-                segmentedControl.setTitle("Посредник", forSegmentAt: 1)
+                textField.placeholder = "Некоторая информация"
                 
-                segmentedControl.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
+                textField.text = dopInfoText
                 
             }else{
                 
-                guard !firstSectionItemsForPosrednik.isEmpty else {return cell}
+                cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelOneImageCell", for: indexPath)
                 
-                let item = firstSectionItemsForPosrednik[index - 1]
+                guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                      let label2 = cell.viewWithTag(2) as? UILabel ,
+                      let imageView = cell.viewWithTag(3) as? UIImageView else {return cell}
                 
-                if item.isDopInfo {
-                    
-                    cell = tableView.dequeueReusableCell(withIdentifier: "labelTextFieldCell", for: indexPath)
-                    
-                    guard let _ = cell.viewWithTag(1) as? UILabel ,
-                          let textField = cell.viewWithTag(2) as? UITextField else {return cell}
-                    
-                    textField.placeholder = "Некоторая информация"
-                    
-                    textField.text = dopInfoText
-                    
-                }else{
-                    
-                    cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelOneImageCell", for: indexPath)
-                    
-                    guard let label1 = cell.viewWithTag(1) as? UILabel ,
-                          let label2 = cell.viewWithTag(2) as? UILabel ,
-                          let imageView = cell.viewWithTag(3) as? UIImageView else {return cell}
-                    
-                    label1.text = item.label1Text
-                    
-                    label2.text = item.label2Text
-                    
-                    label2.textColor = .systemGray
-                    
-                    imageView.image = UIImage(systemName: item.imageName)
-                    
-                }
+                label1.text = item.label1Text
+                
+                label2.text = item.label2Text
+                
+                label2.textColor = .systemGray
+                
+                imageView.image = UIImage(systemName: item.imageName)
                 
             }
             
-        }else if section == 1{
+        }else if section == 2{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
@@ -207,7 +207,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).setTitle("Добавить", for: .normal)
             
-        }else if section == 2{
+        }else if section == 3{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
             
@@ -215,8 +215,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             label.text = "Вы не добавляли диапазонов комиссий"
             
-            
-        }else if section == 3{
+        }else if section == 4{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
@@ -224,7 +223,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).isHidden = true
             
-        }else if section == 4{
+        }else if section == 5{
             
             if index == 0{
                 
@@ -241,7 +240,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 guard let label1 = cell.viewWithTag(1) as? UILabel ,
                       let label2 = cell.viewWithTag(2) as? UILabel ,
                       let imageView = cell.viewWithTag(3) as? UIImageView else {return cell}
-             
+                
                 label1.text = "Стоимость за 1 ед."
                 label2.text = "30 руб"
                 
@@ -251,7 +250,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
-        }else if section == 5{
+        }else if section == 6{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
@@ -261,7 +260,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).setTitle("Добавить", for: .normal)
             
-        }else if section == 6{
+        }else if section == 7{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
             
@@ -269,7 +268,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             label.text = "Вы не добавляли способов отправки"
             
-        }else if section == 7{
+        }else if section == 8{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
@@ -279,7 +278,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).setTitle("Добавить", for: .normal)
             
-        }else if section == 8{
+        }else if section == 9{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
             
