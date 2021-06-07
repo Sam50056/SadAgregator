@@ -37,10 +37,12 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     var key : String?
     
-    private var isPosrednikTab = true
+    private var isPosrednikTab = false
     
     private var firstSectionItemsForPosrednik = [FirstSectionItem]()
     private var firstSectionItemsForOrg = [FirstSectionItem]()
+    
+    private var secondSectionItemsForOrg = [SecondSectionForOrgItem]()
     
     private var brokersFormDataManager = BrokersFormDataManager()
     
@@ -90,7 +92,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         if isPosrednikTab{
             return 10
         }else{
-            return 4
+            return 6
         }
     }
     
@@ -132,9 +134,13 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             case 1: return firstSectionItemsForOrg.count
                 
-            case 2: return 6
+            case 2: return 1
                 
-            case 3: return 2
+            case 3: return secondSectionItemsForOrg.count
+                
+            case 4: return 1
+                
+            case 5: return 1
                 
             default: return 0
                 
@@ -190,8 +196,10 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "labelTextFieldCell", for: indexPath)
                 
-                guard let _ = cell.viewWithTag(1) as? UILabel ,
+                guard let label = cell.viewWithTag(1) as? UILabel ,
                       let textField = cell.viewWithTag(2) as? UITextField else {return cell}
+                
+                label.text = "Дополнительная информация"
                 
                 textField.placeholder = "Некоторая информация"
                 
@@ -348,6 +356,67 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             imageView.image = UIImage(systemName: item.imageName)
             
+        }else if section == 2{
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
+            
+            (cell.viewWithTag(1) as! UILabel).text = "Получение посылок"
+            
+            (cell.viewWithTag(2) as! UIButton).isHidden = true
+            
+        }else if section == 3{
+            
+            let item = secondSectionItemsForOrg[index]
+            
+            if item.label2Text != ""{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelOneImageCell", for: indexPath)
+                
+                guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                      let label2 = cell.viewWithTag(2) as? UILabel ,
+                      let imageView = cell.viewWithTag(3) as? UIImageView else {return cell}
+                
+                label1.text = item.label1Text
+                
+                label2.text = item.label2Text
+                
+                label2.textColor = .systemGray
+                
+                imageView.image = UIImage(systemName: item.imageName)
+                
+            }else{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "labelTextFieldCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel ,
+                      let textField = cell.viewWithTag(2) as? UITextField else {return cell}
+                
+                label.text = item.label1Text
+                
+                textField.placeholder = item.label1Text
+                
+                textField.text = item.value
+                
+            }
+            
+        }else if section == 4{
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
+            
+            (cell.viewWithTag(1) as! UILabel).text = "Наценки"
+            
+            (cell.viewWithTag(2) as! UIButton).isHidden = false
+            
+            (cell.viewWithTag(2) as! UIButton).setTitle("Добавить наценку", for: .normal)
+            
+        }else if section == 5{
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
+            
+            guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+            
+            label.text = "Вы не добавляли наценки"
+            
         }
         
         return cell
@@ -368,6 +437,19 @@ extension NastroykiPosrednikaTableViewController {
         var imageName = "info.circle"
         
         var isDopInfo : Bool = false
+        
+    }
+    
+    private struct SecondSectionForOrgItem{
+        
+        var label1Text : String
+        var label2Text : String = ""
+        
+        var value : String
+        
+        var type : String
+        
+        var imageName = "info.circle"
         
     }
     
@@ -414,6 +496,34 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
             }
             
             firstSectionItemsForOrg = newFirstSectionItemsForOrg
+            
+            var newSecondSectionItems = [SecondSectionForOrgItem]()
+            
+            if let deliveryType = brokerProfile["delivery_type"].string{
+                newSecondSectionItems.append(SecondSectionForOrgItem(label1Text: "Пересылка", label2Text: deliveryType, value: "", type: "10", imageName: "pencil"))
+            }
+            
+            if let pochIndex = brokerProfile["poch_index"].string {
+                newSecondSectionItems.append(SecondSectionForOrgItem(label1Text: "Индекс", value: pochIndex, type: "4"))
+            }
+            
+            if let docNum = brokerProfile["doc_num"].string{
+                newSecondSectionItems.append(SecondSectionForOrgItem(label1Text: "Серия и номер паспорта", value: docNum, type: "5"))
+            }
+            
+            if let fio = brokerProfile["fio"].string{
+                newSecondSectionItems.append(SecondSectionForOrgItem(label1Text: "ФИО", value: fio, type: "6"))
+            }
+            
+            if let tkAddress = brokerProfile["tk_address"].string{
+                newSecondSectionItems.append(SecondSectionForOrgItem(label1Text: "Адрес терминала", value: tkAddress, type: "7"))
+            }
+            
+            if let dopInfo = brokerProfile["delivery_com"].string{
+                newSecondSectionItems.append(SecondSectionForOrgItem(label1Text: "Дополнительная информация", value: dopInfo, type: "8"))
+            }
+            
+            secondSectionItemsForOrg = newSecondSectionItems
             
             tableView.reloadData()
             
