@@ -46,6 +46,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     private var brokersFormDataManager = BrokersFormDataManager()
     
+    private lazy var brokersUpdateInfoDataManager = BrokersUpdateInfoDataManager()
+    
     private var dopInfoText = ""
     
     override func viewDidLoad() {
@@ -58,13 +60,6 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         if let key = key{
             brokersFormDataManager.getBrokersFormData(key: key)
         }
-        
-        //        firstSectionItems = [
-        //            FirstSectionItem(label1Text: "Код партнера", label2Text: "37982723"),
-        //            FirstSectionItem(label1Text: "Телефон", label2Text: "3423423423" , imageName: "pencil"),
-        //            FirstSectionItem(label1Text: "Реквизиты для оплаты", label2Text: "*2343", imageName: "pencil"),
-        //            FirstSectionItem(label1Text: "Дополнительная информация", label2Text: "" , isDopInfo: true)
-        //        ]
         
     }
     
@@ -397,6 +392,10 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
                 textField.text = item.value
                 
+                textField.restorationIdentifier = "\(item.type)|\(index)"
+                
+                textField.delegate = self
+                
             }
             
         }else if section == 4{
@@ -420,6 +419,41 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         }
         
         return cell
+        
+    }
+    
+}
+
+//MARK:- TextField Stuff
+
+extension NastroykiPosrednikaTableViewController : UITextFieldDelegate{
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if let value = textField.text , let key = key , let fieldId = textField.restorationIdentifier {
+            
+            let typeLastIndex = fieldId.firstIndex(of: "|")
+            let type = String(fieldId[fieldId.startIndex..<typeLastIndex!])
+            let index = String(fieldId[typeLastIndex!..<fieldId.endIndex]).replacingOccurrences(of: "|", with: "")
+            
+            print("Type : \(type) and Index : \(index)")
+            
+            brokersUpdateInfoDataManager.getBrokersUpdateInfoData(key: key, type: type, value: value) { [self] data, error in
+                
+                if error != nil , data == nil {
+                    print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    secondSectionItemsForOrg[Int(index)!].value = value
+                    
+                }
+                
+            }
+            
+        }
         
     }
     

@@ -188,6 +188,7 @@
 		22BF1A0D25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A0C25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift */; };
 		22BF1A1125A5E19100567DB7 /* LinePointsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A1025A5E19100567DB7 /* LinePointsPaggingDataManager.swift */; };
 		22BF1A1725A5FD5C00567DB7 /* PostLikeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF1A1625A5FD5C00567DB7 /* PostLikeDataManager.swift */; };
+		22C3315E266EEC4900B4FE1D /* BrokersUpdateInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C3315D266EEC4900B4FE1D /* BrokersUpdateInfoDataManager.swift */; };
 		22C5499525F411A3008D941B /* ClientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5499325F411A3008D941B /* ClientTableViewCell.swift */; };
 		22C5499625F411A4008D941B /* ClientTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C5499425F411A3008D941B /* ClientTableViewCell.xib */; };
 		22C5499C25F41223008D941B /* ClientTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5499A25F41223008D941B /* ClientTableViewCellTableViewCell.swift */; };
@@ -419,6 +420,7 @@
 		22BF1A0C25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePointsPaggingSearchDataManager.swift; sourceTree = "<group>"; };
 		22BF1A1025A5E19100567DB7 /* LinePointsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePointsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22BF1A1625A5FD5C00567DB7 /* PostLikeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeDataManager.swift; sourceTree = "<group>"; };
+		22C3315D266EEC4900B4FE1D /* BrokersUpdateInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersUpdateInfoDataManager.swift; sourceTree = "<group>"; };
 		22C5499325F411A3008D941B /* ClientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTableViewCell.swift; sourceTree = "<group>"; };
 		22C5499425F411A3008D941B /* ClientTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClientTableViewCell.xib; sourceTree = "<group>"; };
 		22C5499A25F41223008D941B /* ClientTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -873,6 +875,7 @@
 			isa = PBXGroup;
 			children = (
 				2272FCD5266D36D6000B5B19 /* BrokersFormDataManager.swift */,
+				22C3315D266EEC4900B4FE1D /* BrokersUpdateInfoDataManager.swift */,
 			);
 			path = Brokers;
 			sourceTree = "<group>";
@@ -1654,6 +1657,7 @@
 				22C9221325814CA40063B5D4 /* MenuView.swift in Sources */,
 				2284EAD625BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift in Sources */,
 				22C5D02825B0E065001C69C6 /* PeerViewController.swift in Sources */,
+				22C3315E266EEC4900B4FE1D /* BrokersUpdateInfoDataManager.swift in Sources */,
 				2245820D25AA2D6D008882A9 /* HelpPageDataManager.swift in Sources */,
 				22A155CF2582925D000EAB64 /* RegView.swift in Sources */,
 				2267D0A025B4F3C600904C44 /* TextViewCollectionViewCell.swift in Sources */,
