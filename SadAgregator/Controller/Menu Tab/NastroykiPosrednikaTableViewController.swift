@@ -44,6 +44,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     private var secondSectionItemsForOrg = [SecondSectionForOrgItem]()
     
+    private var thirdSectionItemsForPosrednik = [ThirdSectionForPosrednikItem]()
+    
     private var brokersFormDataManager = BrokersFormDataManager()
     
     private lazy var brokersUpdateInfoDataManager = BrokersUpdateInfoDataManager()
@@ -57,6 +59,49 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
         if let key = key{
             brokersFormDataManager.getBrokersFormData(key: key)
+        }
+        
+    }
+    
+    //MARK: - Actions
+    
+    @IBAction func switchValueChanged(_ sender : UISwitch){
+        
+        guard let switchId = sender.restorationIdentifier , let key = key else {return}
+        
+        let typeLastIndex = switchId.firstIndex(of: "|")
+        let type = String(switchId[switchId.startIndex..<typeLastIndex!])
+        let index = String(switchId[typeLastIndex!..<switchId.endIndex]).replacingOccurrences(of: "|", with: "")
+        
+        print("Type : \(type) and Index : \(index)")
+        
+        let newValue = (sender.isOn ? "1" : "0")
+        
+        brokersUpdateInfoDataManager.getBrokersUpdateInfoData(key: key, type: type, value: newValue) { [self] data, error in
+            
+            if error != nil , data == nil {
+                print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                return
+            }
+            
+            if data!["result"].intValue == 1{
+                
+                thirdSectionItemsForPosrednik[Int(index)!].value = newValue
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            }else {
+                
+                if let message = data!["msg"].string{
+                    
+                    showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                    
+                }
+                
+            }
+            
         }
         
     }
@@ -103,9 +148,9 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             case 3: return 1
                 
-            case 4: return 1
+            case 4: return thirdSectionItemsForPosrednik.isEmpty ? 0 : 1
                 
-            case 5: return 2
+            case 5: return thirdSectionItemsForPosrednik.count
                 
             case 6: return 1
                 
@@ -159,6 +204,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
         if isPosrednikTab{
             posrednikCellTapped(indexPath: indexPath)
+        }else{
+            orgCellTapped(indexPath: indexPath)
         }
         
     }
@@ -252,13 +299,22 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
         }else if section == 5{
             
-            if index == 0{
+            let item = thirdSectionItemsForPosrednik[index]
+            
+            if item.hasSwitch {
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "labelSwitchCell", for: indexPath)
                 
-                guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+                guard let label = cell.viewWithTag(1) as? UILabel ,
+                      let `switch` = cell.viewWithTag(2) as? UISwitch else {return cell}
                 
-                label.text = "Активность услуги"
+                `switch`.isOn = item.value == "1" ? true : false
+                
+                `switch`.restorationIdentifier = "\(item.type)|\(index)"
+                
+                `switch`.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
+                
+                label.text = item.label1Text
                 
             }else {
                 
@@ -268,8 +324,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                       let label2 = cell.viewWithTag(2) as? UILabel ,
                       let imageView = cell.viewWithTag(3) as? UIImageView else {return cell}
                 
-                label1.text = "Стоимость за 1 ед."
-                label2.text = "30 руб"
+                label1.text = item.label1Text
+                label2.text = item.value
                 
                 label2.textColor = .systemGray
                 
@@ -486,6 +542,254 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
+        }else if section == 5{
+            
+            let item = thirdSectionItemsForPosrednik[index]
+            
+            if !item.hasSwitch{
+                
+                let alertController = UIAlertController(title: "Редактировать \(item.label1Text.lowercased())", message: nil, preferredStyle: .alert)
+                
+                alertController.addTextField { textField in
+                    
+                    textField.placeholder = item.value
+                    
+                    if item.type == "12"{
+                        textField.keyboardType = .numberPad
+                    }
+                    
+                }
+                
+                alertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { [self] _ in
+                    
+                    if let newValue = alertController.textFields?[0].text {
+                        
+                        brokersUpdateInfoDataManager.getBrokersUpdateInfoData(key: key!, type: item.type, value: newValue) { data, error in
+                            
+                            if error != nil , data == nil {
+                                print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                                return
+                            }
+                            
+                            if data!["result"].intValue == 1{
+                                
+                                thirdSectionItemsForPosrednik[index].value = newValue
+                                
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
+                                
+                            }else {
+                                
+                                if let message = data!["msg"].string{
+                                    
+                                    showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                
+                present(alertController, animated: true, completion: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    func orgCellTapped(indexPath : IndexPath){
+        
+        let section = indexPath.section
+        let index = indexPath.row
+        
+        if section == 1{
+            
+            let item = firstSectionItemsForOrg[index]
+            
+            if item.imageName == "pencil"{
+                
+                let alertController = UIAlertController(title: "Редактировать \(item.label1Text.lowercased())", message: nil, preferredStyle: .alert)
+                
+                alertController.addTextField { textField in
+                    textField.placeholder = item.label2Text
+                }
+                
+                alertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { [self] _ in
+                    
+                    if let newValue = alertController.textFields?[0].text {
+                        
+                        brokersUpdateInfoDataManager.getBrokersUpdateInfoData(key: key!, type: item.type, value: newValue) { data, error in
+                            
+                            if error != nil , data == nil {
+                                print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                                return
+                            }
+                            
+                            if data!["result"].intValue == 1{
+                                
+                                firstSectionItemsForOrg[index].label2Text = newValue
+                                
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
+                                
+                            }else {
+                                
+                                if let message = data!["msg"].string{
+                                    
+                                    showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                
+                present(alertController, animated: true, completion: nil)
+                
+            }
+            
+        }else if section == 3{
+            
+            let item = secondSectionItemsForOrg[index]
+            
+            if item.imageName == "pencil"{
+                
+                if item.type == "10"{//Пересылка
+                    
+                    BrokersGetDeliveryTypeDataManager().getBrokersGetDeliveryTypeData(key: key!) { data, error in
+                        
+                        DispatchQueue.main.async { [self] in
+                            
+                            if error != nil , data == nil {
+                                print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                                return
+                            }
+                            
+                            if data!["result"].intValue == 1{
+                                
+                                guard let deliveryList = data!["delivery_list"].array else {return}
+                                
+                                let sheetAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                                
+                                for deliveryItem in deliveryList{
+                                    
+                                    sheetAlertController.addAction(UIAlertAction(title: deliveryItem["name"].stringValue, style: .default, handler: { _ in
+                                        
+                                        let newValue = deliveryItem["id"].stringValue
+                                        
+                                        self.brokersUpdateInfoDataManager.getBrokersUpdateInfoData(key: self.key!, type: item.type, value: newValue) { data, error in
+                                            
+                                            if error != nil , data == nil {
+                                                print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                                                return
+                                            }
+                                            
+                                            if data!["result"].intValue == 1{
+                                                
+                                                self.secondSectionItemsForOrg[index].label2Text = deliveryItem["name"].stringValue
+                                                
+                                                DispatchQueue.main.async {
+                                                    self.tableView.reloadData()
+                                                }
+                                                
+                                            }else {
+                                                
+                                                if let message = data!["msg"].string{
+                                                    
+                                                    DispatchQueue.main.async {
+                                                        self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                                    }
+                                                    
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }))
+                                    
+                                }
+                                
+                                sheetAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                
+                                DispatchQueue.main.async {
+                                    self.present(sheetAlertController, animated: true, completion: nil)
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }else{
+                    
+                    let alertController = UIAlertController(title: "Редактировать \(item.label1Text.lowercased())", message: nil, preferredStyle: .alert)
+                    
+                    alertController.addTextField { textField in
+                        textField.placeholder = item.label2Text
+                    }
+                    
+                    alertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { [self] _ in
+                        
+                        if let newValue = alertController.textFields?[0].text {
+                            
+                            brokersUpdateInfoDataManager.getBrokersUpdateInfoData(key: key!, type: item.type, value: newValue) { data, error in
+                                
+                                if error != nil , data == nil {
+                                    print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                                    return
+                                }
+                                
+                                if data!["result"].intValue == 1{
+                                    
+                                    secondSectionItemsForOrg[index].label2Text = newValue
+                                    
+                                    DispatchQueue.main.async {
+                                        self.tableView.reloadData()
+                                    }
+                                    
+                                }else {
+                                    
+                                    if let message = data!["msg"].string{
+                                        
+                                        DispatchQueue.main.async {
+                                            self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }))
+                    
+                    alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                    
+                    present(alertController, animated: true, completion: nil)
+                    
+                }
+                
+            }
+            
         }
         
     }
@@ -525,7 +829,9 @@ extension NastroykiPosrednikaTableViewController : UITextFieldDelegate{
                     
                     if let message = data!["msg"].string{
                         
-                        showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                        DispatchQueue.main.async {
+                            self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                        }
                         
                     }
                     
@@ -569,6 +875,17 @@ extension NastroykiPosrednikaTableViewController {
         
     }
     
+    private struct ThirdSectionForPosrednikItem{
+        
+        var label1Text : String
+        
+        var type : String
+        var value : String
+        
+        var hasSwitch : Bool = false
+        
+    }
+    
 }
 
 //MARK: - BrokersFormDataManagerDelegate
@@ -603,12 +920,24 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
             
             firstSectionItemsForPosrednik = newFirstSectionItemsForPosrednik
             
+            var newThirdSectionItemsForPosrednik = [ThirdSectionForPosrednikItem]()
+            
+            if let defectCheck = brokerProfile["defect_check"].string{
+                newThirdSectionItemsForPosrednik.append(ThirdSectionForPosrednikItem(label1Text: "Активность услуги", type: "11", value: defectCheck, hasSwitch: true))
+            }
+            
+            if let defectPrice = brokerProfile["defect_price"].string{
+                newThirdSectionItemsForPosrednik.append(ThirdSectionForPosrednikItem(label1Text: "Стоимость за 1 ед.", type: "12", value: defectPrice))
+            }
+            
+            thirdSectionItemsForPosrednik = newThirdSectionItemsForPosrednik
+            
             //ORG Stuff
             
             var newFirstSectionItemsForOrg = [FirstSectionItem]()
             
             if let orgPhone = brokerProfile["phone_org"].string{
-                newFirstSectionItemsForOrg.append(FirstSectionItem(label1Text: "Телефон", label2Text: orgPhone, type: "01"))
+                newFirstSectionItemsForOrg.append(FirstSectionItem(label1Text: "Телефон", label2Text: orgPhone, imageName: "pencil", type: "01"))
             }
             
             firstSectionItemsForOrg = newFirstSectionItemsForOrg
