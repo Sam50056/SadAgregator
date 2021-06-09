@@ -202,7 +202,9 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
                 textField.text = item.label2Text
                 
-                textField.delegate = nil
+                textField.restorationIdentifier = "\(item.type)|\(index)*"
+                
+                textField.delegate = self
                 
             }else{
                 
@@ -500,7 +502,7 @@ extension NastroykiPosrednikaTableViewController : UITextFieldDelegate{
             
             let typeLastIndex = fieldId.firstIndex(of: "|")
             let type = String(fieldId[fieldId.startIndex..<typeLastIndex!])
-            let index = String(fieldId[typeLastIndex!..<fieldId.endIndex]).replacingOccurrences(of: "|", with: "")
+            let index = String(fieldId[typeLastIndex!..<fieldId.endIndex]).replacingOccurrences(of: "|", with: "").replacingOccurrences(of: "*", with: "")
             
             print("Type : \(type) and Index : \(index)")
             
@@ -513,7 +515,11 @@ extension NastroykiPosrednikaTableViewController : UITextFieldDelegate{
                 
                 if data!["result"].intValue == 1{
                     
-                    secondSectionItemsForOrg[Int(index)!].value = value
+                    if fieldId.contains("*"){
+                        firstSectionItemsForPosrednik[Int(index)!].label2Text = value
+                    }else{
+                        secondSectionItemsForOrg[Int(index)!].value = value
+                    }
                     
                 }else {
                     
