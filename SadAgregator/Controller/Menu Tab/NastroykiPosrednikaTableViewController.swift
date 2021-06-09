@@ -48,8 +48,6 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     private lazy var brokersUpdateInfoDataManager = BrokersUpdateInfoDataManager()
     
-    private var dopInfoText = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -159,6 +157,10 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
+        if isPosrednikTab{
+            posrednikCellTapped(indexPath: indexPath)
+        }
+        
     }
     
     //MARK:- Cells SetUp
@@ -194,11 +196,13 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 guard let label = cell.viewWithTag(1) as? UILabel ,
                       let textField = cell.viewWithTag(2) as? UITextField else {return cell}
                 
-                label.text = "Дополнительная информация"
+                label.text = item.label1Text
                 
                 textField.placeholder = "Некоторая информация"
                 
-                textField.text = dopInfoText
+                textField.text = item.label2Text
+                
+                textField.delegate = nil
                 
             }else{
                 
@@ -422,6 +426,68 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
     }
     
+    func posrednikCellTapped(indexPath : IndexPath){
+        
+        let section = indexPath.section
+        let index = indexPath.row
+        
+        if section == 1{
+            
+            let item = firstSectionItemsForPosrednik[index]
+            
+            if item.imageName == "pencil"{
+                
+                let alertController = UIAlertController(title: "Редактировать \(item.label1Text.lowercased())", message: nil, preferredStyle: .alert)
+                
+                alertController.addTextField { textField in
+                    textField.placeholder = item.label2Text
+                }
+                
+                alertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { [self] _ in
+                    
+                    if let newValue = alertController.textFields?[0].text {
+                        
+                        brokersUpdateInfoDataManager.getBrokersUpdateInfoData(key: key!, type: item.type, value: newValue) { data, error in
+                            
+                            if error != nil , data == nil {
+                                print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                                return
+                            }
+                            
+                            if data!["result"].intValue == 1{
+                                
+                                firstSectionItemsForPosrednik[index].label2Text = newValue
+                                
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
+                                
+                            }else {
+                                
+                                if let message = data!["msg"].string{
+                                    
+                                    showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                
+                present(alertController, animated: true, completion: nil)
+                
+            }
+            
+        }
+        
+    }
+    
 }
 
 //MARK:- TextField Stuff
@@ -449,6 +515,14 @@ extension NastroykiPosrednikaTableViewController : UITextFieldDelegate{
                     
                     secondSectionItemsForOrg[Int(index)!].value = value
                     
+                }else {
+                    
+                    if let message = data!["msg"].string{
+                        
+                        showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                        
+                    }
+                    
                 }
                 
             }
@@ -469,6 +543,8 @@ extension NastroykiPosrednikaTableViewController {
         var label2Text : String
         
         var imageName = "info.circle"
+        
+        var type : String
         
         var isDopInfo : Bool = false
         
@@ -504,20 +580,20 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
             //Posrednik Stuff
             
             if let partnerCode = brokerProfile["partner_code"].string {
-                newFirstSectionItemsForPosrednik.append(FirstSectionItem(label1Text: "Код партнера", label2Text: partnerCode))
+                newFirstSectionItemsForPosrednik.append(FirstSectionItem(label1Text: "Код партнера", label2Text: partnerCode, type: "17"))
             }
             
             if let phone = brokerProfile["phone_broker"].string{
-                newFirstSectionItemsForPosrednik.append(FirstSectionItem(label1Text: "Телефон", label2Text: phone, imageName: "pencil"))
+                newFirstSectionItemsForPosrednik.append(FirstSectionItem(label1Text: "Телефон", label2Text: phone, imageName: "pencil", type: "02"))
             }
             
             if let rekviziti = brokerProfile["card4"].string{
-                newFirstSectionItemsForPosrednik.append(FirstSectionItem(label1Text: "Реквизиты для оплаты", label2Text: rekviziti, imageName: "pencil"))
+                newFirstSectionItemsForPosrednik.append(FirstSectionItem(label1Text: "Реквизиты для оплаты", label2Text: rekviziti, imageName: "pencil", type: "03"))
             }
             
-            newFirstSectionItemsForPosrednik.append(FirstSectionItem(label1Text: "Дополнительная информация", label2Text: "", isDopInfo: true))
-            
-            dopInfoText = brokerProfile["broker_terms"].stringValue
+            if let dopInfo = brokerProfile["broker_terms"].string{
+                newFirstSectionItemsForPosrednik.append(FirstSectionItem(label1Text: "Дополнительная информация", label2Text: dopInfo, type: "09", isDopInfo: true))
+            }
             
             firstSectionItemsForPosrednik = newFirstSectionItemsForPosrednik
             
@@ -526,7 +602,7 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
             var newFirstSectionItemsForOrg = [FirstSectionItem]()
             
             if let orgPhone = brokerProfile["phone_org"].string{
-                newFirstSectionItemsForOrg.append(FirstSectionItem(label1Text: "Телефон", label2Text: orgPhone))
+                newFirstSectionItemsForOrg.append(FirstSectionItem(label1Text: "Телефон", label2Text: orgPhone, type: "01"))
             }
             
             firstSectionItemsForOrg = newFirstSectionItemsForOrg
