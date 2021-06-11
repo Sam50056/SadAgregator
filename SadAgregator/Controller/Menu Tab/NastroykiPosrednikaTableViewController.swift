@@ -59,6 +59,14 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
         brokersFormDataManager.delegate = self
         
+        update()
+        
+    }
+    
+    //MARK: - Functions
+    
+    func update(){
+        
         if let key = key{
             brokersFormDataManager.getBrokersFormData(key: key)
         }
@@ -110,7 +118,13 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     @IBAction func dobavitNacenkuPressedInOrg(_ sender : Any){
         
+        let createDiapazonVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateDiapazonVC") as! CreateDiapazonViewController
         
+        createDiapazonVC.createdDiapazon = { [self] in
+            update()
+        }
+        
+        navigationController?.pushViewController(createDiapazonVC, animated: true)
         
     }
     
@@ -269,6 +283,66 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         }
         
         return defaultHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        guard !isPosrednikTab , indexPath.section == 5 else {return nil}
+        
+        let editAction = UIContextualAction(style: .normal, title: nil) { [self] action, view, completion in
+            
+            let createDiapazonVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateDiapazonVC") as! CreateDiapazonViewController
+            
+            createDiapazonVC.createdDiapazon = { [self] in
+                update()
+            }
+            
+            createDiapazonVC.thisZone = zonesForOrg[indexPath.row]
+            
+            navigationController?.pushViewController(createDiapazonVC, animated: true)
+            
+            completion(true)
+            
+        }
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [self] action, view, completion in
+            
+            let zone = zonesForOrg[indexPath.row]
+            
+            PurchasesDelZonePriceDataManager().getPurchasesDelZonePriceData(key: key!, zoneId: zone.id) { data, error in
+                
+                if let error = error , data == nil {
+                    print("Error with purchasesDelZonePriceDataManager : \(error)")
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                if data["result"].intValue == 1{
+                    
+                    DispatchQueue.main.async { [self] in
+                        
+                        zonesForOrg.remove(at: indexPath.row)
+                        
+                        completion(true)
+                        
+                        tableView.reloadSections([5], with: .automatic)
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        editAction.backgroundColor = .gray
+        editAction.image = UIImage(systemName: "pencil")
+        
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction,editAction])
+        
     }
     
     //MARK:- Cells SetUp
@@ -530,6 +604,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             (cell.viewWithTag(2) as! UIButton).isHidden = false
             
             (cell.viewWithTag(2) as! UIButton).setTitle("Добавить наценку", for: .normal)
+            
+            (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitNacenkuPressedInOrg(_:)), for: .touchUpInside)
             
         }else if section == 5{
             
@@ -984,17 +1060,6 @@ extension NastroykiPosrednikaTableViewController {
         var hasSwitch : Bool = false
         
     }
-    
-    private struct PurchaseZone{
-       
-       let id : String
-       let from : String
-       let to : String
-       let marge : String
-       let fix : String
-       let trunc : String
-       
-   }
     
 }
 

@@ -23,20 +23,20 @@ class CenovieDiapazoniViewController: UIViewController {
     var doneChanges : (() -> Void)?
     
     var hasDoneChanges = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            key = "part_2_test"
-            
-            purchasesZonesPriceDataManager.delegate = self
-            
-            update()
-            
-            tableView.delegate = self
-            tableView.dataSource = self
-            
-        }
+        key = "part_2_test"
+        
+        purchasesZonesPriceDataManager.delegate = self
+        
+        update()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -252,17 +252,13 @@ extension CenovieDiapazoniViewController : PurchasesZonesPriceDataManagerDelegat
 
 //MARK: - Zone
 
-extension CenovieDiapazoniViewController {
+struct PurchaseZone{
     
-     struct PurchaseZone{
-        
-        let id : String
-        let from : String
-        let to : String
-        let marge : String
-        let fix : String
-        let trunc : String
-        
-    }
+    let id : String
+    let from : String
+    let to : String
+    let marge : String
+    let fix : String
+    let trunc : String
     
 }

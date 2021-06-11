@@ -29,7 +29,7 @@ class CreateDiapazonViewController: UIViewController {
     
     private var key = ""
     
-    var thisZone : CenovieDiapazoniViewController.PurchaseZone?
+    var thisZone : PurchaseZone?
     
     var createdDiapazon : (() -> ())?
     
