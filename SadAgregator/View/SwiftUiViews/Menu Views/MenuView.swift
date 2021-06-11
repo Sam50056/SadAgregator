@@ -294,7 +294,7 @@ struct MenuView: View {
                         
                         Section{
                             
-                            NavigationLink(destination: NastroykiPosrednikaView() , isActive: $menuViewModel.showNastroykiPosrednikaView){
+                            NavigationLink(destination: NastroykiPosrednikaView().navigationTitle("Настройки посредника") , isActive: $menuViewModel.showNastroykiPosrednikaView){
                                 
                                 HStack(spacing: 16){
                                     
