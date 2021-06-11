@@ -46,6 +46,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     private var thirdSectionItemsForPosrednik = [ThirdSectionForPosrednikItem]()
     
+    private var zonesForOrg = [PurchaseZone]()
+    
     private var brokersFormDataManager = BrokersFormDataManager()
     
     private lazy var brokersUpdateInfoDataManager = BrokersUpdateInfoDataManager()
@@ -103,6 +105,12 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             }
             
         }
+        
+    }
+    
+    @IBAction func dobavitNacenkuPressedInOrg(_ sender : Any){
+        
+        
         
     }
     
@@ -178,7 +186,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             case 4: return 1
                 
-            case 5: return 1
+            case 5: return zonesForOrg.count
                 
             default: return 0
                 
@@ -208,6 +216,59 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             orgCellTapped(indexPath: indexPath)
         }
         
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let section = indexPath.section
+        let index = indexPath.row
+        
+        let defaultHeight : CGFloat = 50
+        
+        if isPosrednikTab{
+            
+            switch section {
+            case 0: return 70
+            case 1:
+                
+                if firstSectionItemsForPosrednik[index].isDopInfo{
+                    return 95
+                }
+                
+            default:
+                return defaultHeight
+            }
+            
+        }else{
+            
+            switch section {
+            case 0: return 70
+            case 3:
+                
+                if secondSectionItemsForOrg[index].label2Text == ""{
+                    return 95
+                }
+            case 5:
+                
+                if !zonesForOrg.isEmpty{
+                    
+                    let zone = zonesForOrg[indexPath.row]
+                    
+                    if zone.marge.contains("%"){
+                        return 150
+                    }else{
+                        return 115
+                    }
+                    
+                }
+                
+            default:
+                return defaultHeight
+            }
+            
+        }
+        
+        return defaultHeight
     }
     
     //MARK:- Cells SetUp
@@ -472,11 +533,49 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
         }else if section == 5{
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
-            
-            guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
-            
-            label.text = "Вы не добавляли наценки"
+            if zonesForOrg.isEmpty{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+                
+                label.text = "Вы не добавляли наценки"
+                
+            }else{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "diapazonCell", for: indexPath)
+                
+                if let otLabel = cell.viewWithTag(1) as? UILabel ,
+                   let doLabel = cell.viewWithTag(2) as? UILabel,
+                   let nacenkaLabel = cell.viewWithTag(3) as? UILabel,
+                   let okruglenieLabel = cell.viewWithTag(4) as? UILabel ,
+                   let fixNadbavkaLabel = cell.viewWithTag(5) as? UILabel ,
+                   let fixNadbavkaTextLabel = cell.viewWithTag(6) as? UILabel{
+                    
+                    let zone = zonesForOrg[indexPath.row]
+                    
+                    otLabel.text = zone.from + " руб."
+                    
+                    doLabel.text = zone.to + " руб."
+                    
+                    nacenkaLabel.text = zone.marge
+                    
+                    okruglenieLabel.text = zone.trunc
+                    
+                    if zone.marge.contains("%"){
+                        fixNadbavkaTextLabel.isHidden = false
+                        fixNadbavkaLabel.isHidden = false
+                        fixNadbavkaLabel.text = zone.fix
+                    }else{
+                        fixNadbavkaTextLabel.isHidden = true
+                        fixNadbavkaLabel.text = ""
+                        fixNadbavkaLabel.isHidden = true
+                    }
+                    
+                    
+                }
+                
+            }
             
         }
         
@@ -886,6 +985,17 @@ extension NastroykiPosrednikaTableViewController {
         
     }
     
+    private struct PurchaseZone{
+       
+       let id : String
+       let from : String
+       let to : String
+       let marge : String
+       let fix : String
+       let trunc : String
+       
+   }
+    
 }
 
 //MARK: - BrokersFormDataManagerDelegate
@@ -931,6 +1041,17 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
             }
             
             thirdSectionItemsForPosrednik = newThirdSectionItemsForPosrednik
+            
+            let jsonZones = brokerProfile["zones_sp"].arrayValue
+            var newZones = [PurchaseZone]()
+            for jsonZone in jsonZones{
+                
+                let zone = PurchaseZone(id: jsonZone["zone_id"].stringValue, from: jsonZone["from"].stringValue, to: jsonZone["to"].stringValue, marge: jsonZone["marge"].stringValue, fix: jsonZone["fix"].stringValue, trunc: jsonZone["trunc"].stringValue)
+                
+                newZones.append(zone)
+                
+            }
+            zonesForOrg = newZones
             
             //ORG Stuff
             
