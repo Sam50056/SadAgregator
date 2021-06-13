@@ -5026,7 +5026,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZL4-V5-4YT">
+                                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZL4-V5-4YT">
                                             <rect key="frame" x="20" y="39" width="350" height="34"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="34" id="Q55-3E-Pym"/>
@@ -5034,15 +5034,25 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLN-qe-pKo">
+                                            <rect key="frame" x="20" y="73" width="350" height="2"/>
+                                            <color key="backgroundColor" name="gray"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="2" id="4ng-Yh-FYi"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" name="whiteblack"/>
                                     <constraints>
                                         <constraint firstItem="0Gs-IU-077" firstAttribute="top" secondItem="haN-u0-odb" secondAttribute="topMargin" id="7Wq-yZ-YwK"/>
                                         <constraint firstItem="ZL4-V5-4YT" firstAttribute="top" secondItem="0Gs-IU-077" secondAttribute="bottom" constant="10" id="8aN-JA-k2E"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="ZL4-V5-4YT" secondAttribute="trailing" id="D4g-mG-9kb"/>
+                                        <constraint firstItem="pLN-qe-pKo" firstAttribute="leading" secondItem="haN-u0-odb" secondAttribute="leadingMargin" id="Y6b-v5-AZV"/>
                                         <constraint firstItem="ZL4-V5-4YT" firstAttribute="leading" secondItem="haN-u0-odb" secondAttribute="leadingMargin" id="gH2-Ft-DhM"/>
+                                        <constraint firstItem="pLN-qe-pKo" firstAttribute="top" secondItem="ZL4-V5-4YT" secondAttribute="bottom" id="jCI-1Y-yyJ"/>
                                         <constraint firstItem="0Gs-IU-077" firstAttribute="leading" secondItem="haN-u0-odb" secondAttribute="leadingMargin" id="mpE-u4-C1V"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="ZL4-V5-4YT" secondAttribute="bottom" constant="8" id="sIO-qu-ZrR"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="pLN-qe-pKo" secondAttribute="trailing" id="xfS-mn-H6p"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="whiteblack"/>
@@ -5320,11 +5330,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="zeroSectionCell" id="Hfm-de-wxH">
-                                <rect key="frame" x="0.0" y="181.00000190734863" width="390" height="43.666667938232422"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="zeroSectionCell" rowHeight="58" id="Hfm-de-wxH">
+                                <rect key="frame" x="0.0" y="181.00000190734863" width="390" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hfm-de-wxH" id="Wh9-C9-Kor">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="58"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYX-Y6-e2e">
@@ -5349,7 +5359,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aq6-QA-pnh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5394" y="2400"/>
+            <point key="canvasLocation" x="5393.8461538461534" y="2400"/>
         </scene>
         <!--Favorite Posts View Controller-->
         <scene sceneID="9fG-Vg-xsa">
