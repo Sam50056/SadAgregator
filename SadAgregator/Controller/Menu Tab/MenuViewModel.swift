@@ -39,6 +39,8 @@ class MenuViewModel : ObservableObject{
     
     @Published var showNastroykiPosrednikaView = false
     
+    @Published var showNastroykiPostavshika = false
+    
     @Published var showAlert = false
     
     init() {

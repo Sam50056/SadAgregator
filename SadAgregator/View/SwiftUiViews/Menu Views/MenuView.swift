@@ -294,20 +294,41 @@ struct MenuView: View {
                         
                         Section{
                             
-                            NavigationLink(destination: NastroykiPosrednikaView().navigationTitle("Настройки посредника") , isActive: $menuViewModel.showNastroykiPosrednikaView){
+                            List{
                                 
-                                HStack(spacing: 16){
+                                NavigationLink(destination: NastroykiPostavshikaView().navigationTitle("Настройки поставщика") , isActive: $menuViewModel.showNastroykiPostavshika){
                                     
-                                    Image(systemName: "folder.badge.person.crop")
-                                        .resizable()
-                                        .frame(width: 30, height: 20, alignment: .center)
-                                        .foregroundColor(Color(.systemBlue))
-                                    
-                                    Text("Настройки посредника")
-                                        .font(.custom("", size: 16))
+                                    HStack(spacing: 16){
+                                        
+                                        Image(systemName: "externaldrive.badge.person.crop")
+                                            .resizable()
+                                            .frame(width: 30, height: 20, alignment: .center)
+                                            .foregroundColor(Color(.systemBlue))
+                                        
+                                        Text("Настройки поставщика")
+                                            .font(.custom("", size: 16))
+                                        
+                                    }
+                                    .padding(.vertical, 5)
                                     
                                 }
-                                .padding(.vertical, 5)
+                                
+                                NavigationLink(destination: NastroykiPosrednikaView().navigationTitle("Настройки посредника") , isActive: $menuViewModel.showNastroykiPosrednikaView){
+                                    
+                                    HStack(spacing: 16){
+                                        
+                                        Image(systemName: "folder.badge.person.crop")
+                                            .resizable()
+                                            .frame(width: 30, height: 20, alignment: .center)
+                                            .foregroundColor(Color(.systemBlue))
+                                        
+                                        Text("Настройки посредника")
+                                            .font(.custom("", size: 16))
+                                        
+                                    }
+                                    .padding(.vertical, 5)
+                                    
+                                }
                                 
                             }
                             
