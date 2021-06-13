@@ -5350,6 +5350,50 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="labelTextFieldCell" rowHeight="92" id="fer-91-6Ch">
+                                <rect key="frame" x="0.0" y="239.00000190734863" width="390" height="92"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fer-91-6Ch" id="viX-PB-d8c">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="92"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дополнительная информация" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRL-yG-JdV">
+                                            <rect key="frame" x="20" y="11" width="239" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WbW-t5-kKt">
+                                            <rect key="frame" x="20" y="39" width="350" height="34"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="34" id="I6Z-gh-hDo"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZc-4C-On2">
+                                            <rect key="frame" x="20" y="73" width="350" height="2"/>
+                                            <color key="backgroundColor" name="gray"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="2" id="6tn-kl-tPn"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" name="whiteblack"/>
+                                    <constraints>
+                                        <constraint firstItem="xZc-4C-On2" firstAttribute="leading" secondItem="viX-PB-d8c" secondAttribute="leadingMargin" id="9oH-Yw-Nsn"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="WbW-t5-kKt" secondAttribute="trailing" id="MiL-IE-iLG"/>
+                                        <constraint firstItem="xZc-4C-On2" firstAttribute="top" secondItem="WbW-t5-kKt" secondAttribute="bottom" id="OXl-u4-FJa"/>
+                                        <constraint firstItem="WbW-t5-kKt" firstAttribute="top" secondItem="HRL-yG-JdV" secondAttribute="bottom" constant="10" id="dOy-au-71l"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="xZc-4C-On2" secondAttribute="trailing" id="fCk-SZ-Q3V"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="WbW-t5-kKt" secondAttribute="bottom" constant="8" id="gkY-GF-XFu"/>
+                                        <constraint firstItem="HRL-yG-JdV" firstAttribute="leading" secondItem="viX-PB-d8c" secondAttribute="leadingMargin" id="i9K-ib-qvB"/>
+                                        <constraint firstItem="WbW-t5-kKt" firstAttribute="leading" secondItem="viX-PB-d8c" secondAttribute="leadingMargin" id="rKs-7u-2OK"/>
+                                        <constraint firstItem="HRL-yG-JdV" firstAttribute="top" secondItem="viX-PB-d8c" secondAttribute="topMargin" id="vTl-I3-2Ig"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" name="whiteblack"/>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="79M-dI-LtV" id="XHy-ce-yb9"/>

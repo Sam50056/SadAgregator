@@ -37,9 +37,12 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
     
     var key : String?
     
+    private var capt : String?
+    
     private var firstSectionItems = [FirstSectionItem]()
     
     private var vendFormDataManager = VendFormDataManager()
+    private lazy var vendUpdateInfoDataManager = VendUpdateInfoDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +75,7 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
         
         switch section {
         case 0:
-            return 1
+            return capt == nil ? 0 : 1
         case 1:
             return firstSectionItems.count
         case 2:
@@ -102,7 +105,7 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
             
             guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
 
-            label.text = "22-155"
+            label.text = capt!
             label.font = UIFont.boldSystemFont(ofSize: 23)
             
         }else if section == 1{
@@ -126,7 +129,7 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
                 
                 textField.restorationIdentifier = "\(item.type)|\(index)*"
                 
-                //                textField.delegate = self
+                textField.delegate = self
                 
             }else{
                 
@@ -171,7 +174,112 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let index = indexPath.row
+        let section = indexPath.section
+        
+        if section == 1{
+            
+            let item = firstSectionItems[index]
+            
+            if item.imageName == "pencil"{
+                
+                let alertController = UIAlertController(title: "Редактировать \(item.label1Text.lowercased())", message: nil, preferredStyle: .alert)
+                
+                alertController.addTextField { textField in
+                    textField.placeholder = item.label2Text
+                }
+                
+                alertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { [self] _ in
+                    
+                    if let newValue = alertController.textFields?[0].text {
+                        
+                        vendUpdateInfoDataManager.getVendUpdateInfoData(key: key!, type: item.type, value: newValue) { [self] data, error in
+                            
+                            if error != nil , data == nil {
+                                print("Erorr with VendUpdateInfoDataManager : \(error!)")
+                                return
+                            }
+                            
+                            if data!["result"].intValue == 1{
+                                
+                                firstSectionItems[index].label2Text = newValue + (item.type == "3" ? " руб." : "")
+                                
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
+                                
+                            }else {
+                                
+                                if let message = data!["msg"].string{
+                                    
+                                    showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                
+                present(alertController, animated: true, completion: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
+//MARK:- UITextField
+
+extension NastroykiPostavshikaTableViewController : UITextFieldDelegate{
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if let value = textField.text , let key = key , let fieldId = textField.restorationIdentifier {
+            
+            let typeLastIndex = fieldId.firstIndex(of: "|")
+            let type = String(fieldId[fieldId.startIndex..<typeLastIndex!])
+            let index = String(fieldId[typeLastIndex!..<fieldId.endIndex]).replacingOccurrences(of: "|", with: "").replacingOccurrences(of: "*", with: "")
+            
+            print("Type : \(type) and Index : \(index)")
+            
+            vendUpdateInfoDataManager.getVendUpdateInfoData(key: key, type: type, value: value) { [self] data, error in
+                
+                if error != nil , data == nil {
+                    print("Erorr with VendUpdateInfoDataManager : \(error!)")
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    firstSectionItems[Int(index)!].label2Text = value
+                    
+                }else {
+                    
+                    if let message = data!["msg"].string{
+                        
+                        DispatchQueue.main.async {
+                            self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
     }
     
 }
@@ -207,6 +315,8 @@ extension NastroykiPostavshikaTableViewController : VendFormDataManagerDelegate{
                 
                 let vendInfo = data["vend_info"]
                 
+                capt = vendInfo["point_capt"].string
+                
                 var newFirstSectionItems = [FirstSectionItem]()
                 
                 if let phone = vendInfo["phone"].string{
@@ -214,11 +324,15 @@ extension NastroykiPostavshikaTableViewController : VendFormDataManagerDelegate{
                 }
                 
                 if let minOrderDef = vendInfo["min_order_def"].string{
-                    newFirstSectionItems.append(FirstSectionItem(label1Text: "Минимальный заказ", label2Text: minOrderDef, type: "3"))
+                    newFirstSectionItems.append(FirstSectionItem(label1Text: "Минимальный заказ", label2Text: minOrderDef + " руб.", imageName : "pencil" , type: "3"))
                 }
                 
                 if let card4 = vendInfo["card4"].string{
-                    newFirstSectionItems.append(FirstSectionItem(label1Text: "Номер карты", label2Text: card4, type: "4"))
+                    newFirstSectionItems.append(FirstSectionItem(label1Text: "Номер карты", label2Text: card4,imageName : "pencil" , type: "4"))
+                }
+                
+                if let dopInfo = vendInfo["dop_info"].string{
+                    newFirstSectionItems.append(FirstSectionItem(label1Text: "Дополнительная информация", label2Text: dopInfo.replacingOccurrences(of: "<br>", with: "\n"), type: "5", isDopInfo: true))
                 }
                 
                 firstSectionItems = newFirstSectionItems
