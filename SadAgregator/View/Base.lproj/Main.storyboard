@@ -5344,6 +5344,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" name="whiteblack"/>
                                     <constraints>
                                         <constraint firstItem="QYX-Y6-e2e" firstAttribute="top" secondItem="Wh9-C9-Kor" secondAttribute="topMargin" constant="6" id="BUn-Mh-937"/>
                                         <constraint firstItem="QYX-Y6-e2e" firstAttribute="leading" secondItem="Wh9-C9-Kor" secondAttribute="leadingMargin" id="Wch-rW-us1"/>

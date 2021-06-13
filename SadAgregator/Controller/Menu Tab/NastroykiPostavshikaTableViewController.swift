@@ -167,6 +167,16 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
             
             label.text = "Вы не добавляли способов отправки"
             
+        }else if section == 4{
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
+            
+            (cell.viewWithTag(1) as! UILabel).text = "Система прямого выкупа"
+            
+            (cell.viewWithTag(2) as! UIButton).isHidden = true
+            
+            //            (cell.viewWithTag(2) as! UIButton).setTitle("Добавить", for: .normal)
+            
         }
         
         return cell
