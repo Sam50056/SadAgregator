@@ -455,6 +455,7 @@ extension DobavlenieVZakupkuViewController {
     @IBAction func removeClientForReplacePressed(_ sender : Any){
         
         clientForReplce = nil
+        replaceTovarId = nil
         
         makeKlientiCellItemsArray()
         
@@ -1140,6 +1141,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     let vibratKlientaVC = VibratKlientaViewController()
                     
                     vibratKlientaVC.isForReplace = true
+                    vibratKlientaVC.zakupkaId = selectedZakupka?.id
                     
                     vibratKlientaVC.clientSelected = { [self] name , id in
                         
@@ -1165,6 +1167,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     let zamenaDlyaVC = ZamenaDlyaTableViewController()
                     
                     zamenaDlyaVC.thisClientId = clientForReplce!.id
+                    zamenaDlyaVC.zakupkaId = selectedZakupka?.id
                     
                     zamenaDlyaVC.tovarSelected = { [self] pid in
                         print("Selected tovar pid : \(pid)")

@@ -16,6 +16,7 @@ class ZamenaDlyaTableViewController: UITableViewController {
     private var key = ""
     
     var thisClientId : String?
+    var zakupkaId : String?
     
     private var purchasesProdsByClientDataManager = PurchasesProdsByClientDataManager()
     
@@ -38,7 +39,7 @@ class ZamenaDlyaTableViewController: UITableViewController {
         tableView.allowsSelection = false
         
         if let id = thisClientId{
-            purchasesProdsByClientDataManager.getPurchasesProdsByClientData(key: key, clientId: id, purSYSID: "1")
+            purchasesProdsByClientDataManager.getPurchasesProdsByClientData(key: key, clientId: id, purSYSID: zakupkaId ?? "")
         }
         
     }
@@ -155,7 +156,7 @@ extension ZamenaDlyaTableViewController{
             rowForPaggingUpdate += 16
             
             if let id = thisClientId{
-                purchasesProdsByClientDataManager.getPurchasesProdsByClientData(key: key, clientId: id, purSYSID: "1", page: page)
+                purchasesProdsByClientDataManager.getPurchasesProdsByClientData(key: key, clientId: id, purSYSID: zakupkaId ?? "", page: page)
             }
             
             print("Done a request for page: \(page)")

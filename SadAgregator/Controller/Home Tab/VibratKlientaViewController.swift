@@ -28,6 +28,7 @@ class VibratKlientaViewController: UITableViewController{
     var clientSelected : ((String , String) -> ())?
     
     var isForReplace : Bool = false
+    var zakupkaId : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,7 @@ class VibratKlientaViewController: UITableViewController{
         
         purchasesClientsSelectListDataManager.delegate = self
         
-        purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, forReplace: isForReplace, isInZakupka: true)
+        purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, forReplace: isForReplace, zakupkaId: zakupkaId ?? "")
         
     }
     
@@ -104,7 +105,7 @@ extension VibratKlientaViewController : UISearchResultsUpdating{
             page = 1
             rowForPaggingUpdate = 15
             
-            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, query: searchText, forReplace: isForReplace, isInZakupka: true)
+            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, query: searchText, forReplace: isForReplace, zakupkaId: zakupkaId ?? "")
             
         }else{
             
@@ -113,7 +114,7 @@ extension VibratKlientaViewController : UISearchResultsUpdating{
             page = 1
             rowForPaggingUpdate = 15
             
-            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, forReplace: isForReplace, isInZakupka: true)
+            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, forReplace: isForReplace, zakupkaId: zakupkaId ?? "")
             
         }
         
@@ -164,7 +165,7 @@ extension VibratKlientaViewController{
             
             rowForPaggingUpdate += 16
             
-            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, query: searchController.searchBar.text ?? "", forReplace: isForReplace, isInZakupka: true)
+            purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, query: searchController.searchBar.text ?? "", forReplace: isForReplace, zakupkaId: zakupkaId ?? "")
             
             print("Done a request for page: \(page)")
             
