@@ -4455,6 +4455,7 @@
                         <outlet property="inRublesButton" destination="hoJ-lk-hir" id="N7e-h9-DUf"/>
                         <outlet property="nacenkaTextField" destination="2S4-84-a4M" id="LrX-DA-svA"/>
                         <outlet property="nacenkaTrailLabel" destination="11F-vU-8Gf" id="cxK-E0-CBH"/>
+                        <outlet property="okruglenieLabel" destination="JRm-UI-daw" id="mWQ-tm-aCa"/>
                         <outlet property="otTextField" destination="SgA-58-Yhd" id="UCe-Jj-fKv"/>
                         <outlet property="otmenaButton" destination="aad-8H-Qyn" id="yKH-4C-Jt6"/>
                         <outlet property="picker" destination="ifQ-VL-dUd" id="V0j-Ln-Drj"/>

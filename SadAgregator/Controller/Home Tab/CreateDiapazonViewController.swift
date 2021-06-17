@@ -18,6 +18,8 @@ class CreateDiapazonViewController: UIViewController {
     @IBOutlet weak var fixNadbavkalabel : UILabel!
     @IBOutlet weak var nacenkaTrailLabel : UILabel!
     
+    @IBOutlet weak var okruglenieLabel: UILabel!
+    
     @IBOutlet weak var inRublesButton: UIButton!
     @IBOutlet weak var inPercentsButton: UIButton!
     
@@ -108,6 +110,9 @@ extension CreateDiapazonViewController{
             fixNadbavkaTextField.isHidden = true
             fixNadbavkalabel.isHidden = true
             
+            picker.isHidden = true
+            okruglenieLabel.isHidden = true
+            
         }
         
     }
@@ -126,6 +131,9 @@ extension CreateDiapazonViewController{
             
             fixNadbavkaTextField.isHidden = false
             fixNadbavkalabel.isHidden = false
+            
+            picker.isHidden = false
+            okruglenieLabel.isHidden = false
             
         }
         
