@@ -268,7 +268,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     
                     let zone = zonesForOrg[indexPath.row]
                     
-                    if zone.marge.contains("%"){
+                    if zone.marge.contains("%") , zone.fix != "0"{
                         return 150
                     }else{
                         return 115
@@ -621,20 +621,40 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "diapazonCell", for: indexPath)
                 
-                if let otLabel = cell.viewWithTag(1) as? UILabel ,
-                   let doLabel = cell.viewWithTag(2) as? UILabel,
-                   let nacenkaLabel = cell.viewWithTag(3) as? UILabel,
-                   let okruglenieLabel = cell.viewWithTag(4) as? UILabel ,
-                   let fixNadbavkaLabel = cell.viewWithTag(5) as? UILabel ,
-                   let fixNadbavkaTextLabel = cell.viewWithTag(6) as? UILabel{
+                if let firstTitleLabel = cell.viewWithTag(1) as? UILabel,
+                   let firstValueLabel = cell.viewWithTag(2) as? UILabel ,
+                   let secondTitleLabel = cell.viewWithTag(3) as? UILabel,
+                   let secondValueLabel = cell.viewWithTag(4) as? UILabel,
+                   let nacenkaLabel = cell.viewWithTag(5) as? UILabel,
+                   let okruglenieLabel = cell.viewWithTag(6) as? UILabel ,
+                   let fixNadbavkaTextLabel = cell.viewWithTag(7) as? UILabel,
+                   let fixNadbavkaLabel = cell.viewWithTag(8) as? UILabel{
                     
                     let zone = zonesForOrg[indexPath.row]
                     
-                    otLabel.text = zone.from + " руб."
+                    if zone.to == "0" || zone.from == "0"{
+                        
+                        if zone.to == "0"{
+                            firstTitleLabel.text = "от"
+                            firstValueLabel.text = zone.from + " руб."
+                        }else if zone.from == "0"{
+                            firstTitleLabel.text = "до"
+                            firstValueLabel.text = zone.to + " руб."
+                        }
+                        
+                        secondTitleLabel.text = ""
+                        secondValueLabel.text = ""
+                        
+                    }else{
+                        
+                        firstTitleLabel.text = "от"
+                        firstValueLabel.text = zone.from + " руб."
+                        secondTitleLabel.text = "до"
+                        secondValueLabel.text = zone.to + " руб."
+                        
+                    }
                     
-                    doLabel.text = zone.to + " руб."
-                    
-                    nacenkaLabel.text = zone.marge
+                    nacenkaLabel.text = zone.marge + (zone.marge.contains("%") ? "" : " руб.")
                     
                     okruglenieLabel.text = zone.trunc
                     
