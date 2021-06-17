@@ -356,7 +356,7 @@ extension DobavlenieVZakupkuViewController {
     @IBAction func gotovoTapped(_ sender : Any?){
         
         guard !clients.isEmpty else {
-            showSimpleAlertWithOkButton(title: "Ошибка", message: "Нет добавленных клиентов")
+            //            showSimpleAlertWithOkButton(title: "Ошибка", message: "Нет добавленных клиентов")
             return
         }
         
