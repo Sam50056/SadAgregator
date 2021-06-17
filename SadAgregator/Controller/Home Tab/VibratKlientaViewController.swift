@@ -32,8 +32,8 @@ class VibratKlientaViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        loadUserData()
-        key = "part_2_test"
+        loadUserData()
+        //        key = "part_2_test"
         
         //Set up search controller
         searchController.searchResultsUpdater = self

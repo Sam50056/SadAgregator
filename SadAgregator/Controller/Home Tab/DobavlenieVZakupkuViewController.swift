@@ -230,8 +230,8 @@ class DobavlenieVZakupkuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        loadUserData()
-        key = "part_2_test"
+        loadUserData()
+//        key = "part_2_test"
         
         purchasesItemInfoDataManager.delegate = self
         newPhotoPlaceDataManager.delegate = self
