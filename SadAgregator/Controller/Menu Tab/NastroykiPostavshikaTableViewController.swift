@@ -61,12 +61,12 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
     
     @IBAction func dobavitSposobOtpravkiPressedInPosrednik(_ sener : Any){
         
-        BrokersGetDeliveryTypeDataManager().getBrokersGetDeliveryTypeData(key: key!) { data, error in
+        VendGetDeliveryTypeDataManager().getVendGetDeliveryTypeData(key: key!) { data, error in
             
             DispatchQueue.main.async { [self] in
                 
                 if error != nil , data == nil {
-                    print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                    print("Erorr with VendGetDeliveryTypeDataManager : \(error!)")
                     return
                 }
                 
@@ -93,10 +93,10 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
                                 
                                 guard let price = priceAlertController.textFields?[0].text else {return}
                                 
-                                BrokersAddSendTypeDataManager().getBrokersAddSendTypeData(key: key!, sendType: deliveryId, price: price) { data, error in
+                                VendAddSendRuleDataManager().getVendAddSendRuleData(key: key!, sendType: deliveryId, price: price) { data, error in
                                     
                                     if error != nil , data == nil {
-                                        print("Erorr with BrokersAddSendTypeDataManager : \(error!)")
+                                        print("Erorr with VendAddSendRuleDataManager : \(error!)")
                                         return
                                     }
                                     
@@ -158,10 +158,10 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
         
         let sposob = sposobOtpravkiSectionItems[index]
         
-        BrokersDelSendTypeDataManager().getBrokersDelSendTypeData(key: key!, ruleId: sposob.ruleId) { data, error in
+        VendDelSendRuleDataManager().getVendDelSendRuleData(key: key!, ruleId: sposob.ruleId) { data, error in
             
             if error != nil , data == nil {
-                print("Erorr with BrokersDelSendTypeDataManager : \(error!)")
+                print("Erorr with VendDelSendRuleDataManager : \(error!)")
                 return
             }
             
