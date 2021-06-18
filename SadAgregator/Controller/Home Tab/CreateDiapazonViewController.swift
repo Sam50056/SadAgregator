@@ -17,6 +17,7 @@ class CreateDiapazonViewController: UIViewController {
     
     @IBOutlet weak var fixNadbavkalabel : UILabel!
     @IBOutlet weak var nacenkaTrailLabel : UILabel!
+    @IBOutlet weak var tipNacenkiLabel : UILabel!
     
     @IBOutlet weak var okruglenieLabel: UILabel!
     
@@ -28,6 +29,8 @@ class CreateDiapazonViewController: UIViewController {
     private var key = ""
     
     var thisZone : PurchaseZone?
+    
+    var isPosrednik = false
     
     var createdDiapazon : (() -> ())?
     
@@ -64,11 +67,27 @@ class CreateDiapazonViewController: UIViewController {
         inRublesButton.layer.cornerRadius = 8
         inPercentsButton.layer.cornerRadius = 8
         
-        if thisZone != nil {
-            prewriteParameters()
+        if isPosrednik{
+            
+            selectPercents()
+            
+            fixNadbavkalabel.isHidden = true
+            fixNadbavkaTextField.isHidden = true
+            okruglenieLabel.isHidden = true
+            picker.isHidden = true
+            inRublesButton.isHidden = true
+            inPercentsButton.isHidden = true
+            tipNacenkiLabel.isHidden = true
+            
         }else{
-            picker.selectRow(1, inComponent: 0, animated: false)
-            selectRubles()
+            
+            if thisZone != nil {
+                prewriteParameters()
+            }else{
+                picker.selectRow(1, inComponent: 0, animated: false)
+                selectRubles()
+            }
+            
         }
         
     }
@@ -187,12 +206,20 @@ extension CreateDiapazonViewController{
         let nacenka = nacenkaTextField.text! + (isInPercents ? "%" : "")
         let fix = fixNadbavkaTextField.text!.isEmpty ? "0" : fixNadbavkaTextField.text!
         
-        if let zone = thisZone {
-            PurchasesUpdateZonePriceDataManager(delegate: self).getPurchasesUpdateZonePriceDataManager(key: key, zoneId : zone.id , from: from, to: to, merge: nacenka, fix: fix, trunc: okruglenieArray[picker.selectedRow(inComponent: 0)])
-        }else{
-            PurchasesAddZonePriceDataManager(delegate: self).getPurchasesAddZonePriceDataManager(key: key, from: from, to: to, merge: nacenka, fix: fix, trunc: okruglenieArray[picker.selectedRow(inComponent: 0)])
-        }
+        if isPosrednik{
             
+            BrokersAddZonePriceDataManager(delegate: self).getBrokersAddZonePriceData(key: key, from: from, to: to, merge: nacenka)
+            
+        }else{
+            
+            if let zone = thisZone {
+                PurchasesUpdateZonePriceDataManager(delegate: self).getPurchasesUpdateZonePriceDataManager(key: key, zoneId : zone.id , from: from, to: to, merge: nacenka, fix: fix, trunc: okruglenieArray[picker.selectedRow(inComponent: 0)])
+            }else{
+                PurchasesAddZonePriceDataManager(delegate: self).getPurchasesAddZonePriceDataManager(key: key, from: from, to: to, merge: nacenka, fix: fix, trunc: okruglenieArray[picker.selectedRow(inComponent: 0)])
+            }
+            
+        }
+        
     }
     
 }
@@ -272,6 +299,36 @@ extension CreateDiapazonViewController : PurchasesUpdateZonePriceDataManagerDele
     
     func didFailGettingPurchasesUpdateZonePriceDataWithError(error: String) {
         print("Error with PurchasesUpdateZonePriceDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - BrokersAddZonePriceDataManagerDelegate
+
+extension CreateDiapazonViewController : BrokersAddZonePriceDataManagerDelegate{
+    
+    func didGetBrokersAddZonePriceData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                navigationController?.popViewController(animated: true)
+                
+                createdDiapazon?()
+                
+            }else{
+                
+                showSimpleAlertWithOkButton(title: "Ошибка запроса", message: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingBrokersAddZonePriceDataWithError(error: String) {
+        print("Error with BrokersAddZonePriceDataManager : \(error)")
     }
     
 }

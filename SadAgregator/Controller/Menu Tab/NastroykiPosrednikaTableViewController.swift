@@ -49,6 +49,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     private var thirdSectionItemsForPosrednik = [ThirdSectionForPosrednikItem]()
     
     private var zonesForOrg = [PurchaseZone]()
+    private var zonesForPosrednik = [PurchaseZone]()
     
     private var brokersFormDataManager = BrokersFormDataManager()
     
@@ -223,6 +224,20 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
     }
     
+    @IBAction func dobavitKomissiaPressedInPosrednik(_ sender : Any){
+        
+        let createDiapazonVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateDiapazonVC") as! CreateDiapazonViewController
+        
+        createDiapazonVC.createdDiapazon = { [self] in
+            update()
+        }
+        
+        createDiapazonVC.isPosrednik = true
+        
+        navigationController?.pushViewController(createDiapazonVC, animated: true)
+        
+    }
+    
     @IBAction func removeSposobOtpravkiPressed(_ sender : UIButtonWithInfo){
         
         guard let index = Int(sender.info) else {return}
@@ -304,7 +319,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             case 2: return 1
                 
-            case 3: return 1
+            case 3: return zonesForPosrednik.isEmpty ? 1 : zonesForPosrednik.count
                 
             case 4: return thirdSectionItemsForPosrednik.isEmpty ? 0 : 1
                 
@@ -383,6 +398,12 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
                 if firstSectionItemsForPosrednik[index].isDopInfo{
                     return 95
+                }
+                
+            case 3:
+                
+                if !zonesForPosrednik.isEmpty{
+                    return 85
                 }
                 
             default:
@@ -552,13 +573,68 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).setTitle("Добавить", for: .normal)
             
+            (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitKomissiaPressedInPosrednik(_:)), for: .touchUpInside)
+            
         }else if section == 3{
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
+            if zonesForPosrednik.isEmpty{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+                
+                label.text = "Вы не добавляли диапазонов комиссий"
+                
+                return cell
+                
+            }
             
-            guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+            cell = tableView.dequeueReusableCell(withIdentifier: "diapazonCell", for: indexPath)
             
-            label.text = "Вы не добавляли диапазонов комиссий"
+            if let firstTitleLabel = cell.viewWithTag(1) as? UILabel,
+               let firstValueLabel = cell.viewWithTag(2) as? UILabel ,
+               let secondTitleLabel = cell.viewWithTag(3) as? UILabel,
+               let secondValueLabel = cell.viewWithTag(4) as? UILabel,
+               let nacenkaLabel = cell.viewWithTag(5) as? UILabel,
+               let okruglenieLabel = cell.viewWithTag(6) as? UILabel ,
+               let fixNadbavkaTextLabel = cell.viewWithTag(7) as? UILabel,
+               let fixNadbavkaLabel = cell.viewWithTag(8) as? UILabel ,
+               let okruglenieTextLabel = cell.viewWithTag(9) as? UILabel{
+                
+                let zone = zonesForPosrednik[index]
+                
+                if zone.to == "0" || zone.from == "0"{
+                    
+                    if zone.to == "0"{
+                        firstTitleLabel.text = "от"
+                        firstValueLabel.text = zone.from + " руб."
+                    }else if zone.from == "0"{
+                        firstTitleLabel.text = "до"
+                        firstValueLabel.text = zone.to + " руб."
+                    }
+                    
+                    secondTitleLabel.text = ""
+                    secondValueLabel.text = ""
+                    
+                }else{
+                    
+                    firstTitleLabel.text = "от"
+                    firstValueLabel.text = zone.from + " руб."
+                    secondTitleLabel.text = "до"
+                    secondValueLabel.text = zone.to + " руб."
+                    
+                }
+                
+                nacenkaLabel.text = zone.marge + (zone.marge.contains("%") ? "" : " руб.")
+                
+                okruglenieLabel.text = ""
+                okruglenieTextLabel.isHidden = true
+                
+                fixNadbavkaTextLabel.isHidden = true
+                fixNadbavkaLabel.text = ""
+                fixNadbavkaLabel.isHidden = true
+                
+            }
             
         }else if section == 4{
             
@@ -1350,17 +1426,6 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
             
             thirdSectionItemsForPosrednik = newThirdSectionItemsForPosrednik
             
-            let jsonZones = brokerProfile["zones_sp"].arrayValue
-            var newZones = [PurchaseZone]()
-            for jsonZone in jsonZones{
-                
-                let zone = PurchaseZone(id: jsonZone["zone_id"].stringValue, from: jsonZone["from"].stringValue, to: jsonZone["to"].stringValue, marge: jsonZone["marge"].stringValue, fix: jsonZone["fix"].stringValue, trunc: jsonZone["trunc"].stringValue)
-                
-                newZones.append(zone)
-                
-            }
-            zonesForOrg = newZones
-            
             var newSposobi = [SposobiOtpravkiSectionForPosrednikItem]()
             let rules = brokerProfile["send_rules"].arrayValue
             
@@ -1369,6 +1434,17 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
             }
             
             sposobOtpravkiSectionForPosrednikItems = newSposobi
+            
+            let jsonZonesForPosrednik = brokerProfile["zones_broker"].arrayValue
+            var newZonesForPosrednik = [PurchaseZone]()
+            for jsonZone in jsonZonesForPosrednik{
+                
+                let zone = PurchaseZone(id: jsonZone["zone_id"].stringValue, from: jsonZone["from"].stringValue, to: jsonZone["to"].stringValue, marge: jsonZone["marge"].stringValue, fix: jsonZone["fix"].stringValue, trunc: jsonZone["trunc"].stringValue)
+                
+                newZonesForPosrednik.append(zone)
+                
+            }
+            zonesForPosrednik = newZonesForPosrednik
             
             //ORG Stuff
             
@@ -1407,6 +1483,17 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
             }
             
             secondSectionItemsForOrg = newSecondSectionItems
+            
+            let jsonZonesForOrg = brokerProfile["zones_sp"].arrayValue
+            var newZonesForOrg = [PurchaseZone]()
+            for jsonZone in jsonZonesForOrg{
+                
+                let zone = PurchaseZone(id: jsonZone["zone_id"].stringValue, from: jsonZone["from"].stringValue, to: jsonZone["to"].stringValue, marge: jsonZone["marge"].stringValue, fix: jsonZone["fix"].stringValue, trunc: jsonZone["trunc"].stringValue)
+                
+                newZonesForOrg.append(zone)
+                
+            }
+            zonesForOrg = newZonesForOrg
             
             tableView.reloadData()
             
