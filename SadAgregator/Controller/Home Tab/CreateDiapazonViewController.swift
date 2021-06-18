@@ -79,6 +79,10 @@ class CreateDiapazonViewController: UIViewController {
             inPercentsButton.isHidden = true
             tipNacenkiLabel.isHidden = true
             
+            if thisZone != nil {
+                prewriteParameters()
+            }
+            
         }else{
             
             if thisZone != nil {
@@ -208,7 +212,11 @@ extension CreateDiapazonViewController{
         
         if isPosrednik{
             
-            BrokersAddZonePriceDataManager(delegate: self).getBrokersAddZonePriceData(key: key, from: from, to: to, merge: nacenka)
+            if let zone = thisZone {
+                BrokersUpdZonePriceDataManager(delegate: self).getBrokersUpdZonePriceData(key: key, zoneId : zone.id , from: from, to: to, merge: nacenka)
+            }else{
+                BrokersAddZonePriceDataManager(delegate: self).getBrokersAddZonePriceData(key: key, from: from, to: to, merge: nacenka)
+            }
             
         }else{
             
@@ -329,6 +337,36 @@ extension CreateDiapazonViewController : BrokersAddZonePriceDataManagerDelegate{
     
     func didFailGettingBrokersAddZonePriceDataWithError(error: String) {
         print("Error with BrokersAddZonePriceDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - BrokersUpdZonePriceDataManagerDelegate
+
+extension CreateDiapazonViewController : BrokersUpdZonePriceDataManagerDelegate{
+    
+    func didGetBrokersUpdZonePriceData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                navigationController?.popViewController(animated: true)
+                
+                createdDiapazon?()
+                
+            }else{
+                
+                showSimpleAlertWithOkButton(title: "Ошибка запроса", message: nil)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingBrokersUpdZonePriceDataWithError(error: String) {
+        print("Error with BrokersUpdZonePriceDataManager : \(error)")
     }
     
 }

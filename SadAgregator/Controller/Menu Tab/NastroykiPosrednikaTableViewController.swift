@@ -444,46 +444,48 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        guard !isPosrednikTab , indexPath.section == 5 else {return nil}
-        
-        let editAction = UIContextualAction(style: .normal, title: nil) { [self] action, view, completion in
+        if !isPosrednikTab , indexPath.section == 5{
             
-            let createDiapazonVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateDiapazonVC") as! CreateDiapazonViewController
-            
-            createDiapazonVC.createdDiapazon = { [self] in
-                update()
-            }
-            
-            createDiapazonVC.thisZone = zonesForOrg[indexPath.row]
-            
-            navigationController?.pushViewController(createDiapazonVC, animated: true)
-            
-            completion(true)
-            
-        }
-        
-        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [self] action, view, completion in
-            
-            let zone = zonesForOrg[indexPath.row]
-            
-            PurchasesDelZonePriceDataManager().getPurchasesDelZonePriceData(key: key!, zoneId: zone.id) { data, error in
+            let editAction = UIContextualAction(style: .normal, title: nil) { [self] action, view, completion in
                 
-                if let error = error , data == nil {
-                    print("Error with purchasesDelZonePriceDataManager : \(error)")
-                    return
+                let createDiapazonVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateDiapazonVC") as! CreateDiapazonViewController
+                
+                createDiapazonVC.createdDiapazon = { [self] in
+                    update()
                 }
                 
-                guard let data = data else {return}
+                createDiapazonVC.thisZone = zonesForOrg[indexPath.row]
                 
-                if data["result"].intValue == 1{
+                navigationController?.pushViewController(createDiapazonVC, animated: true)
+                
+                completion(true)
+                
+            }
+            
+            let deleteAction = UIContextualAction(style: .destructive, title: nil) { [self] action, view, completion in
+                
+                let zone = zonesForOrg[indexPath.row]
+                
+                PurchasesDelZonePriceDataManager().getPurchasesDelZonePriceData(key: key!, zoneId: zone.id) { data, error in
                     
-                    DispatchQueue.main.async { [self] in
+                    if let error = error , data == nil {
+                        print("Error with purchasesDelZonePriceDataManager : \(error)")
+                        return
+                    }
+                    
+                    guard let data = data else {return}
+                    
+                    if data["result"].intValue == 1{
                         
-                        zonesForOrg.remove(at: indexPath.row)
-                        
-                        completion(true)
-                        
-                        tableView.reloadSections([5], with: .automatic)
+                        DispatchQueue.main.async { [self] in
+                            
+                            zonesForOrg.remove(at: indexPath.row)
+                            
+                            completion(true)
+                            
+                            tableView.reloadSections([5], with: .automatic)
+                            
+                        }
                         
                     }
                     
@@ -491,14 +493,74 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
+            editAction.backgroundColor = .gray
+            editAction.image = UIImage(systemName: "pencil")
+            
+            deleteAction.image = UIImage(systemName: "trash.fill")
+            
+            return UISwipeActionsConfiguration(actions: [deleteAction,editAction])
+            
+        }else if isPosrednikTab , indexPath.section == 3{
+            
+            let editAction = UIContextualAction(style: .normal, title: nil) { [self] action, view, completion in
+                
+                let createDiapazonVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateDiapazonVC") as! CreateDiapazonViewController
+                
+                createDiapazonVC.createdDiapazon = { [self] in
+                    update()
+                }
+                
+                createDiapazonVC.isPosrednik = true
+                
+                createDiapazonVC.thisZone = zonesForPosrednik[indexPath.row]
+                
+                navigationController?.pushViewController(createDiapazonVC, animated: true)
+                
+                completion(true)
+                
+            }
+            
+            let deleteAction = UIContextualAction(style: .destructive, title: nil) { [self] action, view, completion in
+                
+                let zone = zonesForPosrednik[indexPath.row]
+                
+                BrokersDelZonePriceDataManager().getBrokersDelZonePriceData(key: key!, zoneId: zone.id) { data, error in
+                    
+                    if let error = error , data == nil {
+                        print("Error with BrokersDelZonePriceDataManager : \(error)")
+                        return
+                    }
+                    
+                    guard let data = data else {return}
+                    
+                    if data["result"].intValue == 1{
+                        
+                        DispatchQueue.main.async { [self] in
+                            
+                            zonesForPosrednik.remove(at: indexPath.row)
+                            
+                            completion(true)
+                            
+                            tableView.reloadSections([3], with: .automatic)
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            editAction.backgroundColor = .gray
+            editAction.image = UIImage(systemName: "pencil")
+            
+            deleteAction.image = UIImage(systemName: "trash.fill")
+            
+            return UISwipeActionsConfiguration(actions: [deleteAction,editAction])
+            
         }
         
-        editAction.backgroundColor = .gray
-        editAction.image = UIImage(systemName: "pencil")
-        
-        deleteAction.image = UIImage(systemName: "trash.fill")
-        
-        return UISwipeActionsConfiguration(actions: [deleteAction,editAction])
+        return nil
         
     }
     
@@ -572,6 +634,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             (cell.viewWithTag(2) as! UIButton).isHidden = false
             
             (cell.viewWithTag(2) as! UIButton).setTitle("Добавить", for: .normal)
+            
+            (cell.viewWithTag(2) as! UIButton).removeTarget(self, action: nil, for: .touchUpInside)
             
             (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitKomissiaPressedInPosrednik(_:)), for: .touchUpInside)
             
@@ -689,6 +753,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             (cell.viewWithTag(2) as! UIButton).isHidden = false
             
             (cell.viewWithTag(2) as! UIButton).setTitle("Добавить", for: .normal)
+            
+            (cell.viewWithTag(2) as! UIButton).removeTarget(self, action: nil, for: .touchUpInside)
             
             (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitSposobOtpravkiPressedInPosrednik(_:)), for: .touchUpInside)
             
@@ -842,6 +908,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             (cell.viewWithTag(2) as! UIButton).isHidden = false
             
             (cell.viewWithTag(2) as! UIButton).setTitle("Добавить наценку", for: .normal)
+            
+            (cell.viewWithTag(2) as! UIButton).removeTarget(self, action: nil, for: .touchUpInside)
             
             (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitNacenkuPressedInOrg(_:)), for: .touchUpInside)
             
