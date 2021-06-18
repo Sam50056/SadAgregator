@@ -4860,6 +4860,7 @@
                                             </segments>
                                         </segmentedControl>
                                     </subviews>
+                                    <color key="backgroundColor" name="whiteblack"/>
                                     <constraints>
                                         <constraint firstItem="9G3-W0-7UI" firstAttribute="top" secondItem="A31-mC-Il5" secondAttribute="topMargin" constant="12" id="2b0-Lk-3i9"/>
                                         <constraint firstItem="9G3-W0-7UI" firstAttribute="centerX" secondItem="A31-mC-Il5" secondAttribute="centerX" id="3gY-Zr-0WP"/>
