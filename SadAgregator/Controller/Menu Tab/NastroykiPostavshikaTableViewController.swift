@@ -106,7 +106,7 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
                                         
                                         DispatchQueue.main.async {
                                             
-                                            sposobOtpravkiSectionItems.append(SposobiOtpravkiSectionForPosrednikItem(ruleId: ruleId, name: deliveryName, price: price))
+                                            sposobOtpravkiSectionItems.append(SposobiOtpravkiSectionForPosrednikItem(ruleId: ruleId, name: deliveryName, typeId: deliveryId, price: price))
                                             
                                             self.tableView.reloadData()
                                             
@@ -481,6 +481,8 @@ extension NastroykiPostavshikaTableViewController{
         var ruleId : String
         var name : String
         
+        var typeId : String
+        
         var price : String
         
     }
@@ -525,7 +527,7 @@ extension NastroykiPostavshikaTableViewController : VendFormDataManagerDelegate{
                 let rules = vendInfo["send_rules"].arrayValue
                 
                 for rule in rules{
-                    newSposobi.append(SposobiOtpravkiSectionForPosrednikItem(ruleId: rule["rule_id"].stringValue, name: rule["type_name"].stringValue, price: rule["price"].stringValue))
+                    newSposobi.append(SposobiOtpravkiSectionForPosrednikItem(ruleId: rule["rule_id"].stringValue, name: rule["type_name"].stringValue, typeId: rule["type_id"].stringValue, price: rule["price"].stringValue))
                 }
                 
                 sposobOtpravkiSectionItems = newSposobi

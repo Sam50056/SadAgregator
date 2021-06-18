@@ -177,7 +177,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                                         
                                         DispatchQueue.main.async {
                                             
-                                            sposobOtpravkiSectionForPosrednikItems.append(SposobiOtpravkiSectionForPosrednikItem(ruleId: ruleId, name: deliveryName, price: price))
+                                            sposobOtpravkiSectionForPosrednikItems.append(SposobiOtpravkiSectionForPosrednikItem(ruleId: ruleId, name: deliveryName, typeId: deliveryId, price: price))
                                             
                                             self.tableView.reloadData()
                                             
@@ -1224,6 +1224,8 @@ extension NastroykiPosrednikaTableViewController {
         var ruleId : String
         var name : String
         
+        var typeId : String
+        
         var price : String
         
     }
@@ -1313,7 +1315,7 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
             let rules = brokerProfile["send_rules"].arrayValue
             
             for rule in rules{
-                newSposobi.append(SposobiOtpravkiSectionForPosrednikItem(ruleId: rule["rule_id"].stringValue, name: rule["type_name"].stringValue, price: rule["price"].stringValue))
+                newSposobi.append(SposobiOtpravkiSectionForPosrednikItem(ruleId: rule["rule_id"].stringValue, name: rule["type_name"].stringValue, typeId: rule["type_id"].stringValue, price: rule["price"].stringValue))
             }
             
             sposobOtpravkiSectionForPosrednikItems = newSposobi
