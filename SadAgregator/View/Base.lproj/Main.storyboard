@@ -4338,27 +4338,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aad-8H-Qyn">
-                                <rect key="frame" x="172" y="450.33333333333331" width="82" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="1tc-uf-lCa"/>
-                                    <constraint firstAttribute="width" constant="82" id="PuS-Yr-7rp"/>
-                                </constraints>
-                                <state key="normal" title="Отмена">
-                                    <color key="titleColor" name="blackwhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PqT-AK-aMC">
-                                <rect key="frame" x="270" y="450.33333333333331" width="104" height="40"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="0Q4-mS-UWf"/>
-                                    <constraint firstAttribute="width" constant="104" id="0or-Rh-DTM"/>
-                                </constraints>
-                                <state key="normal" title="Создать">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Округление" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRm-UI-daw">
                                 <rect key="frame" x="16" y="312" width="95.333333333333329" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -4414,11 +4393,9 @@
                             <constraint firstItem="duq-hY-sAj" firstAttribute="leading" secondItem="SgA-58-Yhd" secondAttribute="leading" constant="2" id="0P7-Np-dKe"/>
                             <constraint firstItem="Qxa-n9-hSB" firstAttribute="top" secondItem="8pG-yw-6ap" secondAttribute="bottom" constant="4" id="17b-Ym-6Vd"/>
                             <constraint firstItem="Ley-GR-VVm" firstAttribute="trailing" secondItem="jLq-ez-tf7" secondAttribute="trailing" constant="16" id="4fQ-GW-TfF"/>
-                            <constraint firstItem="Ley-GR-VVm" firstAttribute="trailing" secondItem="PqT-AK-aMC" secondAttribute="trailing" constant="16" id="4sJ-b1-XFU"/>
                             <constraint firstItem="11F-vU-8Gf" firstAttribute="trailing" secondItem="SgA-58-Yhd" secondAttribute="trailing" id="5fW-76-zCT"/>
                             <constraint firstItem="jSL-Hq-oGd" firstAttribute="leading" secondItem="Ley-GR-VVm" secondAttribute="leading" constant="16" id="7b9-3B-Fn1"/>
                             <constraint firstItem="2S4-84-a4M" firstAttribute="leading" secondItem="Ley-GR-VVm" secondAttribute="leading" constant="16" id="CGN-sU-4fm"/>
-                            <constraint firstItem="PqT-AK-aMC" firstAttribute="leading" secondItem="aad-8H-Qyn" secondAttribute="trailing" constant="16" id="CNJ-Na-BVi"/>
                             <constraint firstItem="11F-vU-8Gf" firstAttribute="leading" secondItem="2S4-84-a4M" secondAttribute="trailing" constant="4" id="E3w-pX-voA"/>
                             <constraint firstItem="2S4-84-a4M" firstAttribute="top" secondItem="HZg-YW-obG" secondAttribute="bottom" constant="4" id="Iax-fk-THq"/>
                             <constraint firstItem="duq-hY-sAj" firstAttribute="top" secondItem="Ley-GR-VVm" secondAttribute="top" constant="32" id="JPD-6L-kb2"/>
@@ -4426,7 +4403,6 @@
                             <constraint firstItem="Ley-GR-VVm" firstAttribute="trailing" secondItem="Qxa-n9-hSB" secondAttribute="trailing" constant="16" id="Jc4-z2-6OX"/>
                             <constraint firstItem="HZg-YW-obG" firstAttribute="leading" secondItem="2S4-84-a4M" secondAttribute="leading" constant="2" id="P9w-Rh-dhS"/>
                             <constraint firstItem="HZg-YW-obG" firstAttribute="top" secondItem="qSx-96-FLw" secondAttribute="bottom" constant="16" id="PN8-8K-1RR"/>
-                            <constraint firstItem="PqT-AK-aMC" firstAttribute="top" secondItem="jLq-ez-tf7" secondAttribute="bottom" constant="154.33000000000001" id="Pp1-eq-keY"/>
                             <constraint firstItem="jSL-Hq-oGd" firstAttribute="top" secondItem="Qxa-n9-hSB" secondAttribute="bottom" constant="16" id="R21-n9-NDp"/>
                             <constraint firstItem="JRm-UI-daw" firstAttribute="leading" secondItem="Ley-GR-VVm" secondAttribute="leading" constant="16" id="SwU-gS-lNy"/>
                             <constraint firstItem="jLq-ez-tf7" firstAttribute="top" secondItem="AN4-GZ-Tch" secondAttribute="bottom" constant="4" id="TSP-3o-Qsz"/>
@@ -4435,7 +4411,6 @@
                             <constraint firstItem="ifQ-VL-dUd" firstAttribute="top" secondItem="JRm-UI-daw" secondAttribute="bottom" constant="16" id="bvf-Q0-hfQ"/>
                             <constraint firstItem="8pG-yw-6ap" firstAttribute="top" secondItem="Ley-GR-VVm" secondAttribute="top" constant="32" id="dFa-Bc-ens"/>
                             <constraint firstItem="jLq-ez-tf7" firstAttribute="leading" secondItem="11F-vU-8Gf" secondAttribute="trailing" constant="8" id="eir-jX-Ml1"/>
-                            <constraint firstItem="aad-8H-Qyn" firstAttribute="centerY" secondItem="PqT-AK-aMC" secondAttribute="centerY" id="hdg-xJ-KU5"/>
                             <constraint firstItem="Qxa-n9-hSB" firstAttribute="leading" secondItem="Ley-GR-VVm" secondAttribute="leading" constant="16" id="htU-xR-Y4p"/>
                             <constraint firstItem="AN4-GZ-Tch" firstAttribute="leading" secondItem="jLq-ez-tf7" secondAttribute="leading" constant="2" id="kxa-dT-kWQ"/>
                             <constraint firstItem="Qxa-n9-hSB" firstAttribute="top" secondItem="duq-hY-sAj" secondAttribute="bottom" constant="4" id="m5u-xN-wHn"/>
@@ -4447,7 +4422,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="createButton" destination="PqT-AK-aMC" id="vlB-95-qwP"/>
                         <outlet property="doTextField" destination="p7R-gg-yFh" id="9EU-qs-gZX"/>
                         <outlet property="fixNadbavkaTextField" destination="jLq-ez-tf7" id="VQX-0b-lq7"/>
                         <outlet property="fixNadbavkalabel" destination="AN4-GZ-Tch" id="af7-So-CTT"/>
@@ -4457,9 +4431,7 @@
                         <outlet property="nacenkaTrailLabel" destination="11F-vU-8Gf" id="cxK-E0-CBH"/>
                         <outlet property="okruglenieLabel" destination="JRm-UI-daw" id="mWQ-tm-aCa"/>
                         <outlet property="otTextField" destination="SgA-58-Yhd" id="UCe-Jj-fKv"/>
-                        <outlet property="otmenaButton" destination="aad-8H-Qyn" id="yKH-4C-Jt6"/>
                         <outlet property="picker" destination="ifQ-VL-dUd" id="V0j-Ln-Drj"/>
-                        <outlet property="sozdatButton" destination="PqT-AK-aMC" id="heC-dS-IX7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yUG-Fp-2G0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

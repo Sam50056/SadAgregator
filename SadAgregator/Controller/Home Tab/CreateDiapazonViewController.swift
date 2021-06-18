@@ -23,10 +23,6 @@ class CreateDiapazonViewController: UIViewController {
     @IBOutlet weak var inRublesButton: UIButton!
     @IBOutlet weak var inPercentsButton: UIButton!
     
-    @IBOutlet weak var otmenaButton: UIButton!
-    @IBOutlet weak var sozdatButton: UIButton!
-    @IBOutlet weak var createButton: UIButton!
-    
     @IBOutlet weak var picker: UIPickerView!
     
     private var key = ""
@@ -61,19 +57,14 @@ class CreateDiapazonViewController: UIViewController {
         
         inRublesButton.addTarget(self, action: #selector(inRublesButtonTapped(_:)), for: .touchUpInside)
         inPercentsButton.addTarget(self, action: #selector(inPersentsButtonTapped(_:)), for: .touchUpInside)
-        otmenaButton.addTarget(self, action: #selector(otmenaButtonTapped(_:)), for: .touchUpInside)
-        createButton.addTarget(self, action: #selector(createButtonTapped(_:)), for: .touchUpInside)
         
         picker.delegate = self
         picker.dataSource = self
-        
-        sozdatButton.layer.cornerRadius = 8
         
         inRublesButton.layer.cornerRadius = 8
         inPercentsButton.layer.cornerRadius = 8
         
         if thisZone != nil {
-            sozdatButton.setTitle("Изменить", for: .normal)
             prewriteParameters()
         }else{
             picker.selectRow(1, inComponent: 0, animated: false)
@@ -86,6 +77,9 @@ class CreateDiapazonViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationItem.title = thisZone == nil ? "Создать диапазон" : "Изменить диапазон"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: (thisZone != nil ? "Изменить" : "Создать"), style: .plain, target: self, action: #selector(createButtonTapped(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(otmenaButtonTapped(_:)))
         
     }
     
@@ -185,7 +179,7 @@ extension CreateDiapazonViewController{
         
     }
     
-    @IBAction func createButtonTapped(_ sender : UIButton){
+    @IBAction func createButtonTapped(_ sender : Any){
         
         let from = otTextField.text!.isEmpty ? "0" : otTextField.text!
         let to = doTextField.text!.isEmpty ? "0" : doTextField.text!
