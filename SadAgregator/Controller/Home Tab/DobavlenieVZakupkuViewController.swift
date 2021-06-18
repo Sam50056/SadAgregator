@@ -231,7 +231,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
         super.viewDidLoad()
         
         loadUserData()
-//        key = "part_2_test"
+        //        key = "part_2_test"
         
         purchasesItemInfoDataManager.delegate = self
         newPhotoPlaceDataManager.delegate = self

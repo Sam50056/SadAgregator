@@ -5226,6 +5226,61 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="twoLabelTwoButtonCell" id="DAf-Vy-AdU">
+                                <rect key="frame" x="0.0" y="581.66666984558105" width="390" height="44.333332061767578"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DAf-Vy-AdU" id="aFq-h0-Tut">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="44.333332061767578"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="217-gM-WXN">
+                                            <rect key="frame" x="20.000000000000004" y="11.999999999999998" width="41.333333333333343" height="20.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGP-gc-TfY">
+                                            <rect key="frame" x="273.33333333333331" y="11.999999999999998" width="41.333333333333314" height="20.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multiply" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Oz7-Sd-BPG">
+                                            <rect key="frame" x="350.33333333333331" y="11.666666666666664" width="19.666666666666686" height="21.333333333333336"/>
+                                            <color key="tintColor" systemColor="systemGrayColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="19.670000000000002" id="0Jx-yD-cwd"/>
+                                                <constraint firstAttribute="height" constant="28.329999999999998" id="gdP-nG-pgf"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XdR-oF-qBp">
+                                            <rect key="frame" x="322.66666666666669" y="10.999999999999996" width="19.666666666666686" height="23.333333333333329"/>
+                                            <color key="tintColor" systemColor="systemGrayColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="28.329999999999998" id="huk-Tk-dZT"/>
+                                                <constraint firstAttribute="width" constant="19.670000000000002" id="nil-Wz-WQU"/>
+                                            </constraints>
+                                        </imageView>
+                                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZgJ-fL-dtF" customClass="UIButtonWithInfo" customModule="SadAgregator" customModuleProvider="target">
+                                            <rect key="frame" x="342.33333333333331" y="6.9999999999999982" width="47.666666666666686" height="30.333333333333329"/>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="217-gM-WXN" firstAttribute="leading" secondItem="aFq-h0-Tut" secondAttribute="leadingMargin" id="BHB-YZ-dsF"/>
+                                        <constraint firstAttribute="trailing" secondItem="ZgJ-fL-dtF" secondAttribute="trailing" id="FFT-wQ-S3K"/>
+                                        <constraint firstItem="oGP-gc-TfY" firstAttribute="centerY" secondItem="aFq-h0-Tut" secondAttribute="centerY" id="Khe-gF-Enf"/>
+                                        <constraint firstItem="ZgJ-fL-dtF" firstAttribute="top" secondItem="aFq-h0-Tut" secondAttribute="topMargin" constant="-4" id="a1i-MM-bgl"/>
+                                        <constraint firstItem="Oz7-Sd-BPG" firstAttribute="leading" secondItem="XdR-oF-qBp" secondAttribute="trailing" constant="8" id="aO7-8a-tBu"/>
+                                        <constraint firstItem="ZgJ-fL-dtF" firstAttribute="centerY" secondItem="Oz7-Sd-BPG" secondAttribute="centerY" id="e4R-PY-KbR"/>
+                                        <constraint firstItem="XdR-oF-qBp" firstAttribute="centerY" secondItem="aFq-h0-Tut" secondAttribute="centerY" id="hDu-pW-Bsy"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Oz7-Sd-BPG" secondAttribute="trailing" id="iKy-jc-0xa"/>
+                                        <constraint firstItem="XdR-oF-qBp" firstAttribute="leading" secondItem="oGP-gc-TfY" secondAttribute="trailing" constant="8" id="uIe-rI-BHF"/>
+                                        <constraint firstItem="ZgJ-fL-dtF" firstAttribute="leading" secondItem="XdR-oF-qBp" secondAttribute="trailing" id="wax-fx-FF8"/>
+                                        <constraint firstItem="217-gM-WXN" firstAttribute="centerY" secondItem="aFq-h0-Tut" secondAttribute="centerY" id="zCk-K0-ncq"/>
+                                        <constraint firstItem="Oz7-Sd-BPG" firstAttribute="centerY" secondItem="aFq-h0-Tut" secondAttribute="centerY" id="zXm-2F-qi1"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="rme-rn-mGo" id="aIr-WF-Foq"/>

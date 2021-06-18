@@ -165,6 +165,8 @@
 		22ACF1A9262B828B00F9584D /* ZamenaDlyaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */; };
 		22ACF1AE262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */; };
 		22ACF1AF262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */; };
+		22ADF821267C16F600811DA9 /* BrokersAddSendTypeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF820267C16F600811DA9 /* BrokersAddSendTypeDataManager.swift */; };
+		22ADF823267C24B100811DA9 /* BrokersDelSendTypeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF822267C24B100811DA9 /* BrokersDelSendTypeDataManager.swift */; };
 		22B2D8EB267108A600F2F820 /* BrokersGetDeliveryTypeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2D8EA267108A600F2F820 /* BrokersGetDeliveryTypeDataManager.swift */; };
 		22B41BA726476EA000F7DC30 /* CenovieDiapazoniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B41BA626476EA000F7DC30 /* CenovieDiapazoniViewController.swift */; };
 		22B41BA926486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B41BA826486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift */; };
@@ -400,6 +402,8 @@
 		22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZamenaDlyaTableViewController.swift; sourceTree = "<group>"; };
 		22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCellTwoLabelTableViewCell.swift; sourceTree = "<group>"; };
 		22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCellTwoLabelTableViewCell.xib; sourceTree = "<group>"; };
+		22ADF820267C16F600811DA9 /* BrokersAddSendTypeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersAddSendTypeDataManager.swift; sourceTree = "<group>"; };
+		22ADF822267C24B100811DA9 /* BrokersDelSendTypeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersDelSendTypeDataManager.swift; sourceTree = "<group>"; };
 		22B2D8EA267108A600F2F820 /* BrokersGetDeliveryTypeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersGetDeliveryTypeDataManager.swift; sourceTree = "<group>"; };
 		22B41BA626476EA000F7DC30 /* CenovieDiapazoniViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenovieDiapazoniViewController.swift; sourceTree = "<group>"; };
 		22B41BA826486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesDelZonePriceDataManager.swift; sourceTree = "<group>"; };
@@ -886,6 +890,8 @@
 				2272FCD5266D36D6000B5B19 /* BrokersFormDataManager.swift */,
 				22C3315D266EEC4900B4FE1D /* BrokersUpdateInfoDataManager.swift */,
 				22B2D8EA267108A600F2F820 /* BrokersGetDeliveryTypeDataManager.swift */,
+				22ADF820267C16F600811DA9 /* BrokersAddSendTypeDataManager.swift */,
+				22ADF822267C24B100811DA9 /* BrokersDelSendTypeDataManager.swift */,
 			);
 			path = Brokers;
 			sourceTree = "<group>";
@@ -1542,6 +1548,7 @@
 				22D636F32625CB0000987E3F /* PurchasesPursListDataManager.swift in Sources */,
 				22044EB2261AA9BF0032C67F /* ClientsFilterPayHistByClientDataManager.swift in Sources */,
 				229FE69225706B6B0001FF54 /* GetSearchPageDataManager.swift in Sources */,
+				22ADF823267C24B100811DA9 /* BrokersDelSendTypeDataManager.swift in Sources */,
 				225C6CAD25FCBF5700CC621E /* ClientDataManager.swift in Sources */,
 				22B41BA926486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift in Sources */,
 				22D90236259C0359009732CC /* MyPostsDataManager.swift in Sources */,
@@ -1576,6 +1583,7 @@
 				226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */,
 				224BC44D25A0C529003F147F /* AddPointRequestDataManager.swift in Sources */,
 				22595798259667F90088C7E4 /* MasterNastroekView.swift in Sources */,
+				22ADF821267C16F600811DA9 /* BrokersAddSendTypeDataManager.swift in Sources */,
 				22906B372578020300F00B0D /* PostavshikViewController.swift in Sources */,
 				2259579C259668220088C7E4 /* SimpleReqView.swift in Sources */,
 				22BF1A0A25A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift in Sources */,

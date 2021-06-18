@@ -42,6 +42,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     private var firstSectionItemsForPosrednik = [FirstSectionItem]()
     private var firstSectionItemsForOrg = [FirstSectionItem]()
     
+    private var sposobOtpravkiSectionForPosrednikItems = [SposobiOtpravkiSectionForPosrednikItem]()
+    
     private var secondSectionItemsForOrg = [SecondSectionForOrgItem]()
     
     private var thirdSectionItemsForPosrednik = [ThirdSectionForPosrednikItem]()
@@ -128,6 +130,138 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
     }
     
+    @IBAction func dobavitSposobOtpravkiPressedInPosrednik(_ sener : Any){
+        
+        BrokersGetDeliveryTypeDataManager().getBrokersGetDeliveryTypeData(key: key!) { data, error in
+            
+            DispatchQueue.main.async { [self] in
+                
+                if error != nil , data == nil {
+                    print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    guard let deliveryList = data!["delivery_list"].array else {return}
+                    
+                    let sheetAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                    
+                    for deliveryItem in deliveryList{
+                        
+                        let deliveryName = deliveryItem["name"].stringValue
+                        let deliveryId = deliveryItem["id"].stringValue
+                        
+                        sheetAlertController.addAction(UIAlertAction(title: deliveryName, style: .default, handler: { _ in
+                            
+                            let priceAlertController = UIAlertController(title: "Цена доставки для \"\(deliveryName)\"", message: nil, preferredStyle: .alert)
+                            
+                            priceAlertController.addTextField { priceTextField in
+                                priceTextField.keyboardType = .numberPad
+                            }
+                            
+                            priceAlertController.addAction(UIAlertAction(title: "Добавить", style: .default, handler: { _ in
+                                
+                                guard let price = priceAlertController.textFields?[0].text else {return}
+                                
+                                BrokersAddSendTypeDataManager().getBrokersAddSendTypeData(key: key!, sendType: deliveryId, price: price) { data, error in
+                                    
+                                    if error != nil , data == nil {
+                                        print("Erorr with BrokersAddSendTypeDataManager : \(error!)")
+                                        return
+                                    }
+                                    
+                                    if data!["result"].intValue == 1{
+                                        
+                                        let ruleId = data!["rule_id"].stringValue
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            sposobOtpravkiSectionForPosrednikItems.append(SposobiOtpravkiSectionForPosrednikItem(ruleId: ruleId, name: deliveryName, price: price))
+                                            
+                                            self.tableView.reloadData()
+                                            
+                                        }
+                                        
+                                    } else {
+                                        
+                                        if let message = data!["msg"].string{
+                                            
+                                            DispatchQueue.main.async {
+                                                self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }))
+                            
+                            priceAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                            
+                            DispatchQueue.main.async {
+                                self.present(priceAlertController, animated: true, completion: nil)
+                            }
+                            
+                        }))
+                        
+                    }
+                    
+                    sheetAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                    
+                    DispatchQueue.main.async {
+                        self.present(sheetAlertController, animated: true, completion: nil)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    @IBAction func removeSposobOtpravkiPressed(_ sender : UIButtonWithInfo){
+        
+        guard let index = Int(sender.info) else {return}
+        
+        let sposob = sposobOtpravkiSectionForPosrednikItems[index]
+        
+        BrokersDelSendTypeDataManager().getBrokersDelSendTypeData(key: key!, ruleId: sposob.ruleId) { data, error in
+            
+            if error != nil , data == nil {
+                print("Erorr with BrokersDelSendTypeDataManager : \(error!)")
+                return
+            }
+            
+            if data!["result"].intValue == 1{
+                
+                DispatchQueue.main.async {
+                    
+                    self.sposobOtpravkiSectionForPosrednikItems.remove(at: index)
+                    
+                    self.tableView.reloadSections([7], with: .automatic)
+                    
+                }
+                
+            }else {
+                
+                if let message = data!["msg"].string{
+                    
+                    DispatchQueue.main.async {
+                        self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
     //MARK: - SegmentedControl
     
     @IBAction func indexChanged(_ sender : UISegmentedControl){
@@ -158,6 +292,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        guard !firstSectionItemsForOrg.isEmpty || !firstSectionItemsForPosrednik.isEmpty else {return 0}
+        
         if isPosrednikTab{
             
             switch section {
@@ -176,7 +312,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             case 6: return 1
                 
-            case 7: return 1
+            case 7: return sposobOtpravkiSectionForPosrednikItems.isEmpty ? 1 : sposobOtpravkiSectionForPosrednikItems.count
                 
             case 8: return 1
                 
@@ -478,13 +614,39 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).setTitle("Добавить", for: .normal)
             
+            (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitSposobOtpravkiPressedInPosrednik(_:)), for: .touchUpInside)
+            
         }else if section == 7{
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
+            if sposobOtpravkiSectionForPosrednikItems.isEmpty{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+                
+                label.text = "Вы не добавляли способов отправки"
+                
+                return cell
+            }
             
-            guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+            let sposob = sposobOtpravkiSectionForPosrednikItems[index]
             
-            label.text = "Вы не добавляли способов отправки"
+            cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelTwoButtonCell", for: indexPath)
+            
+            guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                  let label2 = cell.viewWithTag(2) as? UILabel ,
+                  let _ = cell.viewWithTag(3) as? UIImageView,
+                  let _ = cell.viewWithTag(4) as? UIImageView,
+                  let removeButton = cell.viewWithTag(5) as? UIButtonWithInfo else {return cell}
+            
+            label1.text = sposob.name
+            label2.text = sposob.price + " руб."
+            
+            label2.textColor = .systemGray
+            
+            removeButton.info = "\(index)"
+            
+            removeButton.addTarget(self, action: #selector(removeSposobOtpravkiPressed(_:)), for: .touchUpInside)
             
         }else if section == 8{
             
@@ -1057,6 +1219,15 @@ extension NastroykiPosrednikaTableViewController {
         
     }
     
+    private struct SposobiOtpravkiSectionForPosrednikItem{
+        
+        var ruleId : String
+        var name : String
+        
+        var price : String
+        
+    }
+    
     private struct SecondSectionForOrgItem{
         
         var label1Text : String
@@ -1137,6 +1308,15 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
                 
             }
             zonesForOrg = newZones
+            
+            var newSposobi = [SposobiOtpravkiSectionForPosrednikItem]()
+            let rules = brokerProfile["send_rules"].arrayValue
+            
+            for rule in rules{
+                newSposobi.append(SposobiOtpravkiSectionForPosrednikItem(ruleId: rule["rule_id"].stringValue, name: rule["type_name"].stringValue, price: rule["price"].stringValue))
+            }
+            
+            sposobOtpravkiSectionForPosrednikItems = newSposobi
             
             //ORG Stuff
             
