@@ -958,6 +958,56 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
+        }else if section == 7{
+            
+            guard !sposobOtpravkiSectionForPosrednikItems.isEmpty else {return}
+            
+            let sposob = sposobOtpravkiSectionForPosrednikItems[index]
+            
+            let priceAlertController = UIAlertController(title: "Цена доставки для \"\(sposob.name)\"", message: nil, preferredStyle: .alert)
+            
+            priceAlertController.addTextField { priceTextField in
+                priceTextField.placeholder = "Новая цена"
+                priceTextField.keyboardType = .numberPad
+            }
+            
+            priceAlertController.addAction(UIAlertAction(title: "Изменить", style: .default, handler: { [self] _ in
+                
+                guard let price = priceAlertController.textFields?[0].text else {return}
+                
+                BrokersUpdSendTypeDataManager().getBrokersUpdSendTypeData(key: key!, ruleId: sposob.ruleId, sendType: sposob.typeId, price: price) { [self] data, error in
+                    
+                    if error != nil , data == nil {
+                        print("Erorr with BrokersUpdSendTypeDataManager : \(error!)")
+                        return
+                    }
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        sposobOtpravkiSectionForPosrednikItems[index].price = price
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                        
+                    } else {
+                        
+                        if let message = data!["msg"].string{
+                            
+                            showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }))
+            
+            priceAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            present(priceAlertController, animated: true, completion: nil)
+            
         }
         
     }
