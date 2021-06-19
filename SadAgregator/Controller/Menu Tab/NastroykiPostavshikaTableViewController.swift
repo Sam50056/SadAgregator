@@ -43,6 +43,8 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
     
     private var sposobOtpravkiSectionItems = [SposobiOtpravkiSectionForPosrednikItem]()
     
+    private var lastSectionItems = [FirstSectionItem]()
+    
     private var vendFormDataManager = VendFormDataManager()
     private lazy var vendUpdateInfoDataManager = VendUpdateInfoDataManager()
     
@@ -223,7 +225,7 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
         case 4:
             return 1
         case 5:
-            return 2
+            return lastSectionItems.count + 1
         default:
             return 0
         }
@@ -342,6 +344,32 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
             
             //            (cell.viewWithTag(2) as! UIButton).setTitle("Добавить", for: .normal)
             
+        }else if section == 5{
+            
+            if index == 0{
+                
+                return cell
+                
+            }
+            
+            guard !lastSectionItems.isEmpty else {return cell}
+            
+            let item = lastSectionItems[index - 1]
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelOneImageCell", for: indexPath)
+            
+            guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                  let label2 = cell.viewWithTag(2) as? UILabel ,
+                  let imageView = cell.viewWithTag(3) as? UIImageView else {return cell}
+            
+            label1.text = item.label1Text
+            
+            label2.text = item.label2Text
+            
+            label2.textColor = .systemGray
+            
+            imageView.image = UIImage(systemName: item.imageName)
+            
         }
         
         return cell
@@ -458,6 +486,64 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
             
             present(priceAlertController, animated: true, completion: nil)
             
+            
+        }else if section == 5{
+            
+            guard !lastSectionItems.isEmpty , index != 0 else {return}
+            
+            let item = lastSectionItems[index - 1]
+            
+            if item.imageName == "pencil"{
+                
+                let alertController = UIAlertController(title: "Редактировать \(item.label1Text.lowercased())", message: nil, preferredStyle: .alert)
+                
+                alertController.addTextField { textField in
+                    if item.type == "3"{
+                        textField.keyboardType = .numberPad
+                    }
+                    textField.placeholder = item.label2Text
+                }
+                
+                alertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { [self] _ in
+                    
+                    if let newValue = alertController.textFields?[0].text {
+                        
+                        vendUpdateInfoDataManager.getVendUpdateInfoData(key: key!, type: item.type, value: newValue) { [self] data, error in
+                            
+                            if error != nil , data == nil {
+                                print("Erorr with VendUpdateInfoDataManager : \(error!)")
+                                return
+                            }
+                            
+                            if data!["result"].intValue == 1{
+                                
+                                lastSectionItems[index - 1].label2Text = newValue + (item.type == "3" ? " руб." : "")
+                                
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
+                                
+                            }else {
+                                
+                                if let message = data!["msg"].string{
+                                    
+                                    showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                
+                present(alertController, animated: true, completion: nil)
+                
+            }
             
         }
         
@@ -582,6 +668,14 @@ extension NastroykiPostavshikaTableViewController : VendFormDataManagerDelegate{
                 }
                 
                 sposobOtpravkiSectionItems = newSposobi
+                
+                var newLastSectionItems = [FirstSectionItem]()
+                
+                if let minOrderAgr = vendInfo["min_order_agr"].string{
+                    newLastSectionItems.append(FirstSectionItem(label1Text: "Минимальный заказ", label2Text: minOrderAgr + " руб.", imageName : "pencil" , type: "3"))
+                }
+                
+                lastSectionItems = newLastSectionItems
                 
                 tableView.reloadData()
                 
