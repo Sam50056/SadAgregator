@@ -348,6 +348,17 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
             
             if index == 0{
                 
+                cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel ,
+                      let buttonView = cell.viewWithTag(2),
+                      let buttonLabel = cell.viewWithTag(3) as? UILabel else {return cell}
+                
+                buttonView.layer.cornerRadius = 8
+                buttonView.backgroundColor = UIColor(named: "gray")
+                
+                buttonLabel.text = "Не отображается"
+                
                 return cell
                 
             }
