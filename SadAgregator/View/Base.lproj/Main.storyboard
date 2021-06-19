@@ -4870,13 +4870,20 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POy-aD-wmm" customClass="UIButtonWithInfo" customModule="SadAgregator" customModuleProvider="target">
+                                            <rect key="frame" x="343" y="0.0" width="47" height="63"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="6ro-d5-wNN" firstAttribute="leading" secondItem="2Nh-DU-eOb" secondAttribute="leadingMargin" id="81R-zB-LF2"/>
+                                        <constraint firstItem="POy-aD-wmm" firstAttribute="top" secondItem="2Nh-DU-eOb" secondAttribute="top" id="Gjn-qm-rth"/>
                                         <constraint firstItem="dVN-lv-x1A" firstAttribute="leading" secondItem="cFA-3A-EJk" secondAttribute="trailing" constant="8" id="J38-3s-n26"/>
+                                        <constraint firstItem="POy-aD-wmm" firstAttribute="leading" secondItem="cFA-3A-EJk" secondAttribute="trailing" id="MhF-D5-xG6"/>
                                         <constraint firstItem="6ro-d5-wNN" firstAttribute="centerY" secondItem="2Nh-DU-eOb" secondAttribute="centerY" id="UPw-0c-WWE"/>
+                                        <constraint firstAttribute="bottom" secondItem="POy-aD-wmm" secondAttribute="bottom" id="axh-Bz-hCB"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="dVN-lv-x1A" secondAttribute="trailing" id="bQc-Fx-QyY"/>
                                         <constraint firstItem="cFA-3A-EJk" firstAttribute="centerY" secondItem="2Nh-DU-eOb" secondAttribute="centerY" id="gzh-ik-zQL"/>
+                                        <constraint firstAttribute="trailing" secondItem="POy-aD-wmm" secondAttribute="trailing" id="vi5-Ti-bm0"/>
                                         <constraint firstItem="dVN-lv-x1A" firstAttribute="centerY" secondItem="2Nh-DU-eOb" secondAttribute="centerY" id="x82-NC-ppC"/>
                                     </constraints>
                                 </tableViewCellContentView>

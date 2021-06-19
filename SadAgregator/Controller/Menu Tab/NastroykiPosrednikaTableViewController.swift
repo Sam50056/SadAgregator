@@ -51,6 +51,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     private var zonesForOrg = [PurchaseZone]()
     private var zonesForPosrednik = [PurchaseZone]()
     
+    private var helpersForPosrednik = [Helper]()
+    
     private var brokersFormDataManager = BrokersFormDataManager()
     
     private lazy var brokersUpdateInfoDataManager = BrokersUpdateInfoDataManager()
@@ -238,6 +240,78 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
     }
     
+    @IBAction func dobavitPomoshnikaPressedInPosrednik(_ sender : Any){
+        
+        let alertController = UIAlertController(title: "Введите код помощника", message: nil, preferredStyle: .alert)
+        
+        alertController.addTextField { textField in
+            
+        }
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        alertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { [self] _ in
+            
+            guard let code = alertController.textFields?[0].text else {return}
+            
+            BrokersBrokerHelperCheckDataManager().getBrokersBrokerHelperCheckData(key: key!, code: code) { data, error in
+                
+                if error != nil , data == nil {
+                    print("Erorr with BrokersBrokerHelperCheckDataManager : \(error!)")
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    DispatchQueue.main.async {
+                        
+                        let name = data!["name"].stringValue
+                        let error = data!["err_msg"].stringValue
+                        
+                        if !name.isEmpty , error.isEmpty{
+                            
+                            let nameAlertController = UIAlertController(title: "Добавить помощника \"\(name)\"", message: nil, preferredStyle: .alert)
+                            
+                            nameAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                            
+                            nameAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                
+                                BrokersAddBrokerHelperDataManager().getBrokersAddBrokerHelperData(key: key!, code: code) { data, error in
+                                    
+                                    if data!["result"].intValue == 1{
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            helpersForPosrednik.append(Helper(id: data!["rec_id"].stringValue, name: name, code: code))
+                                            
+                                            tableView.reloadSections([9], with: .automatic)
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }))
+                            
+                            present(nameAlertController, animated: true, completion: nil)
+                            
+                        }else{
+                            showSimpleAlertWithOkButton(title: "Ошибка", message: error)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }))
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
     @IBAction func removeSposobOtpravkiPressed(_ sender : UIButtonWithInfo){
         
         guard let index = Int(sender.info) else {return}
@@ -331,7 +405,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             case 8: return 1
                 
-            case 9: return 1
+            case 9: return helpersForPosrednik.isEmpty ? 1 : helpersForPosrednik.count
                 
             default: return 0
                 
@@ -800,13 +874,66 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).setTitle("Добавить", for: .normal)
             
+            (cell.viewWithTag(2) as! UIButton).removeTarget(self, action: nil, for: .touchUpInside)
+            
+            (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitPomoshnikaPressedInPosrednik(_:)), for: .touchUpInside)
+            
         }else if section == 9{
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
+            if helpersForPosrednik.isEmpty{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+                
+                label.text = "Вы не добавляли помощников"
+                
+                return cell
+                
+            }
             
-            guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+            let helper = helpersForPosrednik[index]
             
-            label.text = "Вы не добавляли помощников"
+            cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelOneImageCell", for: indexPath)
+            
+            guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                  let label2 = cell.viewWithTag(2) as? UILabel ,
+                  let imageView = cell.viewWithTag(3) as? UIImageView,
+                  let button = cell.viewWithTag(4) as? UIButton
+            else {return cell}
+            
+            label1.text = helper.name
+            
+            label2.text = helper.code
+            
+            label2.textColor = .systemGray
+            
+            imageView.image = UIImage(systemName: "multiply")
+            
+            button.addAction(UIAction(handler: { [self] _ in
+                
+                BrokersDelBrokerHelperDataManager().getBrokersDelBrokerHelperData(key: key!, id: helper.id) { data, error in
+                    
+                    if error != nil , data == nil {
+                        print("Erorr with BrokersDelBrokerHelperDataManager : \(error!)")
+                        return
+                    }
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        DispatchQueue.main.async { [self] in
+                            
+                            helpersForPosrednik.remove(at: index)
+                            
+                            tableView.reloadSections([9], with: .automatic)
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }), for: .touchUpInside)
             
         }
         
@@ -842,7 +969,9 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             guard let label1 = cell.viewWithTag(1) as? UILabel ,
                   let label2 = cell.viewWithTag(2) as? UILabel ,
-                  let imageView = cell.viewWithTag(3) as? UIImageView else {return cell}
+                  let imageView = cell.viewWithTag(3) as? UIImageView,
+                  let _ = cell.viewWithTag(4) as? UIButton
+            else {return cell}
             
             label1.text = item.label1Text
             
@@ -1426,6 +1555,15 @@ extension NastroykiPosrednikaTableViewController {
         
     }
     
+    private struct Helper{
+        
+        var id : String
+        
+        var name : String
+        var code : String
+        
+    }
+    
     private struct SecondSectionForOrgItem{
         
         var label1Text : String
@@ -1515,6 +1653,18 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
                 
             }
             zonesForPosrednik = newZonesForPosrednik
+            
+            var newHelpersForPosrednik = [Helper]()
+            
+            let jsonHelpers = brokerProfile["broker_helpers"].arrayValue
+            
+            for jsonHelper in jsonHelpers{
+                
+                newHelpersForPosrednik.append(Helper(id: jsonHelper["hid"].stringValue, name: jsonHelper["name"].stringValue, code: jsonHelper["code"].stringValue))
+                
+            }
+            
+            helpersForPosrednik = newHelpersForPosrednik
             
             //ORG Stuff
             
