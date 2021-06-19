@@ -934,7 +934,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                    let nacenkaLabel = cell.viewWithTag(5) as? UILabel,
                    let okruglenieLabel = cell.viewWithTag(6) as? UILabel ,
                    let fixNadbavkaTextLabel = cell.viewWithTag(7) as? UILabel,
-                   let fixNadbavkaLabel = cell.viewWithTag(8) as? UILabel{
+                   let fixNadbavkaLabel = cell.viewWithTag(8) as? UILabel,
+                   let okruglenieTextLabel = cell.viewWithTag(9) as? UILabel{
                     
                     let zone = zonesForOrg[indexPath.row]
                     
@@ -963,6 +964,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     nacenkaLabel.text = zone.marge + (zone.marge.contains("%") ? "" : " руб.")
                     
                     okruglenieLabel.text = zone.trunc
+                    okruglenieTextLabel.isHidden = false
                     
                     if zone.marge.contains("%"){
                         fixNadbavkaTextLabel.isHidden = false
