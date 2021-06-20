@@ -193,6 +193,12 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
         
     }
     
+    @IBAction func ratingCellButtonTapped(_ sender : Any){
+        
+        
+        
+    }
+    
     //MARK: - Update
     
     func update(){
@@ -352,12 +358,18 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
                 
                 guard let label = cell.viewWithTag(1) as? UILabel ,
                       let buttonView = cell.viewWithTag(2),
-                      let buttonLabel = cell.viewWithTag(3) as? UILabel else {return cell}
+                      let buttonLabel = cell.viewWithTag(3) as? UILabel ,
+                      let button = cell.viewWithTag(4) as? UIButton
+                else {return cell}
+                
+                label.text = "В рейтинге поставщиков"
                 
                 buttonView.layer.cornerRadius = 8
                 buttonView.backgroundColor = UIColor(named: "gray")
                 
                 buttonLabel.text = "Не отображается"
+                
+                button.addTarget(self, action: #selector(ratingCellButtonTapped(_:)), for: .touchUpInside)
                 
                 return cell
                 
