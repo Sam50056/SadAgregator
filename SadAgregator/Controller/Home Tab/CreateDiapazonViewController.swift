@@ -69,7 +69,7 @@ class CreateDiapazonViewController: UIViewController {
         
         if isPosrednik{
             
-            selectPercents()
+            isInPercents = true
             
             fixNadbavkalabel.isHidden = true
             fixNadbavkaTextField.isHidden = true

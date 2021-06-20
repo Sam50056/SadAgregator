@@ -767,7 +767,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     
                 }
                 
-                nacenkaLabel.text = zone.marge + (zone.marge.contains("%") ? "" : " руб.")
+                nacenkaLabel.text = zone.marge + "%" //We put always percent sign because in "Комиссия" , nacenka is always in percents
                 
                 okruglenieLabel.text = ""
                 okruglenieTextLabel.isHidden = true
