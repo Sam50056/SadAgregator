@@ -585,7 +585,7 @@ extension NastroykiPostavshikaTableViewController : UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        if let value = textField.text , let key = key , let fieldId = textField.restorationIdentifier {
+        if let value = textField.text?.replacingOccurrences(of: "\n", with: "<br>") , let key = key , let fieldId = textField.restorationIdentifier {
             
             let typeLastIndex = fieldId.firstIndex(of: "|")
             let type = String(fieldId[fieldId.startIndex..<typeLastIndex!])

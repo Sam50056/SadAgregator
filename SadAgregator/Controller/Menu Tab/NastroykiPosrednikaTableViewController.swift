@@ -1492,7 +1492,7 @@ extension NastroykiPosrednikaTableViewController : UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        if let value = textField.text , let key = key , let fieldId = textField.restorationIdentifier {
+        if let value = textField.text?.replacingOccurrences(of: "\n", with: "<br>") , let key = key , let fieldId = textField.restorationIdentifier {
             
             let typeLastIndex = fieldId.firstIndex(of: "|")
             let type = String(fieldId[fieldId.startIndex..<typeLastIndex!])
@@ -1624,7 +1624,7 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
                 newFirstSectionItemsForPosrednik.append(FirstSectionItem(label1Text: "Реквизиты для оплаты", label2Text: rekviziti, imageName: "pencil", type: "03"))
             }
             
-            if let dopInfo = brokerProfile["broker_terms"].string{
+            if let dopInfo = brokerProfile["broker_terms"].string?.replacingOccurrences(of: "<br>", with: "\n"){
                 newFirstSectionItemsForPosrednik.append(FirstSectionItem(label1Text: "Дополнительная информация", label2Text: dopInfo, type: "09", isDopInfo: true))
             }
             
