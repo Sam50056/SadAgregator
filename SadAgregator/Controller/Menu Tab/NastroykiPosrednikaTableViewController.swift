@@ -501,6 +501,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     
                     if zone.marge.contains("%") , zone.fix != "0"{
                         return 150
+                    }else if !zone.marge.contains("%"){
+                        return 80
                     }else{
                         return 115
                     }
@@ -1099,10 +1101,14 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                         fixNadbavkaTextLabel.isHidden = false
                         fixNadbavkaLabel.isHidden = false
                         fixNadbavkaLabel.text = zone.fix
+                        okruglenieLabel.isHidden = false
+                        okruglenieTextLabel.isHidden = false
                     }else{
                         fixNadbavkaTextLabel.isHidden = true
                         fixNadbavkaLabel.text = ""
                         fixNadbavkaLabel.isHidden = true
+                        okruglenieLabel.isHidden = true
+                        okruglenieTextLabel.isHidden = true
                     }
                     
                     

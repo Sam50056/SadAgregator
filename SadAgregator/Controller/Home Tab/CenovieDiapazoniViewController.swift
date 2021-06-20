@@ -106,7 +106,8 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
            let nacenkaLabel = cell.viewWithTag(5) as? UILabel,
            let okruglenieLabel = cell.viewWithTag(6) as? UILabel ,
            let fixNadbavkaTextLabel = cell.viewWithTag(7) as? UILabel,
-           let fixNadbavkaLabel = cell.viewWithTag(8) as? UILabel{
+           let fixNadbavkaLabel = cell.viewWithTag(8) as? UILabel,
+           let okruglenieTextLabel = cell.viewWithTag(9) as? UILabel{
             
             let zone = zones[indexPath.row]
             
@@ -140,10 +141,14 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
                 fixNadbavkaTextLabel.isHidden = false
                 fixNadbavkaLabel.isHidden = false
                 fixNadbavkaLabel.text = zone.fix
+                okruglenieLabel.isHidden = false
+                okruglenieTextLabel.isHidden = false
             }else{
                 fixNadbavkaTextLabel.isHidden = true
                 fixNadbavkaLabel.text = ""
                 fixNadbavkaLabel.isHidden = true
+                okruglenieLabel.isHidden = true
+                okruglenieTextLabel.isHidden = true
             }
             
             
@@ -159,6 +164,8 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
         
         if zone.marge.contains("%") , zone.fix != "0"{
             return 150
+        }else if !zone.marge.contains("%"){
+            return 80
         }else{
             return 115
         }
