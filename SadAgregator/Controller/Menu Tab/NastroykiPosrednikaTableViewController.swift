@@ -353,6 +353,39 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
     }
     
+    @IBAction func removePomoshnik(_ sender : UIButtonWithInfo){
+        
+        let info = sender.info
+        
+        let dividerIndex = info.firstIndex(of: "|")
+        let helperId = String(info[info.startIndex..<dividerIndex!])
+        let index = Int(String(info[dividerIndex!..<info.endIndex]).replacingOccurrences(of: "|", with: ""))!
+        
+        guard !helperId.isEmpty else {return}
+        
+        BrokersDelBrokerHelperDataManager().getBrokersDelBrokerHelperData(key: key!, id: helperId) { data, error in
+            
+            if error != nil , data == nil {
+                print("Erorr with BrokersDelBrokerHelperDataManager : \(error!)")
+                return
+            }
+            
+            if data!["result"].intValue == 1{
+                
+                DispatchQueue.main.async { [self] in
+                    
+                    helpersForPosrednik.remove(at: index)
+                    
+                    tableView.reloadSections([9], with: .automatic)
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
     //MARK: - SegmentedControl
     
     @IBAction func indexChanged(_ sender : UISegmentedControl){
@@ -903,7 +936,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             guard let label1 = cell.viewWithTag(1) as? UILabel ,
                   let label2 = cell.viewWithTag(2) as? UILabel ,
                   let imageView = cell.viewWithTag(3) as? UIImageView,
-                  let button = cell.viewWithTag(4) as? UIButton
+                  let button = cell.viewWithTag(4) as? UIButtonWithInfo
             else {return cell}
             
             label1.text = helper.name
@@ -914,30 +947,11 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             imageView.image = UIImage(systemName: "multiply")
             
-            button.addAction(UIAction(handler: { [self] _ in
-                
-                BrokersDelBrokerHelperDataManager().getBrokersDelBrokerHelperData(key: key!, id: helper.id) { data, error in
-                    
-                    if error != nil , data == nil {
-                        print("Erorr with BrokersDelBrokerHelperDataManager : \(error!)")
-                        return
-                    }
-                    
-                    if data!["result"].intValue == 1{
-                        
-                        DispatchQueue.main.async { [self] in
-                            
-                            helpersForPosrednik.remove(at: index)
-                            
-                            tableView.reloadSections([9], with: .automatic)
-                            
-                        }
-                        
-                    }
-                    
-                }
-                
-            }), for: .touchUpInside)
+            button.removeTarget(self, action: nil, for: .touchUpInside)
+            
+            button.info = "\(helper.id)|\(index)"
+            
+            button.addTarget(self, action: #selector(removePomoshnik(_:)), for: .touchUpInside)
             
         }
         
