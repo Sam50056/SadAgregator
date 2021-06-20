@@ -415,6 +415,11 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
                 let alertController = UIAlertController(title: "Редактировать \(item.label1Text.lowercased())", message: nil, preferredStyle: .alert)
                 
                 alertController.addTextField { textField in
+                    
+                    if item.type == "3"{
+                        textField.keyboardType = .numberPad
+                    }
+                    
                     textField.placeholder = item.label2Text
                 }
                 
