@@ -45,6 +45,8 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
     
     private var lastSectionItems = [FirstSectionItem]()
     
+    private var vendStatus : String?
+    
     private var vendFormDataManager = VendFormDataManager()
     private lazy var vendUpdateInfoDataManager = VendUpdateInfoDataManager()
     
@@ -199,6 +201,39 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
         
     }
     
+    @IBAction func zeroSectionCellButtonTapped(_ sender : Any){
+        
+        guard let key = key , let vendStatus = vendStatus , vendStatus == "0" else {return}
+        
+        let alertController = UIAlertController(title: "Отправить запрос на проверку номера точки?", message: nil, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+            
+            BrokersUpdateInfoDataManager().getBrokersUpdateInfoData(key: key, type: "1", value: "1") { data, error in
+                
+                if error != nil , data == nil {
+                    print("Erorr with VendGetDeliveryTypeDataManager : \(error!)")
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    DispatchQueue.main.async {
+                        self.update()
+                    }
+                    
+                }
+                
+            }
+            
+        }))
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
     //MARK: - Update
     
     func update(){
@@ -217,7 +252,7 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        guard !firstSectionItems.isEmpty else {return 1}
+        guard !firstSectionItems.isEmpty else {return 0}
         
         switch section {
         case 0:
@@ -249,10 +284,32 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
             
             cell = tableView.dequeueReusableCell(withIdentifier: "zeroSectionCell", for: indexPath)
             
-            guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
-
+            guard let label = cell.viewWithTag(1) as? UILabel,
+                  let buttonView = cell.viewWithTag(2),
+                  let buttonLabel = cell.viewWithTag(3) as? UILabel ,
+                  let button = cell.viewWithTag(4) as? UIButton
+            else {return cell}
+            
             label.text = capt ?? ""
             label.font = UIFont.boldSystemFont(ofSize: 23)
+            
+            buttonView.isHidden = true
+            
+            guard let vendStatus = vendStatus , vendStatus != "" else { return cell }
+            
+            buttonView.isHidden = false
+            
+            buttonView.layer.cornerRadius = 8
+            
+            button.addTarget(self, action: #selector(zeroSectionCellButtonTapped(_:)), for: .touchUpInside)
+            
+            if vendStatus == "0"{
+                buttonLabel.text = "Перепроверить"
+                buttonView.backgroundColor = UIColor(named: "gray")
+            }else{
+                buttonLabel.text = "Перепроверяется"
+                buttonView.backgroundColor = .systemYellow
+            }
             
         }else if section == 1{
             
@@ -704,6 +761,8 @@ extension NastroykiPostavshikaTableViewController : VendFormDataManagerDelegate{
                 }
                 
                 lastSectionItems = newLastSectionItems
+                
+                vendStatus = vendInfo["vend_status"].string
                 
                 tableView.reloadData()
                 

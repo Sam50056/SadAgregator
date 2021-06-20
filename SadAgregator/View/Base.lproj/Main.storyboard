@@ -5429,11 +5429,43 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LqN-pY-N6c">
+                                            <rect key="frame" x="235" y="15" width="135" height="28"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRU-XP-Gmg">
+                                                    <rect key="frame" x="8" y="4" width="119" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liu-kC-8UE">
+                                                    <rect key="frame" x="0.0" y="0.0" width="135" height="28"/>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstItem="nRU-XP-Gmg" firstAttribute="leading" secondItem="LqN-pY-N6c" secondAttribute="leading" constant="8" id="0KL-bV-iJ6"/>
+                                                <constraint firstAttribute="bottom" secondItem="liu-kC-8UE" secondAttribute="bottom" id="3mf-iI-lUy"/>
+                                                <constraint firstItem="nRU-XP-Gmg" firstAttribute="centerY" secondItem="LqN-pY-N6c" secondAttribute="centerY" id="DfV-mx-dps"/>
+                                                <constraint firstItem="liu-kC-8UE" firstAttribute="leading" secondItem="LqN-pY-N6c" secondAttribute="leading" id="UN6-dL-Dnd"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="135" id="W2z-aw-cPr"/>
+                                                <constraint firstItem="liu-kC-8UE" firstAttribute="top" secondItem="LqN-pY-N6c" secondAttribute="top" id="Wv1-lU-3JD"/>
+                                                <constraint firstItem="nRU-XP-Gmg" firstAttribute="centerX" secondItem="LqN-pY-N6c" secondAttribute="centerX" id="eVY-Rv-THf"/>
+                                                <constraint firstAttribute="bottom" secondItem="nRU-XP-Gmg" secondAttribute="bottom" constant="4" id="eiW-Zh-oS1"/>
+                                                <constraint firstAttribute="trailing" secondItem="liu-kC-8UE" secondAttribute="trailing" id="h1M-qu-hTl"/>
+                                                <constraint firstItem="nRU-XP-Gmg" firstAttribute="top" secondItem="LqN-pY-N6c" secondAttribute="top" constant="4" id="kwq-0q-hcx"/>
+                                                <constraint firstAttribute="trailing" secondItem="nRU-XP-Gmg" secondAttribute="trailing" constant="8" id="nPg-mo-dsS"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" name="whiteblack"/>
                                     <constraints>
                                         <constraint firstItem="QYX-Y6-e2e" firstAttribute="top" secondItem="Wh9-C9-Kor" secondAttribute="topMargin" constant="6" id="BUn-Mh-937"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="LqN-pY-N6c" secondAttribute="bottom" constant="4" id="Eaw-HG-WUG"/>
+                                        <constraint firstItem="LqN-pY-N6c" firstAttribute="trailing" secondItem="Wh9-C9-Kor" secondAttribute="trailingMargin" id="IpL-MH-eyH"/>
                                         <constraint firstItem="QYX-Y6-e2e" firstAttribute="leading" secondItem="Wh9-C9-Kor" secondAttribute="leadingMargin" id="Wch-rW-us1"/>
+                                        <constraint firstItem="LqN-pY-N6c" firstAttribute="centerY" secondItem="Wh9-C9-Kor" secondAttribute="centerY" id="eUi-H0-9Us"/>
+                                        <constraint firstItem="LqN-pY-N6c" firstAttribute="top" secondItem="Wh9-C9-Kor" secondAttribute="topMargin" constant="4" id="qsV-9p-AI8"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>

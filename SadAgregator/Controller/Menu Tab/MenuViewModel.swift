@@ -138,8 +138,10 @@ extension MenuViewModel{
     
     func login(newKey : String){
         
-        showModalLogIn = false
-        showModalReg = false
+        DispatchQueue.main.async {
+            self.showModalLogIn = false
+            self.showModalReg = false
+        }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
             
