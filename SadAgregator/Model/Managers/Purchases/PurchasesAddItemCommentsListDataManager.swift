@@ -10,7 +10,7 @@ import SwiftyJSON
 
 struct PurchasesAddItemCommentsListDataManager {
     
-    func getPurchasesAddItemCommentsListData(key : String, comment : String , myComment : String , items : [String] , completionHandler: @escaping (JSON?, String?) -> Void){
+    func getPurchasesAddItemCommentsListData(key : String, comment : String , myComment : String , items : String , completionHandler: @escaping (JSON?, String?) -> Void){
         
         let urlString = "https://agrapi.tk-sad.ru/agr_purchases.AddItemCommentsList?AKey=\(key)&AItemsList=\(items)&AComment=\(comment)&APrivateComment=\(myComment)"
         
