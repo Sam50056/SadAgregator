@@ -46,8 +46,8 @@ class DobavlenieVZakupkuViewController: UIViewController {
         
         var count = 0
         
-        if clients.isEmpty && clientForReplce != nil{
-            count = clientForReplce!.count
+        if clients.isEmpty && clientForReplace != nil{
+            count = clientForReplace!.count
         }else{
             
             for client in clients{
@@ -133,7 +133,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
     
     private var replaceTovarId : String?
     
-    private var clientForReplce : KlientiCellKlientItem?
+    private var clientForReplace : KlientiCellKlientItem?
     
     lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
     lazy var photoSavedDataManager = PhotoSavedDataManager()
@@ -300,7 +300,7 @@ extension DobavlenieVZakupkuViewController {
         
         klientiCellItemsArray = [
             KlientiCellItem(labelText: "Добавить клиента в закупку"),
-            KlientiCellItem(labelText: clientForReplce == nil ? "Выбрать клиента для замены" : "Клиент для замены:"),
+            KlientiCellItem(labelText: clientForReplace == nil ? "Выбрать клиента для замены" : "Клиент для замены:"),
             KlientiCellItem(labelText: replaceTovarId == nil ? "Выбрать товар под замену" : "Замена выбрана"),
             KlientiCellItem(labelText: selectedZakupka == nil ? "Выбрать закупку" : "Закупка: \(selectedZakupka!.name)")
         ]
@@ -355,7 +355,7 @@ extension DobavlenieVZakupkuViewController {
     
     @IBAction func gotovoTapped(_ sender : Any?){
         
-        guard !clients.isEmpty else {
+        guard !clients.isEmpty || clientForReplace != nil else {
             //            showSimpleAlertWithOkButton(title: "Ошибка", message: "Нет добавленных клиентов")
             return
         }
@@ -372,17 +372,27 @@ extension DobavlenieVZakupkuViewController {
             return
         }
         
-        //Making client string from clients array
+        //Making client string
         var clientsString = ""
-        for i in 0..<clients.count{
+        
+        if clients.isEmpty , let clientForReplace = clientForReplace{
             
-            let client = clients[i]
+            clientsString = "|\(clientForReplace.id)-1|"
             
-            if i == clients.count - 1{
-                clientsString.append("|\(client.id)-\(client.count)|")
-            }else{
-                clientsString.append("|\(client.id)-\(client.count)")
+        }else{
+            
+            for i in 0..<clients.count{
+                
+                let client = clients[i]
+                
+                if i == clients.count - 1{
+                    clientsString.append("|\(client.id)-\(client.count)|")
+                }else{
+                    clientsString.append("|\(client.id)-\(client.count)")
+                }
+                
             }
+            
         }
         
         PurchasesAddItemDataManager(delegate: self).getPurchasesAddItemData(key: key, imgId: thisImageId, zakupkaId: selectedZakupka?.id ?? "" , size: thisSize ?? "", purPrice: cenaZakupki == nil ? "" : String(cenaZakupki!), sellPrice: cenaProdazhi == nil ? "" : String(cenaProdazhi!), withoutReplace: bezZamenSwitch ? "1" : "0", paid: oplachenoSwitch ? "1" : "0", checkDefect: proverkaNaBrakSwitch ? "1" : "0", checkImgId: checkImageId ?? "", parselImgId: parselImageId ?? "", clients: clientsString, replaceTovarId: replaceTovarId ?? "")
@@ -454,7 +464,7 @@ extension DobavlenieVZakupkuViewController {
     
     @IBAction func removeClientForReplacePressed(_ sender : Any){
         
-        clientForReplce = nil
+        clientForReplace = nil
         replaceTovarId = nil
         
         makeKlientiCellItemsArray()
@@ -838,7 +848,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 button.addTarget(self, action: #selector(removeZamenaPressed(_:)), for: .touchUpInside)
                 
                 //If there's more or less than one client selected , "Выбрать товар под замену" should be gray and not be selectable
-                if clientForReplce == nil {
+                if clientForReplace == nil {
                     label1.textColor = .systemGray
                 }else{
                     label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
@@ -858,7 +868,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 else {return cell}
                 
                 label1.text = item.labelText
-                label2.text = clientForReplce!.name
+                label2.text = clientForReplace!.name
                 
                 label1.textColor = item.shouldLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
                 
@@ -884,7 +894,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
             
             if item.labelText == "Выбрать клиента для замены" , !clients.isEmpty{
                 label1.textColor = .systemGray
-            }else if item.labelText == "Добавить клиента в закупку" , clientForReplce != nil {
+            }else if item.labelText == "Добавить клиента в закупку" , clientForReplace != nil {
                 label1.textColor = .systemGray
             }
             
@@ -1108,7 +1118,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     
                 }else if klientiCellItemsArray[index - clients.count].labelText == "Добавить клиента в закупку"{
                     
-                    guard clientForReplce == nil else {
+                    guard clientForReplace == nil else {
                         showSimpleAlertWithOkButton(title: "Вы уже проводите замену товара", message: nil)
                         return
                     }
@@ -1145,7 +1155,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     
                     vibratKlientaVC.clientSelected = { [self] name , id in
                         
-                        clientForReplce = KlientiCellKlientItem(name: name, id: id, count: 1)
+                        clientForReplace = KlientiCellKlientItem(name: name, id: id, count: 1)
                         
                         makeKlientiCellItemsArray()
                         
@@ -1157,7 +1167,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     
                     present(navVC, animated: true, completion: nil)
                     
-                }else if klientiCellItemsArray[index - clients.count].labelText == "Выбрать товар под замену" && clientForReplce != nil{
+                }else if klientiCellItemsArray[index - clients.count].labelText == "Выбрать товар под замену" && clientForReplace != nil{
                     
                     guard clients.isEmpty else {
                         showSimpleAlertWithOkButton(title: "Вы уже добавляете товары в закупку", message: nil)
@@ -1166,7 +1176,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     
                     let zamenaDlyaVC = ZamenaDlyaTableViewController()
                     
-                    zamenaDlyaVC.thisClientId = clientForReplce!.id
+                    zamenaDlyaVC.thisClientId = clientForReplace!.id
                     zamenaDlyaVC.zakupkaId = selectedZakupka?.id
                     
                     zamenaDlyaVC.tovarSelected = { [self] pid in
