@@ -245,7 +245,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         let alertController = UIAlertController(title: "Введите код помощника", message: nil, preferredStyle: .alert)
         
         alertController.addTextField { textField in
-            
+            textField.keyboardType = .numberPad
         }
         
         alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
@@ -297,7 +297,9 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                             present(nameAlertController, animated: true, completion: nil)
                             
                         }else{
-                            showSimpleAlertWithOkButton(title: "Ошибка", message: error)
+                            DispatchQueue.main.async {
+                                self.showSimpleAlertWithOkButton(title: "Ошибка", message: error)
+                            }
                         }
                         
                     }
@@ -1161,9 +1163,9 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                             }else {
                                 
                                 if let message = data!["msg"].string{
-                                    
-                                    showSimpleAlertWithOkButton(title: "Ошибка", message: message)
-                                    
+                                    DispatchQueue.main.async {
+                                        self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                    }
                                 }
                                 
                             }
@@ -1220,9 +1222,9 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                             }else {
                                 
                                 if let message = data!["msg"].string{
-                                    
-                                    showSimpleAlertWithOkButton(title: "Ошибка", message: message)
-                                    
+                                    DispatchQueue.main.async {
+                                        self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                    }
                                 }
                                 
                             }
@@ -1274,9 +1276,9 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     } else {
                         
                         if let message = data!["msg"].string{
-                            
-                            showSimpleAlertWithOkButton(title: "Ошибка", message: message)
-                            
+                            DispatchQueue.main.async{
+                                self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                            }
                         }
                         
                     }
@@ -1332,9 +1334,9 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                             }else {
                                 
                                 if let message = data!["msg"].string{
-                                    
-                                    showSimpleAlertWithOkButton(title: "Ошибка", message: message)
-                                    
+                                    DispatchQueue.main.async{
+                                        self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                    }
                                 }
                                 
                             }
