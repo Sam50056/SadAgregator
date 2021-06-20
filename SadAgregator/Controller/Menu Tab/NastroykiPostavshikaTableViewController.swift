@@ -682,7 +682,7 @@ extension NastroykiPostavshikaTableViewController : VendFormDataManagerDelegate{
                     newFirstSectionItems.append(FirstSectionItem(label1Text: "Номер карты", label2Text: card4,imageName : "pencil" , type: "4"))
                 }
                 
-                if let dopInfo = vendInfo["dop_info"].string{
+                if let dopInfo = vendInfo["dop_info"].string?.replacingOccurrences(of: "<br>", with: "\n"){
                     newFirstSectionItems.append(FirstSectionItem(label1Text: "Дополнительная информация", label2Text: dopInfo.replacingOccurrences(of: "<br>", with: "\n"), type: "5", isDopInfo: true))
                 }
                 
