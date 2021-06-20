@@ -46,6 +46,7 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
     private var lastSectionItems = [FirstSectionItem]()
     
     private var vendStatus : String?
+    private var agrMembLevel : String?
     
     private var vendFormDataManager = VendFormDataManager()
     private lazy var vendUpdateInfoDataManager = VendUpdateInfoDataManager()
@@ -247,7 +248,7 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 7
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -266,7 +267,9 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
         case 4:
             return 1
         case 5:
-            return lastSectionItems.count + 1
+            return agrMembLevel == nil ? 0 : 1
+        case 6:
+            return lastSectionItems.count
         default:
             return 0
         }
@@ -408,8 +411,6 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
             //            (cell.viewWithTag(2) as! UIButton).setTitle("Добавить", for: .normal)
             
         }else if section == 5{
-            
-            if index == 0{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
                 
@@ -428,13 +429,11 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
                 
                 button.addTarget(self, action: #selector(ratingCellButtonTapped(_:)), for: .touchUpInside)
                 
-                return cell
-                
-            }
+        }else if section == 6{
             
             guard !lastSectionItems.isEmpty else {return cell}
             
-            let item = lastSectionItems[index - 1]
+            let item = lastSectionItems[index]
             
             cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelOneImageCell", for: indexPath)
             
@@ -572,11 +571,11 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
             present(priceAlertController, animated: true, completion: nil)
             
             
-        }else if section == 5{
+        }else if section == 6{
             
-            guard !lastSectionItems.isEmpty , index != 0 else {return}
+            guard !lastSectionItems.isEmpty else {return}
             
-            let item = lastSectionItems[index - 1]
+            let item = lastSectionItems[index]
             
             if item.imageName == "pencil"{
                 
@@ -602,7 +601,7 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
                             
                             if data!["result"].intValue == 1{
                                 
-                                lastSectionItems[index - 1].label2Text = newValue + (item.type == "3" ? " руб." : "")
+                                lastSectionItems[index].label2Text = newValue + (item.type == "3" ? " руб." : "")
                                 
                                 DispatchQueue.main.async {
                                     self.tableView.reloadData()
@@ -763,6 +762,8 @@ extension NastroykiPostavshikaTableViewController : VendFormDataManagerDelegate{
                 lastSectionItems = newLastSectionItems
                 
                 vendStatus = vendInfo["vend_status"].string
+                
+                agrMembLevel = vendInfo["agr_memb_lvl"].string
                 
                 tableView.reloadData()
                 
