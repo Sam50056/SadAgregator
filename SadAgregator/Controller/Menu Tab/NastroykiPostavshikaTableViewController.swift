@@ -526,7 +526,9 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
             
             if item.imageName == "pencil"{
                 
-                let alertController = UIAlertController(title: "Редактировать \(item.label1Text.lowercased())", message: nil, preferredStyle: .alert)
+                let message = item.type == "4" ? "Последние 4 цифры" : nil // Type 03 is "Реквизиты оплаты"
+                
+                let alertController = UIAlertController(title: "Редактировать \(item.label1Text.lowercased())", message: message, preferredStyle: .alert)
                 
                 alertController.addTextField { textField in
                     
