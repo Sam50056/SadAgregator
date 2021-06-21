@@ -34,6 +34,7 @@
 		221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */; };
 		221C479C25B4C7E200290E09 /* DescriptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C479A25B4C7E200290E09 /* DescriptionCollectionViewCell.swift */; };
 		221C479D25B4C7E200290E09 /* DescriptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C479B25B4C7E200290E09 /* DescriptionCollectionViewCell.xib */; };
+		221F2C722680179C007725D6 /* NastroykiPostavshikaCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F2C712680179C007725D6 /* NastroykiPostavshikaCheckView.swift */; };
 		22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22216A4325853FCC00D5248B /* RegisterDataManager.swift */; };
 		222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */; };
 		2231DB6D2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB6C2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift */; };
@@ -279,6 +280,7 @@
 		221C072B256E5ABB001BC842 /* PhoneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneTableViewCell.xib; sourceTree = "<group>"; };
 		221C479A25B4C7E200290E09 /* DescriptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		221C479B25B4C7E200290E09 /* DescriptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionCollectionViewCell.xib; sourceTree = "<group>"; };
+		221F2C712680179C007725D6 /* NastroykiPostavshikaCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NastroykiPostavshikaCheckView.swift; sourceTree = "<group>"; };
 		22216A4325853FCC00D5248B /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUpdateDataManager.swift; sourceTree = "<group>"; };
 		2231DB6C2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesSellPriceRecalcDataManager.swift; sourceTree = "<group>"; };
@@ -899,6 +901,7 @@
 				22C9221225814CA40063B5D4 /* MenuView.swift */,
 				22D9022E259BFFC3009732CC /* AddPointRequestView.swift */,
 				22D90238259C1546009732CC /* SendQuestionView.swift */,
+				221F2C712680179C007725D6 /* NastroykiPostavshikaCheckView.swift */,
 				22A155E02582C746000EAB64 /* Auth Views */,
 				2265853B259017C8004587AA /* Profile Views */,
 				22595793259667C10088C7E4 /* Master Views  */,
@@ -1717,6 +1720,7 @@
 				224FE2AC2609644600AE13B2 /* CreateNewClientDataManager.swift in Sources */,
 				22BF19FB25A4DA9300567DB7 /* ActivityLinesTableViewController.swift in Sources */,
 				22F7426E26226DA3009128AF /* PostImage.swift in Sources */,
+				221F2C722680179C007725D6 /* NastroykiPostavshikaCheckView.swift in Sources */,
 				22943FE925ABDB1A00A742B8 /* PostRedirectDataManager.swift in Sources */,
 				22D663D125823D9E0058B5CC /* LoginView.swift in Sources */,
 				22B518E5261E46C100A7176F /* DobavlenieVZakupkuViewController.swift in Sources */,

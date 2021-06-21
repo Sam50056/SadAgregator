@@ -296,7 +296,7 @@ struct MenuView: View {
                             
                             List{
                                 
-                                NavigationLink(destination: NastroykiPostavshikaView().navigationTitle("Настройки поставщика") , isActive: $menuViewModel.showNastroykiPostavshika){
+                                NavigationLink(destination: NastroykiPostavshikaCheckView().navigationTitle("Настройки поставщика") , isActive: $menuViewModel.showNastroykiPostavshika){
                                     
                                     HStack(spacing: 16){
                                         
