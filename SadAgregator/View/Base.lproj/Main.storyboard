@@ -5585,21 +5585,21 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twC-rl-RyL">
-                                            <rect key="frame" x="235" y="11" width="135" height="41"/>
+                                            <rect key="frame" x="316.66666666666669" y="11" width="53.333333333333314" height="41"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tkw-uE-s1H">
-                                                    <rect key="frame" x="8" y="4" width="119" height="33"/>
+                                                    <rect key="frame" x="8" y="4" width="37.333333333333336" height="33"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uu4-HH-vbA">
-                                                    <rect key="frame" x="0.0" y="0.0" width="135" height="41"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="53.333333333333336" height="41"/>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="135" id="3T3-dN-a4w"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="3T3-dN-a4w"/>
                                                 <constraint firstAttribute="trailing" secondItem="Tkw-uE-s1H" secondAttribute="trailing" constant="8" id="49n-S8-nGO"/>
                                                 <constraint firstItem="Tkw-uE-s1H" firstAttribute="centerY" secondItem="twC-rl-RyL" secondAttribute="centerY" id="S44-yq-flb"/>
                                                 <constraint firstItem="Tkw-uE-s1H" firstAttribute="leading" secondItem="twC-rl-RyL" secondAttribute="leading" constant="8" id="TDM-f5-ilQ"/>

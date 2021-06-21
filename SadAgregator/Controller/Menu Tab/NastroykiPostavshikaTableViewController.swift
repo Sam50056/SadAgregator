@@ -198,7 +198,59 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
     
     @IBAction func ratingCellButtonTapped(_ sender : Any){
         
+        guard let agrMembLevel = agrMembLevel , !agrMembLevel.isEmpty else {
+            return
+        }
         
+        var alertTitle = ""
+        
+        let field = "6"
+        var val = ""
+        
+        if agrMembLevel == "0"{
+            alertTitle = "Отправить заявку на участие в прямом выкупе?"
+        }else if agrMembLevel == "1"{
+            alertTitle = "Отозвать заявку с модерации?"
+        }else if agrMembLevel == "2"{
+            alertTitle = "Отменить участие в системе быстрого выкупа?"
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [self] _ in
+            
+            if agrMembLevel == "0"{
+                val = "1"
+            }else if agrMembLevel == "1"{
+                val = "0"
+            }else if agrMembLevel == "2"{
+                val = "0"
+            }
+            
+            BrokersUpdateInfoDataManager().getBrokersUpdateInfoData(key: key!, type: field, value: val) { data, error in
+                
+                DispatchQueue.main.async {
+                    
+                    if error != nil , data == nil {
+                        print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                        return
+                    }
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        update()
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }))
+        
+        present(alertController, animated: true, completion: nil)
         
     }
     
@@ -215,7 +267,7 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
             BrokersUpdateInfoDataManager().getBrokersUpdateInfoData(key: key, type: "1", value: "1") { data, error in
                 
                 if error != nil , data == nil {
-                    print("Erorr with VendGetDeliveryTypeDataManager : \(error!)")
+                    print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
                     return
                 }
                 
@@ -244,13 +296,13 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
         }
         
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 7
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard !firstSectionItems.isEmpty else {return 0}
@@ -411,24 +463,30 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
             //            (cell.viewWithTag(2) as! UIButton).setTitle("Добавить", for: .normal)
             
         }else if section == 5{
-                
-                cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
-                
-                guard let label = cell.viewWithTag(1) as? UILabel ,
-                      let buttonView = cell.viewWithTag(2),
-                      let buttonLabel = cell.viewWithTag(3) as? UILabel ,
-                      let button = cell.viewWithTag(4) as? UIButton
-                else {return cell}
-                
-                label.text = "В рейтинге поставщиков"
-                
-                buttonView.layer.cornerRadius = 8
-                buttonView.backgroundColor = UIColor(named: "gray")
-                
-                buttonLabel.text = "Не отображается"
-                
-                button.addTarget(self, action: #selector(ratingCellButtonTapped(_:)), for: .touchUpInside)
-                
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
+            
+            guard let label = cell.viewWithTag(1) as? UILabel ,
+                  let buttonView = cell.viewWithTag(2),
+                  let buttonLabel = cell.viewWithTag(3) as? UILabel ,
+                  let button = cell.viewWithTag(4) as? UIButton
+            else {return cell}
+            
+            label.text = "В рейтинге поставщиков"
+            
+            buttonView.layer.cornerRadius = 8
+            buttonView.backgroundColor = UIColor(named: "gray")
+            
+            if agrMembLevel == "0"{
+                buttonLabel.text = "Нет"
+            }else if agrMembLevel == "1"{
+                buttonLabel.text = "На модерации"
+            }else if agrMembLevel == "2"{
+                buttonLabel.text = "Да"
+            }
+            
+            button.addTarget(self, action: #selector(ratingCellButtonTapped(_:)), for: .touchUpInside)
+            
         }else if section == 6{
             
             guard !lastSectionItems.isEmpty else {return cell}
