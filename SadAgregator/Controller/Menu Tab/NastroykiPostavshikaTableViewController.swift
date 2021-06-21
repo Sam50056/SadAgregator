@@ -229,12 +229,12 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
                 val = "0"
             }
             
-            BrokersUpdateInfoDataManager().getBrokersUpdateInfoData(key: key!, type: field, value: val) { data, error in
+            vendUpdateInfoDataManager.getVendUpdateInfoData(key: key!, type: field, value: val) { data, error in
                 
                 DispatchQueue.main.async {
                     
                     if error != nil , data == nil {
-                        print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                        print("Erorr with VendUpdateInfoDataManager : \(error!)")
                         return
                     }
                     
@@ -264,10 +264,10 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
         
         alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
             
-            BrokersUpdateInfoDataManager().getBrokersUpdateInfoData(key: key, type: "1", value: "1") { data, error in
+            self.vendUpdateInfoDataManager.getVendUpdateInfoData(key: key, type: "1", value: "1") { data, error in
                 
                 if error != nil , data == nil {
-                    print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                    print("Erorr with VendUpdateInfoDataManager : \(error!)")
                     return
                 }
                 
