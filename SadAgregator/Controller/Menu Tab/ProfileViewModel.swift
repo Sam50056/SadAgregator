@@ -196,7 +196,7 @@ extension ProfileViewModel : VKAuthServiceDelegate{
     
     func vkAuthServiceShouldShow(viewController: UIViewController) {
         
-        guard vkAuthService.isPresentedInProfileView else {return}
+        guard vkAuthService.isPresentedInProfileView , !vkAuthService.isPresentedInNastroykiPostavshika else {return}
         
         //Presenting VK View Controller
         SceneDelegate.shared().window?.rootViewController?.present(viewController, animated: true, completion: nil)
@@ -205,7 +205,7 @@ extension ProfileViewModel : VKAuthServiceDelegate{
     
     func vkAuthServiceSignIn() {
         
-        guard vkAuthService.isPresentedInProfileView else {return}
+        guard vkAuthService.isPresentedInProfileView , !vkAuthService.isPresentedInNastroykiPostavshika else {return}
         
         guard let userId = vkAuthService.userId, let _ = vkAuthService.token else {return}
         
@@ -215,7 +215,7 @@ extension ProfileViewModel : VKAuthServiceDelegate{
     
     func vkAuthServiceSignInDidFail() {
         
-        guard vkAuthService.isPresentedInProfileView else {return}
+        guard vkAuthService.isPresentedInProfileView , !vkAuthService.isPresentedInNastroykiPostavshika else {return}
         
         print("Failed VK Sign In")
         

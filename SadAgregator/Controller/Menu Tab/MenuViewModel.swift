@@ -274,7 +274,7 @@ extension MenuViewModel : VKAuthServiceDelegate{
     
     func vkAuthServiceShouldShow(viewController: UIViewController) {
         
-        guard !vkAuthService.isPresentedInProfileView else {return}
+        guard !vkAuthService.isPresentedInProfileView , !vkAuthService.isPresentedInNastroykiPostavshika else {return}
         
         //Presenting VK View Controller
         SceneDelegate.shared().window?.rootViewController?.present(viewController, animated: true, completion: nil)
@@ -283,7 +283,7 @@ extension MenuViewModel : VKAuthServiceDelegate{
     
     func vkAuthServiceSignIn() {
         
-        guard !vkAuthService.isPresentedInProfileView else {return}
+        guard !vkAuthService.isPresentedInProfileView , !vkAuthService.isPresentedInNastroykiPostavshika else {return}
         
         print("Successfully Signed via VK")
         
@@ -296,7 +296,7 @@ extension MenuViewModel : VKAuthServiceDelegate{
     
     func vkAuthServiceSignInDidFail() {
         
-        guard !vkAuthService.isPresentedInProfileView else {return}
+        guard !vkAuthService.isPresentedInProfileView , !vkAuthService.isPresentedInNastroykiPostavshika else {return}
         
         print("Failed VK Sign In")
         

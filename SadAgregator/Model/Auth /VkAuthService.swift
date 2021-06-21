@@ -34,6 +34,7 @@ class VKAuthService : NSObject ,  VKSdkDelegate , VKSdkUIDelegate{
     }
     
     var isPresentedInProfileView = false
+    var isPresentedInNastroykiPostavshika = false 
     
     override init() {
         

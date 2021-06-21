@@ -118,6 +118,7 @@
 		2284EADD25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284EADC25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift */; };
 		2286AD0B25CB5EEE004EF0D7 /* VendorRevsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2286AD0A25CB5EEE004EF0D7 /* VendorRevsViewController.swift */; };
 		2286AD0F25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2286AD0E25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift */; };
+		228C525726802F7E00B0B9CB /* AuthSocialDataManagerWithClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C525626802F7E00B0B9CB /* AuthSocialDataManagerWithClosure.swift */; };
 		228CB75D255BF96D002B4A96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB75C255BF96D002B4A96 /* AppDelegate.swift */; };
 		228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB75E255BF96D002B4A96 /* SceneDelegate.swift */; };
 		228CB761255BF96D002B4A96 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB760255BF96D002B4A96 /* MainViewController.swift */; };
@@ -365,6 +366,7 @@
 		2284EADC25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveOkInfoDataManager.swift; sourceTree = "<group>"; };
 		2286AD0A25CB5EEE004EF0D7 /* VendorRevsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorRevsViewController.swift; sourceTree = "<group>"; };
 		2286AD0E25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVendRevsPagingDataManager.swift; sourceTree = "<group>"; };
+		228C525626802F7E00B0B9CB /* AuthSocialDataManagerWithClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSocialDataManagerWithClosure.swift; sourceTree = "<group>"; };
 		228CB759255BF96D002B4A96 /* SadAgregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SadAgregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228CB75C255BF96D002B4A96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		228CB75E255BF96D002B4A96 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1133,6 +1135,7 @@
 				22216A4325853FCC00D5248B /* RegisterDataManager.swift */,
 				224BC44925A013C3003F147F /* AuthSocialDataManager.swift */,
 				22582C7E25D20170005E341C /* SignInWIthAppleIdDataManager.swift */,
+				228C525626802F7E00B0B9CB /* AuthSocialDataManagerWithClosure.swift */,
 			);
 			path = "Auth Managers";
 			sourceTree = "<group>";
@@ -1638,6 +1641,7 @@
 				22B6BCAB25DEDA6A00EAE067 /* AllCategoriesViewController.swift in Sources */,
 				2200943925DACBE90001F7B3 /* CategoryViewController.swift in Sources */,
 				224584272592A6A60000B3D4 /* UserChangePassDataManager.swift in Sources */,
+				228C525726802F7E00B0B9CB /* AuthSocialDataManagerWithClosure.swift in Sources */,
 				228CB761255BF96D002B4A96 /* MainViewController.swift in Sources */,
 				225957A2259668540088C7E4 /* ListSelectView.swift in Sources */,
 				2265853F259017FA004587AA /* ProfileView.swift in Sources */,

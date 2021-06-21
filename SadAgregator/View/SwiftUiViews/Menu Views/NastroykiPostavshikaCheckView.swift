@@ -7,12 +7,17 @@
 
 import SwiftUI
 import SwiftyJSON
+import RealmSwift
 
 struct NastroykiPostavshikaCheckView: View {
     
-    @EnvironmentObject var menuViewModel : MenuViewModel
+    @EnvironmentObject private var menuViewModel : MenuViewModel
     
-    @State var shouldShowLogin : Bool?
+    @State private var shouldShowLogin : Bool?
+    
+    let realm = try! Realm()
+    
+    private let vkAuthService = VKAuthService()
     
     var body: some View {
         
@@ -29,8 +34,14 @@ struct NastroykiPostavshikaCheckView: View {
                             .bold()
                             .foregroundColor(Color(.systemGray))
                             .frame(maxWidth: .infinity, alignment: .center)
+                            .padding(.horizontal)
                         
                         PodkluchitVkVigruzkuView(text: "Авторизоваться").onTapGesture {
+                            
+                            vkAuthService.isPresentedInProfileView = false
+                            vkAuthService.isPresentedInNastroykiPostavshika = true
+                            vkAuthService.delegate = self
+                            vkAuthService.wakeUpSession()
                             
                         }
                         
@@ -57,12 +68,49 @@ struct NastroykiPostavshikaCheckView: View {
             ActivityIndicatorView(isAnimating: .constant(true), style: .large)
                 .onAppear{
                     
-                    guard let key = menuViewModel.getUserDataObject()?.key else {return}
-                    
-                    VendFormDataManager(delegate: self).getVendFormData(key: key)
+                    update()
                     
                 }
         }
+        
+    }
+    
+}
+
+//MARK:- Functions
+
+extension NastroykiPostavshikaCheckView{
+    
+    func update(with newKey : String = "") {
+        
+        var key = ""
+        
+        if !newKey.isEmpty{
+            key = newKey
+        }else{
+            guard let oldKey = menuViewModel.getUserDataObject()?.key else {return}
+            key = oldKey
+        }
+        
+        VendFormDataManager(delegate: self).getVendFormData(key: key)
+        
+    }
+    
+    func login(newKey : String){
+        
+        if let userDataObject = menuViewModel.getUserDataObject(){
+            
+            try! realm.write{
+                userDataObject.key = newKey
+            }
+            
+//            loadUserData()
+            
+        }
+        
+//        isLogged = true
+//
+        update()
         
     }
     
@@ -84,6 +132,63 @@ extension NastroykiPostavshikaCheckView : VendFormDataManagerDelegate{
     
     func didFailGettingVendFormDataWithError(error: String) {
         print("Error with VendFormDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - Vk Stuff
+
+extension NastroykiPostavshikaCheckView : VKAuthServiceDelegate{
+    
+    func vkAuthServiceShouldShow(viewController: UIViewController) {
+        
+        guard !vkAuthService.isPresentedInProfileView else {return}
+        
+        //Presenting VK View Controller
+        SceneDelegate.shared().window?.rootViewController?.present(viewController, animated: true, completion: nil)
+        
+    }
+    
+    func vkAuthServiceSignIn() {
+        
+        guard !vkAuthService.isPresentedInProfileView else {return}
+        
+        print("Successfully Signed via VK")
+        
+        if let safeVkToken = vkAuthService.token{
+            
+            AuthSocialDataManagerWithClosure().getGetAuthSocialData(social: "VK", token: safeVkToken, key: menuViewModel.getUserDataObject()!.key) { data, error in
+                
+                DispatchQueue.main.async {
+                    
+                    if let error = error , data == nil{
+                        print("Error with AuthSocialDataManagerWithClosure : \(error)")
+                        return
+                    }
+                    
+                    guard let newKey = data!["token"].string else {
+                        print("Error with token in AuthSocialDataManager")
+                        return
+                    }
+                    
+                    print("NEW KEY : \(newKey)")
+                    
+                    login(newKey: newKey)
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func vkAuthServiceSignInDidFail() {
+        
+        guard !vkAuthService.isPresentedInProfileView else {return}
+        
+        print("Failed VK Sign In")
+        
     }
     
 }
