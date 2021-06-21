@@ -166,10 +166,14 @@ extension CreateDiapazonViewController{
         
         nacenkaTextField.text = zone.marge.replacingOccurrences(of: "%", with: "")
         
-        if zone.marge.contains("%"){
-            isInPercents = true
-        }else{
-            isInRubles = true
+        if !isPosrednik{
+            
+            if zone.marge.contains("%"){
+                isInPercents = true
+            }else{
+                isInRubles = true
+            }
+            
         }
         
         picker.selectRow(okruglenieArray.firstIndex(of: zone.trunc) ?? 1, inComponent: 0, animated: false)
