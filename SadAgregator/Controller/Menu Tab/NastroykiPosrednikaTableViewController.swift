@@ -778,12 +778,12 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
                 let zone = zonesForPosrednik[index]
                 
-                if zone.to == "0" || zone.from == "0"{
+                if zone.to == "0" || zone.from == "0" || zone.to == "" || zone.from == ""{
                     
-                    if zone.to == "0"{
+                    if zone.to == "0" || zone.to == ""{
                         firstTitleLabel.text = "от"
                         firstValueLabel.text = zone.from + " руб."
-                    }else if zone.from == "0"{
+                    }else if zone.from == "0" || zone.from == ""{
                         firstTitleLabel.text = "до"
                         firstValueLabel.text = zone.to + " руб."
                     }
@@ -1086,12 +1086,12 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     
                     let zone = zonesForOrg[indexPath.row]
                     
-                    if zone.to == "0" || zone.from == "0"{
+                    if zone.to == "0" || zone.from == "0" || zone.to == "" || zone.from == ""{
                         
-                        if zone.to == "0"{
+                        if zone.to == "0" || zone.to == ""{
                             firstTitleLabel.text = "от"
                             firstValueLabel.text = zone.from + " руб."
-                        }else if zone.from == "0"{
+                        }else if zone.from == "0" || zone.from == ""{
                             firstTitleLabel.text = "до"
                             firstValueLabel.text = zone.to + " руб."
                         }
