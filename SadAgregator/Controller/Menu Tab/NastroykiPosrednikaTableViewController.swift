@@ -53,6 +53,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     private var helpersForPosrednik = [Helper]()
     
+    private var level : String?
+    
     private var brokersFormDataManager = BrokersFormDataManager()
     
     private lazy var brokersUpdateInfoDataManager = BrokersUpdateInfoDataManager()
@@ -79,6 +81,62 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     }
     
     //MARK: - Actions
+    
+    @IBAction func ratingCellButtonTapped(_ sender : Any){
+        
+        guard let level = level , !level.isEmpty else {
+            return
+        }
+        
+        var alertTitle = ""
+        var status = ""
+        
+        if level == "0"{
+            alertTitle = "Отправить запрос на отображение в поиске посредников?"
+        }else if level == "1"{
+            alertTitle = "Отозвать заявку с модерации?"
+        }else if level == "2"{
+            alertTitle = "Скрыть вашу страницу из рейтинга посредников?"
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [self] _ in
+            
+            if level == "0"{
+                status = "1"
+            }else if level == "1"{
+                status = "0"
+            }else if level == "2"{
+                status = "0"
+            }
+            
+            BrokersBrokerStatusDataManager().getBrokersBrokerStatusData(key: key!, status: status) { data, error in
+                
+                DispatchQueue.main.async {
+                    
+                    if error != nil , data == nil {
+                        print("Erorr with BrokersBrokerStatusDataManager : \(error!)")
+                        return
+                    }
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        update()
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }))
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
     
     @IBAction func switchValueChanged(_ sender : UISwitch){
         
@@ -408,7 +466,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         if isPosrednikTab{
-            return 10
+            return 11
         }else{
             return 6
         }
@@ -424,23 +482,25 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             case 0: return 1
                 
-            case 1: return firstSectionItemsForPosrednik.count
+            case 1: return level == nil ? 0 : 1
                 
-            case 2: return 1
+            case 2: return firstSectionItemsForPosrednik.count
                 
-            case 3: return zonesForPosrednik.isEmpty ? 1 : zonesForPosrednik.count
+            case 3: return 1
                 
-            case 4: return thirdSectionItemsForPosrednik.isEmpty ? 0 : 1
+            case 4: return zonesForPosrednik.isEmpty ? 1 : zonesForPosrednik.count
                 
-            case 5: return thirdSectionItemsForPosrednik.count
+            case 5: return thirdSectionItemsForPosrednik.isEmpty ? 0 : 1
                 
-            case 6: return 1
+            case 6: return thirdSectionItemsForPosrednik.count
                 
-            case 7: return sposobOtpravkiSectionForPosrednikItems.isEmpty ? 1 : sposobOtpravkiSectionForPosrednikItems.count
+            case 7: return 1
                 
-            case 8: return 1
+            case 8: return sposobOtpravkiSectionForPosrednikItems.isEmpty ? 1 : sposobOtpravkiSectionForPosrednikItems.count
                 
-            case 9: return helpersForPosrednik.isEmpty ? 1 : helpersForPosrednik.count
+            case 9: return 1
+                
+            case 10: return helpersForPosrednik.isEmpty ? 1 : helpersForPosrednik.count
                 
             default: return 0
                 
@@ -503,13 +563,14 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             switch section {
             case 0: return 70
-            case 1:
+            case 1: return 65
+            case 2:
                 
                 if firstSectionItemsForPosrednik[index].isDopInfo{
                     return 95
                 }
                 
-            case 3:
+            case 4:
                 
                 if !zonesForPosrednik.isEmpty{
                     return 85
@@ -611,7 +672,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             return UISwipeActionsConfiguration(actions: [deleteAction,editAction])
             
-        }else if isPosrednikTab , indexPath.section == 3{
+        }else if isPosrednikTab , indexPath.section == 4{
             
             let editAction = UIContextualAction(style: .normal, title: nil) { [self] action, view, completion in
                 
@@ -697,6 +758,31 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
         }else if section == 1{
             
+            cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
+            
+            guard let label = cell.viewWithTag(1) as? UILabel ,
+                  let buttonView = cell.viewWithTag(2),
+                  let buttonLabel = cell.viewWithTag(3) as? UILabel ,
+                  let button = cell.viewWithTag(4) as? UIButton
+            else {return cell}
+            
+            label.text = "В рейтинге поставщиков"
+            
+            buttonView.layer.cornerRadius = 8
+            buttonView.backgroundColor = UIColor(named: "gray")
+            
+            if level == "0"{
+                buttonLabel.text = "Не отображается"
+            }else if level == "1"{
+                buttonLabel.text = "На модерации"
+            }else if level == "2"{
+                buttonLabel.text = "Отображается"
+            }
+            
+            button.addTarget(self, action: #selector(ratingCellButtonTapped(_:)), for: .touchUpInside)
+            
+        }else if section == 2{
+            
             guard !firstSectionItemsForPosrednik.isEmpty else {return cell}
             
             let item = firstSectionItemsForPosrednik[index]
@@ -736,7 +822,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
-        }else if section == 2{
+        }else if section == 3{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
@@ -750,7 +836,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitKomissiaPressedInPosrednik(_:)), for: .touchUpInside)
             
-        }else if section == 3{
+        }else if section == 4{
             
             if zonesForPosrednik.isEmpty{
                 
@@ -811,7 +897,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
-        }else if section == 4{
+        }else if section == 5{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
@@ -819,7 +905,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).isHidden = true
             
-        }else if section == 5{
+        }else if section == 6{
             
             let item = thirdSectionItemsForPosrednik[index]
             
@@ -855,7 +941,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
-        }else if section == 6{
+        }else if section == 7{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
@@ -869,7 +955,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitSposobOtpravkiPressedInPosrednik(_:)), for: .touchUpInside)
             
-        }else if section == 7{
+        }else if section == 8{
             
             if sposobOtpravkiSectionForPosrednikItems.isEmpty{
                 
@@ -901,7 +987,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             removeButton.addTarget(self, action: #selector(removeSposobOtpravkiPressed(_:)), for: .touchUpInside)
             
-        }else if section == 8{
+        }else if section == 9{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
@@ -915,7 +1001,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitPomoshnikaPressedInPosrednik(_:)), for: .touchUpInside)
             
-        }else if section == 9{
+        }else if section == 10{
             
             if helpersForPosrednik.isEmpty{
                 
@@ -1143,7 +1229,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         let section = indexPath.section
         let index = indexPath.row
         
-        if section == 1{
+        if section == 2{
             
             let item = firstSectionItemsForPosrednik[index]
             
@@ -1198,7 +1284,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
-        }else if section == 5{
+        }else if section == 6{
             
             let item = thirdSectionItemsForPosrednik[index]
             
@@ -1257,7 +1343,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
-        }else if section == 7{
+        }else if section == 8{
             
             guard !sposobOtpravkiSectionForPosrednikItems.isEmpty else {return}
             
@@ -1689,6 +1775,8 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
             }
             
             helpersForPosrednik = newHelpersForPosrednik
+            
+            level = brokerProfile["lvl"].string
             
             //ORG Stuff
             
