@@ -789,20 +789,18 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             if item.isDopInfo {
                 
-                cell = tableView.dequeueReusableCell(withIdentifier: "labelTextFieldCell", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "labelTextViewCell", for: indexPath)
                 
                 guard let label = cell.viewWithTag(1) as? UILabel ,
-                      let textField = cell.viewWithTag(2) as? UITextField else {return cell}
+                      let textView = cell.viewWithTag(2) as? UITextView else {return cell}
                 
                 label.text = item.label1Text
                 
-                textField.placeholder = "Некоторая информация"
+                textView.text = item.label2Text
                 
-                textField.text = item.label2Text
+                textView.restorationIdentifier = "\(item.type)|\(index)*"
                 
-                textField.restorationIdentifier = "\(item.type)|\(index)*"
-                
-                textField.delegate = self
+                textView.delegate = self
                 
             }else{
                 
@@ -1115,20 +1113,39 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }else{
                 
-                cell = tableView.dequeueReusableCell(withIdentifier: "labelTextFieldCell", for: indexPath)
-                
-                guard let label = cell.viewWithTag(1) as? UILabel ,
-                      let textField = cell.viewWithTag(2) as? UITextField else {return cell}
-                
-                label.text = item.label1Text
-                
-                textField.placeholder = item.label1Text
-                
-                textField.text = item.value
-                
-                textField.restorationIdentifier = "\(item.type)|\(index)"
-                
-                textField.delegate = self
+                if item.label1Text == "Дополнительная информация"{
+                    
+                    cell = tableView.dequeueReusableCell(withIdentifier: "labelTextViewCell", for: indexPath)
+                    
+                    guard let label = cell.viewWithTag(1) as? UILabel ,
+                          let textView = cell.viewWithTag(2) as? UITextView else {return cell}
+                    
+                    label.text = item.label1Text
+                    
+                    textView.text = item.value
+                    
+                    textView.restorationIdentifier = "\(item.type)|\(index)"
+                    
+                    textView.delegate = self
+                    
+                }else{
+                    
+                    cell = tableView.dequeueReusableCell(withIdentifier: "labelTextFieldCell", for: indexPath)
+                    
+                    guard let label = cell.viewWithTag(1) as? UILabel ,
+                          let textField = cell.viewWithTag(2) as? UITextField else {return cell}
+                    
+                    label.text = item.label1Text
+                    
+                    textField.placeholder = item.label1Text
+                    
+                    textField.text = item.value
+                    
+                    textField.restorationIdentifier = "\(item.type)|\(index)"
+                    
+                    textField.delegate = self
+                    
+                }
                 
             }
             
@@ -1590,11 +1607,54 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
 
 //MARK:- TextField Stuff
 
-extension NastroykiPosrednikaTableViewController : UITextFieldDelegate{
+extension NastroykiPosrednikaTableViewController : UITextFieldDelegate , UITextViewDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         if let value = textField.text?.replacingOccurrences(of: "\n", with: "<br>") , let key = key , let fieldId = textField.restorationIdentifier {
+            
+            let typeLastIndex = fieldId.firstIndex(of: "|")
+            let type = String(fieldId[fieldId.startIndex..<typeLastIndex!])
+            let index = String(fieldId[typeLastIndex!..<fieldId.endIndex]).replacingOccurrences(of: "|", with: "").replacingOccurrences(of: "*", with: "")
+            
+            print("Type : \(type) and Index : \(index)")
+            
+            brokersUpdateInfoDataManager.getBrokersUpdateInfoData(key: key, type: type, value: value) { [self] data, error in
+                
+                if error != nil , data == nil {
+                    print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    if fieldId.contains("*"){
+                        firstSectionItemsForPosrednik[Int(index)!].label2Text = value
+                    }else{
+                        secondSectionItemsForOrg[Int(index)!].value = value
+                    }
+                    
+                }else {
+                    
+                    if let message = data!["msg"].string{
+                        
+                        DispatchQueue.main.async {
+                            self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+        if let value = textView.text?.replacingOccurrences(of: "\n", with: "<br>") , let key = key , let fieldId = textView.restorationIdentifier {
             
             let typeLastIndex = fieldId.firstIndex(of: "|")
             let type = String(fieldId[fieldId.startIndex..<typeLastIndex!])

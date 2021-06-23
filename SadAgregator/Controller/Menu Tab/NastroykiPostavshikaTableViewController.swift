@@ -374,20 +374,18 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
             
             if item.isDopInfo {
                 
-                cell = tableView.dequeueReusableCell(withIdentifier: "labelTextFieldCell", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "labelTextViewCell", for: indexPath)
                 
                 guard let label = cell.viewWithTag(1) as? UILabel ,
-                      let textField = cell.viewWithTag(2) as? UITextField else {return cell}
+                      let textView = cell.viewWithTag(2) as? UITextView else {return cell}
                 
                 label.text = item.label1Text
                 
-                textField.placeholder = "Некоторая информация"
+                textView.text = item.label2Text
                 
-                textField.text = item.label2Text
+                textView.restorationIdentifier = "\(item.type)|\(index)*"
                 
-                textField.restorationIdentifier = "\(item.type)|\(index)*"
-                
-                textField.delegate = self
+                textView.delegate = self
                 
             }else{
                 
@@ -510,6 +508,31 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
         }
         
         return cell
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let section = indexPath.section
+        let index = indexPath.row
+        
+        let defaultHeight : CGFloat = 50
+        
+        if section == 0{
+            return 60
+        }else if section == 1{
+            
+            let item = firstSectionItems[index]
+            
+            if item.isDopInfo{
+                return 95
+            }
+            
+        }else if section == 5{
+            return 65
+        }
+        
+        return defaultHeight
         
     }
     
@@ -697,11 +720,11 @@ class NastroykiPostavshikaTableViewController: UITableViewController {
 
 //MARK:- UITextField
 
-extension NastroykiPostavshikaTableViewController : UITextFieldDelegate{
+extension NastroykiPostavshikaTableViewController : UITextViewDelegate{
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
-        if let value = textField.text?.replacingOccurrences(of: "\n", with: "<br>") , let key = key , let fieldId = textField.restorationIdentifier {
+        if let value = textView.text?.replacingOccurrences(of: "\n", with: "<br>") , let key = key , let fieldId = textView.restorationIdentifier {
             
             let typeLastIndex = fieldId.firstIndex(of: "|")
             let type = String(fieldId[fieldId.startIndex..<typeLastIndex!])
