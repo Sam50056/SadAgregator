@@ -91,7 +91,17 @@ extension ClientViewController{
             infoItems.append(InfoItem(firstText: "Одноклассники", secondText: ok))
         }
         
+        if let pochtaIndex = clientHeaderData["pochta_index"].string{
+            infoItems.append(InfoItem(firstText: "Почтовый индекс", secondText: pochtaIndex))
+        }
+        
+        if let fio = clientHeaderData["pochta_fio"].string{
+            infoItems.append(InfoItem(firstText: "ФИО", secondText: fio))
+        }
+        
     }
+    
+    //MARK: - Actions
     
     @IBAction func editButtonTappedForPhone(_ sender : Any){
         
@@ -177,6 +187,67 @@ extension ClientViewController{
             
             textField.placeholder = "Ссылка"
             textField.keyboardType = .URL
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(alertAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func editButtonTappedPochtaIndex(_ sender : Any){
+        
+        let alertController = UIAlertController(title: "Введите почтовый индекс", message: nil, preferredStyle: .alert)
+        
+        let alertAction = UIAlertAction(title: "Ок", style: .default) { [self] (_) in
+            
+            guard let value = alertController.textFields?[0].text else {return}
+            
+            updateClientInfoDataManager.getUpdateClientInfoData(key: key, clientId: thisClientId!, fieldId: "6", value: value)
+            
+        }
+        
+        alertController.addTextField { (textField) in
+            
+            textField.placeholder = ""
+            textField.keyboardType = .numberPad
+            textField.restorationIdentifier = "pochtaIndex"
+            textField.delegate = self
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(alertAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func editButtonTappedFIO(_ sender : Any){
+        
+        let alertController = UIAlertController(title: "Введите ФИО", message: nil, preferredStyle: .alert)
+        
+        let alertAction = UIAlertAction(title: "Ок", style: .default) { [self] (_) in
+            
+            guard let value = alertController.textFields?[0].text else {return}
+            
+            updateClientInfoDataManager.getUpdateClientInfoData(key: key, clientId: thisClientId!, fieldId: "7", value: value)
+            
+        }
+        
+        alertController.addTextField { (textField) in
+            
+            textField.placeholder = ""
             
         }
         
@@ -411,6 +482,14 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                     
                 }
                 
+            }else if item.firstText == "Почтовый индекс"{
+                
+                editButtonTappedPochtaIndex(self)
+                
+            }else if item.firstText == "ФИО"{
+                
+                editButtonTappedFIO(self)
+                
             }
             
         }
@@ -526,10 +605,22 @@ extension ClientViewController : UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        guard textField.text != nil , textField.text?.replacingOccurrences(of: " ", with: "") != "" else {return}
+        guard textField.restorationIdentifier != "pochtaIndex" , textField.text != nil , textField.text?.replacingOccurrences(of: " ", with: "") != "" else {return}
         
         updateClientInfoDataManager.getUpdateClientInfoData(key: key, clientId: thisClientId!, fieldId: "5", value: textField.text!.replacingOccurrences(of: "'", with: "").replacingOccurrences(of: "\n", with: "<br>"))
         
+    }
+    
+    //This is for pochta index field
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard textField.restorationIdentifier == "pochtaIndex" ,
+              let textFieldText = textField.text,
+              let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return true
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count <= 6
     }
     
 }
