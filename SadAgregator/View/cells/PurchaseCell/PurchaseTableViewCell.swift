@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class PurchaseTableViewCell: UITableViewCell {
     
@@ -13,28 +14,27 @@ class PurchaseTableViewCell: UITableViewCell {
     
     private var tableViewItems = [TableViewItem]()
     
-    //    var client : JSON?{
-    //        didSet{
-    //
-    //            if client?["balance"].stringValue != "" /*, client?["balance"].stringValue != "0"*/{
-    //
-    //                tableViewItems.append(TableViewItem(firstText: "Баланс", secondText: (client?["balance"].stringValue)!))
-    //
-    //            }
-    //
-    //            if client?["in_process"].stringValue != "" , client?["in_process"].stringValue != "0"{
-    //
-    //                tableViewItems.append(TableViewItem(firstText: "В закупке", secondText: (client?["in_process"].stringValue)!))
-    //
-    //            }
-    //
-    //        }
-    //    }
+    var thisItem : PurchaseTableViewCellItem?{
+        didSet{
+            
+            guard let thisItem = thisItem else {return}
+            
+            if thisItem.status != ""{
+                
+                tableViewItems.append(TableViewItem(firstText: "Статус", secondText: thisItem.status))
+                
+            }
+            
+            tableViewItems.append(contentsOf: thisItem.money)
+            
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         tableView.register(UINib(nibName: "PurchaseTableViewCellTableViewCell", bundle: nil), forCellReuseIdentifier: "itemCell")
+        tableView.register(UINib(nibName: "PurchaseTableViewCellTitleCellTableViewCell", bundle: nil), forCellReuseIdentifier: "titleLabel")
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -42,6 +42,8 @@ class PurchaseTableViewCell: UITableViewCell {
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
         
+        //        tableViewItems.append(TableViewItem(firstText: "Баланс", secondText: "12323"))
+        //        tableViewItems.append(TableViewItem(firstText: "В закупке", secondText: "33"))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -74,11 +76,18 @@ extension PurchaseTableViewCell : UITableViewDelegate , UITableViewDataSource{
         
         var cell = UITableViewCell()
         
+        guard let thisItem = thisItem else {return cell}
+        
         if indexPath.section == 0{
             
-            cell.textLabel?.text = "Sam Yerz2006"//client?["name"].stringValue
+            cell = tableView.dequeueReusableCell(withIdentifier: "titleLabel", for: indexPath)
             
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+            (cell as! PurchaseTableViewCellTitleCellTableViewCell).captLabel.text = thisItem.capt
+            (cell as! PurchaseTableViewCellTitleCellTableViewCell).dateLabel.text = thisItem.date
+            
+            (cell as! PurchaseTableViewCellTitleCellTableViewCell).captLabel.font = UIFont.boldSystemFont(ofSize: 17)
+            
+            (cell as! PurchaseTableViewCellTitleCellTableViewCell).dateLabel.font = UIFont.boldSystemFont(ofSize: 16)
             
         }else{
             
@@ -97,9 +106,9 @@ extension PurchaseTableViewCell : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 30
+            return 26
         }else{
-            return 20
+            return 22
         }
     }
     
@@ -109,11 +118,24 @@ extension PurchaseTableViewCell : UITableViewDelegate , UITableViewDataSource{
 
 extension PurchaseTableViewCell {
     
-    private struct TableViewItem {
+    struct TableViewItem {
         
         var firstText : String
         var secondText : String
         
     }
+    
+}
+
+struct PurchaseTableViewCellItem {
+    
+    var id : String
+    
+    var capt : String
+    var date : String
+    
+    var status : String
+    
+    var money : [PurchaseTableViewCell.TableViewItem] = [PurchaseTableViewCell.TableViewItem]()
     
 }

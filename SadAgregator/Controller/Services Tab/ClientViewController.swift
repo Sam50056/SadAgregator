@@ -33,6 +33,8 @@ class ClientViewController: UIViewController {
     private var balance : Int?
     private var balanceLabel : UILabel?
     
+    private var purs = [JSON]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -282,9 +284,9 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
         case 2:
             return clientData == nil ? 0 : 1
         case 3:
-            return 0
+            return 1
         case 4:
-            return 0
+            return purs.isEmpty ? 1 : purs.count
         default:
             return 0
         }
@@ -388,9 +390,36 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
             
         case 4:
             
+            if purs.isEmpty{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "centredLabelCell", for: indexPath)
+                
+                (cell.viewWithTag(1) as! UILabel).text = "Клиент не участвовал в закупках"
+                
+                return cell
+                
+            }
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "purchaseCell", for: indexPath) as! PurchaseTableViewCell
             
-        //            (cell  as! PurchaseTableViewCell).client = clients[indexPath.row]
+            let jsonPur = purs[indexPath.row]
+            
+            let id = jsonPur["id"].stringValue
+            let capt = jsonPur["capt"].stringValue
+            let date = jsonPur["dt"].stringValue
+            let status = jsonPur["status"].stringValue
+            
+            var moneyArray = [PurchaseTableViewCell.TableViewItem]()
+            
+            if let moneyJsonArray = jsonPur["money"].array , !moneyJsonArray.isEmpty{
+                moneyArray = moneyJsonArray.map({ jsonMoneyItem in
+                    PurchaseTableViewCell.TableViewItem(firstText: jsonMoneyItem["capt"].stringValue, secondText: "\(jsonMoneyItem["value"].stringValue) \(jsonMoneyItem["dop"].stringValue)")
+                })
+            }
+            
+            let purItem = PurchaseTableViewCellItem(id: id, capt: capt, date: date, status: status , money: moneyArray)
+            
+            (cell  as! PurchaseTableViewCell).thisItem = purItem
         
         default:
             return cell
@@ -499,10 +528,68 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 4{
-            return 85 - 20
+        if indexPath.section == 4 , !purs.isEmpty{
+            
+            let pur = purs[indexPath.row]
+            
+            let moneyArray = pur["money"].arrayValue
+            
+            return CGFloat(66 + (moneyArray.count * 23)) //130//88 //- 20
         }
         return K.simpleHeaderCellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        guard !purs.isEmpty , indexPath.section == 4 else {return nil}
+        
+        let pur = purs[indexPath.row]
+        
+        guard pur["can_del"].intValue != 0 else {return nil}
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [self] action, view, completion in
+            
+            let alertController = UIAlertController(title: "Удалить клиента из закупки?", message: nil, preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                
+                ClientsDelClientFromPurDataManager().getClientsDelClientFromPurData(key: key, clientId: thisClientId!, purId: pur["id"].stringValue) { data, error in
+                    
+                    if let error = error , data == nil {
+                        print("Error with purchasesDelZonePriceDataManager : \(error)")
+                        return
+                    }
+                    
+                    guard let data = data else {return}
+                    
+                    if data["result"].intValue == 1{
+                        
+                        DispatchQueue.main.async { [self] in
+                            
+                            purs.remove(at: indexPath.row)
+                            
+                            completion(true)
+                            
+                            tableView.reloadSections([4], with: .automatic)
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            present(alertController, animated: true, completion: nil)
+            
+        }
+        
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+        
     }
     
     //MARK: - Stepper
@@ -642,6 +729,8 @@ extension ClientViewController : ClientDataManagerDelegate{
                 if let name = clientHeaderData["name"].string , name != ""{
                     navigationItem.title = name
                 }
+                
+                purs = data["purs"].arrayValue
                 
                 makeInfoItemsFrom(clientHeaderData)
                 

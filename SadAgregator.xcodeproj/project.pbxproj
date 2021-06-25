@@ -27,6 +27,9 @@
 		2203F15D25BF243A007DBFFD /* EmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203F15B25BF243A007DBFFD /* EmptyTableViewCell.xib */; };
 		2203F16625BFC35D007DBFFD /* EditVigruzkaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203F16525BFC35D007DBFFD /* EditVigruzkaViewController.swift */; };
 		22044EB2261AA9BF0032C67F /* ClientsFilterPayHistByClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22044EB1261AA9BF0032C67F /* ClientsFilterPayHistByClientDataManager.swift */; };
+		220704662685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220704642685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.swift */; };
+		220704672685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220704652685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.xib */; };
+		220704692685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220704682685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift */; };
 		220DF1802617EAAE008F5873 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DF17F2617EAAE008F5873 /* DatePickerViewController.swift */; };
 		220DF1842617F863008F5873 /* BottomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DF1832617F863008F5873 /* BottomPresentationController.swift */; };
 		221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221949FE256B1FBD00E0564D /* PointViewController.swift */; };
@@ -275,6 +278,9 @@
 		2203F15B25BF243A007DBFFD /* EmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyTableViewCell.xib; sourceTree = "<group>"; };
 		2203F16525BFC35D007DBFFD /* EditVigruzkaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVigruzkaViewController.swift; sourceTree = "<group>"; };
 		22044EB1261AA9BF0032C67F /* ClientsFilterPayHistByClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsFilterPayHistByClientDataManager.swift; sourceTree = "<group>"; };
+		220704642685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCellTitleCellTableViewCell.swift; sourceTree = "<group>"; };
+		220704652685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseTableViewCellTitleCellTableViewCell.xib; sourceTree = "<group>"; };
+		220704682685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsDelClientFromPurDataManager.swift; sourceTree = "<group>"; };
 		220DF17F2617EAAE008F5873 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		220DF1832617F863008F5873 /* BottomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPresentationController.swift; sourceTree = "<group>"; };
 		221949FE256B1FBD00E0564D /* PointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointViewController.swift; sourceTree = "<group>"; };
@@ -579,6 +585,15 @@
 			path = EmptyCell;
 			sourceTree = "<group>";
 		};
+		220704632685626700FC6B4B /* PurchaseTableViewCellTitleCell */ = {
+			isa = PBXGroup;
+			children = (
+				220704642685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.swift */,
+				220704652685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.xib */,
+			);
+			path = PurchaseTableViewCellTitleCell;
+			sourceTree = "<group>";
+		};
 		220DF17E2617E960008F5873 /* PaymentHistory */ = {
 			isa = PBXGroup;
 			children = (
@@ -616,6 +631,7 @@
 				22328CC625FD806300C51CC9 /* ClientsFIlterDataManager.swift */,
 				224FE2AB2609644600AE13B2 /* CreateNewClientDataManager.swift */,
 				224FE2AE2609738900AE13B2 /* ClientsSetActiveDataManager.swift */,
+				220704682685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -671,6 +687,7 @@
 		2237E76F25FA325C00EBD919 /* PurchaseCell */ = {
 			isa = PBXGroup;
 			children = (
+				220704632685626700FC6B4B /* PurchaseTableViewCellTitleCell */,
 				2237E77925FA359F00EBD919 /* PurchaseTableViewCellTableViewCell */,
 				2237E77425FA32C500EBD919 /* PurchaseTableViewCell.swift */,
 				2237E77525FA32C500EBD919 /* PurchaseTableViewCell.xib */,
@@ -1506,6 +1523,7 @@
 				2200943125D837530001F7B3 /* CategoryCollectionViewCell.xib in Resources */,
 				2203F15D25BF243A007DBFFD /* EmptyTableViewCell.xib in Resources */,
 				22A49CB52566645800CCC781 /* PostTableViewCell.xib in Resources */,
+				220704672685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.xib in Resources */,
 				22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */,
 				2237E77D25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib in Resources */,
 				22941A40262A478C00119844 /* TovarTableViewCell.xib in Resources */,
@@ -1609,7 +1627,9 @@
 				22CADF4A25CCE7EE001C4F31 /* NewVersionViewController.swift in Sources */,
 				22A49CBB2566650600CCC781 /* SizeCollectionViewCell.swift in Sources */,
 				220DF1842617F863008F5873 /* BottomPresentationController.swift in Sources */,
+				220704662685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.swift in Sources */,
 				2201672325A73FEA0072BFE7 /* GetPointActionsDataManager.swift in Sources */,
+				220704692685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift in Sources */,
 				228D2D3725ABE1D5000E9FAE /* DelDeviceDataManager.swift in Sources */,
 				224FE2A62608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift in Sources */,
 				22A155E42583E11C000EAB64 /* Constants.swift in Sources */,
