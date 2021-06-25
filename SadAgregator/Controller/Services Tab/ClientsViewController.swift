@@ -398,6 +398,13 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 3{
+            
+            let client = clients[indexPath.row]
+            
+            if client["in_process"].stringValue != "" , client["in_process"].stringValue != "0"{
+                return 85
+            }
+            
             return 85 - 20
         }
         return K.simpleHeaderCellHeight
