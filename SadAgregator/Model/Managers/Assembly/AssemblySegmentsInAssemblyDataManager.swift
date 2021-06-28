@@ -21,7 +21,7 @@ struct AssemblySegmentsInAssemblyDataManager {
         
         let urlString = "https://agrapi.tk-sad.ru/agr_assembly.SegmentsInAssembly?AKey=\(key)&AParentSegment=\(parentSegment)&AStatus=\(status)&AHelperID=\(helperId)"
         
-        print("URLString for PurchasesZonesPriceDataManager: \(urlString)")
+        print("URLString for AssemblySegmentsInAssemblyDataManager: \(urlString)")
         
         guard let encodedURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: encodedURL)  else {return}
         

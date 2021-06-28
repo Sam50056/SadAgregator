@@ -158,9 +158,9 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             
         }else if indexPath.row == 2{
             
-            var sborkaView = SborkaView()
+            let sborkaView = SborkaView()
             
-            sborkaView.key = getKey()!
+            sborkaView.sborkaViewModel.key = getKey()!
             
             let sborkaVC = UIHostingController(rootView: sborkaView)
             
