@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ServicesViewController: UIViewController {
     
@@ -67,7 +68,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -101,9 +102,9 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 
             case 2:
                 
-                cellImageView.image = UIImage(systemName: "person.badge.plus")
+                cellImageView.image = UIImage(systemName: "shippingbox")
                 
-                serviceNameLabel.text = "Поставщики"
+                serviceNameLabel.text = "Сборка"
                 
             case 3:
                 
@@ -119,9 +120,9 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 
             case 5:
                 
-                cellImageView.image = UIImage(systemName: "shippingbox")
+                cellImageView.image = UIImage(systemName: "person.badge.plus")
                 
-                serviceNameLabel.text = "Сборка"
+                serviceNameLabel.text = "Поставщики"
                 
             case 6:
                 
@@ -154,6 +155,16 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             let clientsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientsVC") as! ClientsViewController
             
             navigationController?.pushViewController(clientsVC, animated: true)
+            
+        }else if indexPath.row == 2{
+            
+            var sborkaView = SborkaView()
+            
+            sborkaView.key = getKey()!
+            
+            let sborkaVC = UIHostingController(rootView: sborkaView)
+            
+            navigationController?.pushViewController(sborkaVC, animated: true)
             
         }
         

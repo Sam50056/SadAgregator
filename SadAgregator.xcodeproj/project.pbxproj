@@ -30,6 +30,8 @@
 		220704662685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220704642685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.swift */; };
 		220704672685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220704652685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.xib */; };
 		220704692685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220704682685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift */; };
+		2207046C2686A9CE00FC6B4B /* SborkaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207046B2686A9CE00FC6B4B /* SborkaViewController.swift */; };
+		220704702689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207046F2689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift */; };
 		220DF1802617EAAE008F5873 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DF17F2617EAAE008F5873 /* DatePickerViewController.swift */; };
 		220DF1842617F863008F5873 /* BottomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DF1832617F863008F5873 /* BottomPresentationController.swift */; };
 		221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221949FE256B1FBD00E0564D /* PointViewController.swift */; };
@@ -281,6 +283,8 @@
 		220704642685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCellTitleCellTableViewCell.swift; sourceTree = "<group>"; };
 		220704652685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseTableViewCellTitleCellTableViewCell.xib; sourceTree = "<group>"; };
 		220704682685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsDelClientFromPurDataManager.swift; sourceTree = "<group>"; };
+		2207046B2686A9CE00FC6B4B /* SborkaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SborkaViewController.swift; sourceTree = "<group>"; };
+		2207046F2689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySegmentsInAssemblyDataManager.swift; sourceTree = "<group>"; };
 		220DF17F2617EAAE008F5873 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		220DF1832617F863008F5873 /* BottomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPresentationController.swift; sourceTree = "<group>"; };
 		221949FE256B1FBD00E0564D /* PointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointViewController.swift; sourceTree = "<group>"; };
@@ -594,6 +598,17 @@
 			path = PurchaseTableViewCellTitleCell;
 			sourceTree = "<group>";
 		};
+		2207046A2686A86300FC6B4B /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				22D604D425F1784100102CB6 /* ClientsViewController.swift */,
+				2237E77F25FBD15F00EBD919 /* ClientViewController.swift */,
+				224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */,
+				220DF17E2617E960008F5873 /* PaymentHistory */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
 		220DF17E2617E960008F5873 /* PaymentHistory */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,6 +761,7 @@
 				22F742682622653F009128AF /* Purchases */,
 				2272FCD4266D36B3000B5B19 /* Brokers */,
 				22BF4DDD2676A23300748D0B /* Vend */,
+				22DB5DD126895C0F00ACE62F /* Assembly */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1401,12 +1417,18 @@
 			children = (
 				22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */,
 				22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */,
-				22D604D425F1784100102CB6 /* ClientsViewController.swift */,
-				2237E77F25FBD15F00EBD919 /* ClientViewController.swift */,
-				224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */,
-				220DF17E2617E960008F5873 /* PaymentHistory */,
+				2207046A2686A86300FC6B4B /* Clients */,
+				2207046B2686A9CE00FC6B4B /* SborkaViewController.swift */,
 			);
 			path = "Services Tab";
+			sourceTree = "<group>";
+		};
+		22DB5DD126895C0F00ACE62F /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				2207046F2689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift */,
+			);
+			path = Assembly;
 			sourceTree = "<group>";
 		};
 		22DC987026028ADB0016A31B /* Payment */ = {
@@ -1625,6 +1647,7 @@
 				229FE68E25700B120001FF54 /* SearchViewController.swift in Sources */,
 				221C072C256E5ABB001BC842 /* PhoneTableViewCell.swift in Sources */,
 				22CADF4A25CCE7EE001C4F31 /* NewVersionViewController.swift in Sources */,
+				2207046C2686A9CE00FC6B4B /* SborkaViewController.swift in Sources */,
 				22A49CBB2566650600CCC781 /* SizeCollectionViewCell.swift in Sources */,
 				220DF1842617F863008F5873 /* BottomPresentationController.swift in Sources */,
 				220704662685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.swift in Sources */,
@@ -1715,6 +1738,7 @@
 				2259579F259668370088C7E4 /* InputValView.swift in Sources */,
 				2255301D261AA5B80017B9CF /* ClientsFilterPayHistByClientCountDataManager.swift in Sources */,
 				22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */,
+				220704702689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift in Sources */,
 				22328CEC25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.swift in Sources */,
 				2298DECB26111F2B002FA2A2 /* PaymentFilterViewController.swift in Sources */,
 				22729F61262F017200C19EF3 /* PurchasesProdsByClientDataManager.swift in Sources */,
