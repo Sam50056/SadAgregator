@@ -67,6 +67,7 @@ struct Item: Identifiable {
     let title: String
     let title2 : String
     let title3 : String
+    var canGoForDot : Bool
     var parentsCount : Int = 0
     var isOpened = false
     var childrenCount : Int = 0
@@ -92,7 +93,7 @@ extension SborkaViewModel : AssemblySegmentsInAssemblyDataManagerDelegate{
                     
                     jsonItems.forEach { jsonItem in
                         
-                        var newItem = Item(segId: jsonItem["seg_id"].stringValue, title: jsonItem["seg_name"].stringValue, title2: jsonItem["cnt"].stringValue , title3: jsonItem["summ"].stringValue)
+                        var newItem = Item(segId: jsonItem["seg_id"].stringValue, title: jsonItem["seg_name"].stringValue, title2: jsonItem["cnt"].stringValue , title3: jsonItem["summ"].stringValue, canGoForDot: data["max_dept"].stringValue == "1" ? true : false)
                         
                         newItem.parentsCount = 1 + items[segIndex].parentsCount
                         
@@ -109,7 +110,7 @@ extension SborkaViewModel : AssemblySegmentsInAssemblyDataManagerDelegate{
                     var newItems = [Item]()
                     
                     jsonItems.forEach { jsonItem in
-                        newItems.append(Item(segId: jsonItem["seg_id"].stringValue, title: jsonItem["seg_name"].stringValue, title2: jsonItem["cnt"].stringValue , title3: jsonItem["summ"].stringValue))
+                        newItems.append(Item(segId: jsonItem["seg_id"].stringValue, title: jsonItem["seg_name"].stringValue, title2: jsonItem["cnt"].stringValue , title3: jsonItem["summ"].stringValue, canGoForDot: data["max_dept"].stringValue == "1" ? true : false))
                     }
                     
                     items = newItems

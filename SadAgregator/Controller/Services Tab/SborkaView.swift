@@ -43,13 +43,9 @@ struct SborkaView : View {
                                     
                                     Text(item.title3 + " руб.")
                                         .foregroundColor(Color(.systemGray))
-                                    
-                                    if item.title2 != "" , item.title2 != "0"{
                                         
-                                        Image(systemName: "chevron.right")
+                                    Image(systemName: !item.isOpened ? "chevron.right" : "chevron.up")
                                             .foregroundColor(Color(.systemBlue))
-                                        
-                                    }
                                     
                                 }
                                 
@@ -60,7 +56,7 @@ struct SborkaView : View {
                         }
                         .onTapGesture {
                             
-                            guard item.title2 != "" , item.title2 != "0" else {return}
+                            guard !item.canGoForDot else {return}
                             
                             let itemIndex = sborkaViewModel.items.firstIndex(where: { searchItem in
                                 searchItem.segId == item.segId
