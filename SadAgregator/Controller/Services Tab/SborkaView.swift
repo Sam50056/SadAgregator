@@ -41,8 +41,9 @@ struct SborkaView : View {
                                         Text(item.title3 + " руб.")
                                             .foregroundColor(Color(.systemGray))
                                         
-                                        Image(systemName: !item.isOpened ? "chevron.right" : "chevron.up")
+                                        Image(systemName: !item.isOpened ? "chevron.right" : "chevron.down")
                                             .foregroundColor(Color(.systemBlue))
+                                            .animation(.default)
                                         
                                     }
                                     
