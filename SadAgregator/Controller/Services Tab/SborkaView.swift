@@ -28,9 +28,25 @@ struct SborkaView : View {
                         
                         VStack{
                             
-                            HStack{
+                            ZStack{
                                 
-                                Text(item.title)
+                                HStack{
+                                    
+                                    Text(item.title)
+                                    
+                                    Spacer()
+                                    
+                                    HStack(spacing: 8){
+                                        
+                                        Text(item.title3 + " руб.")
+                                            .foregroundColor(Color(.systemGray))
+                                        
+                                        Image(systemName: !item.isOpened ? "chevron.right" : "chevron.up")
+                                            .foregroundColor(Color(.systemBlue))
+                                        
+                                    }
+                                    
+                                }
                                 
                                 Spacer()
                                 
@@ -38,16 +54,6 @@ struct SborkaView : View {
                                     .foregroundColor(Color(.systemGray))
                                 
                                 Spacer()
-                                
-                                HStack(spacing: 8){
-                                    
-                                    Text(item.title3 + " руб.")
-                                        .foregroundColor(Color(.systemGray))
-                                        
-                                    Image(systemName: !item.isOpened ? "chevron.right" : "chevron.up")
-                                            .foregroundColor(Color(.systemBlue))
-                                    
-                                }
                                 
                             }
                             
