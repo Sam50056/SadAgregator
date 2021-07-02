@@ -17,6 +17,11 @@ class SborkaViewModel : ObservableObject{
     
     @Published var thisSegIndex : Int?
     
+    var statusIndex = 0
+    var status : String = ""
+    let statusArray = ["0","1","2"]
+    var helperID : String = ""
+    
     var assemblySegmentsInAssemblyDataManager = AssemblySegmentsInAssemblyDataManager()
     
     init() {
@@ -33,7 +38,7 @@ extension SborkaViewModel{
     
     func updateSegments(parent : String = ""){
         
-        assemblySegmentsInAssemblyDataManager.getAssemblySegmentsInAssemblyData(key: key, parentSegment: parent, status: "", helperId: "")
+        assemblySegmentsInAssemblyDataManager.getAssemblySegmentsInAssemblyData(key: key, parentSegment: parent, status: status, helperId: helperID)
         
     }
     
@@ -54,6 +59,27 @@ extension SborkaViewModel{
         //        print("Children count : \(childrenCount)")
         
         items.removeSubrange(index + 1...index+childrenCount)
+        
+    }
+    
+    func changeStatus(){
+        
+        withAnimation {
+            
+            items.removeAll()
+            thisSegIndex = nil
+            
+            if statusIndex != statusArray.count - 1 {
+                statusIndex += 1
+            }else{
+                statusIndex = 0
+            }
+            
+            status = statusArray[statusIndex]
+            
+            updateSegments()
+            
+        }
         
     }
     

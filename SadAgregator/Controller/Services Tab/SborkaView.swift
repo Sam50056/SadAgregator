@@ -43,7 +43,7 @@ struct SborkaView : View {
                                         
                                         Image(systemName: !item.isOpened ? "chevron.right" : "chevron.down")
                                             .foregroundColor(Color(.systemBlue))
-                                            .animation(.default)
+                                        //                                            .animation(.default)
                                         
                                     }
                                     
@@ -95,6 +95,18 @@ struct SborkaView : View {
             
         }
         .navigationTitle("Структура рынка")
+        .navigationBarItems(trailing: HStack{
+            Button(action: {
+                sborkaViewModel.changeStatus()
+            }){
+                Image(systemName : "person")
+            }
+            Button(action: {
+                
+            }){
+                Image(systemName : "slider.vertical.3")
+            }
+        })
         .onAppear{
             sborkaViewModel.updateSegments()
         }
