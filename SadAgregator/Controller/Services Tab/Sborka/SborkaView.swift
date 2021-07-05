@@ -15,6 +15,8 @@ struct SborkaView : View {
     
     var body: some View{
         
+        ZStack{
+        
         ScrollView{
             
             LazyVStack{
@@ -63,25 +65,35 @@ struct SborkaView : View {
                         }
                         .onTapGesture {
                             
-                            guard !item.canGoForDot else {return}
-                            
-                            let itemIndex = sborkaViewModel.items.firstIndex(where: { searchItem in
-                                searchItem.segId == item.segId
-                            })
-                            
-                            if item.isOpened{
+                            if !item.canGoForDot {
                                 
-                                sborkaViewModel.closeTabWithParentIndex(itemIndex!)
+                                let itemIndex = sborkaViewModel.items.firstIndex(where: { searchItem in
+                                    searchItem.segId == item.segId
+                                })
+                                
+                                if item.isOpened{
+                                    
+                                    sborkaViewModel.closeTabWithParentIndex(itemIndex!)
+                                    
+                                }else{
+                                    
+                                    sborkaViewModel.thisSegIndex = itemIndex
+                                    
+                                    sborkaViewModel.updateSegments(parent: item.segId)
+                                    
+                                }
+                                
+                                sborkaViewModel.items[itemIndex!].isOpened.toggle()
                                 
                             }else{
                                 
-                                sborkaViewModel.thisSegIndex = itemIndex
+                                sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.thisSegmentId = item.segId
                                 
-                                sborkaViewModel.updateSegments(parent: item.segId)
+                                sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.key = sborkaViewModel.key
+                                
+                                sborkaViewModel.showPointsView = true
                                 
                             }
-                            
-                            sborkaViewModel.items[itemIndex!].isOpened.toggle()
                             
                         }
                         
@@ -94,7 +106,12 @@ struct SborkaView : View {
             .padding(.horizontal)
             
         }
-        .navigationTitle("Структура рынка")
+            
+            NavigationLink(destination: sborkaViewModel.pointsInSegmentsView, isActive: $sborkaViewModel.showPointsView) {
+                EmptyView()
+            }
+        
+        }
         .navigationBarItems(trailing: HStack{
             Button(action: {
                 sborkaViewModel.changeStatus()
@@ -108,6 +125,9 @@ struct SborkaView : View {
             }
         })
         .onAppear{
+            
+            guard sborkaViewModel.items.isEmpty else {return}
+            
             sborkaViewModel.updateSegments()
         }
         

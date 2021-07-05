@@ -13,6 +13,8 @@ class SborkaViewModel : ObservableObject{
     
     @Published var items = [Item]()
     
+    @Published var showPointsView = false
+    
     var key = ""
     
     @Published var thisSegIndex : Int?
@@ -22,7 +24,9 @@ class SborkaViewModel : ObservableObject{
     let statusArray = ["0","1","2"]
     var helperID : String = ""
     
-    var assemblySegmentsInAssemblyDataManager = AssemblySegmentsInAssemblyDataManager()
+    private var assemblySegmentsInAssemblyDataManager = AssemblySegmentsInAssemblyDataManager()
+    
+    lazy var pointsInSegmentsView = PointsInSborkaSegmentView()
     
     init() {
         
@@ -87,16 +91,20 @@ extension SborkaViewModel{
 
 //MARK: - Item
 
-struct Item: Identifiable {
-    let id = UUID()
-    let segId : String
-    let title: String
-    let title2 : String
-    let title3 : String
-    var canGoForDot : Bool
-    var parentsCount : Int = 0
-    var isOpened = false
-    var childrenCount : Int = 0
+extension SborkaViewModel{
+    
+    struct Item: Identifiable {
+        let id = UUID()
+        let segId : String
+        let title: String
+        let title2 : String
+        let title3 : String
+        var canGoForDot : Bool
+        var parentsCount : Int = 0
+        var isOpened = false
+        var childrenCount : Int = 0
+    }
+    
 }
 
 //MARK: - AssemblySegmentsInAssemblyDataManagerDelegate

@@ -252,6 +252,9 @@
 		22DC987226028B160016A31B /* PaggingPaymentsByClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC987126028B160016A31B /* PaggingPaymentsByClientDataManager.swift */; };
 		22DC9876260293E90016A31B /* ClientsPagingPaymentsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */; };
 		22DC987F2602AFCB0016A31B /* UpdateClientInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */; };
+		22E44717269237B60016D96E /* PointsInSborkaSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E44716269237B60016D96E /* PointsInSborkaSegmentView.swift */; };
+		22E44719269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E44718269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift */; };
+		22E4471B269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4471A269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift */; };
 		22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */; };
 		22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */; };
 		22F7426A26226561009128AF /* PurchasesItemInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F7426926226561009128AF /* PurchasesItemInfoDataManager.swift */; };
@@ -510,6 +513,9 @@
 		22DC987126028B160016A31B /* PaggingPaymentsByClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaggingPaymentsByClientDataManager.swift; sourceTree = "<group>"; };
 		22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsPagingPaymentsDataManager.swift; sourceTree = "<group>"; };
 		22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateClientInfoDataManager.swift; sourceTree = "<group>"; };
+		22E44716269237B60016D96E /* PointsInSborkaSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsInSborkaSegmentView.swift; sourceTree = "<group>"; };
+		22E44718269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsInSborkaSegmentViewModel.swift; sourceTree = "<group>"; };
+		22E4471A269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyPointsInSegmentDataManager.swift; sourceTree = "<group>"; };
 		22EF767C2596CCCE0093B645 /* SetSimpleReqDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSimpleReqDataManager.swift; sourceTree = "<group>"; };
 		22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListSelectDataManager.swift; sourceTree = "<group>"; };
 		22F7426926226561009128AF /* PurchasesItemInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesItemInfoDataManager.swift; sourceTree = "<group>"; };
@@ -1420,8 +1426,7 @@
 				22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */,
 				22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */,
 				2207046A2686A86300FC6B4B /* Clients */,
-				2207046B2686A9CE00FC6B4B /* SborkaView.swift */,
-				22BC71D1268A46A700846702 /* SborkaViewModel.swift */,
+				22E44715269234340016D96E /* Sborka */,
 			);
 			path = "Services Tab";
 			sourceTree = "<group>";
@@ -1430,6 +1435,7 @@
 			isa = PBXGroup;
 			children = (
 				2207046F2689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift */,
+				22E4471A269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -1441,6 +1447,17 @@
 				2255301F261AA6EE0017B9CF /* Filter */,
 			);
 			path = Payment;
+			sourceTree = "<group>";
+		};
+		22E44715269234340016D96E /* Sborka */ = {
+			isa = PBXGroup;
+			children = (
+				2207046B2686A9CE00FC6B4B /* SborkaView.swift */,
+				22BC71D1268A46A700846702 /* SborkaViewModel.swift */,
+				22E44716269237B60016D96E /* PointsInSborkaSegmentView.swift */,
+				22E44718269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift */,
+			);
+			path = Sborka;
 			sourceTree = "<group>";
 		};
 		22F742682622653F009128AF /* Purchases */ = {
@@ -1711,7 +1728,10 @@
 				22DC987F2602AFCB0016A31B /* UpdateClientInfoDataManager.swift in Sources */,
 				2231DB6D2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift in Sources */,
 				2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */,
+				22E44719269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift in Sources */,
+				22E44717269237B60016D96E /* PointsInSborkaSegmentView.swift in Sources */,
 				22703262262711510068BD82 /* VibratKlientaViewController.swift in Sources */,
+				22E4471B269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift in Sources */,
 				22D90221259AC9EF009732CC /* AlbumsInProgressDataManager.swift in Sources */,
 				22B2D8EB267108A600F2F820 /* BrokersGetDeliveryTypeDataManager.swift in Sources */,
 				2200942825D831C00001F7B3 /* CategoriesTableViewCell.swift in Sources */,
@@ -1992,7 +2012,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2016,7 +2036,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
