@@ -16,82 +16,84 @@ struct SborkaView : View {
     var body: some View{
         
         ZStack{
-        
-        ScrollView{
             
-            LazyVStack{
+            ScrollView{
                 
-                ForEach(sborkaViewModel.items , id: \.id){ item in
+                LazyVStack{
                     
-                    HStack{
+                    ForEach(sborkaViewModel.items , id: \.id){ item in
                         
-                        Spacer(minLength: 0)
-                            .frame(width: CGFloat((item.parentsCount * 10)))
-                        
-                        VStack{
+                        HStack{
                             
-                            ZStack{
+                            Spacer(minLength: 0)
+                                .frame(width: CGFloat((item.parentsCount * 10)))
+                            
+                            VStack{
                                 
-                                HStack{
+                                ZStack{
                                     
-                                    Text(item.title)
-                                    
-                                    Spacer()
-                                    
-                                    HStack(spacing: 8){
+                                    HStack{
                                         
-                                        Text(item.title3 + " руб.")
-                                            .foregroundColor(Color(.systemGray))
+                                        Text(item.title)
                                         
-                                        Image(systemName: !item.isOpened ? "chevron.right" : "chevron.down")
-                                            .foregroundColor(Color(.systemBlue))
-                                        //                                            .animation(.default)
+                                        Spacer()
+                                        
+                                        HStack(spacing: 8){
+                                            
+                                            Text(item.title3 + " руб.")
+                                                .foregroundColor(Color(.systemGray))
+                                            
+                                            Image(systemName: !item.isOpened ? "chevron.right" : "chevron.down")
+                                                .foregroundColor(Color(.systemBlue))
+                                            //                                            .animation(.default)
+                                            
+                                        }
                                         
                                     }
                                     
+                                    Spacer()
+                                    
+                                    Text(item.title2 + " шт.")
+                                        .foregroundColor(Color(.systemGray))
+                                    
+                                    Spacer()
+                                    
                                 }
                                 
-                                Spacer()
-                                
-                                Text(item.title2 + " шт.")
-                                    .foregroundColor(Color(.systemGray))
-                                
-                                Spacer()
+                                Divider()
                                 
                             }
-                            
-                            Divider()
-                            
-                        }
-                        .onTapGesture {
-                            
-                            if !item.canGoForDot {
+                            .onTapGesture {
                                 
-                                let itemIndex = sborkaViewModel.items.firstIndex(where: { searchItem in
-                                    searchItem.segId == item.segId
-                                })
-                                
-                                if item.isOpened{
+                                if !item.canGoForDot {
                                     
-                                    sborkaViewModel.closeTabWithParentIndex(itemIndex!)
+                                    let itemIndex = sborkaViewModel.items.firstIndex(where: { searchItem in
+                                        searchItem.segId == item.segId
+                                    })
+                                    
+                                    if item.isOpened{
+                                        
+                                        sborkaViewModel.closeTabWithParentIndex(itemIndex!)
+                                        
+                                    }else{
+                                        
+                                        sborkaViewModel.thisSegIndex = itemIndex
+                                        
+                                        sborkaViewModel.updateSegments(parent: item.segId)
+                                        
+                                    }
+                                    
+                                    sborkaViewModel.items[itemIndex!].isOpened.toggle()
                                     
                                 }else{
                                     
-                                    sborkaViewModel.thisSegIndex = itemIndex
+                                    sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.thisSegmentId = item.segId
                                     
-                                    sborkaViewModel.updateSegments(parent: item.segId)
+                                    sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.key = sborkaViewModel.key
+                                    
+                                    sborkaViewModel.showPointsView = true
                                     
                                 }
-                                
-                                sborkaViewModel.items[itemIndex!].isOpened.toggle()
-                                
-                            }else{
-                                
-                                sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.thisSegmentId = item.segId
-                                
-                                sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.key = sborkaViewModel.key
-                                
-                                sborkaViewModel.showPointsView = true
                                 
                             }
                             
@@ -100,30 +102,42 @@ struct SborkaView : View {
                     }
                     
                 }
+                .padding(.top , 16)
+                .padding(.horizontal)
                 
             }
-            .padding(.top , 16)
-            .padding(.horizontal)
-            
-        }
             
             NavigationLink(destination: sborkaViewModel.pointsInSegmentsView, isActive: $sborkaViewModel.showPointsView) {
                 EmptyView()
             }
-        
+            
         }
-        .navigationBarItems(trailing: HStack{
-            Button(action: {
-                sborkaViewModel.changeStatus()
-            }){
-                Image(systemName : "person")
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button(action:{
+                    
+                }){
+                    Image(systemName : "person")
+                }
+                Menu {
+                    Button("Не обработаны", action: {
+                        sborkaViewModel.changeStatus(to: "0")
+                    })
+                    Button("Нет в наличии", action: {
+                        sborkaViewModel.changeStatus(to: "1")
+                    })
+                    Button("Куплены", action: {
+                        sborkaViewModel.changeStatus(to: "2")
+                    })
+                    Button("Любой", action: {
+                        sborkaViewModel.changeStatus(to: "")
+                    })
+                } label: {
+                    Image(systemName : "slider.vertical.3")
+                        .imageScale(.large)
+                }
             }
-            Button(action: {
-                
-            }){
-                Image(systemName : "slider.vertical.3")
-            }
-        })
+        }
         .onAppear{
             
             guard sborkaViewModel.items.isEmpty else {return}
