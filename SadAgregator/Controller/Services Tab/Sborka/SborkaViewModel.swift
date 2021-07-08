@@ -13,7 +13,11 @@ class SborkaViewModel : ObservableObject{
     
     @Published var items = [Item]()
     
+    @Published var helpers = [Helper]()
+    
     @Published var showPointsView = false
+    
+    @Published var showHelperListSheet = false
     
     var key = ""
     
@@ -23,12 +27,14 @@ class SborkaViewModel : ObservableObject{
     var helperID : String = ""
     
     private var assemblySegmentsInAssemblyDataManager = AssemblySegmentsInAssemblyDataManager()
+    private var assemblyGetHelpersDataManager = AssemblyGetHelpersDataManager()
     
     lazy var pointsInSegmentsView = PointsInSborkaSegmentView()
     
     init() {
         
         assemblySegmentsInAssemblyDataManager.delegate = self
+        assemblyGetHelpersDataManager.delegate = self
         
     }
     
@@ -41,6 +47,12 @@ extension SborkaViewModel{
     func updateSegments(parent : String = ""){
         
         assemblySegmentsInAssemblyDataManager.getAssemblySegmentsInAssemblyData(key: key, parentSegment: parent, status: status, helperId: helperID)
+        
+    }
+    
+    func getHelpers(){
+        
+        assemblyGetHelpersDataManager.getAssemblyGetHelpersData(key: key)
         
     }
     
@@ -97,6 +109,13 @@ extension SborkaViewModel{
         var childrenCount : Int = 0
     }
     
+    struct Helper : Identifiable{
+        
+        var id : String
+        var capt : String
+        
+    }
+    
 }
 
 //MARK: - AssemblySegmentsInAssemblyDataManagerDelegate
@@ -151,6 +170,36 @@ extension SborkaViewModel : AssemblySegmentsInAssemblyDataManagerDelegate{
     
     func didFailGettingAssemblySegmentsInAssemblyDataWithError(error: String) {
         print("Error with AssemblySegmentsInAssemblyDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - AssemblyGetHelpersDataManager
+
+extension SborkaViewModel : AssemblyGetHelpersDataManagerDelegate{
+    
+    func getAssemblyGetHelpersData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+            if data["result"].intValue == 1{
+                
+                let jsonHelpers = data["helpers"].arrayValue
+                
+                self.helpers = jsonHelpers.map { jsonHelper in
+                    Helper(id: jsonHelper["hl_id"].stringValue, capt: jsonHelper["capt"].stringValue)
+                }
+                
+                self.showHelperListSheet = true
+                
+            }
+            
+        }
+        
+    }
+    
+    func getAssemblyGetHelpersDataWithError(error: String) {
+        print("Error with AssemblyGetHelpersDataManager : \(error)")
     }
     
 }

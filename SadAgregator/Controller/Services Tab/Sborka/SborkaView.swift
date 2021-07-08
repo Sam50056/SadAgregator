@@ -112,13 +112,47 @@ struct SborkaView : View {
             }
             
         }
+        .sheet(isPresented: $sborkaViewModel.showHelperListSheet, content: {
+            
+            VStack{
+                
+                List{
+                    
+                    ForEach(sborkaViewModel.helpers, id: \.id){ helper in
+                        
+                        HStack{
+                            
+                            Text(helper.capt)
+                            
+                            Spacer()
+                            
+                        }
+                        .onTapGesture {
+                            sborkaViewModel.helperID = helper.id
+                            sborkaViewModel.updateSegments()
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        })
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
+                
                 Button(action:{
-                    
+                    sborkaViewModel.getHelpers()
                 }){
                     Image(systemName : "person")
-                }
+                }.contextMenu(ContextMenu(menuItems: {
+                    Button("Смотреть от себя"){
+                        sborkaViewModel.helperID = ""
+                        sborkaViewModel.updateSegments()
+                    }
+                }))
+                
                 Menu {
                     Button("Не обработаны", action: {
                         sborkaViewModel.changeStatus(to: "0")

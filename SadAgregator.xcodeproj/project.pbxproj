@@ -42,6 +42,7 @@
 		221F2C722680179C007725D6 /* NastroykiPostavshikaCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F2C712680179C007725D6 /* NastroykiPostavshikaCheckView.swift */; };
 		22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22216A4325853FCC00D5248B /* RegisterDataManager.swift */; };
 		222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */; };
+		222B08C0269790D300AC062F /* AssemblyGetHelpersDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222B08BF269790D300AC062F /* AssemblyGetHelpersDataManager.swift */; };
 		2231DB6D2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB6C2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift */; };
 		2231DB6F2649CB600075228E /* PurchasesAddItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB6E2649CB600075228E /* PurchasesAddItemDataManager.swift */; };
 		2231DB71264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB70264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift */; };
@@ -299,6 +300,7 @@
 		221F2C712680179C007725D6 /* NastroykiPostavshikaCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NastroykiPostavshikaCheckView.swift; sourceTree = "<group>"; };
 		22216A4325853FCC00D5248B /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUpdateDataManager.swift; sourceTree = "<group>"; };
+		222B08BF269790D300AC062F /* AssemblyGetHelpersDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyGetHelpersDataManager.swift; sourceTree = "<group>"; };
 		2231DB6C2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesSellPriceRecalcDataManager.swift; sourceTree = "<group>"; };
 		2231DB6E2649CB600075228E /* PurchasesAddItemDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesAddItemDataManager.swift; sourceTree = "<group>"; };
 		2231DB70264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesAddItemForYourselfDataManager.swift; sourceTree = "<group>"; };
@@ -1436,6 +1438,7 @@
 			children = (
 				2207046F2689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift */,
 				22E4471A269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift */,
+				222B08BF269790D300AC062F /* AssemblyGetHelpersDataManager.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -1757,6 +1760,7 @@
 				2200943025D837530001F7B3 /* CategoryCollectionViewCell.swift in Sources */,
 				228D2D3B25AC9DED000E9FAE /* UpdateDeviceDataManager.swift in Sources */,
 				229A95CA25A16E100086EAD9 /* TopVendorsDataManager.swift in Sources */,
+				222B08C0269790D300AC062F /* AssemblyGetHelpersDataManager.swift in Sources */,
 				22B26522267D61EA004342E3 /* BrokersDelZonePriceDataManager.swift in Sources */,
 				22582C7F25D20170005E341C /* SignInWIthAppleIdDataManager.swift in Sources */,
 				2259579F259668370088C7E4 /* InputValView.swift in Sources */,
