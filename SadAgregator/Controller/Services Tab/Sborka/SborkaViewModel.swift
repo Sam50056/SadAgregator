@@ -53,6 +53,11 @@ extension SborkaViewModel{
     
     func updateSegments(parent : String = ""){
         
+        if parent.isEmpty{
+            items.removeAll()
+            thisSegIndex = nil
+        }
+        
         assemblySegmentsInAssemblyDataManager.getAssemblySegmentsInAssemblyData(key: key, parentSegment: parent, status: status, helperId: helperID)
         
     }
@@ -133,9 +138,6 @@ extension SborkaViewModel{
     func changeStatus(to newStatus : String){
         
         withAnimation {
-            
-            items.removeAll()
-            thisSegIndex = nil
             
             status = newStatus
             

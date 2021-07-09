@@ -139,31 +139,35 @@ struct SborkaView : View {
         })
         .sheet(isPresented: $sborkaViewModel.showHelperListSheet, content: {
             
-            VStack{
+            NavigationView{
                 
-                List{
+                VStack{
                     
-                    ForEach(sborkaViewModel.helpers, id: \.id){ helper in
+                    List{
                         
-                        HStack{
+                        ForEach(sborkaViewModel.helpers, id: \.id){ helper in
                             
-                            Text(helper.capt)
-                            
-                            Spacer()
-                            
-                        }
-                        .onTapGesture {
-                            
-                            if let _ = sborkaViewModel.selectedByLongPressSegment{
+                            HStack{
                                 
-                                sborkaViewModel.giveSegmentTo(helper.id)
+                                Text(helper.capt)
                                 
-                            }else{
+                                Spacer()
                                 
-                                sborkaViewModel.helperID = helper.id
-                                sborkaViewModel.updateSegments()
+                            }
+                            .onTapGesture {
                                 
-                                sborkaViewModel.showHelperListSheet = false
+                                if let _ = sborkaViewModel.selectedByLongPressSegment{
+                                    
+                                    sborkaViewModel.giveSegmentTo(helper.id)
+                                    
+                                }else{
+                                    
+                                    sborkaViewModel.helperID = helper.id
+                                    sborkaViewModel.updateSegments()
+                                    
+                                    sborkaViewModel.showHelperListSheet = false
+                                    
+                                }
                                 
                             }
                             
@@ -172,6 +176,8 @@ struct SborkaView : View {
                     }
                     
                 }
+                
+                .navigationBarTitle("Помощники", displayMode: .inline)
                 
             }
             
