@@ -100,7 +100,7 @@ struct SborkaView : View {
                                 
                                 sborkaViewModel.selectedByLongPressSegment = item
                                 
-                                sborkaViewModel.alertTitle = sborkaViewModel.helperID == "" ? "Передать сегмент точку помощнику?" :  "Забрать сегмент у помощника?"
+                                sborkaViewModel.alertTitle = sborkaViewModel.helperID == "" ? "Передать сегмент помощнику?" :  "Забрать сегмент у помощника?"
                                 sborkaViewModel.alertMessage = nil
                                 sborkaViewModel.showAlert = true
                                 

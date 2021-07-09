@@ -84,6 +84,8 @@ extension SborkaViewModel{
                     self.showHelperListSheet = false
                     self.updateSegments()
                     
+                    self.selectedByLongPressSegment = nil
+                    
                 }
                 
             }
@@ -106,6 +108,8 @@ extension SborkaViewModel{
                 if data!["result"].intValue == 1{
                     
                     self.updateSegments()
+                    
+                    self.selectedByLongPressSegment = nil
                     
                 }
                 

@@ -42,6 +42,8 @@
 		221F2C722680179C007725D6 /* NastroykiPostavshikaCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F2C712680179C007725D6 /* NastroykiPostavshikaCheckView.swift */; };
 		22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22216A4325853FCC00D5248B /* RegisterDataManager.swift */; };
 		2222676D2698B05C00E1AFFC /* AssemblyRemoveFromHelperDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222676C2698B05C00E1AFFC /* AssemblyRemoveFromHelperDataManager.swift */; };
+		2222676F2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222676E2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift */; };
+		222267712698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222267702698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift */; };
 		222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */; };
 		222B08C0269790D300AC062F /* AssemblyGetHelpersDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222B08BF269790D300AC062F /* AssemblyGetHelpersDataManager.swift */; };
 		222B08C22698831400AC062F /* AssemblyMoveToHelperDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222B08C12698831400AC062F /* AssemblyMoveToHelperDataManager.swift */; };
@@ -302,6 +304,8 @@
 		221F2C712680179C007725D6 /* NastroykiPostavshikaCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NastroykiPostavshikaCheckView.swift; sourceTree = "<group>"; };
 		22216A4325853FCC00D5248B /* RegisterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDataManager.swift; sourceTree = "<group>"; };
 		2222676C2698B05C00E1AFFC /* AssemblyRemoveFromHelperDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyRemoveFromHelperDataManager.swift; sourceTree = "<group>"; };
+		2222676E2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyMoveToHelperPoint.swift; sourceTree = "<group>"; };
+		222267702698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyRemoveFromHelperPointDataManager.swift; sourceTree = "<group>"; };
 		222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUpdateDataManager.swift; sourceTree = "<group>"; };
 		222B08BF269790D300AC062F /* AssemblyGetHelpersDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyGetHelpersDataManager.swift; sourceTree = "<group>"; };
 		222B08C12698831400AC062F /* AssemblyMoveToHelperDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyMoveToHelperDataManager.swift; sourceTree = "<group>"; };
@@ -1445,6 +1449,8 @@
 				222B08BF269790D300AC062F /* AssemblyGetHelpersDataManager.swift */,
 				222B08C12698831400AC062F /* AssemblyMoveToHelperDataManager.swift */,
 				2222676C2698B05C00E1AFFC /* AssemblyRemoveFromHelperDataManager.swift */,
+				2222676E2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift */,
+				222267702698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -1669,6 +1675,7 @@
 				22CADB1225B2484000A5E475 /* AssignVkToAppIDDataManager.swift in Sources */,
 				22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */,
 				22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */,
+				222267712698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift in Sources */,
 				22328CE025FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.swift in Sources */,
 				22B26526267D7114004342E3 /* BrokersBrokerHelperCheckDataManager.swift in Sources */,
 				228289C426519B0D00E3AA83 /* PhotoSavedDataManager.swift in Sources */,
@@ -1871,6 +1878,7 @@
 				224D273D2613AED200BFAE30 /* RangeSlider.swift in Sources */,
 				2201673C25A952040072BFE7 /* SearchImageDataManager.swift in Sources */,
 				22A0534E256BCE350016B40A /* ActivityPointDataManager.swift in Sources */,
+				2222676F2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift in Sources */,
 				22328CCE25FE743E00C51CC9 /* ClientsPayments.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

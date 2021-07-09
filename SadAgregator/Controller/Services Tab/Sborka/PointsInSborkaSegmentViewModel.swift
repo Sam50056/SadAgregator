@@ -11,13 +11,27 @@ import SwiftyJSON
 
 class PointsInSborkaSegmentViewModel : ObservableObject{
     
+    var key = ""
+    
     @Published var items = [Item]()
+    @Published var helpers = [Helper]()
     
     var thisSegmentId : String?
     
-    var key = ""
+    @Published var showHelperListSheet = false
+    
+    @Published var showAlert = false
+    var alertTitle = ""
+    var alertMessage : String? = nil
+    var alertButtonText = "Да"
+    
+    var selectedByLongPressPoint : Item?
+    
+    var status : String = ""
+    var helperID : String = ""
     
     private var assemblyPointsInSegmentDataManager = AssemblyPointsInSegmentDataManager()
+    private lazy var assemblyMoveToHelperPointDataManager = AssemblyMoveToHelperPointDataManager()
     
     init(){
         assemblyPointsInSegmentDataManager.delegate = self
@@ -33,7 +47,76 @@ extension PointsInSborkaSegmentViewModel{
         
         guard let thisSegmentId = thisSegmentId else {return}
         
-        assemblyPointsInSegmentDataManager.getAssemblyPointsInSegmentData(key: key, segmentId: thisSegmentId, status: "", helperId: "", page: 1)
+        assemblyPointsInSegmentDataManager.getAssemblyPointsInSegmentData(key: key, segmentId: thisSegmentId, status: status, helperId: helperID, page: 1)
+        
+    }
+    
+    func getHelpers(){
+        
+        AssemblyGetHelpersDataManager(delegate: self).getAssemblyGetHelpersData(key: key)
+        
+    }
+    
+    func givePointTo(_ helper : String){
+        
+        AssemblyMoveToHelperPointDataManager().getAssemblyMoveToHelperPointData(key: key, helper: helper, point: selectedByLongPressPoint!.pointId) { data, error in
+            
+            DispatchQueue.main.async {
+                
+                if let error = error , data == nil {
+                    print("Error with AssemblyMoveToHelperDataManager : \(error)")
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    self.showHelperListSheet = false
+                    self.update()
+                    
+                    self.selectedByLongPressPoint = nil
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func takePointFrom(_ helper : String){
+        
+        AssemblyRemoveFromHelperPointDataManager().getAssemblyRemoveFromHelperPointData(key: key, helper: helper, point: selectedByLongPressPoint!.pointId) { data, error in
+            
+            DispatchQueue.main.async {
+                
+                if let error = error , data == nil {
+                    print("Error with AssemblyRemoveFromHelperPointDataManager : \(error)")
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    self.update()
+                    
+                    self.selectedByLongPressPoint = nil
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func changeStatus(to newStatus : String){
+        
+        withAnimation {
+            
+            status = newStatus
+            
+            update()
+            
+        }
         
     }
     
@@ -49,6 +132,13 @@ extension PointsInSborkaSegmentViewModel{
         let capt : String
         let count : String
         let summ : String
+    }
+    
+    struct Helper : Identifiable{
+        
+        var id : String
+        var capt : String
+        
     }
     
 }
@@ -83,6 +173,37 @@ extension PointsInSborkaSegmentViewModel : AssemblyPointsInSegmentDataManagerDel
     
     func didFailGettingAssemblyPointsInSegmentDataWithError(error: String) {
         print("Error with AssemblyPointsInSegmentDataManager : \(error)")
+    }
+    
+}
+
+
+//MARK: - AssemblyGetHelpersDataManager
+
+extension PointsInSborkaSegmentViewModel : AssemblyGetHelpersDataManagerDelegate{
+    
+    func getAssemblyGetHelpersData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+            if data["result"].intValue == 1{
+                
+                let jsonHelpers = data["helpers"].arrayValue
+                
+                self.helpers = jsonHelpers.map { jsonHelper in
+                    Helper(id: jsonHelper["hl_id"].stringValue, capt: jsonHelper["capt"].stringValue)
+                }
+                
+                self.showHelperListSheet = true
+                
+            }
+            
+        }
+        
+    }
+    
+    func getAssemblyGetHelpersDataWithError(error: String) {
+        print("Error with AssemblyGetHelpersDataManager : \(error)")
     }
     
 }
