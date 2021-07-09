@@ -49,8 +49,7 @@ class PaymentHistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        loadUserData()
-        key = "part_2_test"
+        loadUserData()
         
         clientsPaymentsDataManager.delegate = self
         paggingPaymentsByClientDataManager.delegate = self

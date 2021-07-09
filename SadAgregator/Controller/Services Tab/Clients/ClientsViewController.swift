@@ -52,8 +52,7 @@ class ClientsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        loadUserData()
-        key = "part_2_test"
+        loadUserData()
         
         //Set up search controller
         searchController.searchResultsUpdater = self

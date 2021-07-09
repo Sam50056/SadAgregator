@@ -45,7 +45,7 @@ class PaymentFilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        key = "part_2_test"
+        key = getKey()!
         
         collectionView.collectionViewLayout = createLayout()
         

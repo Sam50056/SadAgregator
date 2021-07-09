@@ -38,7 +38,7 @@ class ClientViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        key = "part_2_test"
+        key = getKey()!
         
         clientDataManager.delegate = self
         updateClientInfoDataManager.delegate = self

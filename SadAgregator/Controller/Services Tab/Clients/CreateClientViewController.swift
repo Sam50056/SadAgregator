@@ -30,7 +30,7 @@ class CreateClientViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        key = "part_2_test"
+        key = getKey()!
         
         doneButton.layer.cornerRadius = 8
         doneButton.addTarget(self, action: #selector(doneButtonTapped(_:)), for: .touchUpInside)
