@@ -19,6 +19,13 @@ class SborkaViewModel : ObservableObject{
     
     @Published var showHelperListSheet = false
     
+    @Published var showAlert = false
+    var alertTitle = ""
+    var alertMessage : String? = nil
+    var alertButtonText = "Да"
+    
+    var selectedByLongPressSegment : Item?
+    
     var key = ""
     
     @Published var thisSegIndex : Int?
@@ -53,6 +60,53 @@ extension SborkaViewModel{
     func getHelpers(){
         
         assemblyGetHelpersDataManager.getAssemblyGetHelpersData(key: key)
+        
+    }
+    
+    func giveSegmentTo(_ helper : String){
+        
+        AssemblyMoveToHelperDataManager().getAssemblyMoveToHelperData(key: key, helper: helper, segment: selectedByLongPressSegment!.segId) { data, error in
+            
+            DispatchQueue.main.async {
+                
+                if let error = error , data == nil {
+                    print("Error with AssemblyMoveToHelperDataManager : \(error)")
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    self.showHelperListSheet = false
+                    self.updateSegments()
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func takeSegmentFrom(_ helper : String){
+        
+        AssemblyRemoveFromHelperDataManager().getAssemblyRemoveFromHelperData(key: key, helper: helper, segment: selectedByLongPressSegment!.segId) { data, error in
+            
+            DispatchQueue.main.async {
+                
+                if let error = error , data == nil {
+                    print("Error with AssemblyRemoveFromHelperDataManager : \(error)")
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    self.updateSegments()
+                    
+                }
+                
+            }
+            
+        }
         
     }
     

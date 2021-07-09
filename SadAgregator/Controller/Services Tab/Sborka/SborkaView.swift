@@ -96,6 +96,15 @@ struct SborkaView : View {
                                 }
                                 
                             }
+                            .onLongPressGesture {
+                                
+                                sborkaViewModel.selectedByLongPressSegment = item
+                                
+                                sborkaViewModel.alertTitle = sborkaViewModel.helperID == "" ? "Передать сегмент точку помощнику?" :  "Забрать сегмент у помощника?"
+                                sborkaViewModel.alertMessage = nil
+                                sborkaViewModel.showAlert = true
+                                
+                            }
                             
                         }
                         
@@ -112,6 +121,22 @@ struct SborkaView : View {
             }
             
         }
+        .alert(isPresented: $sborkaViewModel.showAlert, content: {
+            Alert(title: Text(sborkaViewModel.alertTitle), message: sborkaViewModel.alertMessage != nil ? Text(sborkaViewModel.alertMessage!) : nil, primaryButton: .cancel(Text("Отмена")), secondaryButton: .default(Text(sborkaViewModel.alertButtonText), action: {
+                
+                if sborkaViewModel.helperID != "" { //Smotrit ne ot sebya
+                    
+                    sborkaViewModel.takeSegmentFrom(sborkaViewModel.helperID)
+                    
+                }else{//Smotrit ot sebya
+                    
+                    //Getting the list of helpers for user to choose who is he giving the segment to
+                    sborkaViewModel.getHelpers()
+                    
+                }
+                
+            }))
+        })
         .sheet(isPresented: $sborkaViewModel.showHelperListSheet, content: {
             
             VStack{
@@ -128,8 +153,20 @@ struct SborkaView : View {
                             
                         }
                         .onTapGesture {
-                            sborkaViewModel.helperID = helper.id
-                            sborkaViewModel.updateSegments()
+                            
+                            if let _ = sborkaViewModel.selectedByLongPressSegment{
+                                
+                                sborkaViewModel.giveSegmentTo(helper.id)
+                                
+                            }else{
+                                
+                                sborkaViewModel.helperID = helper.id
+                                sborkaViewModel.updateSegments()
+                                
+                                sborkaViewModel.showHelperListSheet = false
+                                
+                            }
+                            
                         }
                         
                     }

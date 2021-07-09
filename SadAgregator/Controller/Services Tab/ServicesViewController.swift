@@ -164,7 +164,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             
             let sborkaVC = UIHostingController(rootView: sborkaView)
             
-            sborkaVC.navigationItem.title = "Структура рынка"
+            //            sborkaVC.navigationItem.title = "Структура рынка"
             
             navigationController?.pushViewController(sborkaVC, animated: true)
             
