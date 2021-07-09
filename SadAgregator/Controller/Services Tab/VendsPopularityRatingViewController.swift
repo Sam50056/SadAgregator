@@ -33,7 +33,7 @@ class VendsPopularityRatingViewController: UIViewController {
     var help : JSON?
     
     var page = 1
-    var rowForPaggingUpdate : Int = 15
+    var rowForPaggingUpdate : Int = 14
     
     var selectedVendId = ""
     
@@ -103,7 +103,7 @@ class VendsPopularityRatingViewController: UIViewController {
         items.removeAll()
         
         page = 1
-        rowForPaggingUpdate = 15
+        rowForPaggingUpdate = 14
         
     }
     
