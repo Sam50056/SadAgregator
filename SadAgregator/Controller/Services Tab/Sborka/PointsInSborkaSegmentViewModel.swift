@@ -20,12 +20,16 @@ class PointsInSborkaSegmentViewModel : ObservableObject{
     
     @Published var showHelperListSheet = false
     
+    @Published var showProdsInPointView = false
+    lazy var prodsInPointView = ProdsInPointView()
+    
     @Published var showAlert = false
     var alertTitle = ""
     var alertMessage : String? = nil
     var alertButtonText = "Да"
     
     var selectedByLongPressPoint : Item?
+    var selectedByTapPoint : Item?
     
     var status : String = ""
     var helperID : String = ""
@@ -125,6 +129,16 @@ extension PointsInSborkaSegmentViewModel{
             update()
             
         }
+        
+    }
+    
+    func showProdsInPoint(){
+        
+        prodsInPointView.status = status
+        prodsInPointView.helperId = helperID
+        prodsInPointView.pointId = selectedByTapPoint?.pointId
+        
+        showProdsInPointView = true
         
     }
     

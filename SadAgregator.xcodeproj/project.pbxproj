@@ -176,6 +176,8 @@
 		22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */; };
 		22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */; };
 		22A4A9CE2699CDE1000D3B73 /* AssemblyGetHelpersInAssemblyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4A9CD2699CDE1000D3B73 /* AssemblyGetHelpersInAssemblyDataManager.swift */; };
+		22A4A9D02699EAB8000D3B73 /* ProdsInPointTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4A9CF2699EAB8000D3B73 /* ProdsInPointTableViewController.swift */; };
+		22A4A9D22699F1C5000D3B73 /* AssemblyProdsInPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4A9D12699F1C5000D3B73 /* AssemblyProdsInPointDataManager.swift */; };
 		22ACF1A9262B828B00F9584D /* ZamenaDlyaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */; };
 		22ACF1AE262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */; };
 		22ACF1AF262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */; };
@@ -442,6 +444,8 @@
 		22A49CC12566717700CCC781 /* OptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		22A49CC22566717700CCC781 /* OptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionCollectionViewCell.xib; sourceTree = "<group>"; };
 		22A4A9CD2699CDE1000D3B73 /* AssemblyGetHelpersInAssemblyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyGetHelpersInAssemblyDataManager.swift; sourceTree = "<group>"; };
+		22A4A9CF2699EAB8000D3B73 /* ProdsInPointTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdsInPointTableViewController.swift; sourceTree = "<group>"; };
+		22A4A9D12699F1C5000D3B73 /* AssemblyProdsInPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyProdsInPointDataManager.swift; sourceTree = "<group>"; };
 		22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZamenaDlyaTableViewController.swift; sourceTree = "<group>"; };
 		22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCellTwoLabelTableViewCell.swift; sourceTree = "<group>"; };
 		22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCellTwoLabelTableViewCell.xib; sourceTree = "<group>"; };
@@ -1454,6 +1458,7 @@
 				2222676C2698B05C00E1AFFC /* AssemblyRemoveFromHelperDataManager.swift */,
 				2222676E2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift */,
 				222267702698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift */,
+				22A4A9D12699F1C5000D3B73 /* AssemblyProdsInPointDataManager.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -1474,6 +1479,7 @@
 				22BC71D1268A46A700846702 /* SborkaViewModel.swift */,
 				22E44716269237B60016D96E /* PointsInSborkaSegmentView.swift */,
 				22E44718269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift */,
+				22A4A9CF2699EAB8000D3B73 /* ProdsInPointTableViewController.swift */,
 			);
 			path = Sborka;
 			sourceTree = "<group>";
@@ -1718,6 +1724,7 @@
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
 				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
 				2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */,
+				22A4A9D22699F1C5000D3B73 /* AssemblyProdsInPointDataManager.swift in Sources */,
 				22B41BA726476EA000F7DC30 /* CenovieDiapazoniViewController.swift in Sources */,
 				228004A42645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift in Sources */,
 				22B8E49225FCF49E002DDB73 /* FormDataManager.swift in Sources */,
@@ -1858,6 +1865,7 @@
 				22904862256DC701000B7A28 /* RatingTableViewCell.swift in Sources */,
 				2237E77C25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.swift in Sources */,
 				2268869C25996B920079933D /* RefreshAlbsDataManager.swift in Sources */,
+				22A4A9D02699EAB8000D3B73 /* ProdsInPointTableViewController.swift in Sources */,
 				22782906258AC7FE00B435FA /* Extensions.swift in Sources */,
 				22C5D02B25B0E9DF001C69C6 /* ExportPeersDataManager.swift in Sources */,
 				22BF1A0625A543C900567DB7 /* TopPointsPaggingDataManager.swift in Sources */,

@@ -13,101 +13,112 @@ struct PointsInSborkaSegmentView: View {
     
     var body: some View {
         
-        VStack{
+        ZStack{
             
-            List{
+            VStack{
                 
-                ForEach(pointsInSborkaSegmentViewModel.items , id: \.id){ item in
+                List{
                     
-                    VStack{
+                    ForEach(pointsInSborkaSegmentViewModel.items , id: \.id){ item in
                         
-                        ZStack{
+                        VStack{
                             
-                            HStack{
+                            ZStack{
                                 
-                                Text(item.capt)
+                                HStack{
+                                    
+                                    Text(item.capt)
+                                    
+                                    Spacer()
+                                    
+                                    Text(item.summ + " руб.")
+                                        .foregroundColor(Color(.systemGray))
+                                    
+                                }
                                 
-                                Spacer()
-                                
-                                Text(item.summ + " руб.")
-                                    .foregroundColor(Color(.systemGray))
-                                
-                            }
-                            
-                            HStack{
-                                
-                                Spacer()
-                                
-                                Text(item.count + " шт.")
-                                    .foregroundColor(Color(.systemGray))
-                                
-                                Spacer()
+                                HStack{
+                                    
+                                    Spacer()
+                                    
+                                    Text(item.count + " шт.")
+                                        .foregroundColor(Color(.systemGray))
+                                    
+                                    Spacer()
+                                    
+                                }
                                 
                             }
                             
                         }
-                        
-                    }
-                    .onLongPressGesture {
-                        
-                        pointsInSborkaSegmentViewModel.selectedByLongPressPoint = item
-                        
-                        pointsInSborkaSegmentViewModel.alertTitle = pointsInSborkaSegmentViewModel.helperID == "" ? "Передать точку помощнику?" :  "Забрать точку у помощника?"
-                        pointsInSborkaSegmentViewModel.alertMessage = nil
-                        pointsInSborkaSegmentViewModel.showAlert = true
+                        .onTapGesture{
+                            
+                            pointsInSborkaSegmentViewModel.selectedByTapPoint = item
+                            
+                            pointsInSborkaSegmentViewModel.showProdsInPoint()
+                            
+                        }
+                        .onLongPressGesture {
+                            
+                            pointsInSborkaSegmentViewModel.selectedByLongPressPoint = item
+                            
+                            pointsInSborkaSegmentViewModel.alertTitle = pointsInSborkaSegmentViewModel.helperID == "" ? "Передать точку помощнику?" :  "Забрать точку у помощника?"
+                            pointsInSborkaSegmentViewModel.alertMessage = nil
+                            pointsInSborkaSegmentViewModel.showAlert = true
+                            
+                        }
                         
                     }
                     
                 }
                 
             }
-            
-        }
-        .alert(isPresented: $pointsInSborkaSegmentViewModel.showAlert, content: {
-            Alert(title: Text(pointsInSborkaSegmentViewModel.alertTitle), message: pointsInSborkaSegmentViewModel.alertMessage != nil ? Text(pointsInSborkaSegmentViewModel.alertMessage!) : nil, primaryButton: .cancel(Text("Отмена")), secondaryButton: .default(Text(pointsInSborkaSegmentViewModel.alertButtonText), action: {
-                
-                if pointsInSborkaSegmentViewModel.helperID != "" { //Smotrit ne ot sebya
+            .alert(isPresented: $pointsInSborkaSegmentViewModel.showAlert, content: {
+                Alert(title: Text(pointsInSborkaSegmentViewModel.alertTitle), message: pointsInSborkaSegmentViewModel.alertMessage != nil ? Text(pointsInSborkaSegmentViewModel.alertMessage!) : nil, primaryButton: .cancel(Text("Отмена")), secondaryButton: .default(Text(pointsInSborkaSegmentViewModel.alertButtonText), action: {
                     
-                    pointsInSborkaSegmentViewModel.takePointFrom(pointsInSborkaSegmentViewModel.helperID)
-                    
-                }else{//Smotrit ot sebya
-                    
-                    //Getting the list of helpers for user to choose who is he giving the segment to
-                    pointsInSborkaSegmentViewModel.getHelpers()
-                    
-                }
-                
-            }))
-        })
-        .sheet(isPresented: $pointsInSborkaSegmentViewModel.showHelperListSheet, content: {
-            
-            NavigationView{
-                
-                VStack{
-                    
-                    List{
+                    if pointsInSborkaSegmentViewModel.helperID != "" { //Smotrit ne ot sebya
                         
-                        ForEach(pointsInSborkaSegmentViewModel.helpers, id: \.id){ helper in
+                        pointsInSborkaSegmentViewModel.takePointFrom(pointsInSborkaSegmentViewModel.helperID)
+                        
+                    }else{//Smotrit ot sebya
+                        
+                        //Getting the list of helpers for user to choose who is he giving the segment to
+                        pointsInSborkaSegmentViewModel.getHelpers()
+                        
+                    }
+                    
+                }))
+            })
+            .sheet(isPresented: $pointsInSborkaSegmentViewModel.showHelperListSheet, content: {
+                
+                NavigationView{
+                    
+                    VStack{
+                        
+                        List{
                             
-                            HStack{
+                            ForEach(pointsInSborkaSegmentViewModel.helpers, id: \.id){ helper in
                                 
-                                Text(helper.capt)
-                                
-                                Spacer()
-                                
-                            }
-                            .onTapGesture {
-                                
-                                if let _ = pointsInSborkaSegmentViewModel.selectedByLongPressPoint{
+                                HStack{
                                     
-                                    pointsInSborkaSegmentViewModel.givePointTo(helper.id)
+                                    Text(helper.capt)
                                     
-                                }else{
+                                    Spacer()
                                     
-                                    pointsInSborkaSegmentViewModel.helperID = helper.id
-                                    pointsInSborkaSegmentViewModel.update()
+                                }
+                                .onTapGesture {
                                     
-                                    pointsInSborkaSegmentViewModel.showHelperListSheet = false
+                                    if let _ = pointsInSborkaSegmentViewModel.selectedByLongPressPoint{
+                                        
+                                        pointsInSborkaSegmentViewModel.givePointTo(helper.id)
+                                        
+                                    }else{
+                                        
+                                        pointsInSborkaSegmentViewModel.helperID = helper.id
+                                        pointsInSborkaSegmentViewModel.update()
+                                        
+                                        pointsInSborkaSegmentViewModel.showHelperListSheet = false
+                                        
+                                    }
                                     
                                 }
                                 
@@ -117,51 +128,55 @@ struct PointsInSborkaSegmentView: View {
                         
                     }
                     
+                    .navigationBarTitle("Помощники", displayMode: .inline)
+                    
                 }
                 
-                .navigationBarTitle("Помощники", displayMode: .inline)
-                
-            }
-            
-        })
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                
-                Button(action:{
-                    pointsInSborkaSegmentViewModel.getHelpers(inSborka: true)
-                }){
-                    Image(systemName : "person")
-                }.contextMenu(ContextMenu(menuItems: {
-                    Button("Смотреть от себя"){
-                        pointsInSborkaSegmentViewModel.helperID = ""
-                        pointsInSborkaSegmentViewModel.update()
+            })
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    
+                    Button(action:{
+                        pointsInSborkaSegmentViewModel.getHelpers(inSborka: true)
+                    }){
+                        Image(systemName : "person")
+                    }.contextMenu(ContextMenu(menuItems: {
+                        Button("Смотреть от себя"){
+                            pointsInSborkaSegmentViewModel.helperID = ""
+                            pointsInSborkaSegmentViewModel.update()
+                        }
+                    }))
+                    
+                    Menu {
+                        Button("Не обработаны", action: {
+                            pointsInSborkaSegmentViewModel.changeStatus(to: "0")
+                        })
+                        Button("Нет в наличии", action: {
+                            pointsInSborkaSegmentViewModel.changeStatus(to: "1")
+                        })
+                        Button("Куплены", action: {
+                            pointsInSborkaSegmentViewModel.changeStatus(to: "2")
+                        })
+                        Button("Любой", action: {
+                            pointsInSborkaSegmentViewModel.changeStatus(to: "")
+                        })
+                    } label: {
+                        Image(systemName : "slider.vertical.3")
+                            .imageScale(.large)
                     }
-                }))
-                
-                Menu {
-                    Button("Не обработаны", action: {
-                        pointsInSborkaSegmentViewModel.changeStatus(to: "0")
-                    })
-                    Button("Нет в наличии", action: {
-                        pointsInSborkaSegmentViewModel.changeStatus(to: "1")
-                    })
-                    Button("Куплены", action: {
-                        pointsInSborkaSegmentViewModel.changeStatus(to: "2")
-                    })
-                    Button("Любой", action: {
-                        pointsInSborkaSegmentViewModel.changeStatus(to: "")
-                    })
-                } label: {
-                    Image(systemName : "slider.vertical.3")
-                        .imageScale(.large)
                 }
             }
-        }
-        .onAppear{
+            .onAppear{
+                
+                guard pointsInSborkaSegmentViewModel.items.isEmpty else {return}
+                
+                pointsInSborkaSegmentViewModel.update()
+                
+            }
             
-            guard pointsInSborkaSegmentViewModel.items.isEmpty else {return}
-            
-            pointsInSborkaSegmentViewModel.update()
+            NavigationLink(destination: pointsInSborkaSegmentViewModel.prodsInPointView, isActive: $pointsInSborkaSegmentViewModel.showProdsInPointView) {
+                EmptyView()
+            }
             
         }
         
