@@ -55,10 +55,6 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "QR-код", label2Text: "", hasImage: true, image: "qrcode"))
             }
             
-            if thisTovar.status != "" , !isZamena{
-                newItems.append(TableViewItem(label1Text: "Статус", label2Text: thisTovar.status))
-            }
-            
             if thisTovar.isReplace != "" , thisTovar.isReplace != "0" {
                 newItems.append(TableViewItem(label1Text: "Это замена", label2Text: thisTovar.isReplace == "1" ? "Да" : "Нет" ))
             }
@@ -185,6 +181,8 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
+        guard isZamena else {return nil}
+        
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
         
         footerView.translatesAutoresizingMaskIntoConstraints = false
@@ -220,7 +218,7 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
     }
      
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 60
+        return isZamena ? 60 : 0
     }
     
 }
