@@ -232,22 +232,22 @@ extension TovarTableViewCell : UICollectionViewDataSource , UICollectionViewDele
         let sectionProvider = { (sectionIndex: Int,
                                  layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.35),
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.4),
                                                   heightDimension: .fractionalHeight(1))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),heightDimension: .fractionalHeight(0.35))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),heightDimension: .fractionalHeight(0.4))
             
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
-            group.interItemSpacing = .fixed(8)
+            group.interItemSpacing = .fixed(16)
             
             let section = NSCollectionLayoutSection(group: group)
             
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: self.tovarImageView.frame.width / 4, bottom: 0, trailing: 0)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: self.tovarImageView.frame.width / 5.2, bottom: 0, trailing: 0)
             
-            section.interGroupSpacing = 8
+            section.interGroupSpacing = 16
             
             return section
         }
