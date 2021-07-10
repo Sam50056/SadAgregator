@@ -178,6 +178,7 @@
 		22A4A9CE2699CDE1000D3B73 /* AssemblyGetHelpersInAssemblyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4A9CD2699CDE1000D3B73 /* AssemblyGetHelpersInAssemblyDataManager.swift */; };
 		22A4A9D02699EAB8000D3B73 /* ProdsInPointTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4A9CF2699EAB8000D3B73 /* ProdsInPointTableViewController.swift */; };
 		22A4A9D22699F1C5000D3B73 /* AssemblyProdsInPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4A9D12699F1C5000D3B73 /* AssemblyProdsInPointDataManager.swift */; };
+		22A4A9D4269A3EB3000D3B73 /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A4A9D3269A3EB3000D3B73 /* QRScannerController.swift */; };
 		22ACF1A9262B828B00F9584D /* ZamenaDlyaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */; };
 		22ACF1AE262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */; };
 		22ACF1AF262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */; };
@@ -446,6 +447,7 @@
 		22A4A9CD2699CDE1000D3B73 /* AssemblyGetHelpersInAssemblyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyGetHelpersInAssemblyDataManager.swift; sourceTree = "<group>"; };
 		22A4A9CF2699EAB8000D3B73 /* ProdsInPointTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdsInPointTableViewController.swift; sourceTree = "<group>"; };
 		22A4A9D12699F1C5000D3B73 /* AssemblyProdsInPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyProdsInPointDataManager.swift; sourceTree = "<group>"; };
+		22A4A9D3269A3EB3000D3B73 /* QRScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
 		22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZamenaDlyaTableViewController.swift; sourceTree = "<group>"; };
 		22ACF1AC262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCellTwoLabelTableViewCell.swift; sourceTree = "<group>"; };
 		22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCellTwoLabelTableViewCell.xib; sourceTree = "<group>"; };
@@ -1480,6 +1482,7 @@
 				22E44716269237B60016D96E /* PointsInSborkaSegmentView.swift */,
 				22E44718269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift */,
 				22A4A9CF2699EAB8000D3B73 /* ProdsInPointTableViewController.swift */,
+				22A4A9D3269A3EB3000D3B73 /* QRScannerController.swift */,
 			);
 			path = Sborka;
 			sourceTree = "<group>";
@@ -1763,6 +1766,7 @@
 				22B2D8EB267108A600F2F820 /* BrokersGetDeliveryTypeDataManager.swift in Sources */,
 				2200942825D831C00001F7B3 /* CategoriesTableViewCell.swift in Sources */,
 				22BF1A1125A5E19100567DB7 /* LinePointsPaggingDataManager.swift in Sources */,
+				22A4A9D4269A3EB3000D3B73 /* QRScannerController.swift in Sources */,
 				22582C7C25D1E832005E341C /* SignInWithAppleDelegates.swift in Sources */,
 				22D604D225EFA6BC00102CB6 /* ServicesViewController.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,

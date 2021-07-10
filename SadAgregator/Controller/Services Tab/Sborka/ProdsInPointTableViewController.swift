@@ -91,6 +91,18 @@ extension ProdsInPointTableViewController{
         
     }
     
+    func showQRScannerVC(){
+        
+        let qrScannerVC = QRScannerController()
+        
+        let navVc = UINavigationController(rootViewController: qrScannerVC)
+        
+        navVc.modalPresentationStyle = .fullScreen
+        
+        present(navVc, animated: true, completion: nil)
+        
+    }
+    
 }
 
 //MARK: - TableView
@@ -118,6 +130,28 @@ extension ProdsInPointTableViewController{
         let tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue)
         
         cell.thisTovar = tovar
+        
+        cell.qrCodeTapped = {
+            
+            if tovar.qr == "1"{
+                
+                let alertController = UIAlertController(title: "Перепривязать код?", message: nil, preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                    self.showQRScannerVC()
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                
+                self.present(alertController, animated: true, completion: nil)
+                
+            }else{
+                
+                self.showQRScannerVC()
+                
+            }
+            
+        }
         
         return cell
         

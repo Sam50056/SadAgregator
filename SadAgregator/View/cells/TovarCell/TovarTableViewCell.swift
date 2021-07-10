@@ -92,6 +92,8 @@ class TovarTableViewCell: UITableViewCell {
     
     var tovarSelected : (() -> Void)?
     
+    var qrCodeTapped : (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -177,6 +179,15 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let item = tableViewItems[indexPath.row]
+        
+        if item.label1Text == "QR-код"{
+            
+            qrCodeTapped?()
+            
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -216,7 +227,7 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         42
     }
-     
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return isZamena ? 60 : 0
     }
@@ -287,12 +298,12 @@ extension TovarTableViewCell : UICollectionViewDataSource , UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let item = collectionViewItems[indexPath.row]
-
+        
         let itemType = item.type
         
         if itemType == .qr{
             
-            
+            qrCodeTapped?()
             
         }else if itemType == .info{
             
