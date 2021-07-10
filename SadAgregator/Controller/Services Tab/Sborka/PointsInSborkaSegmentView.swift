@@ -128,7 +128,7 @@ struct PointsInSborkaSegmentView: View {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 
                 Button(action:{
-                    pointsInSborkaSegmentViewModel.getHelpers()
+                    pointsInSborkaSegmentViewModel.getHelpers(inSborka: true)
                 }){
                     Image(systemName : "person")
                 }.contextMenu(ContextMenu(menuItems: {

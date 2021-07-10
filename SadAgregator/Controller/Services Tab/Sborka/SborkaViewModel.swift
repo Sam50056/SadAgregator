@@ -35,6 +35,7 @@ class SborkaViewModel : ObservableObject{
     
     private var assemblySegmentsInAssemblyDataManager = AssemblySegmentsInAssemblyDataManager()
     private var assemblyGetHelpersDataManager = AssemblyGetHelpersDataManager()
+    private var assemblyGetHelpersInAssemblyDataManager = AssemblyGetHelpersInAssemblyDataManager()
     
     lazy var pointsInSegmentsView = PointsInSborkaSegmentView()
     
@@ -42,6 +43,7 @@ class SborkaViewModel : ObservableObject{
         
         assemblySegmentsInAssemblyDataManager.delegate = self
         assemblyGetHelpersDataManager.delegate = self
+        assemblyGetHelpersInAssemblyDataManager.delegate = self
         
     }
     
@@ -62,9 +64,13 @@ extension SborkaViewModel{
         
     }
     
-    func getHelpers(){
+    func getHelpers(inSborka : Bool = false){
         
-        assemblyGetHelpersDataManager.getAssemblyGetHelpersData(key: key)
+        if inSborka{
+            assemblyGetHelpersInAssemblyDataManager.getAssemblyGetHelpersInAssemblyData(key: key)
+        }else{
+            assemblyGetHelpersDataManager.getAssemblyGetHelpersData(key: key)
+        }
         
     }
     
@@ -262,4 +268,33 @@ extension SborkaViewModel : AssemblyGetHelpersDataManagerDelegate{
         print("Error with AssemblyGetHelpersDataManager : \(error)")
     }
     
+}
+
+//MARK: - AssemblyGetHelpersInAssemblyDataManager
+
+extension SborkaViewModel : AssemblyGetHelpersInAssemblyDataManagerDelegate{
+    
+    func didGetAssemblyGetHelpersInAssemblyData(data: JSON) {
+        
+        DispatchQueue.main.async {
+            
+            if data["result"].intValue == 1{
+                
+                let jsonHelpers = data["helpers"].arrayValue
+                
+                self.helpers = jsonHelpers.map { jsonHelper in
+                    Helper(id: jsonHelper["hl_id"].stringValue, capt: jsonHelper["capt"].stringValue)
+                }
+                
+                self.showHelperListSheet = true
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingAssemblyGetHelpersInAssemblyDataWithError(error: String) {
+        print("Error with AssemblyGetHelpersInAssemblyDataManager : \(error)")
+    }
 }

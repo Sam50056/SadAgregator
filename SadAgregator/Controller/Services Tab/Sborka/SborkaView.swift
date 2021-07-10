@@ -186,7 +186,7 @@ struct SborkaView : View {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 
                 Button(action:{
-                    sborkaViewModel.getHelpers()
+                    sborkaViewModel.getHelpers(inSborka: true)
                 }){
                     Image(systemName : "person")
                 }.contextMenu(ContextMenu(menuItems: {
