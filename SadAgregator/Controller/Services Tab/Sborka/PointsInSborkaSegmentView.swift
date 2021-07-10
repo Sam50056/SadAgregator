@@ -20,33 +20,33 @@ struct PointsInSborkaSegmentView: View {
                 ForEach(pointsInSborkaSegmentViewModel.items , id: \.id){ item in
                     
                     VStack{
-                    
-                    ZStack{
                         
-                        HStack{
+                        ZStack{
                             
-                            Text(item.capt)
+                            HStack{
+                                
+                                Text(item.capt)
+                                
+                                Spacer()
+                                
+                                Text(item.summ + " руб.")
+                                    .foregroundColor(Color(.systemGray))
+                                
+                            }
                             
-                            Spacer()
-                            
-                            Text(item.summ + " руб.")
-                                .foregroundColor(Color(.systemGray))
+                            HStack{
+                                
+                                Spacer()
+                                
+                                Text(item.count + " шт.")
+                                    .foregroundColor(Color(.systemGray))
+                                
+                                Spacer()
+                                
+                            }
                             
                         }
                         
-                        HStack{
-                            
-                            Spacer()
-                            
-                            Text(item.count + " шт.")
-                                .foregroundColor(Color(.systemGray))
-                            
-                            Spacer()
-                            
-                        }
-                        
-                    }
-                    
                     }
                     .onLongPressGesture {
                         
