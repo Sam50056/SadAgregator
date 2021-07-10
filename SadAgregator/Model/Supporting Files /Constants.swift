@@ -82,7 +82,7 @@ struct K {
     static func makeHeightForTovarCell(thisTovar : TovarCellItem , isZamena : Bool) -> CGFloat{
         
         var height : CGFloat = 0
-        let cellHeight : CGFloat = 38
+        let cellHeight : CGFloat = 41
         
         if thisTovar.capt != "" {
             height += cellHeight
@@ -128,7 +128,9 @@ struct K {
             height += cellHeight
         }
         
-        height += 62//This is for the footer button
+        if isZamena{
+            height += 52//This is for the footer button
+        }
         
         return height
         

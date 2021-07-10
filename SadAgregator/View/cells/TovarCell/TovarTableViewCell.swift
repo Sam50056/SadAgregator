@@ -52,7 +52,7 @@ class TovarTableViewCell: UITableViewCell {
             }
             
             if thisTovar.qr != "" , !isZamena{
-                newItems.append(TableViewItem(label1Text: "QR-код", label2Text: "", hasImage: true, image: "qrcode"))
+                newItems.append(TableViewItem(label1Text: "QR-код", label2Text:  thisTovar.qr == "0" ? "Не привязан" : "Привязан", hasImage: true, image: "qrcode"))
             }
             
             if thisTovar.isReplace != "" , thisTovar.isReplace != "0" {
