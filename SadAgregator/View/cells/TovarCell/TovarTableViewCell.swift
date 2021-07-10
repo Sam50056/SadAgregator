@@ -31,14 +31,6 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Номер точки", label2Text: thisTovar.capt))
             }
             
-            if thisTovar.size != "" {
-                newItems.append(TableViewItem(label1Text: "Размер", label2Text: thisTovar.size))
-            }
-            
-            if thisTovar.payed != "" , thisTovar.payed != "0"{
-                newItems.append(TableViewItem(label1Text: "Оплачено", label2Text: thisTovar.payed == "1" ? "Да" : "Нет" ))
-            }
-            
             if thisTovar.purCost != ""{
                 newItems.append(TableViewItem(label1Text: "Цена закупки", label2Text: thisTovar.purCost))
             }
@@ -47,24 +39,32 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Цена продажи", label2Text: thisTovar.sellCost))
             }
             
+            if thisTovar.size != "" {
+                newItems.append(TableViewItem(label1Text: "Размер", label2Text: thisTovar.size))
+            }
+            
+            if thisTovar.status != "" , !isZamena{
+                newItems.append(TableViewItem(label1Text: "Статус", label2Text: thisTovar.status , shouldSecondLabelBeBlue: true))
+            }
+            
+            if thisTovar.qr != "" , !isZamena{
+                newItems.append(TableViewItem(label1Text: "QR-код", label2Text:  thisTovar.qr == "0" ? "Не привязан" : "Привязан", hasImage: true, image: "qrcode" , shouldSecondLabelBeBlue: true))
+            }
+            
             if thisTovar.clientName != "" {
                 newItems.append(TableViewItem(label1Text: "Клиент", label2Text: thisTovar.clientName))
             }
             
-            if thisTovar.qr != "" , !isZamena{
-                newItems.append(TableViewItem(label1Text: "QR-код", label2Text:  thisTovar.qr == "0" ? "Не привязан" : "Привязан", hasImage: true, image: "qrcode"))
+            if thisTovar.payed != ""{
+                newItems.append(TableViewItem(label1Text: "Оплачено", label2Text: thisTovar.payed == "1" ? "Да" : "Нет" ))
             }
             
-            if thisTovar.isReplace != "" , thisTovar.isReplace != "0" {
-                newItems.append(TableViewItem(label1Text: "Это замена", label2Text: thisTovar.isReplace == "1" ? "Да" : "Нет" ))
+            if thisTovar.isReplace != "" {
+                newItems.append(TableViewItem(label1Text: "Это замена", label2Text: thisTovar.isReplace == "1" ? "Да" : "Нет" , shouldSecondLabelBeBlue: true))
             }
             
-            if thisTovar.status != "" , !isZamena{
-                newItems.append(TableViewItem(label1Text: "Статус", label2Text: thisTovar.status))
-            }
-            
-            if thisTovar.replaces != "" , thisTovar.replaces != "0"{
-                newItems.append(TableViewItem(label1Text: "Замен по товару ", label2Text: thisTovar.replaces))
+            if thisTovar.replaces != ""{
+                newItems.append(TableViewItem(label1Text: "Замен по товару ", label2Text:  thisTovar.replaces == "0" ? "Нет" : thisTovar.replaces))
             }
             
             tableViewItems = newItems
@@ -76,10 +76,10 @@ class TovarTableViewCell: UITableViewCell {
             
             //Setting collection view's items
             collectionViewItems = [
-                CollectionViewItem(image: "questionmark"),
-                CollectionViewItem(image: "magnifyingglass"),
-                CollectionViewItem(image: "info"),
-                CollectionViewItem(image: "qrcode")
+                CollectionViewItem(image: "questionmark", type: .questionMark),
+                CollectionViewItem(image: "magnifyingglass", type: .magnifyingGlass),
+                CollectionViewItem(image: "info", type: .info),
+                CollectionViewItem(image: "qrcode", type: .qr)
             ]
             
             collectionView.reloadData()
@@ -169,7 +169,7 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         (cell as! TovarTableViewCellTwoLabelTableViewCell).label1.textColor = .systemGray
         
         (cell as! TovarTableViewCellTwoLabelTableViewCell).label2.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        (cell as! TovarTableViewCellTwoLabelTableViewCell).label2.textColor = UIColor(named: "blackwhite")
+        (cell as! TovarTableViewCellTwoLabelTableViewCell).label2.textColor = item.shouldSecondLabelBeBlue ? .systemBlue : UIColor(named: "blackwhite")
         
         return cell
         
@@ -274,13 +274,31 @@ extension TovarTableViewCell : UICollectionViewDataSource , UICollectionViewDele
         
         cell.imageView.image = UIImage(systemName: item.image)
         
-        cell.imageView.tintColor = .systemGray
+        cell.imageView.tintColor = .systemBlue
         
         cell.bgView.backgroundColor = UIColor(named: "gray")
         
         cell.roundCorners(.allCorners, radius: 8)
         
         return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let item = collectionViewItems[indexPath.row]
+
+        let itemType = item.type
+        
+        if itemType == .qr{
+            
+            
+            
+        }else if itemType == .info{
+            
+            
+            
+        }
         
     }
     
@@ -293,6 +311,7 @@ extension TovarTableViewCell{
     private struct CollectionViewItem {
         
         var image : String
+        var type : CollectionViewCellType
         
     }
     
@@ -302,6 +321,8 @@ extension TovarTableViewCell{
         var label2Text : String
         var hasImage : Bool = false
         var image : String = ""
+        
+        var shouldSecondLabelBeBlue : Bool = false
         
     }
     
@@ -327,5 +348,16 @@ struct TovarCellItem {
     var replaces : String
     var img : String
     var chLvl : String
+    
+}
+
+extension TovarTableViewCell{
+    
+    private enum CollectionViewCellType{
+        case questionMark
+        case info
+        case qr
+        case magnifyingGlass
+    }
     
 }
