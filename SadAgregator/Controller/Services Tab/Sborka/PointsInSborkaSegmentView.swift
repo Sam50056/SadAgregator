@@ -174,7 +174,7 @@ struct PointsInSborkaSegmentView: View {
                 
             }
             
-            NavigationLink(destination: pointsInSborkaSegmentViewModel.prodsInPointView.navigationTitle("Товары точки"), isActive: $pointsInSborkaSegmentViewModel.showProdsInPointView) {
+            NavigationLink(destination: pointsInSborkaSegmentViewModel.prodsInPointView, isActive: $pointsInSborkaSegmentViewModel.showProdsInPointView) {
                 EmptyView()
             }
             
