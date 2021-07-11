@@ -26,6 +26,10 @@ class PostTableViewCell: UITableViewCell  {
     @IBOutlet weak var likeButtonImageView: UIImageView!
     @IBOutlet weak var likeButton : UIButton!
     
+    @IBOutlet weak var soobshitButton: UIButton!
+    
+    @IBOutlet weak var bottomView: UIView!
+    
     typealias PostCellCollectionViewDataSource =  UICollectionViewDiffableDataSource<PostCellCollectionViewSectionLayoutKind, String>
     typealias PostCellCollectionViewSnapshot = NSDiffableDataSourceSnapshot<PostCellCollectionViewSectionLayoutKind, String>
     

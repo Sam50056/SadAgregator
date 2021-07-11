@@ -136,6 +136,33 @@ class TovarImageSearchTableViewController: UITableViewController {
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int, export : JSON?){
         
+        //Change the bottom panel a bit (because we're in tovar)
+        
+        cell.soobshitButton.isHidden = true
+        
+        let newBottomViewFrame = CGRect(x: 0, y: 0, width: cell.bottomView.bounds.width + 30, height: cell.bottomView.bounds.height)
+        
+        let newBottomView = UIView(frame: newBottomViewFrame)
+        cell.bottomView.addSubview(newBottomView)
+        
+        newBottomView.backgroundColor = UIColor(named: "whiteblack")
+        
+        let leftButton = UIButton()
+        let rightButton = UIButton()
+        
+        let stackView = UIStackView(arrangedSubviews: [leftButton , rightButton])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.frame = newBottomViewFrame
+        newBottomView.addSubview(stackView)
+        
+        leftButton.setTitle("Выбрать эту точку", for: .normal)
+        rightButton.setTitle("См. пост в VK", for: .normal)
+        leftButton.setTitleColor(.systemBlue, for: .normal)
+        rightButton.setTitleColor(.systemBlue, for: .normal)
+        
+        rightButton.addTarget(cell, action: #selector(cell.smotretVkPostPressed(_:)), for: .touchUpInside)
+        
         cell.delegate = self
         
         cell.key = key
@@ -151,22 +178,6 @@ class TovarImageSearchTableViewController: UITableViewController {
         
         cell.vkLinkUrlString = data["vk_post"].stringValue
         
-        //        cell.soobshitButtonCallback = { [self] in
-        //
-        //            GetPostActionsDataManager(delegate: self).getGetPostActionsData(key: key, postId: postId)
-        //
-        //            selectedPostId = postId
-        //
-        //        }
-        
-        //        cell.vendorLabelButtonCallBack = { [self] in
-        //
-        //            selectedPointId = data["point_id"].stringValue
-        //
-        //            self.performSegue(withIdentifier: "goToPoint", sender: self)
-        //
-        //        }
-        
         cell.byLabelButtonCallback = { [self] in
             
             selectedVendId = data["vendor_id"].stringValue
@@ -174,97 +185,6 @@ class TovarImageSearchTableViewController: UITableViewController {
             self.performSegue(withIdentifier: "goToVend", sender: self)
             
         }
-        
-        //        cell.peerButtonCallback = { [self] in
-        //
-        //            guard isLogged else {
-        //
-        //                showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
-        //
-        //                return
-        //            }
-        //
-        //            showSimpleCircleAnimation(activityController: activityController)
-        //
-        //            ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
-        //
-        //        }
-        
-        //        if thisPeerId != cell.peerId {
-        //            cell.vigruzitLabel.text = "Выгрузить"
-        //            cell.peerId = thisPeerId
-        //            doneArray.removeAll()
-        //        }
-        //
-        //        if doneArray.contains(postId){
-        //            cell.vigruzitLabel.text = "Готово"
-        //        }else{
-        //            cell.vigruzitLabel.text = "Выгрузить"
-        //        }
-        
-        //        cell.vigruzitButtonCallback = { [self] in
-        //
-        //            guard isLogged else {
-        //
-        //                showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
-        //
-        //                return
-        //            }
-        //
-        //            if favoritePostsData!["export"]["fast"].intValue == 0{
-        //
-        //                let editVigruzkaVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditVigruzkaVC") as! EditVigruzkaViewController
-        //
-        //                editVigruzkaVC.thisPostId = postId
-        //
-        //                editVigruzkaVC.toExpQueueDataManagerCallback = {
-        //
-        //                    cell.vigruzitLabel.text = "Готово"
-        //                    doneArray.append(postId)
-        //
-        //                }
-        //
-        //                present(editVigruzkaVC, animated: true, completion: nil)
-        //
-        //            }else{
-        //
-        //                ToExpQueueDataManager().getToExpQueueData(key: key, postId: postId, completionHandler: { data , error in
-        //
-        //                    DispatchQueue.main.async {
-        //
-        //                        if error != nil , data == nil {
-        //                            print("Error with ToExpQueueDataManager : \(error!)")
-        //                            return
-        //                        }
-        //
-        //                        if data!["result"].intValue == 1{
-        //
-        //                            cell.vigruzitLabel.text = "Готово"
-        //                            doneArray.append(postId)
-        //
-        //                            print("ToExpQueueDataManager Request Sent")
-        //
-        //                        }else{
-        //
-        //                            showSimpleAlertWithOkButton(title: "Ошибка отправки запроса", message: nil, dismissButtonText: "Закрыть")
-        //
-        //                        }
-        //
-        //                    }
-        //
-        //                })
-        //
-        //            }
-        //
-        //        }
-        
-        //        if let export = export{
-        //
-        //            let exportType = export["type"].stringValue
-        //
-        //            cell.vigruzitImageView.image = exportType == "vk" ? UIImage(named: "vk") : UIImage(named: "odno")
-        //
-        //        }
         
         cell.showDescription = false
         
@@ -280,16 +200,11 @@ class TovarImageSearchTableViewController: UITableViewController {
         cell.postedLabel.text = data["posted"].stringValue
         
         let sizesArray = sizes[index]
-        //        let optionsArray = options[index]
         let imagesArray = images[index]
         
         cell.sizes = sizesArray
         cell.options = []
         cell.images = imagesArray
-        
-        //        isLogged ? (cell.likeButtonImageView.isHidden = false) : (cell.likeButtonImageView.isHidden = true)
-        
-        //        !isLogged ? (cell.vigruzitView.alpha = 0.6) : (cell.vigruzitView.alpha = 1)
         
     }
     
@@ -320,11 +235,7 @@ class TovarImageSearchTableViewController: UITableViewController {
 extension TovarImageSearchTableViewController : PostCellCollectionViewActionsDelegate{
     
     func didTapOnOptionCell(option: String) {
-        
-        //        searchText = option
-        //
-        //        performSegue(withIdentifier: "goSearch", sender: self)
-        
+        //No option cells in this VC bitch
     }
     
     func didTapOnImageCell(index: Int, images: [PostImage], sizes : [String]) {
