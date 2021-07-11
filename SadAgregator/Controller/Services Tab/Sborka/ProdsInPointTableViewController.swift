@@ -199,6 +199,26 @@ extension ProdsInPointTableViewController{
         
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 8{
+            
+            if indexPath.row == rowForPaggingUpdate{
+                
+                page += 1
+                
+                rowForPaggingUpdate += 16
+                
+                update()
+                
+                print("Done a request for page: \(page)")
+                
+            }
+            
+        }
+        
+    }
+    
 }
 
 //MARK: - AssemblyProdsInPointDataManager
