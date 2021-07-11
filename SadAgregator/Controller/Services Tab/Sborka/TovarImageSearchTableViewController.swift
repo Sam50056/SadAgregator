@@ -101,6 +101,7 @@ class TovarImageSearchTableViewController: UITableViewController {
         
         loadUserData()
         
+        tableView.register(UINib(nibName: "EmptyTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCell")
         tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
         
         tableView.allowsSelection = false
@@ -117,18 +118,32 @@ class TovarImageSearchTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postsArray.count
+        return searchData != nil ? !postsArray.isEmpty ? postsArray.count : 1 : 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
-        
-        let post = postsArray[indexPath.row]
-        
-        setUpPostCell(cell: cell , data: post, index: indexPath.row, export: nil)
-        
-        return cell
+        if postsArray.isEmpty{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath)
+            
+            (cell as! EmptyTableViewCell).label.text = "Нет результатов"
+            
+            (cell as! EmptyTableViewCell).emptyImageView.image = UIImage(systemName: "photo")
+            
+            return cell
+            
+        }else{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
+            
+            let post = postsArray[indexPath.row]
+            
+            setUpPostCell(cell: cell , data: post, index: indexPath.row, export: nil)
+            
+            return cell
+            
+        }
         
     }
     
@@ -210,22 +225,6 @@ class TovarImageSearchTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return (postsArray.count == 0) ? ((UIScreen.main.bounds.height / 2)) : K.postHeight
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        //        if indexPath.row == rowForPaggingUpdate{
-        //
-        //            page += 1
-        //
-        //            rowForPaggingUpdate += 16
-        //
-        //            myPostsDataManager.getMyPostsData(key: key, page: page)
-        //
-        //            print("Done a request for page: \(page)")
-        //
-        //        }
-        
     }
     
 }
