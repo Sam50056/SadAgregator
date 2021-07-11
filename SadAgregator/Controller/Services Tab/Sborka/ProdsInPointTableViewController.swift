@@ -131,6 +131,24 @@ extension ProdsInPointTableViewController{
         
         cell.thisTovar = tovar
         
+        cell.tovarImageTapped = {
+            
+            let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
+            
+            galleryVC.simplePreviewMode = true
+            
+            galleryVC.selectedImageIndex = 0
+            
+            galleryVC.images = [PostImage(image: tovar.img, imageId: "")]
+            
+            galleryVC.sizes = []
+            
+            let navVC = UINavigationController(rootViewController: galleryVC)
+            
+            self.presentHero(navVC, navigationAnimationType: .fade)
+            
+        }
+        
         cell.qrCodeTapped = {
             
             if tovar.qr == "1"{

@@ -143,6 +143,24 @@ extension ZamenaDlyaTableViewController{
             
         }
         
+        cell.tovarImageTapped = {
+            
+            let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
+            
+            galleryVC.simplePreviewMode = true
+            
+            galleryVC.selectedImageIndex = 0
+            
+            galleryVC.images = [PostImage(image: tovar.img, imageId: "")]
+            
+            galleryVC.sizes = []
+            
+            let navVC = UINavigationController(rootViewController: galleryVC)
+            
+            self.presentHero(navVC, navigationAnimationType: .fade)
+            
+        }
+        
         return cell
         
     }

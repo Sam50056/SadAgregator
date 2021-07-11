@@ -30,6 +30,8 @@ class GalleryViewController: UIViewController {
     
     private var selectedSize : String?
     
+    var simplePreviewMode : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,6 +72,11 @@ class GalleryViewController: UIViewController {
         //If there are sizes , menu shows up after tapping a button and if not , it just taps without menu
         buyButton.showsMenuAsPrimaryAction = sizes.isEmpty ? false : true
 
+        if simplePreviewMode{
+            
+            buttonView.isHidden = true
+            
+        }
         
     }
     
@@ -95,7 +102,9 @@ class GalleryViewController: UIViewController {
         
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(downloadButtonPressed(_:)))
+        if !simplePreviewMode{
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(downloadButtonPressed(_:)))
+        }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .plain, target: self, action: #selector(closeButtonPressed(_:)))
         
@@ -125,6 +134,8 @@ class GalleryViewController: UIViewController {
     }
     
     @objc func handleTap(_ sender: UIPanGestureRecognizer? = nil) {
+        
+        guard !simplePreviewMode else {return}
         
         UIView.transition(with: buttonView, duration: 0.4,
                           options: .transitionCrossDissolve,

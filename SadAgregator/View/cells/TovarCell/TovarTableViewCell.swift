@@ -14,6 +14,7 @@ class TovarTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView : UICollectionView!
     
     @IBOutlet weak var tovarImageView : UIImageView!
+    var tovarImageViewButton : UIButton!
     
     private var collectionViewItems = [CollectionViewItem]()
     
@@ -92,11 +93,17 @@ class TovarTableViewCell: UITableViewCell {
     
     var tovarSelected : (() -> Void)?
     
+    var tovarImageTapped : (() -> Void)?
+    
     var qrCodeTapped : (() -> Void)?
     var magnifyingGlassTapped : (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        tovarImageViewButton = UIButton(frame: tovarImageView.frame)
+        addSubview(tovarImageViewButton)
+        tovarImageViewButton.addTarget(self, action: #selector(tovarImageTapped(_:)), for: .touchUpInside)
         
         tovarImageView.contentMode = .scaleAspectFill
         tovarImageView.layer.cornerRadius = 6
@@ -143,6 +150,15 @@ extension TovarTableViewCell{
         guard let _ = thisTovar else {return}
         
         tovarSelected?()
+        
+    }
+    
+    @IBAction func tovarImageTapped(_ sender : Any){
+        
+        guard let thisTovar = thisTovar, thisTovar.img != "" else {return}
+        
+        print("In cell")
+        tovarImageTapped?()
         
     }
     

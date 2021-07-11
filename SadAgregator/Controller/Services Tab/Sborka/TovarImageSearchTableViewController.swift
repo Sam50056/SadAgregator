@@ -195,9 +195,13 @@ class TovarImageSearchTableViewController: UITableViewController {
         
         cell.byLabelButtonCallback = { [self] in
             
-            selectedVendId = data["vendor_id"].stringValue
+            let selectedVendId = data["vendor_id"].stringValue
             
-            self.performSegue(withIdentifier: "goToVend", sender: self)
+            let vendorVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "VendorVC") as! PostavshikViewController
+            
+            vendorVC.thisVendorId = selectedVendId
+            
+            navigationController?.pushViewController(vendorVC, animated: true)
             
         }
         
