@@ -66,8 +66,11 @@ class QRScannerController: UIViewController {
             qrCodeFrameView = UIView()
             
             if let qrcodeFrameView = qrCodeFrameView {
-                qrcodeFrameView.layer.borderColor = UIColor.yellow.cgColor
+                qrcodeFrameView.layer.borderColor = UIColor.systemBlue.cgColor
                 qrcodeFrameView.layer.borderWidth = 2
+                
+                qrCodeFrameView?.layer.cornerRadius = 8
+                
                 view.addSubview(qrcodeFrameView)
                 view.bringSubviewToFront(qrcodeFrameView)
             }
