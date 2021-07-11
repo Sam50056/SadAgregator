@@ -153,6 +153,18 @@ extension ProdsInPointTableViewController{
             
         }
         
+        cell.magnifyingGlassTapped = {
+            
+            let tovarImageSearchVC = TovarImageSearchTableViewController()
+            
+            tovarImageSearchVC.imageHashText = tovar.hash
+            
+            //            print("HASH THAT WE'RE GIVING \(tovar.hash)")
+            
+            self.navigationController?.pushViewController(tovarImageSearchVC, animated: true)
+            
+        }
+        
         return cell
         
     }
@@ -220,8 +232,6 @@ extension ProdsInPointTableViewController {
         let userDataObject = realm.objects(UserData.self)
         
         key = userDataObject.first!.key
-        
-        //        isLogged = userDataObject.first!.isLogged
         
     }
     

@@ -47,6 +47,7 @@
 		222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */; };
 		222B08C0269790D300AC062F /* AssemblyGetHelpersDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222B08BF269790D300AC062F /* AssemblyGetHelpersDataManager.swift */; };
 		222B08C22698831400AC062F /* AssemblyMoveToHelperDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222B08C12698831400AC062F /* AssemblyMoveToHelperDataManager.swift */; };
+		2231DB55269B1C20007B688E /* TovarImageSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB54269B1C20007B688E /* TovarImageSearchTableViewController.swift */; };
 		2231DB6D2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB6C2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift */; };
 		2231DB6F2649CB600075228E /* PurchasesAddItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB6E2649CB600075228E /* PurchasesAddItemDataManager.swift */; };
 		2231DB71264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2231DB70264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift */; };
@@ -313,6 +314,7 @@
 		222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUpdateDataManager.swift; sourceTree = "<group>"; };
 		222B08BF269790D300AC062F /* AssemblyGetHelpersDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyGetHelpersDataManager.swift; sourceTree = "<group>"; };
 		222B08C12698831400AC062F /* AssemblyMoveToHelperDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyMoveToHelperDataManager.swift; sourceTree = "<group>"; };
+		2231DB54269B1C20007B688E /* TovarImageSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarImageSearchTableViewController.swift; sourceTree = "<group>"; };
 		2231DB6C2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesSellPriceRecalcDataManager.swift; sourceTree = "<group>"; };
 		2231DB6E2649CB600075228E /* PurchasesAddItemDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesAddItemDataManager.swift; sourceTree = "<group>"; };
 		2231DB70264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesAddItemForYourselfDataManager.swift; sourceTree = "<group>"; };
@@ -1483,6 +1485,7 @@
 				22E44718269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift */,
 				22A4A9CF2699EAB8000D3B73 /* ProdsInPointTableViewController.swift */,
 				22A4A9D3269A3EB3000D3B73 /* QRScannerController.swift */,
+				2231DB54269B1C20007B688E /* TovarImageSearchTableViewController.swift */,
 			);
 			path = Sborka;
 			sourceTree = "<group>";
@@ -1673,6 +1676,7 @@
 				22A09BFE2648B81C009B9921 /* PurchasesAddZonePriceDataManager.swift in Sources */,
 				222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */,
 				22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */,
+				2231DB55269B1C20007B688E /* TovarImageSearchTableViewController.swift in Sources */,
 				221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */,
 				22D636F32625CB0000987E3F /* PurchasesPursListDataManager.swift in Sources */,
 				22044EB2261AA9BF0032C67F /* ClientsFilterPayHistByClientDataManager.swift in Sources */,

@@ -93,6 +93,7 @@ class TovarTableViewCell: UITableViewCell {
     var tovarSelected : (() -> Void)?
     
     var qrCodeTapped : (() -> Void)?
+    var magnifyingGlassTapped : (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -308,6 +309,10 @@ extension TovarTableViewCell : UICollectionViewDataSource , UICollectionViewDele
         }else if itemType == .info{
             
             
+            
+        }else if itemType == .magnifyingGlass{
+            
+            magnifyingGlassTapped?()
             
         }
         
