@@ -99,7 +99,10 @@ class QRScannerController: UIViewController {
     
 }
 
+//MARK: - AVCaptureMetadataOutputObjectsDelegate
+
 extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
+    
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         // Check if the metadataObjects array is not nil and it contains at least one object
         if metadataObjects.count == 0 {
@@ -117,9 +120,13 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
             if metadataObj.stringValue != nil {
+                
                 print(metadataObj.stringValue ?? "")
+                
             }
+            
         }
+        
     }
+    
 }
-
