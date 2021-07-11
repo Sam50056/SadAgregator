@@ -111,6 +111,21 @@ class TovarImageSearchTableViewController: UITableViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .plain, target: self, action: #selector(closeBarButtonTapped(_:)))
+        
+    }
+    
+    //MARK: - Actions
+    
+    @IBAction func closeBarButtonTapped(_ sender : Any){
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
     // MARK: - TableView
     
     override func numberOfSections(in tableView: UITableView) -> Int {

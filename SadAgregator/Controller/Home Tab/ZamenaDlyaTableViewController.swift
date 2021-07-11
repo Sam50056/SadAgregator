@@ -135,6 +135,8 @@ extension ZamenaDlyaTableViewController{
         
         cell.thisTovar = tovar
         
+        cell.tovarImageView.heroID = tovar.img
+        
         cell.tovarSelected = { [self] in
             
             dismiss(animated: true, completion: nil)

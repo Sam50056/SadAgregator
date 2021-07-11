@@ -157,7 +157,6 @@ extension TovarTableViewCell{
         
         guard let thisTovar = thisTovar, thisTovar.img != "" else {return}
         
-        print("In cell")
         tovarImageTapped?()
         
     }

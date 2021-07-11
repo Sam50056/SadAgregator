@@ -131,6 +131,8 @@ extension ProdsInPointTableViewController{
         
         cell.thisTovar = tovar
         
+        cell.tovarImageView.heroID = tovar.img
+        
         cell.tovarImageTapped = {
             
             let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
@@ -179,7 +181,9 @@ extension ProdsInPointTableViewController{
             
             //            print("HASH THAT WE'RE GIVING \(tovar.hash)")
             
-            self.navigationController?.pushViewController(tovarImageSearchVC, animated: true)
+            let navVC = UINavigationController(rootViewController: tovarImageSearchVC)
+            
+            self.present(navVC, animated: true, completion: nil)
             
         }
         
