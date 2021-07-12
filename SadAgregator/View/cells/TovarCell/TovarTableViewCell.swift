@@ -272,7 +272,7 @@ extension TovarTableViewCell : UICollectionViewDataSource , UICollectionViewDele
             
             let section = NSCollectionLayoutSection(group: group)
             
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: self.tovarImageView.frame.width / 5.2, bottom: 0, trailing: 0)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0)
             
             section.interGroupSpacing = 16
             

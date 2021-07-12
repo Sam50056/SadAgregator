@@ -131,8 +131,6 @@ extension ProdsInPointTableViewController{
         
         cell.thisTovar = tovar
         
-        cell.tovarImageView.heroID = tovar.img
-        
         cell.tovarImageTapped = {
             
             let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
