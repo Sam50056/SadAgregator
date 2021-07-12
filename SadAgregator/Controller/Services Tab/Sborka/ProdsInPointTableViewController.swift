@@ -61,6 +61,10 @@ class ProdsInPointTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshControl = UIRefreshControl()
+        //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl!.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
         assemblyProdsInPointDataManager.delegate = self
         
         loadUserData()
@@ -85,7 +89,10 @@ extension ProdsInPointTableViewController{
         
     }
     
-    func refresh (){
+    @objc func refresh (){
+        
+        purProds.removeAll()
+        tableView.reloadData()
         
         page = 1
         rowForPaggingUpdate = 15
@@ -247,6 +254,8 @@ extension ProdsInPointTableViewController : AssemblyProdsInPointDataManagerDeleg
                 }
                 
                 self.tableView.reloadData()
+                
+                self.refreshControl!.endRefreshing()
                 
             }else{
                 
