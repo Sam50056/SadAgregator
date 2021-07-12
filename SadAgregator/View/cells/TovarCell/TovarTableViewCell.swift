@@ -29,15 +29,15 @@ class TovarTableViewCell: UITableViewCell {
             var newItems = [TableViewItem]()
             
             if thisTovar.capt != "" {
-                newItems.append(TableViewItem(label1Text: "Номер точки", label2Text: thisTovar.capt))
+                newItems.append(TableViewItem(label1Text: "Точка", label2Text: thisTovar.capt))
             }
             
             if thisTovar.purCost != ""{
-                newItems.append(TableViewItem(label1Text: "Цена закупки", label2Text: thisTovar.purCost))
+                newItems.append(TableViewItem(label1Text: "Закупка", label2Text: thisTovar.purCost + " руб."))
             }
             
             if thisTovar.sellCost != "" {
-                newItems.append(TableViewItem(label1Text: "Цена продажи", label2Text: thisTovar.sellCost))
+                newItems.append(TableViewItem(label1Text: "Продажа", label2Text: thisTovar.sellCost + " руб."))
             }
             
             if thisTovar.size != "" {
