@@ -17,6 +17,7 @@ class PointsInSborkaSegmentViewModel : ObservableObject{
     @Published var helpers = [Helper]()
     
     var thisSegmentId : String?
+    @Published var thisSegmentName = ""
     
     @Published var showHelperListSheet = false
     
@@ -137,6 +138,7 @@ extension PointsInSborkaSegmentViewModel{
         prodsInPointView.status = status
         prodsInPointView.helperId = helperID
         prodsInPointView.pointId = selectedByTapPoint?.pointId
+        prodsInPointView.pointName = selectedByTapPoint?.capt
         
         showProdsInPointView = true
         

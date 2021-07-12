@@ -14,6 +14,7 @@ import RealmSwift
 
 struct ProdsInPointView : UIViewControllerRepresentable{
     
+    var pointName : String?
     var pointId : String?
     var helperId : String?
     var status : String?
@@ -22,6 +23,7 @@ struct ProdsInPointView : UIViewControllerRepresentable{
         
         let vc = ProdsInPointTableViewController()
         
+        vc.pointName = pointName
         vc.pointId = pointId
         vc.helperId = helperId
         vc.status = status
@@ -44,6 +46,7 @@ class ProdsInPointTableViewController: UITableViewController {
     
     var key = ""
     
+    var pointName : String?
     var pointId : String?
     var helperId : String?
     var status : String?

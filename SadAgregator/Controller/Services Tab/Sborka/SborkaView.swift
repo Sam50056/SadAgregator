@@ -88,6 +88,7 @@ struct SborkaView : View {
                                 }else{
                                     
                                     sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.thisSegmentId = item.segId
+                                    sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.thisSegmentName = item.title
                                     
                                     sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.key = sborkaViewModel.key
                                     
@@ -221,6 +222,7 @@ struct SborkaView : View {
             
             sborkaViewModel.updateSegments()
         }
+        .navigationBarTitle(Text("Сборка"))
         
     }
     
