@@ -174,7 +174,7 @@ struct PointsInSborkaSegmentView: View {
         }
         .onAppear{
             
-            guard pointsInSborkaSegmentViewModel.items.isEmpty else {return}
+            pointsInSborkaSegmentViewModel.items.removeAll()
             
             pointsInSborkaSegmentViewModel.update()
             
