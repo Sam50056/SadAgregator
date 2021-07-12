@@ -15,6 +15,8 @@ class SborkaViewModel : ObservableObject{
     
     @Published var helpers = [Helper]()
     
+    @Published var navBarTitle = "Сборка"
+    
     @Published var showPointsView = false
     
     @Published var showHelperListSheet = false

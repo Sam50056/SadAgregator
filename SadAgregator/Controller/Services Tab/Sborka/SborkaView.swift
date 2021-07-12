@@ -163,6 +163,7 @@ struct SborkaView : View {
                                     
                                 }else{
                                     
+                                    sborkaViewModel.navBarTitle = "Помощник"
                                     sborkaViewModel.helperID = helper.id
                                     sborkaViewModel.updateSegments()
                                     
@@ -201,6 +202,7 @@ struct SborkaView : View {
                     Image(systemName : "person")
                 }.contextMenu(ContextMenu(menuItems: {
                     Button("Смотреть от себя"){
+                        sborkaViewModel.navBarTitle = "Сборка"
                         sborkaViewModel.helperID = ""
                         sborkaViewModel.updateSegments()
                     }
@@ -227,11 +229,12 @@ struct SborkaView : View {
         }
         .onAppear{
             
-            guard sborkaViewModel.items.isEmpty else {return}
+            sborkaViewModel.items.removeAll()
             
             sborkaViewModel.updateSegments()
+            
         }
-        .navigationBarTitle(Text("Сборка"))
+        .navigationBarTitle(Text(sborkaViewModel.navBarTitle))
         
     }
     
