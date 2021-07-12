@@ -48,7 +48,7 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Статус", label2Text: thisTovar.status , shouldSecondLabelBeBlue: true))
             }
             
-            if thisTovar.qr != "" , !isZamena{
+            if thisTovar.qr != "" , thisTovar.qr != "-1" , !isZamena{
                 newItems.append(TableViewItem(label1Text: "QR-код", label2Text:  thisTovar.qr == "0" ? "Не привязан" : "Привязан", hasImage: true, image: "qrcode" , shouldSecondLabelBeBlue: true))
             }
             
@@ -104,9 +104,12 @@ class TovarTableViewCell: UITableViewCell {
             collectionViewItems = [
                 CollectionViewItem(image: "questionmark", type: .questionMark),
                 CollectionViewItem(image: "magnifyingglass", type: .magnifyingGlass),
-                CollectionViewItem(image: "info", type: .info),
-                CollectionViewItem(image: "qrcode", type: .qr)
+                CollectionViewItem(image: "info", type: .info)
             ]
+            
+            if thisTovar.qr != "-1"{
+                collectionViewItems.append(CollectionViewItem(image: "qrcode", type: .qr))
+            }
             
             collectionView.reloadData()
             

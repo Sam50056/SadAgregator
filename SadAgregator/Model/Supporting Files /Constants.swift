@@ -108,7 +108,7 @@ struct K {
             height += cellHeight
         }
         
-        if thisTovar.qr != "" , !isZamena{
+        if thisTovar.qr != "" , thisTovar.qr != "-1" , !isZamena{
             height += cellHeight
         }
         
