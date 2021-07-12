@@ -14,6 +14,8 @@ class QRScannerController: UIViewController {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
     
+    var closeButton : UIButton!
+    
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
                                       AVMetadataObject.ObjectType.code39,
                                       AVMetadataObject.ObjectType.code39Mod43,
@@ -30,6 +32,22 @@ class QRScannerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        closeButton = UIButton()
+        closeButton.setTitle("Закрыть", for: .normal)
+        closeButton.setTitleColor(.white, for: .normal)
+        closeButton.backgroundColor = .systemBlue
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.addTarget(self, action: #selector(closeBarButtonTapped(_:)), for: .touchUpInside)
+        view.addSubview(closeButton)
+        
+        NSLayoutConstraint.activate([
+            closeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            closeButton.leftAnchor.constraint(equalTo: view.leftAnchor),
+            closeButton.rightAnchor.constraint(equalTo: view.rightAnchor),
+            closeButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
         
         // Get the back-facing camera for capturing videos
         guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
@@ -62,6 +80,8 @@ class QRScannerController: UIViewController {
             // Start video capture
             captureSession.startRunning()
             
+            view.bringSubviewToFront(closeButton)
+            
             // Initialize QR Code Frame to highlight the QR Code
             qrCodeFrameView = UIView()
             
@@ -80,13 +100,6 @@ class QRScannerController: UIViewController {
             print(error)
             return
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .plain, target: self, action: #selector(closeBarButtonTapped(_:)))
-        
     }
     
     //MARK: - Actions

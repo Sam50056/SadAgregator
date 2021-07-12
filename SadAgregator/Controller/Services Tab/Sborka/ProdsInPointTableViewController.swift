@@ -95,11 +95,7 @@ extension ProdsInPointTableViewController{
         
         let qrScannerVC = QRScannerController()
         
-        let navVc = UINavigationController(rootViewController: qrScannerVC)
-        
-        navVc.modalPresentationStyle = .fullScreen
-        
-        present(navVc, animated: true, completion: nil)
+        present(qrScannerVC, animated: true, completion: nil)
         
     }
     
