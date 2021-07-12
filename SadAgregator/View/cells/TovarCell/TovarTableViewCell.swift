@@ -68,6 +68,10 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Замен по товару ", label2Text: thisTovar.replaces))
             }
             
+            if thisTovar.shipmentImage != ""{
+                newItems.append(TableViewItem(label1Text: "Фото посылки", label2Text: "Есть" , shouldSecondLabelBeBlue: true))
+            }
+            
             tableViewItems = newItems
             
             tableView.reloadData()
@@ -109,6 +113,7 @@ class TovarTableViewCell: UITableViewCell {
     var tovarImageTapped : (() -> Void)?
     
     var oplachenoTapped : (() -> Void)?
+    var shipmentImageTapped : (() -> Void)?
     var qrCodeTapped : (() -> Void)?
     var magnifyingGlassTapped : (() -> Void)?
     
@@ -221,6 +226,10 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
             //if item.shouldSecondLabelBeBlue , it means there is a payedImage
             
             oplachenoTapped?()
+            
+        }else if item.label1Text == "Фото посылки"{
+            
+            shipmentImageTapped?()
             
         }
         
@@ -400,6 +409,7 @@ struct TovarCellItem {
     var img : String
     var chLvl : String
     var payedImage : String
+    var shipmentImage : String
     
 }
 

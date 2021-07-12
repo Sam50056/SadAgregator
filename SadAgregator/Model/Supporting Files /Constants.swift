@@ -128,6 +128,10 @@ struct K {
             height += cellHeight
         }
         
+        if thisTovar.shipmentImage != ""{
+            height += cellHeight
+        }
+        
         if isZamena{
             height += 52//This is for the footer button
         }

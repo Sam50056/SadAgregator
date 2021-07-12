@@ -179,6 +179,24 @@ extension UIViewController {
         
     }
     
+    func previewImage(_ imageLink : String){
+        
+        let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
+        
+        galleryVC.simplePreviewMode = true
+        
+        galleryVC.selectedImageIndex = 0
+        
+        galleryVC.images = [PostImage(image: imageLink, imageId: "")]
+        
+        galleryVC.sizes = []
+        
+        let navVC = UINavigationController(rootViewController: galleryVC)
+        
+        self.presentHero(navVC, navigationAnimationType: .fade)
+        
+    }
+    
 }
 
 //MARK: - UIView
