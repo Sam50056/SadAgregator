@@ -72,6 +72,14 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Фото посылки", label2Text: "Есть" , shouldSecondLabelBeBlue: true))
             }
             
+            if thisTovar.defCheck == "1"{
+                newItems.append(TableViewItem(label1Text: "Проверка на брак", label2Text: "Да"))
+            }
+            
+            if thisTovar.withoutRep == "1"{
+                newItems.append(TableViewItem(label1Text: "Без замен", label2Text: "Да"))
+            }
+            
             tableViewItems = newItems
             
             tableView.reloadData()
@@ -408,6 +416,8 @@ struct TovarCellItem {
     var replaces : String
     var img : String
     var chLvl : String
+    var defCheck : String
+    var withoutRep : String
     var payedImage : String
     var shipmentImage : String
     

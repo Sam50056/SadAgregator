@@ -132,6 +132,14 @@ struct K {
             height += cellHeight
         }
         
+        if thisTovar.defCheck == "1"{
+            height += cellHeight
+        }
+        
+        if thisTovar.withoutRep == "1"{
+            height += cellHeight
+        }
+        
         if isZamena{
             height += 52//This is for the footer button
         }
