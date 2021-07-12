@@ -44,7 +44,7 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Размер", label2Text: thisTovar.size))
             }
             
-            if thisTovar.status != "" , !isZamena{
+            if thisTovar.status != "" , thisTovar.status != "-1" ,!isZamena{
                 newItems.append(TableViewItem(label1Text: "Статус", label2Text: thisTovar.status , shouldSecondLabelBeBlue: true))
             }
             
