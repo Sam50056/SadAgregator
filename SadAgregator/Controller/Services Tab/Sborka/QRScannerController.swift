@@ -45,7 +45,7 @@ class QRScannerController: UIViewController {
             closeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             closeButton.leftAnchor.constraint(equalTo: view.leftAnchor),
             closeButton.rightAnchor.constraint(equalTo: view.rightAnchor),
-            closeButton.heightAnchor.constraint(equalToConstant: 40)
+            closeButton.heightAnchor.constraint(equalToConstant: 60)
         ])
         
         
