@@ -137,6 +137,15 @@ struct PointsInSborkaSegmentView: View {
                 .navigationBarTitle("Помощники", displayMode: .inline)
                 
             }
+            .alert(isPresented: $pointsInSborkaSegmentViewModel.showAlertInHelperView , content : {
+                
+                Alert(title: Text(pointsInSborkaSegmentViewModel.alertInHelperViewTitle), message: pointsInSborkaSegmentViewModel.alertInHelperViewMessage != nil ? Text(pointsInSborkaSegmentViewModel.alertInHelperViewMessage!) : nil, dismissButton: .default(Text(pointsInSborkaSegmentViewModel.alertInHelperViewButtonText), action: {
+                    
+                    pointsInSborkaSegmentViewModel.showHelperListSheet = false
+                    
+                }))
+                
+            })
             
         })
         .toolbar {

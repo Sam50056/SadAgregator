@@ -181,6 +181,15 @@ struct SborkaView : View {
                 .navigationBarTitle("Помощники", displayMode: .inline)
                 
             }
+            .alert(isPresented: $sborkaViewModel.showAlertInHelperView , content : {
+                
+                Alert(title: Text(sborkaViewModel.alertInHelperViewTitle), message: sborkaViewModel.alertInHelperViewMessage != nil ? Text(sborkaViewModel.alertInHelperViewMessage!) : nil, dismissButton: .default(Text(sborkaViewModel.alertInHelperViewButtonText), action: {
+                    
+                    sborkaViewModel.showHelperListSheet = false
+                    
+                }))
+                
+            })
             
         })
         .toolbar {

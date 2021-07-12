@@ -24,6 +24,11 @@ class SborkaViewModel : ObservableObject{
     var alertMessage : String? = nil
     var alertButtonText = "Да"
     
+    @Published var showAlertInHelperView = false
+    var alertInHelperViewTitle = "Помощники не участвуют в сборке"
+    var alertInHelperViewMessage : String? = nil
+    var alertInHelperViewButtonText = "Ок"
+    
     var selectedByLongPressSegment : Item?
     
     var key = ""
@@ -287,6 +292,13 @@ extension SborkaViewModel : AssemblyGetHelpersInAssemblyDataManagerDelegate{
                 }
                 
                 self.showHelperListSheet = true
+                
+                //Showing alert that there are no helpers out there
+                if self.helpers.isEmpty{
+                    
+                    self.showAlertInHelperView = true
+                    
+                }
                 
             }
             
