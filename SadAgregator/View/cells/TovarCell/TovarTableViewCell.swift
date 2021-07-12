@@ -57,7 +57,7 @@ class TovarTableViewCell: UITableViewCell {
             }
             
             if thisTovar.payed != "" , thisTovar.payed != "0"{
-                newItems.append(TableViewItem(label1Text: "Оплачено", label2Text: "Да"))
+                newItems.append(TableViewItem(label1Text: "Оплачено", label2Text: "Да" , shouldSecondLabelBeBlue: thisTovar.payedImage != ""))
             }
             
             if thisTovar.isReplace != "" , thisTovar.isReplace != "0" {
@@ -108,6 +108,7 @@ class TovarTableViewCell: UITableViewCell {
     
     var tovarImageTapped : (() -> Void)?
     
+    var oplachenoTapped : (() -> Void)?
     var qrCodeTapped : (() -> Void)?
     var magnifyingGlassTapped : (() -> Void)?
     
@@ -214,6 +215,12 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         if item.label1Text == "QR-код"{
             
             qrCodeTapped?()
+            
+        }else if item.label1Text == "Оплачено" , item.shouldSecondLabelBeBlue{
+            
+            //if item.shouldSecondLabelBeBlue , it means there is a payedImage
+            
+            oplachenoTapped?()
             
         }
         
@@ -392,6 +399,7 @@ struct TovarCellItem {
     var replaces : String
     var img : String
     var chLvl : String
+    var payedImage : String
     
 }
 
