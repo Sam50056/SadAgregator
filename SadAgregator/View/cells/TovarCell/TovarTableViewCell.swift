@@ -56,16 +56,16 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Клиент", label2Text: thisTovar.clientName))
             }
             
-            if thisTovar.payed != ""{
-                newItems.append(TableViewItem(label1Text: "Оплачено", label2Text: thisTovar.payed == "1" ? "Да" : "Нет" ))
+            if thisTovar.payed != "" , thisTovar.payed != "0"{
+                newItems.append(TableViewItem(label1Text: "Оплачено", label2Text: "Да"))
             }
             
-            if thisTovar.isReplace != "" {
-                newItems.append(TableViewItem(label1Text: "Это замена", label2Text: thisTovar.isReplace == "1" ? "Да" : "Нет" , shouldSecondLabelBeBlue: true))
+            if thisTovar.isReplace != "" , thisTovar.isReplace != "0" {
+                newItems.append(TableViewItem(label1Text: "Это замена", label2Text: "Да" , shouldSecondLabelBeBlue: true))
             }
             
-            if thisTovar.replaces != ""{
-                newItems.append(TableViewItem(label1Text: "Замен по товару ", label2Text:  thisTovar.replaces == "0" ? "Нет" : thisTovar.replaces))
+            if thisTovar.replaces != "" ,  thisTovar.replaces != "0"{
+                newItems.append(TableViewItem(label1Text: "Замен по товару ", label2Text: thisTovar.replaces))
             }
             
             tableViewItems = newItems

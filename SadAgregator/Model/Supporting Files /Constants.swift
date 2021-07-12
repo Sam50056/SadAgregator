@@ -92,7 +92,7 @@ struct K {
             height += cellHeight
         }
         
-        if thisTovar.payed != ""{
+        if thisTovar.payed != "" , thisTovar.payed != "0"{
             height += cellHeight
         }
         
@@ -116,7 +116,7 @@ struct K {
             height += cellHeight
         }
         
-        if thisTovar.isReplace != "" {
+        if thisTovar.isReplace != "" , thisTovar.isReplace != "0" {
             height += cellHeight
         }
         
@@ -124,7 +124,7 @@ struct K {
             height += cellHeight
         }
         
-        if thisTovar.replaces != ""{
+        if thisTovar.replaces != "" , thisTovar.replaces != "0"{
             height += cellHeight
         }
         
