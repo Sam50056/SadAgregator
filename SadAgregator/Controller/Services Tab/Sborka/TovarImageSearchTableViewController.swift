@@ -114,6 +114,8 @@ class TovarImageSearchTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationItem.title = "Поиск замен"
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .plain, target: self, action: #selector(closeBarButtonTapped(_:)))
         
     }
@@ -295,7 +297,7 @@ extension TovarImageSearchTableViewController : SearchImageDataManagerDelegate{
             
             postsArray = data["posts"].arrayValue
             
-            tableView.reloadSections([0], with: .automatic)
+            tableView.reloadData()
             
             //            stopSimpleCircleAnimation(activityController: activityController)
             
