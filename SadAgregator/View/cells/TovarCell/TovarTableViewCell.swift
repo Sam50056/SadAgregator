@@ -73,7 +73,20 @@ class TovarTableViewCell: UITableViewCell {
             tableView.reloadData()
             
             //Setting the image
-            tovarImageView.sd_setImage(with: URL(string: thisTovar.img), placeholderImage: UIImage(systemName: "cart"), options: .highPriority, context: nil)
+            let originalUrlString = thisTovar.img
+            if !originalUrlString.isEmpty{
+                
+                let indexOfLastSlash = originalUrlString.lastIndex(of: "/")
+                let indexOfDot = originalUrlString.lastIndex(of: ".")
+                let firstPartOfURL = String(originalUrlString[originalUrlString.startIndex ..< indexOfLastSlash!])
+                let secondPartOfURL = "/\(250)\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
+                let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
+                
+                tovarImageView.sd_setImage(with: URL(string: fullURL), placeholderImage: UIImage(systemName: "cart"), options: .highPriority, context: nil)
+                
+            }else{
+                tovarImageView.image = UIImage(systemName: "cart")
+            }
             
             //Setting collection view's items
             collectionViewItems = [
