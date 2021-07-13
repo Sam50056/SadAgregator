@@ -53,7 +53,7 @@ class TovarTableViewCell: UITableViewCell {
             }
             
             if thisTovar.clientName != "" {
-                newItems.append(TableViewItem(label1Text: "Клиент", label2Text: thisTovar.clientName))
+                newItems.append(TableViewItem(label1Text: "Клиент", label2Text: thisTovar.clientName , shouldSecondLabelBeBlue: thisTovar.clientId != "" ? true : false))
             }
             
             if thisTovar.payed != "" , thisTovar.payed != "0"{
@@ -125,6 +125,7 @@ class TovarTableViewCell: UITableViewCell {
     
     var oplachenoTapped : (() -> Void)?
     var shipmentImageTapped : (() -> Void)?
+    var clientNameTapped : (() -> Void)?
     var qrCodeTapped : (() -> Void)?
     var magnifyingGlassTapped : (() -> Void)?
     
@@ -241,6 +242,10 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         }else if item.label1Text == "Фото посылки"{
             
             shipmentImageTapped?()
+            
+        }else if item.label1Text == "Клиент" , item.shouldSecondLabelBeBlue{
+            
+            clientNameTapped?()
             
         }
         

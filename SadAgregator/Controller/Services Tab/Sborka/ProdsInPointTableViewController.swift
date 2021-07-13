@@ -191,6 +191,17 @@ extension ProdsInPointTableViewController{
             
         }
         
+        cell.clientNameTapped = {
+            
+            let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
+            
+            clientVC.thisClientId = tovar.clientId
+            
+            let navVC = UINavigationController(rootViewController: clientVC)
+            
+            self.present(navVC, animated: true, completion: nil)
+        }
+        
         return cell
         
     }
