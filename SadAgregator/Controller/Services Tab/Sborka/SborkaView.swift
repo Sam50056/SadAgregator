@@ -155,6 +155,7 @@ struct SborkaView : View {
                                 Spacer()
                                 
                             }
+                            .contentShape(Rectangle())
                             .onTapGesture {
                                 
                                 if let _ = sborkaViewModel.selectedByLongPressSegment{
