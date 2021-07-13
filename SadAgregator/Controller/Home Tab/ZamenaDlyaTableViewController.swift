@@ -236,6 +236,18 @@ extension ZamenaDlyaTableViewController{
                         
                         self.present(sheetAlertController, animated: true, completion: nil)
                         
+                    }else{
+                        
+                        if let message = data!["msg"].string, message != ""{
+                            
+                            self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                            
+                        }else{
+                            
+                            self.showSimpleAlertWithOkButton(title: "Ошибка запроса", message: nil)
+                            
+                        }
+                        
                     }
                     
                 }
