@@ -208,6 +208,7 @@ struct SborkaView : View {
                         
                         //Updating the ui and set stuff to nil
                         
+                        sborkaViewModel.showSimpleAlertInHelperView = true
                         sborkaViewModel.showHelperListSheet = false
                         sborkaViewModel.updateSegments()
                         
