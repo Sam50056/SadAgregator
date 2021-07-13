@@ -33,15 +33,15 @@ class TovarTableViewCell: UITableViewCell {
             }
             
             if thisTovar.purCost != ""{
-                newItems.append(TableViewItem(label1Text: "Закупка", label2Text: thisTovar.purCost + " руб."))
+                newItems.append(TableViewItem(label1Text: "Закупка", label2Text: thisTovar.purCost + " руб." , shouldSecondLabelBeBlue: thisTovar.chLvl != "0"))
             }
             
             if thisTovar.sellCost != "" {
-                newItems.append(TableViewItem(label1Text: "Продажа", label2Text: thisTovar.sellCost + " руб."))
+                newItems.append(TableViewItem(label1Text: "Продажа", label2Text: thisTovar.sellCost + " руб." , shouldSecondLabelBeBlue: thisTovar.chLvl != "0"))
             }
             
             if thisTovar.size != "" {
-                newItems.append(TableViewItem(label1Text: "Размер", label2Text: thisTovar.size))
+                newItems.append(TableViewItem(label1Text: "Размер", label2Text: thisTovar.size , shouldSecondLabelBeBlue: thisTovar.chLvl != "0"))
             }
             
             if thisTovar.status != "" , thisTovar.status != "-1" ,!isZamena{
@@ -127,6 +127,9 @@ class TovarTableViewCell: UITableViewCell {
     var shipmentImageTapped : (() -> Void)?
     var clientNameTapped : (() -> Void)?
     var statusTapped : (() -> Void)?
+    var zakupkaTapped : (() -> Void)?
+    var prodazhaTapped : (() -> Void)?
+    var razmerTapped : (() -> Void)?
     var qrCodeTapped : (() -> Void)?
     var magnifyingGlassTapped : (() -> Void)?
     
@@ -251,6 +254,18 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         }else if item.label1Text == "Статус"{
             
             statusTapped?()
+            
+        }else if item.label1Text == "Закупка" , item.shouldSecondLabelBeBlue{
+            
+            zakupkaTapped?()
+            
+        }else if item.label1Text == "Продажа" , item.shouldSecondLabelBeBlue{
+            
+            prodazhaTapped?()
+            
+        }else if item.label1Text == "Размер" , item.shouldSecondLabelBeBlue{
+            
+            razmerTapped?()
             
         }
         

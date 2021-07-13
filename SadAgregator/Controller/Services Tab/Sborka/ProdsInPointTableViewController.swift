@@ -286,6 +286,228 @@ extension ProdsInPointTableViewController{
             
         }
         
+        cell.zakupkaTapped = {
+            
+            let alertController = UIAlertController(title: "Изменить цену закупки?", message: nil, preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                
+                let textFieldAlertController = UIAlertController(title: "Введите новое значение", message: nil, preferredStyle: .alert)
+                
+                textFieldAlertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { _ in
+                    
+                    guard let newValue = textFieldAlertController.textFields?[0].text else {return}
+                    
+                    AssemblySetItemValueDataManager().getAssemblySetItemValueData(key: self.key, itemId: tovar.pid, fieldId: "1", value: newValue) { data, error in
+                        
+                        DispatchQueue.main.async {
+                            
+                            if let error = error , data == nil{
+                                
+                                print("Error with AssemblyAvailableStatusesDataManager : \(error)")
+                                return
+                            }
+                            
+                            if data!["result"].intValue == 1{
+                                
+                                tovar.purCost = newValue
+                                
+                                cell.thisTovar = tovar
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }))
+                
+                textFieldAlertController.addTextField { field in
+                    
+                    field.keyboardType = .numberPad
+                    
+                }
+                
+                textFieldAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                
+                self.present(textFieldAlertController, animated: true, completion: nil)
+                
+                
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        }
+        
+        cell.prodazhaTapped = {
+            
+            let alertController = UIAlertController(title: "Изменить цену продажи?", message: nil, preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                
+                let textFieldAlertController = UIAlertController(title: "Введите новое значение", message: nil, preferredStyle: .alert)
+                
+                textFieldAlertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { _ in
+                    
+                    guard let newValue = textFieldAlertController.textFields?[0].text else {return}
+                    
+                    AssemblySetItemValueDataManager().getAssemblySetItemValueData(key: self.key, itemId: tovar.pid, fieldId: "2", value: newValue) { data, error in
+                        
+                        DispatchQueue.main.async {
+                            
+                            if let error = error , data == nil{
+                                
+                                print("Error with AssemblyAvailableStatusesDataManager : \(error)")
+                                return
+                            }
+                            
+                            if data!["result"].intValue == 1{
+                                
+                                tovar.sellCost = newValue
+                                
+                                cell.thisTovar = tovar
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }))
+                
+                textFieldAlertController.addTextField { field in
+                    
+                    field.keyboardType = .numberPad
+                    
+                }
+                
+                textFieldAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                
+                self.present(textFieldAlertController, animated: true, completion: nil)
+                
+                
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        }
+        
+        cell.razmerTapped = {
+            
+            let alertController = UIAlertController(title: "Изменить размер?" , message: nil, preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                
+                AssemblyGetItemSizesDataManager().getAssemblyGetItemSizesData(key: self.key, id: tovar.pid) { data, error in
+                    
+                    DispatchQueue.main.async {
+                        
+                        if let error = error , data == nil{
+                            
+                            print("Error with AssemblyAvailableStatusesDataManager : \(error)")
+                            return
+                        }
+                        
+                        if data!["result"].intValue == 1{
+                            
+                            let jsonSizes = data!["sizes"].arrayValue
+                            
+                            let sheetAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                            
+                            jsonSizes.forEach { jsonSize in
+                                
+                                sheetAlertController.addAction(UIAlertAction(title: jsonSize.stringValue, style: .default, handler: { _ in
+                                    
+                                    AssemblySetItemValueDataManager().getAssemblySetItemValueData(key: self.key, itemId: tovar.pid, fieldId: "3", value: jsonSize.stringValue) { data, error in
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            if let error = error , data == nil{
+                                                
+                                                print("Error with AssemblyAvailableStatusesDataManager : \(error)")
+                                                return
+                                            }
+                                            
+                                            if data!["result"].intValue == 1{
+                                                
+                                                tovar.size = jsonSize.stringValue
+                                                
+                                                cell.thisTovar = tovar
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }))
+                                
+                            }
+                            
+                            sheetAlertController.addAction(UIAlertAction(title: "Свой размер", style: .default, handler: { _ in
+                                
+                                let textFieldAlertController = UIAlertController(title: "Введите свой размер", message: nil, preferredStyle: .alert)
+                                
+                                textFieldAlertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { _ in
+                                    
+                                    guard let newValue = textFieldAlertController.textFields?[0].text else {return}
+                                    
+                                    AssemblySetItemValueDataManager().getAssemblySetItemValueData(key: self.key, itemId: tovar.pid, fieldId: "3", value: newValue) { data, error in
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            if let error = error , data == nil{
+                                                
+                                                print("Error with AssemblyAvailableStatusesDataManager : \(error)")
+                                                return
+                                            }
+                                            
+                                            if data!["result"].intValue == 1{
+                                                
+                                                tovar.size = newValue
+                                                
+                                                cell.thisTovar = tovar
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }))
+                                
+                                textFieldAlertController.addTextField { field in
+                                    
+                                }
+                                
+                                textFieldAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                
+                                self.present(textFieldAlertController, animated: true, completion: nil)
+                                
+                            }))
+                            
+                            sheetAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                            
+                            self.present(sheetAlertController, animated: true, completion: nil)
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        }
+        
         return cell
         
     }

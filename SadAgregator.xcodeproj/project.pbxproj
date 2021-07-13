@@ -243,6 +243,8 @@
 		22CADF4A25CCE7EE001C4F31 /* NewVersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CADF4925CCE7EE001C4F31 /* NewVersionViewController.swift */; };
 		22CD3545269DD940009057C3 /* AssemblyAvailableStatusesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD3544269DD940009057C3 /* AssemblyAvailableStatusesDataManager.swift */; };
 		22CD3547269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD3546269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift */; };
+		22CD3549269E13FC009057C3 /* AssemblySetItemValueDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD3548269E13FC009057C3 /* AssemblySetItemValueDataManager.swift */; };
+		22CD354B269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD354A269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift */; };
 		22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */; };
 		22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */; };
 		22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */; };
@@ -516,6 +518,8 @@
 		22CADF4925CCE7EE001C4F31 /* NewVersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewVersionViewController.swift; sourceTree = "<group>"; };
 		22CD3544269DD940009057C3 /* AssemblyAvailableStatusesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyAvailableStatusesDataManager.swift; sourceTree = "<group>"; };
 		22CD3546269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySetItemStatusDataManager.swift; sourceTree = "<group>"; };
+		22CD3548269E13FC009057C3 /* AssemblySetItemValueDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySetItemValueDataManager.swift; sourceTree = "<group>"; };
+		22CD354A269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyGetItemSizesDataManager.swift; sourceTree = "<group>"; };
 		22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorLikeDataManager.swift; sourceTree = "<group>"; };
 		22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1469,6 +1473,8 @@
 				22A4A9D12699F1C5000D3B73 /* AssemblyProdsInPointDataManager.swift */,
 				22CD3544269DD940009057C3 /* AssemblyAvailableStatusesDataManager.swift */,
 				22CD3546269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift */,
+				22CD3548269E13FC009057C3 /* AssemblySetItemValueDataManager.swift */,
+				22CD354A269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -1819,6 +1825,7 @@
 				2231DB71264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift in Sources */,
 				22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */,
 				22BF4DDF2676B80F00748D0B /* VendUpdateInfoDataManager.swift in Sources */,
+				22CD3549269E13FC009057C3 /* AssemblySetItemValueDataManager.swift in Sources */,
 				224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */,
 				22ADF827267C31BD00811DA9 /* VendAddSendRuleDataManager.swift in Sources */,
 				22B26520267D2B5E004342E3 /* BrokersAddZonePriceDataManager.swift in Sources */,
@@ -1867,6 +1874,7 @@
 				22A155ED2584E766000EAB64 /* MenuViewModel.swift in Sources */,
 				22D90239259C1546009732CC /* SendQuestionView.swift in Sources */,
 				22DC987226028B160016A31B /* PaggingPaymentsByClientDataManager.swift in Sources */,
+				22CD354B269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift in Sources */,
 				2201671C25A669790072BFE7 /* GetPostActionsDataManager.swift in Sources */,
 				2201672925A777A20072BFE7 /* GetVendActionsDataManager.swift in Sources */,
 				229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */,
