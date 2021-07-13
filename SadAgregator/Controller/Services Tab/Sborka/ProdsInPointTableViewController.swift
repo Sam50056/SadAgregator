@@ -288,7 +288,7 @@ extension ProdsInPointTableViewController{
         
         cell.zakupkaTapped = {
             
-            let alertController = UIAlertController(title: "Изменить цену закупки?", message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: tovar.chLvl == "1" ? "Изменить цену закупки?" : "Отправить на согласование изменение закупочный цены?", message: nil, preferredStyle: .alert)
             
             alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                 
@@ -398,7 +398,7 @@ extension ProdsInPointTableViewController{
         
         cell.razmerTapped = {
             
-            let alertController = UIAlertController(title: "Изменить размер?" , message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: tovar.chLvl == "1" ? "Изменить размер?" : "Отправить на согласование изменение размера?" , message: nil, preferredStyle: .alert)
             
             alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                 
