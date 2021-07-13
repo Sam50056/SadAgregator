@@ -133,7 +133,7 @@ extension ProdsInPointTableViewController{
         
         let purProd = purProds[indexPath.row]
         
-        let tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue)
+        var tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue)
         
         cell.thisTovar = tovar
         
@@ -200,6 +200,78 @@ extension ProdsInPointTableViewController{
             let navVC = UINavigationController(rootViewController: clientVC)
             
             self.present(navVC, animated: true, completion: nil)
+        }
+        
+        cell.statusTapped = {
+            
+            AssemblyAvailableStatusesDataManager().getAssemblyAvailableStatusesData(key: self.key, id: tovar.pid) { data, error in
+                
+                DispatchQueue.main.async {
+                    
+                    if let error = error , data == nil{
+                        
+                        print("Error with AssemblyAvailableStatusesDataManager : \(error)")
+                        return
+                    }
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        let jsonStatuses = data!["statuses"].arrayValue
+                        
+                        let sheetAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                        
+                        jsonStatuses.forEach { jsonStatus in
+                            
+                            sheetAlertController.addAction(UIAlertAction(title: jsonStatus["capt"].stringValue, style: .default, handler: { _ in
+                                
+                                AssemblySetItemStatusDataManager().getAssemblySetItemStatusData(key: self.key, id: tovar.pid, status: jsonStatus["id"].stringValue) { setStatusData, setStatusError in
+                                    
+                                    DispatchQueue.main.async {
+                                        
+                                        if let error = error , data == nil{
+                                            
+                                            print("Error with AssemblySetItemStatusDataManager : \(error)")
+                                            return
+                                        }
+                                        
+                                        if data!["result"].intValue == 1{
+                                            
+                                            tovar.status = jsonStatus["capt"].stringValue
+                                            
+                                            cell.thisTovar = tovar
+                                            
+                                        }else{
+                                            
+                                            if let message = data!["msg"].string, message != ""{
+                                                
+                                                self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                                
+                                            }else{
+                                                
+                                                self.showSimpleAlertWithOkButton(title: "Ошибка запроса", message: nil)
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }))
+                            
+                        }
+                        
+                        sheetAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                        
+                        self.present(sheetAlertController, animated: true, completion: nil)
+                        
+                    }
+                    
+                }
+                
+            }
+            
         }
         
         return cell

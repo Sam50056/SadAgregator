@@ -126,6 +126,7 @@ class TovarTableViewCell: UITableViewCell {
     var oplachenoTapped : (() -> Void)?
     var shipmentImageTapped : (() -> Void)?
     var clientNameTapped : (() -> Void)?
+    var statusTapped : (() -> Void)?
     var qrCodeTapped : (() -> Void)?
     var magnifyingGlassTapped : (() -> Void)?
     
@@ -246,6 +247,10 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         }else if item.label1Text == "Клиент" , item.shouldSecondLabelBeBlue{
             
             clientNameTapped?()
+            
+        }else if item.label1Text == "Статус"{
+            
+            statusTapped?()
             
         }
         

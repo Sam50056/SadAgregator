@@ -241,6 +241,8 @@
 		22CADB1225B2484000A5E475 /* AssignVkToAppIDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CADB1125B2484000A5E475 /* AssignVkToAppIDDataManager.swift */; };
 		22CADB1825B24A9600A5E475 /* SaveVkInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CADB1725B24A9600A5E475 /* SaveVkInfoDataManager.swift */; };
 		22CADF4A25CCE7EE001C4F31 /* NewVersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CADF4925CCE7EE001C4F31 /* NewVersionViewController.swift */; };
+		22CD3545269DD940009057C3 /* AssemblyAvailableStatusesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD3544269DD940009057C3 /* AssemblyAvailableStatusesDataManager.swift */; };
+		22CD3547269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD3546269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift */; };
 		22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */; };
 		22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */; };
 		22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */; };
@@ -512,6 +514,8 @@
 		22CADB1125B2484000A5E475 /* AssignVkToAppIDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignVkToAppIDDataManager.swift; sourceTree = "<group>"; };
 		22CADB1725B24A9600A5E475 /* SaveVkInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveVkInfoDataManager.swift; sourceTree = "<group>"; };
 		22CADF4925CCE7EE001C4F31 /* NewVersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewVersionViewController.swift; sourceTree = "<group>"; };
+		22CD3544269DD940009057C3 /* AssemblyAvailableStatusesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyAvailableStatusesDataManager.swift; sourceTree = "<group>"; };
+		22CD3546269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySetItemStatusDataManager.swift; sourceTree = "<group>"; };
 		22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorLikeDataManager.swift; sourceTree = "<group>"; };
 		22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1463,6 +1467,8 @@
 				2222676E2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift */,
 				222267702698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift */,
 				22A4A9D12699F1C5000D3B73 /* AssemblyProdsInPointDataManager.swift */,
+				22CD3544269DD940009057C3 /* AssemblyAvailableStatusesDataManager.swift */,
+				22CD3546269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -1730,6 +1736,7 @@
 				22BF1A0A25A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift in Sources */,
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
 				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
+				22CD3545269DD940009057C3 /* AssemblyAvailableStatusesDataManager.swift in Sources */,
 				2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */,
 				22A4A9D22699F1C5000D3B73 /* AssemblyProdsInPointDataManager.swift in Sources */,
 				22B41BA726476EA000F7DC30 /* CenovieDiapazoniViewController.swift in Sources */,
@@ -1884,6 +1891,7 @@
 				2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */,
 				22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */,
 				22BF4DD926755D2800748D0B /* NastroykiPostavshikaTableViewController.swift in Sources */,
+				22CD3547269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift in Sources */,
 				2269740025AE394800C76BA6 /* VendorPostsTableViewController.swift in Sources */,
 				226973FD25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift in Sources */,
 				2237E77625FA32C500EBD919 /* PurchaseTableViewCell.swift in Sources */,
