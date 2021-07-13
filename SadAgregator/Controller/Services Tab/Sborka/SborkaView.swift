@@ -184,11 +184,39 @@ struct SborkaView : View {
             }
             .alert(isPresented: $sborkaViewModel.showAlertInHelperView , content : {
                 
-                Alert(title: Text(sborkaViewModel.alertInHelperViewTitle), message: sborkaViewModel.alertInHelperViewMessage != nil ? Text(sborkaViewModel.alertInHelperViewMessage!) : nil, dismissButton: .default(Text(sborkaViewModel.alertInHelperViewButtonText), action: {
+                if sborkaViewModel.showSimpleAlertInHelperView{
                     
-                    sborkaViewModel.showHelperListSheet = false
+                    return Alert(title: Text(sborkaViewModel.alertInHelperViewTitle), message: sborkaViewModel.alertInHelperViewMessage != nil ? Text(sborkaViewModel.alertInHelperViewMessage!) : nil, dismissButton: .default(Text(sborkaViewModel.alertInHelperViewButtonText), action: {
+                        
+                        sborkaViewModel.showHelperListSheet = false
+                        
+                    }))
                     
-                }))
+                }else{
+                    
+                    return Alert(title: Text(sborkaViewModel.alertInHelperViewTitle), message: sborkaViewModel.alertInHelperViewMessage != nil ? Text(sborkaViewModel.alertInHelperViewMessage!) : nil, primaryButton: .default(Text("Отмена"), action: {
+                        
+                        //Canceling the done action and doing the oposite
+                        
+                        guard let _ = sborkaViewModel.givenHelperId else {return}
+                        
+                        sborkaViewModel.takeSegmentFrom(sborkaViewModel.givenHelperId!)
+                        
+                        sborkaViewModel.givenHelperId = nil
+                        
+                    }), secondaryButton: .default(Text(sborkaViewModel.alertInHelperViewButtonText), action: {
+                        
+                        //Updating the ui and set stuff to nil
+                        
+                        sborkaViewModel.showHelperListSheet = false
+                        sborkaViewModel.updateSegments()
+                        
+                        sborkaViewModel.selectedByLongPressSegment = nil
+                        sborkaViewModel.givenHelperId = nil
+                        
+                    }))
+                    
+                }
                 
             })
             

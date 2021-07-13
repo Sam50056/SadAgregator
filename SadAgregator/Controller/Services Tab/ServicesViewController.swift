@@ -160,11 +160,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             
             let sborkaView = SborkaView()
             
-            sborkaView.sborkaViewModel.key = getKey()!
-            
             let sborkaVC = UIHostingController(rootView: sborkaView)
-            
-            //            sborkaVC.navigationItem.title = "Структура рынка"
             
             navigationController?.pushViewController(sborkaVC, animated: true)
             

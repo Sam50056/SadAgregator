@@ -8,8 +8,11 @@
 import Foundation
 import SwiftyJSON
 import SwiftUI
+import RealmSwift
 
 class SborkaViewModel : ObservableObject{
+    
+    private let realm = try! Realm()
     
     @Published var items = [Item]()
     
@@ -27,11 +30,14 @@ class SborkaViewModel : ObservableObject{
     var alertButtonText = "Да"
     
     @Published var showAlertInHelperView = false
+    var showSimpleAlertInHelperView = true
     var alertInHelperViewTitle = "Помощники не участвуют в сборке"
     var alertInHelperViewMessage : String? = nil
     var alertInHelperViewButtonText = "Ок"
     
     var selectedByLongPressSegment : Item?
+    
+    var givenHelperId : String?
     
     var key = ""
     
@@ -47,6 +53,8 @@ class SborkaViewModel : ObservableObject{
     lazy var pointsInSegmentsView = PointsInSborkaSegmentView()
     
     init() {
+        
+        loadUserData()
         
         assemblySegmentsInAssemblyDataManager.delegate = self
         assemblyGetHelpersDataManager.delegate = self
@@ -94,10 +102,17 @@ extension SborkaViewModel{
                 
                 if data!["result"].intValue == 1{
                     
-                    self.showHelperListSheet = false
-                    self.updateSegments()
+                    //Show an alert demonstrating given tovar count with option to cancel the action
                     
-                    self.selectedByLongPressSegment = nil
+                    self.givenHelperId = helper
+                    
+                    let count = data!["cnt"].stringValue
+                    
+                    self.alertInHelperViewTitle = "Передано товаров: \(count) шт."
+                    self.alertInHelperViewMessage = nil
+                    self.alertInHelperViewButtonText = "Ок"
+                    self.showSimpleAlertInHelperView = false
+                    self.showAlertInHelperView = true
                     
                 }
                 
@@ -120,9 +135,23 @@ extension SborkaViewModel{
                 
                 if data!["result"].intValue == 1{
                     
-                    self.updateSegments()
+                    let count = data!["cnt"].stringValue
                     
-                    self.selectedByLongPressSegment = nil
+                    if !self.showSimpleAlertInHelperView{
+                        
+                        self.alertInHelperViewTitle = "Перенесено на себя товаров: \(count) шт."
+                        self.alertInHelperViewMessage = nil
+                        self.alertInHelperViewButtonText = "Ок"
+                        self.showSimpleAlertInHelperView = true
+                        self.showAlertInHelperView = true
+                        
+                    }else{
+                        
+                        self.updateSegments()
+                        
+                        self.selectedByLongPressSegment = nil
+                        
+                    }
                     
                 }
                 
@@ -311,4 +340,31 @@ extension SborkaViewModel : AssemblyGetHelpersInAssemblyDataManagerDelegate{
     func didFailGettingAssemblyGetHelpersInAssemblyDataWithError(error: String) {
         print("Error with AssemblyGetHelpersInAssemblyDataManager : \(error)")
     }
+}
+
+//MARK: - Data Manipulation Methods
+
+extension SborkaViewModel {
+    
+    func loadUserData (){
+        
+        if let userDataObject = getUserDataObject(){
+            
+            key = userDataObject.key
+            
+        }
+        
+    }
+    
+    func getUserDataObject () -> UserData?{
+        
+        let userData = realm.objects(UserData.self)
+        
+        if let userDataObject = userData.first{
+            return userDataObject
+        }
+        
+        return nil
+    }
+
 }
