@@ -101,14 +101,6 @@ extension ProdsInPointTableViewController{
         
     }
     
-    func showQRScannerVC(){
-        
-        let qrScannerVC = QRScannerController()
-        
-        present(qrScannerVC, animated: true, completion: nil)
-        
-    }
-    
 }
 
 //MARK: - TableView
@@ -198,7 +190,23 @@ extension ProdsInPointTableViewController{
                 let alertController = UIAlertController(title: "Перепривязать код?", message: nil, preferredStyle: .alert)
                 
                 alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
-                    self.showQRScannerVC()
+                    
+                    let qrScannerVC = QRScannerController()
+                    
+                    qrScannerVC.pid = tovar.pid
+                    
+                    qrScannerVC.qrConnected = {
+                        
+                        self.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                        
+                        tovar.status = "Куплено"
+                        
+                        cell.thisTovar = tovar
+                        
+                    }
+                    
+                    self.present(qrScannerVC, animated: true, completion: nil)
+                    
                 }))
                 
                 alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
@@ -207,7 +215,21 @@ extension ProdsInPointTableViewController{
                 
             }else{
                 
-                self.showQRScannerVC()
+                let qrScannerVC = QRScannerController()
+                
+                qrScannerVC.pid = tovar.pid
+                
+                qrScannerVC.qrConnected = {
+                    
+                    self.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                    
+                    tovar.status = "Куплено"
+                    
+                    cell.thisTovar = tovar
+                    
+                }
+                
+                self.present(qrScannerVC, animated: true, completion: nil)
                 
             }
             

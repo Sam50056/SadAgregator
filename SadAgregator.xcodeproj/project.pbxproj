@@ -245,6 +245,7 @@
 		22CD3547269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD3546269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift */; };
 		22CD3549269E13FC009057C3 /* AssemblySetItemValueDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD3548269E13FC009057C3 /* AssemblySetItemValueDataManager.swift */; };
 		22CD354B269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD354A269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift */; };
+		22CD354D269E64E5009057C3 /* AssemblySetQRDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD354C269E64E5009057C3 /* AssemblySetQRDataManager.swift */; };
 		22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */; };
 		22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */; };
 		22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */; };
@@ -520,6 +521,7 @@
 		22CD3546269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySetItemStatusDataManager.swift; sourceTree = "<group>"; };
 		22CD3548269E13FC009057C3 /* AssemblySetItemValueDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySetItemValueDataManager.swift; sourceTree = "<group>"; };
 		22CD354A269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyGetItemSizesDataManager.swift; sourceTree = "<group>"; };
+		22CD354C269E64E5009057C3 /* AssemblySetQRDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySetQRDataManager.swift; sourceTree = "<group>"; };
 		22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorLikeDataManager.swift; sourceTree = "<group>"; };
 		22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1475,6 +1477,7 @@
 				22CD3546269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift */,
 				22CD3548269E13FC009057C3 /* AssemblySetItemValueDataManager.swift */,
 				22CD354A269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift */,
+				22CD354C269E64E5009057C3 /* AssemblySetQRDataManager.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -1858,6 +1861,7 @@
 				225957AA2596A6450088C7E4 /* GetStepDataManager.swift in Sources */,
 				22C549A225F41C99008D941B /* PagingClientsDataManager.swift in Sources */,
 				2201672625A771E10072BFE7 /* SetPointActionsDataManager.swift in Sources */,
+				22CD354D269E64E5009057C3 /* AssemblySetQRDataManager.swift in Sources */,
 				22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */,
 				22029C1B25C63ED600CE79BC /* GetForExportDataManager.swift in Sources */,
 				22C9221325814CA40063B5D4 /* MenuView.swift in Sources */,

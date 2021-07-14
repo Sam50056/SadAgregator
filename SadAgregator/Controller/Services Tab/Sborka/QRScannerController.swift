@@ -7,14 +7,22 @@
 
 import UIKit
 import AVFoundation
+import RealmSwift
 
 class QRScannerController: UIViewController {
     
-    var captureSession = AVCaptureSession()
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
-    var qrCodeFrameView: UIView?
+    var pid : String?
+    var qrConnected : (() -> Void)?
     
-    var closeButton : UIButton!
+    private let realm = try! Realm()
+    
+    private var key = ""
+    
+    private var captureSession = AVCaptureSession()
+    private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    private var qrCodeFrameView: UIView?
+    
+    private var closeButton : UIButton!
     
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
                                       AVMetadataObject.ObjectType.code39,
@@ -32,6 +40,8 @@ class QRScannerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadUserData()
         
         closeButton = UIButton()
         closeButton.setTitle("Закрыть", for: .normal)
@@ -132,13 +142,55 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
             let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
-            if metadataObj.stringValue != nil {
+            if let qrValue = metadataObj.stringValue , let pid = pid{
                 
-                print(metadataObj.stringValue ?? "")
+                //Here we get the value that was in the scanned qr codr
+                
+                AssemblySetQRDataManager().getAssemblySetQRData(key: key, id: pid, value: qrValue) { data, error in
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        
+                        if let error = error , data == nil{
+                            
+                            print("Error with AssemblyAvailableStatusesDataManager : \(error)")
+                            return
+                        }
+                        
+                        if data!["result"].intValue == 1{
+                            
+                            self?.qrConnected?()
+                            
+                        }else{
+                            
+                            guard let message = data!["msg"].string else {self?.showSimpleAlertWithOkButton(title: "Ошибка запроса", message: nil); return}
+                            
+                            self?.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                print(qrValue)
                 
             }
             
         }
+        
+    }
+    
+}
+
+//MARK: - Data Manipulation Methods
+
+extension QRScannerController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        key = userDataObject.first!.key
         
     }
     
