@@ -130,8 +130,10 @@ class TovarTableViewCell: UITableViewCell {
     var zakupkaTapped : (() -> Void)?
     var prodazhaTapped : (() -> Void)?
     var razmerTapped : (() -> Void)?
+    var infoTapped : (() -> Void)?
     var qrCodeTapped : (() -> Void)?
     var magnifyingGlassTapped : (() -> Void)?
+    var questionMarkTapped : (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -388,11 +390,15 @@ extension TovarTableViewCell : UICollectionViewDataSource , UICollectionViewDele
             
         }else if itemType == .info{
             
-            
+            infoTapped?()
             
         }else if itemType == .magnifyingGlass{
             
             magnifyingGlassTapped?()
+            
+        }else if itemType == .questionMark{
+            
+            questionMarkTapped?()
             
         }
         

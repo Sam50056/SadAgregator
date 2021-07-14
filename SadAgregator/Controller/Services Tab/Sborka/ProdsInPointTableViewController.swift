@@ -143,6 +143,54 @@ extension ProdsInPointTableViewController{
             
         }
         
+        cell.infoTapped = {
+            
+            if tovar.comExt != "0"{
+                
+                let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                
+                alertController.addAction(UIAlertAction(title: "Перейти на пост в VK", style: .default, handler: { _ in
+                    
+                    guard let vkLink = URL(string: "https://vk.com/wall\(tovar.link)") else {return}
+                    
+                    UIApplication.shared.open(vkLink, options: [:])
+                    
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Посмотреть комментарии", style: .default, handler: { _ in
+                    
+                    
+                    
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                
+                self.present(alertController, animated: true, completion: nil)
+                
+            }else{
+                
+                guard let vkLink = URL(string: "https://vk.com/wall\(tovar.link)") else {return}
+                
+                UIApplication.shared.open(vkLink, options: [:])
+                
+            }
+            
+        }
+        
+        cell.questionMarkTapped = {
+            
+            let alertController = UIAlertController(title: "Задать вопрос клиенту по товару?", message: nil, preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        }
+        
         cell.qrCodeTapped = {
             
             if tovar.qr == "1"{
