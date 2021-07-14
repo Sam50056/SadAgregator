@@ -239,18 +239,17 @@ struct SborkaView : View {
                 }))
                 
                 Menu {
-                    Button("Не обработаны", action: {
-                        sborkaViewModel.changeStatus(to: "0")
-                    })
-                    Button("Нет в наличии", action: {
-                        sborkaViewModel.changeStatus(to: "1")
-                    })
-                    Button("Куплены", action: {
-                        sborkaViewModel.changeStatus(to: "2")
-                    })
-                    Button("Любой", action: {
-                        sborkaViewModel.changeStatus(to: "")
-                    })
+                    Picker(selection: $sborkaViewModel.menuSortIndex, label: Text("Статусы")) {
+                        Text("Не обработаны")
+                            .tag(0)
+                        Text("Нет в наличии")
+                            .tag(1)
+                        Text("Куплены")
+                            .tag(2)
+                        Text("Любой")
+                            .tag(3)
+                    }
+                    
                 } label: {
                     Image(systemName : "slider.vertical.3")
                         .imageScale(.large)

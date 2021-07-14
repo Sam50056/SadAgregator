@@ -34,6 +34,12 @@ class PointsInSborkaSegmentViewModel : ObservableObject{
     var alertInHelperViewMessage : String? = nil
     var alertInHelperViewButtonText = "Ок"
     
+    @Published var menuSortIndex : Int = 3{
+        didSet{
+            changeStatus(to: menuSortIndex != 3 ? "\(menuSortIndex)" : "")
+        }
+    }
+    
     var selectedByLongPressPoint : Item?
     var selectedByTapPoint : Item?
     

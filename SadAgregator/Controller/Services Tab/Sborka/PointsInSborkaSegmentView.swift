@@ -163,18 +163,17 @@ struct PointsInSborkaSegmentView: View {
                 }))
                 
                 Menu {
-                    Button("Не обработаны", action: {
-                        pointsInSborkaSegmentViewModel.changeStatus(to: "0")
-                    })
-                    Button("Нет в наличии", action: {
-                        pointsInSborkaSegmentViewModel.changeStatus(to: "1")
-                    })
-                    Button("Куплены", action: {
-                        pointsInSborkaSegmentViewModel.changeStatus(to: "2")
-                    })
-                    Button("Любой", action: {
-                        pointsInSborkaSegmentViewModel.changeStatus(to: "")
-                    })
+                    Picker(selection: $pointsInSborkaSegmentViewModel.menuSortIndex, label: Text("Статусы")) {
+                        Text("Не обработаны")
+                            .tag(0)
+                        Text("Нет в наличии")
+                            .tag(1)
+                        Text("Куплены")
+                            .tag(2)
+                        Text("Любой")
+                            .tag(3)
+                    }
+                    
                 } label: {
                     Image(systemName : "slider.vertical.3")
                         .imageScale(.large)
