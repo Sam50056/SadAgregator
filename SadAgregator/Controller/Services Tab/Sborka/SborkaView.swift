@@ -258,7 +258,7 @@ struct SborkaView : View {
         }
         .onAppear{
             
-            sborkaViewModel.items.removeAll()
+            guard sborkaViewModel.items.isEmpty else {return}
             
             sborkaViewModel.updateSegments()
             
