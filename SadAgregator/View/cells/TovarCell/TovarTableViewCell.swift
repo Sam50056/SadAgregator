@@ -100,6 +100,8 @@ class TovarTableViewCell: UITableViewCell {
                 tovarImageView.image = UIImage(systemName: "cart")
             }
             
+            guard oldValue == nil else {return}
+            
             //Setting collection view's items
             collectionViewItems = [
                 CollectionViewItem(image: "questionmark", type: .questionMark),
