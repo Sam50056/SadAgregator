@@ -50,6 +50,7 @@ struct PointsInSborkaSegmentView: View {
                             }
                             
                         }
+                        .contentShape(Rectangle())
                         .onTapGesture{
                             
                             pointsInSborkaSegmentViewModel.selectedByTapPoint = item

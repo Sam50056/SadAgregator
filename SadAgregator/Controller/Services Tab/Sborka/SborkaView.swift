@@ -63,6 +63,7 @@ struct SborkaView : View {
                                 Divider()
                                 
                             }
+                            .contentShape(Rectangle())
                             .onTapGesture {
                                 
                                 if !item.canGoForDot {
