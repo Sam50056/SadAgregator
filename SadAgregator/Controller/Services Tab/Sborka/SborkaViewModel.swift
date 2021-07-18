@@ -25,6 +25,7 @@ class SborkaViewModel : ObservableObject{
     @Published var showHelperListSheet = false
     
     @Published var showAlert = false
+    var showSimpleAlert = false
     var alertTitle = ""
     var alertMessage : String? = nil
     var alertButtonText = "Да"
@@ -128,7 +129,7 @@ extension SborkaViewModel{
         
     }
     
-    func takeSegmentFrom(_ helper : String){
+    func takeSegmentFrom(_ helper : String , isInHelperView : Bool = false){
         
         AssemblyRemoveFromHelperDataManager().getAssemblyRemoveFromHelperData(key: key, helper: helper, segment: selectedByLongPressSegment!.segId) { data, error in
             
@@ -143,19 +144,26 @@ extension SborkaViewModel{
                     
                     let count = data!["cnt"].stringValue
                     
-                    if !self.showSimpleAlertInHelperView{
+                    if isInHelperView{
                         
-                        self.alertInHelperViewTitle = "Перенесено на себя товаров: \(count) шт."
-                        self.alertInHelperViewMessage = nil
-                        self.alertInHelperViewButtonText = "Ок"
-                        self.showSimpleAlertInHelperView = true
-                        self.showAlertInHelperView = true
+                        if !self.showSimpleAlertInHelperView{
+                            
+                            self.showHelperListSheet = false
+                            
+                            self.updateSegments()
+                            
+                            self.selectedByLongPressSegment = nil
+                            
+                        }
                         
                     }else{
                         
-                        self.updateSegments()
+                        self.alertTitle = "Перенесено на себя товаров: \(count) шт."
+                        self.alertMessage = nil
+                        self.alertButtonText = "Ок"
                         
-                        self.selectedByLongPressSegment = nil
+                        self.showSimpleAlert = true
+                        self.showAlert = true
                         
                     }
                     
@@ -333,6 +341,10 @@ extension SborkaViewModel : AssemblyGetHelpersInAssemblyDataManagerDelegate{
                 //Showing alert that there are no helpers out there
                 if self.helpers.isEmpty{
                     
+                    self.alertInHelperViewTitle = "Помощники не участвуют в сборке"
+                    self.alertInHelperViewMessage = nil
+                    self.alertInHelperViewButtonText = "Ок"
+                    self.showSimpleAlertInHelperView = true
                     self.showAlertInHelperView = true
                     
                 }

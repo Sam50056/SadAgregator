@@ -91,6 +91,8 @@ struct SborkaView : View {
                                     sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.thisSegmentId = item.segId
                                     sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.thisSegmentName = item.title
                                     
+                                    sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.helperID = sborkaViewModel.helperID
+                                    
                                     sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.key = sborkaViewModel.key
                                     
                                     sborkaViewModel.showPointsView = true
@@ -104,6 +106,7 @@ struct SborkaView : View {
                                 
                                 sborkaViewModel.alertTitle = sborkaViewModel.helperID == "" ? "Передать сегмент помощнику?" :  "Забрать сегмент у помощника?"
                                 sborkaViewModel.alertMessage = nil
+                                sborkaViewModel.showSimpleAlert = false
                                 sborkaViewModel.showAlert = true
                                 
                             }
@@ -124,20 +127,38 @@ struct SborkaView : View {
             
         }
         .alert(isPresented: $sborkaViewModel.showAlert, content: {
-            Alert(title: Text(sborkaViewModel.alertTitle), message: sborkaViewModel.alertMessage != nil ? Text(sborkaViewModel.alertMessage!) : nil, primaryButton: .cancel(Text("Отмена")), secondaryButton: .default(Text(sborkaViewModel.alertButtonText), action: {
+            
+            if sborkaViewModel.showSimpleAlert {
                 
-                if sborkaViewModel.helperID != "" { //Smotrit ne ot sebya
+                return Alert(title: Text(sborkaViewModel.alertTitle), message: sborkaViewModel.alertMessage != nil ? Text(sborkaViewModel.alertMessage!) : nil, dismissButton: .default(Text(sborkaViewModel.alertButtonText), action: {
                     
-                    sborkaViewModel.takeSegmentFrom(sborkaViewModel.helperID)
+                    sborkaViewModel.updateSegments()
                     
-                }else{//Smotrit ot sebya
+                    sborkaViewModel.selectedByLongPressSegment = nil
                     
-                    //Getting the list of helpers for user to choose who is he giving the segment to
-                    sborkaViewModel.getHelpers()
+                    sborkaViewModel.showAlert = false
                     
-                }
+                }))
                 
-            }))
+            }else{
+                
+                return Alert(title: Text(sborkaViewModel.alertTitle), message: sborkaViewModel.alertMessage != nil ? Text(sborkaViewModel.alertMessage!) : nil, primaryButton: .cancel(Text("Отмена")), secondaryButton: .default(Text(sborkaViewModel.alertButtonText), action: {
+                    
+                    if sborkaViewModel.helperID != "" { //Smotrit ne ot sebya
+                        
+                        sborkaViewModel.takeSegmentFrom(sborkaViewModel.helperID)
+                        
+                    }else{//Smotrit ot sebya
+                        
+                        //Getting the list of helpers for user to choose who is he giving the segment to
+                        sborkaViewModel.getHelpers()
+                        
+                    }
+                    
+                }))
+                
+            }
+            
         })
         .sheet(isPresented: $sborkaViewModel.showHelperListSheet, content: {
             
@@ -202,7 +223,7 @@ struct SborkaView : View {
                         
                         guard let _ = sborkaViewModel.givenHelperId else {return}
                         
-                        sborkaViewModel.takeSegmentFrom(sborkaViewModel.givenHelperId!)
+                        sborkaViewModel.takeSegmentFrom(sborkaViewModel.givenHelperId!, isInHelperView : true)
                         
                         sborkaViewModel.givenHelperId = nil
                         
