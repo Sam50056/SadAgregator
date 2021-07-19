@@ -111,11 +111,13 @@ extension UIViewController {
 
 extension UIViewController{
     
-    func showSimpleAlertWithOkButton(title : String? , message : String? , dismissButtonText : String = "Ок"){
+    func showSimpleAlertWithOkButton(title : String? , message : String? , dismissButtonText : String = "Ок" , dismissAction : (() -> Void)? = nil){
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let action = UIAlertAction(title: dismissButtonText, style: .cancel) { (_) in
+            
+            dismissAction?()
             
             alertController.dismiss(animated: true, completion: nil)
             

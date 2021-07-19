@@ -160,9 +160,15 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
                             
                             self?.qrConnected?()
                             
+                            self?.dismiss(animated: true, completion: nil)
+                            
                         }else{
                             
-                            guard let message = data!["msg"].string else {self?.showSimpleAlertWithOkButton(title: "Ошибка запроса", message: nil); return}
+                            guard let message = data!["msg"].string else {self?.showSimpleAlertWithOkButton(title: "Ошибка запроса", message: nil , dismissAction: {
+                                
+                                self?.dismiss(animated: true, completion: nil)
+                                
+                            }); return}
                             
                             self?.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
                             
