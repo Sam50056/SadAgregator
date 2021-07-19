@@ -43,6 +43,10 @@ class PointsInSborkaSegmentViewModel : ObservableObject{
     var selectedByLongPressPoint : Item?
     var selectedByTapPoint : Item?
     
+    var shouldShowSmotretOtSebyaInHelperView : Bool {
+        !helpers.isEmpty && selectedByLongPressPoint == nil
+    }
+    
     var status : String = ""
     var helperID : String = ""
     
@@ -152,6 +156,13 @@ extension PointsInSborkaSegmentViewModel{
         prodsInPointView.pointName = selectedByTapPoint?.capt
         
         showProdsInPointView = true
+        
+    }
+    
+    func smotretOtSebya() {
+        
+        helperID = ""
+        update()
         
     }
     

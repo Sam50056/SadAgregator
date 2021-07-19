@@ -42,9 +42,13 @@ class SborkaViewModel : ObservableObject{
         }
     }
     
-    var selectedByLongPressSegment : Item?
+    var selectedByLongPressSegment : Item? = nil
     
     var givenHelperId : String?
+    
+    var shouldShowSmotretOtSebyaInHelperView : Bool {
+        !helpers.isEmpty && selectedByLongPressSegment == nil
+    }
     
     var key = ""
     
@@ -204,6 +208,14 @@ extension SborkaViewModel{
             updateSegments()
             
         }
+        
+    }
+    
+    func smotretOtSebya() {
+        
+        navBarTitle = "Сборка"
+        helperID = ""
+        updateSegments()
         
     }
     

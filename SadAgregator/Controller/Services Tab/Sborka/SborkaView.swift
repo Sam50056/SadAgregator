@@ -200,6 +200,29 @@ struct SborkaView : View {
                         
                     }
                     
+                    Divider()
+                    
+                    HStack{
+                        
+                        Spacer()
+                        
+                        Text(!sborkaViewModel.shouldShowSmotretOtSebyaInHelperView ? "" : "Смотреть мою сборку")
+                            .font(.system(size: 18))
+                        
+                        Spacer()
+                        
+                    }
+                    .frame(height: 25)
+                    .padding(.bottom , 16)
+                    .padding(.top , 8)
+                    .onTapGesture{
+                        
+                        guard sborkaViewModel.shouldShowSmotretOtSebyaInHelperView else {return}
+                        
+                        sborkaViewModel.showHelperListSheet = false
+                        sborkaViewModel.smotretOtSebya()
+                    }
+                    
                 }
                 
                 .navigationBarTitle("Помощники", displayMode: .inline)
@@ -254,9 +277,7 @@ struct SborkaView : View {
                     Image(systemName : "person")
                 }.contextMenu(ContextMenu(menuItems: {
                     Button("Смотреть от себя"){
-                        sborkaViewModel.navBarTitle = "Сборка"
-                        sborkaViewModel.helperID = ""
-                        sborkaViewModel.updateSegments()
+                        sborkaViewModel.smotretOtSebya()
                     }
                 }))
                 

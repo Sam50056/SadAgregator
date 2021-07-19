@@ -133,6 +133,29 @@ struct PointsInSborkaSegmentView: View {
                         
                     }
                     
+                    Divider()
+                    
+                    HStack{
+                        
+                        Spacer()
+                        
+                        Text(!pointsInSborkaSegmentViewModel.shouldShowSmotretOtSebyaInHelperView ? "" : "Смотреть мою сборку")
+                            .font(.system(size: 18))
+                        
+                        Spacer()
+                        
+                    }
+                    .frame(height: 25)
+                    .padding(.bottom , 16)
+                    .padding(.top , 8)
+                    .onTapGesture{
+                        
+                        guard pointsInSborkaSegmentViewModel.shouldShowSmotretOtSebyaInHelperView else {return}
+                        
+                        pointsInSborkaSegmentViewModel.showHelperListSheet = false
+                        pointsInSborkaSegmentViewModel.smotretOtSebya()
+                    }
+                    
                 }
                 
                 .navigationBarTitle("Помощники", displayMode: .inline)
@@ -158,8 +181,7 @@ struct PointsInSborkaSegmentView: View {
                     Image(systemName : "person")
                 }.contextMenu(ContextMenu(menuItems: {
                     Button("Смотреть от себя"){
-                        pointsInSborkaSegmentViewModel.helperID = ""
-                        pointsInSborkaSegmentViewModel.update()
+                        pointsInSborkaSegmentViewModel.smotretOtSebya()
                     }
                 }))
                 
