@@ -235,17 +235,19 @@ extension ProdsInPointTableViewController{
             
         }
         
-        cell.magnifyingGlassTapped = {
+        cell.magnifyingGlassTapped = { [weak self] in
             
             let tovarImageSearchVC = TovarImageSearchTableViewController()
             
             tovarImageSearchVC.imageHashText = tovar.hash
             
+            tovarImageSearchVC.thisPointId = self!.pointId
+            
             //            print("HASH THAT WE'RE GIVING \(tovar.hash)")
             
             let navVC = UINavigationController(rootViewController: tovarImageSearchVC)
             
-            self.present(navVC, animated: true, completion: nil)
+            self!.present(navVC, animated: true, completion: nil)
             
         }
         

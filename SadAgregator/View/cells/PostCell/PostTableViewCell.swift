@@ -136,6 +136,7 @@ class PostTableViewCell: UITableViewCell  {
     var soobshitButtonCallback : (() -> ())?
     var peerButtonCallback : (() -> ())?
     var vigruzitButtonCallback : (() -> ())?
+    var vibratTochkuButtonCallback : (() -> ())?
     
     var postDescription : String?
     var showDescription = false
@@ -691,6 +692,12 @@ class PostTableViewCell: UITableViewCell  {
         showDescription.toggle()
         
         applySnapshot(animatingDifferences: true)
+        
+    }
+    
+    @IBAction func vibratTochkuTapped(_ sender : Any){
+        
+        vibratTochkuButtonCallback?()
         
     }
     

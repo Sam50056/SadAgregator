@@ -21,6 +21,8 @@ class TovarImageSearchTableViewController: UITableViewController {
     
     var imageHashText : String?
     
+    var thisPointId : String?
+    
     private var searchData : JSON?
     
     private var postsArray = [JSON]()
@@ -168,6 +170,8 @@ class TovarImageSearchTableViewController: UITableViewController {
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int, export : JSON?){
         
+        let postId = data["id"].stringValue
+        
         //Change the bottom panel a bit (because we're in tovar)
         
         cell.soobshitButton.isHidden = true
@@ -194,12 +198,42 @@ class TovarImageSearchTableViewController: UITableViewController {
         rightButton.setTitleColor(.systemBlue, for: .normal)
         
         rightButton.addTarget(cell, action: #selector(cell.smotretVkPostPressed(_:)), for: .touchUpInside)
+        leftButton.addTarget(cell, action: #selector(cell.vibratTochkuTapped(_:)), for: .touchUpInside)
+        
+        cell.vibratTochkuButtonCallback = { [weak self] in
+            
+            guard let thisPointId = self!.thisPointId else {return}
+            
+            AssemblySellThisPointDataManager().getAssemblySellThisPointData(key: self!.key, itemId: thisPointId, postId: postId) { sellData, error in
+                
+                DispatchQueue.main.async {
+                    
+                    if let error = error , sellData == nil {
+                        print("Error with : \(error)")
+                        return
+                    }
+                    
+                    if sellData!["result"].intValue == 1{
+                        
+                        self!.postsArray.remove(at: index)
+                        
+                        self!.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                        
+                    }else{
+                        
+                        self!.showSimpleAlertWithOkButton(title: "Ошибка", message: sellData!["msg"].stringValue)
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
         
         cell.delegate = self
         
         cell.key = key
-        
-        let postId = data["id"].stringValue
         
         cell.id = postId
         

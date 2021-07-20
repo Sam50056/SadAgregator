@@ -247,6 +247,7 @@
 		22CD354B269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD354A269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift */; };
 		22CD354D269E64E5009057C3 /* AssemblySetQRDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CD354C269E64E5009057C3 /* AssemblySetQRDataManager.swift */; };
 		22CE4F9225869EB00060E9DF /* VendorLikeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */; };
+		22D1322626A5AD4300D0BB38 /* AssemblySellThisPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D1322526A5AD4300D0BB38 /* AssemblySellThisPointDataManager.swift */; };
 		22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */; };
 		22D175F32567E86B00DA7D0E /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */; };
 		22D604D225EFA6BC00102CB6 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */; };
@@ -523,6 +524,7 @@
 		22CD354A269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyGetItemSizesDataManager.swift; sourceTree = "<group>"; };
 		22CD354C269E64E5009057C3 /* AssemblySetQRDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySetQRDataManager.swift; sourceTree = "<group>"; };
 		22CE4F9125869EB00060E9DF /* VendorLikeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorLikeDataManager.swift; sourceTree = "<group>"; };
+		22D1322526A5AD4300D0BB38 /* AssemblySellThisPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySellThisPointDataManager.swift; sourceTree = "<group>"; };
 		22D175F02567E86B00DA7D0E /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		22D175F12567E86B00DA7D0E /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		22D604D125EFA6BC00102CB6 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
@@ -1478,6 +1480,7 @@
 				22CD3548269E13FC009057C3 /* AssemblySetItemValueDataManager.swift */,
 				22CD354A269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift */,
 				22CD354C269E64E5009057C3 /* AssemblySetQRDataManager.swift */,
+				22D1322526A5AD4300D0BB38 /* AssemblySellThisPointDataManager.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -1885,6 +1888,7 @@
 				22941A3F262A478C00119844 /* TovarTableViewCell.swift in Sources */,
 				22A2B56825E03200001359D6 /* SlideDownPresentationController.swift in Sources */,
 				2286AD0B25CB5EEE004EF0D7 /* VendorRevsViewController.swift in Sources */,
+				22D1322626A5AD4300D0BB38 /* AssemblySellThisPointDataManager.swift in Sources */,
 				22328CD925FE857800C51CC9 /* PaymentTableViewCell.swift in Sources */,
 				228C525926815E2C00B0B9CB /* BrokersBrokerStatusDataManager.swift in Sources */,
 				22C5499525F411A3008D941B /* ClientTableViewCell.swift in Sources */,

@@ -170,7 +170,11 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
                                 
                             }); return}
                             
-                            self?.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                            self?.showSimpleAlertWithOkButton(title: "Ошибка", message: message, dismissAction: {
+                                
+                                self?.dismiss(animated: true, completion: nil)
+                                
+                            })
                             
                         }
                         
