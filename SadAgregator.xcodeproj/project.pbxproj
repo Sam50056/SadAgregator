@@ -152,6 +152,7 @@
 		2293745E2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2293745D2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift */; };
 		2293B66326A796FE00022FAC /* AssemblyCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2293B66226A796FD00022FAC /* AssemblyCommentsViewController.swift */; };
 		2293B66526A79C9C00022FAC /* PurchasesGetItemCommentsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2293B66426A79C9C00022FAC /* PurchasesGetItemCommentsDataManager.swift */; };
+		2293B66726A7A3DD00022FAC /* PurchasesAddItemCommentDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2293B66626A7A3DD00022FAC /* PurchasesAddItemCommentDataManager.swift */; };
 		22941A3F262A478C00119844 /* TovarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A3D262A478C00119844 /* TovarTableViewCell.swift */; };
 		22941A40262A478C00119844 /* TovarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22941A3E262A478C00119844 /* TovarTableViewCell.xib */; };
 		22941A48262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A46262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift */; };
@@ -430,6 +431,7 @@
 		2293745D2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesAddItemCommentsListDataManager.swift; sourceTree = "<group>"; };
 		2293B66226A796FD00022FAC /* AssemblyCommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyCommentsViewController.swift; sourceTree = "<group>"; };
 		2293B66426A79C9C00022FAC /* PurchasesGetItemCommentsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesGetItemCommentsDataManager.swift; sourceTree = "<group>"; };
+		2293B66626A7A3DD00022FAC /* PurchasesAddItemCommentDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesAddItemCommentDataManager.swift; sourceTree = "<group>"; };
 		22941A3D262A478C00119844 /* TovarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCell.swift; sourceTree = "<group>"; };
 		22941A3E262A478C00119844 /* TovarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCell.xib; sourceTree = "<group>"; };
 		22941A46262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCellCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1529,6 +1531,7 @@
 				2231DB70264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift */,
 				2293745D2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift */,
 				2293B66426A79C9C00022FAC /* PurchasesGetItemCommentsDataManager.swift */,
+				2293B66626A7A3DD00022FAC /* PurchasesAddItemCommentDataManager.swift */,
 			);
 			path = Purchases;
 			sourceTree = "<group>";
@@ -1823,6 +1826,7 @@
 				22582C7F25D20170005E341C /* SignInWIthAppleIdDataManager.swift in Sources */,
 				2259579F259668370088C7E4 /* InputValView.swift in Sources */,
 				2255301D261AA5B80017B9CF /* ClientsFilterPayHistByClientCountDataManager.swift in Sources */,
+				2293B66726A7A3DD00022FAC /* PurchasesAddItemCommentDataManager.swift in Sources */,
 				22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */,
 				220704702689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift in Sources */,
 				22328CEC25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.swift in Sources */,

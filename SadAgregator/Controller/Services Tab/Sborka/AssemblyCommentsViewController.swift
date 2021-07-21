@@ -27,6 +27,7 @@ class AssemblyCommentsViewController: UIViewController {
     var thisTovarId : String?
     
     private var purchasesGetItemCommentsDataManager = PurchasesGetItemCommentsDataManager()
+    private lazy var purchasesAddItemCommentDataManager = PurchasesAddItemCommentDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +40,41 @@ class AssemblyCommentsViewController: UIViewController {
         commentForIspTextField.text.removeAll()
         commentFromIspTextField.text.removeAll()
         
+        orgCommentTextField.delegate = self
+        commentForIspTextField.delegate = self
+        commentFromIspTextField.delegate = self
+        
         guard let thisTovarId = thisTovarId else {
             return
         }
         
         purchasesGetItemCommentsDataManager.getPurchasesGetItemCommentsData(key: key, id: thisTovarId)
+        
+    }
+    
+}
+
+//MARK: - UITextView
+
+extension AssemblyCommentsViewController : UITextViewDelegate{
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+        guard let thisTovarId = thisTovarId else {return}
+        
+        if textView == orgCommentTextField{
+            
+            purchasesAddItemCommentDataManager.getPurchasesAddItemCommentData(key: key, purItemId: thisTovarId, comType: "1", comment: textView.text)
+            
+        }else if textView == commentForIspTextField{
+            
+            purchasesAddItemCommentDataManager.getPurchasesAddItemCommentData(key: key, purItemId: thisTovarId, comType: "0", comment: textView.text)
+            
+        }else if textView == commentFromIspTextField{
+            
+            purchasesAddItemCommentDataManager.getPurchasesAddItemCommentData(key: key, purItemId: thisTovarId, comType: "", comment: textView.text)
+            
+        }
         
     }
     
