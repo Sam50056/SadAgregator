@@ -247,6 +247,14 @@ extension ProdsInPointTableViewController{
             
             tovarImageSearchVC.thisPointId = self!.pointId
             
+            tovarImageSearchVC.vibratTochkaInPost = { [weak self] postId in
+                
+                self!.purProds.remove(at: indexPath.row)
+                
+                self!.tableView.reloadRows(at: [indexPath], with: .automatic)
+                
+            }
+            
             //            print("HASH THAT WE'RE GIVING \(tovar.hash)")
             
             let navVC = UINavigationController(rootViewController: tovarImageSearchVC)

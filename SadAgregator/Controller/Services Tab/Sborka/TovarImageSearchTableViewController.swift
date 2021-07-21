@@ -98,6 +98,8 @@ class TovarImageSearchTableViewController: UITableViewController {
     
     private var selectedPostId = ""
     
+    var vibratTochkaInPost : ((String) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -215,9 +217,7 @@ class TovarImageSearchTableViewController: UITableViewController {
                     
                     if sellData!["result"].intValue == 1{
                         
-                        self!.postsArray.remove(at: index)
-                        
-                        self!.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                        self?.vibratTochkaInPost?(postId)
                         
                     }else{
                         
