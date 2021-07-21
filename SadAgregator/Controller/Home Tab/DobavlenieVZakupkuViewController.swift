@@ -72,7 +72,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
             
             makeOsnovnoeCellItemsArray()
             
-            if let zakupka = itemInfo["def_pur"]["name"].string{
+            if let zakupka = itemInfo["def_pur"]["name"].string , zakupka != ""{
                 selectedZakupka = Zakupka(name: zakupka, id:  itemInfo["def_pur"]["id"].stringValue)
                 makeKlientiCellItemsArray()
             }

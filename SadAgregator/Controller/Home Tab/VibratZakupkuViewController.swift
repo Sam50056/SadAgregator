@@ -35,7 +35,7 @@ class VibratZakupkuViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationItem.title = "Выбрать выкуп"
+        navigationItem.title = "Выбрать закупку"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(otmenaTapped(_:)))
         
