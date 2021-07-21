@@ -17,107 +17,13 @@ struct SborkaView : View {
         
         ZStack{
             
-            ScrollView{
+            if sborkaViewModel.items.isEmpty , sborkaViewModel.screenData != nil {
                 
-                LazyVStack{
-                    
-                    ForEach(sborkaViewModel.items , id: \.id){ item in
-                        
-                        HStack{
-                            
-                            Spacer(minLength: 0)
-                                .frame(width: CGFloat((item.parentsCount * 10)))
-                            
-                            VStack{
-                                
-                                ZStack{
-                                    
-                                    HStack{
-                                        
-                                        Text(item.title)
-                                        
-                                        Spacer()
-                                        
-                                        HStack(spacing: 8){
-                                            
-                                            Text(item.title3 + " руб.")
-                                                .foregroundColor(Color(.systemGray))
-                                            
-                                            Image(systemName: !item.isOpened ? "chevron.right" : "chevron.down")
-                                                .foregroundColor(Color(.systemBlue))
-                                            //                                            .animation(.default)
-                                            
-                                        }
-                                        
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    Text(item.title2 + " шт.")
-                                        .foregroundColor(Color(.systemGray))
-                                    
-                                    Spacer()
-                                    
-                                }
-                                
-                                Divider()
-                                
-                            }
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                
-                                if !item.canGoForDot {
-                                    
-                                    let itemIndex = sborkaViewModel.items.firstIndex(where: { searchItem in
-                                        searchItem.segId == item.segId
-                                    })
-                                    
-                                    if item.isOpened{
-                                        
-                                        sborkaViewModel.closeTabWithParentIndex(itemIndex!)
-                                        
-                                    }else{
-                                        
-                                        sborkaViewModel.thisSegIndex = itemIndex
-                                        
-                                        sborkaViewModel.updateSegments(parent: item.segId)
-                                        
-                                    }
-                                    
-                                    sborkaViewModel.items[itemIndex!].isOpened.toggle()
-                                    
-                                }else{
-                                    
-                                    sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.thisSegmentId = item.segId
-                                    sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.thisSegmentName = item.title
-                                    
-                                    sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.helperID = sborkaViewModel.helperID
-                                    
-                                    sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.key = sborkaViewModel.key
-                                    
-                                    sborkaViewModel.showPointsView = true
-                                    
-                                }
-                                
-                            }
-                            .onLongPressGesture {
-                                
-                                sborkaViewModel.selectedByLongPressSegment = item
-                                
-                                sborkaViewModel.alertTitle = sborkaViewModel.helperID == "" ? "Передать сегмент помощнику?" :  "Забрать сегмент у помощника?"
-                                sborkaViewModel.alertMessage = nil
-                                sborkaViewModel.showSimpleAlert = false
-                                sborkaViewModel.showAlert = true
-                                
-                            }
-                            
-                        }
-                        
-                    }
-                    
-                }
-                .padding(.top , 16)
-                .padding(.horizontal)
+                noItemsView
+                
+            }else{
+                
+                mainScreen
                 
             }
             
@@ -307,6 +213,160 @@ struct SborkaView : View {
             
         }
         .navigationBarTitle(Text(sborkaViewModel.navBarTitle))
+        
+    }
+    
+    var mainScreen : some View{
+        
+        ScrollView{
+            
+            LazyVStack{
+                
+                ForEach(sborkaViewModel.items , id: \.id){ item in
+                    
+                    HStack{
+                        
+                        Spacer(minLength: 0)
+                            .frame(width: CGFloat((item.parentsCount * 10)))
+                        
+                        VStack{
+                            
+                            ZStack{
+                                
+                                HStack{
+                                    
+                                    Text(item.title)
+                                    
+                                    Spacer()
+                                    
+                                    HStack(spacing: 8){
+                                        
+                                        Text(item.title3 + " руб.")
+                                            .foregroundColor(Color(.systemGray))
+                                        
+                                        Image(systemName: !item.isOpened ? "chevron.right" : "chevron.down")
+                                            .foregroundColor(Color(.systemBlue))
+                                        //                                            .animation(.default)
+                                        
+                                    }
+                                    
+                                }
+                                
+                                Spacer()
+                                
+                                Text(item.title2 + " шт.")
+                                    .foregroundColor(Color(.systemGray))
+                                
+                                Spacer()
+                                
+                            }
+                            
+                            Divider()
+                            
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            
+                            if !item.canGoForDot {
+                                
+                                let itemIndex = sborkaViewModel.items.firstIndex(where: { searchItem in
+                                    searchItem.segId == item.segId
+                                })
+                                
+                                if item.isOpened{
+                                    
+                                    sborkaViewModel.closeTabWithParentIndex(itemIndex!)
+                                    
+                                }else{
+                                    
+                                    sborkaViewModel.thisSegIndex = itemIndex
+                                    
+                                    sborkaViewModel.updateSegments(parent: item.segId)
+                                    
+                                }
+                                
+                                sborkaViewModel.items[itemIndex!].isOpened.toggle()
+                                
+                            }else{
+                                
+                                sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.thisSegmentId = item.segId
+                                sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.thisSegmentName = item.title
+                                
+                                sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.helperID = sborkaViewModel.helperID
+                                
+                                sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.key = sborkaViewModel.key
+                                
+                                sborkaViewModel.showPointsView = true
+                                
+                            }
+                            
+                        }
+                        .onLongPressGesture {
+                            
+                            sborkaViewModel.selectedByLongPressSegment = item
+                            
+                            sborkaViewModel.alertTitle = sborkaViewModel.helperID == "" ? "Передать сегмент помощнику?" :  "Забрать сегмент у помощника?"
+                            sborkaViewModel.alertMessage = nil
+                            sborkaViewModel.showSimpleAlert = false
+                            sborkaViewModel.showAlert = true
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            .padding(.top , 16)
+            .padding(.horizontal)
+            
+        }
+        
+    }
+    
+    var noItemsView : some View{
+        
+        VStack{
+            
+            Text("Нет элементов для отображения")
+                .font(.system(size: 19))
+                .fontWeight(Font.Weight.semibold)
+                .padding(.vertical)
+            
+            if sborkaViewModel.showNoItemsViewButton{
+                
+                Button(action:{
+                    
+                    //Change status to "Любой"
+                    sborkaViewModel.menuSortIndex = 3
+                    
+                }){
+                    
+                    Text("Отобразить все товары")
+                        .bold()
+                        .padding(12)
+                        .background(Color(.systemBlue))
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                    
+                }
+                
+            }
+            
+        }
+        .onAppear {
+            
+            if sborkaViewModel.status != ""{
+                sborkaViewModel.noItemsViewText = "Нет элементов для отображения"
+                sborkaViewModel.showNoItemsViewButton = true
+            }else{
+                
+                sborkaViewModel.noItemsViewText = "Нет элементов для отображения"
+                sborkaViewModel.showNoItemsViewButton = false
+                
+            }
+            
+        }
         
     }
     

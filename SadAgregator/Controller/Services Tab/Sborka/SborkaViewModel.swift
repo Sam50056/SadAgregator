@@ -14,7 +14,13 @@ class SborkaViewModel : ObservableObject{
     
     private let realm = try! Realm()
     
+    @Published var screenData : JSON?
+    
     @Published var items = [Item]()
+    
+    @Published var showNoItemsView = false
+    @Published var noItemsViewText = "Нет элементов для отображения"
+    @Published var showNoItemsViewButton = false
     
     @Published var helpers = [Helper]()
     
@@ -254,6 +260,8 @@ extension SborkaViewModel : AssemblySegmentsInAssemblyDataManagerDelegate{
         
         DispatchQueue.main.async { [self] in
             
+            screenData = data
+            
             if data["result"].intValue == 1{
                 
                 let jsonItems = data["segments"].arrayValue
@@ -289,6 +297,8 @@ extension SborkaViewModel : AssemblySegmentsInAssemblyDataManagerDelegate{
                     items = newItems
                     
                 }
+                
+                showNoItemsView = items.isEmpty && screenData != nil
                 
             }
             
