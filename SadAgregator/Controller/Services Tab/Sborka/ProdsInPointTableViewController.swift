@@ -151,7 +151,11 @@ extension ProdsInPointTableViewController{
                 
                 alertController.addAction(UIAlertAction(title: "Посмотреть комментарии", style: .default, handler: { _ in
                     
+                    let assemblyCommentsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AssemblyCommentsVC") as! AssemblyCommentsViewController
                     
+                    assemblyCommentsVC.thisTovarId = tovar.pid
+                    
+                    self.present(assemblyCommentsVC, animated: true, completion: nil)
                     
                 }))
                 

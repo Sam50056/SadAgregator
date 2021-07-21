@@ -150,6 +150,8 @@
 		22906B3A2578293500F00B0D /* VendorCardDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22906B392578293500F00B0D /* VendorCardDataManager.swift */; };
 		2291BE452560620F004F55DF /* MainDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2291BE442560620F004F55DF /* MainDataManager.swift */; };
 		2293745E2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2293745D2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift */; };
+		2293B66326A796FE00022FAC /* AssemblyCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2293B66226A796FD00022FAC /* AssemblyCommentsViewController.swift */; };
+		2293B66526A79C9C00022FAC /* PurchasesGetItemCommentsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2293B66426A79C9C00022FAC /* PurchasesGetItemCommentsDataManager.swift */; };
 		22941A3F262A478C00119844 /* TovarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A3D262A478C00119844 /* TovarTableViewCell.swift */; };
 		22941A40262A478C00119844 /* TovarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22941A3E262A478C00119844 /* TovarTableViewCell.xib */; };
 		22941A48262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A46262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift */; };
@@ -426,6 +428,8 @@
 		22906B392578293500F00B0D /* VendorCardDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorCardDataManager.swift; sourceTree = "<group>"; };
 		2291BE442560620F004F55DF /* MainDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataManager.swift; sourceTree = "<group>"; };
 		2293745D2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesAddItemCommentsListDataManager.swift; sourceTree = "<group>"; };
+		2293B66226A796FD00022FAC /* AssemblyCommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyCommentsViewController.swift; sourceTree = "<group>"; };
+		2293B66426A79C9C00022FAC /* PurchasesGetItemCommentsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesGetItemCommentsDataManager.swift; sourceTree = "<group>"; };
 		22941A3D262A478C00119844 /* TovarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCell.swift; sourceTree = "<group>"; };
 		22941A3E262A478C00119844 /* TovarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TovarTableViewCell.xib; sourceTree = "<group>"; };
 		22941A46262B6F3400119844 /* TovarTableViewCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TovarTableViewCellCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1504,6 +1508,7 @@
 				22A4A9CF2699EAB8000D3B73 /* ProdsInPointTableViewController.swift */,
 				22A4A9D3269A3EB3000D3B73 /* QRScannerController.swift */,
 				2231DB54269B1C20007B688E /* TovarImageSearchTableViewController.swift */,
+				2293B66226A796FD00022FAC /* AssemblyCommentsViewController.swift */,
 			);
 			path = Sborka;
 			sourceTree = "<group>";
@@ -1523,6 +1528,7 @@
 				2231DB6E2649CB600075228E /* PurchasesAddItemDataManager.swift */,
 				2231DB70264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift */,
 				2293745D2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift */,
+				2293B66426A79C9C00022FAC /* PurchasesGetItemCommentsDataManager.swift */,
 			);
 			path = Purchases;
 			sourceTree = "<group>";
@@ -1862,6 +1868,7 @@
 				22B6BC8A25DC6DF300EAE067 /* CategoryFilterViewController.swift in Sources */,
 				2284EADA25BB196B00CC1D58 /* OKAuthService.swift in Sources */,
 				225957AA2596A6450088C7E4 /* GetStepDataManager.swift in Sources */,
+				2293B66326A796FE00022FAC /* AssemblyCommentsViewController.swift in Sources */,
 				22C549A225F41C99008D941B /* PagingClientsDataManager.swift in Sources */,
 				2201672625A771E10072BFE7 /* SetPointActionsDataManager.swift in Sources */,
 				22CD354D269E64E5009057C3 /* AssemblySetQRDataManager.swift in Sources */,
@@ -1889,6 +1896,7 @@
 				22A2B56825E03200001359D6 /* SlideDownPresentationController.swift in Sources */,
 				2286AD0B25CB5EEE004EF0D7 /* VendorRevsViewController.swift in Sources */,
 				22D1322626A5AD4300D0BB38 /* AssemblySellThisPointDataManager.swift in Sources */,
+				2293B66526A79C9C00022FAC /* PurchasesGetItemCommentsDataManager.swift in Sources */,
 				22328CD925FE857800C51CC9 /* PaymentTableViewCell.swift in Sources */,
 				228C525926815E2C00B0B9CB /* BrokersBrokerStatusDataManager.swift in Sources */,
 				22C5499525F411A3008D941B /* ClientTableViewCell.swift in Sources */,
