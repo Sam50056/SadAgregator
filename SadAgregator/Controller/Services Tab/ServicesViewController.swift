@@ -68,7 +68,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -87,7 +87,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             secondView.isHidden = true
             
             switch indexPath.row {
-            
+                
             case 0:
                 
                 cellImageView.image = UIImage(systemName: "person.2")
@@ -163,6 +163,12 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             let sborkaVC = UIHostingController(rootView: sborkaView)
             
             navigationController?.pushViewController(sborkaVC, animated: true)
+            
+        }else if indexPath.row == 3{
+            
+            let brokerPopVC = BrokersPopularityViewController()
+            
+            navigationController?.pushViewController(brokerPopVC, animated: true)
             
         }
         

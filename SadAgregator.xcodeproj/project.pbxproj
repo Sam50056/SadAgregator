@@ -113,6 +113,10 @@
 		2269740025AE394800C76BA6 /* VendorPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */; };
 		226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9444258D2179008CEC4A /* GalleryViewController.swift */; };
 		226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9447258D2EF9008CEC4A /* HeroHelper.swift */; };
+		226F240826B1F57900FB2744 /* BrokersPopularityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F240726B1F57900FB2744 /* BrokersPopularityViewController.swift */; };
+		226F240E26B2004000FB2744 /* BrokerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F240C26B2004000FB2744 /* BrokerTableViewCell.swift */; };
+		226F240F26B2004000FB2744 /* BrokerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 226F240D26B2004000FB2744 /* BrokerTableViewCell.xib */; };
+		226F241126B2D85F00FB2744 /* BrokersBrokersTopDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F241026B2D85F00FB2744 /* BrokersBrokersTopDataManager.swift */; };
 		22703262262711510068BD82 /* VibratKlientaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22703261262711510068BD82 /* VibratKlientaViewController.swift */; };
 		22703265262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22703264262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift */; };
 		22729F61262F017200C19EF3 /* PurchasesProdsByClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22729F60262F017100C19EF3 /* PurchasesProdsByClientDataManager.swift */; };
@@ -390,6 +394,10 @@
 		2269740725AF409A00C76BA6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		226D9444258D2179008CEC4A /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		226D9447258D2EF9008CEC4A /* HeroHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroHelper.swift; sourceTree = "<group>"; };
+		226F240726B1F57900FB2744 /* BrokersPopularityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersPopularityViewController.swift; sourceTree = "<group>"; };
+		226F240C26B2004000FB2744 /* BrokerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerTableViewCell.swift; sourceTree = "<group>"; };
+		226F240D26B2004000FB2744 /* BrokerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrokerTableViewCell.xib; sourceTree = "<group>"; };
+		226F241026B2D85F00FB2744 /* BrokersBrokersTopDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersBrokersTopDataManager.swift; sourceTree = "<group>"; };
 		22703261262711510068BD82 /* VibratKlientaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibratKlientaViewController.swift; sourceTree = "<group>"; };
 		22703264262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesClientsSelectListDataManager.swift; sourceTree = "<group>"; };
 		22729F60262F017100C19EF3 /* PurchasesProdsByClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesProdsByClientDataManager.swift; sourceTree = "<group>"; };
@@ -992,6 +1000,15 @@
 			path = "Menu Views";
 			sourceTree = "<group>";
 		};
+		226F240926B2001400FB2744 /* BrokerCell */ = {
+			isa = PBXGroup;
+			children = (
+				226F240C26B2004000FB2744 /* BrokerTableViewCell.swift */,
+				226F240D26B2004000FB2744 /* BrokerTableViewCell.xib */,
+			);
+			path = BrokerCell;
+			sourceTree = "<group>";
+		};
 		2272FCD4266D36B3000B5B19 /* Brokers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1008,6 +1025,7 @@
 				22B26527267D77BA004342E3 /* BrokersAddBrokerHelperDataManager.swift */,
 				22B26529267D7C21004342E3 /* BrokersDelBrokerHelperDataManager.swift */,
 				228C525826815E2C00B0B9CB /* BrokersBrokerStatusDataManager.swift */,
+				226F241026B2D85F00FB2744 /* BrokersBrokersTopDataManager.swift */,
 			);
 			path = Brokers;
 			sourceTree = "<group>";
@@ -1225,6 +1243,7 @@
 		22A49CA7256661D700CCC781 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				226F240926B2001400FB2744 /* BrokerCell */,
 				22941A3B26299E9D00119844 /* TovarCell */,
 				22328CD125FE854500C51CC9 /* PaymentCell */,
 				2237E76F25FA325C00EBD919 /* PurchaseCell */,
@@ -1465,6 +1484,7 @@
 				22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */,
 				2207046A2686A86300FC6B4B /* Clients */,
 				22E44715269234340016D96E /* Sborka */,
+				226F240726B1F57900FB2744 /* BrokersPopularityViewController.swift */,
 			);
 			path = "Services Tab";
 			sourceTree = "<group>";
@@ -1624,6 +1644,7 @@
 				22A49CB52566645800CCC781 /* PostTableViewCell.xib in Resources */,
 				220704672685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.xib in Resources */,
 				22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */,
+				226F240F26B2004000FB2744 /* BrokerTableViewCell.xib in Resources */,
 				2237E77D25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib in Resources */,
 				22941A40262A478C00119844 /* TovarTableViewCell.xib in Resources */,
 				22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */,
@@ -1793,6 +1814,7 @@
 				22E44719269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift in Sources */,
 				22E44717269237B60016D96E /* PointsInSborkaSegmentView.swift in Sources */,
 				22703262262711510068BD82 /* VibratKlientaViewController.swift in Sources */,
+				226F240E26B2004000FB2744 /* BrokerTableViewCell.swift in Sources */,
 				22E4471B269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift in Sources */,
 				22D90221259AC9EF009732CC /* AlbumsInProgressDataManager.swift in Sources */,
 				22B2D8EB267108A600F2F820 /* BrokersGetDeliveryTypeDataManager.swift in Sources */,
@@ -1803,6 +1825,7 @@
 				22D604D225EFA6BC00102CB6 /* ServicesViewController.swift in Sources */,
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
 				22BC71D2268A46A700846702 /* SborkaViewModel.swift in Sources */,
+				226F241126B2D85F00FB2744 /* BrokersBrokersTopDataManager.swift in Sources */,
 				2286AD0F25CB620F004EF0D7 /* GetVendRevsPagingDataManager.swift in Sources */,
 				22ACF1A9262B828B00F9584D /* ZamenaDlyaTableViewController.swift in Sources */,
 				22C5499C25F41223008D941B /* ClientTableViewCellTableViewCell.swift in Sources */,
@@ -1841,6 +1864,7 @@
 				2231DB71264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift in Sources */,
 				22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */,
 				22BF4DDF2676B80F00748D0B /* VendUpdateInfoDataManager.swift in Sources */,
+				226F240826B1F57900FB2744 /* BrokersPopularityViewController.swift in Sources */,
 				22CD3549269E13FC009057C3 /* AssemblySetItemValueDataManager.swift in Sources */,
 				224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */,
 				22ADF827267C31BD00811DA9 /* VendAddSendRuleDataManager.swift in Sources */,
