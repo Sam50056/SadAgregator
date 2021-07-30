@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.4"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -75,10 +76,19 @@
                             <constraint firstAttribute="height" constant="2" id="uM6-Ve-LXP"/>
                         </constraints>
                     </view>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n85-NZ-5P1">
+                        <rect key="frame" x="126.5" y="23" width="24" height="21.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="RTH-83-XHW"/>
+                            <constraint firstAttribute="width" constant="24" id="pyP-hW-LgD"/>
+                        </constraints>
+                        <imageReference key="image" image="checkmark.seal.fill" catalog="system"/>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" name="whiteblack"/>
                 <constraints>
                     <constraint firstItem="NWJ-We-hil" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="0el-U9-Q2S"/>
+                    <constraint firstItem="n85-NZ-5P1" firstAttribute="leading" secondItem="Zh6-Fw-pfs" secondAttribute="trailing" constant="4" id="2FZ-3f-nGu"/>
                     <constraint firstItem="NWJ-We-hil" firstAttribute="top" secondItem="kfR-aK-sP2" secondAttribute="bottom" constant="8" id="7NR-Ak-34q"/>
                     <constraint firstItem="kfR-aK-sP2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="88O-qw-S06"/>
                     <constraint firstItem="ZLc-IB-9qY" firstAttribute="leading" secondItem="vs4-yv-RDv" secondAttribute="trailing" constant="4" id="A2k-PQ-h8a"/>
@@ -91,6 +101,7 @@
                     <constraint firstItem="vs4-yv-RDv" firstAttribute="centerY" secondItem="ZLc-IB-9qY" secondAttribute="centerY" id="oKb-fd-t17"/>
                     <constraint firstItem="Zh6-Fw-pfs" firstAttribute="leading" secondItem="kfR-aK-sP2" secondAttribute="trailing" constant="8" id="puI-OQ-gUU"/>
                     <constraint firstItem="vs4-yv-RDv" firstAttribute="leading" secondItem="kfR-aK-sP2" secondAttribute="trailing" constant="8" id="qET-3v-SbV"/>
+                    <constraint firstItem="n85-NZ-5P1" firstAttribute="centerY" secondItem="Zh6-Fw-pfs" secondAttribute="centerY" id="qqp-Bh-T1U"/>
                     <constraint firstItem="NWJ-We-hil" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="tdz-Hn-XkD"/>
                     <constraint firstAttribute="bottom" secondItem="d3Z-5R-sJ7" secondAttribute="bottom" id="trX-fY-6kD"/>
                 </constraints>
@@ -102,6 +113,7 @@
                 <outlet property="ratingLabel" destination="vs4-yv-RDv" id="mWu-2m-hZc"/>
                 <outlet property="ratingView" destination="ZLc-IB-9qY" id="RuZ-Ry-03Z"/>
                 <outlet property="tableView" destination="NWJ-We-hil" id="DEc-fL-Icq"/>
+                <outlet property="verifyImageView" destination="n85-NZ-5P1" id="fz2-z0-bt2"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="189.84375"/>
         </tableViewCell>
@@ -112,6 +124,7 @@
         </designable>
     </designables>
     <resources>
+        <image name="checkmark.seal.fill" catalog="system" width="128" height="128"/>
         <namedColor name="gray">
             <color red="0.96100002527236938" green="0.9649999737739563" blue="0.97299998998641968" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

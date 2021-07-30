@@ -15,6 +15,7 @@ class BrokerTableViewCell: UITableViewCell {
     @IBOutlet weak var ratingLabel : UILabel!
     @IBOutlet weak var ratingView : CosmosView!
     @IBOutlet weak var tableView : UITableView!
+    @IBOutlet weak var verifyImageView : UIImageView!
     
     var otherItems = [TableViewItem](){
         didSet{

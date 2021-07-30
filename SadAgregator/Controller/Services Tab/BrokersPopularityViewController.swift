@@ -107,6 +107,8 @@ extension BrokersPopularityViewController{
         cell.otherItems = otherItemsArray
         cell.rateItems = rateItemsArray
         cell.parcelItems = parcelItemsArray
+        
+        cell.verifyImageView.isHidden = broker["verify"].intValue == 0
             
         return cell
         
