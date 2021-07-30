@@ -30,6 +30,7 @@ class BrokersPopularityViewController: UITableViewController {
         brokersBrokersTopDataManager.delegate = self
         
         tableView.register(UINib(nibName: "BrokerTableViewCell", bundle: nil), forCellReuseIdentifier: "brokerCell")
+        tableView.separatorStyle = .none
         
         update()
         
@@ -83,12 +84,54 @@ extension BrokersPopularityViewController{
         
         cell.brokerImageView.sd_setImage(with: URL(string: broker["img"].stringValue), placeholderImage: UIImage(systemName: "person"))
         
+        var otherItemsArray = [BrokerTableViewCell.TableViewItem]()
+        var rateItemsArray = [BrokerTableViewCell.TableViewItem]()
+        var parcelItemsArray = [BrokerTableViewCell.TableViewItem]()
+        
+        if let phone = broker["phone"].string , phone != ""{
+            otherItemsArray.append(BrokerTableViewCell.TableViewItem(image: "phone", label1Text: "Телефон", label2Text: phone))
+        }
+        
+        broker["rates"].arrayValue.forEach { jsonRate in
+            
+            rateItemsArray.append(BrokerTableViewCell.TableViewItem(image: "newspaper", label1Text: "Условия закупки", label2Text: jsonRate["capt"].stringValue + " " + jsonRate["marge"].stringValue))
+            
+        }
+        
+        broker["parcels"].arrayValue.forEach { jsonParcel in
+            
+            parcelItemsArray.append(BrokerTableViewCell.TableViewItem(image: "shippingbox", label1Text: "Условия доставки", label2Text: jsonParcel["name"].stringValue + " " + jsonParcel["price"].stringValue))
+            
+        }
+        
+        cell.otherItems = otherItemsArray
+        cell.rateItems = rateItemsArray
+        cell.parcelItems = parcelItemsArray
+            
         return cell
         
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        90
+        
+        var height : CGFloat = 0
+        
+        let topPartHeight : CGFloat = 90
+        
+        let broker = brokers[indexPath.row]
+        
+        if let phone = broker["phone"].string , phone != ""{
+            height += 32
+        }
+        
+        height += 32 * CGFloat(broker["rates"].arrayValue.count)
+        
+        height += 32 * CGFloat(broker["parcels"].arrayValue.count)
+        
+        height += topPartHeight
+        
+        return height
+        
     }
     
 }

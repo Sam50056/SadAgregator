@@ -117,6 +117,8 @@
 		226F240E26B2004000FB2744 /* BrokerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F240C26B2004000FB2744 /* BrokerTableViewCell.swift */; };
 		226F240F26B2004000FB2744 /* BrokerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 226F240D26B2004000FB2744 /* BrokerTableViewCell.xib */; };
 		226F241126B2D85F00FB2744 /* BrokersBrokersTopDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F241026B2D85F00FB2744 /* BrokersBrokersTopDataManager.swift */; };
+		226F241626B344D000FB2744 /* BrokerTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F241426B344D000FB2744 /* BrokerTableViewCellTableViewCell.swift */; };
+		226F241726B344D000FB2744 /* BrokerTableViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 226F241526B344D000FB2744 /* BrokerTableViewCellTableViewCell.xib */; };
 		22703262262711510068BD82 /* VibratKlientaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22703261262711510068BD82 /* VibratKlientaViewController.swift */; };
 		22703265262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22703264262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift */; };
 		22729F61262F017200C19EF3 /* PurchasesProdsByClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22729F60262F017100C19EF3 /* PurchasesProdsByClientDataManager.swift */; };
@@ -398,6 +400,8 @@
 		226F240C26B2004000FB2744 /* BrokerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerTableViewCell.swift; sourceTree = "<group>"; };
 		226F240D26B2004000FB2744 /* BrokerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrokerTableViewCell.xib; sourceTree = "<group>"; };
 		226F241026B2D85F00FB2744 /* BrokersBrokersTopDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersBrokersTopDataManager.swift; sourceTree = "<group>"; };
+		226F241426B344D000FB2744 /* BrokerTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
+		226F241526B344D000FB2744 /* BrokerTableViewCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrokerTableViewCellTableViewCell.xib; sourceTree = "<group>"; };
 		22703261262711510068BD82 /* VibratKlientaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibratKlientaViewController.swift; sourceTree = "<group>"; };
 		22703264262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesClientsSelectListDataManager.swift; sourceTree = "<group>"; };
 		22729F60262F017100C19EF3 /* PurchasesProdsByClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesProdsByClientDataManager.swift; sourceTree = "<group>"; };
@@ -1003,10 +1007,20 @@
 		226F240926B2001400FB2744 /* BrokerCell */ = {
 			isa = PBXGroup;
 			children = (
+				226F241326B344A200FB2744 /* TableViewCells */,
 				226F240C26B2004000FB2744 /* BrokerTableViewCell.swift */,
 				226F240D26B2004000FB2744 /* BrokerTableViewCell.xib */,
 			);
 			path = BrokerCell;
+			sourceTree = "<group>";
+		};
+		226F241326B344A200FB2744 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				226F241426B344D000FB2744 /* BrokerTableViewCellTableViewCell.swift */,
+				226F241526B344D000FB2744 /* BrokerTableViewCellTableViewCell.xib */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		2272FCD4266D36B3000B5B19 /* Brokers */ = {
@@ -1633,6 +1647,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				226F241726B344D000FB2744 /* BrokerTableViewCellTableViewCell.xib in Resources */,
 				22CA694525A1475E00D21840 /* VendorRatingTableViewCell.xib in Resources */,
 				221C072D256E5ABB001BC842 /* PhoneTableViewCell.xib in Resources */,
 				22328CE125FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.xib in Resources */,
@@ -1941,6 +1956,7 @@
 				2272FCD6266D36D6000B5B19 /* BrokersFormDataManager.swift in Sources */,
 				224EFC3125A9D209007CA45E /* SendQuestionDataManager.swift in Sources */,
 				2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */,
+				226F241626B344D000FB2744 /* BrokerTableViewCellTableViewCell.swift in Sources */,
 				22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */,
 				22BF4DD926755D2800748D0B /* NastroykiPostavshikaTableViewController.swift in Sources */,
 				22CD3547269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift in Sources */,
