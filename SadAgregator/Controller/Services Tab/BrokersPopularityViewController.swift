@@ -109,7 +109,49 @@ extension BrokersPopularityViewController{
         cell.parcelItems = parcelItemsArray
         
         cell.verifyImageView.isHidden = broker["verify"].intValue == 0
+        
+        if broker["new"].intValue == 1{
             
+            cell.ratingView.isHidden = true
+            cell.ratingLabel.isHidden = true
+            
+            let newFrame = CGRect(x: cell.ratingLabel.frame.origin.x, y: cell.ratingView.frame.origin.y, width: 70, height: 25)
+            
+            let newView = UIView(frame: newFrame)
+            
+            newView.backgroundColor = #colorLiteral(red: 0.8812789321, green: 0.9681747556, blue: 0.9018383622, alpha: 1)
+            newView.layer.cornerRadius = 6
+            
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: newView.frame.width, height: newView.frame.height))
+            label.font = UIFont.systemFont(ofSize: 14)
+            label.textAlignment = .center
+            label.textColor = .systemGreen
+            
+            label.text = "Новичок"
+            
+            newView.addSubview(label)
+            
+            cell.contentView.addSubview(newView)
+            
+        }else{
+            cell.ratingView.isHidden = false
+            cell.ratingLabel.isHidden = false
+        }
+        
+        if broker["gold_rate"].intValue == 1{
+            
+            cell.ratingView.settings.filledColor = #colorLiteral(red: 0.9989343286, green: 0.8006014824, blue: 0.007612912916, alpha: 1)
+            cell.ratingView.settings.filledBorderColor = #colorLiteral(red: 0.9989343286, green: 0.8006014824, blue: 0.007612912916, alpha: 1)
+            cell.ratingView.settings.emptyBorderColor = #colorLiteral(red: 0.9989343286, green: 0.8006014824, blue: 0.007612912916, alpha: 1)
+            
+        }else{
+            
+            cell.ratingView.settings.filledColor = .systemGray
+            cell.ratingView.settings.filledBorderColor = .systemGray
+            cell.ratingView.settings.emptyBorderColor = .systemGray
+            
+        }
+        
         return cell
         
     }
