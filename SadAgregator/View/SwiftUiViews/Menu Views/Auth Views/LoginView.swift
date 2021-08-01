@@ -92,7 +92,7 @@ struct LoginView: View {
                     
                     HStack{
                         
-                        TextField("Пароль", text: $passText)
+                        SecureField("Пароль", text: $passText)
                             .padding(.horizontal , 8)
                             .padding(.vertical, 12)
                             .multilineTextAlignment(.leading)

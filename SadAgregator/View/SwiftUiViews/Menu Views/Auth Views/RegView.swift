@@ -99,7 +99,7 @@ struct RegView: View {
                     
                     HStack{
                         
-                        TextField("Имя", text: $nameText)
+                        SecureField("Имя", text: $nameText)
                             .padding(.horizontal , 8)
                             .padding(.vertical, 12)
                             .multilineTextAlignment(.leading)
