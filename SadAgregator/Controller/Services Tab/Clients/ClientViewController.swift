@@ -549,7 +549,7 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
         
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { [self] action, view, completion in
             
-            let alertController = UIAlertController(title: "Удалить клиента из закупки?", message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Удалить невыкупленные товары из закупки?", message: nil, preferredStyle: .alert)
             
             alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                 
