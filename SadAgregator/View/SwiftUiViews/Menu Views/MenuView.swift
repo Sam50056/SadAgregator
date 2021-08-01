@@ -180,7 +180,7 @@ struct MenuView: View {
                             
                             List{
                                 
-                                NavigationLink(destination: FavoriteVendsView(), isActive: $menuViewModel.showFavoriteVends){
+                                NavigationLink(destination: FavoriteVendsView().navigationBarTitle("Избранные поставщики", displayMode: .inline), isActive: $menuViewModel.showFavoriteVends){
                                     
                                     HStack(spacing: 16){
                                         
@@ -205,7 +205,7 @@ struct MenuView: View {
                                     
                                 }
                                 
-                                NavigationLink(destination: FavoritePostsView()){
+                                NavigationLink(destination: FavoritePostsView().navigationBarTitle("Избранные посты", displayMode: .inline)){
                                     
                                     HStack(spacing: 23){
                                         
