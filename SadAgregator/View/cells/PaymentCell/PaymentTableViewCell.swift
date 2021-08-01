@@ -186,6 +186,14 @@ extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
             (cell as! PaymentTableViewCellTableViewCell).firstLabel.text = item.firstText
             (cell as! PaymentTableViewCellTableViewCell).secondLabel.text = item.secondText
             
+            if item.firstText == "Сумма"{
+                if item.secondText.first == "-"{
+                    (cell as! PaymentTableViewCellTableViewCell).secondLabel.textColor = .systemRed
+                }else{
+                    (cell as! PaymentTableViewCellTableViewCell).secondLabel.textColor = .systemGreen
+                }
+            }
+            
         case 3:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "editCell", for: indexPath)
