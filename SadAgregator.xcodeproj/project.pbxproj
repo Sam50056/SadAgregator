@@ -110,6 +110,8 @@
 		2268869C25996B920079933D /* RefreshAlbsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2268869B25996B920079933D /* RefreshAlbsDataManager.swift */; };
 		226886A62599EDD00079933D /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226886A52599EDD00079933D /* ActivityIndicatorView.swift */; };
 		22692E3326B889E700CA2946 /* BrokersBrokersTopBySearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E3226B889E700CA2946 /* BrokersBrokersTopBySearchDataManager.swift */; };
+		22692E3A26B9543D00CA2946 /* BrokerCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E3926B9543D00CA2946 /* BrokerCardTableViewController.swift */; };
+		22692E3C26B9707D00CA2946 /* BrokersBrokerCardDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E3B26B9707D00CA2946 /* BrokersBrokerCardDataManager.swift */; };
 		226973FD25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226973FC25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift */; };
 		2269740025AE394800C76BA6 /* VendorPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */; };
 		226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9444258D2179008CEC4A /* GalleryViewController.swift */; };
@@ -393,6 +395,8 @@
 		2268869B25996B920079933D /* RefreshAlbsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshAlbsDataManager.swift; sourceTree = "<group>"; };
 		226886A52599EDD00079933D /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		22692E3226B889E700CA2946 /* BrokersBrokersTopBySearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersBrokersTopBySearchDataManager.swift; sourceTree = "<group>"; };
+		22692E3926B9543D00CA2946 /* BrokerCardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerCardTableViewController.swift; sourceTree = "<group>"; };
+		22692E3B26B9707D00CA2946 /* BrokersBrokerCardDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersBrokerCardDataManager.swift; sourceTree = "<group>"; };
 		226973FC25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVendPostsPaggingDataManager.swift; sourceTree = "<group>"; };
 		226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorPostsTableViewController.swift; sourceTree = "<group>"; };
 		2269740725AF409A00C76BA6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
@@ -1010,6 +1014,7 @@
 			isa = PBXGroup;
 			children = (
 				226F240726B1F57900FB2744 /* BrokersPopularityViewController.swift */,
+				22692E3926B9543D00CA2946 /* BrokerCardTableViewController.swift */,
 			);
 			path = Posredniki;
 			sourceTree = "<group>";
@@ -1097,6 +1102,7 @@
 				228C525826815E2C00B0B9CB /* BrokersBrokerStatusDataManager.swift */,
 				226F241026B2D85F00FB2744 /* BrokersBrokersTopDataManager.swift */,
 				22692E3226B889E700CA2946 /* BrokersBrokersTopBySearchDataManager.swift */,
+				22692E3B26B9707D00CA2946 /* BrokersBrokerCardDataManager.swift */,
 			);
 			path = Brokers;
 			sourceTree = "<group>";
@@ -1799,6 +1805,7 @@
 				22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */,
 				22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */,
 				222267712698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift in Sources */,
+				22692E3A26B9543D00CA2946 /* BrokerCardTableViewController.swift in Sources */,
 				22328CE025FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.swift in Sources */,
 				22B26526267D7114004342E3 /* BrokersBrokerHelperCheckDataManager.swift in Sources */,
 				228289C426519B0D00E3AA83 /* PhotoSavedDataManager.swift in Sources */,
@@ -1890,6 +1897,7 @@
 				22C5499C25F41223008D941B /* ClientTableViewCellTableViewCell.swift in Sources */,
 				22328CC725FD806300C51CC9 /* ClientsFIlterDataManager.swift in Sources */,
 				224D273E2613AED200BFAE30 /* RangeSliderTrackLayer.swift in Sources */,
+				22692E3C26B9707D00CA2946 /* BrokersBrokerCardDataManager.swift in Sources */,
 				22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */,
 				2201672C25A77BB50072BFE7 /* SetVendActionsDataManager.swift in Sources */,
 				2231DB73264C64480075228E /* ClientsUpdatePaymentComDataManager.swift in Sources */,

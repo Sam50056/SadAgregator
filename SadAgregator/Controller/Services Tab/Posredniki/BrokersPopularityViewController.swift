@@ -223,6 +223,14 @@ extension BrokersPopularityViewController{
         
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let brokerCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BrokerCardVC") as! BrokerCardTableViewController
+        
+        navigationController?.pushViewController(brokerCardVC, animated: true)
+        
+    }
+    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if indexPath.row == rowForPaggingUpdate{
