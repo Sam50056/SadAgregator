@@ -197,6 +197,54 @@ extension BrokerCardTableViewController{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if indexPath.section == 2, indexPath.row == 1{
+            
+            if !isLogged{
+                
+                showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
+                
+            }else{
+                
+                self.performSegue(withIdentifier: "goToReviewUpdate", sender: self)
+                
+            }
+            
+        }else if indexPath.section == 3{
+            
+            //            if brokerRevs.count >= 3 {
+            //
+            //                let vendorRevsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VendorRevsVC") as! VendorRevsViewController
+            //
+            //                vendorRevsVC.thisVendId = thisVendorId
+            //
+            //                navigationController?.pushViewController(vendorRevsVC, animated: true)
+            //
+            //            }
+            
+        }else if indexPath.section == 1{
+            
+            let selectedInfoCell = infoCells[indexPath.row]
+            
+            if selectedInfoCell.image == UIImage(named: "vk-3"){
+                let urlString = "https://vk.com/\((brokerData!["vk_link"].stringValue))"
+                if let url = URL(string: urlString){
+                    
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    
+                }
+                
+            }else if selectedInfoCell.image == UIImage(systemName: "phone.fill") {
+                
+                if let url = URL(string: "tel://\(brokerData!["phone"].stringValue)") {
+                    
+                    UIApplication.shared.open(url ,  options: [:], completionHandler: nil)
+                    
+                }
+                
+            }
+            
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
