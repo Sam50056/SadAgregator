@@ -1006,6 +1006,14 @@
 			path = "Menu Views";
 			sourceTree = "<group>";
 		};
+		22692E3426B8C8A500CA2946 /* Posredniki */ = {
+			isa = PBXGroup;
+			children = (
+				226F240726B1F57900FB2744 /* BrokersPopularityViewController.swift */,
+			);
+			path = Posredniki;
+			sourceTree = "<group>";
+		};
 		226F240926B2001400FB2744 /* BrokerCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1501,7 +1509,7 @@
 				22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */,
 				2207046A2686A86300FC6B4B /* Clients */,
 				22E44715269234340016D96E /* Sborka */,
-				226F240726B1F57900FB2744 /* BrokersPopularityViewController.swift */,
+				22692E3426B8C8A500CA2946 /* Posredniki */,
 			);
 			path = "Services Tab";
 			sourceTree = "<group>";
