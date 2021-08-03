@@ -1014,6 +1014,52 @@
 			path = Posredniki;
 			sourceTree = "<group>";
 		};
+		22692E3526B8CDDB00CA2946 /* DobavlenieVZakupku */ = {
+			isa = PBXGroup;
+			children = (
+				22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */,
+				22D636EF2624E8A400987E3F /* VibratZakupkuViewController.swift */,
+				22703261262711510068BD82 /* VibratKlientaViewController.swift */,
+				22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */,
+				22B41BA626476EA000F7DC30 /* CenovieDiapazoniViewController.swift */,
+				22B41BAA2648808600F7DC30 /* CreateDiapazonViewController.swift */,
+			);
+			path = DobavlenieVZakupku;
+			sourceTree = "<group>";
+		};
+		22692E3626B8CDEA00CA2946 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				226D9444258D2179008CEC4A /* GalleryViewController.swift */,
+				22C5D02725B0E064001C69C6 /* PeerViewController.swift */,
+				2203F16525BFC35D007DBFFD /* EditVigruzkaViewController.swift */,
+				22CADF4925CCE7EE001C4F31 /* NewVersionViewController.swift */,
+				22692E3526B8CDDB00CA2946 /* DobavlenieVZakupku */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		22692E3726B8CE7600CA2946 /* Postavshik */ = {
+			isa = PBXGroup;
+			children = (
+				22906B362578020300F00B0D /* PostavshikViewController.swift */,
+				226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */,
+				2286AD0A25CB5EEE004EF0D7 /* VendorRevsViewController.swift */,
+				227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */,
+			);
+			path = Postavshik;
+			sourceTree = "<group>";
+		};
+		22692E3826B8CE9600CA2946 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				2200943825DACBE90001F7B3 /* CategoryViewController.swift */,
+				22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */,
+				22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		226F240926B2001400FB2744 /* BrokerCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1103,6 +1149,7 @@
 		228CB773255BF98A002B4A96 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				22692E3626B8CDEA00CA2946 /* Global */,
 				22C9221725814DBC0063B5D4 /* Home Tab */,
 				22D604CF25EFA3B800102CB6 /* Services Tab */,
 				22CA693F25A1420E00D21840 /* Chat Tab */,
@@ -1401,23 +1448,8 @@
 				2253EE2A2569D85D00103C86 /* LineViewController.swift */,
 				221949FE256B1FBD00E0564D /* PointViewController.swift */,
 				229FE68D25700B120001FF54 /* SearchViewController.swift */,
-				22906B362578020300F00B0D /* PostavshikViewController.swift */,
-				226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */,
-				2286AD0A25CB5EEE004EF0D7 /* VendorRevsViewController.swift */,
-				227828EA258A719E00B435FA /* ReviewUpdateViewController.swift */,
-				226D9444258D2179008CEC4A /* GalleryViewController.swift */,
-				22C5D02725B0E064001C69C6 /* PeerViewController.swift */,
-				2203F16525BFC35D007DBFFD /* EditVigruzkaViewController.swift */,
-				22CADF4925CCE7EE001C4F31 /* NewVersionViewController.swift */,
-				2200943825DACBE90001F7B3 /* CategoryViewController.swift */,
-				22B6BC8925DC6DF300EAE067 /* CategoryFilterViewController.swift */,
-				22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */,
-				22B518E4261E46C100A7176F /* DobavlenieVZakupkuViewController.swift */,
-				22D636EF2624E8A400987E3F /* VibratZakupkuViewController.swift */,
-				22703261262711510068BD82 /* VibratKlientaViewController.swift */,
-				22ACF1A8262B828B00F9584D /* ZamenaDlyaTableViewController.swift */,
-				22B41BA626476EA000F7DC30 /* CenovieDiapazoniViewController.swift */,
-				22B41BAA2648808600F7DC30 /* CreateDiapazonViewController.swift */,
+				22692E3726B8CE7600CA2946 /* Postavshik */,
+				22692E3826B8CE9600CA2946 /* Categories */,
 			);
 			path = "Home Tab";
 			sourceTree = "<group>";
