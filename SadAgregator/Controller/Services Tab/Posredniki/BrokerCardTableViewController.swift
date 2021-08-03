@@ -86,7 +86,7 @@ extension BrokerCardTableViewController{
 extension BrokerCardTableViewController{
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        5
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -138,9 +138,9 @@ extension BrokerCardTableViewController{
         
         case 0:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "postavshikTopCell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "brokerTopCell", for: indexPath)
             
-            setUpPostavshikTopCell(cell: cell, data: brokerData)
+            setUpBrokerTopCell(cell: cell, data: brokerData)
             
         case 1:
             
@@ -226,7 +226,7 @@ extension BrokerCardTableViewController{
     
     //MARK: - Cells SetUp
     
-    func setUpPostavshikTopCell(cell : UITableViewCell, data : JSON) {
+    func setUpBrokerTopCell(cell : UITableViewCell, data : JSON) {
         //   let revsCountLabel = cell.viewWithTag(4) as? UILabel
         if let imageView = cell.viewWithTag(1) as? UIImageView,
            let ratingView = cell.viewWithTag(3) as? CosmosView,
@@ -278,9 +278,16 @@ extension BrokerCardTableViewController{
             }
             
             //Set up image view
-            imageView.layer.cornerRadius = imageView.frame.width / 2
-            imageView.clipsToBounds = true
-            imageView.sd_setImage(with: URL(string: data["img"].stringValue))
+            
+            let image = data["img"].stringValue
+            
+            if !image.isEmpty{
+                imageView.layer.cornerRadius = imageView.frame.width / 2
+                imageView.clipsToBounds = true
+                imageView.sd_setImage(with: URL(string: image))
+            }else{
+                imageView.image = UIImage(systemName: "person")
+            }
             
             //Set up the rating
             
