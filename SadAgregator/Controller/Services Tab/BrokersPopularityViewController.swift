@@ -15,12 +15,22 @@ class BrokersPopularityViewController: UITableViewController {
     
     private var key = ""
     
+    private let searchController = UISearchController(searchResultsController: nil)
+    
     private var brokersBrokersTopDataManager = BrokersBrokersTopDataManager()
+    private lazy var brokersBrokersTopBySearchDataManager = BrokersBrokersTopBySearchDataManager()
     
     private var brokers = [JSON]()
     
     private var page = 1
     private var rowForPaggingUpdate : Int = 14
+    
+    private var searchBarIsEmpty : Bool{
+        guard let text = searchController.searchBar.text else {return false}
+        return text.isEmpty
+    }
+    
+    private var searchTimer : Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +38,17 @@ class BrokersPopularityViewController: UITableViewController {
         loadUserData()
         
         brokersBrokersTopDataManager.delegate = self
+        brokersBrokersTopBySearchDataManager.delegate = self
         
         tableView.register(UINib(nibName: "BrokerTableViewCell", bundle: nil), forCellReuseIdentifier: "brokerCell")
         tableView.separatorStyle = .none
+        
+        //Set up search controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Поиск"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
         
         update()
         
@@ -51,7 +69,34 @@ extension BrokersPopularityViewController{
     
     func update(){
         
-        brokersBrokersTopDataManager.getBrokersBrokersTopData(key: key, page: page)
+        if searchBarIsEmpty{
+            brokersBrokersTopDataManager.getBrokersBrokersTopData(key: key, page: page)
+        }else{
+            
+            searchTimer != nil ? searchTimer.invalidate() : nil
+            
+            searchTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { [weak self] _ in
+                self?.brokersBrokersTopBySearchDataManager.geBrokersBrokersTopBySearchData(key: self!.key, query: self!.searchController.searchBar.text!, page: self!.page)
+            }
+            
+        }
+        
+    }
+    
+}
+
+//MARK: - SearchBar
+
+extension BrokersPopularityViewController : UISearchResultsUpdating{
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        brokers.removeAll()
+        page = 1
+        
+        update()
+        
+        tableView.reloadData()
         
     }
     
@@ -178,6 +223,22 @@ extension BrokersPopularityViewController{
         
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == rowForPaggingUpdate{
+            
+            page += 1
+            
+            rowForPaggingUpdate += 16
+            
+            update()
+            
+            print("Done a request for page: \(page)")
+            
+        }
+        
+    }
+    
 }
 
 //MARK: - BrokersBrokersTopDataManager
@@ -204,6 +265,32 @@ extension BrokersPopularityViewController : BrokersBrokersTopDataManagerDelegate
     
     func didFailGettingBrokersBrokersTopDataWithError(error: String) {
         print("Error with BrokersBrokersTopDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - BrokersBrokersTopBySearchDataManager
+
+extension BrokersPopularityViewController : BrokersBrokersTopBySearchDataManagerDelegate{
+    
+    func didGetBorkersBrokersTopDataManager(data: JSON) {
+        DispatchQueue.main.async { [weak self] in
+            
+            if data["result"].intValue == 1{
+                
+                self?.brokers.append(contentsOf: data["brokers"].arrayValue)
+                
+                self?.tableView.reloadData()
+                
+            }else{
+                
+            }
+            
+        }
+    }
+    
+    func didFailGettingBorkersBrokersTopDataWithError(error: String) {
+        print("Error with BrokersBrokersTopBySearchDataManager : \(error)")
     }
     
 }
