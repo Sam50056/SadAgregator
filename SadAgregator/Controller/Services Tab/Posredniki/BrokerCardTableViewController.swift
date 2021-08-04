@@ -17,6 +17,8 @@ class BrokerCardTableViewController: UITableViewController {
     private var key = ""
     private var isLogged = false
     
+    var thisBrokerId : String?
+    
     private var likeBarButton: UIBarButtonItem = UIBarButtonItem(image: nil, style: .plain, target: self, action: nil)
     
     private var brokersBrokerCardDataManager = BrokersBrokerCardDataManager()
@@ -57,7 +59,9 @@ extension BrokerCardTableViewController{
     
     @objc func refresh(_ sender : Any?){
         
-        brokersBrokerCardDataManager.getBrokersBrokerCardData(key: key, id: "")
+        guard let thisBrokerId = thisBrokerId else {return}
+        
+        brokersBrokerCardDataManager.getBrokersBrokerCardData(key: key, id: thisBrokerId)
         
     }
     
@@ -402,7 +406,24 @@ extension BrokerCardTableViewController{
                 
                 if isLogged{
                     
-                    //                    RateUpdateDataManager().getRateUpdateData(key: key, vendId: thisVendorId!, rate: Int(rating))
+                    BrokersReviewUpdateDataManager().getBrokersReviewUpdateData(key: key, id: thisBrokerId!, newRate: String(format: "%.0f", rating)) { [weak self] data , error in
+                     
+                        DispatchQueue.main.async {
+                            
+                            if let error = error , data == nil{
+                                print("Error with BrokersReviewUpdateDataManager : \(error)")
+                                return
+                            }
+                            
+                            if data!["result"].intValue == 1{
+                                
+                                self?.refresh(nil)
+                                
+                            }
+                            
+                        }
+                        
+                    }
                     
                 }else{
                     

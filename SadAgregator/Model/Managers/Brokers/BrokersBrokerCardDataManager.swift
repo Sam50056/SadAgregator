@@ -19,7 +19,7 @@ struct BrokersBrokerCardDataManager{
     
     func getBrokersBrokerCardData(key : String , id : String){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_brokers.BrokerCard?Akey=\(key)&ABrokerID=2842681"
+        let urlString = "https://agrapi.tk-sad.ru/agr_brokers.BrokerCard?Akey=\(key)&ABrokerID=\(id)"
         
         print("URLString for BrokersBrokerCardDataManager: \(urlString)")
         
