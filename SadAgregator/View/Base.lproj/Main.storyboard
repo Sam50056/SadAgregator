@@ -133,7 +133,7 @@
         <!--Review Update View Controller-->
         <scene sceneID="hl5-6A-pLQ">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="s7e-YJ-ycF" customClass="ReviewUpdateViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewUpdateVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="s7e-YJ-ycF" customClass="ReviewUpdateViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rIN-oH-uXG">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

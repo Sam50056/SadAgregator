@@ -27,11 +27,14 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
     
     var key : String?
     var vendId : String?
+    var brokerId : String?
     var myRate : Double?
     
     lazy var getMyReviewDataManager = GetMyReviewDataManager()
+    lazy var brokersGetMyReviewDataManager = BrokersGetMyReviewDataManager()
     
     lazy var reviewUpdateDataManager = ReviewUpdateDataManager()
+    lazy var brokersReviewUpdateDataManager = BrokersReviewUpdateDataManager()
     
     lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
     
@@ -51,7 +54,9 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
         imagesCollectionView.dataSource = self
         
         getMyReviewDataManager.delegate = self
+        brokersGetMyReviewDataManager.delegate = self
         reviewUpdateDataManager.delegate = self
+        brokersReviewUpdateDataManager.delegate = self
         newPhotoPlaceDataManager.delegate = self
         
         textView.text = ""
@@ -70,16 +75,23 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
         }
         
         addPhotoView.isHidden = true
+        
+        guard let key = key else {return}
+        
+        if let vendId = vendId {
+            getMyReviewDataManager.getVendorLikeData(key: key, vendId: vendId)
+        }else if let brokerId = brokerId {
+            brokersGetMyReviewDataManager.getBrokersGetMyReviewData(key: key, id: brokerId)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let myRate = myRate , let key = key , let vendId = vendId else {return}
+        guard let myRate = myRate else {return}
         
         self.navigationItem.title = myRate == 0 ? "ОСТАВИТЬ ОТЗЫВ" : "РЕДАКТИРОВАТЬ ОТЗЫВ"
-        
-        getMyReviewDataManager.getVendorLikeData(key: key, vendId: vendId)
         
     }
     
@@ -93,7 +105,7 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         
-        guard let key = key , let vendId = vendId else {return}
+        guard let key = key else {return}
         
         if !textView.text.contains("\\") , !titleTextField.text!.contains("\\"){
             
@@ -105,12 +117,16 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
                 }else{
                     images += "\(object.id)"
                 }
-               
+                
             }
             
             let textViewTextWithTags = (textView.text.replacingOccurrences(of: "\n", with: "<br>")).replacingOccurrences(of: "%", with: "<persent>")
             
-            reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: vendId, rating: Int(ratingView.rating), title: titleTextField.text!, text: textViewTextWithTags, images : images)
+            if let vendId = vendId {
+                reviewUpdateDataManager.getReviewUpdateData(key: key, vendId: vendId, rating: Int(ratingView.rating), title: titleTextField.text!, text: textViewTextWithTags, images : images)
+            }else if let brokerId = brokerId {
+                brokersReviewUpdateDataManager.getBrokersReviewUpdateData(key: key, brokerId: brokerId, rating: Int(ratingView.rating), title: titleTextField.text!, text: textViewTextWithTags, images : images)
+            }
             
         }
         
@@ -235,6 +251,46 @@ extension ReviewUpdateViewController : GetMyReviewDataManagerDelegate{
     
 }
 
+//MARK: - BrokersGetMyReviewDataManagerDelegate
+
+extension ReviewUpdateViewController : BrokersGetMyReviewDataManagerDelegate{
+    
+    func didGetBrokersGetMyReviewData(data: JSON) {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            guard let title =  data["title"].string , let text = data["text"].string , let rate = Double(data["rate"].stringValue) else {return}
+            
+            self?.titleTextField.text = title
+            
+            let newText = (text.replacingOccurrences(of: "<br>", with: "\n")).replacingOccurrences(of: "<persent>", with: "%")
+            
+            self?.textView.text = newText
+            
+            self?.ratingView.rating = rate
+            
+            if let images = data["imgs"].array {
+                
+                for image in images {
+                    
+                    self?.imageCellObjects.append(ImageCellObject(id: image["id"].stringValue, link: image["img"].stringValue))
+                    
+                }
+                
+                self?.imagesCollectionView.reloadData()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingBrokersGetMyReviewDataWithError(error: String) {
+        print("Error with BrokersGetMyReviewDataManager : \(error)")
+    }
+    
+}
+
 //MARK: - NewPhotoPlaceDataManagerDelegate
 
 extension ReviewUpdateViewController : NewPhotoPlaceDataManagerDelegate{
@@ -300,6 +356,38 @@ extension ReviewUpdateViewController : ReviewUpdateDataManagerDelegate {
     
     func didFailGettingReviewUpdateDataWithError(error: String) {
         print("Error with ReviewUpdateDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - BrokersReviewUpdateDataManagerDelegate
+
+extension ReviewUpdateViewController : BrokersReviewUpdateDataManagerDelegate{
+    
+    func didGetBrokersReviewUpdateData(data: JSON) {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            if let message = data["msg"].string{
+                
+                self?.showSimpleAlertWithOkButton(title: message, message: nil)
+                
+            }
+            
+            let result = data["result"].intValue
+            
+            if result == 1 {
+                
+                self?.navigationController?.popViewController(animated: true)
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingBrokersReviewUpdateDataWithError(error: String) {
+        print("Error with BrokersReviewUpdateDataManager : \(error)")
     }
     
 }

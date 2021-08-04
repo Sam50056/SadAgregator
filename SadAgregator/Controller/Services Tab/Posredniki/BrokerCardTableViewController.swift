@@ -32,13 +32,9 @@ class BrokerCardTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadUserData()
-        
         brokersBrokerCardDataManager.delegate = self
         
         tableView.separatorStyle = .none
-        
-        refresh(nil)
         
     }
     
@@ -48,6 +44,15 @@ class BrokerCardTableViewController: UITableViewController {
         navigationItem.title = "Посредник"
         
         navigationItem.rightBarButtonItems = [likeBarButton]
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        loadUserData()
+        
+        refresh(nil)
         
     }
     
@@ -209,7 +214,14 @@ extension BrokerCardTableViewController{
                 
             }else{
                 
-                self.performSegue(withIdentifier: "goToReviewUpdate", sender: self)
+                let reviewUpdateVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ReviewUpdateVC") as! ReviewUpdateViewController
+                
+                reviewUpdateVC.key = key
+                reviewUpdateVC.vendId = nil
+                reviewUpdateVC.brokerId = brokerData!["broker_id"].string
+                reviewUpdateVC.myRate = Double(brokerData!["my_rate"].stringValue)!
+                
+                navigationController?.pushViewController(reviewUpdateVC, animated: true)
                 
             }
             
@@ -406,12 +418,12 @@ extension BrokerCardTableViewController{
                 
                 if isLogged{
                     
-                    BrokersReviewUpdateDataManager().getBrokersReviewUpdateData(key: key, id: thisBrokerId!, newRate: String(format: "%.0f", rating)) { [weak self] data , error in
+                    BrokersRateUpdateDataManager().getBrokersRateUpdateData(key: key, id: thisBrokerId!, newRate: String(format: "%.0f", rating)) { [weak self] data , error in
                         
                         DispatchQueue.main.async {
                             
                             if let error = error , data == nil{
-                                print("Error with BrokersReviewUpdateDataManager : \(error)")
+                                print("Error with BrokersRateUpdateDataManager : \(error)")
                                 return
                             }
                             
