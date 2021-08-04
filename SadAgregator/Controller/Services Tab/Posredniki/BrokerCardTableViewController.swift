@@ -94,9 +94,9 @@ extension BrokerCardTableViewController{
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     
-        switch section {
         
+        switch section {
+            
         case 0:
             
             return 1
@@ -139,7 +139,7 @@ extension BrokerCardTableViewController{
         guard let brokerData = self.brokerData else {return cell}
         
         switch indexPath.section {
-        
+            
         case 0:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "brokerTopCell", for: indexPath)
@@ -193,7 +193,7 @@ extension BrokerCardTableViewController{
             return cell
             
         }
-            
+        
         
         return cell
         
@@ -407,7 +407,7 @@ extension BrokerCardTableViewController{
                 if isLogged{
                     
                     BrokersReviewUpdateDataManager().getBrokersReviewUpdateData(key: key, id: thisBrokerId!, newRate: String(format: "%.0f", rating)) { [weak self] data , error in
-                     
+                        
                         DispatchQueue.main.async {
                             
                             if let error = error , data == nil{
@@ -508,7 +508,7 @@ extension BrokerCardTableViewController{
         }
         
     }
-
+    
     
 }
 
