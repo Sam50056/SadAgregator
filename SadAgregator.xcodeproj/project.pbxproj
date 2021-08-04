@@ -115,6 +115,7 @@
 		22692E3E26BA0E6E00CA2946 /* BrokersRateUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E3D26BA0E6E00CA2946 /* BrokersRateUpdateDataManager.swift */; };
 		22692E4026BAC39E00CA2946 /* BrokerGetMyReviewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E3F26BAC39E00CA2946 /* BrokerGetMyReviewDataManager.swift */; };
 		22692E4226BB235200CA2946 /* BrokersReviewUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E4126BB235200CA2946 /* BrokersReviewUpdateDataManager.swift */; };
+		22692E4426BB2C9600CA2946 /* BrokersBrokerLikeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E4326BB2C9600CA2946 /* BrokersBrokerLikeDataManager.swift */; };
 		226973FD25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226973FC25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift */; };
 		2269740025AE394800C76BA6 /* VendorPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */; };
 		226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9444258D2179008CEC4A /* GalleryViewController.swift */; };
@@ -403,6 +404,7 @@
 		22692E3D26BA0E6E00CA2946 /* BrokersRateUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersRateUpdateDataManager.swift; sourceTree = "<group>"; };
 		22692E3F26BAC39E00CA2946 /* BrokerGetMyReviewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerGetMyReviewDataManager.swift; sourceTree = "<group>"; };
 		22692E4126BB235200CA2946 /* BrokersReviewUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersReviewUpdateDataManager.swift; sourceTree = "<group>"; };
+		22692E4326BB2C9600CA2946 /* BrokersBrokerLikeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersBrokerLikeDataManager.swift; sourceTree = "<group>"; };
 		226973FC25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVendPostsPaggingDataManager.swift; sourceTree = "<group>"; };
 		226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorPostsTableViewController.swift; sourceTree = "<group>"; };
 		2269740725AF409A00C76BA6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
@@ -1112,6 +1114,7 @@
 				22692E3D26BA0E6E00CA2946 /* BrokersRateUpdateDataManager.swift */,
 				22692E3F26BAC39E00CA2946 /* BrokerGetMyReviewDataManager.swift */,
 				22692E4126BB235200CA2946 /* BrokersReviewUpdateDataManager.swift */,
+				22692E4326BB2C9600CA2946 /* BrokersBrokerLikeDataManager.swift */,
 			);
 			path = Brokers;
 			sourceTree = "<group>";
@@ -1829,6 +1832,7 @@
 				220704662685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.swift in Sources */,
 				2201672325A73FEA0072BFE7 /* GetPointActionsDataManager.swift in Sources */,
 				220704692685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift in Sources */,
+				22692E4426BB2C9600CA2946 /* BrokersBrokerLikeDataManager.swift in Sources */,
 				228D2D3725ABE1D5000E9FAE /* DelDeviceDataManager.swift in Sources */,
 				224FE2A62608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift in Sources */,
 				22A155E42583E11C000EAB64 /* Constants.swift in Sources */,

@@ -19,9 +19,10 @@ class BrokerCardTableViewController: UITableViewController {
     
     var thisBrokerId : String?
     
-    private var likeBarButton: UIBarButtonItem = UIBarButtonItem(image: nil, style: .plain, target: self, action: nil)
+    private var likeBarButton: UIBarButtonItem!
     
     private var brokersBrokerCardDataManager = BrokersBrokerCardDataManager()
+    private lazy var brokersBrokerLikeDataManager = BrokersBrokerLikeDataManager()
     
     private var brokerData : JSON?
     
@@ -33,6 +34,9 @@ class BrokerCardTableViewController: UITableViewController {
         super.viewDidLoad()
         
         brokersBrokerCardDataManager.delegate = self
+        brokersBrokerLikeDataManager.delegate = self
+        
+        likeBarButton = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(likeBarButtonPressed))
         
         tableView.separatorStyle = .none
         
@@ -53,6 +57,35 @@ class BrokerCardTableViewController: UITableViewController {
         loadUserData()
         
         refresh(nil)
+        
+    }
+    
+}
+
+//MARK: - Actions
+
+extension BrokerCardTableViewController {
+    
+    @IBAction func likeBarButtonPressed() {
+        
+        guard let thisBrokerId = thisBrokerId , let _ = brokerData , isLogged == true else {return}
+        
+        var newStatus = ""
+        
+        let brokerLikeStatus = brokerLikeStatus
+        
+        if brokerLikeStatus == "0"{
+            newStatus = "1"
+        }else if brokerLikeStatus == "1"{
+            newStatus = "0"
+        }else{
+            print("Error. Wrong Like Status")
+            return
+        }
+        
+        self.brokerLikeStatus = newStatus
+        
+        brokersBrokerLikeDataManager.getBrokersBrokerLikeData(key: key, brokerId: thisBrokerId, status: newStatus)
         
     }
     
@@ -218,7 +251,7 @@ extension BrokerCardTableViewController{
                 
                 reviewUpdateVC.key = key
                 reviewUpdateVC.vendId = nil
-                reviewUpdateVC.brokerId = brokerData!["broker_id"].string
+                reviewUpdateVC.brokerId = thisBrokerId
                 reviewUpdateVC.myRate = Double(brokerData!["my_rate"].stringValue)!
                 
                 navigationController?.pushViewController(reviewUpdateVC, animated: true)
@@ -587,6 +620,25 @@ extension BrokerCardTableViewController : BrokersBrokerCardDataManagerDelegate{
     
 }
 
+//MARK: - BrokersBrokerLikeDataManager
+
+extension BrokerCardTableViewController : BrokersBrokerLikeDataManagerDelegate{
+    
+    func didGetBrokersBrokerLikeData(data: JSON) {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            self?.setLikeBarButtonImage()
+            
+        }
+        
+    }
+    
+    func didFailGettingBrokersBrokerLikeDataWithError(error: String) {
+        print("Error with BrokersBrokerLikeDataManager : \(error)")
+    }
+    
+}
 
 //MARK: - Data Manipulation Methods
 
