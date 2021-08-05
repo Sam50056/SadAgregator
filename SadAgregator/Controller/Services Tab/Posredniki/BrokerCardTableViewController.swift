@@ -26,6 +26,7 @@ class BrokerCardTableViewController: UITableViewController {
     
     private var brokerData : JSON?
     
+    private var balanceCellItems = [BalanceCellItem]()
     private var infoCells : [InfoCellObject] = []
     private var brokerRevs = [JSON]()
     private var brokerLikeStatus : String?
@@ -121,6 +122,59 @@ extension BrokerCardTableViewController{
         
     }
     
+    func makeInfoArray(data : JSON) {
+        
+        if let phone = data["phone"].string , phone != "" {
+            
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "phone.fill")!, leftLabelText: "Номер телефона", rightLabelText: phone, shouldRightLabelBeBlue: false))
+            
+        }
+        
+        if let regDate = data["reg_dt"].string , regDate != "" {
+            
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "calendar")!, leftLabelText: "Дата регистрации VK", rightLabelText: regDate, shouldRightLabelBeBlue: false))
+            
+        }
+        
+        if let vkLink = data["vk_link"].string , vkLink != "" {
+            
+            var leftLabelText = "Страница"
+            
+            if vkLink.contains("@club"){
+                leftLabelText = "Группа"
+            }
+            
+            infoCells.append(InfoCellObject(image: UIImage(named: "vk-3")!, leftLabelText: leftLabelText, rightLabelText: vkLink, shouldRightLabelBeBlue: true))
+            
+        }
+        
+        
+    }
+    
+    func makeBalanceArray(data : JSON){
+        
+        let balanceBlock = data["balance"]
+        
+        var newBalanceItems = [BalanceCellItem]()
+        
+        //        if let balance = balanceBlock["balance"].string , balance != ""{
+        //            newBalanceItems.append(BalanceCellItem(label1Text: "Ваш баланс", label2Text: balance, image: "plus" , label2TextColor: balance.contains("-") ? .systemRed : .systemGreen))
+        //        }
+        //
+        //        if let waitBalance = balanceBlock["wait_balance"].string , waitBalance != ""{
+        //            newBalanceItems.append(BalanceCellItem(label1Text: "В обработке", label2Text: waitBalance, image: "person.fill" , label2TextColor: #colorLiteral(red: 0.930277288, green: 0.6392800808, blue: 0.2036687732, alpha: 1)))
+        //        }
+        
+        newBalanceItems.append(BalanceCellItem(label1Text: "Ваш баланс", label2Text: "- 25 000,30 руб.", image: "plus" , label2TextColor: "".contains("-") ? .systemRed : .systemGreen))
+        
+        newBalanceItems.append(BalanceCellItem(label1Text: "В обработке", label2Text: "11 500,00 руб.", image: "person.fill" , label2TextColor: #colorLiteral(red: 0.930277288, green: 0.6392800808, blue: 0.2036687732, alpha: 1)))
+        
+        balanceCellItems = newBalanceItems
+        
+        tableView.reloadData()
+        
+    }
+    
 }
 
 //MARK: - TableView
@@ -128,7 +182,7 @@ extension BrokerCardTableViewController{
 extension BrokerCardTableViewController{
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        5
+        6
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -137,25 +191,28 @@ extension BrokerCardTableViewController{
             
         case 0:
             
-            return 1
+            return balanceCellItems.count
             
         case 1:
             
-            return getInfoRowsCount()
-            
+            return 1
         case 2:
             
-            return 2
+            return getInfoRowsCount()
             
         case 3:
             
-            return brokerRevs.count != 0 ? 1 : 0
+            return 2
             
         case 4:
             
-            return brokerRevs.count < 3 ? brokerRevs.count : 3
+            return brokerRevs.count != 0 ? 1 : 0
             
         case 5:
+            
+            return brokerRevs.count < 3 ? brokerRevs.count : 3
+            
+        case 6:
             
             if brokerData?["alert_text"].stringValue != "" || brokerData?["altert_text"].stringValue != "" {
                 return 1
@@ -180,17 +237,41 @@ extension BrokerCardTableViewController{
             
         case 0:
             
+            let item = balanceCellItems[indexPath.row]
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "balanceCell", for: indexPath)
+            
+            guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                  let label2 = cell.viewWithTag(2) as? UILabel ,
+                  let buttonView = cell.viewWithTag(3),
+                  let buttonImageView = cell.viewWithTag(4) as? UIImageView,
+                  let button = cell.viewWithTag(5) as? UIButton
+            else {return cell}
+            
+            label1.text = item.label1Text
+            label2.text = item.label2Text
+            
+            label2.textColor = item.label2TextColor
+            
+            button.setTitle("", for: .normal)
+            
+            buttonView.layer.cornerRadius = buttonView.frame.width / 2
+            
+            buttonImageView.image = UIImage(systemName: item.image)
+            
+        case 1:
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "brokerTopCell", for: indexPath)
             
             setUpBrokerTopCell(cell: cell, data: brokerData)
             
-        case 1:
+        case 2:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
             
             setUpInfoCell(cell: cell, data: brokerData, index: indexPath.row)
             
-        case 2:
+        case 3:
             
             if indexPath.row == 0{
                 
@@ -206,13 +287,13 @@ extension BrokerCardTableViewController{
                 
             }
             
-        case 3:
+        case 4:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "revCountLabel", for: indexPath)
             
             setUpRevCountLabel(cell: cell)
             
-        case 4:
+        case 5:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "revCell", for: indexPath)
             
@@ -239,7 +320,7 @@ extension BrokerCardTableViewController{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 2, indexPath.row == 1{
+        if indexPath.section == 3, indexPath.row == 1{
             
             if !isLogged{
                 
@@ -258,7 +339,7 @@ extension BrokerCardTableViewController{
                 
             }
             
-        }else if indexPath.section == 3{
+        }else if indexPath.section == 4{
             
             //            if brokerRevs.count >= 3 {
             //
@@ -270,7 +351,7 @@ extension BrokerCardTableViewController{
             //
             //            }
             
-        }else if indexPath.section == 1{
+        }else if indexPath.section == 2{
             
             let selectedInfoCell = infoCells[indexPath.row]
             
@@ -557,6 +638,23 @@ extension BrokerCardTableViewController{
     
 }
 
+//MARK: - Structs
+
+extension BrokerCardTableViewController{
+    
+    private struct BalanceCellItem {
+        
+        var label1Text : String
+        var label2Text : String
+        
+        var image : String
+        
+        var label2TextColor : UIColor = .black
+        
+    }
+    
+}
+
 //MARK: - BrokersBrokerCardDataManager
 
 extension BrokerCardTableViewController : BrokersBrokerCardDataManagerDelegate{
@@ -573,29 +671,9 @@ extension BrokerCardTableViewController : BrokersBrokerCardDataManagerDelegate{
                 
                 self?.brokerLikeStatus = data["broker_like"].string
                 
-                if let phone = data["phone"].string , phone != "" {
-                    
-                    self?.infoCells.append(InfoCellObject(image: UIImage(systemName: "phone.fill")!, leftLabelText: "Номер телефона", rightLabelText: phone, shouldRightLabelBeBlue: false))
-                    
-                }
+                self?.makeInfoArray(data: data)
                 
-                if let regDate = data["reg_dt"].string , regDate != "" {
-                    
-                    self?.infoCells.append(InfoCellObject(image: UIImage(systemName: "calendar")!, leftLabelText: "Дата регистрации VK", rightLabelText: regDate, shouldRightLabelBeBlue: false))
-                    
-                }
-                
-                if let vkLink = data["vk_link"].string , vkLink != "" {
-                    
-                    var leftLabelText = "Страница"
-                    
-                    if vkLink.contains("@club"){
-                        leftLabelText = "Группа"
-                    }
-                    
-                    self?.infoCells.append(InfoCellObject(image: UIImage(named: "vk-3")!, leftLabelText: leftLabelText, rightLabelText: vkLink, shouldRightLabelBeBlue: true))
-                    
-                }
+                self?.makeBalanceArray(data: data)
                 
                 self?.setLikeBarButtonImage()
                 
