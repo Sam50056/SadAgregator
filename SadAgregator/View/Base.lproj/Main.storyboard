@@ -4945,6 +4945,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
+                                    <color key="backgroundColor" name="whiteblack"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="zd8-gW-kt2" secondAttribute="trailing" id="8Oy-If-jDP"/>
                                         <constraint firstItem="zd8-gW-kt2" firstAttribute="leading" secondItem="bQp-mp-H4B" secondAttribute="leading" id="9Yh-Zc-JGk"/>
@@ -4959,6 +4960,7 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="Epv-us-MkZ" secondAttribute="trailing" constant="16" id="wIC-3c-6Ku"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="whiteblack"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>

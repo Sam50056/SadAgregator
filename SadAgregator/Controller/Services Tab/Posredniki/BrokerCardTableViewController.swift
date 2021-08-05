@@ -157,17 +157,19 @@ extension BrokerCardTableViewController{
         
         var newBalanceItems = [BalanceCellItem]()
         
-        //        if let balance = balanceBlock["balance"].string , balance != ""{
-        //            newBalanceItems.append(BalanceCellItem(label1Text: "Ваш баланс", label2Text: balance, image: "plus" , label2TextColor: balance.contains("-") ? .systemRed : .systemGreen))
-        //        }
-        //
-        //        if let waitBalance = balanceBlock["wait_balance"].string , waitBalance != ""{
-        //            newBalanceItems.append(BalanceCellItem(label1Text: "В обработке", label2Text: waitBalance, image: "person.fill" , label2TextColor: #colorLiteral(red: 0.930277288, green: 0.6392800808, blue: 0.2036687732, alpha: 1)))
-        //        }
+        if var balance = balanceBlock["balance"].string , balance != ""{
+            
+            balance = String(String(balance.reversed()).inserting(separator: " ", every: 3).reversed())
+            
+            newBalanceItems.append(BalanceCellItem(label1Text: "Ваш баланс", label2Text: balance + " руб.", image: "plus" , label2TextColor: balance.contains("-") ? .systemRed : .systemGreen))
+        }
         
-        newBalanceItems.append(BalanceCellItem(label1Text: "Ваш баланс", label2Text: "- 25 000,30 руб.", image: "plus" , label2TextColor: "".contains("-") ? .systemRed : .systemGreen))
-        
-        newBalanceItems.append(BalanceCellItem(label1Text: "В обработке", label2Text: "11 500,00 руб.", image: "person.fill" , label2TextColor: #colorLiteral(red: 0.930277288, green: 0.6392800808, blue: 0.2036687732, alpha: 1)))
+        if var waitBalance = balanceBlock["wait_balance"].string , waitBalance != ""{
+            
+            waitBalance = String(String(waitBalance.reversed()).inserting(separator: " ", every: 3).reversed())
+            
+            newBalanceItems.append(BalanceCellItem(label1Text: "В обработке", label2Text: waitBalance + " руб.", image: "newspaper.fill" , label2TextColor: #colorLiteral(red: 0.930277288, green: 0.6392800808, blue: 0.2036687732, alpha: 1)))
+        }
         
         balanceCellItems = newBalanceItems
         
