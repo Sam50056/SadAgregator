@@ -23,6 +23,9 @@ class BrokerCardTableViewController: UITableViewController {
     
     private var brokersBrokerCardDataManager = BrokersBrokerCardDataManager()
     private lazy var brokersBrokerLikeDataManager = BrokersBrokerLikeDataManager()
+    private lazy var brokersBalanceAddRequestDataManager = BrokersBalanceAddRequestDataManager()
+    private lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
+    private lazy var photoSavedDataManager = PhotoSavedDataManager()
     
     private var brokerData : JSON?
     
@@ -31,11 +34,18 @@ class BrokerCardTableViewController: UITableViewController {
     private var brokerRevs = [JSON]()
     private var brokerLikeStatus : String?
     
+    private var checkImageUrl : URL?
+    private var checkImageId : String?
+    
+    private var boxView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         brokersBrokerCardDataManager.delegate = self
         brokersBrokerLikeDataManager.delegate = self
+        brokersBalanceAddRequestDataManager.delegate = self
+        newPhotoPlaceDataManager.delegate = self
         
         likeBarButton = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(likeBarButtonPressed))
         
@@ -87,6 +97,78 @@ extension BrokerCardTableViewController {
         self.brokerLikeStatus = newStatus
         
         brokersBrokerLikeDataManager.getBrokersBrokerLikeData(key: key, brokerId: thisBrokerId, status: newStatus)
+        
+    }
+    
+    @IBAction func balanceButonTapped(_ sender : UIButton){
+        
+        guard let buttonKey = sender.restorationIdentifier else {return}
+        
+        if buttonKey.contains("plus"){
+            
+            let alertController = UIAlertController(title: "Поплнить баланс?", message: nil, preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
+                
+                let firstAlertController = UIAlertController(title: "Прикрепить чек?", message: nil, preferredStyle: .alert)
+                
+                firstAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
+                    self?.showImagePickerController(sourceType: .photoLibrary)
+                }))
+                
+                firstAlertController.addAction(UIAlertAction(title: "Нет", style: .default, handler: { [weak self] _ in
+                    
+                    let secondAlertController = UIAlertController(title: "Укажите сумму", message: nil, preferredStyle: .alert)
+                    
+                    secondAlertController.addTextField { textField in
+                        textField.keyboardType = .numberPad
+                    }
+                    
+                    secondAlertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { [weak self] _ in
+                        
+                        guard let summ = secondAlertController.textFields![0].text , !summ.isEmpty else {return}
+                        
+                        self?.brokersBalanceAddRequestDataManager.getBrokersBalanceAddRequestData(key: self!.key, brokerId: self!.thisBrokerId!, summ: summ)
+                        
+                    }))
+                    
+                    self?.present(secondAlertController , animated: true)
+                    
+                }))
+                
+                self?.present(firstAlertController , animated: true , completion: nil)
+                
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            present(alertController , animated: true)
+            
+        }else{
+            
+           
+            
+        }
+        
+    }
+    
+    func checkSent() {
+        
+        let alertController = UIAlertController(title: "Укажите сумму из чека", message: nil, preferredStyle: .alert)
+        
+        alertController.addTextField { textField in
+            textField.keyboardType = .numberPad
+        }
+        
+        alertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { [weak self] _ in
+            
+            guard let summ = alertController.textFields![0].text , !summ.isEmpty else {return}
+            
+            self?.brokersBalanceAddRequestDataManager.getBrokersBalanceAddRequestData(key: self!.key, brokerId: self!.thisBrokerId!, summ: summ , imgId: self?.checkImageId ?? "")
+            
+        }))
+        
+        present(alertController , animated: true)
         
     }
     
@@ -177,6 +259,43 @@ extension BrokerCardTableViewController{
         
     }
     
+    func showBoxView(with text : String) {
+        
+        let width = text.width(withConstrainedHeight: UIScreen.main.bounds.width - 16, font: UIFont.systemFont(ofSize: 17)) + 60
+        
+        // You only need to adjust this frame to move it anywhere you want
+        boxView = UIView(frame: CGRect(x: view.frame.midX - (width/2), y: view.frame.midY - 25, width: width, height: 50))
+        boxView.backgroundColor = UIColor(named: "gray")
+        boxView.alpha = 0.95
+        boxView.layer.cornerRadius = 10
+        
+        boxView.center = view.center
+        
+        //Here the spinnier is initialized
+        let activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        activityView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityView.startAnimating()
+        
+        let textLabel = UILabel(frame: CGRect(x: 45, y: 0, width: 200, height: 50))
+        textLabel.textColor = UIColor.gray
+        textLabel.text = text
+        
+        boxView.addSubview(activityView)
+        boxView.addSubview(textLabel)
+        
+        view.addSubview(boxView)
+        
+        view.isUserInteractionEnabled = false
+        
+    }
+    
+    func removeBoxView(){
+        
+        boxView.removeFromSuperview()
+        view.isUserInteractionEnabled = true
+        
+    }
+    
 }
 
 //MARK: - TableView
@@ -260,6 +379,10 @@ extension BrokerCardTableViewController{
             buttonView.layer.cornerRadius = buttonView.frame.width / 2
             
             buttonImageView.image = UIImage(systemName: item.image)
+            
+            button.restorationIdentifier = item.image
+            
+            button.addTarget(self, action: #selector(balanceButonTapped(_:)), for: .touchUpInside)
             
         case 1:
             
@@ -657,6 +780,168 @@ extension BrokerCardTableViewController{
     
 }
 
+//MARK: - UIImagePickerControllerDelegate
+
+extension BrokerCardTableViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func showImagePickerController(sourceType : UIImagePickerController.SourceType) {
+        
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = false
+        imagePickerController.sourceType = sourceType
+        
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let safeUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            
+            checkImageUrl = safeUrl
+            showBoxView(with: "Загрузка фото чека")
+            newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
+            
+        }
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+}
+
+
+//MARK: - NewPhotoPlaceDataManagerDelegate
+
+extension BrokerCardTableViewController : NewPhotoPlaceDataManagerDelegate{
+    
+    func didGetNewPhotoPlaceData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                let url = "\(data["post_to"].stringValue)/store?file_name=\(data["file_name"].stringValue)"
+                
+                print("URL FOR SENDING THE FILE: \(url)")
+                
+                guard let checkImageUrl = checkImageUrl else {return}
+                
+                sendFileToServer(from: checkImageUrl, to: url)
+                
+                let imageId = data["image_id"].stringValue
+                
+                let imageLinkWithPortAndWithoutFile = "\(data["post_to"].stringValue)"
+                let splitIndex = imageLinkWithPortAndWithoutFile.lastIndex(of: ":")!
+                let imageLink = "\(String(imageLinkWithPortAndWithoutFile[imageLinkWithPortAndWithoutFile.startIndex ..< splitIndex]))\(data["file_name"].stringValue)"
+                
+                print("Image Link: \(imageLink)")
+                
+                checkImageId = imageId
+                
+            }else{
+                
+               removeBoxView()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingNewPhotoPlaceDataWithError(error: String) {
+        print("Error with NewPhotoPlaceDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - File Sending
+
+extension BrokerCardTableViewController{
+    
+    func sendFileToServer(from fromUrl : URL, to toUrl : String){
+        
+        print("import result : \(fromUrl)")
+        
+        guard let toUrl = URL(string: toUrl) else {return}
+        
+        print("To URL: \(toUrl)")
+        
+        do{
+            
+            let data = try Data(contentsOf: fromUrl)
+            
+            let image = UIImage(data: data)!
+            
+            let imageData = image.jpegData(compressionQuality: 0.5)
+            
+            var request = URLRequest(url: toUrl)
+            
+            request.httpMethod = "POST"
+            request.setValue("text/plane", forHTTPHeaderField: "Content-Type")
+            request.httpBody = imageData
+            
+            let task = URLSession.shared.dataTask(with: request) { [self] (data, response, error) in
+                
+                if error != nil {
+                    print("Error sending file: \(error!.localizedDescription)")
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+                
+                print("Answer : \(json)")
+                
+                DispatchQueue.main.async { [self] in
+                    
+                    print("Got check sent to server")
+                    
+                    photoSavedDataManager.getPhotoSavedData(key: key, photoId: checkImageId!) { data, error in
+                        
+                        if let error = error{
+                            print("Error with PhotoSavedDataManager : \(error)")
+                            return
+                        }
+                        
+                        guard let data = data else {return}
+                        
+                        if data["result"].intValue == 1{
+                            
+                            print("Check image successfuly saved to server")
+                            
+                            DispatchQueue.main.async { [self] in
+                                
+                                removeBoxView()
+                                
+                                checkSent()
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+            }
+            
+            task.resume()
+            
+        }catch{
+            print(error)
+        }
+        
+    }
+    
+}
+
 //MARK: - BrokersBrokerCardDataManager
 
 extension BrokerCardTableViewController : BrokersBrokerCardDataManagerDelegate{
@@ -716,6 +1001,33 @@ extension BrokerCardTableViewController : BrokersBrokerLikeDataManagerDelegate{
     
     func didFailGettingBrokersBrokerLikeDataWithError(error: String) {
         print("Error with BrokersBrokerLikeDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - BrokersBalanceAddRequestDataManager
+
+extension BrokerCardTableViewController : BrokersBalanceAddRequestDataManagerDelegate{
+    
+    func didGetBrokersBalanceAddRequestData(data: JSON) {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            if data["result"].intValue == 1{
+                
+                self?.refresh(nil)
+                
+                self?.checkImageUrl = nil
+                self?.checkImageId = nil
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingBrokersBalanceAddRequestDataWithError(error: String) {
+        print("Error with BrokersBalanceAddRequestDataManager : \(error)")
     }
     
 }
