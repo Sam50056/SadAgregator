@@ -152,7 +152,12 @@ extension BrokerCardViewController {
             
         }else{
             
+            guard let brokerData = brokerData ,
+            let checks = brokerData["balance"]["checks"].arrayObject as? [String] ,
+            !checks.isEmpty
+            else {return}
             
+            previewImages(checks)
             
         }
         
