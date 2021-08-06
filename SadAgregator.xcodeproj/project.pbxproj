@@ -111,7 +111,7 @@
 		2268869C25996B920079933D /* RefreshAlbsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2268869B25996B920079933D /* RefreshAlbsDataManager.swift */; };
 		226886A62599EDD00079933D /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226886A52599EDD00079933D /* ActivityIndicatorView.swift */; };
 		22692E3326B889E700CA2946 /* BrokersBrokersTopBySearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E3226B889E700CA2946 /* BrokersBrokersTopBySearchDataManager.swift */; };
-		22692E3A26B9543D00CA2946 /* BrokerCardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E3926B9543D00CA2946 /* BrokerCardTableViewController.swift */; };
+		22692E3A26B9543D00CA2946 /* BrokerCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E3926B9543D00CA2946 /* BrokerCardViewController.swift */; };
 		22692E3C26B9707D00CA2946 /* BrokersBrokerCardDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E3B26B9707D00CA2946 /* BrokersBrokerCardDataManager.swift */; };
 		22692E3E26BA0E6E00CA2946 /* BrokersRateUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E3D26BA0E6E00CA2946 /* BrokersRateUpdateDataManager.swift */; };
 		22692E4026BAC39E00CA2946 /* BrokerGetMyReviewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22692E3F26BAC39E00CA2946 /* BrokerGetMyReviewDataManager.swift */; };
@@ -401,7 +401,7 @@
 		2268869B25996B920079933D /* RefreshAlbsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshAlbsDataManager.swift; sourceTree = "<group>"; };
 		226886A52599EDD00079933D /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		22692E3226B889E700CA2946 /* BrokersBrokersTopBySearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersBrokersTopBySearchDataManager.swift; sourceTree = "<group>"; };
-		22692E3926B9543D00CA2946 /* BrokerCardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerCardTableViewController.swift; sourceTree = "<group>"; };
+		22692E3926B9543D00CA2946 /* BrokerCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerCardViewController.swift; sourceTree = "<group>"; };
 		22692E3B26B9707D00CA2946 /* BrokersBrokerCardDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersBrokerCardDataManager.swift; sourceTree = "<group>"; };
 		22692E3D26BA0E6E00CA2946 /* BrokersRateUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersRateUpdateDataManager.swift; sourceTree = "<group>"; };
 		22692E3F26BAC39E00CA2946 /* BrokerGetMyReviewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerGetMyReviewDataManager.swift; sourceTree = "<group>"; };
@@ -1024,7 +1024,7 @@
 			isa = PBXGroup;
 			children = (
 				226F240726B1F57900FB2744 /* BrokersPopularityViewController.swift */,
-				22692E3926B9543D00CA2946 /* BrokerCardTableViewController.swift */,
+				22692E3926B9543D00CA2946 /* BrokerCardViewController.swift */,
 			);
 			path = Posredniki;
 			sourceTree = "<group>";
@@ -1820,7 +1820,7 @@
 				22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */,
 				22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */,
 				222267712698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift in Sources */,
-				22692E3A26B9543D00CA2946 /* BrokerCardTableViewController.swift in Sources */,
+				22692E3A26B9543D00CA2946 /* BrokerCardViewController.swift in Sources */,
 				22328CE025FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.swift in Sources */,
 				22B26526267D7114004342E3 /* BrokersBrokerHelperCheckDataManager.swift in Sources */,
 				228289C426519B0D00E3AA83 /* PhotoSavedDataManager.swift in Sources */,

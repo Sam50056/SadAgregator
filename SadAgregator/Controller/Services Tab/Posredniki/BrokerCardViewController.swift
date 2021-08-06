@@ -1,5 +1,5 @@
 //
-//  BrokerCardTableViewController.swift
+//  BrokerCardViewController.swift
 //  SadAgregator
 //
 //  Created by Sam Yerznkyan on 03.08.2021.
@@ -10,7 +10,9 @@ import SwiftyJSON
 import Cosmos
 import RealmSwift
 
-class BrokerCardTableViewController: UITableViewController {
+class BrokerCardViewController: UIViewController {
+    
+    @IBOutlet weak var tableView : UITableView!
     
     private let realm = try! Realm()
     
@@ -49,6 +51,9 @@ class BrokerCardTableViewController: UITableViewController {
         
         likeBarButton = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(likeBarButtonPressed))
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         tableView.separatorStyle = .none
         
     }
@@ -75,7 +80,7 @@ class BrokerCardTableViewController: UITableViewController {
 
 //MARK: - Actions
 
-extension BrokerCardTableViewController {
+extension BrokerCardViewController {
     
     @IBAction func likeBarButtonPressed() {
         
@@ -146,7 +151,7 @@ extension BrokerCardTableViewController {
             
         }else{
             
-           
+            
             
         }
         
@@ -176,7 +181,7 @@ extension BrokerCardTableViewController {
 
 //MARK: - Functions
 
-extension BrokerCardTableViewController{
+extension BrokerCardViewController{
     
     @objc func refresh(_ sender : Any?){
         
@@ -300,13 +305,13 @@ extension BrokerCardTableViewController{
 
 //MARK: - TableView
 
-extension BrokerCardTableViewController{
+extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource{
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         6
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch section {
             
@@ -348,7 +353,7 @@ extension BrokerCardTableViewController{
         
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = UITableViewCell()
         
@@ -443,7 +448,7 @@ extension BrokerCardTableViewController{
         
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 3, indexPath.row == 1{
             
@@ -765,7 +770,7 @@ extension BrokerCardTableViewController{
 
 //MARK: - Structs
 
-extension BrokerCardTableViewController{
+extension BrokerCardViewController{
     
     private struct BalanceCellItem {
         
@@ -782,7 +787,7 @@ extension BrokerCardTableViewController{
 
 //MARK: - UIImagePickerControllerDelegate
 
-extension BrokerCardTableViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+extension BrokerCardViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     func showImagePickerController(sourceType : UIImagePickerController.SourceType) {
         
@@ -816,7 +821,7 @@ extension BrokerCardTableViewController : UIImagePickerControllerDelegate, UINav
 
 //MARK: - NewPhotoPlaceDataManagerDelegate
 
-extension BrokerCardTableViewController : NewPhotoPlaceDataManagerDelegate{
+extension BrokerCardViewController : NewPhotoPlaceDataManagerDelegate{
     
     func didGetNewPhotoPlaceData(data: JSON) {
         
@@ -844,7 +849,7 @@ extension BrokerCardTableViewController : NewPhotoPlaceDataManagerDelegate{
                 
             }else{
                 
-               removeBoxView()
+                removeBoxView()
                 
             }
             
@@ -860,7 +865,7 @@ extension BrokerCardTableViewController : NewPhotoPlaceDataManagerDelegate{
 
 //MARK: - File Sending
 
-extension BrokerCardTableViewController{
+extension BrokerCardViewController{
     
     func sendFileToServer(from fromUrl : URL, to toUrl : String){
         
@@ -944,7 +949,7 @@ extension BrokerCardTableViewController{
 
 //MARK: - BrokersBrokerCardDataManager
 
-extension BrokerCardTableViewController : BrokersBrokerCardDataManagerDelegate{
+extension BrokerCardViewController : BrokersBrokerCardDataManagerDelegate{
     
     func didGetBrokersBrokerCardData(data: JSON) {
         
@@ -966,7 +971,7 @@ extension BrokerCardTableViewController : BrokersBrokerCardDataManagerDelegate{
                 
                 self?.tableView.reloadData()
                 
-                self?.refreshControl?.endRefreshing()
+                //                self?.refreshControl?.endRefreshing()
                 
                 //                stopSimpleCircleAnimation(activityController: activityController)
                 
@@ -987,7 +992,7 @@ extension BrokerCardTableViewController : BrokersBrokerCardDataManagerDelegate{
 
 //MARK: - BrokersBrokerLikeDataManager
 
-extension BrokerCardTableViewController : BrokersBrokerLikeDataManagerDelegate{
+extension BrokerCardViewController : BrokersBrokerLikeDataManagerDelegate{
     
     func didGetBrokersBrokerLikeData(data: JSON) {
         
@@ -1007,7 +1012,7 @@ extension BrokerCardTableViewController : BrokersBrokerLikeDataManagerDelegate{
 
 //MARK: - BrokersBalanceAddRequestDataManager
 
-extension BrokerCardTableViewController : BrokersBalanceAddRequestDataManagerDelegate{
+extension BrokerCardViewController : BrokersBalanceAddRequestDataManagerDelegate{
     
     func didGetBrokersBalanceAddRequestData(data: JSON) {
         
@@ -1034,7 +1039,7 @@ extension BrokerCardTableViewController : BrokersBalanceAddRequestDataManagerDel
 
 //MARK: - Data Manipulation Methods
 
-extension BrokerCardTableViewController {
+extension BrokerCardViewController {
     
     func loadUserData (){
         
