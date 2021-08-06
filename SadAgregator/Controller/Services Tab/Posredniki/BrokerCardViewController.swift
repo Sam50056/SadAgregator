@@ -40,6 +40,7 @@ class BrokerCardViewController: UIViewController {
     private var checkImageId : String?
     
     private var boxView = UIView()
+    private var blurEffectView = UIVisualEffectView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +51,6 @@ class BrokerCardViewController: UIViewController {
         newPhotoPlaceDataManager.delegate = self
         
         likeBarButton = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(likeBarButtonPressed))
-        
-        tableView.delegate = self
-        tableView.dataSource = self
         
         tableView.separatorStyle = .none
         
@@ -71,6 +69,9 @@ class BrokerCardViewController: UIViewController {
         super.viewDidAppear(animated)
         
         loadUserData()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         refresh(nil)
         
@@ -266,6 +267,12 @@ extension BrokerCardViewController{
     
     func showBoxView(with text : String) {
         
+        let blurEffect = UIBlurEffect(style: .systemChromeMaterial)
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+        
         let width = text.width(withConstrainedHeight: UIScreen.main.bounds.width - 16, font: UIFont.systemFont(ofSize: 17)) + 60
         
         // You only need to adjust this frame to move it anywhere you want
@@ -297,6 +304,7 @@ extension BrokerCardViewController{
     func removeBoxView(){
         
         boxView.removeFromSuperview()
+        blurEffectView.removeFromSuperview()
         view.isUserInteractionEnabled = true
         
     }
