@@ -227,7 +227,9 @@ extension BrokersPopularityViewController{
         
         let brokerCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BrokerCardVC") as! BrokerCardViewController
         
-        brokerCardVC.thisBrokerId = brokers[indexPath.row]["id"].stringValue
+        let selectedBrokerId = brokers[indexPath.row]["id"].string
+        
+        brokerCardVC.thisBrokerId = selectedBrokerId
         
         navigationController?.pushViewController(brokerCardVC, animated: true)
         
