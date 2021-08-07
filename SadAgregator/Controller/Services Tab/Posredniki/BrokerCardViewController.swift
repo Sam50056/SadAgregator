@@ -397,7 +397,11 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             
         case 6:
             
-            return showUsl ? 1 : 0
+            if showUsl , brokerData?["dop_info"].string != ""{
+                return 1
+            }else{
+                return 0
+            }
             
         case 7:
             
@@ -519,6 +523,20 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 label1.textColor = .systemGray
                 label2.font = UIFont.boldSystemFont(ofSize: 15)
             }
+            
+        case 6:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "labelTextViewCell", for: indexPath)
+            
+            cell.contentView.backgroundColor = .systemGray6
+            
+            guard let _ = cell.viewWithTag(1) as? UILabel ,
+                    let textView = cell.viewWithTag(2) as? UITextView
+            else {return cell}
+            
+            textView.text = brokerData["dop_info"].stringValue.replacingOccurrences(of: "<br>", with: "\n")
+            
+            textView.backgroundColor = .systemGray6
             
         case 7:
             
