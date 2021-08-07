@@ -32,6 +32,9 @@ class BrokerCardViewController: UIViewController {
     private var brokerData : JSON?
     
     private var balanceCellItems = [BalanceCellItem]()
+    private var ratesArray = [UsloviaSotrItem]()
+    private var parcelsArray = [UsloviaSotrItem]()
+    private var payInfoArray = [UsloviaSotrItem]()
     private var infoCells : [InfoCellObject] = []
     private var brokerRevs = [JSON]()
     private var brokerLikeStatus : String?
@@ -41,6 +44,8 @@ class BrokerCardViewController: UIViewController {
     
     private var boxView = UIView()
     private var blurEffectView = UIVisualEffectView()
+    
+    private var showUsl = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -270,6 +275,44 @@ extension BrokerCardViewController{
         
     }
     
+    func makeUslSotrArrays(data : JSON){
+        
+        let jsonRatesArray = data["rates"].arrayValue
+        
+        if !jsonRatesArray.isEmpty{
+            var newRates = [UsloviaSotrItem]()
+            newRates.append(UsloviaSotrItem(label1: "Выкуп", label2: ""))
+            jsonRatesArray.forEach { jsonRate in
+                newRates.append(UsloviaSotrItem(label1: jsonRate["capt"].stringValue, label2: jsonRate["marge"].stringValue))
+            }
+            ratesArray = newRates
+        }
+        
+        let jsonParcelsArray = data["parcels"].arrayValue
+        
+        if !jsonParcelsArray.isEmpty{
+            var newParcels = [UsloviaSotrItem]()
+            newParcels.append(UsloviaSotrItem(label1: "Отправка", label2: ""))
+            jsonParcelsArray.forEach { jsonParcel in
+                newParcels.append(UsloviaSotrItem(label1: jsonParcel["name"].stringValue, label2: jsonParcel["price"].stringValue))
+            }
+            parcelsArray = newParcels
+        }
+        
+        if var card = data["pay_info"]["card4"].string , !card.isEmpty{
+            var newPayInfo = [UsloviaSotrItem]()
+            newPayInfo.append(UsloviaSotrItem(label1: "Оплата", label2: ""))
+            if card.count <= 4{
+                card.insert(contentsOf: "**** ", at: card.startIndex)
+            }
+            newPayInfo.append(UsloviaSotrItem(label1: "Карта", label2: card))
+            payInfoArray = newPayInfo
+        }
+        
+        tableView.reloadData()
+        
+    }
+    
     func showBoxView(with text : String) {
         
         let blurEffect = UIBlurEffect(style: .systemChromeMaterial)
@@ -321,7 +364,7 @@ extension BrokerCardViewController{
 extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        6
+        12
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -335,23 +378,44 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
         case 1:
             
             return 1
+            
         case 2:
             
-            return getInfoRowsCount()
+            return 1
             
         case 3:
             
-            return 2
+            return showUsl ? ratesArray.count : 0
             
         case 4:
             
-            return brokerRevs.count != 0 ? 1 : 0
+            return showUsl ? parcelsArray.count : 0
             
         case 5:
             
-            return brokerRevs.count < 3 ? brokerRevs.count : 3
+            return showUsl ?  payInfoArray.count : 0
             
         case 6:
+            
+            return showUsl ? 1 : 0
+            
+        case 7:
+            
+            return getInfoRowsCount()
+            
+        case 8:
+            
+            return 2
+            
+        case 9:
+            
+            return brokerRevs.count != 0 ? 1 : 0
+            
+        case 10:
+            
+            return brokerRevs.count < 3 ? brokerRevs.count : 3
+            
+        case 11:
             
             if brokerData?["alert_text"].stringValue != "" || brokerData?["altert_text"].stringValue != "" {
                 return 1
@@ -410,11 +474,59 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             
         case 2:
             
+            cell = tableView.dequeueReusableCell(withIdentifier: "uslCell", for: indexPath)
+            
+            guard let label = cell.viewWithTag(1) as? UILabel,
+                  let imgView = cell.viewWithTag(2) as? UIImageView
+            else {return cell}
+            
+            label.text = "Условия сотрудничества"
+            
+            label.font = UIFont.systemFont(ofSize: 18)
+            
+            imgView.image = UIImage(systemName: showUsl ? "chevron.up" : "chevron.down")
+            
+            cell.contentView.backgroundColor = .systemGray6
+            
+        case 3...5:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelCell", for: indexPath)
+            
+            cell.contentView.backgroundColor = .systemGray6
+            
+            var item : UsloviaSotrItem!
+            
+            if indexPath.section == 3{
+                item = ratesArray[indexPath.row]
+            }else if indexPath.section == 4{
+                item = parcelsArray[indexPath.row]
+            }else if indexPath.section == 5{
+                item = payInfoArray[indexPath.row]
+            }
+            
+            guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                  let label2 = cell.viewWithTag(2) as? UILabel
+            else {return cell}
+            
+            label1.text = item.label1
+            label2.text = item.label2
+            
+            if item.label2.isEmpty{
+                label1.font = UIFont.boldSystemFont(ofSize: 17)
+                label1.textColor = UIColor(named: "blackwhite")
+            }else{
+                label1.font = UIFont.systemFont(ofSize: 15)
+                label1.textColor = .systemGray
+                label2.font = UIFont.boldSystemFont(ofSize: 15)
+            }
+            
+        case 7:
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
             
             setUpInfoCell(cell: cell, data: brokerData, index: indexPath.row)
             
-        case 3:
+        case 8:
             
             if indexPath.row == 0{
                 
@@ -430,13 +542,13 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        case 4:
+        case 9:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "revCountLabel", for: indexPath)
             
             setUpRevCountLabel(cell: cell)
             
-        case 5:
+        case 10:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "revCell", for: indexPath)
             
@@ -463,7 +575,13 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 3, indexPath.row == 1{
+        if indexPath.section == 2{
+            
+            showUsl.toggle()
+            
+            tableView.reloadSections([2,3,4,5,6], with: .automatic)
+            
+        }else if indexPath.section == 8, indexPath.row == 1{
             
             if !isLogged{
                 
@@ -482,7 +600,7 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        }else if indexPath.section == 4{
+        }else if indexPath.section == 9{
             
             //            if brokerRevs.count >= 3 {
             //
@@ -494,7 +612,7 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             //
             //            }
             
-        }else if indexPath.section == 2{
+        }else if indexPath.section == 7{
             
             let selectedInfoCell = infoCells[indexPath.row]
             
@@ -796,6 +914,13 @@ extension BrokerCardViewController{
         
     }
     
+    private struct UsloviaSotrItem {
+        
+        var label1 : String
+        var label2 : String
+        
+    }
+    
 }
 
 //MARK: - UIImagePickerControllerDelegate
@@ -979,6 +1104,8 @@ extension BrokerCardViewController : BrokersBrokerCardDataManagerDelegate{
                 self?.makeInfoArray(data: data)
                 
                 self?.makeBalanceArray(data: data)
+                
+                self?.makeUslSotrArrays(data: data)
                 
                 self?.setLikeBarButtonImage()
                 
