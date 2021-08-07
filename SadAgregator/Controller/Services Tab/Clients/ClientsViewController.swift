@@ -193,7 +193,7 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
         
         switch section {
         case 0:
-            return 1
+            return stats.isEmpty ? 0 : 1
         case 1:
             return areStatsShown ? stats.count : 0
         case 2:
