@@ -410,31 +410,32 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         case 0:
             
-            return 1
-            
-        case 1:
-            
-            return getInfoRowsCount()
-            
-        case 2:
-            
-            return 2
-            
-        case 3:
-            
-            return vendorRevs.count != 0 ? 1 : 0
-            
-        case 4:
-            
-            return vendorRevs.count < 3 ? vendorRevs.count : 3
-            
-        case 5:
-            
             if vendorData?["alert_text"].stringValue != "" || vendorData?["altert_text"].stringValue != "" {
                 return 1
             }else {
                 return 0
             }
+            
+        case 1:
+            
+            return 1
+            
+        case 2:
+            
+            return getInfoRowsCount()
+            
+        case 3:
+            
+            return 2
+            
+        case 4:
+            
+            return vendorRevs.count != 0 ? 1 : 0
+                
+            
+        case 5:
+            
+            return vendorRevs.count < 3 ? vendorRevs.count : 3
             
         case 6:
             
@@ -464,17 +465,23 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         case 0:
             
+            cell = tableView.dequeueReusableCell(withIdentifier: "alertCell", for: indexPath)
+            
+            setUpAlertCell(cell: cell, data: vendorData)
+        
+        case 1:
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "postavshikTopCell", for: indexPath)
             
             setUpPostavshikTopCell(cell: cell, data: vendorData)
             
-        case 1:
+        case 2:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
             
             setUpInfoCell(cell: cell, data: vendorData, index: indexPath.row)
             
-        case 2:
+        case 3:
             
             if indexPath.row == 0{
                 
@@ -490,25 +497,19 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        case 3:
+        case 4:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "revCountLabel", for: indexPath)
             
             setUpRevCountLabel(cell: cell)
             
-        case 4:
+        case 5:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "revCell", for: indexPath)
             
             let rev = vendorRevs[indexPath.row]
             
             setUpRevCell(cell: cell, data: rev)
-            
-        case 5:
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "alertCell", for: indexPath)
-            
-            setUpAlertCell(cell: cell, data: vendorData)
             
         case 6:
             
@@ -541,11 +542,11 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         case 0:
             
-            return 92
-            
+            return 150
+        
         case 1:
             
-            return 50
+            return 92
             
         case 2:
             
@@ -557,11 +558,11 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 4:
             
-            return 150
+            return 50
             
         case 5:
             
-            return 50
+            return 150
             
         case 6:
             
@@ -584,7 +585,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 2, indexPath.row == 1{
+        if indexPath.section == 3, indexPath.row == 1{
             
             if !isLogged{
                 
@@ -596,7 +597,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        }else if indexPath.section == 3{
+        }else if indexPath.section == 4{
             
             if vendorRevs.count >= 3 {
                 
@@ -616,7 +617,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             self.navigationController?.pushViewController(vendorPostsVc, animated: true)
             
-        }else if indexPath.section == 1{
+        }else if indexPath.section == 2{
             
             let selectedInfoCell = infoCells[indexPath.row]
             
