@@ -376,11 +376,11 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
             
-            if let commentTextField = cell.viewWithTag(1) as? UITextField{
+            if let commentTextView = cell.viewWithTag(1) as? UITextView{
                 
-                commentTextField.delegate = self
+                commentTextView.delegate = self
                 
-                commentTextField.text = clientData?["client_header"]["comment"].string?.replacingOccurrences(of: "<br>", with: "\n") ?? ""
+                commentTextView.text = clientData?["client_header"]["comment"].string?.replacingOccurrences(of: "<br>", with: "\n") ?? ""
                 
             }
             
@@ -690,14 +690,6 @@ extension ClientViewController{
 
 extension ClientViewController : UITextFieldDelegate {
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        guard textField.restorationIdentifier != "pochtaIndex" , textField.text != nil , textField.text?.replacingOccurrences(of: " ", with: "") != "" else {return}
-        
-        updateClientInfoDataManager.getUpdateClientInfoData(key: key, clientId: thisClientId!, fieldId: "5", value: textField.text!.replacingOccurrences(of: "'", with: "").replacingOccurrences(of: "\n", with: "<br>"))
-        
-    }
-    
     //This is for pochta index field
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard textField.restorationIdentifier == "pochtaIndex" ,
@@ -708,6 +700,20 @@ extension ClientViewController : UITextFieldDelegate {
         let substringToReplace = textFieldText[rangeOfTextToReplace]
         let count = textFieldText.count - substringToReplace.count + string.count
         return count <= 6
+    }
+    
+}
+
+//MARK: - TextView
+
+extension ClientViewController : UITextViewDelegate{
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+        guard textView.text != nil , textView.text?.replacingOccurrences(of: " ", with: "") != "" else {return}
+        
+        updateClientInfoDataManager.getUpdateClientInfoData(key: key, clientId: thisClientId!, fieldId: "5", value: textView.text!.replacingOccurrences(of: "'", with: "").replacingOccurrences(of: "\n", with: "<br>"))
+        
     }
     
 }
