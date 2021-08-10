@@ -440,7 +440,7 @@ extension ClientsViewController : FormDataManagerDelegate{
                 
                 clients = data["clients"].arrayValue
                 
-                tableView.reloadSections([1,2,3], with: .automatic)
+                tableView.reloadData()
                 
             }else{
                 print("Error with getting FormData , result : 0")
