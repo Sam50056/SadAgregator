@@ -48,6 +48,9 @@ class BrokerTableViewCell: UITableViewCell {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        brokerImageView.layer.cornerRadius = brokerImageView.frame.width / 2
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
