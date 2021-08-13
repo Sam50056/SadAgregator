@@ -242,6 +242,7 @@
 		22BF4DDC2676A22C00748D0B /* VendFormDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF4DDB2676A22C00748D0B /* VendFormDataManager.swift */; };
 		22BF4DDF2676B80F00748D0B /* VendUpdateInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF4DDE2676B80F00748D0B /* VendUpdateInfoDataManager.swift */; };
 		22C3315E266EEC4900B4FE1D /* BrokersUpdateInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C3315D266EEC4900B4FE1D /* BrokersUpdateInfoDataManager.swift */; };
+		22C4883C26C6E97A005E7A7A /* FavoriteBrokersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4883B26C6E97A005E7A7A /* FavoriteBrokersView.swift */; };
 		22C5499525F411A3008D941B /* ClientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5499325F411A3008D941B /* ClientTableViewCell.swift */; };
 		22C5499625F411A4008D941B /* ClientTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C5499425F411A3008D941B /* ClientTableViewCell.xib */; };
 		22C5499C25F41223008D941B /* ClientTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5499A25F41223008D941B /* ClientTableViewCellTableViewCell.swift */; };
@@ -536,6 +537,7 @@
 		22BF4DDB2676A22C00748D0B /* VendFormDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendFormDataManager.swift; sourceTree = "<group>"; };
 		22BF4DDE2676B80F00748D0B /* VendUpdateInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendUpdateInfoDataManager.swift; sourceTree = "<group>"; };
 		22C3315D266EEC4900B4FE1D /* BrokersUpdateInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersUpdateInfoDataManager.swift; sourceTree = "<group>"; };
+		22C4883B26C6E97A005E7A7A /* FavoriteBrokersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBrokersView.swift; sourceTree = "<group>"; };
 		22C5499325F411A3008D941B /* ClientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTableViewCell.swift; sourceTree = "<group>"; };
 		22C5499425F411A3008D941B /* ClientTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClientTableViewCell.xib; sourceTree = "<group>"; };
 		22C5499A25F41223008D941B /* ClientTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -1482,6 +1484,7 @@
 				22A155EC2584E766000EAB64 /* MenuViewModel.swift */,
 				22423E97259116270097C9E6 /* ProfileViewModel.swift */,
 				2238F7F5259400C600CFF51D /* FavoriteVendsView.swift */,
+				22C4883B26C6E97A005E7A7A /* FavoriteBrokersView.swift */,
 				225957A42596A2A60088C7E4 /* MasterViewModel.swift */,
 				22D90232259C023B009732CC /* FavoritePostsView.swift */,
 				2245820225A9FB15008882A9 /* HelpView.swift */,
@@ -1846,6 +1849,7 @@
 				22ADF82B267C369800811DA9 /* BrokersUpdSendTypeDataManager.swift in Sources */,
 				22029C1E25C64C0600CE79BC /* ToExpQueueDataManager.swift in Sources */,
 				227ADAAA25892D8E009B32EC /* ReviewUpdateDataManager.swift in Sources */,
+				22C4883C26C6E97A005E7A7A /* FavoriteBrokersView.swift in Sources */,
 				2293745E2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift in Sources */,
 				2284EADD25BB26AE00CC1D58 /* SaveOkInfoDataManager.swift in Sources */,
 				226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */,

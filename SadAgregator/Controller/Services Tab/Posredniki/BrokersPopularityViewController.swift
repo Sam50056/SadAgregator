@@ -122,6 +122,37 @@ extension BrokersPopularityViewController{
         
         cell.label.text = broker["name"].stringValue
         
+        let peoples = broker["peoples"].stringValue
+        
+        if peoples == "" || peoples == "0"{
+            cell.peoplesLabel.text = ""
+            cell.peoplesImageView.isHidden = true
+        }else{
+            cell.peoplesLabel.text = peoples
+            cell.peoplesImageView.isHidden = false
+        }
+        
+        let rev = broker["revs"].intValue
+        
+        if rev == 0{
+            cell.revLabel.text = ""
+            cell.revImageView.isHidden = true
+        }else{
+            cell.revLabel.text = String(rev)
+            cell.revImageView.isHidden = false
+        }
+        
+        let imgs = broker["imgs"].stringValue
+        
+        if imgs == "0" || imgs == "" {
+            cell.imageCountLabel.text = ""
+            cell.imageCountImageView.isHidden = true
+        }else{
+            cell.imageCountLabel.text = imgs
+            cell.imageCountImageView.isHidden = false
+        }
+        
+        
         let rating = broker["avg_rate"].doubleValue
         cell.ratingView.rating = rating
         cell.ratingView.settings.fillMode = .precise

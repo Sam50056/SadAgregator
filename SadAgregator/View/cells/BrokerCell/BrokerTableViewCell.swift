@@ -17,6 +17,14 @@ class BrokerTableViewCell: UITableViewCell {
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var verifyImageView : UIImageView!
     
+    @IBOutlet weak var revImageView: UIImageView!
+    @IBOutlet weak var revLabel: UILabel!
+    @IBOutlet weak var peoplesImageView: UIImageView!
+    @IBOutlet weak var peoplesLabel: UILabel!
+    @IBOutlet weak var imageCountImageView: UIImageView!
+    @IBOutlet weak var imageCountLabel: UILabel!
+    
+    
     var otherItems = [TableViewItem](){
         didSet{
             tableView.reloadData()
