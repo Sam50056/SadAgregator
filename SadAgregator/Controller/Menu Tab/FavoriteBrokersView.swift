@@ -1,124 +1,109 @@
 //
-//  BrokersPopularityViewController.swift
+//  FavoriteBrokersView.swift
 //  SadAgregator
 //
-//  Created by Sam Yerznkyan on 29.07.2021.
+//  Created by Sam Yerznkyan on 13.08.2021.
 //
 
+import SwiftUI
 import UIKit
 import SwiftyJSON
 import RealmSwift
 
-class BrokersPopularityViewController: UITableViewController {
+//MARK: - ViewController Representable
+
+struct FavoriteBrokersView : UIViewControllerRepresentable{
     
-    private let realm = try! Realm()
-    
-    private var key = ""
-    
-    private let searchController = UISearchController(searchResultsController: nil)
-    
-    private var brokersBrokersTopDataManager = BrokersBrokersTopDataManager()
-    private lazy var brokersBrokersTopBySearchDataManager = BrokersBrokersTopBySearchDataManager()
-    
-    private var brokers = [JSON]()
-    
-    private var page = 1
-    private var rowForPaggingUpdate : Int = 14
-    
-    private var searchBarIsEmpty : Bool{
-        guard let text = searchController.searchBar.text else {return false}
-        return text.isEmpty
+    func makeUIViewController(context: Context) -> FavoriteBrokersViewController {
+        
+        return FavoriteBrokersViewController() //UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavoriteVendsVC") as! FavoriteVendsViewController
+        
     }
     
-    private var searchTimer : Timer!
+    func updateUIViewController(_ uiViewController: FavoriteBrokersViewController, context: Context) {
+        
+    }
+    
+}
+
+//MARK: - ViewController
+
+class FavoriteBrokersViewController : UITableViewController {
+    
+    let realm = try! Realm()
+    
+    let activityController = UIActivityIndicatorView()
+    
+    var key = ""
+    
+    lazy var brokersFavoritesDataManager = BrokersFavoritesDataManager()
+    
+    var page = 1
+    var rowForPaggingUpdate : Int = 10
+    
+    var brokersArray = [JSON]()
+    
+    var brokersData : JSON?
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
         loadUserData()
         
-        brokersBrokersTopDataManager.delegate = self
-        brokersBrokersTopBySearchDataManager.delegate = self
-        
         tableView.register(UINib(nibName: "BrokerTableViewCell", bundle: nil), forCellReuseIdentifier: "brokerCell")
+        
+        tableView.register(UINib(nibName: "EmptyTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCell")
+        
+        refreshControl = UIRefreshControl()
+        
+        //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl!) // not required when using UITableViewController
+        
         tableView.separatorStyle = .none
         
-        //Set up search controller
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Поиск"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
+        brokersFavoritesDataManager.delegate = self
         
-        update()
+        refresh(self)
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationItem.title = "Посредники"
-        
-    }
+    //MARK: - Refresh func
     
-}
-
-//MARK: - Functions
-
-extension BrokersPopularityViewController{
-    
-    func update(){
+    @objc func refresh(_ sender: AnyObject) {
         
-        if searchBarIsEmpty{
-            brokersBrokersTopDataManager.getBrokersBrokersTopData(key: key, page: page)
-        }else{
-            
-            searchTimer != nil ? searchTimer.invalidate() : nil
-            
-            searchTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { [weak self] _ in
-                self?.brokersBrokersTopBySearchDataManager.geBrokersBrokersTopBySearchData(key: self!.key, query: self!.searchController.searchBar.text!, page: self!.page)
-            }
-            
-        }
-        
-    }
-    
-}
-
-//MARK: - SearchBar
-
-extension BrokersPopularityViewController : UISearchResultsUpdating{
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
-        brokers.removeAll()
         page = 1
         
-        update()
+        brokersArray.removeAll()
         
         tableView.reloadData()
         
+        brokersFavoritesDataManager.getBrokersFavoritesData(key: key, page: page)
+        
+        showSimpleCircleAnimation(activityController: activityController)
+        
     }
     
-}
-
-//MARK: - TableView
-
-extension BrokersPopularityViewController{
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    //MARK: - TableView Stuff
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return brokers.count
+        return brokersData != nil ? brokersArray.count == 0 ? 1 : brokersArray.count : 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if brokersArray.isEmpty{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath)
+            
+            (cell as! EmptyTableViewCell).label.text = "Вы еще не добавили посредников в избранное"
+            
+            return cell
+            
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "brokerCell" , for: indexPath) as! BrokerTableViewCell
         
-        let broker = brokers[indexPath.row]
+        let broker = brokersArray[indexPath.row]
         
         cell.label.text = broker["name"].stringValue
         
@@ -232,22 +217,14 @@ extension BrokersPopularityViewController{
         
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return K.makeHeightForBrokerCell(broker: brokers[indexPath.row])
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         
+      
         
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let brokerCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BrokerCardVC") as! BrokerCardViewController
-        
-        let selectedBrokerId = brokers[indexPath.row]["id"].string
-        
-        brokerCardVC.thisBrokerId = selectedBrokerId
-        
-        navigationController?.pushViewController(brokerCardVC, animated: true)
-        
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return (brokersArray.count == 0) ? ((UIScreen.main.bounds.height / 2)) : (K.makeHeightForBrokerCell(broker: brokersArray[indexPath.row]))
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -256,9 +233,9 @@ extension BrokersPopularityViewController{
             
             page += 1
             
-            rowForPaggingUpdate += 16
+            rowForPaggingUpdate += 9
             
-            update()
+            brokersFavoritesDataManager.getBrokersFavoritesData(key: key, page: page)
             
             print("Done a request for page: \(page)")
             
@@ -268,70 +245,45 @@ extension BrokersPopularityViewController{
     
 }
 
-//MARK: - BrokersBrokersTopDataManager
+//MARK: - BrokersFavoritesDataManager
 
-extension BrokersPopularityViewController : BrokersBrokersTopDataManagerDelegate{
+extension FavoriteBrokersViewController : BrokersFavoritesDataManagerDelegate {
     
-    func didGetBrokersBrokersTopData(data: JSON) {
+    func didGegBrokersFavoritesData(data: JSON) {
         
         DispatchQueue.main.async { [weak self] in
             
-            if data["result"].intValue == 1{
-                
-                self?.brokers = data["brokers"].arrayValue
-                
-                self?.tableView.reloadData()
-                
-            }else{
-                
-            }
+            self?.brokersData = data
+            
+            self?.brokersArray.append(contentsOf: data["brokers"].arrayValue)
+            
+            self?.tableView.reloadSections([0], with: .automatic)
+            
+            self?.refreshControl?.endRefreshing()
+            
+            self?.stopSimpleCircleAnimation(activityController: self!.activityController)
             
         }
         
     }
     
-    func didFailGettingBrokersBrokersTopDataWithError(error: String) {
-        print("Error with BrokersBrokersTopDataManager : \(error)")
-    }
-    
-}
-
-//MARK: - BrokersBrokersTopBySearchDataManager
-
-extension BrokersPopularityViewController : BrokersBrokersTopBySearchDataManagerDelegate{
-    
-    func didGetBorkersBrokersTopDataManager(data: JSON) {
-        DispatchQueue.main.async { [weak self] in
-            
-            if data["result"].intValue == 1{
-                
-                self?.brokers.append(contentsOf: data["brokers"].arrayValue)
-                
-                self?.tableView.reloadData()
-                
-            }else{
-                
-            }
-            
-        }
-    }
-    
-    func didFailGettingBorkersBrokersTopDataWithError(error: String) {
-        print("Error with BrokersBrokersTopBySearchDataManager : \(error)")
+    func didFailGettingBrokersFavoritesDataWithError(error: String) {
+        print("Error with BrokersFavoritesDataManager : \(error)")
     }
     
 }
 
 //MARK: - Data Manipulation Methods
 
-extension BrokersPopularityViewController {
+extension FavoriteBrokersViewController {
     
-    func loadUserData(){
+    func loadUserData (){
         
         let userDataObject = realm.objects(UserData.self)
         
-        key = userDataObject.first?.key ?? ""
+        key = userDataObject.first!.key
         
     }
     
 }
+

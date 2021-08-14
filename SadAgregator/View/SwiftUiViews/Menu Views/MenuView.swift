@@ -205,6 +205,31 @@ struct MenuView: View {
                                     
                                 }
                                 
+                                NavigationLink(destination: FavoriteBrokersView().navigationBarTitle("Избранные посредники", displayMode: .inline), isActive: $menuViewModel.showFavoriteBrokers){
+                                    
+                                    HStack(spacing: 16){
+                                        
+                                        Image(systemName: "person.2.fill")
+                                            .resizable()
+                                            .frame(width: 30, height: 20, alignment: .center)
+                                            .foregroundColor(Color(.systemBlue))
+                                        
+                                        Text("Избранные посредники")
+                                            .font(.custom("", size: 16))
+                                        
+                                        Spacer()
+                                        
+                                        if menuViewModel.lkVends != "0"{
+                                            Text(menuViewModel.lkVends)
+                                                .font(.custom("", size: 16))
+                                                .foregroundColor(Color(.systemGray))
+                                        }
+                                        
+                                    }
+                                    .padding(.vertical, 5)
+                                    
+                                }
+                                
                                 NavigationLink(destination: FavoritePostsView().navigationBarTitle("Избранные посты", displayMode: .inline)){
                                     
                                     HStack(spacing: 23){

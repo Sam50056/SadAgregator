@@ -148,4 +148,24 @@ struct K {
         
     }
     
+    static func makeHeightForBrokerCell(broker : JSON) -> CGFloat{
+        
+        var height : CGFloat = 0
+        
+        let topPartHeight : CGFloat = 90
+        
+        if let phone = broker["phone"].string , phone != ""{
+            height += 32
+        }
+        
+        height += 32 * CGFloat(broker["rates"].arrayValue.count)
+        
+        height += 32 * CGFloat(broker["parcels"].arrayValue.count)
+        
+        height += topPartHeight
+        
+        return height
+        
+    }
+    
 }

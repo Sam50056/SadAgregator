@@ -43,6 +43,8 @@ class FavoriteVendsViewController : UITableViewController {
     
     var vendsArray = [JSON]()
     
+    var vendsData : JSON?
+    
     var selectedVendId : String?
     
     override func viewDidLoad() {
@@ -100,7 +102,7 @@ class FavoriteVendsViewController : UITableViewController {
     //MARK: - TableView Stuff
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return vendsArray.count == 0 ? 1 : vendsArray.count
+        return vendsData != nil ? vendsArray.count == 0 ? 1 : vendsArray.count : 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -206,15 +208,17 @@ extension FavoriteVendsViewController : MyVendorsDataManagerDelegate {
     
     func didGetMyVendorsData(data : JSON){
         
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async { [weak self] in
             
-            vendsArray.append(contentsOf: data["vends"].arrayValue)
+            self?.vendsData = data
             
-            tableView.reloadSections([0], with: .automatic)
+            self?.vendsArray.append(contentsOf: data["vends"].arrayValue)
             
-            refreshControl?.endRefreshing()
+            self?.tableView.reloadSections([0], with: .automatic)
             
-            stopSimpleCircleAnimation(activityController: activityController)
+            self?.refreshControl?.endRefreshing()
+            
+            self?.stopSimpleCircleAnimation(activityController: self!.activityController)
             
         }
         

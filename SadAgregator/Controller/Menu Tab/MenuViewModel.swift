@@ -31,6 +31,8 @@ class MenuViewModel : ObservableObject{
     
     @Published var showFavoriteVends = false
     
+    @Published var showFavoriteBrokers = false
+    
     @Published var showAddPointRequestView = false
     
     @Published var showSendQuestionView = false
