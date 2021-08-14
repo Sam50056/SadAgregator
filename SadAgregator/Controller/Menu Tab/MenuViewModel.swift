@@ -24,6 +24,7 @@ class MenuViewModel : ObservableObject{
     @Published var name = ""
     @Published var code = ""
     @Published var lkVends = ""
+    @Published var lkBrokers = ""
     @Published var lkPosts = ""
     
     @Published var showModalLogIn = false
@@ -86,6 +87,7 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
                     let code = data["code"].stringValue
                     
                     let lkVends = data["lk_vends"].stringValue
+                    let lkBrokers = data["lk_brokers"].stringValue
                     let lkPosts = data["lk_posts"].stringValue
                     
                     userDataObject.name = name
@@ -95,6 +97,7 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
                     
                     userDataObject.lkPosts = lkPosts
                     userDataObject.lkVends = lkVends
+                    userDataObject.lkBrokers = lkBrokers
                     
                     userDataObject.settings = data["settings"].stringValue
                     
@@ -389,6 +392,7 @@ extension MenuViewModel {
             code = userDataObject.code
             
             lkVends = userDataObject.lkVends
+            lkBrokers = userDataObject.lkBrokers
             lkPosts = userDataObject.lkPosts
             
         }

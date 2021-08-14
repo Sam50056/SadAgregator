@@ -219,8 +219,8 @@ struct MenuView: View {
                                         
                                         Spacer()
                                         
-                                        if menuViewModel.lkVends != "0"{
-                                            Text(menuViewModel.lkVends)
+                                        if menuViewModel.lkBrokers != "0"{
+                                            Text(menuViewModel.lkBrokers)
                                                 .font(.custom("", size: 16))
                                                 .foregroundColor(Color(.systemGray))
                                         }

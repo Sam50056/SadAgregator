@@ -329,6 +329,7 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                     let code = data["code"].stringValue
                     
                     let lkVends = data["lk_vends"].stringValue
+                    let lkBrokers = data["lk_brokers"].stringValue
                     let lkPosts = data["lk_posts"].stringValue
                     
                     userDataObject.name = name
@@ -336,6 +337,7 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                     
                     userDataObject.lkPosts = lkPosts
                     userDataObject.lkVends = lkVends
+                    userDataObject.lkBrokers = lkBrokers
                     
                     userDataObject.settings = data["settings"].stringValue
                     

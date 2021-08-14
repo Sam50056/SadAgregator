@@ -218,8 +218,14 @@ class FavoriteBrokersViewController : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         
-      
+        
+        let brokerCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BrokerCardVC") as! BrokerCardViewController
+        
+        let selectedBrokerId = brokersArray[indexPath.row]["id"].string
+        
+        brokerCardVC.thisBrokerId = selectedBrokerId
+        
+        navigationController?.pushViewController(brokerCardVC, animated: true)
         
     }
     
