@@ -570,7 +570,7 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                             
                             completion(true)
                             
-                            tableView.reloadSections([4], with: .automatic)
+                            refreshClientData()
                             
                         }
                         
