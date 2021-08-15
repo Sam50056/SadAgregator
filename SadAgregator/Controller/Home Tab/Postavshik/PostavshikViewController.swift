@@ -137,6 +137,8 @@ class PostavshikViewController: UIViewController {
     
     var doneArray = [String]()
     
+    var showTerms = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -401,7 +403,7 @@ extension PostavshikViewController : SetVendActionsDataManagerDelegate{
 extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 9
+        return 11
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -422,30 +424,38 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 2:
             
-            return getInfoRowsCount()
+            return vendorData?["terms"].stringValue != "" ? 1 : 0
             
         case 3:
             
-            return 2
+            return showTerms ? 1 : 0
             
         case 4:
+            
+            return getInfoRowsCount()
+            
+        case 5:
+            
+            return 2
+            
+        case 6:
             
             return vendorRevs.count != 0 ? 1 : 0
                 
             
-        case 5:
+        case 7:
             
             return vendorRevs.count < 3 ? vendorRevs.count : 3
             
-        case 6:
+        case 8:
             
             return postsArray.isEmpty ? 0 : 1
             
-        case 7:
+        case 9:
             
             return postsArray.count
             
-        case 8:
+        case 10:
             
             return postsArray.isEmpty ? 0 : 1
             
@@ -477,11 +487,41 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 2:
             
+            cell = tableView.dequeueReusableCell(withIdentifier: "uslCell", for: indexPath)
+            
+            guard let label = cell.viewWithTag(1) as? UILabel,
+                  let imgView = cell.viewWithTag(2) as? UIImageView
+            else {return cell}
+            
+            label.text = "Условия сотрудничества"
+            
+            label.font = UIFont.systemFont(ofSize: 18)
+            
+            imgView.image = UIImage(systemName: showTerms ? "chevron.up" : "chevron.down")
+            
+            cell.contentView.backgroundColor = .systemGray6
+            
+        case 3:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "textViewCell", for: indexPath)
+            
+            guard let textView = cell.viewWithTag(1) as? UITextView else {return cell}
+            
+            cell.contentView.backgroundColor = .systemGray6
+            
+            textView.text = vendorData["terms"].string?.replacingOccurrences(of: "<br>", with: "\n")
+            
+            textView.font = UIFont.systemFont(ofSize: 17)
+            
+            textView.backgroundColor = .systemGray6
+            
+        case 4:
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
             
             setUpInfoCell(cell: cell, data: vendorData, index: indexPath.row)
             
-        case 3:
+        case 5:
             
             if indexPath.row == 0{
                 
@@ -497,13 +537,13 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        case 4:
+        case 6:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "revCountLabel", for: indexPath)
             
             setUpRevCountLabel(cell: cell)
             
-        case 5:
+        case 7:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "revCell", for: indexPath)
             
@@ -511,11 +551,11 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             setUpRevCell(cell: cell, data: rev)
             
-        case 6:
+        case 8:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "lastPostsCell", for: indexPath)
             
-        case 7:
+        case 9:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
             
@@ -525,7 +565,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             setUpPostCell(cell: cell as! PostTableViewCell, data: post, index: index, export: vendorData["export"])
             
-        case 8:
+        case 10:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "allPostsCell", for: indexPath)
             
@@ -536,56 +576,15 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         return cell
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        switch indexPath.section {
-        
-        case 0:
-            
-            return 150
-        
-        case 1:
-            
-            return 92
-            
-        case 2:
-            
-            return 50
-            
-        case 3:
-            
-            return 50
-            
-        case 4:
-            
-            return 50
-            
-        case 5:
-            
-            return 150
-            
-        case 6:
-            
-            return 50
-            
-        case 7:
-            
-            return K.postHeight
-            
-        case 8:
-            
-            return 50
-            
-        default:
-            fatalError("Invalid Section")
-        }
-        
-        
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 3, indexPath.row == 1{
+        if indexPath.section == 2{
+            
+            showTerms.toggle()
+            
+            tableView.reloadSections([2,3], with: .automatic)
+            
+        }else if indexPath.section == 5, indexPath.row == 1{
             
             if !isLogged{
                 
@@ -597,7 +596,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        }else if indexPath.section == 4{
+        }else if indexPath.section == 6{
             
             if vendorRevs.count >= 3 {
                 
@@ -609,7 +608,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        }else if indexPath.section == 6 || indexPath.section == 8{
+        }else if indexPath.section == 8 || indexPath.section == 10{
             
             let vendorPostsVc = VendorPostsTableViewController()
             
@@ -617,7 +616,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             self.navigationController?.pushViewController(vendorPostsVc, animated: true)
             
-        }else if indexPath.section == 2{
+        }else if indexPath.section == 4{
             
             let selectedInfoCell = infoCells[indexPath.row]
             
