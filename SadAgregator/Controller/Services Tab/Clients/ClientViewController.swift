@@ -64,7 +64,9 @@ class ClientViewController: UIViewController {
 extension ClientViewController{
     
     func refreshClientData() {
+        clientData = nil
         infoItems.removeAll()
+        purs.removeAll()
         clientDataManager.getClientData(key: key, clientId: thisClientId!)
     }
     
@@ -564,13 +566,11 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                     
                     if data["result"].intValue == 1{
                         
-                        DispatchQueue.main.async { [self] in
-                            
-                            purs.remove(at: indexPath.row)
+                        DispatchQueue.main.async { [weak self] in
                             
                             completion(true)
                             
-                            refreshClientData()
+                            self?.refreshClientData()
                             
                         }
                         
