@@ -56,9 +56,9 @@ class VendorRatingTableViewCell: UITableViewCell , UITableViewDelegate , UITable
         
         tableView.separatorStyle = .none
         
-        tableView.register(UINib(nibName: "RatingTableViewCell", bundle: nil), forCellReuseIdentifier: "ratingCell")
-        tableView.register(UINib(nibName: "PopTableViewCell", bundle: nil), forCellReuseIdentifier: "popCell")
-        tableView.register(UINib(nibName: "PhoneTableViewCell", bundle: nil), forCellReuseIdentifier: "phoneCell")
+        tableView.register(UINib(nibName: "VendTableViewCellRatingTableViewCell", bundle: nil), forCellReuseIdentifier: "ratingCell")
+        tableView.register(UINib(nibName: "VendTableViewCellPopTableViewCell", bundle: nil), forCellReuseIdentifier: "popCell")
+        tableView.register(UINib(nibName: "VendTableViewCellPhoneTableViewCell", bundle: nil), forCellReuseIdentifier: "phoneCell")
         tableView.register(UINib(nibName: "PricesTableViewCell", bundle: nil), forCellReuseIdentifier: "pricesCell")
         
         tableView.dataSource = self
@@ -104,7 +104,7 @@ class VendorRatingTableViewCell: UITableViewCell , UITableViewDelegate , UITable
             
             cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
             
-            setUpRatingCell(cell: cell as! RatingTableViewCell, data: rating!)
+            setUpRatingCell(cell: cell as! VendTableViewCellRatingTableViewCell, data: rating!)
             
         case 1:
             
@@ -116,7 +116,7 @@ class VendorRatingTableViewCell: UITableViewCell , UITableViewDelegate , UITable
             
             cell = tableView.dequeueReusableCell(withIdentifier: "popCell", for: indexPath)
             
-            setUpPopCell(cell: cell as! PopTableViewCell, data: pop!)
+            setUpPopCell(cell: cell as! VendTableViewCellPopTableViewCell, data: pop!)
             
         default:
             print("Invalid Section")
@@ -129,7 +129,7 @@ class VendorRatingTableViewCell: UITableViewCell , UITableViewDelegate , UITable
     
     //MARK: - Cell SetUp
     
-    func setUpRatingCell(cell : RatingTableViewCell , data : String){
+    func setUpRatingCell(cell : VendTableViewCellRatingTableViewCell , data : String){
         
         cell.ratingView.settings.fillMode = .precise
         
@@ -139,7 +139,7 @@ class VendorRatingTableViewCell: UITableViewCell , UITableViewDelegate , UITable
         
     }
     
-    func setUpPopCell(cell : PopTableViewCell , data : String){
+    func setUpPopCell(cell : VendTableViewCellPopTableViewCell , data : String){
         
         cell.label.text = data
         

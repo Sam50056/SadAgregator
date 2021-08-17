@@ -1,5 +1,5 @@
 //
-//  PhoneTableViewCell.swift
+//  VendTableViewCellPhoneTableViewCell.swift
 //  SadAgregator
 //
 //  Created by Sam Yerznkyan on 25.11.2020.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PhoneTableViewCell: UITableViewCell {
+class VendTableViewCellPhoneTableViewCell: UITableViewCell {
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var phoneImageView: UIImageView!

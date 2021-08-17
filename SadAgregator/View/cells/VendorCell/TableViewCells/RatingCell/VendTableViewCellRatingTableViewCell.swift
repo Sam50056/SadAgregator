@@ -1,5 +1,5 @@
 //
-//  RatingTableViewCell.swift
+//  VendTableViewCellRatingTableViewCell.swift
 //  SadAgregator
 //
 //  Created by Sam Yerznkyan on 25.11.2020.
@@ -8,7 +8,7 @@
 import UIKit
 import Cosmos
 
-class RatingTableViewCell: UITableViewCell {
+class VendTableViewCellRatingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var ratingView : CosmosView!
     @IBOutlet weak var ratingLabel : UILabel!

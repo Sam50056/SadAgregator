@@ -45,9 +45,9 @@ class VendTableViewCell: UITableViewCell {
         
         tableView.separatorStyle = .none
         
-        tableView.register(UINib(nibName: "RatingTableViewCell", bundle: nil), forCellReuseIdentifier: "ratingCell")
-        tableView.register(UINib(nibName: "PopTableViewCell", bundle: nil), forCellReuseIdentifier: "popCell")
-        tableView.register(UINib(nibName: "PhoneTableViewCell", bundle: nil), forCellReuseIdentifier: "phoneCell")
+        tableView.register(UINib(nibName: "VendTableViewCellRatingTableViewCell", bundle: nil), forCellReuseIdentifier: "ratingCell")
+        tableView.register(UINib(nibName: "VendTableViewCellPopTableViewCell", bundle: nil), forCellReuseIdentifier: "popCell")
+        tableView.register(UINib(nibName: "VendTableViewCellPhoneTableViewCell", bundle: nil), forCellReuseIdentifier: "phoneCell")
         
         tableView.dataSource = self
     }
@@ -94,19 +94,19 @@ extension VendTableViewCell : UITableViewDataSource{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
                 
-                setUpRatingCell(cell: cell as! RatingTableViewCell, data: rating!)
+                setUpRatingCell(cell: cell as! VendTableViewCellRatingTableViewCell, data: rating!)
                 
             }else if phone != nil{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "phoneCell", for: indexPath)
                 
-                setUpPhoneCell(cell: cell as! PhoneTableViewCell, data: phone!)
+                setUpPhoneCell(cell: cell as! VendTableViewCellPhoneTableViewCell, data: phone!)
                 
             }else {
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "popCell", for: indexPath)
                 
-                setUpPopCell(cell: cell as! PopTableViewCell, data: pop!)
+                setUpPopCell(cell: cell as! VendTableViewCellPopTableViewCell, data: pop!)
             }
             
         case 1:
@@ -115,13 +115,13 @@ extension VendTableViewCell : UITableViewDataSource{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "phoneCell", for: indexPath)
                 
-                setUpPhoneCell(cell: cell as! PhoneTableViewCell, data: phone!)
+                setUpPhoneCell(cell: cell as! VendTableViewCellPhoneTableViewCell, data: phone!)
                 
             }else if pop != nil {
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "popCell", for: indexPath)
                 
-                setUpPopCell(cell: cell as! PopTableViewCell, data: pop!)
+                setUpPopCell(cell: cell as! VendTableViewCellPopTableViewCell, data: pop!)
                 
             }
             
@@ -130,7 +130,7 @@ extension VendTableViewCell : UITableViewDataSource{
             //If it came to 3 elements in table View , it means that the last is 100% popCell
             cell = tableView.dequeueReusableCell(withIdentifier: "popCell", for: indexPath)
             
-            setUpPopCell(cell: cell as! PopTableViewCell, data: pop!)
+            setUpPopCell(cell: cell as! VendTableViewCellPopTableViewCell, data: pop!)
             
         default:
             print("IndexPath out of switch: \(indexPath.row)")
@@ -144,7 +144,7 @@ extension VendTableViewCell : UITableViewDataSource{
     
     //MARK: - Cell SetUp
     
-    func setUpRatingCell(cell : RatingTableViewCell , data : String){
+    func setUpRatingCell(cell : VendTableViewCellRatingTableViewCell , data : String){
         
         cell.ratingView.rating = Double(data)!
         
@@ -152,13 +152,13 @@ extension VendTableViewCell : UITableViewDataSource{
         
     }
     
-    func setUpPhoneCell(cell : PhoneTableViewCell , data : String){
+    func setUpPhoneCell(cell : VendTableViewCellPhoneTableViewCell , data : String){
         
         cell.label.text = data
         
     }
     
-    func setUpPopCell(cell : PopTableViewCell , data : String){
+    func setUpPopCell(cell : VendTableViewCellPopTableViewCell , data : String){
         
         cell.label.text = data
         

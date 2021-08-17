@@ -1,5 +1,5 @@
 //
-//  PopTableViewCell.swift
+//  VendTableViewCellPopTableViewCell.swift
 //  SadAgregator
 //
 //  Created by Sam Yerznkyan on 25.11.2020.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PopTableViewCell: UITableViewCell {
+class VendTableViewCellPopTableViewCell: UITableViewCell {
     
     @IBOutlet weak var leadingImageView : UIImageView!
     
