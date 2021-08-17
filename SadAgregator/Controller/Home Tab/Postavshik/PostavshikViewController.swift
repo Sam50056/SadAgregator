@@ -154,6 +154,7 @@ class PostavshikViewController: UIViewController {
         tableView.separatorStyle = .none
         
         tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
+        tableView.register(UINib(nibName: "RatingTableViewCell", bundle: nil), forCellReuseIdentifier: "revCell")
         
         //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
@@ -549,7 +550,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             let rev = vendorRevs[indexPath.row]
             
-            setUpRevCell(cell: cell, data: rev)
+            setUpRevCell(cell: cell as! RatingTableViewCell, data: rev)
             
         case 8:
             
@@ -897,26 +898,19 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
     }
     
-    func setUpRevCell(cell : UITableViewCell, data : JSON){
+    func setUpRevCell(cell : RatingTableViewCell, data : JSON){
         
-        if let authorLabel = cell.viewWithTag(1) as? UILabel,
-           let ratingView = cell.viewWithTag(2) as? CosmosView,
-           let textView = cell.viewWithTag(3) as? UITextView,
-           let dateLabel = cell.viewWithTag(4) as? UILabel{
-            
-            authorLabel.text = data["author"].stringValue
-            
-            ratingView.rating = Double(data["rate"].stringValue)!
-            
-            let rateText = data["text"].stringValue
-            
-            let rateTextWithoutBr = rateText.replacingOccurrences(of: "<br>", with: "\n")
-            
-            textView.text = rateTextWithoutBr
-            
-            dateLabel.text = data["dt"].stringValue
-            
-        }
+        cell.authorLabel.text = data["author"].stringValue
+        
+        cell.ratingView.rating = Double(data["rate"].stringValue)!
+        
+        let rateText = data["text"].stringValue
+        
+        let rateTextWithoutBr = rateText.replacingOccurrences(of: "<br>", with: "\n")
+        
+        cell.textView.text = rateTextWithoutBr
+        
+        cell.dateLabel.text = data["dt"].stringValue
         
     }
     
