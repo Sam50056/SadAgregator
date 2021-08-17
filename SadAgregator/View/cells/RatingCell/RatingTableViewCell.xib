@@ -87,6 +87,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
+                <color key="backgroundColor" name="whiteblack"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="l5G-lE-IcP" secondAttribute="trailing" id="5kZ-Vh-wSJ"/>
                     <constraint firstItem="h8Q-YR-JgH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-4" id="6dY-Zr-Xg9"/>
@@ -126,6 +127,9 @@
     <resources>
         <namedColor name="gray">
             <color red="0.96100002527236938" green="0.9649999737739563" blue="0.97299998998641968" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="whiteblack">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

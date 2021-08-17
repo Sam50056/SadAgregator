@@ -601,7 +601,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             if vendorRevs.count >= 3 {
                 
-                let vendorRevsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VendorRevsVC") as! VendorRevsViewController
+                let vendorRevsVC = VendorRevsViewController()
                 
                 vendorRevsVC.thisVendId = thisVendorId
                 

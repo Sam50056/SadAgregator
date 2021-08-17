@@ -28,6 +28,9 @@ class VendorRevsViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.isHidden = true
+        tableView.separatorStyle = .none
+        
+        tableView.register(UINib(nibName: "RatingTableViewCell", bundle: nil), forCellReuseIdentifier: "revCell")
         
         getVendRevsPagingDataManager.delegate = self
         
@@ -70,7 +73,7 @@ class VendorRevsViewController: UITableViewController {
         
         let rev = revsArray[indexPath.row]
         
-        setUpRevCell(cell: cell, data: rev)
+        setUpRevCell(cell: cell as! RatingTableViewCell, data: rev)
         
         return cell
         
@@ -93,26 +96,19 @@ class VendorRevsViewController: UITableViewController {
     
     //MARK: - Cell Setup
     
-    func setUpRevCell(cell : UITableViewCell, data : JSON){
+    func setUpRevCell(cell : RatingTableViewCell, data : JSON){
         
-        if let authorLabel = cell.viewWithTag(1) as? UILabel,
-           let ratingView = cell.viewWithTag(2) as? CosmosView,
-           let textView = cell.viewWithTag(3) as? UITextView,
-           let dateLabel = cell.viewWithTag(4) as? UILabel{
-            
-            authorLabel.text = data["author"].stringValue
-            
-            ratingView.rating = Double(data["rate"].stringValue)!
-            
-            let rateText = data["text"].stringValue
-            
-            let rateTextWithoutBr = rateText.replacingOccurrences(of: "<br>", with: "\n")
-            
-            textView.text = rateTextWithoutBr
-            
-            dateLabel.text = data["dt"].stringValue
-            
-        }
+        cell.authorLabel.text = data["author"].stringValue
+        
+        cell.ratingView.rating = Double(data["rate"].stringValue)!
+        
+        let rateText = data["text"].stringValue
+        
+        let rateTextWithoutBr = rateText.replacingOccurrences(of: "<br>", with: "\n")
+        
+        cell.textView.text = rateTextWithoutBr
+        
+        cell.dateLabel.text = data["dt"].stringValue
         
     }
     
