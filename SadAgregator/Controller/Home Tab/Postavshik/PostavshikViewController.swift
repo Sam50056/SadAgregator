@@ -155,6 +155,7 @@ class PostavshikViewController: UIViewController {
         
         tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
         tableView.register(UINib(nibName: "RatingTableViewCell", bundle: nil), forCellReuseIdentifier: "revCell")
+        tableView.register(UINib(nibName: "RatingTableViewCellWithImages", bundle: nil), forCellReuseIdentifier: "revCellWithImages")
         
         //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
@@ -546,11 +547,23 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
         case 7:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "revCell", for: indexPath)
-            
             let rev = vendorRevs[indexPath.row]
             
-            setUpRevCell(cell: cell as! RatingTableViewCell, data: rev)
+            let imgs = rev["imgs"].arrayValue
+            
+            if imgs.isEmpty{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "revCell", for: indexPath)
+                
+                setUpRevCell(cell: cell as! RatingTableViewCell, data: rev)
+                
+            }else{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "revCellWithImages", for: indexPath)
+                
+                setUpRevCell(cell: cell as! RatingTableViewCellWithImages, data: rev)
+                
+            }
             
         case 8:
             
@@ -911,6 +924,49 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         cell.textView.text = rateTextWithoutBr
         
         cell.dateLabel.text = data["dt"].stringValue
+        
+    }
+    
+    func setUpRevCell(cell : RatingTableViewCellWithImages, data : JSON){
+        
+        cell.authorLabel.text = data["author"].stringValue
+        
+        cell.ratingView.rating = Double(data["rate"].stringValue)!
+        
+        let rateText = data["text"].stringValue
+        
+        let rateTextWithoutBr = rateText.replacingOccurrences(of: "<br>", with: "\n")
+        
+        cell.textView.text = rateTextWithoutBr
+        
+        cell.dateLabel.text = data["dt"].stringValue
+        
+        let images =  data["imgs"].arrayValue.map({ jsonImage in
+            return jsonImage.stringValue
+        })
+        
+        cell.images = images
+        
+        cell.imageSelected = { [weak self] index in
+            
+            let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
+            
+            galleryVC.selectedImageIndex = index
+            
+            galleryVC.images = images.map({ img in
+                PostImage(image: img, imageId: "")
+            })
+            
+            galleryVC.sizes = []
+            
+            galleryVC.simplePreviewMode = true
+            
+            let navVC = UINavigationController(rootViewController: galleryVC)
+            
+            self?.presentHero(navVC, navigationAnimationType: .fade)
+            
+            
+        }
         
     }
     

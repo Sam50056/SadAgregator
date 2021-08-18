@@ -74,7 +74,7 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
             
         }
         
-        addPhotoView.isHidden = true
+        addPhotoView.isHidden = false
         
         guard let key = key else {return}
         

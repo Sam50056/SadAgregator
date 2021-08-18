@@ -289,6 +289,10 @@
 		22DC987F2602AFCB0016A31B /* UpdateClientInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */; };
 		22DD116E26CBEB3A00E8494C /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD116C26CBEB3A00E8494C /* RatingTableViewCell.swift */; };
 		22DD116F26CBEB3A00E8494C /* RatingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DD116D26CBEB3A00E8494C /* RatingTableViewCell.xib */; };
+		22DD117426CC755400E8494C /* RatingTableViewCellWithImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD117226CC755400E8494C /* RatingTableViewCellWithImages.swift */; };
+		22DD117526CC755500E8494C /* RatingTableViewCellWithImages.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DD117326CC755400E8494C /* RatingTableViewCellWithImages.xib */; };
+		22DD117926CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD117726CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.swift */; };
+		22DD117A26CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DD117826CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.xib */; };
 		22E44717269237B60016D96E /* PointsInSborkaSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E44716269237B60016D96E /* PointsInSborkaSegmentView.swift */; };
 		22E44719269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E44718269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift */; };
 		22E4471B269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4471A269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift */; };
@@ -587,6 +591,10 @@
 		22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateClientInfoDataManager.swift; sourceTree = "<group>"; };
 		22DD116C26CBEB3A00E8494C /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
 		22DD116D26CBEB3A00E8494C /* RatingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTableViewCell.xib; sourceTree = "<group>"; };
+		22DD117226CC755400E8494C /* RatingTableViewCellWithImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCellWithImages.swift; sourceTree = "<group>"; };
+		22DD117326CC755400E8494C /* RatingTableViewCellWithImages.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTableViewCellWithImages.xib; sourceTree = "<group>"; };
+		22DD117726CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCellWithImagesCollectionViewCell.swift; sourceTree = "<group>"; };
+		22DD117826CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTableViewCellWithImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		22E44716269237B60016D96E /* PointsInSborkaSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsInSborkaSegmentView.swift; sourceTree = "<group>"; };
 		22E44718269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsInSborkaSegmentViewModel.swift; sourceTree = "<group>"; };
 		22E4471A269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyPointsInSegmentDataManager.swift; sourceTree = "<group>"; };
@@ -1612,10 +1620,38 @@
 		22DD116B26CBEB1000E8494C /* RatingCell */ = {
 			isa = PBXGroup;
 			children = (
+				22DD117126CC72FB00E8494C /* CellWithImages */,
+				22DD117026CC718C00E8494C /* Cell */,
+			);
+			path = RatingCell;
+			sourceTree = "<group>";
+		};
+		22DD117026CC718C00E8494C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
 				22DD116C26CBEB3A00E8494C /* RatingTableViewCell.swift */,
 				22DD116D26CBEB3A00E8494C /* RatingTableViewCell.xib */,
 			);
-			path = RatingCell;
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		22DD117126CC72FB00E8494C /* CellWithImages */ = {
+			isa = PBXGroup;
+			children = (
+				22DD117626CC7D3600E8494C /* Cells */,
+				22DD117226CC755400E8494C /* RatingTableViewCellWithImages.swift */,
+				22DD117326CC755400E8494C /* RatingTableViewCellWithImages.xib */,
+			);
+			path = CellWithImages;
+			sourceTree = "<group>";
+		};
+		22DD117626CC7D3600E8494C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				22DD117726CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.swift */,
+				22DD117826CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		22E44715269234340016D96E /* Sborka */ = {
@@ -1747,6 +1783,7 @@
 				226F240F26B2004000FB2744 /* BrokerTableViewCell.xib in Resources */,
 				2237E77D25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib in Resources */,
 				22941A40262A478C00119844 /* TovarTableViewCell.xib in Resources */,
+				22DD117526CC755500E8494C /* RatingTableViewCellWithImages.xib in Resources */,
 				22A49CBC2566650600CCC781 /* SizeCollectionViewCell.xib in Resources */,
 				2267D0A125B4F3C600904C44 /* TextViewCollectionViewCell.xib in Resources */,
 				2290486C256E4978000B7A28 /* VendTableViewCellPopTableViewCell.xib in Resources */,
@@ -1759,6 +1796,7 @@
 				2237E77725FA32C500EBD919 /* PurchaseTableViewCell.xib in Resources */,
 				22328CDA25FE857800C51CC9 /* PaymentTableViewCell.xib in Resources */,
 				22BF19DA25A3DDC800567DB7 /* TextLabelCollectionViewCell.xib in Resources */,
+				22DD117A26CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.xib in Resources */,
 				22904863256DC702000B7A28 /* VendTableViewCellRatingTableViewCell.xib in Resources */,
 				22328CED25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.xib in Resources */,
 				2290485D256DAC80000B7A28 /* VendTableViewCell.xib in Resources */,
@@ -1821,6 +1859,7 @@
 				22BF1A0D25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift in Sources */,
 				22692E3326B889E700CA2946 /* BrokersBrokersTopBySearchDataManager.swift in Sources */,
 				22553015261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift in Sources */,
+				22DD117426CC755400E8494C /* RatingTableViewCellWithImages.swift in Sources */,
 				22B41BAB2648808600F7DC30 /* CreateDiapazonViewController.swift in Sources */,
 				22A09BFE2648B81C009B9921 /* PurchasesAddZonePriceDataManager.swift in Sources */,
 				222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */,
@@ -1937,6 +1976,7 @@
 				22328CC725FD806300C51CC9 /* ClientsFIlterDataManager.swift in Sources */,
 				224D273E2613AED200BFAE30 /* RangeSliderTrackLayer.swift in Sources */,
 				22692E3C26B9707D00CA2946 /* BrokersBrokerCardDataManager.swift in Sources */,
+				22DD117926CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.swift in Sources */,
 				22D90233259C023B009732CC /* FavoritePostsView.swift in Sources */,
 				2201672C25A77BB50072BFE7 /* SetVendActionsDataManager.swift in Sources */,
 				2231DB73264C64480075228E /* ClientsUpdatePaymentComDataManager.swift in Sources */,
