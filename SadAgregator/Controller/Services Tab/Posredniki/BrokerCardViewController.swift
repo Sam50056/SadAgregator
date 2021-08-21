@@ -120,7 +120,7 @@ extension BrokerCardViewController {
         
         if buttonKey.contains("plus"){
             
-            let alertController = UIAlertController(title: "Поплнить баланс?", message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Пополнить баланс?", message: nil, preferredStyle: .alert)
             
             alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
                 
