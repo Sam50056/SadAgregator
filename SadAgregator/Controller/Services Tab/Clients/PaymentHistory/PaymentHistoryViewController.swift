@@ -289,6 +289,45 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
         cell.comment =  payment["comment"].stringValue
         cell.summ = payment["summ"].string
         
+        cell.firstLabel.text = payment["pid"].stringValue
+        
+        cell.secondLabel.text = payment["dt"].stringValue
+        
+        cell.textField.text = payment["comment"].stringValue
+        
+        cell.rightRoundImageView.image = UIImage(systemName: "newspaper")
+        cell.leftRoundImageView.image = UIImage(systemName: "cart")
+        
+        if let piId = payment["pi_id"].string , !piId.isEmpty{
+            
+            cell.leftRoundView.isHidden = false
+            
+        }else{
+            cell.leftRoundView.isHidden = true
+        }
+        
+        cell.rightViewButtonTapped = { [weak self] in
+            
+            if let img = payment["img"].string , !img.isEmpty{
+                
+                self?.previewImage(img)
+                
+            }else{
+                
+                let alertController = UIAlertController(title: "Привязать чек?", message: nil, preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                    
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                
+                self?.present(alertController, animated: true, completion: nil)
+                
+            }
+            
+        }
+        
         cell.clientSelected = { [self] clientId in
             print("CL")
             let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController

@@ -10,7 +10,19 @@ import SwiftyJSON
 
 class PaymentTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var firstLabel : UILabel!
+    @IBOutlet weak var secondLabel : UILabel!
+    
     @IBOutlet weak var tableView : UITableView!
+    
+    @IBOutlet weak var textFieldBgView : UIView!
+    @IBOutlet weak var textField : UITextField!
+    
+    @IBOutlet weak var leftRoundView : UIView!
+    @IBOutlet weak var rightRoundView : UIView!
+    
+    @IBOutlet weak var leftRoundImageView : UIImageView!
+    @IBOutlet weak var rightRoundImageView : UIImageView!
     
     var key : String?
     
@@ -60,6 +72,9 @@ class PaymentTableViewCell: UITableViewCell {
     
     var clientSelected : ((String) -> ())?
     
+    var rightViewButtonTapped : (() -> ())?
+    var leftViewButtonTapped : (() -> ())?
+    
     private var tableViewItems = [TableViewItem]()
     
     override func awakeFromNib() {
@@ -68,6 +83,23 @@ class PaymentTableViewCell: UITableViewCell {
         tableView.register(UINib(nibName: "PaymentTableViewCellTableViewCell", bundle: nil), forCellReuseIdentifier: "itemCell")
         
         tableView.register(UINib(nibName: "PaymentTableViewCellEditTableViewCell", bundle: nil), forCellReuseIdentifier: "editCell")
+        
+        //Edit textField
+        textField.delegate = self
+        textField.placeholder = "Редактировать"
+        textFieldBgView.layer.cornerRadius = 6
+        textFieldBgView.backgroundColor = UIColor(named: "gray")
+        
+        secondLabel.font = UIFont.systemFont(ofSize: 15)
+        secondLabel.textColor = .systemGray
+        
+        firstLabel.font = UIFont.systemFont(ofSize: 15)
+        firstLabel.textColor = .systemBlue
+        
+        leftRoundView.layer.cornerRadius = leftRoundView.frame.width / 2
+        rightRoundView.layer.cornerRadius = rightRoundView.frame.width / 2
+        leftRoundView.backgroundColor = UIColor(named: "gray")
+        rightRoundView.backgroundColor = UIColor(named: "gray")
         
         tableView.separatorStyle = .none
         
@@ -96,6 +128,14 @@ extension PaymentTableViewCell{
         
     }
     
+    @IBAction func rightViewButtonTapped(_ sener : UIButton){
+        rightViewButtonTapped?()
+    }
+    
+    @IBAction func leftViewButtonTapped(_ sender : UIButton){
+        leftViewButtonTapped?()
+    }
+    
 }
 
 //MARK: - UITextField
@@ -117,20 +157,16 @@ extension PaymentTableViewCell : UITextFieldDelegate{
 extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch section {
         case 0:
-            return pid == "" ? 0 : 1
-        case 1:
             return clientName == "" ? 0 : 1
-        case 2:
+        case 1:
             return tableViewItems.count
-        case 3:
-            return 1
         default:
             return 0
         }
@@ -145,22 +181,6 @@ extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
         
         switch section {
         case 0:
-            
-            guard let pid = pid else { return cell }
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! PaymentTableViewCellTableViewCell
-            
-            (cell as! PaymentTableViewCellTableViewCell).firstLabel.font = UIFont.systemFont(ofSize: 15)
-            (cell as! PaymentTableViewCellTableViewCell).firstLabel.textColor = .systemBlue
-            
-            (cell as! PaymentTableViewCellTableViewCell).firstLabel.text = pid
-            
-            (cell as! PaymentTableViewCellTableViewCell).secondLabel.font = UIFont.systemFont(ofSize: 15)
-            (cell as! PaymentTableViewCellTableViewCell).secondLabel.textColor = .systemGray
-            
-            (cell as! PaymentTableViewCellTableViewCell).secondLabel.text = dt ?? ""
-            
-        case 1:
             
             guard let name = clientName else {return cell}
             
@@ -177,37 +197,24 @@ extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
             
             button.addTarget(self, action: #selector(clientCellTapped(_:)), for: .touchUpInside)
             
-        case 2:
+        case 1:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
             
             let item = tableViewItems[indexPath.row]
             
-            (cell as! PaymentTableViewCellTableViewCell).firstLabel.text = item.firstText
-            (cell as! PaymentTableViewCellTableViewCell).secondLabel.text = item.secondText
+            (cell as! PaymentTableViewCellTableViewCell).firstLabel.text = item.secondText
+            (cell as! PaymentTableViewCellTableViewCell).secondLabel.text = ""
+            
+            (cell as! PaymentTableViewCellTableViewCell).firstLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
             
             if item.firstText == "Сумма"{
                 if item.secondText.first == "-"{
-                    (cell as! PaymentTableViewCellTableViewCell).secondLabel.textColor = .systemRed
+                    (cell as! PaymentTableViewCellTableViewCell).firstLabel.textColor = .systemRed
                 }else{
-                    (cell as! PaymentTableViewCellTableViewCell).secondLabel.textColor = .systemGreen
+                    (cell as! PaymentTableViewCellTableViewCell).firstLabel.textColor = .systemGreen
                 }
             }
-            
-        case 3:
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "editCell", for: indexPath)
-            
-            (cell as! PaymentTableViewCellEditTableViewCell).textField.delegate = self
-            
-            (cell as! PaymentTableViewCellEditTableViewCell).textField.placeholder = "Редактировать"
-            
-            (cell as! PaymentTableViewCellEditTableViewCell).bgView.layer.cornerRadius = 6
-            
-            (cell as! PaymentTableViewCellEditTableViewCell).bgView.backgroundColor = UIColor(named: "gray")
-            
-            (cell as! PaymentTableViewCellEditTableViewCell).textField.text = comment
-            
         default:
             return cell
         }
@@ -222,13 +229,9 @@ extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
         
         switch section {
         case 0:
-            return 20
-        case 1:
             return 30
-        case 2:
+        case 1:
             return 20
-        case 3:
-            return 50
         default:
             return 0
         }
