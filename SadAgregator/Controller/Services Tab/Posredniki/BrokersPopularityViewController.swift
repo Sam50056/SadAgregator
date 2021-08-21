@@ -164,19 +164,34 @@ extension BrokersPopularityViewController{
         var rateItemsArray = [BrokerTableViewCell.TableViewItem]()
         var parcelItemsArray = [BrokerTableViewCell.TableViewItem]()
         
+        let brokerJsonRates = broker["rates"].arrayValue
+        let brokerJsonParcels = broker["parcels"].arrayValue
+        
         if let phone = broker["phone"].string , phone != ""{
             otherItemsArray.append(BrokerTableViewCell.TableViewItem(image: "phone", label1Text: "Телефон", label2Text: phone))
         }
         
-        broker["rates"].arrayValue.forEach { jsonRate in
+        if !brokerJsonRates.isEmpty{
             
-            rateItemsArray.append(BrokerTableViewCell.TableViewItem(image: "newspaper", label1Text: "Условия закупки", label2Text: jsonRate["capt"].stringValue + " " + jsonRate["marge"].stringValue))
+            rateItemsArray.append(BrokerTableViewCell.TableViewItem(image: "newspaper", label1Text: "Условия закупки", label2Text: ""))
+            
+            brokerJsonRates.forEach { jsonRate in
+                
+                rateItemsArray.append(BrokerTableViewCell.TableViewItem(image: "newspaper", label1Text: "Условия закупки", label2Text: jsonRate["capt"].stringValue + " " + jsonRate["marge"].stringValue))
+                
+            }
             
         }
         
-        broker["parcels"].arrayValue.forEach { jsonParcel in
+        if !brokerJsonParcels.isEmpty{
             
-            parcelItemsArray.append(BrokerTableViewCell.TableViewItem(image: "shippingbox", label1Text: "Условия доставки", label2Text: jsonParcel["name"].stringValue + " " + jsonParcel["price"].stringValue))
+            parcelItemsArray.append(BrokerTableViewCell.TableViewItem(image: "shippingbox", label1Text: "Условия доставки", label2Text: ""))
+            
+            brokerJsonParcels.forEach { jsonParcel in
+                
+                parcelItemsArray.append(BrokerTableViewCell.TableViewItem(image: "shippingbox", label1Text: "Условия доставки", label2Text: jsonParcel["name"].stringValue + " " + jsonParcel["price"].stringValue))
+                
+            }
             
         }
         

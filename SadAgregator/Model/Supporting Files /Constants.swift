@@ -158,9 +158,9 @@ struct K {
             height += 32
         }
         
-        height += 32 * CGFloat(broker["rates"].arrayValue.count)
+        height += 32 * CGFloat(broker["rates"].arrayValue.isEmpty ? 0 : broker["rates"].arrayValue.count + 1)
         
-        height += 32 * CGFloat(broker["parcels"].arrayValue.count)
+        height += 32 * CGFloat(broker["parcels"].arrayValue.isEmpty ? 0 : broker["parcels"].arrayValue.count + 1)
         
         height += topPartHeight
         
