@@ -14,11 +14,13 @@ class VendorRevsViewController: UITableViewController {
     var key = ""
     
     var thisVendId : String?
+    var thisBrokerId : String?
     
     var page = 1
     var rowForPaggingUpdate = 15
     
-    var getVendRevsPagingDataManager = GetVendRevsPagingDataManager()
+    lazy var getVendRevsPagingDataManager = GetVendRevsPagingDataManager()
+    lazy var brokersGetBrokerRevsPagginationDataManager = BrokersGetBrokerRevsPagginationDataManager()
     
     var revsArray = [JSON]()
     
@@ -27,13 +29,13 @@ class VendorRevsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.isHidden = true
         tableView.separatorStyle = .none
         
         tableView.register(UINib(nibName: "RatingTableViewCell", bundle: nil), forCellReuseIdentifier: "revCell")
         tableView.register(UINib(nibName: "RatingTableViewCellWithImages", bundle: nil), forCellReuseIdentifier: "revCellWithImages")
         
         getVendRevsPagingDataManager.delegate = self
+        brokersGetBrokerRevsPagginationDataManager.delegate = self
         
         refreshControl = UIRefreshControl()
         
@@ -49,16 +51,31 @@ class VendorRevsViewController: UITableViewController {
     
     @objc func refresh(_ sender : AnyObject){
         
-        guard let vendId = thisVendId else {return}
+        if let vendId = thisVendId{
+            
+            page = 1
+            rowForPaggingUpdate = 15
+            
+            revsArray.removeAll()
+            
+            showSimpleCircleAnimation(activityController: activityController)
+            
+            getVendRevsPagingDataManager.getGetVendRevsPagingData(key: key, vendId: vendId, page: page)
+            
+        }else if let brokerId = thisBrokerId {
+            
+            page = 1
+            rowForPaggingUpdate = 15
+            
+            revsArray.removeAll()
+            
+            showSimpleCircleAnimation(activityController: activityController)
+            
+            brokersGetBrokerRevsPagginationDataManager.getBrokersGetBrokerRevsPagginationData(key: key, id: brokerId, page: page)
+            
+        }
         
-        page = 1
-        rowForPaggingUpdate = 15
-        
-        revsArray.removeAll()
-        
-        showSimpleCircleAnimation(activityController: activityController)
-        
-        getVendRevsPagingDataManager.getGetVendRevsPagingData(key: key, vendId: vendId, page: page)
+       
         
     }
     
@@ -101,7 +118,13 @@ class VendorRevsViewController: UITableViewController {
             
             rowForPaggingUpdate += 16
             
-            getVendRevsPagingDataManager.getGetVendRevsPagingData(key: key, vendId: thisVendId!, page: page)
+            if let vendId = thisVendId {
+                getVendRevsPagingDataManager.getGetVendRevsPagingData(key: key, vendId: vendId, page: page)
+            }else if let brokerId = thisBrokerId{
+                brokersGetBrokerRevsPagginationDataManager.getBrokersGetBrokerRevsPagginationData(key: key, id: brokerId, page: page)
+            }
+            
+           
             
             print("Done a request for page: \(page)")
             
@@ -178,20 +201,15 @@ extension VendorRevsViewController : GetVendRevsPagingDataManagerDelegate{
     
     func didGetGetVendRevsPagingData(data: JSON) {
         
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async { [weak self] in
             
-            revsArray.append(contentsOf: data["revs"].arrayValue)
+            self?.revsArray.append(contentsOf: data["revs"].arrayValue)
             
-            tableView.reloadData()
+            self?.tableView.reloadData()
             
-            stopSimpleCircleAnimation(activityController: activityController)
+            self?.stopSimpleCircleAnimation(activityController: self!.activityController)
             
-            refreshControl!.endRefreshing()
-            
-            //Show table view to the user
-            if tableView.isHidden {
-                tableView.isHidden = false
-            }
+            self?.refreshControl!.endRefreshing()
             
         }
         
@@ -199,6 +217,32 @@ extension VendorRevsViewController : GetVendRevsPagingDataManagerDelegate{
     
     func didFailGettingGetVendRevsPagingDataWithError(error: String) {
         print("Error with GetVendRevsPagingDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - BrokersGetBrokerRevsPagginationDataManager
+
+extension VendorRevsViewController : BrokersGetBrokerRevsPagginationDataManagerDelegate{
+    
+    func didGetBrokersGetBrokerRevsPagginationData(data: JSON) {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            self?.revsArray.append(contentsOf: data["revs"].arrayValue)
+            
+            self?.tableView.reloadData()
+            
+            self?.stopSimpleCircleAnimation(activityController: self!.activityController)
+            
+            self?.refreshControl!.endRefreshing()
+            
+        }
+        
+    }
+    
+    func didFailGettingBrokersGetBrokerRevsPagginationDataWithError(error: String) {
+        print("Error with BrokersGetBrokerRevsPagginationDataManager : \(error)")
     }
     
 }

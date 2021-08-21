@@ -635,15 +635,17 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             
         }else if indexPath.section == 9{
             
-            //            if brokerRevs.count >= 3 {
-            //
-            //                let vendorRevsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VendorRevsVC") as! VendorRevsViewController
-            //
-            //                vendorRevsVC.thisVendId = thisVendorId
-            //
-            //                navigationController?.pushViewController(vendorRevsVC, animated: true)
-            //
-            //            }
+            if brokerRevs.count >= 3 {
+                
+                let vendorRevsVC = VendorRevsViewController()
+                
+                vendorRevsVC.key = key
+                
+                vendorRevsVC.thisBrokerId = brokerRevs[indexPath.row]["id"].string
+                
+                navigationController?.pushViewController(vendorRevsVC, animated: true)
+                
+            }
             
         }else if indexPath.section == 7{
             
