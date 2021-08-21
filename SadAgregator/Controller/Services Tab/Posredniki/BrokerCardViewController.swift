@@ -637,13 +637,13 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             
             if brokerRevs.count >= 3 {
                 
-                let vendorRevsVC = VendorRevsViewController()
+                let brokerRevsVC = VendorBrokerRevsViewController()
                 
-                vendorRevsVC.key = key
+                brokerRevsVC.key = key
                 
-                vendorRevsVC.thisBrokerId = brokerRevs[indexPath.row]["id"].string
+                brokerRevsVC.thisBrokerId = brokerRevs[indexPath.row]["id"].string
                 
-                navigationController?.pushViewController(vendorRevsVC, animated: true)
+                navigationController?.pushViewController(brokerRevsVC, animated: true)
                 
             }
             

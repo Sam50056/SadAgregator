@@ -1,5 +1,5 @@
 //
-//  VendorRevsViewController.swift
+//  VendorBrokerRevsViewController.swift
 //  SadAgregator
 //
 //  Created by Sam Yerznkyan on 04.02.2021.
@@ -9,7 +9,7 @@ import UIKit
 import SwiftyJSON
 import Cosmos
 
-class VendorRevsViewController: UITableViewController {
+class VendorBrokerRevsViewController: UITableViewController {
     
     var key = ""
     
@@ -197,7 +197,7 @@ class VendorRevsViewController: UITableViewController {
 
 //MARK: - GetVendRevsPagingDataManagerDelegate
 
-extension VendorRevsViewController : GetVendRevsPagingDataManagerDelegate{
+extension VendorBrokerRevsViewController : GetVendRevsPagingDataManagerDelegate{
     
     func didGetGetVendRevsPagingData(data: JSON) {
         
@@ -223,7 +223,7 @@ extension VendorRevsViewController : GetVendRevsPagingDataManagerDelegate{
 
 //MARK: - BrokersGetBrokerRevsPagginationDataManager
 
-extension VendorRevsViewController : BrokersGetBrokerRevsPagginationDataManagerDelegate{
+extension VendorBrokerRevsViewController : BrokersGetBrokerRevsPagginationDataManagerDelegate{
     
     func didGetBrokersGetBrokerRevsPagginationData(data: JSON) {
         

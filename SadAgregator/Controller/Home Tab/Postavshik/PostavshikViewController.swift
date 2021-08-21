@@ -614,7 +614,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             if vendorRevs.count >= 3 {
                 
-                let vendorRevsVC = VendorRevsViewController()
+                let vendorRevsVC = VendorBrokerRevsViewController()
                 
                 vendorRevsVC.thisVendId = thisVendorId
                 
