@@ -98,7 +98,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 
                 cellImageView.image = UIImage(systemName: "star.fill")
                 
-                serviceNameLabel.text = "Рейтинг Поставщиков"
+                serviceNameLabel.text = "Рейтинг поставщиков"
                 
             case 2:
                 
@@ -108,9 +108,9 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 
             case 3:
                 
-                cellImageView.image = UIImage(systemName: "person.3")
+                cellImageView.image = UIImage(systemName: "star.fill")
                 
-                serviceNameLabel.text = "Посредники"
+                serviceNameLabel.text = "Рейтинг посредников"
                 
             case 4:
                 

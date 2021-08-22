@@ -69,7 +69,7 @@ class VendsPopularityRatingViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = false
         
-        navigationItem.title = "Рейтинг Поставщиков"
+        navigationItem.title = "Рейтинг поставщиков"
         
     }
     

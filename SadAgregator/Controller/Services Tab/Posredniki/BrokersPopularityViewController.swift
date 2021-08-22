@@ -57,7 +57,7 @@ class BrokersPopularityViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationItem.title = "Посредники"
+        navigationItem.title = "Рейтинг посредников"
         
     }
     
