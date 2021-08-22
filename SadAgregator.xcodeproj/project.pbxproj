@@ -294,6 +294,7 @@
 		22DD117926CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD117726CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.swift */; };
 		22DD117A26CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DD117826CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.xib */; };
 		22DD117C26D1535800E8494C /* BrokersGetBrokerRevsPagginationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD117B26D1535800E8494C /* BrokersGetBrokerRevsPagginationDataManager.swift */; };
+		22DD117E26D1CCA800E8494C /* ClientsUpdatePayImageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DD117D26D1CCA800E8494C /* ClientsUpdatePayImageDataManager.swift */; };
 		22E44717269237B60016D96E /* PointsInSborkaSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E44716269237B60016D96E /* PointsInSborkaSegmentView.swift */; };
 		22E44719269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E44718269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift */; };
 		22E4471B269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E4471A269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift */; };
@@ -597,6 +598,7 @@
 		22DD117726CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCellWithImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		22DD117826CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTableViewCellWithImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		22DD117B26D1535800E8494C /* BrokersGetBrokerRevsPagginationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersGetBrokerRevsPagginationDataManager.swift; sourceTree = "<group>"; };
+		22DD117D26D1CCA800E8494C /* ClientsUpdatePayImageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsUpdatePayImageDataManager.swift; sourceTree = "<group>"; };
 		22E44716269237B60016D96E /* PointsInSborkaSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsInSborkaSegmentView.swift; sourceTree = "<group>"; };
 		22E44718269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsInSborkaSegmentViewModel.swift; sourceTree = "<group>"; };
 		22E4471A269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyPointsInSegmentDataManager.swift; sourceTree = "<group>"; };
@@ -750,6 +752,7 @@
 				22328CCD25FE743E00C51CC9 /* ClientsPayments.swift */,
 				22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */,
 				2231DB72264C64480075228E /* ClientsUpdatePaymentComDataManager.swift */,
+				22DD117D26D1CCA800E8494C /* ClientsUpdatePayImageDataManager.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -2053,6 +2056,7 @@
 				22CD354D269E64E5009057C3 /* AssemblySetQRDataManager.swift in Sources */,
 				22423E9C259135370097C9E6 /* GetProfileDataManager.swift in Sources */,
 				22029C1B25C63ED600CE79BC /* GetForExportDataManager.swift in Sources */,
+				22DD117E26D1CCA800E8494C /* ClientsUpdatePayImageDataManager.swift in Sources */,
 				22C9221325814CA40063B5D4 /* MenuView.swift in Sources */,
 				2284EAD625BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift in Sources */,
 				22C5D02825B0E065001C69C6 /* PeerViewController.swift in Sources */,
