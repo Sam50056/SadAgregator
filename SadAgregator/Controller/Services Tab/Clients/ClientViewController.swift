@@ -40,6 +40,8 @@ class ClientViewController: UIViewController {
     private var checkImageUrl : URL?
     private var checkImageId : String?
     
+    private var payId : String?
+    
     private var boxView = UIView()
     private var blurEffectView = UIVisualEffectView()
     
@@ -161,9 +163,9 @@ extension ClientViewController{
     
     func checkSent() {
         
-        guard let checkImageId = checkImageId , let thisClientId = thisClientId else {return}
+        guard let checkImageId = checkImageId else {return}
         
-        ClientsUpdatePayImageDataManager().getClientsUpdatePayImageData(key: key, payHistId: thisClientId, imgId: checkImageId) { data, error in
+        ClientsUpdatePayImageDataManager().getClientsUpdatePayImageData(key: key, payHistId: payId ?? "", imgId: checkImageId) { data, error in
             
         }
         
@@ -860,6 +862,8 @@ extension ClientViewController : ClientsChangeBalanceDataManagerDelegate{
                 print("ChangeBalanceData request sent")
                 
                 self?.refreshClientData()
+                
+                self?.payId = data["pay_id"].string
                 
                 let alertController = UIAlertController(title: "Прикрепить чек?", message: nil, preferredStyle: .alert)
                 
