@@ -24,6 +24,8 @@ class PaymentTableViewCell: UITableViewCell {
     @IBOutlet weak var leftRoundImageView : UIImageView!
     @IBOutlet weak var rightRoundImageView : UIImageView!
     
+    @IBOutlet weak var rightRoundViewButton: UIButton!
+    
     var key : String?
     
     var summ : String? {
@@ -73,6 +75,8 @@ class PaymentTableViewCell: UITableViewCell {
     var clientSelected : ((String) -> ())?
     
     var rightViewButtonTapped : (() -> ())?
+    var rightViewButtonLonlglyTapped : (() -> ())?
+    
     var leftViewButtonTapped : (() -> ())?
     
     private var tableViewItems = [TableViewItem]()
@@ -108,6 +112,10 @@ class PaymentTableViewCell: UITableViewCell {
         
         tableView.allowsSelection = false
         
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(rightButtonLonglyTapped))
+          
+        rightRoundViewButton.addGestureRecognizer(longGesture)
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -128,12 +136,16 @@ extension PaymentTableViewCell{
         
     }
     
-    @IBAction func rightViewButtonTapped(_ sener : UIButton){
+    @IBAction func rightViewButtonTapped(_ sender : UIButton){
         rightViewButtonTapped?()
     }
     
     @IBAction func leftViewButtonTapped(_ sender : UIButton){
         leftViewButtonTapped?()
+    }
+    
+    @objc func rightButtonLonglyTapped(){
+        rightViewButtonLonlglyTapped?()
     }
     
 }

@@ -26,6 +26,16 @@ class PaymentHistoryViewController: UIViewController {
     private var clientsPagingPaymentsDataManager = ClientsPagingPaymentsDataManager()
     private var clientsFilterPayListDataManager = ClientsFilterPayListDataManager()
     private var clientsFilterPayHistByClientDataManager = ClientsFilterPayHistByClientDataManager()
+    private lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
+    private lazy var photoSavedDataManager = PhotoSavedDataManager()
+    
+    private var checkImageUrl : URL?
+    private var checkImageId : String?
+    
+    private var boxView = UIView()
+    private var blurEffectView = UIVisualEffectView()
+    
+    private var payId : String?
     
     private var payments = [JSON]()
     
@@ -56,6 +66,7 @@ class PaymentHistoryViewController: UIViewController {
         clientsPagingPaymentsDataManager.delegate = self
         clientsFilterPayListDataManager.delegate = self
         clientsFilterPayHistByClientDataManager.delegate = self
+        newPhotoPlaceDataManager.delegate = self
         
         navigationItem.title = "История платежей"
         
@@ -123,6 +134,66 @@ extension PaymentHistoryViewController{
         let navVC = UINavigationController(rootViewController: filterVC)
         
         presentHero(navVC, navigationAnimationType: .selectBy(presenting: .pull(direction: .down), dismissing: .pull(direction: .up)))
+        
+    }
+    
+}
+
+//MARK: - Functions
+
+extension PaymentHistoryViewController {
+    
+    func showBoxView(with text : String) {
+        
+        let blurEffect = UIBlurEffect(style: .systemChromeMaterial)
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+        
+        let width = text.width(withConstrainedHeight: UIScreen.main.bounds.width - 16, font: UIFont.systemFont(ofSize: 17)) + 60
+        
+        // You only need to adjust this frame to move it anywhere you want
+        boxView = UIView(frame: CGRect(x: view.frame.midX - (width/2), y: view.frame.midY - 25, width: width, height: 50))
+        boxView.backgroundColor = UIColor(named: "gray")
+        boxView.alpha = 0.95
+        boxView.layer.cornerRadius = 10
+        
+        boxView.center = view.center
+        
+        //Here the spinnier is initialized
+        let activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        activityView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityView.startAnimating()
+        
+        let textLabel = UILabel(frame: CGRect(x: 45, y: 0, width: 200, height: 50))
+        textLabel.textColor = UIColor.gray
+        textLabel.text = text
+        
+        boxView.addSubview(activityView)
+        boxView.addSubview(textLabel)
+        
+        view.addSubview(boxView)
+        
+        view.isUserInteractionEnabled = false
+        
+    }
+    
+    func removeBoxView(){
+        
+        boxView.removeFromSuperview()
+        blurEffectView.removeFromSuperview()
+        view.isUserInteractionEnabled = true
+        
+    }
+    
+    func checkSent() {
+        
+        guard let checkImageId = checkImageId else {return}
+        
+        ClientsUpdatePayImageDataManager().getClientsUpdatePayImageData(key: key, payHistId: payId ?? "", imgId: checkImageId) { data, error in
+            
+        }
         
     }
     
@@ -314,9 +385,13 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
                 
             }else{
                 
-                let alertController = UIAlertController(title: "Привязать чек?", message: nil, preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Прикрепить чек?", message: nil, preferredStyle: .alert)
                 
                 alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                    
+                    self?.payId = payment["pid"].string
+                    
+                    self?.showImagePickerController(sourceType: .photoLibrary)
                     
                 }))
                 
@@ -325,6 +400,26 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
                 self?.present(alertController, animated: true, completion: nil)
                 
             }
+            
+        }
+        
+        cell.rightViewButtonLonlglyTapped = { [weak self] in
+            
+            guard payment["img"].stringValue != "" else {return}
+            
+            let alertController = UIAlertController(title: "Перепривязать чек?", message: nil, preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                
+                self?.payId = payment["pid"].string
+                
+                self?.showImagePickerController(sourceType: .photoLibrary)
+                
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            self?.present(alertController, animated: true, completion: nil)
             
         }
         
@@ -470,6 +565,169 @@ extension PaymentHistoryViewController : ClientsFilterPayHistByClientDataManager
     
     func didFailGettingClientsFilterPayHistByClientDataWithError(error: String) {
         print("Error with ClientsFilterPayHistByClientDataManager : \(error)")
+    }
+    
+}
+
+
+//MARK: - UIImagePickerControllerDelegate
+
+extension PaymentHistoryViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func showImagePickerController(sourceType : UIImagePickerController.SourceType) {
+        
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = false
+        imagePickerController.sourceType = sourceType
+        
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let safeUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            
+            checkImageUrl = safeUrl
+            showBoxView(with: "Загрузка фото чека")
+            newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
+            
+        }
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+}
+
+
+//MARK: - NewPhotoPlaceDataManagerDelegate
+
+extension PaymentHistoryViewController : NewPhotoPlaceDataManagerDelegate{
+    
+    func didGetNewPhotoPlaceData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                let url = "\(data["post_to"].stringValue)/store?file_name=\(data["file_name"].stringValue)"
+                
+                print("URL FOR SENDING THE FILE: \(url)")
+                
+                guard let checkImageUrl = checkImageUrl else {return}
+                
+                sendFileToServer(from: checkImageUrl, to: url)
+                
+                let imageId = data["image_id"].stringValue
+                
+                let imageLinkWithPortAndWithoutFile = "\(data["post_to"].stringValue)"
+                let splitIndex = imageLinkWithPortAndWithoutFile.lastIndex(of: ":")!
+                let imageLink = "\(String(imageLinkWithPortAndWithoutFile[imageLinkWithPortAndWithoutFile.startIndex ..< splitIndex]))\(data["file_name"].stringValue)"
+                
+                print("Image Link: \(imageLink)")
+                
+                checkImageId = imageId
+                
+            }else{
+                
+                removeBoxView()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingNewPhotoPlaceDataWithError(error: String) {
+        print("Error with NewPhotoPlaceDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - File Sending
+
+extension PaymentHistoryViewController{
+    
+    func sendFileToServer(from fromUrl : URL, to toUrl : String){
+        
+        print("import result : \(fromUrl)")
+        
+        guard let toUrl = URL(string: toUrl) else {return}
+        
+        print("To URL: \(toUrl)")
+        
+        do{
+            
+            let data = try Data(contentsOf: fromUrl)
+            
+            let image = UIImage(data: data)!
+            
+            let imageData = image.jpegData(compressionQuality: 0.5)
+            
+            var request = URLRequest(url: toUrl)
+            
+            request.httpMethod = "POST"
+            request.setValue("text/plane", forHTTPHeaderField: "Content-Type")
+            request.httpBody = imageData
+            
+            let task = URLSession.shared.dataTask(with: request) { [self] (data, response, error) in
+                
+                if error != nil {
+                    print("Error sending file: \(error!.localizedDescription)")
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+                
+                print("Answer : \(json)")
+                
+                DispatchQueue.main.async { [self] in
+                    
+                    print("Got check sent to server")
+                    
+                    photoSavedDataManager.getPhotoSavedData(key: key, photoId: checkImageId!) { data, error in
+                        
+                        if let error = error{
+                            print("Error with PhotoSavedDataManager : \(error)")
+                            return
+                        }
+                        
+                        guard let data = data else {return}
+                        
+                        if data["result"].intValue == 1{
+                            
+                            print("Check image successfuly saved to server")
+                            
+                            DispatchQueue.main.async { [weak self] in
+                                
+                                self?.removeBoxView()
+                                
+                                self?.checkSent()
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+            }
+            
+            task.resume()
+            
+        }catch{
+            print(error)
+        }
+        
     }
     
 }

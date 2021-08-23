@@ -147,6 +147,7 @@
                 <outlet property="leftRoundView" destination="PKY-Wp-lYg" id="DE8-3p-43b"/>
                 <outlet property="rightRoundImageView" destination="Q4W-ci-fAV" id="k0d-EZ-6Dh"/>
                 <outlet property="rightRoundView" destination="GRZ-7T-foA" id="4F8-Mi-Pbu"/>
+                <outlet property="rightRoundViewButton" destination="cvj-2O-U9s" id="6Xs-8m-PpU"/>
                 <outlet property="secondLabel" destination="VXl-BY-jK1" id="rdd-Ye-uFf"/>
                 <outlet property="tableView" destination="0KC-8z-YJb" id="xIZ-ND-PCN"/>
                 <outlet property="textField" destination="alB-Bx-Kz4" id="3kP-jp-80o"/>
