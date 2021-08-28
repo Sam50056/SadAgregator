@@ -23,6 +23,8 @@ pod 'RealmSwift', '~> 10.5.2'
 
 pod 'Hero'
 
+pod 'FloatingPanel'
+
 pod "VK-ios-sdk"
 pod 'ok-ios-sdk', '~> 2.0'
 

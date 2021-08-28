@@ -44,6 +44,9 @@
 		2222676D2698B05C00E1AFFC /* AssemblyRemoveFromHelperDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222676C2698B05C00E1AFFC /* AssemblyRemoveFromHelperDataManager.swift */; };
 		2222676F2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222676E2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift */; };
 		222267712698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222267702698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift */; };
+		2223759B26D460D40097AF41 /* OnlyCorneredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223759A26D460D40097AF41 /* OnlyCorneredView.swift */; };
+		2223759D26D46BB20097AF41 /* SortirovkaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223759C26D46BB20097AF41 /* SortirovkaViewController.swift */; };
+		222375A026D96A250097AF41 /* SortirovkaContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223759F26D96A250097AF41 /* SortirovkaContentViewController.swift */; };
 		222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */; };
 		222B08C0269790D300AC062F /* AssemblyGetHelpersDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222B08BF269790D300AC062F /* AssemblyGetHelpersDataManager.swift */; };
 		222B08C22698831400AC062F /* AssemblyMoveToHelperDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222B08C12698831400AC062F /* AssemblyMoveToHelperDataManager.swift */; };
@@ -344,6 +347,9 @@
 		2222676C2698B05C00E1AFFC /* AssemblyRemoveFromHelperDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyRemoveFromHelperDataManager.swift; sourceTree = "<group>"; };
 		2222676E2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyMoveToHelperPoint.swift; sourceTree = "<group>"; };
 		222267702698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyRemoveFromHelperPointDataManager.swift; sourceTree = "<group>"; };
+		2223759A26D460D40097AF41 /* OnlyCorneredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyCorneredView.swift; sourceTree = "<group>"; };
+		2223759C26D46BB20097AF41 /* SortirovkaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortirovkaViewController.swift; sourceTree = "<group>"; };
+		2223759F26D96A250097AF41 /* SortirovkaContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortirovkaContentViewController.swift; sourceTree = "<group>"; };
 		222AF59425C7A69F002F7D5A /* RateUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateUpdateDataManager.swift; sourceTree = "<group>"; };
 		222B08BF269790D300AC062F /* AssemblyGetHelpersDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyGetHelpersDataManager.swift; sourceTree = "<group>"; };
 		222B08C12698831400AC062F /* AssemblyMoveToHelperDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyMoveToHelperDataManager.swift; sourceTree = "<group>"; };
@@ -729,6 +735,23 @@
 				221C479B25B4C7E200290E09 /* DescriptionCollectionViewCell.xib */,
 			);
 			path = DescCell;
+			sourceTree = "<group>";
+		};
+		2223759926D460BF0097AF41 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2223759A26D460D40097AF41 /* OnlyCorneredView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2223759E26D96A050097AF41 /* Sortirovka */ = {
+			isa = PBXGroup;
+			children = (
+				2223759C26D46BB20097AF41 /* SortirovkaViewController.swift */,
+				2223759F26D96A250097AF41 /* SortirovkaContentViewController.swift */,
+			);
+			path = Sortirovka;
 			sourceTree = "<group>";
 		};
 		22328CC525FD803F00C51CC9 /* Clients */ = {
@@ -1181,6 +1204,7 @@
 		228CB770255BF981002B4A96 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2223759926D460BF0097AF41 /* Views */,
 				224D273A2613AEB600BFAE30 /* Custom Controls */,
 				22A49CA7256661D700CCC781 /* cells */,
 				22A155E12582C76E000EAB64 /* SwiftUiViews */,
@@ -1588,6 +1612,7 @@
 				2207046A2686A86300FC6B4B /* Clients */,
 				22E44715269234340016D96E /* Sborka */,
 				22692E3426B8C8A500CA2946 /* Posredniki */,
+				2223759E26D96A050097AF41 /* Sortirovka */,
 			);
 			path = "Services Tab";
 			sourceTree = "<group>";
@@ -1866,6 +1891,7 @@
 				22692E3326B889E700CA2946 /* BrokersBrokersTopBySearchDataManager.swift in Sources */,
 				22553015261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift in Sources */,
 				22DD117426CC755400E8494C /* RatingTableViewCellWithImages.swift in Sources */,
+				222375A026D96A250097AF41 /* SortirovkaContentViewController.swift in Sources */,
 				22B41BAB2648808600F7DC30 /* CreateDiapazonViewController.swift in Sources */,
 				22A09BFE2648B81C009B9921 /* PurchasesAddZonePriceDataManager.swift in Sources */,
 				222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */,
@@ -1881,6 +1907,7 @@
 				222B08C22698831400AC062F /* AssemblyMoveToHelperDataManager.swift in Sources */,
 				22B41BA926486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift in Sources */,
 				22D90236259C0359009732CC /* MyPostsDataManager.swift in Sources */,
+				2223759B26D460D40097AF41 /* OnlyCorneredView.swift in Sources */,
 				2291BE452560620F004F55DF /* MainDataManager.swift in Sources */,
 				22DD117C26D1535800E8494C /* BrokersGetBrokerRevsPagginationDataManager.swift in Sources */,
 				22CADB1225B2484000A5E475 /* AssignVkToAppIDDataManager.swift in Sources */,
@@ -1961,6 +1988,7 @@
 				224BC43B259FE61E003F147F /* VkAuthService.swift in Sources */,
 				22DC987F2602AFCB0016A31B /* UpdateClientInfoDataManager.swift in Sources */,
 				2231DB6D2649597C0075228E /* PurchasesSellPriceRecalcDataManager.swift in Sources */,
+				2223759D26D46BB20097AF41 /* SortirovkaViewController.swift in Sources */,
 				2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */,
 				22E44719269237DA0016D96E /* PointsInSborkaSegmentViewModel.swift in Sources */,
 				22E44717269237B60016D96E /* PointsInSborkaSegmentView.swift in Sources */,
@@ -2272,7 +2300,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2296,7 +2324,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

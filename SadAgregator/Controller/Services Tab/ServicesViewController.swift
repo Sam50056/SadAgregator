@@ -68,7 +68,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -169,6 +169,12 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             let brokerPopVC = BrokersPopularityViewController()
             
             navigationController?.pushViewController(brokerPopVC, animated: true)
+            
+        }else if indexPath.row == 4{
+            
+            let sortVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortirovkaVC") as! SortirovkaViewController
+            
+            navigationController?.pushViewController(sortVC, animated: true)
             
         }
         

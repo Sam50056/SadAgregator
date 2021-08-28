@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (5.4.3)
   - Cosmos (23.0.0)
+  - FloatingPanel (2.4.0)
   - Hero (1.6.1)
   - IQKeyboardManagerSwift (6.5.6)
   - ok-ios-sdk (2.0.14)
@@ -26,6 +27,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - Cosmos (~> 23.0)
+  - FloatingPanel
   - Hero
   - IQKeyboardManagerSwift
   - ok-ios-sdk (~> 2.0)
@@ -39,6 +41,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - Cosmos
+    - FloatingPanel
     - Hero
     - IQKeyboardManagerSwift
     - ok-ios-sdk
@@ -52,6 +55,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
+  FloatingPanel: fa60183672ed86313b9e241e34465e82211260e8
   Hero: 215865ba3ae41dd9bb08cd6c60a645529c6fc94b
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   ok-ios-sdk: 30c84b4026386f21f21a3f956e1bd51fa5540b7d
@@ -62,6 +66,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 5bcf00a2014a7323f98db9328b603d4f96635caa
   YandexMobileMetrica: 7ba67267e1ef841f77d5db17a5091b8e9eba911f
 
-PODFILE CHECKSUM: eacbc5c0d4e2b60e3a1e89ae4f180e20a620a5ce
+PODFILE CHECKSUM: fa3fa58da82ffcb67c3da84f0b6d6b95299db950
 
 COCOAPODS: 1.10.1
