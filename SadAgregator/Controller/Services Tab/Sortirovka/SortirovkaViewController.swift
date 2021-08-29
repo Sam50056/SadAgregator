@@ -131,7 +131,7 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                 
                 fpc = FloatingPanelController()
                 
-                //                fpc.delegate = self // Optional
+                fpc.delegate = self
                 
                 let contentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortContentViewVC") as! SortirovkaContentViewController
                 
@@ -146,14 +146,6 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                         self?.captureSession.startRunning()
                     }
                     
-                    //                    // Hide the floating panel.
-                    //                    self?.fpc.hide(animated: true) {
-                    //                        // Remove the floating panel view from your controller's view.
-                    //                        self?.fpc.view.removeFromSuperview()
-                    //                        // Remove the floating panel controller from the controller hierarchy.
-                    //                        self?.fpc.removeFromParent()
-                    //                    }
-                    
                 }
                 
                 fpc.layout = MyFloatingPanelLayout()
@@ -161,14 +153,29 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                 fpc.set(contentViewController: contentVC)
                 
                 fpc.isRemovalInteractionEnabled = false // Optional: Let it removable by a swipe-down
+                
+                // Create a new appearance.
+                let appearance = SurfaceAppearance()
+
+                // Define shadows
+                let shadow = SurfaceAppearance.Shadow()
+                shadow.color = UIColor.black
+                shadow.offset = CGSize(width: 0, height: 16)
+                shadow.radius = 16
+                shadow.spread = 8
+                appearance.shadows = [shadow]
+
+                // Define corner radius and background color
+                appearance.cornerRadius = 16
+                appearance.backgroundColor = .clear
+
+                // Set the new appearance
+                fpc.surfaceView.appearance = appearance
 
                 self.present(fpc, animated: true, completion: nil)
                 
                 // Track a scroll view(or the siblings) in the content view controller.
-                //                fpc.track(scrollView: contentVC.tableView)
-                
-                // Add and show the views managed by the `FloatingPanelController` object to self.view.
-                //                fpc.addPanel(toParent: self)
+                fpc.track(scrollView: contentVC.tableView)
                 
                 print(qrValue)
                 
@@ -194,14 +201,43 @@ extension SortirovkaViewController {
     
 }
 
+//MARK: - Floating Panel
+
 class MyFloatingPanelLayout: FloatingPanelLayout {
+    
     let position: FloatingPanelPosition = .bottom
+    
     let initialState: FloatingPanelState = .tip
+    
     var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
         return [
             .full: FloatingPanelLayoutAnchor(absoluteInset: 16.0, edge: .top, referenceGuide: .safeArea),
             .half: FloatingPanelLayoutAnchor(fractionalInset: 0.5, edge: .bottom, referenceGuide: .safeArea),
-            .tip: FloatingPanelLayoutAnchor(absoluteInset: 280, edge: .bottom, referenceGuide: .safeArea),
+            .tip: FloatingPanelLayoutAnchor(absoluteInset: 316, edge: .bottom, referenceGuide: .safeArea),
         ]
     }
+    
+}
+
+extension SortirovkaViewController : FloatingPanelControllerDelegate{
+    
+    func floatingPanelWillEndDragging(_ fpc: FloatingPanelController, withVelocity velocity: CGPoint, targetState: UnsafeMutablePointer<FloatingPanelState>) {
+        
+        if targetState.pointee == .tip {
+            
+            (fpc.children.first! as! SortirovkaContentViewController).state = 1
+            
+        }else if targetState.pointee == .half{
+            
+            (fpc.children.first! as! SortirovkaContentViewController).state = 2
+            
+        }else if targetState.pointee == .full{
+            
+            (fpc.children.first! as! SortirovkaContentViewController).state = 3
+            
+        }
+        
+    }
+    
+    
 }
