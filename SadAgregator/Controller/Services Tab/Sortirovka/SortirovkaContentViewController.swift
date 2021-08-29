@@ -77,9 +77,9 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
         if state == 1{
             return 3
         }else if state == 2{
-            return 3
+            return 4
         }else if state == 3{
-            return 3
+            return 5
         }
         
         return 0
@@ -93,6 +93,8 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
         }else if section == 1{
             return 1
         }else if section == 2{
+            return 1
+        }else if section == 3{
             return 1
         }
         
@@ -122,18 +124,23 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "footerCell", for: indexPath)
                 
-                guard let dobavitPhotoButton = cell.viewWithTag(1) as? UIButton,
-                      let podrobneeButton = cell.viewWithTag(2) as? UIButton else {
-                          return cell
-                      }
+                makeFooterCell(cell: cell)
                 
-                dobavitPhotoButton.backgroundColor = UIColor(named: "gray")
-                dobavitPhotoButton.layer.cornerRadius = 8
+            }else if state == 2{
                 
-                dobavitPhotoButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-                podrobneeButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+                cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath)
+                
+                (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: ""), placeholderImage: UIImage(systemName: "cart"))
                 
             }
+            
+        }else if section == 3{
+                
+            //Section 3 is only in sate 2 and 3. In both 2 and 3 it's footer at this section
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "footerCell", for: indexPath)
+            
+            makeFooterCell(cell: cell)
             
         }
         
@@ -141,6 +148,21 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
         cell.contentView.backgroundColor = UIColor(named: "whiteblack")
         
         return cell
+    }
+    
+    func makeFooterCell(cell : UITableViewCell){
+        
+        guard let dobavitPhotoButton = cell.viewWithTag(1) as? UIButton,
+              let podrobneeButton = cell.viewWithTag(2) as? UIButton else {
+                  return
+              }
+        
+        dobavitPhotoButton.backgroundColor = UIColor(named: "gray")
+        dobavitPhotoButton.layer.cornerRadius = 8
+        
+        dobavitPhotoButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        podrobneeButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        
     }
     
 }

@@ -212,7 +212,7 @@ class MyFloatingPanelLayout: FloatingPanelLayout {
     var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
         return [
             .full: FloatingPanelLayoutAnchor(absoluteInset: 16.0, edge: .top, referenceGuide: .safeArea),
-            .half: FloatingPanelLayoutAnchor(fractionalInset: 0.5, edge: .bottom, referenceGuide: .safeArea),
+            .half: FloatingPanelLayoutAnchor(absoluteInset: 490, edge: .bottom, referenceGuide: .safeArea),
             .tip: FloatingPanelLayoutAnchor(absoluteInset: 316, edge: .bottom, referenceGuide: .safeArea),
         ]
     }
@@ -230,6 +230,8 @@ extension SortirovkaViewController : FloatingPanelControllerDelegate{
         }else if targetState.pointee == .half{
             
             (fpc.children.first! as! SortirovkaContentViewController).state = 2
+            
+            print("\((UIScreen.main.bounds.height - 64) * 0.65)")
             
         }else if targetState.pointee == .full{
             
