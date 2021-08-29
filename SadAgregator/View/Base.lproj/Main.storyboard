@@ -4993,6 +4993,8 @@
                             </view>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9Iw-bI-u66">
                                 <rect key="frame" x="16" y="75.666666666666671" width="307" height="4"/>
+                                <color key="progressTintColor" red="0.75692492720000004" green="0.75670194629999998" blue="0.76470750570000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="trackTintColor" red="0.92941802740000001" green="0.92940050360000004" blue="0.92941242459999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </progressView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zOn-rc-wAr">
                                 <rect key="frame" x="73.999999999999986" y="127" width="189.66666666666663" height="4"/>

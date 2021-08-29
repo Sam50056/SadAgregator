@@ -64,6 +64,11 @@ class SortirovkaContentViewController: UIViewController {
         }
     }
     
+    var timer : Timer!
+    var seconds : Float = 0
+    
+    var time : Float = 10
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,6 +93,22 @@ class SortirovkaContentViewController: UIViewController {
         
         dobavitPhotoViewButton.backgroundColor = UIColor(named: "gray")
         dobavitPhotoViewButton.layer.cornerRadius = 8
+        
+        timeProgressView.progress = 0.0
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [self] timer in
+            
+            guard self.seconds < self.time else {
+                self.timer.invalidate()
+                self.closeButtonPressed?()
+                return
+            }
+            
+            self.seconds += 0.1
+            
+            self.timeProgressView.setProgress(Float(self.seconds / self.time), animated: true)
+            
+        }
         
     }
  
