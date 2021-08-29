@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class SortirovkaContentViewController: UIViewController {
     
@@ -42,6 +43,26 @@ class SortirovkaContentViewController: UIViewController {
     var closeButtonPressed : (() -> Void)?
     
     var items = [TableViewItem]()
+    
+    var mainText : String?
+    
+    var img : String?
+    
+    var data : JSON?{
+        didSet{
+            
+            guard let data = data else {return}
+            
+            mainText = "\(data["capt_main"].stringValue)\(data["capt_sub"].stringValue != "" ? "\n\(data["capt_sub"].stringValue)" : "")"
+            
+            img = data["img"].string
+            
+            data["opts"].arrayValue.forEach { jsonOpt in
+                items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue))
+            }
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,7 +142,7 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
             
             cell = tableView.dequeueReusableCell(withIdentifier: "oneLabelCell", for: indexPath)
             
-            (cell.viewWithTag(1) as! UILabel).text = "Закупка №2131\nИванова Светлана"
+            (cell.viewWithTag(1) as! UILabel).text = mainText ?? ""
             (cell.viewWithTag(1) as! UILabel).font = UIFont.systemFont(ofSize: 24, weight: .semibold)
             (cell.viewWithTag(1) as! UILabel).numberOfLines = 0
             (cell.viewWithTag(1) as! UILabel).textAlignment = .center
@@ -140,7 +161,7 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
                 
                 if false {
                     
-                    (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: "") , completed: nil)
+                    (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: img ?? "") , completed: nil)
                     (cell.viewWithTag(1) as! UIImageView).contentMode = .scaleAspectFill
                     
                 }else{

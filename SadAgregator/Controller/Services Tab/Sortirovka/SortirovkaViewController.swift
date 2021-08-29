@@ -41,6 +41,7 @@ class SortirovkaViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadUserData()
         
         // Get the back-facing camera for capturing videos
         guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
@@ -127,55 +128,72 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
             
             if let qrValue = metadataObj.stringValue {
                 
-                captureSession.stopRunning()
-                
-                fpc = FloatingPanelController()
-                
-                fpc.delegate = self
-                
-                let contentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortContentViewVC") as! SortirovkaContentViewController
-                
-                contentVC.view.backgroundColor = UIColor(named: "whiteblack")
-                
-                contentVC.closeButtonPressed = { [weak self] in
+                QRScanQRDataManager().getQRScanQRData(key: key, qr: "4") { [weak self] data, error in
                     
-                    self?.fpc.willMove(toParent: nil)
+                    if let error = error , data == nil{
+                        print("Error with QRScanQRDataManager : \(error)")
+                        return
+                    }
                     
-                    self?.dismiss(animated: true){ [weak self] in
-                        self?.qrCodeFrameView?.frame = .zero
-                        self?.captureSession.startRunning()
+                    DispatchQueue.main.async {
+                        
+                        guard data!["result"].intValue == 1 else {return}
+                        
+                        self?.captureSession.stopRunning()
+                        
+                        self?.fpc = FloatingPanelController()
+                        
+                        self?.fpc.delegate = self
+                        
+                        let contentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortContentViewVC") as! SortirovkaContentViewController
+                        
+                        contentVC.data = data
+                        
+                        contentVC.view.backgroundColor = UIColor(named: "whiteblack")
+                        
+                        contentVC.closeButtonPressed = { [weak self] in
+                            
+                            self?.fpc.willMove(toParent: nil)
+                            
+                            self?.dismiss(animated: true){ [weak self] in
+                                self?.qrCodeFrameView?.frame = .zero
+                                self?.captureSession.startRunning()
+                            }
+                            
+                        }
+                        
+                        self?.fpc.layout = MyFloatingPanelLayout()
+                        
+                        self?.fpc.set(contentViewController: contentVC)
+                        
+                        self?.fpc.isRemovalInteractionEnabled = false // Optional: Let it removable by a swipe-down
+                        
+                        // Create a new appearance.
+                        let appearance = SurfaceAppearance()
+                        
+                        // Define shadows
+                        let shadow = SurfaceAppearance.Shadow()
+                        shadow.color = UIColor.black
+                        shadow.offset = CGSize(width: 0, height: 16)
+                        shadow.radius = 16
+                        shadow.spread = 8
+                        appearance.shadows = [shadow]
+                        
+                        // Define corner radius and background color
+                        appearance.cornerRadius = 16
+                        appearance.backgroundColor = .clear
+                        
+                        // Set the new appearance
+                        self?.fpc.surfaceView.appearance = appearance
+                        
+                        self?.present(self!.fpc, animated: true, completion: nil)
+                        
+                        // Track a scroll view(or the siblings) in the content view controller.
+                        self?.fpc.track(scrollView: contentVC.tableView)
+                        
                     }
                     
                 }
-                
-                fpc.layout = MyFloatingPanelLayout()
-                
-                fpc.set(contentViewController: contentVC)
-                
-                fpc.isRemovalInteractionEnabled = false // Optional: Let it removable by a swipe-down
-                
-                // Create a new appearance.
-                let appearance = SurfaceAppearance()
-
-                // Define shadows
-                let shadow = SurfaceAppearance.Shadow()
-                shadow.color = UIColor.black
-                shadow.offset = CGSize(width: 0, height: 16)
-                shadow.radius = 16
-                shadow.spread = 8
-                appearance.shadows = [shadow]
-
-                // Define corner radius and background color
-                appearance.cornerRadius = 16
-                appearance.backgroundColor = .clear
-
-                // Set the new appearance
-                fpc.surfaceView.appearance = appearance
-
-                self.present(fpc, animated: true, completion: nil)
-                
-                // Track a scroll view(or the siblings) in the content view controller.
-                fpc.track(scrollView: contentVC.tableView)
                 
                 print(qrValue)
                 

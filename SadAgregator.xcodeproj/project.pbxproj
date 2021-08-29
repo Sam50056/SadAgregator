@@ -124,6 +124,7 @@
 		2269740025AE394800C76BA6 /* VendorPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226973FF25AE394700C76BA6 /* VendorPostsTableViewController.swift */; };
 		226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9444258D2179008CEC4A /* GalleryViewController.swift */; };
 		226D9448258D2EF9008CEC4A /* HeroHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226D9447258D2EF9008CEC4A /* HeroHelper.swift */; };
+		226EEF0726DC478D002417D2 /* QRScanQRDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226EEF0626DC478D002417D2 /* QRScanQRDataManager.swift */; };
 		226F240826B1F57900FB2744 /* BrokersPopularityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F240726B1F57900FB2744 /* BrokersPopularityViewController.swift */; };
 		226F240E26B2004000FB2744 /* BrokerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F240C26B2004000FB2744 /* BrokerTableViewCell.swift */; };
 		226F240F26B2004000FB2744 /* BrokerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 226F240D26B2004000FB2744 /* BrokerTableViewCell.xib */; };
@@ -428,6 +429,7 @@
 		2269740725AF409A00C76BA6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		226D9444258D2179008CEC4A /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		226D9447258D2EF9008CEC4A /* HeroHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroHelper.swift; sourceTree = "<group>"; };
+		226EEF0626DC478D002417D2 /* QRScanQRDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanQRDataManager.swift; sourceTree = "<group>"; };
 		226F240726B1F57900FB2744 /* BrokersPopularityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersPopularityViewController.swift; sourceTree = "<group>"; };
 		226F240C26B2004000FB2744 /* BrokerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerTableViewCell.swift; sourceTree = "<group>"; };
 		226F240D26B2004000FB2744 /* BrokerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrokerTableViewCell.xib; sourceTree = "<group>"; };
@@ -864,6 +866,7 @@
 		224BC43D259FEE11003F147F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				226EEF0526DC477E002417D2 /* QR */,
 				228D2D3925AC9715000E9FAE /* General Managers */,
 				22BF1A1425A5FC2C00567DB7 /* Photo Managers */,
 				2201671A25A669550072BFE7 /* Post Managers */,
@@ -1117,6 +1120,14 @@
 				22B6BCAA25DEDA6900EAE067 /* AllCategoriesViewController.swift */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		226EEF0526DC477E002417D2 /* QR */ = {
+			isa = PBXGroup;
+			children = (
+				226EEF0626DC478D002417D2 /* QRScanQRDataManager.swift */,
+			);
+			path = QR;
 			sourceTree = "<group>";
 		};
 		226F240926B2001400FB2744 /* BrokerCell */ = {
@@ -2049,6 +2060,7 @@
 				226F240826B1F57900FB2744 /* BrokersPopularityViewController.swift in Sources */,
 				22CD3549269E13FC009057C3 /* AssemblySetItemValueDataManager.swift in Sources */,
 				224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */,
+				226EEF0726DC478D002417D2 /* QRScanQRDataManager.swift in Sources */,
 				22ADF827267C31BD00811DA9 /* VendAddSendRuleDataManager.swift in Sources */,
 				22B26520267D2B5E004342E3 /* BrokersAddZonePriceDataManager.swift in Sources */,
 				2268869325994F030079933D /* ListWorkView.swift in Sources */,
