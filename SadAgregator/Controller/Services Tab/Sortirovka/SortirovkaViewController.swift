@@ -231,7 +231,7 @@ extension SortirovkaViewController : FloatingPanelControllerDelegate{
             
             (fpc.children.first! as! SortirovkaContentViewController).state = 2
             
-            print("\((UIScreen.main.bounds.height - 64) * 0.65)")
+            //            print("\((UIScreen.main.bounds.height - 64) * 0.65)")
             
         }else if targetState.pointee == .full{
             

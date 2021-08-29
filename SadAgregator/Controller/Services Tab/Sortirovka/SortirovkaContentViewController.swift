@@ -27,6 +27,9 @@ class SortirovkaContentViewController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
     
+    @IBOutlet weak var dobavitPhotoViewButton: UIButton!
+    @IBOutlet weak var podrobneeViewButton : UIButton!
+    
     var state = 1{
         didSet{
             UIView.animate(withDuration: 1) { [weak self] in
@@ -37,6 +40,8 @@ class SortirovkaContentViewController: UIViewController {
     } // 1 is bottom , 2 is half , 3 is full
     
     var closeButtonPressed : (() -> Void)?
+    
+    var items = [TableViewItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +65,9 @@ class SortirovkaContentViewController: UIViewController {
         
         tableView.backgroundColor = UIColor(named: "whiteblack")
         
+        dobavitPhotoViewButton.backgroundColor = UIColor(named: "gray")
+        dobavitPhotoViewButton.layer.cornerRadius = 8
+        
     }
  
     @IBAction func closeButtonPressed(_ sender : Any?){
@@ -79,7 +87,7 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
         }else if state == 2{
             return 4
         }else if state == 3{
-            return 5
+            return 4
         }
         
         return 0
@@ -126,22 +134,49 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
                 
                 makeFooterCell(cell: cell)
                 
-            }else if state == 2{
+            }else if state == 2 || state == 3{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath)
                 
-                (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: ""), placeholderImage: UIImage(systemName: "cart"))
-                
+                if false {
+                    
+                    (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: "") , completed: nil)
+                    (cell.viewWithTag(1) as! UIImageView).contentMode = .scaleAspectFill
+                    
+                }else{
+                    
+                    (cell.viewWithTag(1) as! UIImageView).image = UIImage(systemName: "cart")
+                    (cell.viewWithTag(1) as! UIImageView).contentMode = .scaleAspectFit
+                    
+                }
+                    
             }
             
         }else if section == 3{
                 
-            //Section 3 is only in sate 2 and 3. In both 2 and 3 it's footer at this section
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "footerCell", for: indexPath)
-            
-            makeFooterCell(cell: cell)
-            
+            if state == 2{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "footerCell", for: indexPath)
+                
+                makeFooterCell(cell: cell)
+                
+            }else if state == 3{
+                
+                guard !items.isEmpty else {return cell}
+                
+                let item = items[index]
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelCell", for: indexPath)
+                
+                guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                      let label2 = cell.viewWithTag(2) as? UILabel
+                else {return cell}
+                
+                label1.text = item.label1Text
+                label2.text = item.label2Text
+                
+            }
+                
         }
         
         cell.backgroundColor = UIColor(named: "whiteblack")
@@ -162,6 +197,17 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
         
         dobavitPhotoButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         podrobneeButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        
+    }
+    
+}
+
+extension SortirovkaContentViewController {
+    
+    struct TableViewItem{
+        
+        var label1Text : String
+        var label2Text : String
         
     }
     
