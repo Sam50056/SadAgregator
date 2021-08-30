@@ -38,6 +38,8 @@ class SortirovkaViewController: UIViewController {
     
     var fpc: FloatingPanelController!
     
+    var qrValue : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -153,11 +155,26 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                         
                         contentVC.closeButtonPressed = { [weak self] in
                             
-                            self?.fpc.willMove(toParent: nil)
-                            
                             self?.dismiss(animated: true){ [weak self] in
                                 self?.qrCodeFrameView?.frame = .zero
+                                self?.qrValue = nil
                                 self?.captureSession.startRunning()
+                            }
+                            
+                        }
+                        
+                        contentVC.podrobneeButtonPressed = { [weak self] in
+                            
+                            if contentVC.state != 3 {
+                                
+                                contentVC.state = 3
+                                self?.fpc.move(to: .full, animated: true)
+                                
+                            }else{
+                                
+                                contentVC.state = 1
+                                self?.fpc.move(to: .tip, animated: true)
+                                
                             }
                             
                         }

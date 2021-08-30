@@ -31,16 +31,24 @@ class SortirovkaContentViewController: UIViewController {
     @IBOutlet weak var dobavitPhotoViewButton: UIButton!
     @IBOutlet weak var podrobneeViewButton : UIButton!
     
+    @IBOutlet weak var bottomView: UIView!
+    
     var state = 1{
         didSet{
             UIView.animate(withDuration: 1) { [weak self] in
                 self?.tableView.reloadData()
                 self?.view.layoutIfNeeded()
+                if self!.state == 3{
+                    self?.bottomView.isHidden = false
+                }else{
+                    self?.bottomView.isHidden = true
+                }
             }
         }
     } // 1 is bottom , 2 is half , 3 is full
     
     var closeButtonPressed : (() -> Void)?
+    var podrobneeButtonPressed : (() -> Void)?
     
     var items = [TableViewItem]()
     
@@ -71,6 +79,8 @@ class SortirovkaContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bottomView.isHidden = true
         
         cameraView.roundCorners(.allCorners, radius: 20)
         dotsView.roundCorners(.allCorners, radius: 20)
@@ -114,6 +124,10 @@ class SortirovkaContentViewController: UIViewController {
  
     @IBAction func closeButtonPressed(_ sender : Any?){
         closeButtonPressed?()
+    }
+    
+    @IBAction func podrobneeButtonPressed(_ sender : Any?){
+        podrobneeButtonPressed?()
     }
     
 }
@@ -239,6 +253,8 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
         
         dobavitPhotoButton.backgroundColor = UIColor(named: "gray")
         dobavitPhotoButton.layer.cornerRadius = 8
+        
+        podrobneeButton.addTarget(self, action: #selector(podrobneeButtonPressed(_:)), for: .touchUpInside)
         
     }
     

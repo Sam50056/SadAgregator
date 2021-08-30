@@ -5308,9 +5308,12 @@
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                        <connections>
+                                                            <action selector="podrobneeButtonPressed:" destination="dwr-iV-23Y" eventType="touchUpInside" id="wXb-jc-6IH"/>
+                                                        </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Подробнее" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Lw-xF-Vmr">
-                                                        <rect key="frame" x="132" y="14.999999999999998" width="94" height="20.333333333333329"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Скрыть детали" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Lw-xF-Vmr">
+                                                        <rect key="frame" x="116.66666666666666" y="14.999999999999998" width="125" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                         <color key="textColor" systemColor="systemBlueColor"/>
                                                         <nil key="highlightedColor"/>
@@ -5368,6 +5371,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomView" destination="t8C-37-Bcf" id="T3O-ZY-hvF"/>
                         <outlet property="cameraImageView" destination="D1T-pp-Dbk" id="z5c-Fv-5u7"/>
                         <outlet property="cameraView" destination="HXo-xl-etn" id="AQz-sw-nZr"/>
                         <outlet property="cameraViewButton" destination="ihl-Zm-K9s" id="tLN-ir-DUS"/>
