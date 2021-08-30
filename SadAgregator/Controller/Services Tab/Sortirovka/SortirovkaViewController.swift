@@ -128,7 +128,11 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
             let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
-            if let qrValue = metadataObj.stringValue {
+            if let qr = metadataObj.stringValue {
+                
+                guard qrValue == nil else {return}
+                
+                qrValue = qr
                 
                 QRScanQRDataManager().getQRScanQRData(key: "part_2_test", qr: "бМ") { [weak self] data, error in
                     
