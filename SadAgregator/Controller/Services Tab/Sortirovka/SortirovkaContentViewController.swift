@@ -233,15 +233,12 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
     func makeFooterCell(cell : UITableViewCell){
         
         guard let dobavitPhotoButton = cell.viewWithTag(1) as? UIButton,
-              let podrobneeButton = cell.viewWithTag(2) as? UIButton else {
+              let podrobneeButton = cell.viewWithTag(3) as? UIButton else {
                   return
               }
         
         dobavitPhotoButton.backgroundColor = UIColor(named: "gray")
         dobavitPhotoButton.layer.cornerRadius = 8
-        
-        dobavitPhotoButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        podrobneeButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         
     }
     
