@@ -12,7 +12,7 @@ struct QRScanQRDataManager{
     
     func getQRScanQRData(key : String , qr : String , assembly : String = "", completionHandler: @escaping (JSON?, String?) -> Void){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_qr.ScanQR?AKey=\(key)&AQR=\(qr)Q&AAssembly=\(assembly)"
+        let urlString = "https://agrapi.tk-sad.ru/agr_qr.ScanQR?AKey=\(key)&AQR=\(qr)&AAssembly=\(assembly)"
         
         print("URLString for QRScanQRDataManager: \(urlString)")
         

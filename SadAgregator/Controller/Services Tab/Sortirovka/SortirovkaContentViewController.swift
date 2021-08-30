@@ -145,7 +145,7 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
         }else if section == 2{
             return 1
         }else if section == 3{
-            return 1
+            return state == 3 ? items.count : 1
         }
         
         return 0
@@ -180,10 +180,13 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath)
                 
-                if false {
+                if var img = img , !img.isEmpty{
                     
-                    (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: img ?? "") , completed: nil)
+                    img.compressPhotoQuality(compression: "340")
+                    
+                    (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: img) , completed: nil)
                     (cell.viewWithTag(1) as! UIImageView).contentMode = .scaleAspectFill
+                    (cell.viewWithTag(1) as! UIImageView).layer.cornerRadius = 8
                     
                 }else{
                     

@@ -128,7 +128,7 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
             
             if let qrValue = metadataObj.stringValue {
                 
-                QRScanQRDataManager().getQRScanQRData(key: key, qr: "4") { [weak self] data, error in
+                QRScanQRDataManager().getQRScanQRData(key: "part_2_test", qr: "бМ") { [weak self] data, error in
                     
                     if let error = error , data == nil{
                         print("Error with QRScanQRDataManager : \(error)")

@@ -28,6 +28,20 @@ extension String {
         return ceil(boundingBox.width)
     }
     
+    mutating func compressPhotoQuality(compression : String){
+        
+        let originalUrlString = self
+        
+        let indexOfLastSlash = originalUrlString.lastIndex(of: "/")
+        let indexOfDot = originalUrlString.lastIndex(of: ".")
+        let firstPartOfURL = String(originalUrlString[originalUrlString.startIndex ..< indexOfLastSlash!])
+        let secondPartOfURL = "/\(compression)\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
+        let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
+        
+        self = fullURL
+        
+    }
+    
 }
 
 extension StringProtocol where Self: RangeReplaceableCollection {
