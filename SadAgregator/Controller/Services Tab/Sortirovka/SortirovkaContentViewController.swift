@@ -106,7 +106,7 @@ class SortirovkaContentViewController: UIViewController {
         
         timeProgressView.progress = 0.0
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [self] timer in
             
             guard self.seconds < self.time else {
                 self.timer.invalidate()
@@ -114,7 +114,7 @@ class SortirovkaContentViewController: UIViewController {
                 return
             }
             
-            self.seconds += 0.1
+            self.seconds += 0.01
             
             self.timeProgressView.setProgress(Float(self.seconds / self.time), animated: true)
             
