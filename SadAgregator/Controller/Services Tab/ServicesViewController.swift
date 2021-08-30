@@ -114,9 +114,9 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 
             case 4:
                 
-                cellImageView.image = UIImage(systemName: "person.2.square.stack")
+                cellImageView.image = UIImage(systemName: "doc.text.viewfinder")
                 
-                serviceNameLabel.text = "Закупки"
+                serviceNameLabel.text = "Сортировка"
                 
             case 5:
                 
@@ -126,9 +126,9 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 
             case 6:
                 
-                cellImageView.image = UIImage(systemName: "doc.text.viewfinder")
+                cellImageView.image = UIImage(systemName: "person.2.square.stack")
                 
-                serviceNameLabel.text = "Сортировка"
+                serviceNameLabel.text = "Закупки"
                 
                 
             default:
