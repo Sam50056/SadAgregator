@@ -56,6 +56,19 @@ class SortirovkaContentViewController: UIViewController {
     
     var img : String?
     
+    var showMore = false
+    
+    var autoHide = true{
+        didSet{
+            if timer != nil , !autoHide{
+                timer.invalidate()
+                timeProgressView.setProgress(0, animated: true)
+            }else{
+                resetTimer()
+            }
+        }
+    }
+    
     var data : JSON?{
         didSet{
             
@@ -104,23 +117,11 @@ class SortirovkaContentViewController: UIViewController {
         dobavitPhotoViewButton.backgroundColor = UIColor(named: "gray")
         dobavitPhotoViewButton.layer.cornerRadius = 8
         
-        timeProgressView.progress = 0.0
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [self] timer in
-            
-            guard self.seconds < self.time else {
-                self.timer.invalidate()
-                self.closeButtonPressed?()
-                return
-            }
-            
-            self.seconds += 0.01
-            
-            self.timeProgressView.setProgress(Float(self.seconds / self.time), animated: true)
-            
-        }
+        resetTimer()
         
     }
+    
+    //MARK: - Actions
  
     @IBAction func closeButtonPressed(_ sender : Any?){
         closeButtonPressed?()
@@ -128,6 +129,64 @@ class SortirovkaContentViewController: UIViewController {
     
     @IBAction func podrobneeButtonPressed(_ sender : Any?){
         podrobneeButtonPressed?()
+    }
+    
+    @IBAction func moreButtonPressed(_ sender : Any?){
+        
+        showMore.toggle()
+        
+        tableView.reloadData()
+        
+    }
+    
+    @IBAction func autoHideSwitchValueChanged(_ sender : UISwitch){
+        
+        autoHide = sender.isOn
+        
+    }
+    
+    @IBAction func timeStepperValueChanged(_ sender : UIStepperWithInfo){
+        
+        //        print("New Value = \(sender.value)")
+        
+        time = Float(sender.value)
+        
+        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        
+        timer.invalidate()
+        
+        resetTimer(withSeconds: true)
+        
+    }
+    
+    //MARK: - Functions
+    
+    func resetTimer(withSeconds : Bool = true){
+        
+        timeProgressView.progress = 0.0
+        
+        if withSeconds{
+            seconds = 0
+        }
+        
+        if autoHide{
+            
+            timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [self] timer in
+                
+                guard self.seconds < self.time else {
+                    self.timer.invalidate()
+                    self.closeButtonPressed?()
+                    return
+                }
+                
+                self.seconds += 0.01
+                
+                self.timeProgressView.setProgress(Float(self.seconds / self.time), animated: true)
+                
+            }
+            
+        }
+        
     }
     
 }
@@ -153,7 +212,7 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0{
-            return 0
+            return showMore ? 1 : 0
         }else if section == 1{
             return 1
         }else if section == 2{
@@ -173,7 +232,38 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
         
         var cell = UITableViewCell()
         
-        if section == 1 {
+        if section == 0{
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath)
+            
+            guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                  let autoHideSwitch = cell.viewWithTag(2) as? UISwitch,
+                  let label2 = cell.viewWithTag(3) as? UILabel ,
+                  let stepper = cell.viewWithTag(4) as? UIStepper,
+                  let bgView = cell.viewWithTag(5)
+            else {return cell}
+            
+            label1.text = "Скрывать автоматически"
+            
+            label2.text = "Через \(Int(time)) сек."
+            
+            autoHideSwitch.isOn = autoHide
+            
+            autoHideSwitch.addTarget(self, action: #selector(autoHideSwitchValueChanged(_:)), for: .valueChanged)
+            
+            stepper.value = Double(time)
+            
+            stepper.stepValue = 1
+            
+            stepper.minimumValue = 1
+            
+            stepper.maximumValue = .infinity
+            
+            stepper.addTarget(self, action: #selector(timeStepperValueChanged(_:)), for: .valueChanged)
+            
+            bgView.backgroundColor = UIColor(named: "grey")
+            
+        }else if section == 1 {
             
             cell = tableView.dequeueReusableCell(withIdentifier: "oneLabelCell", for: indexPath)
             
