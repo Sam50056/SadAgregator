@@ -4978,7 +4978,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="XA3-7V-dmW" firstAttribute="leading" secondItem="iwn-7x-GLX" secondAttribute="leading" id="0ez-HM-qdf"/>
                                     <constraint firstItem="CVH-Mi-Hfl" firstAttribute="leading" secondItem="iwn-7x-GLX" secondAttribute="leading" id="2gB-cU-9RL"/>
@@ -5195,7 +5194,6 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="lFw-FP-mf8" secondAttribute="trailing" id="1yj-da-ON8"/>
                                                                         <constraint firstItem="lFw-FP-mf8" firstAttribute="leading" secondItem="97S-Ol-wUP" secondAttribute="leading" id="Dqn-2u-APW"/>
@@ -5223,7 +5221,6 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="8cv-vn-c9h" secondAttribute="trailing" id="KNj-wA-EgU"/>
                                                                         <constraint firstItem="o5R-fH-Nfo" firstAttribute="centerX" secondItem="3fS-6N-FgY" secondAttribute="centerX" id="LCm-XT-bt4"/>
@@ -5289,7 +5286,6 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="8S8-pj-UpD" firstAttribute="top" secondItem="4ej-89-qca" secondAttribute="top" id="6Gc-IO-7iS"/>
                                                     <constraint firstItem="VV1-4A-ANa" firstAttribute="centerX" secondItem="4ej-89-qca" secondAttribute="centerX" id="DKf-cb-X1c"/>
@@ -5320,7 +5316,6 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="2Lw-xF-Vmr" firstAttribute="centerY" secondItem="E6q-Ma-D0Q" secondAttribute="centerY" id="4el-1z-h83"/>
                                                     <constraint firstItem="9Lr-p2-p3t" firstAttribute="leading" secondItem="E6q-Ma-D0Q" secondAttribute="leading" id="AnE-Oy-IgJ"/>
