@@ -18,6 +18,8 @@ class SortirovkaViewController: UIViewController {
     
     private var key : String = ""
     
+    var assembly : String?
+    
     private var captureSession = AVCaptureSession()
     private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     private var qrCodeFrameView: UIView?
@@ -99,9 +101,12 @@ class SortirovkaViewController: UIViewController {
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        guard let assembly = assembly else {return}
+        
+        navigationItem.title = assembly == "1" ? "Сортировка" : "Сканирование"
         
     }
     

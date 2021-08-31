@@ -13,6 +13,10 @@ import Hero
 class MainViewController: UIViewController {
     
     @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var scanView: UIView!
+    
+    @IBOutlet weak var scanViewImageView: UIImageView!
+    @IBOutlet weak var scanViewButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -147,6 +151,7 @@ class MainViewController: UIViewController {
         tableView.separatorStyle = .none
         
         searchView.layer.cornerRadius = 10
+        scanView.layer.cornerRadius = 10
         
         checkKeysDataManager.getKeysData(key: key)
         
@@ -189,6 +194,16 @@ extension MainViewController {
     @IBAction func photoSearchButtonPressed(_ sender : UIButton){
         
         showImagePickerController(sourceType: .photoLibrary)
+        
+    }
+    
+    @IBAction func scanViewButtonPressed(_ sender : UIButton){
+        
+        let sortVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortirovkaVC") as! SortirovkaViewController
+        
+        sortVC.assembly = "0"
+        
+        navigationController?.pushViewController(sortVC, animated: true)
         
     }
     

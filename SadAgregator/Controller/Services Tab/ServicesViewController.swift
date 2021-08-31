@@ -174,6 +174,8 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             
             let sortVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortirovkaVC") as! SortirovkaViewController
             
+            sortVC.assembly = "1"
+            
             navigationController?.pushViewController(sortVC, animated: true)
             
         }
