@@ -59,7 +59,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
         }
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 8
+        config.interSectionSpacing = 32
         
         let layout = UICollectionViewCompositionalLayout(
             sectionProvider: sectionProvider, configuration: config)
@@ -67,8 +67,18 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
         return layout
     }
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        if section == 0{
+            return 4
+        }else if section == 1{
+            return 1
+        }else{
+            return 2
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -86,55 +96,68 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             
             secondView.isHidden = true
             
-            switch indexPath.row {
+            if indexPath.section == 0{
                 
-            case 0:
+                switch indexPath.row {
+                    
+                case 0:
+                    
+                    cellImageView.image = UIImage(systemName: "person.2")
+                    
+                    serviceNameLabel.text = "Клиенты"
+                    
+                case 1:
+                    
+                    cellImageView.image = UIImage(systemName: "person.2.square.stack")
+                    
+                    serviceNameLabel.text = "Мои закупки"
+                    
+                case 2:
+                    
+                    cellImageView.image = UIImage(systemName: "shippingbox")
+                    
+                    serviceNameLabel.text = "Сборка"
+                    
+                case 3:
+                    
+                    cellImageView.image = UIImage(systemName: "doc.text.viewfinder")
+                    
+                    serviceNameLabel.text = "Сортировка"
+                    
+                default:
+                    break
+                }
                 
-                cellImageView.image = UIImage(systemName: "person.2")
+            }else if indexPath.section == 1{
                 
-                serviceNameLabel.text = "Клиенты"
+                cellImageView.image = UIImage(systemName: "cart")
                 
-            case 1:
+                serviceNameLabel.text = "Мои заказы"
                 
-                cellImageView.image = UIImage(systemName: "star.fill")
+            }else if indexPath.section == 2{
                 
-                serviceNameLabel.text = "Рейтинг поставщиков"
+                switch indexPath.row{
+                    
+                case 0:
+                    
+                    cellImageView.image = UIImage(systemName: "star.fill")
+                    
+                    serviceNameLabel.text = "Рейтинг поставщиков"
+                    
+                case 1:
+                    
+                    cellImageView.image = UIImage(systemName: "star.fill")
+                    
+                    serviceNameLabel.text = "Рейтинг посредников"
+                    
+                    
+                default:
+                    
+                    break
+                    
+                }
                 
-            case 2:
-                
-                cellImageView.image = UIImage(systemName: "shippingbox")
-                
-                serviceNameLabel.text = "Сборка"
-                
-            case 3:
-                
-                cellImageView.image = UIImage(systemName: "star.fill")
-                
-                serviceNameLabel.text = "Рейтинг посредников"
-                
-            case 4:
-                
-                cellImageView.image = UIImage(systemName: "doc.text.viewfinder")
-                
-                serviceNameLabel.text = "Сортировка"
-                
-            case 5:
-                
-                cellImageView.image = UIImage(systemName: "person.badge.plus")
-                
-                serviceNameLabel.text = "Поставщики"
-                
-            case 6:
-                
-                cellImageView.image = UIImage(systemName: "person.2.square.stack")
-                
-                serviceNameLabel.text = "Закупки"
-                
-                
-            default:
-                break
             }
-            
             
         }
         
@@ -144,39 +167,58 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.row == 1{
+        let section = indexPath.section
+        let index = indexPath.row
+        
+        if section == 0{
             
-            let ratingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VendsRatingVC") as! VendsPopularityRatingViewController
+            if index == 0{
+                
+                let clientsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientsVC") as! ClientsViewController
+                
+                navigationController?.pushViewController(clientsVC, animated: true)
+                
+            }else if index == 1{
+                
+                
+                
+            }else if index == 2{
+                
+                let sborkaView = SborkaView()
+                
+                let sborkaVC = UIHostingController(rootView: sborkaView)
+                
+                navigationController?.pushViewController(sborkaVC, animated: true)
+                
+            }else if index == 3{
+                
+                let sortVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortirovkaVC") as! SortirovkaViewController
+                
+                sortVC.assembly = "1"
+                
+                navigationController?.pushViewController(sortVC, animated: true)
+                
+            }
             
-            navigationController?.pushViewController(ratingVC, animated: true)
+        }else if section == 1{
             
-        }else if indexPath.row == 0{
             
-            let clientsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientsVC") as! ClientsViewController
             
-            navigationController?.pushViewController(clientsVC, animated: true)
+        }else if section == 2{
             
-        }else if indexPath.row == 2{
-            
-            let sborkaView = SborkaView()
-            
-            let sborkaVC = UIHostingController(rootView: sborkaView)
-            
-            navigationController?.pushViewController(sborkaVC, animated: true)
-            
-        }else if indexPath.row == 3{
-            
-            let brokerPopVC = BrokersPopularityViewController()
-            
-            navigationController?.pushViewController(brokerPopVC, animated: true)
-            
-        }else if indexPath.row == 4{
-            
-            let sortVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortirovkaVC") as! SortirovkaViewController
-            
-            sortVC.assembly = "1"
-            
-            navigationController?.pushViewController(sortVC, animated: true)
+            if index == 0{
+                
+                let ratingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VendsRatingVC") as! VendsPopularityRatingViewController
+                
+                navigationController?.pushViewController(ratingVC, animated: true)
+                
+            }else if index == 1{
+                
+                let brokerPopVC = BrokersPopularityViewController()
+                
+                navigationController?.pushViewController(brokerPopVC, animated: true)
+                
+            }
             
         }
         
