@@ -135,6 +135,8 @@ class SortirovkaContentViewController: UIViewController {
         
         resetTimer()
         
+        setUpProgressView()
+        
     }
     
     //MARK: - Actions
@@ -294,6 +296,23 @@ class SortirovkaContentViewController: UIViewController {
         self.imageId = nil
         self.imageUrl = nil
         self.imageWebUrl = nil
+        
+    }
+    
+    func setUpProgressView(){
+        
+        guard let data = data,
+              let max = data["progress"]["max"].string,
+              let curr = data["progress"]["curr"].string,
+              !max.isEmpty
+        else { progressView.isHidden = true; progressLabel.isHidden = true; return}
+        
+        let maxInt = Int(max)!
+        let currInt = Int(curr)!
+        
+        progressView.setProgress(Float(currInt / maxInt), animated: false)
+        
+        progressLabel.text = curr + "/" + max
         
     }
     
