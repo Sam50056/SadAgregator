@@ -206,7 +206,7 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                         
                         self?.fpc.layout = MyFloatingPanelLayout()
                         
-                        self?.fpc.set(contentViewController: contentVC)
+                        self?.fpc.set(contentViewController: UINavigationController(rootViewController: contentVC))
                         
                         self?.fpc.isRemovalInteractionEnabled = false // Optional: Let it removable by a swipe-down
                         
@@ -285,21 +285,20 @@ extension SortirovkaViewController : FloatingPanelControllerDelegate{
         
         if targetState.pointee == .tip {
             
-            (fpc.children.first! as! SortirovkaContentViewController).state = 1
+            ((fpc.children.first! as! UINavigationController).children.first! as! SortirovkaContentViewController).state = 1
             
         }else if targetState.pointee == .half{
             
-            (fpc.children.first! as! SortirovkaContentViewController).state = 2
+            ((fpc.children.first! as! UINavigationController).children.first! as! SortirovkaContentViewController).state = 2
             
             //            print("\((UIScreen.main.bounds.height - 64) * 0.65)")
             
         }else if targetState.pointee == .full{
             
-            (fpc.children.first! as! SortirovkaContentViewController).state = 3
+            ((fpc.children.first! as! UINavigationController).children.first! as! SortirovkaContentViewController).state = 3
             
         }
         
     }
-    
     
 }

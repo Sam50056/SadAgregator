@@ -93,7 +93,33 @@ class SortirovkaContentViewController: UIViewController {
             img = data["img"].string
             
             data["opts"].arrayValue.forEach { jsonOpt in
-                items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue))
+                
+                if jsonOpt["point_id"].stringValue != ""{
+                    
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue , shouldLabel2BeBlue: true , pointId: jsonOpt["point_id"].stringValue))
+                    
+                }else if jsonOpt["vend_id"].stringValue != ""{
+                    
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue , shouldLabel2BeBlue: true , vendId: jsonOpt["vend_id"].stringValue))
+                    
+                }else if jsonOpt["broker_id"].stringValue != ""{
+                    
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue, shouldLabel2BeBlue: true , brokerId: jsonOpt["broker_id"].stringValue))
+                    
+                }else if jsonOpt["url"].stringValue != ""{
+                    
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue, shouldLabel2BeBlue: true , url: jsonOpt["url"].stringValue))
+                    
+                }else if jsonOpt["img"].stringValue != ""{
+                    
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue , shouldLabel2BeBlue: true, img: jsonOpt["img"].stringValue))
+                    
+                }else{
+                    
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue))
+                    
+                }
+                
             }
             
         }
@@ -121,8 +147,6 @@ class SortirovkaContentViewController: UIViewController {
         timeProgressView.transform = timeProgressView.transform.scaledBy(x: 1, y: 2)
         progressView.transform = progressView.transform.scaledBy(x: 1, y: 1.5)
         
-        progressLabel.text = "18/26"
-        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -133,10 +157,19 @@ class SortirovkaContentViewController: UIViewController {
         dobavitPhotoViewButton.backgroundColor = UIColor(named: "gray")
         dobavitPhotoViewButton.layer.cornerRadius = 8
         
-        resetTimer()
-        
         setUpProgressView()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+        resetTimer()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
     }
     
     //MARK: - Actions
@@ -451,6 +484,8 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
                 label1.text = item.label1Text
                 label2.text = item.label2Text
                 
+                label2.textColor = item.shouldLabel2BeBlue ? .systemBlue : UIColor(named: "blackwhite")
+                
             }
                 
         }
@@ -476,6 +511,58 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let section = indexPath.section
+        
+        if section == 3 , state == 3 {
+            
+            let item = items[indexPath.row]
+            
+            guard item.shouldLabel2BeBlue else {return}
+            
+            timer.invalidate()
+            
+            if !item.url.isEmpty{
+                
+                guard let url = URL(string: item.url) else {return}
+                
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                
+            }else if !item.img.isEmpty{
+                
+                previewImage(item.img)
+                
+            }else if !item.brokerId.isEmpty{
+                
+                let brokerCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BrokerCardVC") as! BrokerCardViewController
+                
+                brokerCardVC.thisBrokerId = item.brokerId
+                
+                navigationController?.pushViewController(brokerCardVC, animated: true)
+                
+            }else if !item.vendId.isEmpty{
+                
+                let vendorVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "VendorVC") as! PostavshikViewController
+                
+                vendorVC.thisVendorId = item.vendId
+                
+                navigationController?.pushViewController(vendorVC, animated: true)
+                
+            }else if !item.pointId.isEmpty{
+                
+                let pointVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PointVC") as! PointViewController
+                
+                pointVC.thisPointId = item.pointId
+                
+                navigationController?.pushViewController(pointVC, animated: true)
+                
+            }
+            
+        }
+        
+    }
+    
 }
 
 //MARK: - Structs
@@ -486,6 +573,14 @@ extension SortirovkaContentViewController {
         
         var label1Text : String
         var label2Text : String
+        
+        var shouldLabel2BeBlue : Bool = false
+        
+        var pointId : String = ""
+        var vendId : String = ""
+        var brokerId : String = ""
+        var url : String = ""
+        var img : String = ""
         
     }
     
