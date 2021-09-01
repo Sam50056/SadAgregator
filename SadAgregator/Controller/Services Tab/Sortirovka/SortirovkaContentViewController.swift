@@ -559,6 +559,14 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
                 
             }
             
+        }else if section == 2 , state == 2 || state == 3{
+            
+            guard let img = img else {return}
+            
+            timer.invalidate()
+            
+            previewImage(img)
+            
         }
         
     }
