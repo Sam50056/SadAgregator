@@ -139,7 +139,7 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                 
                 qrValue = qr
                 
-                QRScanQRDataManager().getQRScanQRData(key: "part_2_test", qr: "бМ") { [weak self] data, error in
+                QRScanQRDataManager().getQRScanQRData(key: "part_2_test", qr: "бМ", assembly: assembly ?? "") { [weak self] data, error in
                     
                     if let error = error , data == nil{
                         print("Error with QRScanQRDataManager : \(error)")
@@ -157,6 +157,8 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                         self?.fpc.delegate = self
                         
                         let contentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortContentViewVC") as! SortirovkaContentViewController
+                        
+                        contentVC.key = self?.key ?? ""
                         
                         contentVC.data = data
                         
@@ -185,6 +187,20 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                                 self?.fpc.move(to: .tip, animated: true)
                                 
                             }
+                            
+                        }
+                        
+                        contentVC.moveToState = { [weak self] state in
+                            
+                            if state == 1{
+                                self?.fpc.move(to: .tip, animated: true)
+                            }else if state == 2{
+                                self?.fpc.move(to: .half, animated: true)
+                            }else if state == 3{
+                                self?.fpc.move(to: .full, animated: true)
+                            }
+                            
+                            contentVC.state = state
                             
                         }
                         

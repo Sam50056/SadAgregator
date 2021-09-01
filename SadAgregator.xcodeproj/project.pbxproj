@@ -32,6 +32,7 @@
 		220704692685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220704682685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift */; };
 		2207046C2686A9CE00FC6B4B /* SborkaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207046B2686A9CE00FC6B4B /* SborkaView.swift */; };
 		220704702689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207046F2689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift */; };
+		220C95A226DF796900795DD4 /* AssemblySetRealPhotoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C95A126DF796900795DD4 /* AssemblySetRealPhotoDataManager.swift */; };
 		220DF1802617EAAE008F5873 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DF17F2617EAAE008F5873 /* DatePickerViewController.swift */; };
 		220DF1842617F863008F5873 /* BottomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220DF1832617F863008F5873 /* BottomPresentationController.swift */; };
 		221949FF256B1FBD00E0564D /* PointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221949FE256B1FBD00E0564D /* PointViewController.swift */; };
@@ -336,6 +337,7 @@
 		220704682685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsDelClientFromPurDataManager.swift; sourceTree = "<group>"; };
 		2207046B2686A9CE00FC6B4B /* SborkaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SborkaView.swift; sourceTree = "<group>"; };
 		2207046F2689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySegmentsInAssemblyDataManager.swift; sourceTree = "<group>"; };
+		220C95A126DF796900795DD4 /* AssemblySetRealPhotoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySetRealPhotoDataManager.swift; sourceTree = "<group>"; };
 		220DF17F2617EAAE008F5873 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		220DF1832617F863008F5873 /* BottomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPresentationController.swift; sourceTree = "<group>"; };
 		221949FE256B1FBD00E0564D /* PointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointViewController.swift; sourceTree = "<group>"; };
@@ -1646,6 +1648,7 @@
 				22CD354A269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift */,
 				22CD354C269E64E5009057C3 /* AssemblySetQRDataManager.swift */,
 				22D1322526A5AD4300D0BB38 /* AssemblySellThisPointDataManager.swift */,
+				220C95A126DF796900795DD4 /* AssemblySetRealPhotoDataManager.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -1951,6 +1954,7 @@
 				22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */,
 				22ADF82B267C369800811DA9 /* BrokersUpdSendTypeDataManager.swift in Sources */,
 				22029C1E25C64C0600CE79BC /* ToExpQueueDataManager.swift in Sources */,
+				220C95A226DF796900795DD4 /* AssemblySetRealPhotoDataManager.swift in Sources */,
 				227ADAAA25892D8E009B32EC /* ReviewUpdateDataManager.swift in Sources */,
 				22C4883C26C6E97A005E7A7A /* FavoriteBrokersView.swift in Sources */,
 				2293745E2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift in Sources */,

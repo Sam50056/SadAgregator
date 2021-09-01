@@ -5050,6 +5050,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ihl-Zm-K9s">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="35"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="addImageButtonPressed:" destination="dwr-iV-23Y" eventType="touchUpInside" id="8De-pv-oQp"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" name="gray"/>
@@ -5378,6 +5381,9 @@
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                        <connections>
+                                                            <action selector="addImageButtonPressed:" destination="dwr-iV-23Y" eventType="touchUpInside" id="DQW-L3-U5W"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добавить фото" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VV1-4A-ANa">
                                                         <rect key="frame" x="116.66666666666666" y="14.999999999999998" width="124.66666666666666" height="20.333333333333329"/>
