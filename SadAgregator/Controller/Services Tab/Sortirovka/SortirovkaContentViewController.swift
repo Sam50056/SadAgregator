@@ -77,6 +77,7 @@ class SortirovkaContentViewController: UIViewController {
             if timer != nil , !autoHide{
                 timer.invalidate()
                 timeProgressView.setProgress(0, animated: true)
+                timeProgressView.isHidden = true
             }else{
                 resetTimer()
             }
@@ -128,7 +129,7 @@ class SortirovkaContentViewController: UIViewController {
     var timer : Timer!
     var seconds : Float = 0
     
-    var time : Float = 10
+    var time : Float = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,6 +159,9 @@ class SortirovkaContentViewController: UIViewController {
         dobavitPhotoViewButton.layer.cornerRadius = 8
         
         setUpProgressView()
+        
+        podrobneeViewButton.setTitle("", for: .normal)
+        dobavitPhotoViewButton.setTitle("", for: .normal)
         
     }
     
@@ -239,6 +243,8 @@ class SortirovkaContentViewController: UIViewController {
         }
         
         if autoHide{
+            
+            timeProgressView.isHidden = false
             
             timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [self] timer in
                 
@@ -506,6 +512,8 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
         dobavitPhotoButton.backgroundColor = UIColor(named: "gray")
         dobavitPhotoButton.layer.cornerRadius = 8
         
+        dobavitPhotoViewButton.setTitle("", for: .normal)
+        podrobneeViewButton.setTitle("", for: .normal)
         podrobneeButton.addTarget(self, action: #selector(podrobneeButtonPressed(_:)), for: .touchUpInside)
         dobavitPhotoButton.addTarget(self, action: #selector(addImageButtonPressed(_:)), for: .touchUpInside)
         
