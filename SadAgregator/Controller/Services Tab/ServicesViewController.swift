@@ -7,10 +7,16 @@
 
 import UIKit
 import SwiftUI
+import RealmSwift
 
 class ServicesViewController: UIViewController {
     
     @IBOutlet weak var collectionView : UICollectionView!
+    
+    let realm = try! Realm()
+    
+    private var key = ""
+    private var isLogged = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +34,9 @@ class ServicesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = false
+        
+        loadUserData()
+        
     }
     
 }
@@ -128,6 +137,8 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                     break
                 }
                 
+                !isLogged ? (cell.contentView.alpha = 0.5) : (cell.contentView.alpha = 1)
+                
             }else if indexPath.section == 1{
                 
                 cellImageView.image = UIImage(systemName: "cart")
@@ -170,7 +181,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
         let section = indexPath.section
         let index = indexPath.row
         
-        if section == 0{
+        if section == 0, isLogged{
             
             if index == 0{
                 
@@ -221,6 +232,27 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             }
             
         }
+        
+    }
+    
+}
+
+//MARK: - Data Manipulation Methods
+
+extension ServicesViewController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        let userDataFirst = userDataObject.first
+        
+        print("Key Realm: \(String(describing: userDataFirst?.key))")
+        
+        key = userDataFirst?.key ?? ""
+        isLogged = userDataFirst?.isLogged ?? false
+        
+        collectionView.reloadData()
         
     }
     
