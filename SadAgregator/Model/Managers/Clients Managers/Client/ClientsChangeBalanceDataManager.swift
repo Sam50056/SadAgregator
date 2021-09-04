@@ -17,7 +17,7 @@ struct ClientsChangeBalanceDataManager {
     
     var delegate : ClientsChangeBalanceDataManagerDelegate?
     
-    func getClientsChangeBalanceData(key : String , clientId id : String , summ : Int , comment : String){
+    func getClientsChangeBalanceData(key : String , clientId id : String , summ : Int , comment : String,completionHandler: ((JSON?, String?) -> Void)? = nil){
         
         let urlString = "https://agrapi.tk-sad.ru/agr_clients.ChangeBalance?AKey=\(key)&AClientID=\(id)&ASumm=\(summ)&AComment=\(comment)"
         
@@ -31,6 +31,7 @@ struct ClientsChangeBalanceDataManager {
             
             if error != nil {
                 delegate?.didFailGettingClientsChangeBalanceDataWithError(error: error!.localizedDescription)
+                completionHandler?(nil, error!.localizedDescription)
                 return
             }
             
@@ -41,6 +42,7 @@ struct ClientsChangeBalanceDataManager {
             let jsonAnswer = JSON(parseJSON: json)
             
             delegate?.didGetClientsChangeBalanceData(data: jsonAnswer)
+            completionHandler?(jsonAnswer, nil)
             
         }
         

@@ -52,7 +52,6 @@ class ClientViewController: UIViewController {
         
         clientDataManager.delegate = self
         updateClientInfoDataManager.delegate = self
-        clientsChangeBalanceDataManager.delegate = self
         newPhotoPlaceDataManager.delegate = self
         
         tableView.delegate = self
@@ -684,7 +683,7 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
             
         }
         
-        balanceLabel?.text = "\(balance!)"
+        balanceLabel?.text = "\(balance!) руб"
         
         sender.value = 0
         
@@ -734,7 +733,44 @@ extension ClientViewController{
                         comment = String(comment.prefix(200))
                     }
                     
-                    clientsChangeBalanceDataManager.getClientsChangeBalanceData(key: key, clientId: thisClientId!, summ: intSumm, comment: comment)
+                    clientsChangeBalanceDataManager.getClientsChangeBalanceData(key: key, clientId: thisClientId!, summ: intSumm, comment: comment) { data, error in
+                        
+                        if let error = error , data == nil {
+                            print("Error with ClientsChangeBalanceDataManager : \(error)")
+                            return
+                        }
+                        
+                        DispatchQueue.main.async { [weak self] in
+                            
+                            if data!["result"].intValue == 1{
+                                
+                                print("ChangeBalanceData request sent")
+                                
+                                self?.refreshClientData()
+                                
+                                self?.payId = data!["pay_id"].string
+                                
+                                guard isPlus else {return}
+                                
+                                let alertController = UIAlertController(title: "Прикрепить чек?", message: nil, preferredStyle: .alert)
+                                
+                                alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                    
+                                    self?.showImagePickerController(sourceType: .photoLibrary)
+                                    
+                                }))
+                                
+                                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                
+                                self?.present(alertController, animated: true, completion: nil)
+                                
+                            }else{
+                                print("ChangeBalanceData NOT request sent")
+                            }
+                            
+                        }
+                        
+                    }
                     
                 }
                 
@@ -857,48 +893,6 @@ extension ClientViewController : UpdateClientInfoDataManagerDelegate{
     
     func didFailGettingUpdateClientInfoDataWithError(error: String) {
         print("Error with UpdateClientInfoDataManager : \(error)")
-    }
-    
-}
-
-//MARK: - ClientsChangeBalanceDataManagerDelegate
-
-extension ClientViewController : ClientsChangeBalanceDataManagerDelegate{
-    
-    func didGetClientsChangeBalanceData(data: JSON) {
-        
-        DispatchQueue.main.async { [weak self] in
-            
-            if data["result"].intValue == 1{
-                
-                print("ChangeBalanceData request sent")
-                
-                self?.refreshClientData()
-                
-                self?.payId = data["pay_id"].string
-                
-                let alertController = UIAlertController(title: "Прикрепить чек?", message: nil, preferredStyle: .alert)
-                
-                alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
-                    
-                    self?.showImagePickerController(sourceType: .photoLibrary)
-                    
-                }))
-                
-                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-                
-                self?.present(alertController, animated: true, completion: nil)
-                
-            }else{
-                print("ChangeBalanceData NOT request sent")
-            }
-            
-        }
-        
-    }
-    
-    func didFailGettingClientsChangeBalanceDataWithError(error: String) {
-        print("Error with ClientsChangeBalanceDataManager : \(error)")
     }
     
 }
