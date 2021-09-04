@@ -603,6 +603,18 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
             let moneyArray = pur["money"].arrayValue
             
             return CGFloat(66 + (moneyArray.count * 23)) //130//88 //- 20
+        }else if indexPath.section == 2{
+            
+            guard let comment = clientData?["client_header"]["comment"].string else {return K.simpleHeaderCellHeight}
+            
+            let recommendedHeight = comment.replacingOccurrences(of: "<br>", with: "\n").height(withConstrainedWidth: tableView.bounds.width - 300, font: UIFont.systemFont(ofSize: 13))
+            
+            if recommendedHeight < K.simpleHeaderCellHeight{
+                return K.simpleHeaderCellHeight
+            }else{
+                return recommendedHeight
+            }
+            
         }
         return K.simpleHeaderCellHeight
     }
