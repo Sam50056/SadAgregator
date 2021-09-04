@@ -610,7 +610,7 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
             let recommendedHeight = comment.replacingOccurrences(of: "<br>", with: "\n").height(withConstrainedWidth: tableView.bounds.width - 300, font: UIFont.systemFont(ofSize: 13))
             
             if recommendedHeight < K.simpleHeaderCellHeight{
-                return K.simpleHeaderCellHeight
+                return K.simpleHeaderCellHeight + 16
             }else{
                 return recommendedHeight
             }
