@@ -269,7 +269,7 @@ extension BrokerCardViewController{
             newBalanceItems.append(BalanceCellItem(label1Text: "Ваш баланс", label2Text: balance + " руб.", image: "plus" , label2TextColor: balance.contains("-") ? .systemRed : .systemGreen))
         }
         
-        if var waitBalance = balanceBlock["wait_balance"].string , waitBalance != ""{
+        if var waitBalance = balanceBlock["wait_balance"].string , waitBalance != "" , waitBalance != "0"{
             
             waitBalance = String(String(waitBalance.reversed()).inserting(separator: " ", every: 3).reversed())
             
@@ -476,6 +476,12 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             button.restorationIdentifier = item.image
             
             button.addTarget(self, action: #selector(balanceButonTapped(_:)), for: .touchUpInside)
+            
+            if item.image != "plus" , brokerData["balance"]["checks"].arrayValue.isEmpty{
+                buttonView.isHidden = true
+            }else{
+                buttonView.isHidden = false
+            }
             
         case 1:
             
