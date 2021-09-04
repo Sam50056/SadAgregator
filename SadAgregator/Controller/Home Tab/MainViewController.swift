@@ -152,6 +152,7 @@ class MainViewController: UIViewController {
         
         searchView.layer.cornerRadius = 10
         scanView.layer.cornerRadius = 10
+        scanViewButton.setTitle("", for: .normal)
         
         checkKeysDataManager.getKeysData(key: key)
         

@@ -2152,7 +2152,6 @@
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FKE-6A-dVL">
                                                     <rect key="frame" x="0.0" y="0.0" width="37" height="49"/>
-                                                    <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="scanViewButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y2c-1n-Tg8"/>
                                                     </connections>
