@@ -4781,15 +4781,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ваш баланс" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fG5-KR-udx">
-                                                    <rect key="frame" x="138.33333333333334" y="15.999999999999998" width="113.66666666666666" height="19.333333333333329"/>
+                                                    <rect key="frame" x="138.33333333333334" y="16" width="113.66666666666666" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNC-tf-Qt9">
-                                                    <rect key="frame" x="97" y="51.333333333333336" width="196" height="21.666666666666664"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="руб" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNC-tf-Qt9">
+                                                    <rect key="frame" x="97" y="49" width="196" height="24"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="21.670000000000002" id="46W-88-hme"/>
+                                                        <constraint firstAttribute="height" constant="24" id="46W-88-hme"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                                     <nil key="textColor"/>
@@ -4803,7 +4803,6 @@
                                                         </imageView>
                                                         <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CMv-Td-f98">
                                                             <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
-                                                            <state key="normal" title="Button"/>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" name="gray"/>
