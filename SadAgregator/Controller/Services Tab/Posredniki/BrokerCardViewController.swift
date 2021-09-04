@@ -47,6 +47,8 @@ class BrokerCardViewController: UIViewController {
     
     private var showUsl = false
     
+    private let activityController = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -200,6 +202,8 @@ extension BrokerCardViewController{
     @objc func refresh(_ sender : Any?){
         
         guard let thisBrokerId = thisBrokerId else {return}
+        
+        showSimpleCircleAnimation(activityController: activityController)
         
         brokersBrokerCardDataManager.getBrokersBrokerCardData(key: key, id: thisBrokerId)
         
@@ -1171,6 +1175,8 @@ extension BrokerCardViewController : BrokersBrokerCardDataManagerDelegate{
         DispatchQueue.main.async { [weak self] in
             
             if data["result"].intValue == 1{
+                
+                self?.stopSimpleCircleAnimation(activityController: self!.activityController)
                 
                 self?.brokerData = data
                 
