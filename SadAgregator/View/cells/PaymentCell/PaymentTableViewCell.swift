@@ -98,7 +98,7 @@ class PaymentTableViewCell: UITableViewCell {
         secondLabel.textColor = .systemGray
         
         firstLabel.font = UIFont.systemFont(ofSize: 15)
-        firstLabel.textColor = .systemBlue
+        firstLabel.textColor = UIColor(named: "blackwhite")
         
         leftRoundView.layer.cornerRadius = leftRoundView.frame.width / 2
         rightRoundView.layer.cornerRadius = rightRoundView.frame.width / 2
@@ -198,6 +198,8 @@ extension PaymentTableViewCell : UITableViewDataSource , UITableViewDelegate{
             
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             cell.textLabel?.text = name
+            
+            cell.textLabel?.textColor = .systemBlue
             
             let button = UIButton(frame: cell.contentView.frame)
             

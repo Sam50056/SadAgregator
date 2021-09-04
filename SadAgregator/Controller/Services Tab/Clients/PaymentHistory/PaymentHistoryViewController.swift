@@ -379,6 +379,7 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
             
             if payment["summ"].stringValue.first == "-"{
                 cell.rightRoundImageView.image = UIImage(systemName: "cart")
+                cell.rightRoundView.isHidden = false
             }else{
                 cell.leftRoundView.isHidden = false
             }
@@ -390,12 +391,21 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
             }
         }
         
+        //Checking for check images
+        if let img = payment["img"].string , !img.isEmpty{
+            cell.rightRoundView.alpha = 1
+        }else if payment["summ"].stringValue.first != "-"{
+            cell.rightRoundView.alpha = 0.5
+        }else{
+            cell.rightRoundView.alpha = 1
+        }
+        
         
         cell.rightViewButtonTapped = { [weak self] in
             
             if payment["summ"].stringValue.first == "-"{
+                //CART Button
                 
-                print("CART")
                 
             }else{
                 

@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0KC-8z-YJb">
-                        <rect key="frame" x="0.0" y="28" width="218" height="117"/>
+                        <rect key="frame" x="4" y="28" width="214" height="117"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </tableView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBx-as-tHm">
@@ -136,7 +136,7 @@
                     <constraint firstItem="tZL-BE-Wz3" firstAttribute="top" secondItem="0KC-8z-YJb" secondAttribute="bottom" constant="8" id="bp7-ZN-gaE"/>
                     <constraint firstItem="dBx-as-tHm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="eZE-e4-4lU"/>
                     <constraint firstItem="GRZ-7T-foA" firstAttribute="leading" secondItem="PKY-Wp-lYg" secondAttribute="trailing" constant="8" id="qSt-6H-ED9"/>
-                    <constraint firstItem="0KC-8z-YJb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vdP-LL-Sjw"/>
+                    <constraint firstItem="0KC-8z-YJb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="vdP-LL-Sjw"/>
                     <constraint firstItem="VXl-BY-jK1" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="yGE-rS-iOn"/>
                 </constraints>
             </tableViewCellContentView>
