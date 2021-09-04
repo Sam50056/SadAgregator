@@ -369,35 +369,57 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
         cell.rightRoundImageView.image = UIImage(systemName: "newspaper")
         cell.leftRoundImageView.image = UIImage(systemName: "cart")
         
+        if payment["summ"].stringValue.first == "-"{
+            cell.leftRoundView.isHidden = true
+        }else{
+            cell.rightRoundView.isHidden = false
+        }
+        
         if let piId = payment["pi_id"].string , !piId.isEmpty{
             
-            cell.leftRoundView.isHidden = false
+            if payment["summ"].stringValue.first == "-"{
+                cell.rightRoundImageView.image = UIImage(systemName: "cart")
+            }else{
+                cell.leftRoundView.isHidden = false
+            }
             
         }else{
             cell.leftRoundView.isHidden = true
+            if payment["summ"].stringValue.first == "-"{
+                cell.rightRoundView.isHidden = true
+            }
         }
+        
         
         cell.rightViewButtonTapped = { [weak self] in
             
-            if let img = payment["img"].string , !img.isEmpty{
+            if payment["summ"].stringValue.first == "-"{
                 
-                self?.previewImage(img)
+                print("CART")
                 
             }else{
                 
-                let alertController = UIAlertController(title: "Прикрепить чек?", message: nil, preferredStyle: .alert)
-                
-                alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                if let img = payment["img"].string , !img.isEmpty{
                     
-                    self?.payId = payment["pid"].string
+                    self?.previewImage(img)
                     
-                    self?.showImagePickerController(sourceType: .photoLibrary)
+                }else{
                     
-                }))
-                
-                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-                
-                self?.present(alertController, animated: true, completion: nil)
+                    let alertController = UIAlertController(title: "Прикрепить чек?", message: nil, preferredStyle: .alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                        
+                        self?.payId = payment["pid"].string
+                        
+                        self?.showImagePickerController(sourceType: .photoLibrary)
+                        
+                    }))
+                    
+                    alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                    
+                    self?.present(alertController, animated: true, completion: nil)
+                    
+                }
                 
             }
             
