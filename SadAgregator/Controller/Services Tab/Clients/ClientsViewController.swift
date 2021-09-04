@@ -123,11 +123,11 @@ extension ClientsViewController{
         }
         
         if let balancesStat = stat["balances"].string , balancesStat != "" {
-            stats.append(StatItem(firstText: "Баланс", secondText: balancesStat + " руб"))
+            stats.append(StatItem(firstText: "Баланс", secondText: balancesStat + " руб" , shouldBeBlue: true))
         }
         
-        if let debetsStat = stat["debets"].string , debetsStat != "" {
-            stats.append(StatItem(firstText: "Задолженность", secondText: debetsStat + " руб"))
+        if let debetsStat = stat["debets"].string , debetsStat != "" , debetsStat != "0" {
+            stats.append(StatItem(firstText: "Задолженность", secondText: debetsStat + " руб" , shouldBeBlue: true))
         }
         
     }
@@ -337,9 +337,14 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             if let firstLabel = cell.viewWithTag(1) as? UILabel ,
                let secondLabel = cell.viewWithTag(2) as? UILabel{
                 
-                firstLabel.text = stats[indexPath.row].firstText
+                let stat = stats[indexPath.row]
                 
-                secondLabel.text = stats[indexPath.row].secondText
+                firstLabel.text = stat.firstText
+                
+                secondLabel.text = stat.secondText
+                
+                secondLabel.textColor = stat.shouldBeBlue ? .systemBlue : UIColor(named: "blackwhite")
+                
             }
             
         case 4:
@@ -547,6 +552,8 @@ extension ClientsViewController{
         
         let firstText : String
         let secondText : String
+        
+        var shouldBeBlue : Bool = false
         
     }
     
