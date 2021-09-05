@@ -17,6 +17,7 @@ class ServicesViewController: UIViewController {
     
     private var key = ""
     private var isLogged = false
+    private var isVendor = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +84,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0{
             return 4
-        }else if section == 1{
+        }else if section == 1 , isVendor{
             return 1
         }else{
             return 2
@@ -251,6 +252,7 @@ extension ServicesViewController {
         
         key = userDataFirst?.key ?? ""
         isLogged = userDataFirst?.isLogged ?? false
+        isVendor = (userDataFirst?.isVendor ?? "") == "1" ? true : false
         
         collectionView.reloadData()
         

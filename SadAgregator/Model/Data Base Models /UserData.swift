@@ -20,6 +20,8 @@ class UserData : Object{
     @objc dynamic var lkBrokers : String = ""
     @objc dynamic var lkPosts : String = ""
     
+    @objc dynamic var isVendor : String = ""
+    
     @objc dynamic var imageHashSearch : String = ""
     @objc dynamic var imageHashServer : String = ""
     
