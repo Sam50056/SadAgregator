@@ -36,6 +36,8 @@ class ClientsViewController: UIViewController {
     private var balanceRequestsPage = 1
     private var balanceRequestsRowForpaggingUpdate = 15
     
+    private var clientsData : JSON?
+    
     private var clients = [JSON]()
     
     private var balanceRequests = [JSON]()
@@ -80,8 +82,11 @@ class ClientsViewController: UIViewController {
         
         pagingClientsDataManager.delegate = self
         clientsFilterDataManager.delegate = self
+        clientsPayRequestsDataManager.delegate = self
         
-        FormDataManager(delegate: self).getFormData(key: key)
+        key = "part_3_test"
+        
+        refresh()
         
     }
     
@@ -118,17 +123,21 @@ extension ClientsViewController{
     
     func makeStatsFrom(_ stat : JSON){
         
+        var newStats = [StatItem]()
+        
         if let clientsStat = stat["clients"].string , clientsStat != "" {
-            stats.append(StatItem(firstText: "Клиенты", secondText: clientsStat))
+            newStats.append(StatItem(firstText: "Клиенты", secondText: clientsStat))
         }
         
         if let balancesStat = stat["balances"].string , balancesStat != "" {
-            stats.append(StatItem(firstText: "Баланс", secondText: balancesStat + " руб" , shouldBeBlue: true))
+            newStats.append(StatItem(firstText: "Баланс", secondText: balancesStat + " руб" , shouldBeBlue: true))
         }
         
         if let debetsStat = stat["debets"].string , debetsStat != "" , debetsStat != "0" {
-            stats.append(StatItem(firstText: "Задолженность", secondText: debetsStat + " руб" , shouldBeBlue: true))
+            newStats.append(StatItem(firstText: "Задолженность", secondText: debetsStat + " руб" , shouldBeBlue: true))
         }
+        
+        stats = newStats
         
     }
     
@@ -142,6 +151,9 @@ extension ClientsViewController{
         
     }
     
+    @objc func refresh(){
+        FormDataManager(delegate: self).getFormData(key: key)
+    }
     
 }
 
@@ -200,7 +212,7 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
         
         switch section {
         case 0:
-            return areRequests ? 1 : 0
+            return (areRequests && balanceRequests.count != 0) ? 1 : 0
         case 1:
             
             if areRequests , areRequestsShown{
@@ -275,6 +287,12 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
                     if data!["result"].intValue == 1{
                         DispatchQueue.main.async {
                             self?.balanceRequests.remove(at: indexPath.row)
+                            if self!.balanceRequests.isEmpty{
+                                self?.tableView.reloadSections([0,1], with: .automatic)
+                            }else{
+                                self?.tableView.reloadSections([1], with: .automatic)
+                            }
+                            self?.refresh()
                         }
                     }
                     
@@ -294,7 +312,12 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
                     if data!["result"].intValue == 1{
                         DispatchQueue.main.async {
                             self?.balanceRequests.remove(at: indexPath.row)
-                            self?.tableView.reloadSections([1], with: .automatic)
+                            if self!.balanceRequests.isEmpty{
+                                self?.tableView.reloadSections([0,1], with: .automatic)
+                            }else{
+                                self?.tableView.reloadSections([1], with: .automatic)
+                            }
+                            self?.refresh()
                         }
                     }
                     
@@ -436,7 +459,7 @@ extension ClientsViewController : UITableViewDelegate , UITableViewDataSource{
             
             areRequestsShown.toggle()
             
-            tableView.reloadSections([1], with: .top)
+            tableView.reloadSections([1], with: .automatic)
             
             (tableView.cellForRow(at: indexPath)?.viewWithTag(1) as? UILabel)?.text = areRequestsShown ? "Скрыть" : "Показать"
             (tableView.cellForRow(at: indexPath)?.viewWithTag(2) as? UIImageView)?.image = areRequestsShown ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
@@ -577,9 +600,11 @@ extension ClientsViewController : FormDataManagerDelegate{
                 
                 tableView.reloadData()
                 
-                if data["pay_reqs"]["cnt"].stringValue != "" , data["pay_reqs"]["cnt"].stringValue != "0"{
+                if data["pay_reqs"]["cnt"].stringValue != "" , data["pay_reqs"]["cnt"].stringValue != "0" , clientsData == nil{
                     clientsPayRequestsDataManager.getClientsPayRequestsData(key: key, page: balanceRequestsPage)
                 }
+                
+                clientsData = data
                 
             }else{
                 print("Error with getting FormData , result : 0")
