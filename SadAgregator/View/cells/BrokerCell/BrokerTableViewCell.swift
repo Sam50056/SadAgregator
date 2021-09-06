@@ -24,6 +24,7 @@ class BrokerTableViewCell: UITableViewCell {
     @IBOutlet weak var imageCountImageView: UIImageView!
     @IBOutlet weak var imageCountLabel: UILabel!
     
+    var newView = UIView()
     
     var otherItems = [TableViewItem](){
         didSet{
@@ -61,6 +62,7 @@ class BrokerTableViewCell: UITableViewCell {
         otherItems.removeAll()
         rateItems.removeAll()
         parcelItems.removeAll()
+        newView.removeFromSuperview()
     }
     
 }

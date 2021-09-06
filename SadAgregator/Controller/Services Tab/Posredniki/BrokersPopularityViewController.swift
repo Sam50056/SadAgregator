@@ -208,21 +208,21 @@ extension BrokersPopularityViewController{
             
             let newFrame = CGRect(x: cell.ratingLabel.frame.origin.x, y: cell.ratingView.frame.origin.y, width: 70, height: 25)
             
-            let newView = UIView(frame: newFrame)
+            cell.newView = UIView(frame: newFrame)
             
-            newView.backgroundColor = #colorLiteral(red: 0.8812789321, green: 0.9681747556, blue: 0.9018383622, alpha: 1)
-            newView.layer.cornerRadius = 6
+            cell.newView.backgroundColor = #colorLiteral(red: 0.8812789321, green: 0.9681747556, blue: 0.9018383622, alpha: 1)
+            cell.newView.layer.cornerRadius = 6
             
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: newView.frame.width, height: newView.frame.height))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: cell.newView.frame.width, height: cell.newView.frame.height))
             label.font = UIFont.systemFont(ofSize: 14)
             label.textAlignment = .center
             label.textColor = .systemGreen
             
             label.text = "Новичок"
             
-            newView.addSubview(label)
+            cell.newView.addSubview(label)
             
-            cell.contentView.addSubview(newView)
+            cell.contentView.addSubview(cell.newView)
             
         }else{
             cell.ratingView.isHidden = false
