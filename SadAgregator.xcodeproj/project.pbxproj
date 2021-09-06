@@ -187,6 +187,8 @@
 		229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A95C425A161030086EAD9 /* PricesTableViewCell.swift */; };
 		229A95C725A161030086EAD9 /* PricesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229A95C525A161030086EAD9 /* PricesTableViewCell.xib */; };
 		229A95CA25A16E100086EAD9 /* TopVendorsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */; };
+		229CCABC26E694D7000398E3 /* BrokersGetBrokerActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229CCABB26E694D7000398E3 /* BrokersGetBrokerActionsDataManager.swift */; };
+		229CCABE26E69752000398E3 /* BrokersSetBrokerActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229CCABD26E69752000398E3 /* BrokersSetBrokerActionsDataManager.swift */; };
 		229FE68E25700B120001FF54 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FE68D25700B120001FF54 /* SearchViewController.swift */; };
 		229FE69225706B6B0001FF54 /* GetSearchPageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FE69125706B6B0001FF54 /* GetSearchPageDataManager.swift */; };
 		22A0534E256BCE350016B40A /* ActivityPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0534D256BCE350016B40A /* ActivityPointDataManager.swift */; };
@@ -501,6 +503,8 @@
 		229A95C425A161030086EAD9 /* PricesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesTableViewCell.swift; sourceTree = "<group>"; };
 		229A95C525A161030086EAD9 /* PricesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PricesTableViewCell.xib; sourceTree = "<group>"; };
 		229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopVendorsDataManager.swift; sourceTree = "<group>"; };
+		229CCABB26E694D7000398E3 /* BrokersGetBrokerActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersGetBrokerActionsDataManager.swift; sourceTree = "<group>"; };
+		229CCABD26E69752000398E3 /* BrokersSetBrokerActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersSetBrokerActionsDataManager.swift; sourceTree = "<group>"; };
 		229FE68D25700B120001FF54 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		229FE69125706B6B0001FF54 /* GetSearchPageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSearchPageDataManager.swift; sourceTree = "<group>"; };
 		22A0534D256BCE350016B40A /* ActivityPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPointDataManager.swift; sourceTree = "<group>"; };
@@ -1210,6 +1214,8 @@
 				2263155D26BC8D4100920F8D /* BrokersBalanceAddRequestDataManager.swift */,
 				22C4883D26C87A9B005E7A7A /* BrokersFavoritesDataManager.swift */,
 				22DD117B26D1535800E8494C /* BrokersGetBrokerRevsPagginationDataManager.swift */,
+				229CCABB26E694D7000398E3 /* BrokersGetBrokerActionsDataManager.swift */,
+				229CCABD26E69752000398E3 /* BrokersSetBrokerActionsDataManager.swift */,
 			);
 			path = Brokers;
 			sourceTree = "<group>";
@@ -1940,6 +1946,7 @@
 				22BF1A0D25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift in Sources */,
 				22692E3326B889E700CA2946 /* BrokersBrokersTopBySearchDataManager.swift in Sources */,
 				22553015261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift in Sources */,
+				229CCABE26E69752000398E3 /* BrokersSetBrokerActionsDataManager.swift in Sources */,
 				22DD117426CC755400E8494C /* RatingTableViewCellWithImages.swift in Sources */,
 				222375A026D96A250097AF41 /* SortirovkaContentViewController.swift in Sources */,
 				22B41BAB2648808600F7DC30 /* CreateDiapazonViewController.swift in Sources */,
@@ -2099,6 +2106,7 @@
 				22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */,
 				22BF4DDF2676B80F00748D0B /* VendUpdateInfoDataManager.swift in Sources */,
 				22692E3E26BA0E6E00CA2946 /* BrokersRateUpdateDataManager.swift in Sources */,
+				229CCABC26E694D7000398E3 /* BrokersGetBrokerActionsDataManager.swift in Sources */,
 				226F240826B1F57900FB2744 /* BrokersPopularityViewController.swift in Sources */,
 				22CD3549269E13FC009057C3 /* AssemblySetItemValueDataManager.swift in Sources */,
 				224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */,

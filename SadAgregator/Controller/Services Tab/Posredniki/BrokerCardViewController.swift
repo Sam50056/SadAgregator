@@ -71,7 +71,7 @@ class BrokerCardViewController: UIViewController {
         
         navigationItem.title = "Посредник"
         
-        navigationItem.rightBarButtonItems = [likeBarButton]
+        navigationItem.rightBarButtonItems = [likeBarButton , UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(infoBarButtonPressed))]
         
     }
     
@@ -113,6 +113,62 @@ extension BrokerCardViewController {
         self.brokerLikeStatus = newStatus
         
         brokersBrokerLikeDataManager.getBrokersBrokerLikeData(key: key, brokerId: thisBrokerId, status: newStatus)
+        
+    }
+    
+    @IBAction func infoBarButtonPressed(){
+        
+        guard let thisBrokerId = thisBrokerId else {return}
+        
+        BrokersGetBrokerActionsDataManager().getBrokersGetBrokerActionsData(key : key , id : thisBrokerId){ data , error in
+         
+            if let error = error , data == nil {
+                print("Error with BrokersGetBrokerActionsDataManager : \(error)")
+                return
+            }
+            
+            DispatchQueue.main.async { [weak self] in
+                
+                if data!["result"].intValue == 1{
+                    
+                    let actionsArray = data!["actions"].arrayValue
+                    
+                    self?.showActionsSheet(actionsArray: actionsArray) { (action) in
+                        
+                        let actionid = (action["id"].stringValue)
+                        
+                        BrokersSetBrokerActionsDataManager().getBrokersSetBrokerActionsDataManager(key : self!.key , brokerId : thisBrokerId , actionId: actionid){ data2 , error2 in
+                            
+                            if let error2 = error2 , data2 == nil{
+                                print("Error with BrokersSetBrokerActionsDataManager : \(error2)")
+                                return
+                            }
+                            
+                            DispatchQueue.main.async {
+                                
+                                if data2!["result"].intValue == 1{
+                                    
+                                    self?.dismiss(animated: true, completion: nil)
+                                    
+                                    if let message = data2!["msg"].string{
+                                        
+                                        self?.showSimpleAlertWithOkButton(title: message, message: nil)
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
         
     }
     
