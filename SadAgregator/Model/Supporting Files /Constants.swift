@@ -144,7 +144,7 @@ struct K {
             height += 52//This is for the footer button
         }
         
-        return height
+        return height < 235 ? 235 : height
         
     }
     

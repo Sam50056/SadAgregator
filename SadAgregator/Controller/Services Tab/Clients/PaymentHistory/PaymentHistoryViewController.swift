@@ -197,6 +197,16 @@ extension PaymentHistoryViewController {
         
     }
     
+    func showOneTovarItem(id : String){
+        
+        let oneTovarItemVC = OneTovarViewController()
+        
+        oneTovarItemVC.itemId = id
+        
+        navigationController?.pushViewController(oneTovarItemVC, animated: true)
+        
+    }
+    
 }
 
 //MARK: - SearchBar
@@ -400,12 +410,22 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
             cell.rightRoundView.alpha = 1
         }
         
+        cell.leftViewButtonTapped = { [weak self] in
+            
+            guard let tovarId = payment["pi_id"].string , !tovarId.isEmpty else {return}
+            
+            self?.showOneTovarItem(id: tovarId)
+            
+        }
         
         cell.rightViewButtonTapped = { [weak self] in
             
             if payment["summ"].stringValue.first == "-"{
                 //CART Button
                 
+                guard let tovarId = payment["pi_id"].string , !tovarId.isEmpty else {return}
+                
+                self?.showOneTovarItem(id: tovarId)
                 
             }else{
                 

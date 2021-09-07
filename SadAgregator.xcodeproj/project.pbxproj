@@ -95,6 +95,7 @@
 		224FE2A926095FF400AE13B2 /* CreateClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */; };
 		224FE2AC2609644600AE13B2 /* CreateNewClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2AB2609644600AE13B2 /* CreateNewClientDataManager.swift */; };
 		224FE2AF2609738900AE13B2 /* ClientsSetActiveDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224FE2AE2609738900AE13B2 /* ClientsSetActiveDataManager.swift */; };
+		2252F76C26E7F8C600291464 /* PurchasesOneItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2252F76B26E7F8C600291464 /* PurchasesOneItemDataManager.swift */; };
 		2253EE272569D23600103C86 /* ActivityLineDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE262569D23600103C86 /* ActivityLineDataManager.swift */; };
 		2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253EE2A2569D85D00103C86 /* LineViewController.swift */; };
 		22553015261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22553014261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift */; };
@@ -409,6 +410,7 @@
 		224FE2A826095FF400AE13B2 /* CreateClientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClientViewController.swift; sourceTree = "<group>"; };
 		224FE2AB2609644600AE13B2 /* CreateNewClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewClientDataManager.swift; sourceTree = "<group>"; };
 		224FE2AE2609738900AE13B2 /* ClientsSetActiveDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsSetActiveDataManager.swift; sourceTree = "<group>"; };
+		2252F76B26E7F8C600291464 /* PurchasesOneItemDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesOneItemDataManager.swift; sourceTree = "<group>"; };
 		2253EE262569D23600103C86 /* ActivityLineDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLineDataManager.swift; sourceTree = "<group>"; };
 		2253EE2A2569D85D00103C86 /* LineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
 		22553014261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsFilterPayHistoryCountDataManager.swift; sourceTree = "<group>"; };
@@ -1774,6 +1776,7 @@
 				2293745D2655BA1300A22A0B /* PurchasesAddItemCommentsListDataManager.swift */,
 				2293B66426A79C9C00022FAC /* PurchasesGetItemCommentsDataManager.swift */,
 				2293B66626A7A3DD00022FAC /* PurchasesAddItemCommentDataManager.swift */,
+				2252F76B26E7F8C600291464 /* PurchasesOneItemDataManager.swift */,
 			);
 			path = Purchases;
 			sourceTree = "<group>";
@@ -1985,6 +1988,7 @@
 				229FE68E25700B120001FF54 /* SearchViewController.swift in Sources */,
 				221C072C256E5ABB001BC842 /* VendTableViewCellPhoneTableViewCell.swift in Sources */,
 				22C4883E26C87A9B005E7A7A /* BrokersFavoritesDataManager.swift in Sources */,
+				2252F76C26E7F8C600291464 /* PurchasesOneItemDataManager.swift in Sources */,
 				22CADF4A25CCE7EE001C4F31 /* NewVersionViewController.swift in Sources */,
 				2207046C2686A9CE00FC6B4B /* SborkaView.swift in Sources */,
 				22A49CBB2566650600CCC781 /* SizeCollectionViewCell.swift in Sources */,
