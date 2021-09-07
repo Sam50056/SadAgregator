@@ -26,6 +26,9 @@ struct K {
     
     static let UNToken = "UNtoken" //User Notifications Token
     
+    static let sortTime = "sortTime" //Time parameter for sortirovka/scan
+    static let sortAutoHide = "sortAutoHide"
+    
     //MARK: - Design vars
     
     static let postHeight : CGFloat = 600

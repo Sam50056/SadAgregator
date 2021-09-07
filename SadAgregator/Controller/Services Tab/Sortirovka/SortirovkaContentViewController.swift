@@ -78,7 +78,7 @@ class SortirovkaContentViewController: UIViewController {
                 timer.invalidate()
                 timeProgressView.setProgress(0, animated: true)
                 timeProgressView.isHidden = true
-            }else{
+            }else if timer.isValid , autoHide{
                 resetTimer()
             }
         }
@@ -131,6 +131,9 @@ class SortirovkaContentViewController: UIViewController {
     
     var time : Float = 5
     
+    let UDTime = UserDefaults.standard.float(forKey: K.sortTime)
+    let UDAutoHide = UserDefaults.standard.bool(forKey: K.sortAutoHide)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -167,8 +170,15 @@ class SortirovkaContentViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.isNavigationBarHidden = true
+        
         resetTimer()
+        
+        time = UDTime < 1 ? 1 : UDTime
+        
+        autoHide = UDAutoHide
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -216,6 +226,12 @@ class SortirovkaContentViewController: UIViewController {
         
         autoHide = sender.isOn
         
+        UserDefaults.standard.set(autoHide, forKey: K.sortAutoHide)
+        
+        if autoHide{
+            resetTimer()
+        }
+        
     }
     
     @IBAction func timeStepperValueChanged(_ sender : UIStepperWithInfo){
@@ -230,6 +246,8 @@ class SortirovkaContentViewController: UIViewController {
         
         resetTimer(withSeconds: true)
         
+        UserDefaults.standard.set(time, forKey: K.sortTime)
+        
     }
     
     //MARK: - Functions
@@ -238,11 +256,11 @@ class SortirovkaContentViewController: UIViewController {
         
         timeProgressView.progress = 0.0
         
-        if withSeconds{
-            seconds = 0
-        }
-        
         if autoHide{
+            
+            if withSeconds{
+                seconds = 0
+            }
             
             timeProgressView.isHidden = false
             
