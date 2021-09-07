@@ -35,6 +35,7 @@ class BrokerCardViewController: UIViewController {
     private var ratesArray = [UsloviaSotrItem]()
     private var parcelsArray = [UsloviaSotrItem]()
     private var payInfoArray = [UsloviaSotrItem]()
+    private var defectsArray = [UsloviaSotrItem]()
     private var infoCells : [InfoCellObject] = []
     private var brokerRevs = [JSON]()
     private var brokerLikeStatus : String?
@@ -121,7 +122,7 @@ extension BrokerCardViewController {
         guard let thisBrokerId = thisBrokerId else {return}
         
         BrokersGetBrokerActionsDataManager().getBrokersGetBrokerActionsData(key : key , id : thisBrokerId){ data , error in
-         
+            
             if let error = error , data == nil {
                 print("Error with BrokersGetBrokerActionsDataManager : \(error)")
                 return
@@ -219,8 +220,8 @@ extension BrokerCardViewController {
         }else{
             
             guard let brokerData = brokerData ,
-            let checks = brokerData["balance"]["checks"].arrayObject as? [String] ,
-            !checks.isEmpty
+                  let checks = brokerData["balance"]["checks"].arrayObject as? [String] ,
+                  !checks.isEmpty
             else {return}
             
             previewImages(checks)
@@ -362,6 +363,18 @@ extension BrokerCardViewController{
             parcelsArray = newParcels
         }
         
+        let defect = data["defect"]
+        
+        if defect["check"].stringValue != ""{
+            var newDefects = [UsloviaSotrItem]()
+            newDefects.append(UsloviaSotrItem(label1: "Проверка на брак", label2: ""))
+            newDefects.append(UsloviaSotrItem(label1: "Услуга предоставляется", label2: defect["check"].stringValue == "1" ? "Да" : "Нет"))
+            if let price = defect["price"].string , !price.isEmpty{
+                newDefects.append(UsloviaSotrItem(label1: "Стоимость за 1 шт.", label2: price + " руб."))
+            }
+            defectsArray = newDefects
+        }
+        
         if var card = data["pay_info"]["card4"].string , !card.isEmpty{
             var newPayInfo = [UsloviaSotrItem]()
             newPayInfo.append(UsloviaSotrItem(label1: "Оплата", label2: ""))
@@ -427,20 +440,20 @@ extension BrokerCardViewController{
 extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        12
+        14
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch section {
-            
+        
         case 0:
             
             return balanceCellItems.count
             
         case 1:
             
-            return 1
+            return balanceCellItems.count
             
         case 2:
             
@@ -448,17 +461,25 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             
         case 3:
             
-            return showUsl ? ratesArray.count : 0
+            return 1
             
         case 4:
             
-            return showUsl ? parcelsArray.count : 0
+            return showUsl ? ratesArray.count : 0
             
         case 5:
             
-            return showUsl ?  payInfoArray.count : 0
+            return showUsl ? parcelsArray.count : 0
             
         case 6:
+            
+            return showUsl ? defectsArray.count : 0
+            
+        case 7:
+            
+            return showUsl ?  payInfoArray.count : 0
+            
+        case 8:
             
             if showUsl , brokerData?["dop_info"].string != ""{
                 return 1
@@ -466,23 +487,23 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 return 0
             }
             
-        case 7:
+        case 9:
             
             return getInfoRowsCount()
             
-        case 8:
+        case 10:
             
             return 2
             
-        case 9:
+        case 11:
             
             return brokerRevs.count != 0 ? 1 : 0
             
-        case 10:
+        case 12:
             
             return brokerRevs.count < 3 ? brokerRevs.count : 3
             
-        case 11:
+        case 13:
             
             if brokerData?["alert_text"].stringValue != "" || brokerData?["altert_text"].stringValue != "" {
                 return 1
@@ -504,8 +525,14 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
         guard let brokerData = self.brokerData else {return cell}
         
         switch indexPath.section {
-            
+        
         case 0:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "alertCell", for: indexPath)
+            
+            setUpAlertCell(cell: cell, data: brokerData)
+        
+        case 1:
             
             let item = balanceCellItems[indexPath.row]
             
@@ -539,13 +566,13 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 buttonView.isHidden = false
             }
             
-        case 1:
+        case 2:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "brokerTopCell", for: indexPath)
             
             setUpBrokerTopCell(cell: cell, data: brokerData)
             
-        case 2:
+        case 3:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "uslCell", for: indexPath)
             
@@ -561,7 +588,7 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             
             cell.contentView.backgroundColor = .systemGray6
             
-        case 3...5:
+        case 3...7:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelCell", for: indexPath)
             
@@ -569,11 +596,13 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             
             var item : UsloviaSotrItem!
             
-            if indexPath.section == 3{
+            if indexPath.section == 4{
                 item = ratesArray[indexPath.row]
-            }else if indexPath.section == 4{
-                item = parcelsArray[indexPath.row]
             }else if indexPath.section == 5{
+                item = parcelsArray[indexPath.row]
+            }else if indexPath.section == 6{
+                item = defectsArray[indexPath.row]
+            }else if indexPath.section == 7{
                 item = payInfoArray[indexPath.row]
             }
             
@@ -593,27 +622,27 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 label2.font = UIFont.boldSystemFont(ofSize: 15)
             }
             
-        case 6:
+        case 8:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "labelTextViewCell", for: indexPath)
             
             cell.contentView.backgroundColor = .systemGray6
             
             guard let _ = cell.viewWithTag(1) as? UILabel ,
-                    let textView = cell.viewWithTag(2) as? UITextView
+                  let textView = cell.viewWithTag(2) as? UITextView
             else {return cell}
             
             textView.text = brokerData["dop_info"].stringValue.replacingOccurrences(of: "<br>", with: "\n")
             
             textView.backgroundColor = .systemGray6
             
-        case 7:
+        case 9:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
             
             setUpInfoCell(cell: cell, data: brokerData, index: indexPath.row)
             
-        case 8:
+        case 10:
             
             if indexPath.row == 0{
                 
@@ -629,13 +658,13 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        case 9:
+        case 11:
             
             cell = tableView.dequeueReusableCell(withIdentifier: "revCountLabel", for: indexPath)
             
             setUpRevCountLabel(cell: cell)
             
-        case 10:
+        case 12:
             
             let rev = brokerRevs[indexPath.row]
             
@@ -655,12 +684,6 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        //        case 5:
-        //
-        //            cell = tableView.dequeueReusableCell(withIdentifier: "alertCell", for: indexPath)
-        //
-        //            setUpAlertCell(cell: cell, data: brokerData)
-        //
         default:
             
             return cell
@@ -674,13 +697,13 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 2{
+        if indexPath.section == 3{
             
             showUsl.toggle()
             
-            tableView.reloadSections([2,3,4,5,6], with: .automatic)
+            tableView.reloadSections([4,5,6,7,8], with: .automatic)
             
-        }else if indexPath.section == 8, indexPath.row == 1{
+        }else if indexPath.section == 10, indexPath.row == 1{
             
             if !isLogged{
                 
@@ -699,7 +722,7 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        }else if indexPath.section == 9{
+        }else if indexPath.section == 11{
             
             if brokerRevs.count >= 3 {
                 
@@ -713,7 +736,7 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        }else if indexPath.section == 7{
+        }else if indexPath.section == 9{
             
             let selectedInfoCell = infoCells[indexPath.row]
             
@@ -1035,6 +1058,16 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             
             self?.presentHero(navVC, navigationAnimationType: .fade)
             
+            
+        }
+        
+    }
+    
+    func setUpAlertCell(cell : UITableViewCell, data: JSON){
+        
+        if let label = cell.viewWithTag(1) as? UILabel{
+            
+            label.text = data["alert_text"].stringValue.replacingOccurrences(of: "<br>", with: "\n")
             
         }
         
