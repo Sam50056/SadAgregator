@@ -74,6 +74,7 @@ class SortirovkaContentViewController: UIViewController {
     
     var autoHide = true{
         didSet{
+            guard timer != nil else {return}
             if timer.isValid , !autoHide{
                 timer.invalidate()
                 timeProgressView.setProgress(0, animated: true)
@@ -131,9 +132,6 @@ class SortirovkaContentViewController: UIViewController {
     
     var time : Float = 5
     
-    let UDTime = UserDefaults.standard.float(forKey: K.sortTime)
-    let UDAutoHide = UserDefaults.standard.bool(forKey: K.sortAutoHide)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -161,8 +159,6 @@ class SortirovkaContentViewController: UIViewController {
         dobavitPhotoViewBottomButton.backgroundColor = UIColor(named: "gray")
         dobavitPhotoViewBottomButton.layer.cornerRadius = 8
         
-        setUpProgressView()
-        
         podrobneeViewBottomButton.setTitle("", for: .normal)
         dobavitPhotoViewBottomButton.setTitle("", for: .normal)
         
@@ -173,17 +169,29 @@ class SortirovkaContentViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = true
         
-        resetTimer()
+        let UDTime = UserDefaults.standard.float(forKey: K.sortTime)
+        let UDAutoHide = UserDefaults.standard.bool(forKey: K.sortAutoHide)
         
-        time = UDTime < 1 ? 1 : UDTime
+        time = UDTime
         
         autoHide = UDAutoHide
+        
+        if !autoHide{
+            timeProgressView.isHidden = true
+        }
+        
+        resetTimer()
+        
+        setUpProgressView()
+        
+        tableView.reloadData()
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
+        timer.invalidate()
     }
     
     //MARK: - Actions
