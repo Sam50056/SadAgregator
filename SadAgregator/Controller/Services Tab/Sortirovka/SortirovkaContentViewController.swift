@@ -28,8 +28,8 @@ class SortirovkaContentViewController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
     
-    @IBOutlet weak var dobavitPhotoViewButton: UIButton!
-    @IBOutlet weak var podrobneeViewButton : UIButton!
+    @IBOutlet weak var dobavitPhotoViewBottomButton: UIButton!
+    @IBOutlet weak var podrobneeViewBottomButton : UIButton!
     
     @IBOutlet weak var bottomView: UIView!
     
@@ -155,13 +155,13 @@ class SortirovkaContentViewController: UIViewController {
         
         tableView.backgroundColor = UIColor(named: "whiteblack")
         
-        dobavitPhotoViewButton.backgroundColor = UIColor(named: "gray")
-        dobavitPhotoViewButton.layer.cornerRadius = 8
+        dobavitPhotoViewBottomButton.backgroundColor = UIColor(named: "gray")
+        dobavitPhotoViewBottomButton.layer.cornerRadius = 8
         
         setUpProgressView()
         
-        podrobneeViewButton.setTitle("", for: .normal)
-        dobavitPhotoViewButton.setTitle("", for: .normal)
+        podrobneeViewBottomButton.setTitle("", for: .normal)
+        dobavitPhotoViewBottomButton.setTitle("", for: .normal)
         
     }
     
@@ -512,8 +512,8 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
         dobavitPhotoButton.backgroundColor = UIColor(named: "gray")
         dobavitPhotoButton.layer.cornerRadius = 8
         
-        dobavitPhotoViewButton.setTitle("", for: .normal)
-        podrobneeViewButton.setTitle("", for: .normal)
+        dobavitPhotoButton.setTitle("", for: .normal)
+        podrobneeButton.setTitle("", for: .normal)
         podrobneeButton.addTarget(self, action: #selector(podrobneeButtonPressed(_:)), for: .touchUpInside)
         dobavitPhotoButton.addTarget(self, action: #selector(addImageButtonPressed(_:)), for: .touchUpInside)
         

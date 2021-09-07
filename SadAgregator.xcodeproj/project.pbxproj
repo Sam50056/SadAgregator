@@ -189,6 +189,7 @@
 		229A95CA25A16E100086EAD9 /* TopVendorsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */; };
 		229CCABC26E694D7000398E3 /* BrokersGetBrokerActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229CCABB26E694D7000398E3 /* BrokersGetBrokerActionsDataManager.swift */; };
 		229CCABE26E69752000398E3 /* BrokersSetBrokerActionsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229CCABD26E69752000398E3 /* BrokersSetBrokerActionsDataManager.swift */; };
+		229CCAC026E7EC24000398E3 /* OneTovarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229CCABF26E7EC24000398E3 /* OneTovarViewController.swift */; };
 		229FE68E25700B120001FF54 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FE68D25700B120001FF54 /* SearchViewController.swift */; };
 		229FE69225706B6B0001FF54 /* GetSearchPageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229FE69125706B6B0001FF54 /* GetSearchPageDataManager.swift */; };
 		22A0534E256BCE350016B40A /* ActivityPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A0534D256BCE350016B40A /* ActivityPointDataManager.swift */; };
@@ -505,6 +506,7 @@
 		229A95C925A16E100086EAD9 /* TopVendorsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopVendorsDataManager.swift; sourceTree = "<group>"; };
 		229CCABB26E694D7000398E3 /* BrokersGetBrokerActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersGetBrokerActionsDataManager.swift; sourceTree = "<group>"; };
 		229CCABD26E69752000398E3 /* BrokersSetBrokerActionsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersSetBrokerActionsDataManager.swift; sourceTree = "<group>"; };
+		229CCABF26E7EC24000398E3 /* OneTovarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTovarViewController.swift; sourceTree = "<group>"; };
 		229FE68D25700B120001FF54 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		229FE69125706B6B0001FF54 /* GetSearchPageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSearchPageDataManager.swift; sourceTree = "<group>"; };
 		22A0534D256BCE350016B40A /* ActivityPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPointDataManager.swift; sourceTree = "<group>"; };
@@ -1135,6 +1137,7 @@
 				22C5D02725B0E064001C69C6 /* PeerViewController.swift */,
 				2203F16525BFC35D007DBFFD /* EditVigruzkaViewController.swift */,
 				22CADF4925CCE7EE001C4F31 /* NewVersionViewController.swift */,
+				229CCABF26E7EC24000398E3 /* OneTovarViewController.swift */,
 				22692E3526B8CDDB00CA2946 /* DobavlenieVZakupku */,
 			);
 			path = Global;
@@ -2041,6 +2044,7 @@
 				22B2652A267D7C21004342E3 /* BrokersDelBrokerHelperDataManager.swift in Sources */,
 				22ADF829267C32D600811DA9 /* VendDelSendRuleDataManager.swift in Sources */,
 				227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */,
+				229CCAC026E7EC24000398E3 /* OneTovarViewController.swift in Sources */,
 				22D9022F259BFFC3009732CC /* AddPointRequestView.swift in Sources */,
 				22A49CB42566645800CCC781 /* PostTableViewCell.swift in Sources */,
 				22906B3A2578293500F00B0D /* VendorCardDataManager.swift in Sources */,
