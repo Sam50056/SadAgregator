@@ -74,7 +74,7 @@ class SortirovkaContentViewController: UIViewController {
     
     var autoHide = true{
         didSet{
-            if timer != nil , !autoHide{
+            if timer.isValid , !autoHide{
                 timer.invalidate()
                 timeProgressView.setProgress(0, animated: true)
                 timeProgressView.isHidden = true
