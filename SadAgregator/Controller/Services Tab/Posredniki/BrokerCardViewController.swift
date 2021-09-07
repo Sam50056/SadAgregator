@@ -301,7 +301,7 @@ extension BrokerCardViewController{
             
             var leftLabelText = "Страница"
             
-            if vkLink.contains("@club"){
+            if vkLink.contains("-"){
                 leftLabelText = "Группа"
             }
             
@@ -718,7 +718,7 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             let selectedInfoCell = infoCells[indexPath.row]
             
             if selectedInfoCell.image == UIImage(named: "vk-3"){
-                let urlString = "https://vk.com/@id\((brokerData!["vk_link"].stringValue.replacingOccurrences(of: "-", with: "")))"
+                let urlString = "https://vk.com/@\(brokerData!["vk_link"].stringValue.contains("-") ? "club" : "id")\((brokerData!["vk_link"].stringValue.replacingOccurrences(of: "-", with: "")))"
                 if let url = URL(string: urlString){
                     
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
