@@ -718,7 +718,7 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             let selectedInfoCell = infoCells[indexPath.row]
             
             if selectedInfoCell.image == UIImage(named: "vk-3"){
-                let urlString = "https://vk.com/\((brokerData!["vk_link"].stringValue))"
+                let urlString = "https://vk.com/@id\((brokerData!["vk_link"].stringValue.replacingOccurrences(of: "-", with: "")))"
                 if let url = URL(string: urlString){
                     
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
