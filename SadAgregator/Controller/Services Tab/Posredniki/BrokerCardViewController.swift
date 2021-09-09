@@ -449,7 +449,11 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
         
         case 0:
             
-            return balanceCellItems.count
+            if brokerData?["alert_text"].stringValue != "" || brokerData?["altert_text"].stringValue != "" {
+                return 1
+            }else {
+                return 0
+            }
             
         case 1:
             
