@@ -247,6 +247,8 @@ extension ProdsInPointTableViewController{
             
             tovarImageSearchVC.thisPointId = self!.pointId
             
+            tovarImageSearchVC.thisPid = tovar.pid
+            
             tovarImageSearchVC.vibratTochkaInPost = { [weak self] postId in
                 
                 self!.purProds.remove(at: indexPath.row)

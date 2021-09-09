@@ -23,6 +23,8 @@ class TovarImageSearchTableViewController: UITableViewController {
     
     var thisPointId : String?
     
+    var thisPid : String?
+    
     private var searchData : JSON?
     
     private var postsArray = [JSON]()
@@ -204,9 +206,9 @@ class TovarImageSearchTableViewController: UITableViewController {
         
         cell.vibratTochkuButtonCallback = { [weak self] in
             
-            guard let thisPointId = self!.thisPointId else {return}
+            guard let _ = self!.thisPointId , let thisPid = self!.thisPid else {return}
             
-            AssemblySellThisPointDataManager().getAssemblySellThisPointData(key: self!.key, itemId: thisPointId, postId: postId) { sellData, error in
+            AssemblySellThisPointDataManager().getAssemblySellThisPointData(key: self!.key, itemId: thisPid, postId: postId) { sellData, error in
                 
                 DispatchQueue.main.async {
                     
