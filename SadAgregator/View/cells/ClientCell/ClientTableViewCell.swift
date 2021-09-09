@@ -125,7 +125,7 @@ extension ClientTableViewCell : UITableViewDelegate , UITableViewDataSource{
             (cell as! ClientTableViewCellTableViewCell).secondLabel.text = item.secondText
             
             if item.firstText == "Баланс" ,
-               let balanceInt = Int(item.secondText.replacingOccurrences(of: " руб", with: "")),
+               let balanceInt = Int(item.secondText.replacingOccurrences(of: " руб.", with: "")),
                balanceInt < 0{
                 (cell as! ClientTableViewCellTableViewCell).secondLabel.textColor = .red
             }else{

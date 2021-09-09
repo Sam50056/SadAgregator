@@ -200,6 +200,11 @@ extension MainViewController {
     
     @IBAction func scanViewButtonPressed(_ sender : UIButton){
         
+        guard isLogged else{
+            showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
+            return
+        }
+        
         let sortVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortirovkaVC") as! SortirovkaViewController
         
         sortVC.assembly = "0"

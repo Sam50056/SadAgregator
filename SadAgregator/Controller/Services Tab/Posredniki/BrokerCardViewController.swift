@@ -46,7 +46,7 @@ class BrokerCardViewController: UIViewController {
     private var boxView = UIView()
     private var blurEffectView = UIVisualEffectView()
     
-    private var showUsl = false
+    private var showUsl = true
     
     private let activityController = UIActivityIndicatorView()
     
