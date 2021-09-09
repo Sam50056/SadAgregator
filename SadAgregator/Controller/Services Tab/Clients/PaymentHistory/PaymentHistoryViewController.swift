@@ -20,12 +20,14 @@ class PaymentHistoryViewController: UIViewController {
     private var key = ""
     
     var thisClientId : String?
+    var thisBrokerId : String?
     
     private var clientsPaymentsDataManager = ClientsPaymentsDataManager()
     private var paggingPaymentsByClientDataManager = PaggingPaymentsByClientDataManager()
     private var clientsPagingPaymentsDataManager = ClientsPagingPaymentsDataManager()
     private var clientsFilterPayListDataManager = ClientsFilterPayListDataManager()
     private var clientsFilterPayHistByClientDataManager = ClientsFilterPayHistByClientDataManager()
+    private var brokersMyBrokerPaysDataManager = BrokersMyBrokerPaysDataManager()
     private lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
     private lazy var photoSavedDataManager = PhotoSavedDataManager()
     
@@ -65,6 +67,7 @@ class PaymentHistoryViewController: UIViewController {
         paggingPaymentsByClientDataManager.delegate = self
         clientsPagingPaymentsDataManager.delegate = self
         clientsFilterPayListDataManager.delegate = self
+        brokersMyBrokerPaysDataManager.delegate = self
         clientsFilterPayHistByClientDataManager.delegate = self
         newPhotoPlaceDataManager.delegate = self
         
@@ -87,6 +90,8 @@ class PaymentHistoryViewController: UIViewController {
         
         if let thisClientId = thisClientId {
             paggingPaymentsByClientDataManager.getPaggingPaymentsByClientData(key: key, clientId: thisClientId)
+        }else if let thisBrokerId = thisBrokerId{
+            brokersMyBrokerPaysDataManager.getBrokersMyBrokerPaysData(key: key, id: thisBrokerId, page: page)
         }else{
             clientsPaymentsDataManager.getClientsPaymentsData(key: key)
         }
@@ -96,7 +101,9 @@ class PaymentHistoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(filterBarButtonTapped(_:)))
+        if thisBrokerId == nil{
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(filterBarButtonTapped(_:)))
+        }
         
     }
     
@@ -233,6 +240,10 @@ extension PaymentHistoryViewController : UISearchResultsUpdating{
             if let thisClientId = thisClientId {
                 
                 clientsFilterPayHistByClientDataManager.getClientsFilterPayHistByClientData(key : key , clientId: thisClientId , page : page , source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: minPrice == nil ? "" : String(minPrice!), sumMax: maxPrice ==  nil ? "" : String(maxPrice!) , startDate: minDate ?? "", endDate: maxDate ?? Date().formatDate(), query: comment ?? "")
+                
+            }else if let thisBrokerId = thisBrokerId{
+             
+                brokersMyBrokerPaysDataManager.getBrokersMyBrokerPaysData(key: key, id: thisBrokerId, query: comment ?? "", page: page)
                 
             }else{
                 
@@ -515,6 +526,10 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
                     
                 }
                 
+            }else if let thisBrokerId = thisBrokerId{
+                
+                brokersMyBrokerPaysDataManager.getBrokersMyBrokerPaysData(key: key, id: thisBrokerId, query: comment ?? "", page: page)
+                
             }else{
                 
                 if isFiltering{
@@ -576,13 +591,13 @@ extension PaymentHistoryViewController : ClientsFilterPayListDataManagerDelegate
     
     func didGetClientsFilterPayListData(data: JSON) {
         
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async { [weak self] in
             
             if data["result"].intValue == 1{
                 
-                payments.append(contentsOf: data["payments"].arrayValue)
+                self?.payments.append(contentsOf: data["payments"].arrayValue)
                 
-                tableView.reloadData()
+                self?.tableView.reloadData()
                 
             }
             
@@ -602,13 +617,13 @@ extension PaymentHistoryViewController : ClientsFilterPayHistByClientDataManager
     
     func didGetClientsFilterPayHistByClientData(data: JSON) {
         
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async { [weak self] in
             
             if data["result"].intValue == 1{
                 
-                payments.append(contentsOf: data["payments"].arrayValue)
+                self?.payments.append(contentsOf: data["payments"].arrayValue)
                 
-                tableView.reloadData()
+                self?.tableView.reloadData()
                 
             }
             
@@ -621,6 +636,31 @@ extension PaymentHistoryViewController : ClientsFilterPayHistByClientDataManager
     
 }
 
+//MARK: - BrokersMyBrokerPaysDataManager
+
+extension PaymentHistoryViewController : BrokersMyBrokerPaysDataManagerDelegate {
+    
+    func didGetBrokersMyBrokerPaysData(data: JSON) {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            if data["result"].intValue == 1{
+                
+                self?.payments.append(contentsOf: data["payments"].arrayValue)
+                
+                self?.tableView.reloadData()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingBrokersMyBrokerPaysDataWithError(error: String) {
+        print("Error with BrokersMyBrokerPaysDataManager : \(error)")
+    }
+    
+}
 
 //MARK: - UIImagePickerControllerDelegate
 

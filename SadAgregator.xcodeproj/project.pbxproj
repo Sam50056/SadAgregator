@@ -317,6 +317,7 @@
 		22EF76802597BB960093B645 /* SetListSelectDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */; };
 		22F7426A26226561009128AF /* PurchasesItemInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F7426926226561009128AF /* PurchasesItemInfoDataManager.swift */; };
 		22F7426E26226DA3009128AF /* PostImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F7426D26226DA3009128AF /* PostImage.swift */; };
+		22FC928926EA922E0068BAA5 /* BrokersMyBrokerPaysDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FC928826EA922E0068BAA5 /* BrokersMyBrokerPaysDataManager.swift */; };
 		44D7F3DB0392E9E53844BA25 /* Pods_SadAgregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */; };
 /* End PBXBuildFile section */
 
@@ -636,6 +637,7 @@
 		22EF767F2597BB960093B645 /* SetListSelectDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetListSelectDataManager.swift; sourceTree = "<group>"; };
 		22F7426926226561009128AF /* PurchasesItemInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesItemInfoDataManager.swift; sourceTree = "<group>"; };
 		22F7426D26226DA3009128AF /* PostImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImage.swift; sourceTree = "<group>"; };
+		22FC928826EA922E0068BAA5 /* BrokersMyBrokerPaysDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersMyBrokerPaysDataManager.swift; sourceTree = "<group>"; };
 		8C0EF398469D5BFFA5945260 /* Pods-SadAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SadAgregator.debug.xcconfig"; path = "Target Support Files/Pods-SadAgregator/Pods-SadAgregator.debug.xcconfig"; sourceTree = "<group>"; };
 		DEFFA691448ACCEE393533A1 /* Pods_SadAgregator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SadAgregator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1221,6 +1223,7 @@
 				22DD117B26D1535800E8494C /* BrokersGetBrokerRevsPagginationDataManager.swift */,
 				229CCABB26E694D7000398E3 /* BrokersGetBrokerActionsDataManager.swift */,
 				229CCABD26E69752000398E3 /* BrokersSetBrokerActionsDataManager.swift */,
+				22FC928826EA922E0068BAA5 /* BrokersMyBrokerPaysDataManager.swift */,
 			);
 			path = Brokers;
 			sourceTree = "<group>";
@@ -2001,6 +2004,7 @@
 				224FE2A62608B4BE00AE13B2 /* ClientsChangeBalanceDataManager.swift in Sources */,
 				22A155E42583E11C000EAB64 /* Constants.swift in Sources */,
 				22553019261941CF0017B9CF /* ClientsFilterPayListDataManager.swift in Sources */,
+				22FC928926EA922E0068BAA5 /* BrokersMyBrokerPaysDataManager.swift in Sources */,
 				2290486B256E4978000B7A28 /* VendTableViewCellPopTableViewCell.swift in Sources */,
 				2290485C256DAC80000B7A28 /* VendTableViewCell.swift in Sources */,
 				22A49CC32566717700CCC781 /* OptionCollectionViewCell.swift in Sources */,

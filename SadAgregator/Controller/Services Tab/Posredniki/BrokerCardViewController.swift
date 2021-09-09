@@ -706,7 +706,22 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 3{
+        if indexPath.section == 1{
+            
+            let item = balanceCellItems[indexPath.row]
+            
+            if item.label1Text == "Ваш баланс"{
+                
+                let paymentsHistoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentHistoryVC") as! PaymentHistoryViewController
+
+                paymentsHistoryVC.thisBrokerId = thisBrokerId
+                
+                navigationController?.pushViewController(paymentsHistoryVC, animated: true)
+
+                
+            }
+            
+        }else if indexPath.section == 3{
             
             showUsl.toggle()
             
