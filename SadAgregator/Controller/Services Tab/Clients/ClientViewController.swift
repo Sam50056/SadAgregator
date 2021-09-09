@@ -611,7 +611,7 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
             if recommendedHeight < K.simpleHeaderCellHeight{
                 return K.simpleHeaderCellHeight + 16
             }else{
-                return recommendedHeight
+                return recommendedHeight + 8
             }
             
         }
