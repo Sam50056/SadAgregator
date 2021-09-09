@@ -84,7 +84,7 @@ class ClientsViewController: UIViewController {
         clientsFilterDataManager.delegate = self
         clientsPayRequestsDataManager.delegate = self
         
-        key = "part_3_test"
+//        key = "part_3_test"
         
         refresh()
         
