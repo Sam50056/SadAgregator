@@ -84,10 +84,12 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0{
             return 4
-        }else if section == 1 , isVendor{
+        }else if section == 1 , isVendor , isLogged{
             return 1
-        }else{
+        }else if section == 2{
             return 2
+        }else{
+            return 0
         }
     }
     
@@ -146,6 +148,8 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 
                 serviceNameLabel.text = "Мои заказы"
                 
+                cell.contentView.alpha = 1
+                
             }else if indexPath.section == 2{
                 
                 switch indexPath.row{
@@ -169,6 +173,8 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                     
                 }
                 
+                cell.contentView.alpha = 1
+                
             }
             
         }
@@ -189,6 +195,10 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 let clientsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientsVC") as! ClientsViewController
                 
                 navigationController?.pushViewController(clientsVC, animated: true)
+                
+            }else if section == 0 , !isLogged{
+             
+                showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
                 
             }else if index == 1{
                 
