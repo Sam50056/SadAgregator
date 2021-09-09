@@ -301,12 +301,17 @@ extension BrokerCardViewController{
         if let vkLink = data["vk_link"].string , vkLink != "" {
             
             var leftLabelText = "Страница"
+            var rightLabelText = vkLink
             
             if vkLink.contains("-"){
                 leftLabelText = "Группа"
+                rightLabelText.removeFirst()
+                rightLabelText.insert(contentsOf: "@club", at: rightLabelText.startIndex)
+            }else{
+                rightLabelText.insert(contentsOf: "@id", at: rightLabelText.startIndex)
             }
             
-            infoCells.append(InfoCellObject(image: UIImage(named: "vk-3")!, leftLabelText: leftLabelText, rightLabelText: vkLink, shouldRightLabelBeBlue: true))
+            infoCells.append(InfoCellObject(image: UIImage(named: "vk-3")!, leftLabelText: leftLabelText, rightLabelText: rightLabelText, shouldRightLabelBeBlue: true))
             
         }
         
