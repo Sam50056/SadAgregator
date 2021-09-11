@@ -74,7 +74,7 @@ class SortirovkaContentViewController: UIViewController {
     
     var autoHide = true{
         didSet{
-            guard timer != nil else {return}
+            guard let timer = timer else{return}
             if timer.isValid , !autoHide{
                 timer.invalidate()
                 timeProgressView.setProgress(0, animated: true)
@@ -127,7 +127,7 @@ class SortirovkaContentViewController: UIViewController {
         }
     }
     
-    var timer : Timer!
+    var timer : Timer?
     var seconds : Float = 0
     
     var time : Float = 5
@@ -186,12 +186,14 @@ class SortirovkaContentViewController: UIViewController {
         
         tableView.reloadData()
         
+        //        print(#function)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
-        timer.invalidate()
+        timer?.invalidate()
     }
     
     //MARK: - Actions
@@ -246,11 +248,13 @@ class SortirovkaContentViewController: UIViewController {
         
         //        print("New Value = \(sender.value)")
         
+        guard timer != nil else {return}
+        
         time = Float(sender.value)
         
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         
-        timer.invalidate()
+        timer?.invalidate()
         
         resetTimer(withSeconds: true)
         
@@ -275,7 +279,7 @@ class SortirovkaContentViewController: UIViewController {
             timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [self] timer in
                 
                 guard self.seconds < self.time else {
-                    self.timer.invalidate()
+                    self.timer?.invalidate()
                     self.closeButtonPressed?()
                     return
                 }
@@ -555,7 +559,7 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
             
             guard item.shouldLabel2BeBlue else {return}
             
-            timer.invalidate()
+            timer?.invalidate()
             
             if !item.url.isEmpty{
                 
@@ -597,7 +601,7 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
             
             guard let img = img else {return}
             
-            timer.invalidate()
+            timer?.invalidate()
             
             previewImage(img)
             
@@ -634,7 +638,7 @@ extension SortirovkaContentViewController : UIImagePickerControllerDelegate, UIN
     
     func showImagePickerController(sourceType : UIImagePickerController.SourceType) {
         
-        timer.invalidate()
+        timer?.invalidate()
         moveToState?(3)
         
         let imagePickerController = UIImagePickerController()
@@ -661,12 +665,19 @@ extension SortirovkaContentViewController : UIImagePickerControllerDelegate, UIN
             showBoxView(with: "Загрузка фото чека")
             newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
             
+        }else{
+            resetTimer(withSeconds: false)
         }
         
         //        print(info)
         
         dismiss(animated: true, completion: nil)
         
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        resetTimer(withSeconds: false)
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -708,6 +719,8 @@ extension SortirovkaContentViewController : NewPhotoPlaceDataManagerDelegate{
             }else{
                 
                 removeBoxView()
+                
+                resetTimer(withSeconds: false)
                 
             }
             
@@ -771,25 +784,27 @@ extension SortirovkaContentViewController{
                             return
                         }
                         
-                        guard let data = data else {return}
-                        
-                        if data["result"].intValue == 1{
+                        DispatchQueue.main.async { [weak self] in
                             
-                            print("Check image successfuly saved to server")
+                            guard let data = data else {return}
                             
-                            DispatchQueue.main.async { [weak self] in
+                            if data["result"].intValue == 1{
+                                
+                                print("Check image successfuly saved to server")
                                 
                                 self?.removeBoxView()
                                 
                                 self?.checkSent()
+                                
+                            }else{
+                                
+                                self?.resetTimer(withSeconds: false)
                                 
                             }
                             
                         }
                         
                     }
-                    
-                    
                     
                 }
                 
@@ -845,25 +860,27 @@ extension SortirovkaContentViewController{
                             return
                         }
                         
-                        guard let data = data else {return}
-                        
-                        if data["result"].intValue == 1{
+                        DispatchQueue.main.async { [weak self] in
                             
-                            print("Check image successfuly saved to server")
+                            guard let data = data else {return}
                             
-                            DispatchQueue.main.async { [weak self] in
+                            if data["result"].intValue == 1{
+                                
+                                print("Check image successfuly saved to server")
                                 
                                 self?.removeBoxView()
                                 
                                 self?.checkSent()
+                                
+                            }else{
+                                
+                                self?.resetTimer(withSeconds: false)
                                 
                             }
                             
                         }
                         
                     }
-                    
-                    
                     
                 }
                 
