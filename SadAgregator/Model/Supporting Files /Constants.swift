@@ -26,8 +26,9 @@ struct K {
     
     static let UNToken = "UNtoken" //User Notifications Token
     
-    static let sortTime = "sortTime" //Time parameter for sortirovka/scan
-    static let sortAutoHide = "sortAutoHide"
+    static let sortTime = "sortTime" //Time parameter for sortirovka/scan //Float param
+    static let sortAutoHide = "sortAutoHide" // Bool
+    static let notFirstTimeSortOpened = "notFirstTimeOpenSort" // Bool
     
     //MARK: - Design vars
     

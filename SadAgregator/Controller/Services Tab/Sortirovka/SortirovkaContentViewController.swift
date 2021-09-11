@@ -169,15 +169,30 @@ class SortirovkaContentViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = true
         
+        let notFirstTime = UserDefaults.standard.bool(forKey: K.notFirstTimeSortOpened)
         let UDTime = UserDefaults.standard.float(forKey: K.sortTime)
         let UDAutoHide = UserDefaults.standard.bool(forKey: K.sortAutoHide)
         
-        time = UDTime
-        
-        autoHide = UDAutoHide
-        
-        if !autoHide{
-            timeProgressView.isHidden = true
+        if !notFirstTime{
+            
+            UserDefaults.standard.set(7, forKey: K.sortTime)
+            UserDefaults.standard.set(true, forKey: K.sortAutoHide)
+            
+            UserDefaults.standard.set(true, forKey: K.notFirstTimeSortOpened)
+            
+            time = 7
+            autoHide = true
+            
+        }else{
+            
+            time = UDTime
+            
+            autoHide = UDAutoHide
+            
+            if !autoHide{
+                timeProgressView.isHidden = true
+            }
+            
         }
         
         resetTimer()
