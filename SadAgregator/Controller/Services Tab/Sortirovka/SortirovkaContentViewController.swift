@@ -263,8 +263,6 @@ class SortirovkaContentViewController: UIViewController {
         
         //        print("New Value = \(sender.value)")
         
-        guard timer != nil else {return}
-        
         time = Float(sender.value)
         
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
