@@ -249,11 +249,25 @@ extension ProdsInPointTableViewController{
             
             tovarImageSearchVC.thisPid = tovar.pid
             
-            tovarImageSearchVC.vibratTochkaInPost = { [weak self] postId in
+            tovarImageSearchVC.vibratTochkaInPost = { postId in
                 
-                self!.purProds.remove(at: indexPath.row)
+                tovarImageSearchVC.dismiss(animated: true, completion: nil)
                 
-                self!.tableView.reloadRows(at: [indexPath], with: .automatic)
+                self?.purProds.remove(at: indexPath.row)
+                
+                self?.tableView.reloadData()
+                
+                if self!.purProds.isEmpty{
+                    
+                    let alertController = UIAlertController(title: "У пользователя не добавлены товары", message: nil, preferredStyle: .alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { _ in
+                        self?.navigationController?.popViewController(animated: true)
+                    }))
+                    
+                    self?.present(alertController, animated: true, completion: nil)
+                    
+                }
                 
             }
             
