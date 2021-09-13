@@ -196,10 +196,6 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 
                 navigationController?.pushViewController(clientsVC, animated: true)
                 
-            }else if section == 0 , !isLogged{
-             
-                showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
-                
             }else if index == 1{
                 
                 
@@ -221,6 +217,10 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 navigationController?.pushViewController(sortVC, animated: true)
                 
             }
+            
+        }else if section == 0 , !isLogged{
+            
+            showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
             
         }else if section == 1{
             
