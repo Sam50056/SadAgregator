@@ -42,7 +42,7 @@ class SborkaViewModel : ObservableObject{
     var alertInHelperViewMessage : String? = nil
     var alertInHelperViewButtonText = "Ок"
     
-    @Published var menuSortIndex : Int = 3{
+    @Published var menuSortIndex : Int = 0{
         didSet{
             changeStatus(to: menuSortIndex != 3 ? "\(menuSortIndex)" : "")
         }
@@ -60,7 +60,7 @@ class SborkaViewModel : ObservableObject{
     
     @Published var thisSegIndex : Int?
     
-    var status : String = ""
+    var status : String = "0"
     var helperID : String = ""
     
     private var assemblySegmentsInAssemblyDataManager = AssemblySegmentsInAssemblyDataManager()
