@@ -229,6 +229,8 @@ extension ProdsInPointTableViewController{
                     
                     tovar.status = "Куплено"
                     
+                    tovar.qr = "1"
+                    
                     cell.thisTovar = tovar
                     
                 }
