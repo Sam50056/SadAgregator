@@ -19,19 +19,11 @@ struct ProdsInPointView : UIViewControllerRepresentable{
     var helperId : String
     var status : String
     
-    var statusChanged : ((String) -> ())?
-    
     class Coordinator : NSObject{
         
         var delegate : ProdsInPointTableViewDelegate?
         
-        var parent : ProdsInPointView{
-            didSet{
-                self.parent.statusChanged = { [weak self] newStatus in
-                    self?.delegate?.statusChanged(newStatus: newStatus)
-                }
-            }
-        }
+        var parent : ProdsInPointView
         
         init(_ parent : ProdsInPointView){
             
@@ -65,6 +57,7 @@ struct ProdsInPointView : UIViewControllerRepresentable{
     func updateUIViewController(_ uiViewController: ProdsInPointTableViewController, context: Context) {
         print("UPDATE")
         context.coordinator.delegate?.statusChanged(newStatus: status)
+        context.coordinator.delegate?.helperChanged(newHelperId: helperId)
     }
     
 }
@@ -73,6 +66,7 @@ struct ProdsInPointView : UIViewControllerRepresentable{
 
 protocol ProdsInPointTableViewDelegate {
     func statusChanged(newStatus : String)
+    func helperChanged(newHelperId : String)
 }
 
 //MARK: - View Controller
@@ -82,6 +76,12 @@ class ProdsInPointTableViewController: UITableViewController , ProdsInPointTable
     func statusChanged(newStatus: String) {
         print("NEW STATUS : \(newStatus)")
         status = newStatus
+        refresh()
+    }
+    
+    func helperChanged(newHelperId: String) {
+        print("NEW HELPER ID : \(newHelperId)")
+        helperId = newHelperId
         refresh()
     }
     
@@ -115,8 +115,6 @@ class ProdsInPointTableViewController: UITableViewController , ProdsInPointTable
         tableView.register(UINib(nibName: "TovarTableViewCell", bundle: nil), forCellReuseIdentifier: "tovar_cell")
         
         tableView.allowsSelection = false
-        
-        //        refresh()
         
     }
     
@@ -697,27 +695,31 @@ extension ProdsInPointTableViewController : AssemblyProdsInPointDataManagerDeleg
     
     func didGetAssemblyProdsInPointData(data: JSON) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             
             if data["result"].intValue == 1{
                 
-                self.purProds.append(contentsOf: data["assembly_prods"].arrayValue)
+                if self!.page == 1{
+                    self?.purProds = data["assembly_prods"].arrayValue
+                }else{
+                    self?.purProds.append(contentsOf: data["assembly_prods"].arrayValue)
+                }
                 
-                if self.page == 1 && self.purProds.isEmpty{
+                if self!.page == 1 && self!.purProds.isEmpty{
                     
                     let alertController = UIAlertController(title: "У пользователя не добавлены товары", message: nil, preferredStyle: .alert)
                     
                     alertController.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { _ in
-                        self.navigationController?.popViewController(animated: true)
+                        self?.navigationController?.popViewController(animated: true)
                     }))
                     
-                    self.present(alertController, animated: true, completion: nil)
+                    self?.present(alertController, animated: true, completion: nil)
                     
                 }
                 
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
                 
-                self.refreshControl!.endRefreshing()
+                self?.refreshControl!.endRefreshing()
                 
             }else{
                 
