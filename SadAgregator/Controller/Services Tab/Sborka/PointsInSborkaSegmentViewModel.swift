@@ -22,7 +22,6 @@ class PointsInSborkaSegmentViewModel : ObservableObject{
     @Published var showHelperListSheet = false
     
     @Published var showProdsInPointView = false
-    lazy var prodsInPointView = ProdsInPointView()
     
     @Published var showAlert = false
     var alertTitle = ""
@@ -149,11 +148,6 @@ extension PointsInSborkaSegmentViewModel{
     }
     
     func showProdsInPoint(){
-        
-        prodsInPointView.status = status
-        prodsInPointView.helperId = helperID
-        prodsInPointView.pointId = selectedByTapPoint?.pointId
-        prodsInPointView.pointName = selectedByTapPoint?.capt
         
         showProdsInPointView = true
         

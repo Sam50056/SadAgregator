@@ -74,7 +74,43 @@ struct PointsInSborkaSegmentView: View {
                 
             }
             
-            NavigationLink(destination: pointsInSborkaSegmentViewModel.prodsInPointView .navigationBarTitle(Text(pointsInSborkaSegmentViewModel.selectedByTapPoint?.capt ?? "")), isActive: $pointsInSborkaSegmentViewModel.showProdsInPointView) {
+            NavigationLink(destination:
+                            ProdsInPointView(pointName: pointsInSborkaSegmentViewModel.selectedByTapPoint?.capt
+                                             , pointId: pointsInSborkaSegmentViewModel.selectedByTapPoint?.pointId
+                                             , helperId: pointsInSborkaSegmentViewModel.helperID, status: pointsInSborkaSegmentViewModel.status)
+                            .navigationBarTitle(Text(pointsInSborkaSegmentViewModel.selectedByTapPoint?.capt ?? ""))
+                            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    
+                    Button(action:{
+                        pointsInSborkaSegmentViewModel.getHelpers(inSborka: true)
+                    }){
+                        Image(systemName : "person")
+                    }.contextMenu(ContextMenu(menuItems: {
+                        Button("Смотреть от себя"){
+                            pointsInSborkaSegmentViewModel.smotretOtSebya()
+                        }
+                    }))
+                    
+                    Menu {
+                        Picker(selection: $pointsInSborkaSegmentViewModel.menuSortIndex, label: Text("Статусы")) {
+                            Text("Не обработаны")
+                                .tag(0)
+                            Text("Нет в наличии")
+                                .tag(1)
+                            Text("Куплены")
+                                .tag(2)
+                            Text("Любой")
+                                .tag(3)
+                        }
+                        
+                    } label: {
+                        Image(systemName : "slider.vertical.3")
+                            .imageScale(.large)
+                    }
+                }
+            }
+                           , isActive: $pointsInSborkaSegmentViewModel.showProdsInPointView) {
                 EmptyView()
             }
             

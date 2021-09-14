@@ -16,8 +16,36 @@ struct ProdsInPointView : UIViewControllerRepresentable{
     
     var pointName : String?
     var pointId : String?
-    var helperId : String?
-    var status : String?
+    var helperId : String
+    var status : String
+    
+    var statusChanged : ((String) -> ())?
+    
+    class Coordinator : NSObject{
+        
+        var delegate : ProdsInPointTableViewDelegate?
+        
+        var parent : ProdsInPointView{
+            didSet{
+                self.parent.statusChanged = { [weak self] newStatus in
+                    self?.delegate?.statusChanged(newStatus: newStatus)
+                }
+            }
+        }
+        
+        init(_ parent : ProdsInPointView){
+            
+            self.parent = parent
+            
+            super.init()
+            
+        }
+        
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
     
     func makeUIViewController(context: Context) -> ProdsInPointTableViewController {
         
@@ -28,19 +56,34 @@ struct ProdsInPointView : UIViewControllerRepresentable{
         vc.helperId = helperId
         vc.status = status
         
+        context.coordinator.delegate = vc
+        
         return vc
         
     }
     
     func updateUIViewController(_ uiViewController: ProdsInPointTableViewController, context: Context) {
-        
+        print("UPDATE")
+        context.coordinator.delegate?.statusChanged(newStatus: status)
     }
     
 }
 
+//MARK: - ProdsInPointTableViewDelegate
+
+protocol ProdsInPointTableViewDelegate {
+    func statusChanged(newStatus : String)
+}
+
 //MARK: - View Controller
 
-class ProdsInPointTableViewController: UITableViewController {
+class ProdsInPointTableViewController: UITableViewController , ProdsInPointTableViewDelegate {
+    
+    func statusChanged(newStatus: String) {
+        print("NEW STATUS : \(newStatus)")
+        status = newStatus
+        refresh()
+    }
     
     let realm = try! Realm()
     
@@ -73,7 +116,7 @@ class ProdsInPointTableViewController: UITableViewController {
         
         tableView.allowsSelection = false
         
-        refresh()
+        //        refresh()
         
     }
     
