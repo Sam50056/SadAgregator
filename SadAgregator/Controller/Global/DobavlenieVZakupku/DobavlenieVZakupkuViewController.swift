@@ -141,6 +141,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
     private var checkImageId : String? //Id чека
     private var parselImageId : String? //Id посылки
     private var isSendingCheck : Bool = true
+    private var isSendingPhotosDlyaSebya = false
     private var checkImageURL : URL?{
         didSet{
             
@@ -362,6 +363,8 @@ extension DobavlenieVZakupkuViewController {
         
         guard let thisImageId = thisImageId else {return}
         
+        isSendingPhotosDlyaSebya = false
+        
         if checkImageURL != nil && !hasSentCheckPhoto{
             sendPhotosToServer(forCheck: true)
             return
@@ -402,6 +405,18 @@ extension DobavlenieVZakupkuViewController {
     func dlyaSebyaPressed() {
         
         guard let thisImageId = thisImageId else {return}
+        
+        isSendingPhotosDlyaSebya = true
+        
+        if checkImageURL != nil && !hasSentCheckPhoto{
+            sendPhotosToServer(forCheck: true)
+            return
+        }
+        
+        if parselImageURL != nil && !hasSentParselPhoto{
+            sendPhotosToServer(forCheck: false)
+            return
+        }
         
         PurchasesAddItemForYourselfDataManager(delegate: self).getPurchasesAddItemForYourselfData(key: key, imgId: thisImageId, buyPrice: cenaZakupki == nil ? "" : String(cenaZakupki!), size: thisSize ?? "", withoutReplace: bezZamenSwitch ? "1" : "0", payed: oplachenoSwitch ? "1" : "0", paymentExt: checkImageId ?? "", shipmentExt: parselImageId ?? "" , defectCheck: proverkaNaBrakSwitch ? "1" : "0")
         
@@ -1532,10 +1547,18 @@ extension DobavlenieVZakupkuViewController{
                                 
                                 if isSendingCheck {
                                     hasSentCheckPhoto = true
-                                    gotovoTapped(nil)
+                                    if isSendingPhotosDlyaSebya{
+                                        dlyaSebyaPressed()
+                                    }else{
+                                        gotovoTapped(nil)
+                                    }
                                 }else{
                                     hasSentParselPhoto = true
-                                    gotovoTapped(nil)
+                                    if isSendingPhotosDlyaSebya{
+                                        dlyaSebyaPressed()
+                                    }else{
+                                        gotovoTapped(nil)
+                                    }
                                 }
                                 
                             }
