@@ -403,7 +403,7 @@ extension DobavlenieVZakupkuViewController {
         
         guard let thisImageId = thisImageId else {return}
         
-        PurchasesAddItemForYourselfDataManager(delegate: self).getPurchasesAddItemForYourselfData(key: key , imgId: thisImageId)
+        PurchasesAddItemForYourselfDataManager(delegate: self).getPurchasesAddItemForYourselfData(key: key, imgId: thisImageId, buyPrice: cenaZakupki == nil ? "" : String(cenaZakupki!), size: thisSize ?? "", withoutReplace: bezZamenSwitch ? "1" : "0", payed: oplachenoSwitch ? "1" : "0", paymentExt: checkImageId ?? "", shipmentExt: parselImageId ?? "" , defectCheck: proverkaNaBrakSwitch ? "1" : "0")
         
     }
     

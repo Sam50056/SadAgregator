@@ -17,9 +17,9 @@ struct PurchasesAddItemForYourselfDataManager{
     
     var delegate : PurchasesAddItemForYourselfDataManagerDelegate?
     
-    func getPurchasesAddItemForYourselfData(key : String , imgId id : String){
+    func getPurchasesAddItemForYourselfData(key : String , imgId id : String , buyPrice : String , size : String , withoutReplace : String , payed : String , paymentExt : String , shipmentExt : String , defectCheck : String){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_purchases.AddItemForYourSelf?AKey=\(key)&AAgrImgID=\(id)"
+        let urlString = "https://agrapi.tk-sad.ru/agr_purchases.AddItemForYourSelf?AKey=\(key)&AAgrImgID=\(id)&ABuyPrice=\(buyPrice)&ASize=\(size)&AWithoutReplace=\(withoutReplace)&APayed=\(payed)&APaymentExt=\(paymentExt)&AShipmentExt=\(shipmentExt)&ADefectCheck=\(defectCheck)"
         
         print("URLString for PurchasesAddItemForYourself DataManager: \(urlString)")
         
