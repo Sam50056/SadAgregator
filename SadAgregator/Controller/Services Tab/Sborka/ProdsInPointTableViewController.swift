@@ -56,8 +56,7 @@ struct ProdsInPointView : UIViewControllerRepresentable{
     
     func updateUIViewController(_ uiViewController: ProdsInPointTableViewController, context: Context) {
         print("UPDATE")
-        context.coordinator.delegate?.statusChanged(newStatus: status)
-        context.coordinator.delegate?.helperChanged(newHelperId: helperId)
+        context.coordinator.delegate?.update(newStatus: status, newHelperId: helperId)
     }
     
 }
@@ -65,26 +64,21 @@ struct ProdsInPointView : UIViewControllerRepresentable{
 //MARK: - ProdsInPointTableViewDelegate
 
 protocol ProdsInPointTableViewDelegate {
-    func statusChanged(newStatus : String)
-    func helperChanged(newHelperId : String)
+    func update(newStatus : String , newHelperId : String)
 }
 
 //MARK: - View Controller
 
 class ProdsInPointTableViewController: UITableViewController , ProdsInPointTableViewDelegate {
     
-    func statusChanged(newStatus: String) {
-        guard shouldUpdate else {return}
-        print("NEW STATUS : \(newStatus)")
-        status = newStatus
-        refresh()
-    }
-    
-    func helperChanged(newHelperId: String) {
+    func update(newStatus: String, newHelperId: String) {
         guard shouldUpdate else {return}
         print("NEW HELPER ID : \(newHelperId)")
+        print("NEW STATUS : \(newStatus)")
+        status = newStatus
         helperId = newHelperId
         refresh()
+        
     }
     
     let realm = try! Realm()
