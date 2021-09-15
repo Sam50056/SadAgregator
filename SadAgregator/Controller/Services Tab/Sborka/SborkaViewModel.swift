@@ -30,6 +30,8 @@ class SborkaViewModel : ObservableObject{
     
     @Published var showHelperListSheet = false
     
+    @Published var showShowingMySborkaAlertView = false
+    
     @Published var showAlert = false
     var showSimpleAlert = false
     var alertTitle = ""
@@ -91,6 +93,8 @@ extension SborkaViewModel{
             items.removeAll()
             thisSegIndex = nil
         }
+        
+        screenData = nil
         
         assemblySegmentsInAssemblyDataManager.getAssemblySegmentsInAssemblyData(key: key, parentSegment: parent, status: status, helperId: helperID)
         
@@ -299,6 +303,25 @@ extension SborkaViewModel : AssemblySegmentsInAssemblyDataManagerDelegate{
                 }
                 
                 showNoItemsView = items.isEmpty && screenData != nil
+                
+                if helperID != "" , items.isEmpty{
+                    
+                    helperID = ""
+                    smotretOtSebya()
+                    
+                    withAnimation(.spring()){
+                        
+                        showShowingMySborkaAlertView = true
+                        
+                        let _ = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { [weak self] timer in
+                            withAnimation(.spring()){
+                                self?.showShowingMySborkaAlertView = false
+                            }
+                        }
+                        
+                    }
+                    
+                }
                 
             }
             

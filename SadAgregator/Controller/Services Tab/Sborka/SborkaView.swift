@@ -33,6 +33,21 @@ struct SborkaView : View {
                 EmptyView()
             }
             
+            
+            if sborkaViewModel.showShowingMySborkaAlertView{
+                
+                VStack{
+                    
+                    Text("Переключено на свою сборку")
+                        .foregroundColor(Color(.white))
+                        .padding(8)
+                    
+                }
+                .background(Color(.systemGray4))
+                .cornerRadius(8)
+                
+            }
+            
         }
         .alert(isPresented: $sborkaViewModel.showAlert, content: {
             
