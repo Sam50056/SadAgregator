@@ -9,7 +9,7 @@ import UIKit
 import SwiftyJSON
 import RealmSwift
 
-class TovarImageSearchTableViewController: UITableViewController {
+class TovarImageSearchTableViewController: UIViewController , UITableViewDataSource , UITableViewDelegate{
     
     private let realm = try! Realm()
     
@@ -102,8 +102,24 @@ class TovarImageSearchTableViewController: UITableViewController {
     
     var vibratTochkaInPost : ((String) -> Void)?
     
+    var tableView : UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView = UITableView(frame: view.frame)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        ])
         
         loadUserData()
         
@@ -112,6 +128,8 @@ class TovarImageSearchTableViewController: UITableViewController {
         
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
+        
+        activityController.center = view.center
         
         imageSearch()
         
@@ -136,15 +154,15 @@ class TovarImageSearchTableViewController: UITableViewController {
     
     // MARK: - TableView
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchData != nil ? !postsArray.isEmpty ? postsArray.count : 1 : 0
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if postsArray.isEmpty{
             
@@ -280,7 +298,7 @@ class TovarImageSearchTableViewController: UITableViewController {
         
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return (postsArray.count == 0) ? ((UIScreen.main.bounds.height / 2)) : K.postHeight
     }
     
@@ -321,6 +339,8 @@ extension TovarImageSearchTableViewController : SearchImageDataManagerDelegate{
         
         guard let imageHashText = imageHashText , imageHashSearch != "" , imageHashServer != "" else {return}
         
+        showSimpleCircleAnimation(activityController: activityController)
+        
         SearchImageDataManager(delegate : self).getSearchImageData(urlString: imageHashSearch, ACRop: "", ANOCrop: imageHashText)
         
     }
@@ -335,7 +355,7 @@ extension TovarImageSearchTableViewController : SearchImageDataManagerDelegate{
             
             tableView.reloadData()
             
-            //            stopSimpleCircleAnimation(activityController: activityController)
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
         
