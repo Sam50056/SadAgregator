@@ -13,6 +13,8 @@ class QRScannerController: UIViewController {
     
     var pid : String?
     var qrConnected : (() -> Void)?
+    var willDis : (() -> Void)?
+    var didDis : (() -> Void)?
     
     private let realm = try! Realm()
     
@@ -110,6 +112,16 @@ class QRScannerController: UIViewController {
             print(error)
             return
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        didDis?()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        willDis?()
     }
     
     //MARK: - Actions

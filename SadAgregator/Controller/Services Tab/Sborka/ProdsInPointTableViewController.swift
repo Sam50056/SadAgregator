@@ -74,12 +74,14 @@ protocol ProdsInPointTableViewDelegate {
 class ProdsInPointTableViewController: UITableViewController , ProdsInPointTableViewDelegate {
     
     func statusChanged(newStatus: String) {
+        guard shouldUpdate else {return}
         print("NEW STATUS : \(newStatus)")
         status = newStatus
         refresh()
     }
     
     func helperChanged(newHelperId: String) {
+        guard shouldUpdate else {return}
         print("NEW HELPER ID : \(newHelperId)")
         helperId = newHelperId
         refresh()
@@ -100,6 +102,8 @@ class ProdsInPointTableViewController: UITableViewController , ProdsInPointTable
     private var assemblyProdsInPointDataManager = AssemblyProdsInPointDataManager()
     
     private var purProds = [JSON]()
+    
+    private var shouldUpdate = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,6 +129,8 @@ class ProdsInPointTableViewController: UITableViewController , ProdsInPointTable
 extension ProdsInPointTableViewController{
     
     func update(){
+        
+        shouldUpdate = true
         
         assemblyProdsInPointDataManager.getAssemblyProdsInPointData(key: key, pointId: pointId ?? "", helperId: helperId ?? "", status: status ?? "", page: page)
         
@@ -264,15 +270,27 @@ extension ProdsInPointTableViewController{
                 
                 qrScannerVC.pid = tovar.pid
                 
-                qrScannerVC.qrConnected = {
+                qrScannerVC.qrConnected = { [weak self] in
                     
-                    self.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                    self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
                     
                     tovar.status = "Куплено"
                     
                     tovar.qr = "1"
                     
                     cell.thisTovar = tovar
+                    
+                }
+                
+                qrScannerVC.willDis = { [weak self] in
+                    
+                    self?.shouldUpdate = false
+                    
+                }
+                
+                qrScannerVC.didDis = { [weak self] in
+                    
+                    self?.shouldUpdate = true
                     
                 }
                 
