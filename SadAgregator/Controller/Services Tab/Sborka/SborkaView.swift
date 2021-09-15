@@ -27,7 +27,9 @@ struct SborkaView : View {
                 
             }
             
-            NavigationLink(destination: sborkaViewModel.pointsInSegmentsView, isActive: $sborkaViewModel.showPointsView) {
+            NavigationLink(destination: sborkaViewModel.pointsInSegmentsView
+                            .environmentObject(sborkaViewModel)
+                           , isActive: $sborkaViewModel.showPointsView) {
                 EmptyView()
             }
             
@@ -295,6 +297,9 @@ struct SborkaView : View {
                                 sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.helperID = sborkaViewModel.helperID
                                 
                                 sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.key = sborkaViewModel.key
+                                
+                                sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.status = sborkaViewModel.status
+                                sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.menuSortIndex = sborkaViewModel.menuSortIndex
                                 
                                 sborkaViewModel.showPointsView = true
                                 

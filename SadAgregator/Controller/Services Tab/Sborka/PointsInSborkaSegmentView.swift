@@ -10,6 +10,7 @@ import SwiftUI
 struct PointsInSborkaSegmentView: View {
     
     @ObservedObject var pointsInSborkaSegmentViewModel = PointsInSborkaSegmentViewModel()
+    @EnvironmentObject var sborkaViewModel : SborkaViewModel
     
     var body: some View {
         
@@ -244,6 +245,19 @@ struct PointsInSborkaSegmentView: View {
             pointsInSborkaSegmentViewModel.items.removeAll()
             
             pointsInSborkaSegmentViewModel.update()
+            
+        }
+        .onWillDisappear {
+            
+            if sborkaViewModel.helperID != pointsInSborkaSegmentViewModel.helperID || sborkaViewModel.status != pointsInSborkaSegmentViewModel.status{
+                
+                sborkaViewModel.helperID = pointsInSborkaSegmentViewModel.helperID
+                sborkaViewModel.status = pointsInSborkaSegmentViewModel.status
+                sborkaViewModel.menuSortIndex = pointsInSborkaSegmentViewModel.menuSortIndex
+                
+                sborkaViewModel.updateSegments()
+                
+            }
             
         }
         .navigationBarTitle(Text(pointsInSborkaSegmentViewModel.thisSegmentName))
