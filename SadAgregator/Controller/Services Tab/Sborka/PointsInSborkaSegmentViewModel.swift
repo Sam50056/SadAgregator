@@ -13,8 +13,14 @@ class PointsInSborkaSegmentViewModel : ObservableObject{
     
     var key = ""
     
+    @Published var screenData : JSON?
+    
     @Published var items = [Item]()
     @Published var helpers = [Helper]()
+    
+    @Published var showNoItemsView = false
+    @Published var noItemsViewText = "Нет элементов для отображения"
+    @Published var showNoItemsViewButton = false
     
     var thisSegmentId : String?
     @Published var thisSegmentName = ""
@@ -69,6 +75,8 @@ extension PointsInSborkaSegmentViewModel{
     func update(){
         
         guard let thisSegmentId = thisSegmentId else {return}
+        
+        screenData = nil
         
         assemblyPointsInSegmentDataManager.getAssemblyPointsInSegmentData(key: key, segmentId: thisSegmentId, status: status, helperId: helperID, page: 1)
         
@@ -189,7 +197,9 @@ extension PointsInSborkaSegmentViewModel : AssemblyPointsInSegmentDataManagerDel
     
     func didGetAssemblyPointsInSegmentData(data: JSON) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            
+            self?.screenData = data
             
             if data["result"].intValue == 1{
                 
@@ -203,7 +213,9 @@ extension PointsInSborkaSegmentViewModel : AssemblyPointsInSegmentDataManagerDel
                     
                 }
                 
-                self.items = newItems
+                self?.items = newItems
+                
+                self?.showNoItemsView = self!.items.isEmpty && self!.screenData != nil
                 
             }
             

@@ -16,62 +16,13 @@ struct PointsInSborkaSegmentView: View {
         
         ZStack{
             
-            VStack{
+            if pointsInSborkaSegmentViewModel.items.isEmpty , pointsInSborkaSegmentViewModel.screenData != nil {
                 
-                List{
-                    
-                    ForEach(pointsInSborkaSegmentViewModel.items , id: \.id){ item in
-                        
-                        VStack{
-                            
-                            ZStack{
-                                
-                                HStack{
-                                    
-                                    Text(item.capt)
-                                    
-                                    Spacer()
-                                    
-                                    Text(item.summ + " руб.")
-                                        .foregroundColor(Color(.systemGray))
-                                    
-                                }
-                                
-                                HStack{
-                                    
-                                    Spacer()
-                                    
-                                    Text(item.count + " шт.")
-                                        .foregroundColor(Color(.systemGray))
-                                    
-                                    Spacer()
-                                    
-                                }
-                                
-                            }
-                            
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture{
-                            
-                            pointsInSborkaSegmentViewModel.selectedByTapPoint = item
-                            
-                            pointsInSborkaSegmentViewModel.showProdsInPoint()
-                            
-                        }
-                        .onLongPressGesture {
-                            
-                            pointsInSborkaSegmentViewModel.selectedByLongPressPoint = item
-                            
-                            pointsInSborkaSegmentViewModel.alertTitle = pointsInSborkaSegmentViewModel.helperID == "" ? "Передать точку помощнику?" :  "Забрать точку у помощника?"
-                            pointsInSborkaSegmentViewModel.alertMessage = nil
-                            pointsInSborkaSegmentViewModel.showAlert = true
-                            
-                        }
-                        
-                    }
-                    
-                }
+                noItemsView
+                
+            }else{
+                
+                mainScreen
                 
             }
             
@@ -261,6 +212,113 @@ struct PointsInSborkaSegmentView: View {
             
         }
         .navigationBarTitle(Text(pointsInSborkaSegmentViewModel.thisSegmentName))
+        
+    }
+    
+    var mainScreen : some View{
+        
+        VStack{
+            
+            List{
+                
+                ForEach(pointsInSborkaSegmentViewModel.items , id: \.id){ item in
+                    
+                    VStack{
+                        
+                        ZStack{
+                            
+                            HStack{
+                                
+                                Text(item.capt)
+                                
+                                Spacer()
+                                
+                                Text(item.summ + " руб.")
+                                    .foregroundColor(Color(.systemGray))
+                                
+                            }
+                            
+                            HStack{
+                                
+                                Spacer()
+                                
+                                Text(item.count + " шт.")
+                                    .foregroundColor(Color(.systemGray))
+                                
+                                Spacer()
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture{
+                        
+                        pointsInSborkaSegmentViewModel.selectedByTapPoint = item
+                        
+                        pointsInSborkaSegmentViewModel.showProdsInPoint()
+                        
+                    }
+                    .onLongPressGesture {
+                        
+                        pointsInSborkaSegmentViewModel.selectedByLongPressPoint = item
+                        
+                        pointsInSborkaSegmentViewModel.alertTitle = pointsInSborkaSegmentViewModel.helperID == "" ? "Передать точку помощнику?" :  "Забрать точку у помощника?"
+                        pointsInSborkaSegmentViewModel.alertMessage = nil
+                        pointsInSborkaSegmentViewModel.showAlert = true
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    var noItemsView : some View{
+        
+        VStack{
+            
+            Text("Нет элементов для отображения")
+                .font(.system(size: 19))
+                .fontWeight(Font.Weight.semibold)
+                .padding(.vertical)
+            
+            if pointsInSborkaSegmentViewModel.showNoItemsViewButton{
+                
+                Button(action:{
+                    
+                    //Change status to "Любой"
+                    pointsInSborkaSegmentViewModel.menuSortIndex = 3
+                    
+                }){
+                    
+                    Text("Отобразить все товары")
+                        .bold()
+                        .padding(12)
+                        .background(Color(.systemBlue))
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                    
+                }
+                
+            }
+            
+        }
+        .onAppear {
+            
+            if pointsInSborkaSegmentViewModel.status != ""{
+                pointsInSborkaSegmentViewModel.noItemsViewText = "Нет элементов для отображения"
+                pointsInSborkaSegmentViewModel.showNoItemsViewButton = true
+            }else{
+                pointsInSborkaSegmentViewModel.noItemsViewText = "Нет элементов для отображения"
+                pointsInSborkaSegmentViewModel.showNoItemsViewButton = false
+            }
+            
+        }
         
     }
     
