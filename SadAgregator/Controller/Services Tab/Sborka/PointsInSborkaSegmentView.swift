@@ -27,7 +27,9 @@ struct PointsInSborkaSegmentView: View {
             }
             
             NavigationLink(destination:
-                            ProdsInPointView(pointName: pointsInSborkaSegmentViewModel.selectedByTapPoint?.capt
+                            ProdsInPointView(statusChangedFromUIVC: { newStatusIndex in
+                self.pointsInSborkaSegmentViewModel.menuSortIndex = newStatusIndex
+            }, pointName: pointsInSborkaSegmentViewModel.selectedByTapPoint?.capt
                                              , pointId: pointsInSborkaSegmentViewModel.selectedByTapPoint?.pointId
                                              , helperId: pointsInSborkaSegmentViewModel.helperID, status: pointsInSborkaSegmentViewModel.status)
                             .navigationBarTitle(Text(pointsInSborkaSegmentViewModel.selectedByTapPoint?.capt ?? ""))
