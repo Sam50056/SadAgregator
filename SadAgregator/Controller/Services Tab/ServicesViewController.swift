@@ -198,7 +198,9 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 
             }else if index == 1{
                 
+                let myZakupkiVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyZakupkiVC") as! MyZakupkiViewController
                 
+                navigationController?.pushViewController(myZakupkiVC, animated: true)
                 
             }else if index == 2{
                 

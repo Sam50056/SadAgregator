@@ -172,4 +172,62 @@ struct K {
         
     }
     
+    static func makeHeightForZakupkaCell(data : JSON) -> CGFloat{
+        
+        var height : CGFloat = 0
+        
+        let defaultCellHeight : CGFloat = 38
+        
+        if data["capt"].stringValue != ""{
+            height += 45
+        }
+        
+        if data["cnt_items"].stringValue != ""{
+            height += defaultCellHeight
+        }
+        
+        if data["cnt_items"].stringValue != "" , data["cnt_items"].stringValue != "0"{
+            height += defaultCellHeight
+        }
+        
+        if !data["money"].arrayValue.isEmpty{
+            height += (30 * CGFloat(data["money"].arrayValue.count))
+        }
+        
+        if data["items"]["wait"].intValue > 1{
+            height += 30
+        }
+        
+        if let bought = data["items"]["bought"].string , bought != "" , bought != "0"{
+            height += 30
+        }
+        
+        if let notAviable = data["items"]["not_aviable"].string , notAviable != "" , notAviable != "0"{
+            height += 30
+        }
+        
+        if data["cnt_points"].stringValue != "" , data["cnt_points"].stringValue != "0"{
+            height += defaultCellHeight
+        }
+        
+        if data["handler_type"].stringValue != ""{
+            height += defaultCellHeight
+        }
+        
+        if data["profit"].stringValue != "" , data["profit"].stringValue != "0"{
+            height += defaultCellHeight
+        }
+        
+        if data["postage_cost"].stringValue != "" , data["postage_cost"].stringValue != "0"{
+            height += defaultCellHeight
+        }
+        
+        height += 50
+        
+        height += 8
+        
+        return height
+        
+    }
+    
 }

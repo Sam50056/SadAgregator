@@ -21,30 +21,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Заголовок отзыва" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTJ-xL-3QQ">
-                                <rect key="frame" x="16" y="120" width="136" height="19.5"/>
+                                <rect key="frame" x="16" y="76" width="136" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Nh-dc-pKC">
-                                <rect key="frame" x="16" y="147.5" width="382" height="34"/>
+                                <rect key="frame" x="16" y="103.5" width="382" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Текст отзыва" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dG8-1s-Uxv">
-                                <rect key="frame" x="16" y="272.5" width="99.5" height="20"/>
+                                <rect key="frame" x="16" y="228.5" width="99.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Оценка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KxK-4Z-VEc">
-                                <rect key="frame" x="16" y="217" width="200" height="20"/>
+                                <rect key="frame" x="16" y="173" width="200" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShL-Z3-9Ko" customClass="CosmosView" customModule="Cosmos">
-                                <rect key="frame" x="248" y="214.5" width="150" height="25"/>
+                                <rect key="frame" x="248" y="170.5" width="150" height="25"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="AqW-Dd-AMV"/>
@@ -66,21 +66,21 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XH4-zp-Pgu">
-                                <rect key="frame" x="0.0" y="197.5" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="153.5" width="414" height="1"/>
                                 <color key="backgroundColor" name="gray"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="X2h-Hq-szb"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1GL-6c-Wa3">
-                                <rect key="frame" x="0.0" y="255.5" width="414" height="1"/>
+                                <rect key="frame" x="0.0" y="211.5" width="414" height="1"/>
                                 <color key="backgroundColor" name="gray"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="AcC-4f-9YT"/>
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hPi-s6-ZgP">
-                                <rect key="frame" x="16" y="300.5" width="382" height="183.5"/>
+                                <rect key="frame" x="16" y="256.5" width="382" height="183.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="dCn-ci-0aw"/>
@@ -91,7 +91,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKV-Py-OHO">
-                                <rect key="frame" x="16" y="500" width="170" height="30"/>
+                                <rect key="frame" x="16" y="456" width="170" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bB-6x-ALl">
                                         <rect key="frame" x="0.0" y="0.0" width="170" height="30"/>
@@ -130,7 +130,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqz-aI-sXG">
-                                <rect key="frame" x="286" y="500" width="112" height="40"/>
+                                <rect key="frame" x="286" y="456" width="112" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="72q-Fk-QCE"/>
@@ -144,7 +144,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jVj-mn-5Pm">
-                                <rect key="frame" x="16" y="572" width="382" height="82"/>
+                                <rect key="frame" x="16" y="528" width="382" height="82"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="82" id="Qwk-FU-5JV"/>
@@ -270,7 +270,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gkI-HL-ayK">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postavshikTopCell" rowHeight="92" id="lAo-76-Ufm">
@@ -805,7 +805,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kRI-vX-pSJ">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="pointSwitchCell" rowHeight="54" id="ENf-3a-h3a">
@@ -4317,6 +4317,36 @@
             </objects>
             <point key="canvasLocation" x="206" y="2400"/>
         </scene>
+        <!--My Zakupki View Controller-->
+        <scene sceneID="dDO-sG-i4Q">
+            <objects>
+                <viewController storyboardIdentifier="MyZakupkiVC" id="6c4-r4-lIl" customClass="MyZakupkiViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sbu-ND-Yna">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Qcv-n2-TAq">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lHN-mn-GPo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Qcv-n2-TAq" secondAttribute="bottom" id="PaY-HD-7eV"/>
+                            <constraint firstItem="lHN-mn-GPo" firstAttribute="trailing" secondItem="Qcv-n2-TAq" secondAttribute="trailing" id="UfY-5a-eOb"/>
+                            <constraint firstItem="Qcv-n2-TAq" firstAttribute="top" secondItem="lHN-mn-GPo" secondAttribute="top" id="YpR-7y-c1z"/>
+                            <constraint firstItem="Qcv-n2-TAq" firstAttribute="leading" secondItem="lHN-mn-GPo" secondAttribute="leading" id="hiz-gD-mtI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Qcv-n2-TAq" id="fLn-Du-uH2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sow-OH-xqn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1378" y="2400"/>
+        </scene>
         <!--Broker Card View Controller-->
         <scene sceneID="ypE-Qo-koo">
             <objects>
@@ -5007,7 +5037,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5HQ-UJ-KAH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1587.6923076923076" y="2400"/>
+            <point key="canvasLocation" x="2526" y="2400"/>
         </scene>
         <!--Sortirovka View Controller-->
         <scene sceneID="Yoo-dk-qGs">
@@ -5022,7 +5052,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEI-Q0-gF1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2607.6923076923076" y="2400"/>
+            <point key="canvasLocation" x="3546" y="2400"/>
         </scene>
         <!--Sortirovka Content View Controller-->
         <scene sceneID="awb-G1-kBC">
@@ -5521,7 +5551,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y9v-EQ-vwp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2607.6923076923076" y="3084.5971563981043"/>
+            <point key="canvasLocation" x="3546" y="3084"/>
         </scene>
         <!--Create Diapazon View Controller-->
         <scene sceneID="FXS-wV-VZC">
@@ -6022,7 +6052,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bem-rR-luh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4100" y="859"/>
+            <point key="canvasLocation" x="6535" y="858"/>
         </scene>
         <!--Favorite Vends View Controller-->
         <scene sceneID="qRN-g7-9ju">
@@ -6043,7 +6073,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OG-59-sKb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4100" y="1636"/>
+            <point key="canvasLocation" x="6535" y="1636"/>
         </scene>
         <!--Nastroyki Posrednika Table View Controller-->
         <scene sceneID="26D-HU-LvZ">
@@ -6539,7 +6569,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eJK-Oh-UNC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8998" y="1636"/>
+            <point key="canvasLocation" x="11432" y="1636"/>
         </scene>
         <!--Nastroyki Postavshika Table View Controller-->
         <scene sceneID="Jfd-do-uNy">
@@ -6898,7 +6928,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aq6-QA-pnh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7791" y="1636"/>
+            <point key="canvasLocation" x="10225" y="1636"/>
         </scene>
         <!--Favorite Posts View Controller-->
         <scene sceneID="9fG-Vg-xsa">
@@ -6921,7 +6951,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dRw-bK-FJn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5394" y="1636"/>
+            <point key="canvasLocation" x="7828" y="1636"/>
         </scene>
         <!--Help View Controller-->
         <scene sceneID="ZOq-Mg-VvE">
@@ -6994,7 +7024,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RcR-LY-bDA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6603" y="1636"/>
+            <point key="canvasLocation" x="9038" y="1636"/>
         </scene>
         <!--Активность поставщиков-->
         <scene sceneID="ffw-pF-a3h">
@@ -7161,7 +7191,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hPT-z2-Xkj">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="EKV-Bw-0tA">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="59"/>
@@ -7424,7 +7454,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xT4-4a-cFd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2372" y="859"/>
+            <point key="canvasLocation" x="4806" y="858"/>
         </scene>
         <!--All Categories View Controller-->
         <scene sceneID="GeQ-aK-gG4">
@@ -7780,11 +7810,11 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="wZb-pO-qG4"/>
+        <segue reference="hIu-vB-ACx"/>
         <segue reference="yR4-7g-u1L"/>
         <segue reference="UT5-6g-K7A"/>
-        <segue reference="sY4-Z3-dlW"/>
-        <segue reference="ZSI-nF-15U"/>
+        <segue reference="FEb-r5-o0p"/>
+        <segue reference="4nT-MZ-xAF"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
