@@ -167,6 +167,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             cell.label2.textColor = itemsCount == "0" ? UIColor(named: "blackwhite") : .systemBlue
             
             cell.iconImageView.image = UIImage(systemName: "cart")
+            cell.iconImageView.tintColor = .systemGray
             
             cell.dropDownImageView.isHidden = tovarsSubItems.isEmpty
             
@@ -206,6 +207,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             cell.iconImageView.image = UIImage(systemName: "person.2")
             
+            cell.iconImageView.tintColor = .systemGray
+            
             cell.dropDownImageView.isHidden = true
             
             return cell
@@ -221,6 +224,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             cell.label2.font = UIFont.systemFont(ofSize: 16)
             
             cell.iconImageView.image = UIImage(systemName: "dollarsign.square")
+            cell.iconImageView.tintColor = .systemGray
             
             cell.dropDownImageView.isHidden = false
             
@@ -259,6 +263,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             cell.label2.textColor = .systemBlue
             
             cell.iconImageView.image = UIImage(systemName: "mappin.and.ellipse")
+            cell.iconImageView.tintColor = .systemGray
             
             cell.dropDownImageView.isHidden = true
             
@@ -286,6 +291,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             cell.label2.textColor = .systemBlue
             
             cell.iconImageView.image = UIImage(systemName: "person")
+            
+            cell.iconImageView.tintColor = .systemGray
             
             cell.dropDownImageView.isHidden = true
             
