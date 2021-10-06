@@ -172,53 +172,57 @@ struct K {
         
     }
     
-    static func makeHeightForZakupkaCell(data : JSON) -> CGFloat{
+    static func makeHeightForZakupkaCell(data : ZakupkaTableViewCell.Zakupka) -> CGFloat{
         
         var height : CGFloat = 0
         
         let defaultCellHeight : CGFloat = 38
         
-        if data["capt"].stringValue != ""{
+        if data.capt != ""{
             height += 45
         }
         
-        if data["cnt_items"].stringValue != ""{
+        if data.countClients != "" , data.countClients != "0"{
             height += defaultCellHeight
         }
         
-        if data["cnt_items"].stringValue != "" , data["cnt_items"].stringValue != "0"{
+        if data.countItems != "" , data.countItems != "0"{
             height += defaultCellHeight
         }
         
-        if !data["money"].arrayValue.isEmpty{
-            height += (30 * CGFloat(data["money"].arrayValue.count))
+        if !data.money.isEmpty{
+            height += defaultCellHeight
         }
         
-        if data["items"]["wait"].intValue > 1{
+        if !data.money.isEmpty{
+            height += (30 * CGFloat(data.money.count))
+        }
+        
+        if let wait = Int(data.itemsWait) , wait >= 1{
             height += 30
         }
         
-        if let bought = data["items"]["bought"].string , bought != "" , bought != "0"{
+        if data.itemsBought != "" , data.itemsBought != "0" , data.itemsBought != ""{
             height += 30
         }
         
-        if let notAviable = data["items"]["not_aviable"].string , notAviable != "" , notAviable != "0"{
+        if data.itemsNotAvailable != "" , data.itemsNotAvailable != "0" , data.itemsNotAvailable != "0"{
             height += 30
         }
         
-        if data["cnt_points"].stringValue != "" , data["cnt_points"].stringValue != "0"{
+        if data.countPoints != "" , data.countPoints != "0" , data.countPoints != ""{
             height += defaultCellHeight
         }
         
-        if data["handler_type"].stringValue != ""{
+        if data.handlerType != ""{
             height += defaultCellHeight
         }
         
-        if data["profit"].stringValue != "" , data["profit"].stringValue != "0"{
+        if data.profit != "" , data.profit != "0" , data.profit != ""{
             height += defaultCellHeight
         }
         
-        if data["postage_cost"].stringValue != "" , data["postage_cost"].stringValue != "0"{
+        if data.postageCost != "" , data.postageCost != "0" , data.postageCost != ""{
             height += defaultCellHeight
         }
         

@@ -12,43 +12,34 @@ class ZakupkaTableViewCell: UITableViewCell {
     
     @IBOutlet weak var tableView : UITableView!
     
-    var thisPur : Zakupka?
-    
-    var purchaseData : JSON?{
+    var thisPur : Zakupka?{
         didSet{
             
-            guard let purchaseData = purchaseData else {return}
+            guard let thisPur = thisPur else {
+                return
+            }
             
-            let jsonMoneyArray = purchaseData["money"].arrayValue
-            var newMoneySubItems = [TableViewItem]()
             var newTovarsSubItems = [TableViewItem]()
             
-            if purchaseData["items"]["wait"].intValue > 1{
-                newTovarsSubItems.append(TableViewItem(label1: "В ожидании:", label2: purchaseData["items"]["wait"].stringValue, label3: purchaseData["items"]["wait_cost"].stringValue + " руб.", haveClickableLabel: true))
+            if let wait = Int(thisPur.itemsWait) , wait >= 1{
+                newTovarsSubItems.append(TableViewItem(label1: "В ожидании:", label2: thisPur.itemsWait, label3: thisPur.itemsWaitCost + " руб.", haveClickableLabel: true))
             }
             
-            if let bought = purchaseData["items"]["bought"].string , bought != "" , bought != "0"{
-                newTovarsSubItems.append(TableViewItem(label1: "Выкуплено:", label2: bought, label3: purchaseData["items"]["bought_cost"].stringValue + " руб.", haveClickableLabel: true))
+            if thisPur.itemsBought != "" , thisPur.itemsBought != "0"{
+                newTovarsSubItems.append(TableViewItem(label1: "Выкуплено:", label2: thisPur.itemsBought, label3: thisPur.itemsBoughtCost + " руб.", haveClickableLabel: true))
             }
             
-            if let notAviable = purchaseData["items"]["not_aviable"].string , notAviable != "" , notAviable != "0"{
-                newTovarsSubItems.append(TableViewItem(label1: "Не выкуплено:", label2: notAviable, label3: purchaseData["items"]["not_aviable_cost"].stringValue + " руб.", haveClickableLabel: true))
+            if thisPur.itemsNotAvailable != "" , thisPur.itemsNotAvailable != "0"{
+                newTovarsSubItems.append(TableViewItem(label1: "Не выкуплено:", label2: thisPur.itemsNotAvailable, label3: thisPur.itemsNotAvailableCost + " руб.", haveClickableLabel: true))
             }
             
-            jsonMoneyArray.forEach { jsonMoneyItem in
-                newMoneySubItems.append(TableViewItem(label1: jsonMoneyItem["capt"].stringValue, label2: "", label3: jsonMoneyItem["value"].stringValue))
-            }
-            
-            moneySubItems = newMoneySubItems
             tovarsSubItems = newTovarsSubItems
             
             tableView.reloadData()
-            
         }
     }
     
     var tovarsSubItems = [TableViewItem]()
-    private var moneySubItems = [TableViewItem]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -76,8 +67,8 @@ class ZakupkaTableViewCell: UITableViewCell {
         super.prepareForReuse()
         
         purchaseData = nil
+        thisPur = nil
         tovarsSubItems.removeAll()
-        moneySubItems.removeAll()
         tableView.reloadData()
         
     }
@@ -94,27 +85,27 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        guard let purchaseData = purchaseData else {return 0}
+        guard let thisPur = thisPur else {return 0}
         
-        if section == 0 , purchaseData["capt"].stringValue != ""{
+        if section == 0 , thisPur.capt != ""{
             return 1
-        }else if section == 1 , purchaseData["cnt_items"]  .stringValue != ""{
+        }else if section == 1 , thisPur.countItems != "" , thisPur.countItems != "0"{
             return 1
-        }else if section == 2 , purchaseData["cnt_items"]  .stringValue != "" , purchaseData["cnt_items"].stringValue != "0" , !tovarsSubItems.isEmpty{
+        }else if section == 2 , thisPur.countItems != "" , thisPur.countItems != "0" , !tovarsSubItems.isEmpty{
             return tovarsSubItems.count
-        }else if section == 3 , purchaseData["cnt_clients"].stringValue != "" , purchaseData["cnt_clients"].stringValue != "0"{
+        }else if section == 3 , thisPur.countClients != "" , thisPur.countClients != "0"{
             return 1
-        }else if section == 4 , !moneySubItems.isEmpty{
+        }else if section == 4 , !thisPur.money.isEmpty{
             return 1
-        }else if section == 5, !moneySubItems.isEmpty{
-            return moneySubItems.count
-        }else if section == 6 , purchaseData["cnt_points"].stringValue != "" , purchaseData["cnt_points"].stringValue != "0"{
+        }else if section == 5, !thisPur.money.isEmpty{
+            return thisPur.money.count
+        }else if section == 6 , thisPur.countPoints != "" , thisPur.countPoints != "0"{
             return 1
-        }else if section == 7 , purchaseData["handler_type"].stringValue != ""{
+        }else if section == 7 , thisPur.handlerType != ""{
             return 1
-        }else if section == 8 , purchaseData["profit"].stringValue != "" , purchaseData["profit"].stringValue != "0"{
+        }else if section == 8 , thisPur.profit != "" , thisPur.profit != "0"{
             return 1
-        }else if section == 9 , purchaseData["postage_cost"].stringValue != "" , purchaseData["postage_cost"].stringValue != "0"{
+        }else if section == 9 , thisPur.postageCost != "" ,thisPur.postageCost != "0"{
             return 1
         }else if section == 10{
             return 1
@@ -126,7 +117,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let purchaseData = purchaseData else {return UITableViewCell()}
+        guard let thisPur = thisPur else {return UITableViewCell()}
         
         let section = indexPath.section
         let index = indexPath.row
@@ -137,11 +128,11 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath) as! ZakupkaTableViewCellHeaderCell
             
-            cell.firstLabel.text = "N2432"
+            cell.firstLabel.text = thisPur.capt
             cell.firstLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
             cell.firstLabel.textColor = .systemBlue
             
-            cell.secondLabel.text = "01.09.2021"
+            cell.secondLabel.text = thisPur.dt
             cell.secondLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
             cell.secondLabel.textColor = .systemGray
             
@@ -156,7 +147,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
-            let itemsCount = purchaseData["cnt_items"].stringValue
+            let itemsCount = thisPur.countItems
             
             cell.label1.text = "Товары"
             cell.label2.text = itemsCount
@@ -198,7 +189,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
             cell.label1.text = "Клиенты"
-            cell.label2.text = purchaseData["cnt_clients"].stringValue
+            cell.label2.text = thisPur.countClients
             
             cell.label1.font = UIFont.systemFont(ofSize: 16, weight: .bold)
             cell.label2.font = UIFont.systemFont(ofSize: 16)
@@ -234,7 +225,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "subCell", for: indexPath) as! ZakupkaTableViewCellTableViewSubCell
             
-            let item = moneySubItems[index]
+            let item = thisPur.money[index]
             
             cell.label1.text = item.label1
             cell.label2.text = item.label2
@@ -255,7 +246,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
             cell.label1.text = "Точки"
-            cell.label2.text = purchaseData["cnt_points"].stringValue
+            cell.label2.text = thisPur.countPoints
             
             cell.label1.font = UIFont.systemFont(ofSize: 16, weight: .bold)
             cell.label2.font = UIFont.systemFont(ofSize: 16)
@@ -273,7 +264,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
-            let handlerType = purchaseData["handler_type"].stringValue
+            let handlerType = thisPur.handlerType
             
             if handlerType == "0"{
                 cell.label1.text = "Посредник"
@@ -283,7 +274,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
                 cell.label1.text = "Клиент"
             }
             
-            cell.label2.text = purchaseData["handler_name"].stringValue
+            cell.label2.text = thisPur.handlerName
             
             cell.label1.font = UIFont.systemFont(ofSize: 16, weight: .bold)
             cell.label2.font = UIFont.systemFont(ofSize: 16)
@@ -306,7 +297,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             cell.bgView.layer.cornerRadius = 6
             
-            cell.label.text = purchaseData["status"].stringValue
+            cell.label.text = thisPur.status
             
             cell.label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
             
@@ -348,15 +339,38 @@ extension ZakupkaTableViewCell{
     
     struct Zakupka{
         
+        var purId : String
+        var statusId : String
+        
         var capt : String
+        var dt : String
+        
         var countItems : String
-        var tovarSubItems : [TableViewItem]
+        var replaces : String
         var countClients : String
-        var moneySubItems : [TableViewItem]
         var countPoints : String
+        
+        var money : [TableViewItem]
+        
+        var clientId : String
+        
         var handlerType : String
+        var handlerId : String
+        var handlerName : String
+        
+        var actAv : String
+        var status : String
         var profit : String
         var postageCost : String
+        
+        var itemsWait : String
+        var itemsWaitCost : String
+        var itemsBought : String
+        var itemsBoughtCost : String
+        var itemsNotAvailable : String
+        var itemsNotAvailableCost : String
+        
+//        var images
         
     }
     
