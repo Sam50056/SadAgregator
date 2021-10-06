@@ -14,32 +14,11 @@ class ZakupkaTableViewCell: UITableViewCell {
     
     var thisPur : Zakupka?{
         didSet{
-            
-            guard let thisPur = thisPur else {
-                return
-            }
-            
-            var newTovarsSubItems = [TableViewItem]()
-            
-            if let wait = Int(thisPur.itemsWait) , wait >= 1{
-                newTovarsSubItems.append(TableViewItem(label1: "В ожидании:", label2: thisPur.itemsWait, label3: thisPur.itemsWaitCost + " руб.", haveClickableLabel: true))
-            }
-            
-            if thisPur.itemsBought != "" , thisPur.itemsBought != "0"{
-                newTovarsSubItems.append(TableViewItem(label1: "Выкуплено:", label2: thisPur.itemsBought, label3: thisPur.itemsBoughtCost + " руб.", haveClickableLabel: true))
-            }
-            
-            if thisPur.itemsNotAvailable != "" , thisPur.itemsNotAvailable != "0"{
-                newTovarsSubItems.append(TableViewItem(label1: "Не выкуплено:", label2: thisPur.itemsNotAvailable, label3: thisPur.itemsNotAvailableCost + " руб.", haveClickableLabel: true))
-            }
-            
-            tovarsSubItems = newTovarsSubItems
-            
             tableView.reloadData()
         }
     }
     
-    var tovarsSubItems = [TableViewItem]()
+    var openTapped : ((Bool) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,9 +45,7 @@ class ZakupkaTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        purchaseData = nil
         thisPur = nil
-        tovarsSubItems.removeAll()
         tableView.reloadData()
         
     }
@@ -91,13 +68,13 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             return 1
         }else if section == 1 , thisPur.countItems != "" , thisPur.countItems != "0"{
             return 1
-        }else if section == 2 , thisPur.countItems != "" , thisPur.countItems != "0" , !tovarsSubItems.isEmpty{
-            return tovarsSubItems.count
+        }else if section == 2 , thisPur.countItems != "" , thisPur.countItems != "0" , !thisPur.tovarsSubItems.isEmpty , thisPur.openTovars{
+            return thisPur.tovarsSubItems.count
         }else if section == 3 , thisPur.countClients != "" , thisPur.countClients != "0"{
             return 1
         }else if section == 4 , !thisPur.money.isEmpty{
             return 1
-        }else if section == 5, !thisPur.money.isEmpty{
+        }else if section == 5, !thisPur.money.isEmpty , thisPur.openMoney{
             return thisPur.money.count
         }else if section == 6 , thisPur.countPoints != "" , thisPur.countPoints != "0"{
             return 1
@@ -160,7 +137,9 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             cell.iconImageView.image = UIImage(systemName: "cart")
             cell.iconImageView.tintColor = .systemGray
             
-            cell.dropDownImageView.isHidden = tovarsSubItems.isEmpty
+            cell.dropDownImageView.image = UIImage(systemName: !thisPur.openTovars ? "chevron.down" : "chevron.up")
+            
+            cell.dropDownImageView.isHidden = thisPur.tovarsSubItems.isEmpty
             
             return cell
             
@@ -168,7 +147,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "subCell", for: indexPath) as! ZakupkaTableViewCellTableViewSubCell
             
-            let item = tovarsSubItems[index]
+            let item = thisPur.tovarsSubItems[index]
             
             cell.label1.text = item.label1
             cell.label2.text = item.label2
@@ -216,6 +195,9 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             cell.iconImageView.image = UIImage(systemName: "dollarsign.square")
             cell.iconImageView.tintColor = .systemGray
+            
+            
+            cell.dropDownImageView.image = UIImage(systemName: !thisPur.openMoney ? "chevron.down" : "chevron.up")
             
             cell.dropDownImageView.isHidden = false
             
@@ -329,6 +311,18 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let thisPur = thisPur else {return}
+        
+        let section = indexPath.section
+        let _ = indexPath.row
+        
+        if section == 1 , !thisPur.tovarsSubItems.isEmpty{
+            openTapped?(true)
+        }else if section == 4{
+            openTapped?(false)
+        }
+        
     }
     
 }
@@ -370,7 +364,11 @@ extension ZakupkaTableViewCell{
         var itemsNotAvailable : String
         var itemsNotAvailableCost : String
         
+        var tovarsSubItems : [TableViewItem] = []
 //        var images
+        
+        var openTovars : Bool = false
+        var openMoney : Bool = false
         
     }
     

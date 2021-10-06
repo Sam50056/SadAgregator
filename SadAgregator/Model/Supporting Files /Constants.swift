@@ -194,19 +194,19 @@ struct K {
             height += defaultCellHeight
         }
         
-        if !data.money.isEmpty{
+        if !data.money.isEmpty , data.openMoney{
             height += (30 * CGFloat(data.money.count))
         }
         
-        if let wait = Int(data.itemsWait) , wait >= 1{
+        if let wait = Int(data.itemsWait) , wait >= 1 , data.openTovars{
             height += 30
         }
         
-        if data.itemsBought != "" , data.itemsBought != "0" , data.itemsBought != ""{
+        if data.itemsBought != "" , data.itemsBought != "0" , data.itemsBought != "" , data.openTovars{
             height += 30
         }
         
-        if data.itemsNotAvailable != "" , data.itemsNotAvailable != "0" , data.itemsNotAvailable != "0"{
+        if data.itemsNotAvailable != "" , data.itemsNotAvailable != "0" , data.itemsNotAvailable != "0" , data.openTovars{
             height += 30
         }
         
