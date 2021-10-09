@@ -20,6 +20,8 @@ class ZakupkaTableViewCell: UITableViewCell {
     
     var openTapped : ((Bool) -> Void)?
     
+    var clientTapped : ((String) -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -319,6 +321,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
         
         if section == 1 , !thisPur.tovarsSubItems.isEmpty{
             openTapped?(true)
+        }else if section == 3{
+            clientTapped?(thisPur.clientId)
         }else if section == 4{
             openTapped?(false)
         }

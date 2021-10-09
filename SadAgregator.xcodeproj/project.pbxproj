@@ -103,6 +103,8 @@
 		22553015261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22553014261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift */; };
 		22553019261941CF0017B9CF /* ClientsFilterPayListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22553018261941CF0017B9CF /* ClientsFilterPayListDataManager.swift */; };
 		2255301D261AA5B80017B9CF /* ClientsFilterPayHistByClientCountDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2255301C261AA5B80017B9CF /* ClientsFilterPayHistByClientCountDataManager.swift */; };
+		225714D4271206090082D583 /* ClientsCliensListByPurchaseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714D3271206090082D583 /* ClientsCliensListByPurchaseDataManager.swift */; };
+		225714D7271209AB0082D583 /* MyZakupkiClientsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714D6271209AB0082D583 /* MyZakupkiClientsListViewController.swift */; };
 		22582C7525D1C1DC005E341C /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7425D1C1DB005E341C /* SignInWithApple.swift */; };
 		22582C7C25D1E832005E341C /* SignInWithAppleDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7B25D1E832005E341C /* SignInWithAppleDelegates.swift */; };
 		22582C7F25D20170005E341C /* SignInWIthAppleIdDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7E25D20170005E341C /* SignInWIthAppleIdDataManager.swift */; };
@@ -431,6 +433,8 @@
 		22553014261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsFilterPayHistoryCountDataManager.swift; sourceTree = "<group>"; };
 		22553018261941CF0017B9CF /* ClientsFilterPayListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsFilterPayListDataManager.swift; sourceTree = "<group>"; };
 		2255301C261AA5B80017B9CF /* ClientsFilterPayHistByClientCountDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsFilterPayHistByClientCountDataManager.swift; sourceTree = "<group>"; };
+		225714D3271206090082D583 /* ClientsCliensListByPurchaseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsCliensListByPurchaseDataManager.swift; sourceTree = "<group>"; };
+		225714D6271209AB0082D583 /* MyZakupkiClientsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyZakupkiClientsListViewController.swift; sourceTree = "<group>"; };
 		22582C7425D1C1DB005E341C /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
 		22582C7B25D1E832005E341C /* SignInWithAppleDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleDelegates.swift; sourceTree = "<group>"; };
 		22582C7E25D20170005E341C /* SignInWIthAppleIdDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWIthAppleIdDataManager.swift; sourceTree = "<group>"; };
@@ -844,6 +848,7 @@
 				220704682685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift */,
 				2226851326E17D20000ECA64 /* ClientsPayRequestsDataManager.swift */,
 				2226851526E18F35000ECA64 /* ClientsSetPayRequestStatusDataManager.swift */,
+				225714D3271206090082D583 /* ClientsCliensListByPurchaseDataManager.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -1026,6 +1031,15 @@
 				22044EB1261AA9BF0032C67F /* ClientsFilterPayHistByClientDataManager.swift */,
 			);
 			path = Filter;
+			sourceTree = "<group>";
+		};
+		225714D5271208820082D583 /* MyZakupki */ = {
+			isa = PBXGroup;
+			children = (
+				22D9D12E26F65D1D005BD254 /* MyZakupkiViewController.swift */,
+				225714D6271209AB0082D583 /* MyZakupkiClientsListViewController.swift */,
+			);
+			path = MyZakupki;
 			sourceTree = "<group>";
 		};
 		22595793259667C10088C7E4 /* Master Views  */ = {
@@ -1716,7 +1730,7 @@
 				22E44715269234340016D96E /* Sborka */,
 				22692E3426B8C8A500CA2946 /* Posredniki */,
 				2223759E26D96A050097AF41 /* Sortirovka */,
-				22D9D12E26F65D1D005BD254 /* MyZakupkiViewController.swift */,
+				225714D5271208820082D583 /* MyZakupki */,
 			);
 			path = "Services Tab";
 			sourceTree = "<group>";
@@ -2067,6 +2081,7 @@
 				229FE69225706B6B0001FF54 /* GetSearchPageDataManager.swift in Sources */,
 				22ADF823267C24B100811DA9 /* BrokersDelSendTypeDataManager.swift in Sources */,
 				2226851626E18F35000ECA64 /* ClientsSetPayRequestStatusDataManager.swift in Sources */,
+				225714D4271206090082D583 /* ClientsCliensListByPurchaseDataManager.swift in Sources */,
 				22B26528267D77BA004342E3 /* BrokersAddBrokerHelperDataManager.swift in Sources */,
 				225C6CAD25FCBF5700CC621E /* ClientDataManager.swift in Sources */,
 				222B08C22698831400AC062F /* AssemblyMoveToHelperDataManager.swift in Sources */,
@@ -2314,6 +2329,7 @@
 				22CD3547269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift in Sources */,
 				2269740025AE394800C76BA6 /* VendorPostsTableViewController.swift in Sources */,
 				226973FD25AE303F00C76BA6 /* GetVendPostsPaggingDataManager.swift in Sources */,
+				225714D7271209AB0082D583 /* MyZakupkiClientsListViewController.swift in Sources */,
 				2237E77625FA32C500EBD919 /* PurchaseTableViewCell.swift in Sources */,
 				22582C7525D1C1DC005E341C /* SignInWithApple.swift in Sources */,
 				226886A62599EDD00079933D /* ActivityIndicatorView.swift in Sources */,

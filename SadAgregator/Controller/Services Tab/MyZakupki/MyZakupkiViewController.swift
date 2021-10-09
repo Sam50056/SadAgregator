@@ -69,6 +69,16 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             self?.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         
+        cell.clientTapped = { [weak self] id in
+            
+            let clientsListVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyZakupkiClientsList") as! MyZakupkiClientsListViewController
+            
+            clientsListVC.thisPur = pur.purId
+            
+            self?.navigationController?.pushViewController(clientsListVC, animated: true)
+            
+        }
+        
         cell.tableView.reloadData()
         
         return cell

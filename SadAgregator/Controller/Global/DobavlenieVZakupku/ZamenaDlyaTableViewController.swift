@@ -27,11 +27,12 @@ class ZamenaDlyaTableViewController: UITableViewController {
     
     var tovarSelected : ((String) -> Void)?
     
+    var shouldCloseWindowFromNav = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        loadUserData()
-        key = "part_2_test"
+        loadUserData()
         
         purchasesProdsByClientDataManager.delegate = self
         
@@ -70,7 +71,11 @@ class ZamenaDlyaTableViewController: UITableViewController {
 extension ZamenaDlyaTableViewController{
     
     @IBAction func otmenaTapped(_ sender : Any){
-        dismiss(animated: true, completion: nil)
+        if shouldCloseWindowFromNav{
+            navigationController?.popViewController(animated: true)
+        }else{
+            dismiss(animated: true, completion: nil)
+        }
     }
     
 }
