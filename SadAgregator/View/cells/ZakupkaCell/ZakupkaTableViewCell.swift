@@ -22,6 +22,7 @@ class ZakupkaTableViewCell: UITableViewCell {
     
     var rightSideButtonPressedForCell : ((String) -> Void)?
     var clientTapped : ((String) -> Void)?
+    var handlerTapped : (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -330,6 +331,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             clientTapped?(thisPur.clientId)
         }else if section == 4{
             openTapped?(false)
+        }else if section == 7{
+            handlerTapped?()
         }
         
     }

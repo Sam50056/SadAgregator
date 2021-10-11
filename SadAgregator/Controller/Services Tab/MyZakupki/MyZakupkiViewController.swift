@@ -80,6 +80,30 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             
         }
         
+        cell.handlerTapped = { [weak self] in
+            
+            let handlerType = pur.handlerType
+            let handlerId = pur.handlerId
+            
+            if handlerType == "0"{
+                //Посредник
+                let brokerCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BrokerCardVC") as! BrokerCardViewController
+                brokerCardVC.thisBrokerId = handlerId
+                self?.navigationController?.pushViewController(brokerCardVC, animated: true)
+            }else if handlerType == "1"{
+                //"Поставщик"
+                let vendorVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "VendorVC") as! PostavshikViewController
+                vendorVC.thisVendorId = handlerId
+                self?.navigationController?.pushViewController(vendorVC, animated: true)
+            }else if handlerType == "2"{
+                //"Клиент"
+                let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
+                clientVC.thisClientId = handlerId
+                self?.navigationController?.pushViewController(clientVC, animated: true)
+            }
+            
+        }
+        
         cell.rightSideButtonPressedForCell = { [weak self] cellInfo in
             
             if cellInfo == "tovars"{
