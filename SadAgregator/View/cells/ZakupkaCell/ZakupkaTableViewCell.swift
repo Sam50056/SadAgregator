@@ -20,6 +20,7 @@ class ZakupkaTableViewCell: UITableViewCell {
     
     var openTapped : ((Bool) -> Void)?
     
+    var rightSideButtonPressedForCell : ((String) -> Void)?
     var clientTapped : ((String) -> Void)?
     
     override func awakeFromNib() {
@@ -142,6 +143,10 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             cell.dropDownImageView.image = UIImage(systemName: !thisPur.openTovars ? "chevron.down" : "chevron.up")
             
             cell.dropDownImageView.isHidden = thisPur.tovarsSubItems.isEmpty
+            
+            cell.rightSideButtonPressed = { [weak self] in
+                self?.rightSideButtonPressedForCell?("tovars")
+            }
             
             return cell
             

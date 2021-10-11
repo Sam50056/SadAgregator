@@ -8,6 +8,7 @@
 import UIKit
 import SwiftyJSON
 import RealmSwift
+import SwiftUI
 
 class MyZakupkiViewController: UIViewController {
 
@@ -76,6 +77,20 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             clientsListVC.thisPur = pur.purId
             
             self?.navigationController?.pushViewController(clientsListVC, animated: true)
+            
+        }
+        
+        cell.rightSideButtonPressedForCell = { [weak self] cellInfo in
+            
+            if cellInfo == "tovars"{
+                
+                let sborkaView = SborkaView()
+                
+                let sborkaVC = UIHostingController(rootView: sborkaView)
+                
+                self?.navigationController?.pushViewController(sborkaVC, animated: true)
+                
+            }
             
         }
         

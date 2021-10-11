@@ -45,8 +45,14 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oz-Lr-dt5">
+                        <rect key="frame" x="133.5" y="0.0" width="186.5" height="38"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title=""/>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="7oz-Lr-dt5" secondAttribute="trailing" id="1ou-6U-vub"/>
                     <constraint firstItem="HQb-U4-J3M" firstAttribute="leading" secondItem="IxF-2I-ic6" secondAttribute="trailing" constant="6" id="6Nb-qq-TF1"/>
                     <constraint firstItem="IxF-2I-ic6" firstAttribute="leading" secondItem="uCH-Xv-nwJ" secondAttribute="trailing" constant="8" symbolic="YES" id="BRi-iy-Aea"/>
                     <constraint firstItem="uCH-Xv-nwJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="DTD-nF-Cal"/>
@@ -54,7 +60,10 @@
                     <constraint firstItem="nqQ-7s-QMb" firstAttribute="leading" secondItem="HQb-U4-J3M" secondAttribute="trailing" constant="8" id="OeS-Dr-Rxd"/>
                     <constraint firstAttribute="trailingMargin" secondItem="nqQ-7s-QMb" secondAttribute="trailing" id="PmB-RR-kz0"/>
                     <constraint firstItem="HQb-U4-J3M" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UtG-nc-DXw"/>
+                    <constraint firstItem="7oz-Lr-dt5" firstAttribute="leading" secondItem="HQb-U4-J3M" secondAttribute="trailing" constant="16" id="Z0M-B5-KND"/>
                     <constraint firstItem="IxF-2I-ic6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aHl-5W-FkC"/>
+                    <constraint firstItem="7oz-Lr-dt5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="cn7-bZ-8bX"/>
+                    <constraint firstAttribute="bottom" secondItem="7oz-Lr-dt5" secondAttribute="bottom" id="fdG-Aq-dHp"/>
                     <constraint firstItem="uCH-Xv-nwJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-1" id="hkX-aF-KPD"/>
                 </constraints>
             </tableViewCellContentView>
@@ -64,6 +73,7 @@
                 <outlet property="iconImageView" destination="uCH-Xv-nwJ" id="Jhf-wf-0ku"/>
                 <outlet property="label1" destination="IxF-2I-ic6" id="lEb-pV-f2G"/>
                 <outlet property="label2" destination="nqQ-7s-QMb" id="CNf-68-KfQ"/>
+                <outlet property="rightSideButton" destination="7oz-Lr-dt5" id="xg1-MZ-T0M"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </tableViewCell>
