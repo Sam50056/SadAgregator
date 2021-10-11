@@ -80,6 +80,16 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             
         }
         
+        cell.tochkaTapped = { [weak self] in
+            
+            let sborkaView = SborkaView()
+            
+            let sborkaVC = UIHostingController(rootView: sborkaView)
+            
+            self?.navigationController?.pushViewController(sborkaVC, animated: true)
+            
+        }
+        
         cell.handlerTapped = { [weak self] in
             
             let handlerType = pur.handlerType
