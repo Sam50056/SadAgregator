@@ -281,6 +281,44 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
+        case 8:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
+            
+            cell.label1.text = "Заработок"
+            cell.label2.text = thisPur.profit
+            
+            cell.label1.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+            cell.label2.font = UIFont.systemFont(ofSize: 16)
+            
+            cell.label2.textColor = .systemBlue
+            
+            cell.iconImageView.image = UIImage(systemName: "rublesign.circle.fill")
+            cell.iconImageView.tintColor = .systemGray
+            
+            cell.dropDownImageView.isHidden = true
+            
+            return cell
+            
+        case 9:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
+            
+            cell.label1.text = "Почта России"
+            cell.label2.text = thisPur.postageCost
+            
+            cell.label1.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+            cell.label2.font = UIFont.systemFont(ofSize: 16)
+            
+            cell.label2.textColor = .systemBlue
+            
+            cell.iconImageView.image = UIImage(systemName: "shippingbox.fill")
+            cell.iconImageView.tintColor = .systemGray
+            
+            cell.dropDownImageView.isHidden = true
+            
+            return cell
+            
         case 10:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "footerCell", for: indexPath) as! ZakupkaTableViewCellFooterCell
