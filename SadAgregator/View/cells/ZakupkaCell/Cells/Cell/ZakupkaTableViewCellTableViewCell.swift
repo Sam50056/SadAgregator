@@ -35,6 +35,7 @@ class ZakupkaTableViewCellTableViewCell: UITableViewCell {
         
         iconImageView.image = nil
         dropDownImageView.image = nil
+        rightSideButtonPressed = nil
         
     }
 
