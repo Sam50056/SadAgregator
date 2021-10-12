@@ -21,6 +21,7 @@ class ZakupkaTableViewCell: UITableViewCell {
     var openTapped : ((Bool) -> Void)?
     
     var rightSideButtonPressedForCell : ((String) -> Void)?
+    var tovarsSubItemTapped : ((Int) -> Void)?
     var clientTapped : ((String) -> Void)?
     var handlerTapped : (() -> Void)?
     var tochkaTapped : (() -> Void)?
@@ -328,6 +329,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
         
         if section == 1 , !thisPur.tovarsSubItems.isEmpty{
             openTapped?(true)
+        }else if section == 2{
+            tovarsSubItemTapped?(indexPath.row)
         }else if section == 3{
             clientTapped?(thisPur.clientId)
         }else if section == 4{

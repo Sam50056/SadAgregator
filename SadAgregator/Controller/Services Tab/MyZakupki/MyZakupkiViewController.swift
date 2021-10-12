@@ -128,6 +128,29 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             
         }
         
+        cell.tovarsSubItemTapped = { [weak self] i in
+            
+            let item = pur.tovarsSubItems[i]
+            
+            var status = ""
+            
+            if item.label1 == "В ожидании:"{
+                status = "0"
+            }else if item.label1 == "Выкуплены:"{
+                status = "1"
+            }else if item.label1 == "Нет в наличии:"{
+                status = "2"
+            }
+            
+            let prodsVC = ProdsByPurByStatusViewController()
+            
+            prodsVC.thisPurId = pur.purId
+            prodsVC.status = status
+            
+            self?.navigationController?.pushViewController(prodsVC, animated: true)
+            
+        }
+        
         cell.tableView.reloadData()
         
         return cell
