@@ -46,7 +46,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oz-Lr-dt5">
-                        <rect key="frame" x="133.5" y="0.0" width="186.5" height="38"/>
+                        <rect key="frame" x="167.5" y="0.0" width="152.5" height="38"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title=""/>
                     </button>
@@ -60,7 +60,7 @@
                     <constraint firstItem="nqQ-7s-QMb" firstAttribute="leading" secondItem="HQb-U4-J3M" secondAttribute="trailing" constant="8" id="OeS-Dr-Rxd"/>
                     <constraint firstAttribute="trailingMargin" secondItem="nqQ-7s-QMb" secondAttribute="trailing" id="PmB-RR-kz0"/>
                     <constraint firstItem="HQb-U4-J3M" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UtG-nc-DXw"/>
-                    <constraint firstItem="7oz-Lr-dt5" firstAttribute="leading" secondItem="HQb-U4-J3M" secondAttribute="trailing" constant="16" id="Z0M-B5-KND"/>
+                    <constraint firstItem="7oz-Lr-dt5" firstAttribute="leading" secondItem="HQb-U4-J3M" secondAttribute="trailing" constant="50" id="Z0M-B5-KND"/>
                     <constraint firstItem="IxF-2I-ic6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aHl-5W-FkC"/>
                     <constraint firstItem="7oz-Lr-dt5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="cn7-bZ-8bX"/>
                     <constraint firstAttribute="bottom" secondItem="7oz-Lr-dt5" secondAttribute="bottom" id="fdG-Aq-dHp"/>

@@ -39,6 +39,13 @@ class MyZakupkiViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.title = "Мои закупки"
+        
+    }
+    
 }
 
 //MARK: - PurchasesFormPagingDataManager
