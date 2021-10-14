@@ -107,6 +107,10 @@
 		225714D7271209AB0082D583 /* MyZakupkiClientsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714D6271209AB0082D583 /* MyZakupkiClientsListViewController.swift */; };
 		225714D927161B4A0082D583 /* ProdsByPurByStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714D827161B4A0082D583 /* ProdsByPurByStatusViewController.swift */; };
 		225714DB27161CCE0082D583 /* PurchasesProdsByClientByStatusDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714DA27161CCE0082D583 /* PurchasesProdsByClientByStatusDataManager.swift */; };
+		225714E427176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714E227176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.swift */; };
+		225714E527176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225714E327176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.xib */; };
+		225714E927177FF70082D583 /* ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714E727177FF70082D583 /* ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.swift */; };
+		225714EA27177FF70082D583 /* ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225714E827177FF70082D583 /* ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.xib */; };
 		22582C7525D1C1DC005E341C /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7425D1C1DB005E341C /* SignInWithApple.swift */; };
 		22582C7C25D1E832005E341C /* SignInWithAppleDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7B25D1E832005E341C /* SignInWithAppleDelegates.swift */; };
 		22582C7F25D20170005E341C /* SignInWIthAppleIdDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22582C7E25D20170005E341C /* SignInWIthAppleIdDataManager.swift */; };
@@ -439,6 +443,10 @@
 		225714D6271209AB0082D583 /* MyZakupkiClientsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyZakupkiClientsListViewController.swift; sourceTree = "<group>"; };
 		225714D827161B4A0082D583 /* ProdsByPurByStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdsByPurByStatusViewController.swift; sourceTree = "<group>"; };
 		225714DA27161CCE0082D583 /* PurchasesProdsByClientByStatusDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesProdsByClientByStatusDataManager.swift; sourceTree = "<group>"; };
+		225714E227176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZakupkaTableViewCellDocumentsTableViewCell.swift; sourceTree = "<group>"; };
+		225714E327176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZakupkaTableViewCellDocumentsTableViewCell.xib; sourceTree = "<group>"; };
+		225714E727177FF70082D583 /* ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		225714E827177FF70082D583 /* ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		22582C7425D1C1DB005E341C /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
 		22582C7B25D1E832005E341C /* SignInWithAppleDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleDelegates.swift; sourceTree = "<group>"; };
 		22582C7E25D20170005E341C /* SignInWIthAppleIdDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWIthAppleIdDataManager.swift; sourceTree = "<group>"; };
@@ -1045,6 +1053,25 @@
 				225714D827161B4A0082D583 /* ProdsByPurByStatusViewController.swift */,
 			);
 			path = MyZakupki;
+			sourceTree = "<group>";
+		};
+		225714E127176AE50082D583 /* DocumentsCell */ = {
+			isa = PBXGroup;
+			children = (
+				225714E627177F0E0082D583 /* Cells */,
+				225714E227176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.swift */,
+				225714E327176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.xib */,
+			);
+			path = DocumentsCell;
+			sourceTree = "<group>";
+		};
+		225714E627177F0E0082D583 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				225714E727177FF70082D583 /* ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.swift */,
+				225714E827177FF70082D583 /* ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		22595793259667C10088C7E4 /* Master Views  */ = {
@@ -1754,6 +1781,7 @@
 		22D9D13626F66E28005BD254 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				225714E127176AE50082D583 /* DocumentsCell */,
 				22204EA826FCE9D800B61255 /* FooterCell */,
 				22D9D14126FA6104005BD254 /* HeaderCell */,
 				22D9D13C26F671E6005BD254 /* SubCell */,
@@ -1980,6 +2008,7 @@
 				22CA694525A1475E00D21840 /* VendorRatingTableViewCell.xib in Resources */,
 				221C072D256E5ABB001BC842 /* VendTableViewCellPhoneTableViewCell.xib in Resources */,
 				22DD116F26CBEB3A00E8494C /* RatingTableViewCell.xib in Resources */,
+				225714EA27177FF70082D583 /* ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.xib in Resources */,
 				22328CE125FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.xib in Resources */,
 				22D9D14526FA6122005BD254 /* ZakupkaTableViewCellHeaderCell.xib in Resources */,
 				22C5499625F411A4008D941B /* ClientTableViewCell.xib in Resources */,
@@ -2011,6 +2040,7 @@
 				22DD117A26CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.xib in Resources */,
 				220C95A926E159C600795DD4 /* BalanceRequestTableViewCell.xib in Resources */,
 				22904863256DC702000B7A28 /* VendTableViewCellRatingTableViewCell.xib in Resources */,
+				225714E527176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.xib in Resources */,
 				22328CED25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.xib in Resources */,
 				2290485D256DAC80000B7A28 /* VendTableViewCell.xib in Resources */,
 				228CB764255BF96D002B4A96 /* Main.storyboard in Resources */,
@@ -2146,6 +2176,7 @@
 				2259579C259668220088C7E4 /* SimpleReqView.swift in Sources */,
 				22BF1A0A25A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift in Sources */,
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
+				225714E927177FF70082D583 /* ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.swift in Sources */,
 				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
 				22CD3545269DD940009057C3 /* AssemblyAvailableStatusesDataManager.swift in Sources */,
 				225714D927161B4A0082D583 /* ProdsByPurByStatusViewController.swift in Sources */,
@@ -2307,6 +2338,7 @@
 				229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */,
 				22692E4226BB235200CA2946 /* BrokersReviewUpdateDataManager.swift in Sources */,
 				22941A3F262A478C00119844 /* TovarTableViewCell.swift in Sources */,
+				225714E427176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.swift in Sources */,
 				22A2B56825E03200001359D6 /* SlideDownPresentationController.swift in Sources */,
 				2286AD0B25CB5EEE004EF0D7 /* VendorBrokerRevsViewController.swift in Sources */,
 				22D1322626A5AD4300D0BB38 /* AssemblySellThisPointDataManager.swift in Sources */,

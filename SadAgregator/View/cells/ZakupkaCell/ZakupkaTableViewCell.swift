@@ -18,13 +18,16 @@ class ZakupkaTableViewCell: UITableViewCell {
         }
     }
     
-    var openTapped : ((Bool) -> Void)?
+    var openTapped : ((OpenType) -> Void)?
     
     var rightSideButtonPressedForCell : ((String) -> Void)?
     var tovarsSubItemTapped : ((Int) -> Void)?
     var clientTapped : ((String) -> Void)?
     var handlerTapped : (() -> Void)?
     var tochkaTapped : (() -> Void)?
+    
+    var documentImageTapped : ((Int) -> Void)?
+    var documentImageRemoveButtonTapped : ((Int) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,6 +36,7 @@ class ZakupkaTableViewCell: UITableViewCell {
         tableView.register(UINib(nibName: "ZakupkaTableViewCellTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         tableView.register(UINib(nibName: "ZakupkaTableViewCellTableViewSubCell", bundle: nil), forCellReuseIdentifier: "subCell")
         tableView.register(UINib(nibName: "ZakupkaTableViewCellFooterCell", bundle: nil), forCellReuseIdentifier: "footerCell")
+        tableView.register(UINib(nibName: "ZakupkaTableViewCellDocumentsTableViewCell", bundle: nil), forCellReuseIdentifier: "docsCell")
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -63,7 +67,7 @@ class ZakupkaTableViewCell: UITableViewCell {
 extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        11
+        13
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -90,7 +94,11 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             return 1
         }else if section == 9 , thisPur.postageCost != "" ,thisPur.postageCost != "0"{
             return 1
-        }else if section == 10{
+        }else if section == 10 , !thisPur.images.isEmpty{
+            return 1
+        }else if section == 11 , !thisPur.images.isEmpty , thisPur.openDocs{
+            return 1
+        }else if section == 12{
             return 1
         }
         
@@ -321,6 +329,42 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
         case 10:
             
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
+            
+            cell.label1.text = "Документы"
+            cell.label2.text = ""
+            
+            cell.label1.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+            cell.label2.font = UIFont.systemFont(ofSize: 16)
+            
+            cell.iconImageView.image = UIImage(systemName: "doc.plaintext")
+            cell.iconImageView.tintColor = .systemGray
+            
+            
+            cell.dropDownImageView.image = UIImage(systemName: !thisPur.openDocs ? "chevron.down" : "chevron.up")
+            
+            cell.dropDownImageView.isHidden = false
+            
+            return cell
+            
+        case 11:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "docsCell", for: indexPath) as! ZakupkaTableViewCellDocumentsTableViewCell
+            
+            cell.images = thisPur.images
+            
+            cell.removeImage = { [weak self] i in
+                self?.documentImageRemoveButtonTapped?(i)
+            }
+            
+            cell.imageTapped = { [weak self] i in
+                self?.documentImageTapped?(i)
+            }
+            
+            return cell
+            
+        case 12:
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "footerCell", for: indexPath) as! ZakupkaTableViewCellFooterCell
             
             cell.bgView.backgroundColor = UIColor(named: "gray")
@@ -349,8 +393,10 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             return 45
         }else if section == 2 || section == 5{
             return 30
-        }else if section == 10{
+        }else if section == 12{
             return 50
+        }else if section == 11{
+            return 80
         }else{
             return 38
         }
@@ -366,17 +412,19 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
         let _ = indexPath.row
         
         if section == 1 , !thisPur.tovarsSubItems.isEmpty{
-            openTapped?(true)
+            openTapped?(.tovars)
         }else if section == 2{
             tovarsSubItemTapped?(indexPath.row)
         }else if section == 3{
             clientTapped?(thisPur.clientId)
         }else if section == 4{
-            openTapped?(false)
+            openTapped?(.finance)
         }else if section == 6{
             tochkaTapped?()
         }else if section == 7{
             handlerTapped?()
+        }else if section == 10{
+            openTapped?(.docs)
         }
         
     }
@@ -421,10 +469,11 @@ extension ZakupkaTableViewCell{
         var itemsNotAvailableCost : String
         
         var tovarsSubItems : [TableViewItem] = []
-//        var images
+        var images : [ImageItem] = []
         
         var openTovars : Bool = false
         var openMoney : Bool = false
+        var openDocs : Bool = false
         
     }
     
@@ -436,6 +485,25 @@ extension ZakupkaTableViewCell{
         
         var haveClickableLabel : Bool = false
         
+    }
+    
+    struct ImageItem {
+        
+        var image : String
+        var id : String
+        
+    }
+    
+}
+
+//MARK: - Enums
+
+extension ZakupkaTableViewCell{
+    
+    enum OpenType {
+        case tovars
+        case finance
+        case docs
     }
     
 }

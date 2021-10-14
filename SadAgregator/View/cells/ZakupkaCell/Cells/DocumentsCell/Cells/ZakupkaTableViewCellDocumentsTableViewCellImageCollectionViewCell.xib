@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell" customModule="SadAgregator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="197" height="183"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="197" height="183"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U5I-1e-orO">
+                        <rect key="frame" x="0.0" y="0.0" width="197" height="183"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qwU-Hf-s7B">
+                                <rect key="frame" x="0.0" y="0.0" width="197" height="183"/>
+                            </imageView>
+                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oR-t7-IDF">
+                                <rect key="frame" x="173" y="0.0" width="24" height="24"/>
+                                <subviews>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="car-8o-Mpl">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="multiply" catalog="system"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="car-8o-Mpl" secondAttribute="trailing" id="PGB-u5-reR"/>
+                                    <constraint firstAttribute="width" constant="24" id="Prc-eH-f07"/>
+                                    <constraint firstItem="car-8o-Mpl" firstAttribute="top" secondItem="3oR-t7-IDF" secondAttribute="top" id="cv2-TQ-OuQ"/>
+                                    <constraint firstAttribute="height" constant="24" id="nSk-Vc-owZ"/>
+                                    <constraint firstItem="car-8o-Mpl" firstAttribute="leading" secondItem="3oR-t7-IDF" secondAttribute="leading" id="p1a-ch-YT2"/>
+                                    <constraint firstAttribute="bottom" secondItem="car-8o-Mpl" secondAttribute="bottom" id="sNq-zL-Jf5"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qwU-Hf-s7B" firstAttribute="leading" secondItem="U5I-1e-orO" secondAttribute="leading" id="0Ea-Lv-BM6"/>
+                            <constraint firstAttribute="bottom" secondItem="qwU-Hf-s7B" secondAttribute="bottom" id="Bds-be-MAE"/>
+                            <constraint firstItem="qwU-Hf-s7B" firstAttribute="top" secondItem="U5I-1e-orO" secondAttribute="top" id="Dt6-jy-Blj"/>
+                            <constraint firstAttribute="trailing" secondItem="3oR-t7-IDF" secondAttribute="trailing" id="N7K-tA-VE1"/>
+                            <constraint firstAttribute="trailing" secondItem="qwU-Hf-s7B" secondAttribute="trailing" id="dGF-OS-RV4"/>
+                            <constraint firstItem="3oR-t7-IDF" firstAttribute="top" secondItem="U5I-1e-orO" secondAttribute="top" id="hj9-HB-zA5"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="U5I-1e-orO" secondAttribute="trailing" id="FbW-HL-vjn"/>
+                <constraint firstItem="U5I-1e-orO" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="M3r-sV-fA6"/>
+                <constraint firstAttribute="bottom" secondItem="U5I-1e-orO" secondAttribute="bottom" id="jSM-mH-YTl"/>
+                <constraint firstItem="U5I-1e-orO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="sV2-C0-aa8"/>
+            </constraints>
+            <size key="customSize" width="197" height="183"/>
+            <connections>
+                <outlet property="imageView" destination="qwU-Hf-s7B" id="uyf-AW-M4Z"/>
+                <outlet property="removeButton" destination="car-8o-Mpl" id="qtp-Da-Rom"/>
+                <outlet property="removeButtonView" destination="3oR-t7-IDF" id="md0-Lf-Ki5"/>
+            </connections>
+            <point key="canvasLocation" x="31.159420289855074" y="197.20982142857142"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="multiply" catalog="system" width="128" height="111"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

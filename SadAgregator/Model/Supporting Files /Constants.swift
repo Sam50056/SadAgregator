@@ -226,6 +226,14 @@ struct K {
             height += defaultCellHeight
         }
         
+        if !data.images.isEmpty{
+            height += defaultCellHeight
+        }
+        
+        if !data.images.isEmpty , data.openDocs{
+            height += 80
+        }
+        
         height += 50
         
         height += 8

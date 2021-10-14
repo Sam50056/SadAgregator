@@ -61,11 +61,13 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
 
         cell.thisPur = pur
         
-        cell.openTapped = { [weak self] isTovars in
-            if isTovars{
+        cell.openTapped = { [weak self] type in
+            if type == .tovars{
                 self?.purchases[indexPath.row].openTovars.toggle()
-            }else{
+            }else if type == .finance{
                 self?.purchases[indexPath.row].openMoney.toggle()
+            }else if type == .docs{
+                self?.purchases[indexPath.row].openDocs.toggle()
             }
             self?.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
@@ -151,6 +153,12 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             
         }
         
+        cell.documentImageTapped = { [weak self] i in
+            
+            self?.previewImages(pur.images.map({$0.image}) , selectedImageIndex: i)
+            
+        }
+        
         cell.tableView.reloadData()
         
         return cell
@@ -187,6 +195,14 @@ extension MyZakupkiViewController : PurchasesFormPagingDataManagerDelegate{
                     }
                     
                     var pur = ZakupkaTableViewCell.Zakupka(purId: purchaseData["pur_id"].stringValue, statusId: purchaseData["status_id"].stringValue, capt: purchaseData["capt"].stringValue, dt: purchaseData["dt"].stringValue, countItems: purchaseData["cnt_items"].stringValue, replaces: purchaseData["replaces"].stringValue, countClients: purchaseData["cnt_clients"].stringValue, countPoints: purchaseData["cnt_points"].stringValue, money: newMoneySubItems, clientId: purchaseData["client_id"].stringValue, handlerType: purchaseData["handler_type"].stringValue, handlerId: purchaseData["handler_id"].stringValue, handlerName: purchaseData["handler_name"].stringValue, actAv: purchaseData["act_ac"].stringValue, status: purchaseData["status"].stringValue, profit: purchaseData["profit"].stringValue, postageCost: purchaseData["postage_cost"].stringValue, itemsWait: purchaseData["items"]["wait"].stringValue, itemsWaitCost: purchaseData["items"]["wait_cost"].stringValue, itemsBought: purchaseData["items"]["bought"].stringValue, itemsBoughtCost: purchaseData["items"]["bought_cost"].stringValue, itemsNotAvailable: purchaseData["items"]["not_available"].stringValue, itemsNotAvailableCost: purchaseData["items"]["not_available_cost"].stringValue)
+                    
+                    var newImages = [ZakupkaTableViewCell.ImageItem]()
+                    
+                    purchaseData["images"].arrayValue.forEach { jsonImage in
+                        newImages.append(ZakupkaTableViewCell.ImageItem(image: jsonImage["img"].stringValue, id: jsonImage["id"].stringValue))
+                    }
+                    
+                    pur.images = newImages
                     
                     var newTovarsSubItems = [ZakupkaTableViewCell.TableViewItem]()
                     

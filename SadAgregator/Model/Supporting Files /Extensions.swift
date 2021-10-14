@@ -229,13 +229,13 @@ extension UIViewController {
         
     }
     
-    func previewImages(_ imageLinks : [String]){
+    func previewImages(_ imageLinks : [String] , selectedImageIndex : Int = 0){
         
         let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
         
         galleryVC.simplePreviewMode = true
         
-        galleryVC.selectedImageIndex = 0
+        galleryVC.selectedImageIndex = selectedImageIndex
         
         var newImages = [PostImage]()
         
