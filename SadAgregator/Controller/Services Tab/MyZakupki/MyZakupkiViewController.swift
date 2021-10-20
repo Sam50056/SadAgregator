@@ -44,6 +44,7 @@ class MyZakupkiViewController: UIViewController {
         
         navigationItem.title = "Мои закупки"
         
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil) , UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: nil) , UIBarButtonItem(image: UIImage(systemName: "magnifyingglass" ) , style: .plain, target: self, action: nil)]
     }
     
 }
@@ -142,19 +143,24 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             let item = pur.tovarsSubItems[i]
             
             var status = ""
+            var navTitle = ""
             
             if item.label1 == "В ожидании:"{
                 status = "0"
+                navTitle = "В ожидании"
             }else if item.label1 == "Выкуплены:"{
                 status = "1"
+                navTitle = "Выкуплены"
             }else if item.label1 == "Нет в наличии:"{
                 status = "2"
+                navTitle = "Нет в наличии"
             }
             
             let prodsVC = ProdsByPurByStatusViewController()
             
             prodsVC.thisPurId = pur.purId
             prodsVC.status = status
+            prodsVC.navTitle = navTitle
             
             self?.navigationController?.pushViewController(prodsVC, animated: true)
             
@@ -198,7 +204,7 @@ extension MyZakupkiViewController : PurchasesFormPagingDataManagerDelegate{
                     var newMoneySubItems = [ZakupkaTableViewCell.TableViewItem]()
                     
                     purchaseData["money"].arrayValue.forEach { jsonMoneyItem in
-                        newMoneySubItems.append(ZakupkaTableViewCell.TableViewItem(label1: jsonMoneyItem["capt"].stringValue, label2: "", label3: jsonMoneyItem["value"].stringValue))
+                        newMoneySubItems.append(ZakupkaTableViewCell.TableViewItem(label1: jsonMoneyItem["capt"].stringValue, label2: "", label3: jsonMoneyItem["value"].stringValue + " руб."))
                     }
                     
                     var pur = ZakupkaTableViewCell.Zakupka(purId: purchaseData["pur_id"].stringValue, statusId: purchaseData["status_id"].stringValue, capt: purchaseData["capt"].stringValue, dt: purchaseData["dt"].stringValue, countItems: purchaseData["cnt_items"].stringValue, replaces: purchaseData["replaces"].stringValue, countClients: purchaseData["cnt_clients"].stringValue, countPoints: purchaseData["cnt_points"].stringValue, money: newMoneySubItems, clientId: purchaseData["client_id"].stringValue, handlerType: purchaseData["handler_type"].stringValue, handlerId: purchaseData["handler_id"].stringValue, handlerName: purchaseData["handler_name"].stringValue, actAv: purchaseData["act_ac"].stringValue, status: purchaseData["status"].stringValue, profit: purchaseData["profit"].stringValue, postageCost: purchaseData["postage_cost"].stringValue, itemsWait: purchaseData["items"]["wait"].stringValue, itemsWaitCost: purchaseData["items"]["wait_cost"].stringValue, itemsBought: purchaseData["items"]["bought"].stringValue, itemsBoughtCost: purchaseData["items"]["bought_cost"].stringValue, itemsNotAvailable: purchaseData["items"]["not_available"].stringValue, itemsNotAvailableCost: purchaseData["items"]["not_available_cost"].stringValue)

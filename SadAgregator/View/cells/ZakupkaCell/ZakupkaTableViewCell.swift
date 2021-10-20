@@ -294,7 +294,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
             cell.label1.text = "Заработок"
-            cell.label2.text = thisPur.profit
+            cell.label2.text = thisPur.profit + " руб."
             
             cell.label1.font = UIFont.systemFont(ofSize: 16, weight: .bold)
             cell.label2.font = UIFont.systemFont(ofSize: 16)
@@ -313,7 +313,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
             cell.label1.text = "Почта России"
-            cell.label2.text = thisPur.postageCost
+            cell.label2.text = thisPur.postageCost + " руб."
             
             cell.label1.font = UIFont.systemFont(ofSize: 16, weight: .bold)
             cell.label2.font = UIFont.systemFont(ofSize: 16)

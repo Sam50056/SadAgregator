@@ -18,6 +18,8 @@ class ProdsByPurByStatusViewController: UITableViewController {
     var thisPurId : String?
     var status : String?
     
+    var navTitle : String?
+    
     private var page = 1
     private var rowForPaggingUpdate : Int = 15
     
@@ -41,6 +43,13 @@ class ProdsByPurByStatusViewController: UITableViewController {
         tableView.allowsSelection = false
         
         refresh()
+        
+    }
+ 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.title = navTitle
         
     }
     
