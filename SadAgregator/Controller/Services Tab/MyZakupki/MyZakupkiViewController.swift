@@ -66,8 +66,53 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: "purCell", for: indexPath) as! ZakupkaTableViewCell
         
         let pur = purchases[indexPath.row]
-
+        
         cell.thisPur = pur
+        
+        cell.purNameTapped = { [weak self] in
+            
+            let alertController = UIAlertController(title: "Название закупки", message: nil, preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "Изменить", style: .default, handler: { [weak self] _ in
+                
+                guard let value = alertController.textFields?[0].text else {return}
+                
+                PurchasesUpdateInfoDataManager().getPurchasesUpdateInfoData(key: self!.key, purSysId: pur.purId, fieldId: "1", val: value) { data, error in
+                 
+                    if let error = error , data == nil {
+                        print("Error with PurchasesUpdateInfoDataManager : \(error)")
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        if data!["result"].intValue == 1{
+                            
+                            self?.purchases[indexPath.row].capt = value
+                            self?.tableView.reloadData()
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            alertController.addTextField { field in
+                field.text = pur.capt
+                field.delegate = self
+            }
+            
+            self?.present(alertController, animated: true, completion: nil)
+            
+        }
+        
+        cell.dateTapped = { [weak self] in
+            
+        }
         
         cell.openTapped = { [weak self] type in
             if type == .tovars{
@@ -187,6 +232,20 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
         let pur = purchases[indexPath.row]
     
         return K.makeHeightForZakupkaCell(data: pur)
+    }
+    
+}
+
+//MARK: - UITextField
+
+extension MyZakupkiViewController : UITextFieldDelegate{
+    
+    //This is for zakupka capt changing (it has limited input types)
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let aSet = NSCharacterSet(charactersIn:"0123456789YNn-_").inverted
+        let compSepByCharInSet = string.components(separatedBy: aSet)
+        let numberFiltered = compSepByCharInSet.joined(separator: "")
+        return string == numberFiltered
     }
     
 }

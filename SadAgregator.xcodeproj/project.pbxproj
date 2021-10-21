@@ -255,6 +255,7 @@
 		22B9E16C27208BE700985450 /* PurchasesSegmentsInPurchaseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E16B27208BE700985450 /* PurchasesSegmentsInPurchaseDataManager.swift */; };
 		22B9E16E2720A2C000985450 /* PurchasesPointsInSegmentDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E16D2720A2C000985450 /* PurchasesPointsInSegmentDataManager.swift */; };
 		22B9E1702721E22600985450 /* PurchasesProdsInPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E16F2721E22600985450 /* PurchasesProdsInPointDataManager.swift */; };
+		22B9E1732721FE6600985450 /* PurchasesUpdateInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E1722721FE6600985450 /* PurchasesUpdateInfoDataManager.swift */; };
 		22BC71D2268A46A700846702 /* SborkaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC71D1268A46A700846702 /* SborkaViewModel.swift */; };
 		22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD86512597FD690052956D /* SetInputValDataManager.swift */; };
 		22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF19D725A3DDC800567DB7 /* TextLabelCollectionViewCell.swift */; };
@@ -597,6 +598,7 @@
 		22B9E16B27208BE700985450 /* PurchasesSegmentsInPurchaseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesSegmentsInPurchaseDataManager.swift; sourceTree = "<group>"; };
 		22B9E16D2720A2C000985450 /* PurchasesPointsInSegmentDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesPointsInSegmentDataManager.swift; sourceTree = "<group>"; };
 		22B9E16F2721E22600985450 /* PurchasesProdsInPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesProdsInPointDataManager.swift; sourceTree = "<group>"; };
+		22B9E1722721FE6600985450 /* PurchasesUpdateInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesUpdateInfoDataManager.swift; sourceTree = "<group>"; };
 		22BC71D1268A46A700846702 /* SborkaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SborkaViewModel.swift; sourceTree = "<group>"; };
 		22BD86512597FD690052956D /* SetInputValDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInputValDataManager.swift; sourceTree = "<group>"; };
 		22BD86542598B4CD0052956D /* SadAgregator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SadAgregator.entitlements; sourceTree = "<group>"; };
@@ -1258,9 +1260,8 @@
 			children = (
 				226975F02700C3B0008539CF /* PurchasesFormPagingDataManager.swift */,
 				225714DA27161CCE0082D583 /* PurchasesProdsByClientByStatusDataManager.swift */,
-				22B9E16B27208BE700985450 /* PurchasesSegmentsInPurchaseDataManager.swift */,
-				22B9E16D2720A2C000985450 /* PurchasesPointsInSegmentDataManager.swift */,
-				22B9E16F2721E22600985450 /* PurchasesProdsInPointDataManager.swift */,
+				22B9E1712721FE4C00985450 /* Sborka */,
+				22B9E1722721FE6600985450 /* PurchasesUpdateInfoDataManager.swift */,
 			);
 			path = "My Zakupki VC";
 			sourceTree = "<group>";
@@ -1605,6 +1606,16 @@
 				22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */,
 			);
 			path = TwoLabelCell;
+			sourceTree = "<group>";
+		};
+		22B9E1712721FE4C00985450 /* Sborka */ = {
+			isa = PBXGroup;
+			children = (
+				22B9E16B27208BE700985450 /* PurchasesSegmentsInPurchaseDataManager.swift */,
+				22B9E16D2720A2C000985450 /* PurchasesPointsInSegmentDataManager.swift */,
+				22B9E16F2721E22600985450 /* PurchasesProdsInPointDataManager.swift */,
+			);
+			path = Sborka;
 			sourceTree = "<group>";
 		};
 		22BF19D125A3DD2300567DB7 /* TextLabelCell */ = {
@@ -2212,6 +2223,7 @@
 				2238DC6F26683DB00037DFF5 /* NastroykiPosrednikaTableViewController.swift in Sources */,
 				22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */,
 				22328CCA25FE70BE00C51CC9 /* PaymentHistoryViewController.swift in Sources */,
+				22B9E1732721FE6600985450 /* PurchasesUpdateInfoDataManager.swift in Sources */,
 				22B2652A267D7C21004342E3 /* BrokersDelBrokerHelperDataManager.swift in Sources */,
 				22ADF829267C32D600811DA9 /* VendDelSendRuleDataManager.swift in Sources */,
 				227828EB258A719E00B435FA /* ReviewUpdateViewController.swift in Sources */,

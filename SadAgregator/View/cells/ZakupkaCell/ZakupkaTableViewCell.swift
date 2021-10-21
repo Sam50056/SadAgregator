@@ -20,6 +20,9 @@ class ZakupkaTableViewCell: UITableViewCell {
     
     var openTapped : ((OpenType) -> Void)?
     
+    var purNameTapped : (() -> Void)?
+    var dateTapped : (() -> Void)?
+    
     var rightSideButtonPressedForCell : ((String) -> Void)?
     var tovarsSubItemTapped : ((Int) -> Void)?
     var clientTapped : ((String) -> Void)?
@@ -131,6 +134,14 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             cell.secondViewButton.setTitle("", for: .normal)
             
             cell.firstView.layer.cornerRadius = 6
+            
+            cell.firstButtonTapped = { [weak self] in
+                self?.purNameTapped?()
+            }
+            
+            cell.secondButtonTapped = { [weak self] in
+                self?.dateTapped?()
+            }
             
             return cell
             
