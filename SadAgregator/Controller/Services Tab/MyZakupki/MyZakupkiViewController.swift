@@ -96,6 +96,8 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             
             let sborkaVC = UIHostingController(rootView: sborkaView)
             
+            sborkaView.sborkaViewModel.thisPurId = pur.purId
+            
             self?.navigationController?.pushViewController(sborkaVC, animated: true)
             
         }
