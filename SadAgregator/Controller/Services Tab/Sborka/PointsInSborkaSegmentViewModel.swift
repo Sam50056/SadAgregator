@@ -13,6 +13,8 @@ class PointsInSborkaSegmentViewModel : ObservableObject{
     
     var key = ""
     
+    @Published var thisPurId : String?
+    
     @Published var screenData : JSON?
     
     @Published var items = [Item]()
@@ -60,10 +62,15 @@ class PointsInSborkaSegmentViewModel : ObservableObject{
     private lazy var assemblyGetHelpersDataManager = AssemblyGetHelpersDataManager()
     private lazy var assemblyGetHelpersInAssemblyDataManager = AssemblyGetHelpersInAssemblyDataManager()
     
+    private var purchasesPointsInSegmentDataManager = PurchasesPointsInSegmentDataManager()
+    
     init(){
         assemblyPointsInSegmentDataManager.delegate = self
         assemblyGetHelpersDataManager.delegate = self
         assemblyGetHelpersInAssemblyDataManager.delegate = self
+        
+        purchasesPointsInSegmentDataManager.delegate = self
+        
     }
     
 }
@@ -78,7 +85,11 @@ extension PointsInSborkaSegmentViewModel{
         
         screenData = nil
         
-        assemblyPointsInSegmentDataManager.getAssemblyPointsInSegmentData(key: key, segmentId: thisSegmentId, status: status, helperId: helperID, page: 1)
+        if let thisPurId = thisPurId {
+            purchasesPointsInSegmentDataManager.getPurchasesPointsInSegmentData(key: key, purSysId: thisPurId, segmentId: thisSegmentId, page: 1)
+        }else{
+            assemblyPointsInSegmentDataManager.getAssemblyPointsInSegmentData(key: key, segmentId: thisSegmentId, status: status, helperId: helperID, page: 1)
+        }
         
     }
     
@@ -229,6 +240,43 @@ extension PointsInSborkaSegmentViewModel : AssemblyPointsInSegmentDataManagerDel
     
 }
 
+//MARK: - PurchasesPointsInSegmentDataManager
+
+extension PointsInSborkaSegmentViewModel : PurchasesPointsInSegmentDataManagerDelegate{
+    
+    func didGetPurchasesPointsInSegmentData(data: JSON) {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            self?.screenData = data
+            
+            if data["result"].intValue == 1{
+                
+                let jsonItems = data["segment_points"].arrayValue
+                
+                var newItems = [Item]()
+                
+                for jsonItem in jsonItems{
+                    
+                    newItems.append(Item(pointId: jsonItem["point_id"].stringValue, capt: jsonItem["capt"].stringValue, count: jsonItem["cnt"].stringValue, summ: jsonItem["summ"].stringValue))
+                    
+                }
+                
+                self?.items = newItems
+                
+                self?.showNoItemsView = self!.items.isEmpty && self!.screenData != nil
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingPurchasesPointsInSegmentDataWithError(error: String) {
+        print("Error with PurchasesPointsInSegmentDataManager : \(error)")
+    }
+    
+}
 
 //MARK: - AssemblyGetHelpersDataManager
 

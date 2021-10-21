@@ -14,6 +14,8 @@ class SborkaViewModel : ObservableObject{
     
     private let realm = try! Realm()
     
+    @Published var thisPurId : String?
+    
     @Published var screenData : JSON?
     
     @Published var items = [Item]()
@@ -69,6 +71,8 @@ class SborkaViewModel : ObservableObject{
     private var assemblyGetHelpersDataManager = AssemblyGetHelpersDataManager()
     private var assemblyGetHelpersInAssemblyDataManager = AssemblyGetHelpersInAssemblyDataManager()
     
+    private var purchasesSegmentsInPurchaseDataManager = PurchasesSegmentsInPurchaseDataManager()
+    
     lazy var pointsInSegmentsView = PointsInSborkaSegmentView()
     
     init() {
@@ -78,6 +82,8 @@ class SborkaViewModel : ObservableObject{
         assemblySegmentsInAssemblyDataManager.delegate = self
         assemblyGetHelpersDataManager.delegate = self
         assemblyGetHelpersInAssemblyDataManager.delegate = self
+        
+        purchasesSegmentsInPurchaseDataManager.delegate = self
         
     }
     
@@ -96,7 +102,11 @@ extension SborkaViewModel{
         
         screenData = nil
         
-        assemblySegmentsInAssemblyDataManager.getAssemblySegmentsInAssemblyData(key: key, parentSegment: parent, status: status, helperId: helperID)
+        if let thisPurId = thisPurId{
+            purchasesSegmentsInPurchaseDataManager.getPurchasesSegmentsInPurchaseData(key: key, purSysId: thisPurId, segmentParentId: parent)
+        }else{
+            assemblySegmentsInAssemblyDataManager.getAssemblySegmentsInAssemblyData(key: key, parentSegment: parent, status: status, helperId: helperID)
+        }
         
     }
     
@@ -331,6 +341,85 @@ extension SborkaViewModel : AssemblySegmentsInAssemblyDataManagerDelegate{
     
     func didFailGettingAssemblySegmentsInAssemblyDataWithError(error: String) {
         print("Error with AssemblySegmentsInAssemblyDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - PurchasesSegmentsInPurchaseDataManager
+
+extension SborkaViewModel : PurchasesSegmentsInPurchaseDataManagerDelegate{
+    
+    func didGetPurchasesSegmentsInPurchaseData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            screenData = data
+            
+            if data["result"].intValue == 1{
+                
+                let jsonItems = data["segments"].arrayValue
+                
+                if let segIndex = thisSegIndex{
+                    
+                    items[segIndex].childrenCount = jsonItems.count
+                    
+                    var insertsCount = 0
+                    
+                    jsonItems.forEach { jsonItem in
+                        
+                        var newItem = Item(segId: jsonItem["seg_id"].stringValue, title: jsonItem["seg_name"].stringValue, title2: jsonItem["cnt"].stringValue , title3: jsonItem["summ"].stringValue, canGoForDot: data["max_dept"].stringValue == "1" ? true : false)
+                        
+                        newItem.parentsCount = 1 + items[segIndex].parentsCount
+                        
+                        withAnimation(Animation.spring()){
+                            items.insert(newItem, at: segIndex + 1 + insertsCount)
+                        }
+                        
+                        insertsCount += 1
+                        
+                    }
+                    
+                }else{
+                    
+                    var newItems = [Item]()
+                    
+                    jsonItems.forEach { jsonItem in
+                        newItems.append(Item(segId: jsonItem["seg_id"].stringValue, title: jsonItem["seg_name"].stringValue, title2: jsonItem["cnt"].stringValue , title3: jsonItem["summ"].stringValue, canGoForDot: data["max_dept"].stringValue == "1" ? true : false))
+                    }
+                    
+                    items = newItems
+                    
+                }
+                
+                showNoItemsView = items.isEmpty && screenData != nil
+                
+                if helperID != "" , items.isEmpty{
+                    
+                    helperID = ""
+                    smotretOtSebya()
+                    
+                    withAnimation(.spring()){
+                        
+                        showShowingMySborkaAlertView = true
+                        
+                        let _ = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { [weak self] timer in
+                            withAnimation(.spring()){
+                                self?.showShowingMySborkaAlertView = false
+                            }
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingPurchasesSegmentsInPurchaseDataWithError(error: String) {
+        print("Error with PurchasesSegmentsInPurchaseDataManager : \(error)")
     }
     
 }

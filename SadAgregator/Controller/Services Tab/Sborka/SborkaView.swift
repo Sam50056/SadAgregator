@@ -193,32 +193,33 @@ struct SborkaView : View {
         })
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                
-                Button(action:{
-                    sborkaViewModel.getHelpers(inSborka: true)
-                }){
-                    Image(systemName : "person")
-                }.contextMenu(ContextMenu(menuItems: {
-                    Button("Смотреть от себя"){
-                        sborkaViewModel.smotretOtSebya()
-                    }
-                }))
-                
-                Menu {
-                    Picker(selection: $sborkaViewModel.menuSortIndex, label: Text("Статусы")) {
-                        Text("Не обработаны")
-                            .tag(0)
-                        Text("Нет в наличии")
-                            .tag(1)
-                        Text("Куплены")
-                            .tag(2)
-                        Text("Любой")
-                            .tag(3)
-                    }
+                if sborkaViewModel.thisPurId == nil{//If watching from pur , this doesn't show
+                    Button(action:{
+                        sborkaViewModel.getHelpers(inSborka: true)
+                    }){
+                        Image(systemName : "person")
+                    }.contextMenu(ContextMenu(menuItems: {
+                        Button("Смотреть от себя"){
+                            sborkaViewModel.smotretOtSebya()
+                        }
+                    }))
                     
-                } label: {
-                    Image(systemName : "slider.vertical.3")
-                        .imageScale(.large)
+                    Menu {
+                        Picker(selection: $sborkaViewModel.menuSortIndex, label: Text("Статусы")) {
+                            Text("Не обработаны")
+                                .tag(0)
+                            Text("Нет в наличии")
+                                .tag(1)
+                            Text("Куплены")
+                                .tag(2)
+                            Text("Любой")
+                                .tag(3)
+                        }
+                        
+                    } label: {
+                        Image(systemName : "slider.vertical.3")
+                            .imageScale(.large)
+                    }
                 }
             }
         }
@@ -316,12 +317,16 @@ struct SborkaView : View {
                                 sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.status = sborkaViewModel.status
                                 sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.menuSortIndex = sborkaViewModel.menuSortIndex
                                 
+                                sborkaViewModel.pointsInSegmentsView.pointsInSborkaSegmentViewModel.thisPurId = sborkaViewModel.thisPurId
+                                
                                 sborkaViewModel.showPointsView = true
                                 
                             }
                             
                         }
                         .onLongPressGesture {
+                            
+                            guard sborkaViewModel.thisPurId == nil else {return} //If watching from pur(Мои закупки) , this doesn't work just like all the nav bar funcs (helpers , statuses...)
                             
                             sborkaViewModel.selectedByLongPressSegment = item
                             

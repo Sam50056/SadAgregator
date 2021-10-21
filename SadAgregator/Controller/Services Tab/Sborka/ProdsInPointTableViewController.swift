@@ -21,6 +21,8 @@ struct ProdsInPointView : UIViewControllerRepresentable{
     var helperId : String
     var status : String
     
+    var thisPurId : String?
+    
     class Coordinator : NSObject , ProdsInPointTableViewCoordninatorDelegate{
         
         func didChangeStatus(newStatus: Int) {
@@ -54,6 +56,8 @@ struct ProdsInPointView : UIViewControllerRepresentable{
         vc.pointId = pointId
         vc.helperId = helperId
         vc.status = status
+        
+        vc.thisPurId = thisPurId
         
         context.coordinator.delegate = vc
         vc.delegate = context.coordinator
@@ -110,10 +114,14 @@ class ProdsInPointTableViewController: UITableViewController , ProdsInPointTable
         }
     }
     
+    var thisPurId : String?
+    
     private var page = 1
     private var rowForPaggingUpdate : Int = 15
     
     private var assemblyProdsInPointDataManager = AssemblyProdsInPointDataManager()
+    
+    private var purchasesProdsInPointDataManager = PurchasesProdsInPointDataManager()
     
     private var purProds = [JSON]()
     
@@ -129,6 +137,8 @@ class ProdsInPointTableViewController: UITableViewController , ProdsInPointTable
         refreshControl!.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
         assemblyProdsInPointDataManager.delegate = self
+        
+        purchasesProdsInPointDataManager.delegate = self
         
         loadUserData()
         
@@ -148,7 +158,11 @@ extension ProdsInPointTableViewController{
         
         shouldUpdate = true
         
-        assemblyProdsInPointDataManager.getAssemblyProdsInPointData(key: key, pointId: pointId ?? "", helperId: helperId ?? "", status: status ?? "", page: page)
+        if let thisPurId = thisPurId {
+            purchasesProdsInPointDataManager.getPurchasesProdsInPointData(key: key, purSysId: thisPurId, pointId: pointId ?? "", page: page)
+        }else{
+            assemblyProdsInPointDataManager.getAssemblyProdsInPointData(key: key, pointId: pointId ?? "", helperId: helperId ?? "", status: status ?? "", page: page)
+        }
         
     }
     
@@ -812,6 +826,52 @@ extension ProdsInPointTableViewController : AssemblyProdsInPointDataManagerDeleg
     
     func didFailGettingAssemblyProdsInPointDataWithError(error: String) {
         print("Error with AssemblyProdsInPointDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - PurchasesProdsInPointDataManager
+
+extension ProdsInPointTableViewController : PurchasesProdsInPointDataManagerDelegate{
+    
+    func didGetPurchasesProdsInPointData(data: JSON) {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            if data["result"].intValue == 1{
+                
+                if self!.page == 1{
+                    self?.purProds = data["pur_prods"].arrayValue
+                }else{
+                    self?.purProds.append(contentsOf: data["pur_prods"].arrayValue)
+                }
+                
+                if self!.page == 1 && self!.purProds.isEmpty && !self!.statusChanged{
+                    
+                    let alertController = UIAlertController(title: "У пользователя не добавлены товары", message: nil, preferredStyle: .alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { _ in
+                        self?.navigationController?.popViewController(animated: true)
+                    }))
+                    
+                    self?.present(alertController, animated: true, completion: nil)
+                    
+                }
+                
+                self?.tableView.reloadData()
+                
+                self?.refreshControl!.endRefreshing()
+                
+            }else{
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingPurchasesProdsInPointDataWithError(error: String) {
+        print("Error with PurchasesProdsInPointDataManager : \(error)")
     }
     
 }

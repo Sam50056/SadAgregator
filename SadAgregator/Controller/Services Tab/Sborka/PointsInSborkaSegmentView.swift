@@ -31,36 +31,38 @@ struct PointsInSborkaSegmentView: View {
                 self.pointsInSborkaSegmentViewModel.menuSortIndex = newStatusIndex
             }, pointName: pointsInSborkaSegmentViewModel.selectedByTapPoint?.capt
                                              , pointId: pointsInSborkaSegmentViewModel.selectedByTapPoint?.pointId
-                                             , helperId: pointsInSborkaSegmentViewModel.helperID, status: pointsInSborkaSegmentViewModel.status)
+                                             , helperId: pointsInSborkaSegmentViewModel.helperID, status: pointsInSborkaSegmentViewModel.status , thisPurId: pointsInSborkaSegmentViewModel.thisPurId)
                             .navigationBarTitle(Text(pointsInSborkaSegmentViewModel.selectedByTapPoint?.capt ?? ""))
                             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    
-                    Button(action:{
-                        pointsInSborkaSegmentViewModel.getHelpers(inSborka: true)
-                    }){
-                        Image(systemName : "person")
-                    }.contextMenu(ContextMenu(menuItems: {
-                        Button("Смотреть от себя"){
-                            pointsInSborkaSegmentViewModel.smotretOtSebya()
-                        }
-                    }))
-                    
-                    Menu {
-                        Picker(selection: $pointsInSborkaSegmentViewModel.menuSortIndex, label: Text("Статусы")) {
-                            Text("Не обработаны")
-                                .tag(0)
-                            Text("Нет в наличии")
-                                .tag(1)
-                            Text("Куплены")
-                                .tag(2)
-                            Text("Любой")
-                                .tag(3)
+                    if pointsInSborkaSegmentViewModel.thisPurId == nil{
+                        Button(action:{
+                            pointsInSborkaSegmentViewModel.getHelpers(inSborka: true)
+                        }){
+                            Image(systemName : "person")
+                        }.contextMenu(ContextMenu(menuItems: {
+                            Button("Смотреть от себя"){
+                                pointsInSborkaSegmentViewModel.smotretOtSebya()
+                            }
+                        }))
+                        
+                        Menu {
+                            Picker(selection: $pointsInSborkaSegmentViewModel.menuSortIndex, label: Text("Статусы")) {
+                                Text("Не обработаны")
+                                    .tag(0)
+                                Text("Нет в наличии")
+                                    .tag(1)
+                                Text("Куплены")
+                                    .tag(2)
+                                Text("Любой")
+                                    .tag(3)
+                            }
+                            
+                        } label: {
+                            Image(systemName : "slider.vertical.3")
+                                .imageScale(.large)
                         }
                         
-                    } label: {
-                        Image(systemName : "slider.vertical.3")
-                            .imageScale(.large)
                     }
                 }
             }
@@ -164,32 +166,33 @@ struct PointsInSborkaSegmentView: View {
         })
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                
-                Button(action:{
-                    pointsInSborkaSegmentViewModel.getHelpers(inSborka: true)
-                }){
-                    Image(systemName : "person")
-                }.contextMenu(ContextMenu(menuItems: {
-                    Button("Смотреть от себя"){
-                        pointsInSborkaSegmentViewModel.smotretOtSebya()
-                    }
-                }))
-                
-                Menu {
-                    Picker(selection: $pointsInSborkaSegmentViewModel.menuSortIndex, label: Text("Статусы")) {
-                        Text("Не обработаны")
-                            .tag(0)
-                        Text("Нет в наличии")
-                            .tag(1)
-                        Text("Куплены")
-                            .tag(2)
-                        Text("Любой")
-                            .tag(3)
-                    }
+                if pointsInSborkaSegmentViewModel.thisPurId == nil{
+                    Button(action:{
+                        pointsInSborkaSegmentViewModel.getHelpers(inSborka: true)
+                    }){
+                        Image(systemName : "person")
+                    }.contextMenu(ContextMenu(menuItems: {
+                        Button("Смотреть от себя"){
+                            pointsInSborkaSegmentViewModel.smotretOtSebya()
+                        }
+                    }))
                     
-                } label: {
-                    Image(systemName : "slider.vertical.3")
-                        .imageScale(.large)
+                    Menu {
+                        Picker(selection: $pointsInSborkaSegmentViewModel.menuSortIndex, label: Text("Статусы")) {
+                            Text("Не обработаны")
+                                .tag(0)
+                            Text("Нет в наличии")
+                                .tag(1)
+                            Text("Куплены")
+                                .tag(2)
+                            Text("Любой")
+                                .tag(3)
+                        }
+                        
+                    } label: {
+                        Image(systemName : "slider.vertical.3")
+                            .imageScale(.large)
+                    }
                 }
             }
         }
@@ -263,6 +266,8 @@ struct PointsInSborkaSegmentView: View {
                         
                     }
                     .onLongPressGesture {
+                        
+                        guard pointsInSborkaSegmentViewModel.thisPurId == nil else {return}
                         
                         pointsInSborkaSegmentViewModel.selectedByLongPressPoint = item
                         

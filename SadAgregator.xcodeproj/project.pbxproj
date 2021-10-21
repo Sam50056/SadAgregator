@@ -252,6 +252,9 @@
 		22B7271325740E8C00B56249 /* LinePostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7271225740E8C00B56249 /* LinePostsPaggingDataManager.swift */; };
 		22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */; };
 		22B8E49225FCF49E002DDB73 /* FormDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B8E49125FCF49E002DDB73 /* FormDataManager.swift */; };
+		22B9E16C27208BE700985450 /* PurchasesSegmentsInPurchaseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E16B27208BE700985450 /* PurchasesSegmentsInPurchaseDataManager.swift */; };
+		22B9E16E2720A2C000985450 /* PurchasesPointsInSegmentDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E16D2720A2C000985450 /* PurchasesPointsInSegmentDataManager.swift */; };
+		22B9E1702721E22600985450 /* PurchasesProdsInPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E16F2721E22600985450 /* PurchasesProdsInPointDataManager.swift */; };
 		22BC71D2268A46A700846702 /* SborkaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC71D1268A46A700846702 /* SborkaViewModel.swift */; };
 		22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD86512597FD690052956D /* SetInputValDataManager.swift */; };
 		22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF19D725A3DDC800567DB7 /* TextLabelCollectionViewCell.swift */; };
@@ -591,6 +594,9 @@
 		22B7271225740E8C00B56249 /* LinePostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePostsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22B7271525741B1100B56249 /* PointPostsPaggingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointPostsPaggingDataManager.swift; sourceTree = "<group>"; };
 		22B8E49125FCF49E002DDB73 /* FormDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataManager.swift; sourceTree = "<group>"; };
+		22B9E16B27208BE700985450 /* PurchasesSegmentsInPurchaseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesSegmentsInPurchaseDataManager.swift; sourceTree = "<group>"; };
+		22B9E16D2720A2C000985450 /* PurchasesPointsInSegmentDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesPointsInSegmentDataManager.swift; sourceTree = "<group>"; };
+		22B9E16F2721E22600985450 /* PurchasesProdsInPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesProdsInPointDataManager.swift; sourceTree = "<group>"; };
 		22BC71D1268A46A700846702 /* SborkaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SborkaViewModel.swift; sourceTree = "<group>"; };
 		22BD86512597FD690052956D /* SetInputValDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInputValDataManager.swift; sourceTree = "<group>"; };
 		22BD86542598B4CD0052956D /* SadAgregator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SadAgregator.entitlements; sourceTree = "<group>"; };
@@ -1252,6 +1258,9 @@
 			children = (
 				226975F02700C3B0008539CF /* PurchasesFormPagingDataManager.swift */,
 				225714DA27161CCE0082D583 /* PurchasesProdsByClientByStatusDataManager.swift */,
+				22B9E16B27208BE700985450 /* PurchasesSegmentsInPurchaseDataManager.swift */,
+				22B9E16D2720A2C000985450 /* PurchasesPointsInSegmentDataManager.swift */,
+				22B9E16F2721E22600985450 /* PurchasesProdsInPointDataManager.swift */,
 			);
 			path = "My Zakupki VC";
 			sourceTree = "<group>";
@@ -2176,6 +2185,7 @@
 				2259579C259668220088C7E4 /* SimpleReqView.swift in Sources */,
 				22BF1A0A25A553EA00567DB7 /* TopPointsPaggingSearchDataManager.swift in Sources */,
 				22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */,
+				22B9E16E2720A2C000985450 /* PurchasesPointsInSegmentDataManager.swift in Sources */,
 				225714E927177FF70082D583 /* ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.swift in Sources */,
 				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
 				22CD3545269DD940009057C3 /* AssemblyAvailableStatusesDataManager.swift in Sources */,
@@ -2271,6 +2281,7 @@
 				22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */,
 				22BF19FF25A4DF0C00567DB7 /* TopLinesDataManager .swift in Sources */,
 				22703265262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift in Sources */,
+				22B9E1702721E22600985450 /* PurchasesProdsInPointDataManager.swift in Sources */,
 				2231DB71264B76950075228E /* PurchasesAddItemForYourselfDataManager.swift in Sources */,
 				22216A4425853FCC00D5248B /* RegisterDataManager.swift in Sources */,
 				22BF4DDF2676B80F00748D0B /* VendUpdateInfoDataManager.swift in Sources */,
@@ -2291,6 +2302,7 @@
 				22B7271325740E8C00B56249 /* LinePostsPaggingDataManager.swift in Sources */,
 				22BF1A1725A5FD5C00567DB7 /* PostLikeDataManager.swift in Sources */,
 				22BF4DDC2676A22C00748D0B /* VendFormDataManager.swift in Sources */,
+				22B9E16C27208BE700985450 /* PurchasesSegmentsInPurchaseDataManager.swift in Sources */,
 				22BF1A0225A540F000567DB7 /* ActivityPointsTableViewController.swift in Sources */,
 				2203F16625BFC35D007DBFFD /* EditVigruzkaViewController.swift in Sources */,
 				227828EE258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift in Sources */,
