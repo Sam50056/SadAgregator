@@ -216,9 +216,36 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
         }
         
         cell.documentImageTapped = { [weak self] i in
-            
             self?.previewImages(pur.images.map({$0.image}) , selectedImageIndex: i)
-            
+        }
+        
+        cell.documentImageRemoveButtonTapped = { [weak self] i in
+            let image = pur.images[i]
+            PurchaseActionsDeletePurDocImgDataManager().getPurchaseActionsDeletePurDocImgData(key: self!.key, purSysId: pur.purId, imgId: image.id) { data, error in
+                
+                if let error = error , data == nil {
+                    print("Error with PurchaseActionsDeletePurDocImgDataManager : \(error)")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        self?.purchases[indexPath.row].images.remove(at: i)
+                        self?.tableView.reloadData()
+                        
+                    }else{
+                        
+                        if let message = data!["msg"].string , !message.isEmpty{
+                            self?.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
         }
         
         cell.tableView.reloadData()
