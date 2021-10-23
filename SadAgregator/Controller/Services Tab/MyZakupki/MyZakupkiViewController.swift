@@ -112,6 +112,40 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
         
         cell.dateTapped = { [weak self] in
             
+            let datePickerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DatePickerVC") as! DatePickerViewController
+            
+            datePickerVC.modalPresentationStyle = .custom
+            datePickerVC.transitioningDelegate = self
+            
+            datePickerVC.dateSelected = { date in
+                
+                let dateForRequest = self!.formatDate(date, withDot: false)
+                let dateForUpdate = self!.formatDate(date, withDot: true)
+                
+                PurchasesUpdateInfoDataManager().getPurchasesUpdateInfoData(key: self!.key, purSysId: pur.purId, fieldId: "2", val: dateForRequest) { data, error in
+                 
+                    if let error = error , data == nil {
+                        print("Error with PurchasesUpdateInfoDataManager : \(error)")
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        if data!["result"].intValue == 1{
+                            
+                            self?.purchases[indexPath.row].dt = dateForUpdate
+                            self?.tableView.reloadData()
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            self?.present(datePickerVC, animated: true, completion: nil)
+            
         }
         
         cell.openTapped = { [weak self] type in
@@ -277,6 +311,14 @@ extension MyZakupkiViewController : UITextFieldDelegate{
         return string == numberFiltered
     }
     
+}
+
+//MARK: - TransitioningDelegate
+
+extension MyZakupkiViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        BottomPresentationController(presentedViewController: presented, presenting: presenting)
+    }
 }
 
 //MARK: - PurchasesFormPagingDataManagerDelegate

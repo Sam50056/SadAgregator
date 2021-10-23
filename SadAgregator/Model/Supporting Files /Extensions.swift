@@ -255,6 +255,24 @@ extension UIViewController {
     
 }
 
+//MARK: - UIViewController (funcs)
+
+extension UIViewController{
+    
+    func formatDate(_ date : Date , withDot : Bool = false) -> String{
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = withDot ? "dd.MM.yy" : "ddMMyy"
+        
+        //let date: NSDate? = dateFormatterGet.date(from: "2016-02-29 12:24:26") as NSDate?
+        let formattedDate = dateFormatterGet.string(from: date)
+        
+        return formattedDate
+        
+    }
+    
+}
+
 //MARK: - UIView
 
 extension UIView {
