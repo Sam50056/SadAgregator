@@ -79,7 +79,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
         
         if section == 0 , thisPur.capt != ""{
             return 1
-        }else if section == 1 , thisPur.countItems != "" , thisPur.countItems != "0"{
+        }else if section == 1{
             return 1
         }else if section == 2 , thisPur.countItems != "" , thisPur.countItems != "0" , !thisPur.tovarsSubItems.isEmpty , thisPur.openTovars{
             return thisPur.tovarsSubItems.count
@@ -152,7 +152,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             let itemsCount = thisPur.countItems
             
             cell.label1.text = "Товары"
-            cell.label2.text = itemsCount
+            cell.label2.text = itemsCount == "" ? "0" : itemsCount
             
             cell.label1.font = UIFont.systemFont(ofSize: 16, weight: .bold)
             cell.label2.font = UIFont.systemFont(ofSize: 16)

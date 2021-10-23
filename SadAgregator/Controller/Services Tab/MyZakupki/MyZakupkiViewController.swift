@@ -175,6 +175,8 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             
             if cellInfo == "tovars"{
                 
+                guard pur.countItems != "" , pur.countItems != "0" else {return}
+                
                 let sborkaView = SborkaView()
                 
                 sborkaView.sborkaViewModel.thisPurId = pur.purId

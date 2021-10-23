@@ -186,9 +186,9 @@ struct K {
             height += defaultCellHeight
         }
         
-        if data.countItems != "" , data.countItems != "0"{
+//        if data.countItems != ""{
             height += defaultCellHeight
-        }
+//        }
         
         if !data.money.isEmpty{
             height += defaultCellHeight
