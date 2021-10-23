@@ -170,6 +170,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
                 self?.rightSideButtonPressedForCell?("tovars")
             }
             
+            cell.rightSideButton.isEnabled = true
+            
             return cell
             
         case 2:
@@ -210,6 +212,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             cell.dropDownImageView.isHidden = true
             
+            cell.rightSideButton.isEnabled = false
+            
             return cell
             
         case 4:
@@ -225,10 +229,11 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             cell.iconImageView.image = UIImage(systemName: "dollarsign.square")
             cell.iconImageView.tintColor = .systemGray
             
-            
             cell.dropDownImageView.image = UIImage(systemName: !thisPur.openMoney ? "chevron.down" : "chevron.up")
             
             cell.dropDownImageView.isHidden = false
+            
+            cell.rightSideButton.isEnabled = false
             
             return cell
             
@@ -269,6 +274,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             cell.dropDownImageView.isHidden = true
             
+            cell.rightSideButton.isEnabled = false
+            
             return cell
             
         case 7:
@@ -298,6 +305,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             cell.dropDownImageView.isHidden = true
             
+            cell.rightSideButton.isEnabled = false
+            
             return cell
             
         case 8:
@@ -316,6 +325,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             cell.iconImageView.tintColor = .systemGray
             
             cell.dropDownImageView.isHidden = true
+            
+            cell.rightSideButton.isEnabled = false
             
             return cell
             
@@ -336,6 +347,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             cell.dropDownImageView.isHidden = true
             
+            cell.rightSideButton.isEnabled = false
+            
             return cell
             
         case 10:
@@ -351,10 +364,11 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             cell.iconImageView.image = UIImage(systemName: "doc.plaintext")
             cell.iconImageView.tintColor = .systemGray
             
-            
             cell.dropDownImageView.image = UIImage(systemName: !thisPur.openDocs ? "chevron.down" : "chevron.up")
             
             cell.dropDownImageView.isHidden = false
+            
+            cell.rightSideButton.isEnabled = false
             
             return cell
             

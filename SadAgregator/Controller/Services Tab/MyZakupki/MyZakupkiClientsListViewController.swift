@@ -127,7 +127,12 @@ extension MyZakupkiClientsListViewController : UITableViewDelegate , UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return clients.count
+        if section == 0{
+            return 1
+        }else if section == 1{
+            return clients.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
