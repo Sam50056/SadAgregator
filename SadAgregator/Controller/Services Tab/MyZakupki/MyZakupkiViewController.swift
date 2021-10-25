@@ -284,6 +284,39 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             }
         }
         
+        cell.footerPressed = { [weak self] in
+            
+            PurchaseActionsGetActionsDataManager().getPurchaseActionsGetActionsData(key: self!.key, purId: pur.purId) { data, error in
+                
+                if let error = error , data == nil {
+                    print("Error with PurchaseActionsGetActionsDataManager : \(error)")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        let actionsArray = data!["actions"].arrayValue
+                        
+                        self?.showActionsSheet(actionsArray: actionsArray) { action in
+                            
+                        }
+                        
+                    }else{
+                        
+                        if let message = data!["msg"].string , !message.isEmpty{
+                            self?.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
         cell.tableView.reloadData()
         
         return cell

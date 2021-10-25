@@ -32,6 +32,8 @@ class ZakupkaTableViewCell: UITableViewCell {
     var documentImageTapped : ((Int) -> Void)?
     var documentImageRemoveButtonTapped : ((Int) -> Void)?
     
+    var footerPressed : (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -450,6 +452,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             handlerTapped?()
         }else if section == 10{
             openTapped?(.docs)
+        }else if section == 12{
+            footerPressed?()
         }
         
     }

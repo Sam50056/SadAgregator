@@ -257,6 +257,7 @@
 		22B9E1702721E22600985450 /* PurchasesProdsInPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E16F2721E22600985450 /* PurchasesProdsInPointDataManager.swift */; };
 		22B9E1732721FE6600985450 /* PurchasesUpdateInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E1722721FE6600985450 /* PurchasesUpdateInfoDataManager.swift */; };
 		22B9E175272353BC00985450 /* PurchaseActionsDeletePurDocImgDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E174272353BC00985450 /* PurchaseActionsDeletePurDocImgDataManager.swift */; };
+		22B9E177272443F000985450 /* PurchaseActionsGetActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E176272443F000985450 /* PurchaseActionsGetActions.swift */; };
 		22BC71D2268A46A700846702 /* SborkaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC71D1268A46A700846702 /* SborkaViewModel.swift */; };
 		22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD86512597FD690052956D /* SetInputValDataManager.swift */; };
 		22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF19D725A3DDC800567DB7 /* TextLabelCollectionViewCell.swift */; };
@@ -601,6 +602,7 @@
 		22B9E16F2721E22600985450 /* PurchasesProdsInPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesProdsInPointDataManager.swift; sourceTree = "<group>"; };
 		22B9E1722721FE6600985450 /* PurchasesUpdateInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesUpdateInfoDataManager.swift; sourceTree = "<group>"; };
 		22B9E174272353BC00985450 /* PurchaseActionsDeletePurDocImgDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsDeletePurDocImgDataManager.swift; sourceTree = "<group>"; };
+		22B9E176272443F000985450 /* PurchaseActionsGetActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsGetActions.swift; sourceTree = "<group>"; };
 		22BC71D1268A46A700846702 /* SborkaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SborkaViewModel.swift; sourceTree = "<group>"; };
 		22BD86512597FD690052956D /* SetInputValDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInputValDataManager.swift; sourceTree = "<group>"; };
 		22BD86542598B4CD0052956D /* SadAgregator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SadAgregator.entitlements; sourceTree = "<group>"; };
@@ -1265,6 +1267,7 @@
 				22B9E1712721FE4C00985450 /* Sborka */,
 				22B9E1722721FE6600985450 /* PurchasesUpdateInfoDataManager.swift */,
 				22B9E174272353BC00985450 /* PurchaseActionsDeletePurDocImgDataManager.swift */,
+				22B9E176272443F000985450 /* PurchaseActionsGetActions.swift */,
 			);
 			path = "My Zakupki VC";
 			sourceTree = "<group>";
@@ -2324,6 +2327,7 @@
 				227828EE258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift in Sources */,
 				2200943D25DB26D00001F7B3 /* GetCatpageDataManager.swift in Sources */,
 				22A155E92584E43C000EAB64 /* AuthDataManager.swift in Sources */,
+				22B9E177272443F000985450 /* PurchaseActionsGetActions.swift in Sources */,
 				2226851426E17D20000ECA64 /* ClientsPayRequestsDataManager.swift in Sources */,
 				224FE2AC2609644600AE13B2 /* CreateNewClientDataManager.swift in Sources */,
 				22BF19FB25A4DA9300567DB7 /* ActivityLinesTableViewController.swift in Sources */,
