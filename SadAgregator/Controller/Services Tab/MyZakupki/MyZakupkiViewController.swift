@@ -11,7 +11,7 @@ import RealmSwift
 import SwiftUI
 
 class MyZakupkiViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView : UITableView!
     
     private let realm = try! Realm()
@@ -78,7 +78,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                 guard let value = alertController.textFields?[0].text else {return}
                 
                 PurchasesUpdateInfoDataManager().getPurchasesUpdateInfoData(key: self!.key, purSysId: pur.purId, fieldId: "1", val: value) { data, error in
-                 
+                    
                     if let error = error , data == nil {
                         print("Error with PurchasesUpdateInfoDataManager : \(error)")
                         return
@@ -123,7 +123,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                 let dateForUpdate = self!.formatDate(date, withDot: true)
                 
                 PurchasesUpdateInfoDataManager().getPurchasesUpdateInfoData(key: self!.key, purSysId: pur.purId, fieldId: "2", val: dateForRequest) { data, error in
-                 
+                    
                     if let error = error , data == nil {
                         print("Error with PurchasesUpdateInfoDataManager : \(error)")
                         return
@@ -301,6 +301,154 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                         
                         self?.showActionsSheet(actionsArray: actionsArray) { action in
                             
+                            let actionId = action["id"].stringValue
+                            
+                            if actionId == "1"{
+                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.PurFixed?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "2"{
+                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.PurUnFixed?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "3"{
+                                
+                                let alertController = UIAlertController(title: "Подбор посредника", message: nil, preferredStyle: .actionSheet)
+                                
+                                alertController.addAction(UIAlertAction(title: "По коду партнера", style: .default, handler: { _ in
+                                    
+                                    let partnerCodeAlertController = UIAlertController(title: "Код партнера", message: nil, preferredStyle: .alert)
+                                    
+                                    partnerCodeAlertController.addTextField { field in
+                                        field.placeholder = "Введите код партнера"
+                                        field.keyboardType = .numberPad
+                                    }
+                                    
+                                    partnerCodeAlertController.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
+                                        
+                                        guard let code = partnerCodeAlertController.textFields?[0].text else {return}
+                                        
+                                        PurchaseActionsCheckBrokerByCodeDataManager().getPurchaseActionsCheckBrokerByCodeData(key: self!.key, code: code) { data, error in
+                                            
+                                            DispatchQueue.main.async {
+                                                
+                                                if let error = error , data == nil {
+                                                    print("Error with PurchaseActionsCheckBrokerByCodeDataManager : \(error)")
+                                                    return
+                                                }
+                                                
+                                                if data!["result"].intValue == 1{
+                                                    
+                                                    let finalAlertController = UIAlertController(title: "Передать закупку  помощнику \"\(data!["broker_name"].stringValue)\"?", message: nil, preferredStyle: .alert)
+                                                    
+                                                    finalAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                                        
+                                                        PurchaseActionsMoveToBrokerDataManager().getPurchaseActionsMoveToBrokerData(key: self!.key, purId: pur.purId, brokerId: data!["broker_id"].stringValue) { moveToBrokerData, moveToBrokerError in
+                                                            
+                                                            DispatchQueue.main.async{
+                                                                
+                                                                if let moveToBrokerError = moveToBrokerError , moveToBrokerData == nil {
+                                                                    print("Error with PurchaseActionsCheckBrokerByCodeDataManager : \(moveToBrokerError)")
+                                                                    return
+                                                                }
+                                                                
+                                                                if moveToBrokerData!["result"].intValue == 1{
+                                                                    
+                                                                    
+                                                                    
+                                                                }
+                                                                
+                                                            }
+                                                            
+                                                        }
+                                                        
+                                                    }))
+                                                    
+                                                    finalAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                    
+                                                    self?.present(finalAlertController, animated: true, completion: nil)
+                                                    
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }))
+                                    
+                                    partnerCodeAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+                                    
+                                    self?.present(partnerCodeAlertController,animated: true , completion: nil)
+                                    
+                                }))
+                                
+                                alertController.addAction(UIAlertAction(title: "Из избранных", style: .default, handler: { _ in
+                                    
+                                    let favBrokersVC = FavoriteBrokersViewController()
+                                    
+                                    let navVC = UINavigationController(rootViewController: favBrokersVC)
+                                    
+                                    favBrokersVC.brokerSelected = { [weak self] brokerId , brokerName in
+                                        
+                                        navVC.dismiss(animated: true, completion: nil)
+                                        
+                                        let finalAlertController = UIAlertController(title: "Передать закупку помощнику \"\(brokerName)\"?", message: nil, preferredStyle: .alert)
+                                        
+                                        finalAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                            
+                                            PurchaseActionsMoveToBrokerDataManager().getPurchaseActionsMoveToBrokerData(key: self!.key, purId: pur.purId, brokerId: brokerId) { moveToBrokerData, moveToBrokerError in
+                                                
+                                                DispatchQueue.main.async{
+                                                    
+                                                    if let moveToBrokerError = moveToBrokerError , moveToBrokerData == nil {
+                                                        print("Error with PurchaseActionsCheckBrokerByCodeDataManager : \(moveToBrokerError)")
+                                                        return
+                                                    }
+                                                    
+                                                    if moveToBrokerData!["result"].intValue == 1{
+                                                        
+                                                        
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                
+                                            }
+                                            
+                                        }))
+                                        
+                                        finalAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                        
+                                        self?.present(finalAlertController, animated: true, completion: nil)
+                                        
+                                    }
+                                    
+                                    self?.present(navVC, animated: true, completion: nil)
+                                    
+                                }))
+                                
+                                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+                                
+                                self?.present(alertController , animated: true , completion: nil)
+                                
+                            }else if actionId == "5"{
+                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.RedeemYourself?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "9"{
+                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.RemoveFromBroker?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "10"{
+                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.BrokerAcceptPurchase?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "11"{
+                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.PurHandlerReject?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "14"{
+                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.PutInAssembly?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "15"{
+                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.PopFromAssembly?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "16"{
+                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.StopPur?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "18"{
+                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.RemoveFromYourself?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "25"{
+                                
+                            }
+                            
+                            //...........
+                            
                         }
                         
                     }else{
@@ -326,8 +474,9 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let pur = purchases[indexPath.row]
-    
+        
         return K.makeHeightForZakupkaCell(data: pur)
+        
     }
     
 }
@@ -403,7 +552,7 @@ extension MyZakupkiViewController : PurchasesFormPagingDataManagerDelegate{
                     newPurs.append(pur)
                     
                 }
-            
+                
                 self?.purchases.append(contentsOf: newPurs)
                 
                 self?.tableView.reloadData()

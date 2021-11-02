@@ -258,6 +258,9 @@
 		22B9E1732721FE6600985450 /* PurchasesUpdateInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E1722721FE6600985450 /* PurchasesUpdateInfoDataManager.swift */; };
 		22B9E175272353BC00985450 /* PurchaseActionsDeletePurDocImgDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E174272353BC00985450 /* PurchaseActionsDeletePurDocImgDataManager.swift */; };
 		22B9E177272443F000985450 /* PurchaseActionsGetActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E176272443F000985450 /* PurchaseActionsGetActions.swift */; };
+		22B9E179272704C400985450 /* NoAnswerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E178272704C400985450 /* NoAnswerDataManager.swift */; };
+		22B9E17B2731549A00985450 /* PurchaseActionsCheckBrokerByCodeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E17A2731549A00985450 /* PurchaseActionsCheckBrokerByCodeDataManager.swift */; };
+		22B9E17D2731D0B500985450 /* PurchaseActionsMoveToBrokerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B9E17C2731D0B400985450 /* PurchaseActionsMoveToBrokerDataManager.swift */; };
 		22BC71D2268A46A700846702 /* SborkaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC71D1268A46A700846702 /* SborkaViewModel.swift */; };
 		22BD86522597FD6A0052956D /* SetInputValDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BD86512597FD690052956D /* SetInputValDataManager.swift */; };
 		22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF19D725A3DDC800567DB7 /* TextLabelCollectionViewCell.swift */; };
@@ -603,6 +606,9 @@
 		22B9E1722721FE6600985450 /* PurchasesUpdateInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesUpdateInfoDataManager.swift; sourceTree = "<group>"; };
 		22B9E174272353BC00985450 /* PurchaseActionsDeletePurDocImgDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsDeletePurDocImgDataManager.swift; sourceTree = "<group>"; };
 		22B9E176272443F000985450 /* PurchaseActionsGetActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsGetActions.swift; sourceTree = "<group>"; };
+		22B9E178272704C400985450 /* NoAnswerDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAnswerDataManager.swift; sourceTree = "<group>"; };
+		22B9E17A2731549A00985450 /* PurchaseActionsCheckBrokerByCodeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsCheckBrokerByCodeDataManager.swift; sourceTree = "<group>"; };
+		22B9E17C2731D0B400985450 /* PurchaseActionsMoveToBrokerDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsMoveToBrokerDataManager.swift; sourceTree = "<group>"; };
 		22BC71D1268A46A700846702 /* SborkaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SborkaViewModel.swift; sourceTree = "<group>"; };
 		22BD86512597FD690052956D /* SetInputValDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInputValDataManager.swift; sourceTree = "<group>"; };
 		22BD86542598B4CD0052956D /* SadAgregator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SadAgregator.entitlements; sourceTree = "<group>"; };
@@ -1268,6 +1274,8 @@
 				22B9E1722721FE6600985450 /* PurchasesUpdateInfoDataManager.swift */,
 				22B9E174272353BC00985450 /* PurchaseActionsDeletePurDocImgDataManager.swift */,
 				22B9E176272443F000985450 /* PurchaseActionsGetActions.swift */,
+				22B9E17A2731549A00985450 /* PurchaseActionsCheckBrokerByCodeDataManager.swift */,
+				22B9E17C2731D0B400985450 /* PurchaseActionsMoveToBrokerDataManager.swift */,
 			);
 			path = "My Zakupki VC";
 			sourceTree = "<group>";
@@ -1409,6 +1417,7 @@
 				228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */,
 				22D60981255D41F000FC622B /* MessageReadedDataManager.swift */,
 				228D2D3A25AC9DED000E9FAE /* UpdateDeviceDataManager.swift */,
+				22B9E178272704C400985450 /* NoAnswerDataManager.swift */,
 			);
 			path = "General Managers";
 			sourceTree = "<group>";
@@ -2160,6 +2169,7 @@
 				22692E3A26B9543D00CA2946 /* BrokerCardViewController.swift in Sources */,
 				22328CE025FE86E100C51CC9 /* PaymentTableViewCellTableViewCell.swift in Sources */,
 				22B26526267D7114004342E3 /* BrokersBrokerHelperCheckDataManager.swift in Sources */,
+				22B9E179272704C400985450 /* NoAnswerDataManager.swift in Sources */,
 				228289C426519B0D00E3AA83 /* PhotoSavedDataManager.swift in Sources */,
 				220C95AD26E15DAD00795DD4 /* BalanceRequestTableViewCellTableViewCell.swift in Sources */,
 				2278290A258BB60E00B435FA /* GetMyReviewDataManager.swift in Sources */,
@@ -2283,6 +2293,7 @@
 				22D9D13326F6614C005BD254 /* ZakupkaTableViewCell.swift in Sources */,
 				222B08C0269790D300AC062F /* AssemblyGetHelpersDataManager.swift in Sources */,
 				22B26522267D61EA004342E3 /* BrokersDelZonePriceDataManager.swift in Sources */,
+				22B9E17B2731549A00985450 /* PurchaseActionsCheckBrokerByCodeDataManager.swift in Sources */,
 				22B9E175272353BC00985450 /* PurchaseActionsDeletePurDocImgDataManager.swift in Sources */,
 				22A4A9CE2699CDE1000D3B73 /* AssemblyGetHelpersInAssemblyDataManager.swift in Sources */,
 				22582C7F25D20170005E341C /* SignInWIthAppleIdDataManager.swift in Sources */,
@@ -2376,6 +2387,7 @@
 				22D1322626A5AD4300D0BB38 /* AssemblySellThisPointDataManager.swift in Sources */,
 				2263155E26BC8D4100920F8D /* BrokersBalanceAddRequestDataManager.swift in Sources */,
 				2293B66526A79C9C00022FAC /* PurchasesGetItemCommentsDataManager.swift in Sources */,
+				22B9E17D2731D0B500985450 /* PurchaseActionsMoveToBrokerDataManager.swift in Sources */,
 				220C95A826E159C600795DD4 /* BalanceRequestTableViewCell.swift in Sources */,
 				22328CD925FE857800C51CC9 /* PaymentTableViewCell.swift in Sources */,
 				22DD116E26CBEB3A00E8494C /* RatingTableViewCell.swift in Sources */,

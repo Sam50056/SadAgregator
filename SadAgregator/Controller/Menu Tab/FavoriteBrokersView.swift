@@ -45,6 +45,8 @@ class FavoriteBrokersViewController : UITableViewController {
     
     var brokersData : JSON?
     
+    var brokerSelected : ((String , String) -> Void)?
+    
     override func viewDidLoad() {
         
         loadUserData()
@@ -65,6 +67,13 @@ class FavoriteBrokersViewController : UITableViewController {
         
         refresh(self)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if brokerSelected != nil{
+            navigationItem.title = "Избранные посредники"
+        }
     }
     
     //MARK: - Refresh func
@@ -219,13 +228,19 @@ class FavoriteBrokersViewController : UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let brokerCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BrokerCardVC") as! BrokerCardViewController
-        
-        let selectedBrokerId = brokersArray[indexPath.row]["id"].string
-        
-        brokerCardVC.thisBrokerId = selectedBrokerId
-        
-        navigationController?.pushViewController(brokerCardVC, animated: true)
+        if let brokerSelected = brokerSelected {
+            brokerSelected(brokersArray[indexPath.row]["id"].stringValue , brokersArray[indexPath.row]["name"].stringValue)
+        }else{
+            
+            let brokerCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BrokerCardVC") as! BrokerCardViewController
+            
+            let selectedBrokerId = brokersArray[indexPath.row]["id"].string
+            
+            brokerCardVC.thisBrokerId = selectedBrokerId
+            
+            navigationController?.pushViewController(brokerCardVC, animated: true)
+            
+        }
         
     }
     
