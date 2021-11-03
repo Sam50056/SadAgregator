@@ -286,18 +286,18 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
         
         cell.footerPressed = { [weak self] in
             
-            PurchaseActionsGetActionsDataManager().getPurchaseActionsGetActionsData(key: self!.key, purId: pur.purId) { data, error in
+            PurchaseActionsGetActionsDataManager().getPurchaseActionsGetActionsData(key: self!.key, purId: pur.purId) { actionsData, actionsError in
                 
-                if let error = error , data == nil {
+                if let error = actionsError , actionsData == nil {
                     print("Error with PurchaseActionsGetActionsDataManager : \(error)")
                     return
                 }
                 
                 DispatchQueue.main.async {
                     
-                    if data!["result"].intValue == 1{
+                    if actionsData!["result"].intValue == 1{
                         
-                        let actionsArray = data!["actions"].arrayValue
+                        let actionsArray = actionsData!["actions"].arrayValue
                         
                         self?.showActionsSheet(actionsArray: actionsArray) { action in
                             
@@ -427,8 +427,86 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 
                                 self?.present(alertController , animated: true , completion: nil)
                                 
+                            }else if actionId == "4"{
+                                
+                                let confirmAlertController = UIAlertController(title: "Подтвердите действие", message: "Передать закупку поставщику?", preferredStyle: .alert)
+                                
+                                confirmAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                    
+                                    PurchaseActionsToSupplierDataManager().getPurchaseActionsToSupplierData(key: self!.key, purId: pur.purId) { data, error in
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            if let error = error , data == nil {
+                                                print("Error with PurchaseActionsToSupplierDataManager : \(error)")
+                                                return
+                                            }
+                                            
+                                            if data!["result"].intValue == 1{
+                                                
+                                                let alertController = UIAlertController(title: "Оставить поставщику комментарий по закупке?", message: nil, preferredStyle: .alert)
+                                                
+                                                alertController.addAction(UIAlertAction(title: "Да", style: .default , handler: { _ in
+                                                    
+                                                    let commentController = UIAlertController(title: "Комментарий по закупке", message: nil, preferredStyle: .alert)
+                                                    
+                                                    commentController.addTextField { field in
+                                                        field.placeholder = "Ваш комментарий"
+                                                    }
+                                                    
+                                                    commentController.addAction(UIAlertAction(title: "Отправить", style: .default, handler: { _ in
+                                                        
+                                                        guard let comment = commentController.textFields?[0].text else {return}
+                                                        
+                                                        PurchaseActionsSetForSupplierCommentDataManager().getPurchaseActionsSetForSupplierCommentData(key: self!.key, purSysId: pur.purId, comment: comment) { commentData, commentError in
+                                                            
+                                                            DispatchQueue.main.async {
+                                                                
+                                                                if let commentError = commentError , commentData == nil{
+                                                                    print("Error with PurchaseActionsSetForSupplierCommentDataManager : \(commentError)")
+                                                                    return
+                                                                }
+                                                                
+                                                                if commentData!["result"].intValue == 1{
+                                                                    
+                                                                    
+                                                                    
+                                                                }
+                                                                
+                                                            }
+                                                            
+                                                        }
+                                                        
+                                                    }))
+                                                    
+                                                    commentController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                    
+                                                    self?.present(commentController, animated: true, completion: nil)
+                                                    
+                                                }))
+                                                
+                                                alertController.addAction(UIAlertAction(title: "Отмена", style: .default, handler: nil))
+                                                
+                                                self?.present(alertController, animated: true, completion: nil)
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }))
+                                
+                                confirmAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                
+                                self?.present(confirmAlertController, animated: true, completion: nil)
+                                
                             }else if actionId == "5"{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.RedeemYourself?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "6"{
+                                
+                                
+                                
                             }else if actionId == "9"{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.RemoveFromBroker?AKey=\(self!.key)&APurID=\(pur.purId)"))
                             }else if actionId == "10"{
@@ -453,7 +531,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                         
                     }else{
                         
-                        if let message = data!["msg"].string , !message.isEmpty{
+                        if let message = actionsData!["msg"].string , !message.isEmpty{
                             self?.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
                         }
                         
