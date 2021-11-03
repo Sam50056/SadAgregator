@@ -161,6 +161,7 @@
 		227ADAAA25892D8E009B32EC /* ReviewUpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */; };
 		227B62FC2733135E00687BEB /* PurchaseActionsToSupplierDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B62FB2733135E00687BEB /* PurchaseActionsToSupplierDataManager.swift */; };
 		227B62FE27331E3700687BEB /* PurchaseActionsSetForSupplierCommentDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B62FD27331E3700687BEB /* PurchaseActionsSetForSupplierCommentDataManager.swift */; };
+		227B630027332ECE00687BEB /* PurchaseActionsDeletePurchaseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B62FF27332ECE00687BEB /* PurchaseActionsDeletePurchaseDataManager.swift */; };
 		228004A42645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228004A32645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift */; };
 		228289C426519B0D00E3AA83 /* PhotoSavedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228289C326519B0D00E3AA83 /* PhotoSavedDataManager.swift */; };
 		2284EAD625BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284EAD525BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift */; };
@@ -509,6 +510,7 @@
 		227ADAA925892D8E009B32EC /* ReviewUpdateDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUpdateDataManager.swift; sourceTree = "<group>"; };
 		227B62FB2733135E00687BEB /* PurchaseActionsToSupplierDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsToSupplierDataManager.swift; sourceTree = "<group>"; };
 		227B62FD27331E3700687BEB /* PurchaseActionsSetForSupplierCommentDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsSetForSupplierCommentDataManager.swift; sourceTree = "<group>"; };
+		227B62FF27332ECE00687BEB /* PurchaseActionsDeletePurchaseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsDeletePurchaseDataManager.swift; sourceTree = "<group>"; };
 		228004A32645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesZonesPriceDataManager.swift; sourceTree = "<group>"; };
 		228289C326519B0D00E3AA83 /* PhotoSavedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSavedDataManager.swift; sourceTree = "<group>"; };
 		2284EAD525BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignOKToAppIDDataManager.swift; sourceTree = "<group>"; };
@@ -1350,6 +1352,7 @@
 				22B9E17C2731D0B400985450 /* PurchaseActionsMoveToBrokerDataManager.swift */,
 				227B62FB2733135E00687BEB /* PurchaseActionsToSupplierDataManager.swift */,
 				227B62FD27331E3700687BEB /* PurchaseActionsSetForSupplierCommentDataManager.swift */,
+				227B62FF27332ECE00687BEB /* PurchaseActionsDeletePurchaseDataManager.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -2352,6 +2355,7 @@
 				22BF1A0225A540F000567DB7 /* ActivityPointsTableViewController.swift in Sources */,
 				2203F16625BFC35D007DBFFD /* EditVigruzkaViewController.swift in Sources */,
 				227828EE258ABF4A00B435FA /* NewPhotoPlaceDataManager.swift in Sources */,
+				227B630027332ECE00687BEB /* PurchaseActionsDeletePurchaseDataManager.swift in Sources */,
 				2200943D25DB26D00001F7B3 /* GetCatpageDataManager.swift in Sources */,
 				22A155E92584E43C000EAB64 /* AuthDataManager.swift in Sources */,
 				22B9E177272443F000985450 /* PurchaseActionsGetActions.swift in Sources */,

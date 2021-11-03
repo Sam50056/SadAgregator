@@ -505,7 +505,59 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.RedeemYourself?AKey=\(self!.key)&APurID=\(pur.purId)"))
                             }else if actionId == "6"{
                                 
+                                let alertController = UIAlertController(title: "Подтвердите действие", message: "Удалить закупку? Операция необратима", preferredStyle: .alert)
                                 
+                                alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                    
+                                    PurchaseActionsDeletePurchaseDataManager().getPurchaseActionsDeletePurchaseData(key: self!.key, purId: pur.purId, force: "0") { data, error in
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            if let error = error , data == nil{
+                                                print("Error with PurchaseActionsDeletePurchaseDataManager : \(error)")
+                                                return
+                                            }
+                                            
+                                            if data!["result"].intValue == 1{
+                                                
+                                                
+                                                
+                                            }else{
+                                                
+                                                if let errorMessage = data!["msg"].string , !errorMessage.isEmpty{
+                                                    
+                                                    let errorAlertController = UIAlertController(title: errorMessage, message: nil, preferredStyle: .alert)
+                                                    
+                                                    errorAlertController.addAction(UIAlertAction(title: "Всё равно удалить", style: .default, handler: { _ in
+                                                        
+                                                        PurchaseActionsDeletePurchaseDataManager().getPurchaseActionsDeletePurchaseData(key: self!.key, purId: pur.purId, force: "1") { secondData, secondError in
+                                                            
+                                                            if let secondError = secondError {
+                                                                print("Error with PurchaseActionsDeletePurchaseDataManager: \(secondError)")
+                                                                return
+                                                            }
+                                                            
+                                                        }
+                                                        
+                                                    }))
+                                                    
+                                                    errorAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                    
+                                                    self?.present(errorAlertController, animated: true, completion: nil)
+                                                    
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }))
+                                
+                                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                
+                                self?.present(alertController, animated: true, completion: nil)
                                 
                             }else if actionId == "9"{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.RemoveFromBroker?AKey=\(self!.key)&APurID=\(pur.purId)"))
