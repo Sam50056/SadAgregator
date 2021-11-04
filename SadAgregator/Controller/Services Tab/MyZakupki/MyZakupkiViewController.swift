@@ -643,6 +643,92 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.BrokerAcceptPurchase?AKey=\(self!.key)&APurID=\(pur.purId)"))
                             }else if actionId == "11"{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.PurHandlerReject?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "12"{
+                                
+                                let summAlertController = UIAlertController(title: "Какую сумму оплатил клиент?", message: nil, preferredStyle: .alert)
+                                
+                                summAlertController.addTextField { field in
+                                    field.keyboardType = .numberPad
+                                }
+                                
+                                summAlertController.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
+                                    
+                                    guard let summ = summAlertController.textFields?[0].text else {return}
+                                    
+                                    
+                                    
+                                }))
+                                
+                                summAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                
+                                self?.present(summAlertController, animated: true, completion: nil)
+                                
+                            }else if actionId == "13"{
+                                
+                                let confirmAlertController = UIAlertController(title: "Подтвердите действие", message: "Начать обработку закупки?", preferredStyle: .alert)
+                                
+                                confirmAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                    
+                                    PurchaseActionsStartPurProcessingDataManager().getPurchaseActionsStartPurProcessingData(key: self!.key, purId: pur.purId, force: "0") { firstData, firstError in
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            if let firstError = firstError , firstData == nil{
+                                                print("Error with PurchaseActionsStartPurProcessingDataManager : \(firstError)")
+                                                return
+                                            }
+                                            
+                                            if firstData!["result"].intValue == 1{
+                                                
+                                                
+                                                
+                                            }else{
+                                                
+                                                if let errorMessage = firstData!["msg"].string , !errorMessage.isEmpty{
+                                                    
+                                                    let errorAlertController = UIAlertController(title: errorMessage, message: nil, preferredStyle: .alert)
+                                                    
+                                                    errorAlertController.addAction(UIAlertAction(title: "Взять в обработку", style: .default, handler: { _ in
+                                                        
+                                                        PurchaseActionsStartPurProcessingDataManager().getPurchaseActionsStartPurProcessingData(key: self!.key, purId: pur.purId, force: "1") { secondData, secondError in
+                                                            
+                                                            DispatchQueue.main.async {
+                                                                
+                                                                if let secondError = secondError , secondData == nil{
+                                                                    print("Error with PurchaseActionsStartPurProcessingDataManager : \(secondError)")
+                                                                    return
+                                                                }
+                                                                
+                                                                if secondData!["result"].intValue == 1{
+                                                                    
+                                                                    
+                                                                    
+                                                                }
+                                                                
+                                                            }
+                                                            
+                                                        }
+                                                        
+                                                    }))
+                                                    
+                                                    errorAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                    
+                                                    self?.present(errorAlertController, animated: true, completion: nil)
+                                                    
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }))
+                                
+                                confirmAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                
+                                self?.present(confirmAlertController, animated: true, completion: nil)
+                                
                             }else if actionId == "14"{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.PutInAssembly?AKey=\(self!.key)&APurID=\(pur.purId)"))
                             }else if actionId == "15"{

@@ -1,20 +1,20 @@
 //
-//  PurchaseActionsaCombinePurchasesDataManager.swift
+//  PurchaseActionsStartPurProcessingDataManager.swift
 //  SadAgregator
 //
-//  Created by Sam Yerznkyan on 04.11.2021.
+//  Created by Sam Yerznkyan on 05.11.2021.
 //
 
 import Foundation
 import SwiftyJSON
 
-struct PurchaseActionsaCombinePurchasesDataManager{
-
-    func getPurchaseActionsaCombinePurchasesData(key : String , mainPurId : String , subPurId : String , completionHandler: @escaping (JSON?, String?) -> Void){
+struct PurchaseActionsStartPurProcessingDataManager {
+    
+    func getPurchaseActionsStartPurProcessingData(key : String , purId : String , force : String , completionHandler: @escaping (JSON?, String?) -> Void){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_purchase_actions.CombinePurchases?AKey=\(key)&AMainPurID=\(mainPurId)&ASubPurID=\(subPurId)"
+        let urlString = "https://agrapi.tk-sad.ru/agr_purchase_actions.StartPurProcessing?Akey=\(key)&APurID=\(purId)&AForce=\(force)"
         
-        print("URLString for PurchaseActionsaCombinePurchasesDataManager : \(urlString)")
+        print("URLString for PurchaseActionsStartPurProcessingDataManager : \(urlString)")
         
         guard let encodedURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: encodedURL)  else {return}
         
