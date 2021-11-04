@@ -559,6 +559,84 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 
                                 self?.present(alertController, animated: true, completion: nil)
                                 
+                            }else if actionId == "8"{
+                                
+                                let confirmAlertController = UIAlertController(title: "Подтвердите действие?", message: "Обьеденить закупки?", preferredStyle: .alert)
+                                
+                                confirmAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                    
+                                    PurchaseActionsMergeablePurchasesDataManager().getPurchaseActionsMergeablePurchasesData(key: self!.key, purId: pur.purId) { mergeListData, mergeListError in
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            if let mergeListError = mergeListError , mergeListData == nil{
+                                                print("Error with PurchaseActionsMergeablePurchasesDataManager : \(mergeListError)")
+                                                return
+                                            }
+                                            
+                                            if mergeListData!["result"].intValue == 1{
+                                                
+                                                let simpleDataVC = SimpleDataTableViewController()
+                                                
+                                                let navVC = UINavigationController(rootViewController: simpleDataVC)
+                                                
+                                                simpleDataVC.array = mergeListData!["purs"].arrayValue.map({ mergeListJsonPur in
+                                                    mergeListJsonPur["capt"].stringValue
+                                                })
+                                                
+                                                simpleDataVC.navBarTitle = "Выбрать закупку"
+                                                
+                                                simpleDataVC.shouldShowNavBarButtons = true
+                                                
+                                                simpleDataVC.tableViewItemSelected = { index in
+                                                    
+                                                    navVC.dismiss(animated: true, completion: nil)
+                                                    
+                                                    let connectController = UIAlertController(title: "Соединить закупки \(mergeListData!["cur_pur_name"].stringValue) и \( mergeListData!["purs"].arrayValue[index]["capt"].stringValue)?", message: nil, preferredStyle: .alert)
+                                                    
+                                                    connectController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                                        
+                                                        PurchaseActionsaCombinePurchasesDataManager().getPurchaseActionsaCombinePurchasesData(key: self!.key, mainPurId: pur.purId, subPurId: mergeListData!["purs"].arrayValue[index]["id"].stringValue) { finalData, finalError in
+                                                            
+                                                            DispatchQueue.main.async {
+                                                                
+                                                                if let finalError = finalError , finalData == nil{
+                                                                    print("Error with PurchaseActionsaCombinePurchasesDataManager : \(finalError)")
+                                                                    return
+                                                                }
+                                                                
+                                                                if finalData!["result"].intValue == 1{
+                                                                    
+                                                                    
+                                                                    
+                                                                }
+                                                                
+                                                            }
+                                                            
+                                                        }
+                                                        
+                                                    }))
+                                                    
+                                                    connectController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                    
+                                                    self?.present(connectController, animated: true, completion: nil)
+                                                    
+                                                }
+                                                
+                                                self?.present(navVC, animated: true, completion: nil)
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }))
+                                
+                                confirmAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                
+                                self?.present(confirmAlertController, animated: true, completion: nil)
+                                
                             }else if actionId == "9"{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.RemoveFromBroker?AKey=\(self!.key)&APurID=\(pur.purId)"))
                             }else if actionId == "10"{

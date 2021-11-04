@@ -162,6 +162,9 @@
 		227B62FC2733135E00687BEB /* PurchaseActionsToSupplierDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B62FB2733135E00687BEB /* PurchaseActionsToSupplierDataManager.swift */; };
 		227B62FE27331E3700687BEB /* PurchaseActionsSetForSupplierCommentDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B62FD27331E3700687BEB /* PurchaseActionsSetForSupplierCommentDataManager.swift */; };
 		227B630027332ECE00687BEB /* PurchaseActionsDeletePurchaseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B62FF27332ECE00687BEB /* PurchaseActionsDeletePurchaseDataManager.swift */; };
+		227B6302273410C000687BEB /* SimpleDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B6301273410C000687BEB /* SimpleDataTableViewController.swift */; };
+		227B630427345CD200687BEB /* PurchaseActionsMergeablePurchasesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B630327345CD200687BEB /* PurchaseActionsMergeablePurchasesDataManager.swift */; };
+		227B630627346FB600687BEB /* PurchaseActionsaCombinePurchasesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B630527346FB600687BEB /* PurchaseActionsaCombinePurchasesDataManager.swift */; };
 		228004A42645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228004A32645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift */; };
 		228289C426519B0D00E3AA83 /* PhotoSavedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228289C326519B0D00E3AA83 /* PhotoSavedDataManager.swift */; };
 		2284EAD625BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284EAD525BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift */; };
@@ -511,6 +514,9 @@
 		227B62FB2733135E00687BEB /* PurchaseActionsToSupplierDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsToSupplierDataManager.swift; sourceTree = "<group>"; };
 		227B62FD27331E3700687BEB /* PurchaseActionsSetForSupplierCommentDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsSetForSupplierCommentDataManager.swift; sourceTree = "<group>"; };
 		227B62FF27332ECE00687BEB /* PurchaseActionsDeletePurchaseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsDeletePurchaseDataManager.swift; sourceTree = "<group>"; };
+		227B6301273410C000687BEB /* SimpleDataTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDataTableViewController.swift; sourceTree = "<group>"; };
+		227B630327345CD200687BEB /* PurchaseActionsMergeablePurchasesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsMergeablePurchasesDataManager.swift; sourceTree = "<group>"; };
+		227B630527346FB600687BEB /* PurchaseActionsaCombinePurchasesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsaCombinePurchasesDataManager.swift; sourceTree = "<group>"; };
 		228004A32645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesZonesPriceDataManager.swift; sourceTree = "<group>"; };
 		228289C326519B0D00E3AA83 /* PhotoSavedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSavedDataManager.swift; sourceTree = "<group>"; };
 		2284EAD525BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignOKToAppIDDataManager.swift; sourceTree = "<group>"; };
@@ -1246,6 +1252,7 @@
 				22CADF4925CCE7EE001C4F31 /* NewVersionViewController.swift */,
 				229CCABF26E7EC24000398E3 /* OneTovarViewController.swift */,
 				22692E3526B8CDDB00CA2946 /* DobavlenieVZakupku */,
+				227B6301273410C000687BEB /* SimpleDataTableViewController.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -1353,6 +1360,8 @@
 				227B62FB2733135E00687BEB /* PurchaseActionsToSupplierDataManager.swift */,
 				227B62FD27331E3700687BEB /* PurchaseActionsSetForSupplierCommentDataManager.swift */,
 				227B62FF27332ECE00687BEB /* PurchaseActionsDeletePurchaseDataManager.swift */,
+				227B630327345CD200687BEB /* PurchaseActionsMergeablePurchasesDataManager.swift */,
+				227B630527346FB600687BEB /* PurchaseActionsaCombinePurchasesDataManager.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -2171,6 +2180,7 @@
 				2226851626E18F35000ECA64 /* ClientsSetPayRequestStatusDataManager.swift in Sources */,
 				225714D4271206090082D583 /* ClientsCliensListByPurchaseDataManager.swift in Sources */,
 				22B26528267D77BA004342E3 /* BrokersAddBrokerHelperDataManager.swift in Sources */,
+				227B6302273410C000687BEB /* SimpleDataTableViewController.swift in Sources */,
 				225C6CAD25FCBF5700CC621E /* ClientDataManager.swift in Sources */,
 				222B08C22698831400AC062F /* AssemblyMoveToHelperDataManager.swift in Sources */,
 				22B41BA926486A5600F7DC30 /* PurchasesDelZonePriceDataManager.swift in Sources */,
@@ -2321,6 +2331,7 @@
 				2293B66726A7A3DD00022FAC /* PurchasesAddItemCommentDataManager.swift in Sources */,
 				22423EA025924BD70097C9E6 /* UserChangeOptionDataManager.swift in Sources */,
 				220704702689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift in Sources */,
+				227B630627346FB600687BEB /* PurchaseActionsaCombinePurchasesDataManager.swift in Sources */,
 				22328CEC25FE888500C51CC9 /* PaymentTableViewCellEditTableViewCell.swift in Sources */,
 				2298DECB26111F2B002FA2A2 /* PaymentFilterViewController.swift in Sources */,
 				22729F61262F017200C19EF3 /* PurchasesProdsByClientDataManager.swift in Sources */,
@@ -2444,6 +2455,7 @@
 				228CB75F255BF96D002B4A96 /* SceneDelegate.swift in Sources */,
 				2201673125A8BADD0072BFE7 /* SendFileDataManager.swift in Sources */,
 				224D273D2613AED200BFAE30 /* RangeSlider.swift in Sources */,
+				227B630427345CD200687BEB /* PurchaseActionsMergeablePurchasesDataManager.swift in Sources */,
 				2201673C25A952040072BFE7 /* SearchImageDataManager.swift in Sources */,
 				22A0534E256BCE350016B40A /* ActivityPointDataManager.swift in Sources */,
 				2222676F2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift in Sources */,
