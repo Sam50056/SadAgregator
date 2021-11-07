@@ -735,6 +735,41 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.PopFromAssembly?AKey=\(self!.key)&APurID=\(pur.purId)"))
                             }else if actionId == "16"{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.StopPur?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "17"{
+                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.RemoveFromSupplier?Akey=\(self!.key)&APurID=\(pur.purId)&AForce=0")) { removeData, removeError  in
+                                    
+                                    DispatchQueue.main.async {
+                                        
+                                        if let removeError = removeError , removeData == nil {
+                                            print("Error with RemoveFromSupplier : \(removeError)")
+                                            return
+                                        }
+                                        
+                                        if removeData!["error"].intValue == 1{
+                                            
+                                        }else{
+                                            
+                                            if let removeDataErrorMessage = removeData!["msg"].string , !removeDataErrorMessage.isEmpty{
+                                                
+                                                let alertController = UIAlertController(title: removeDataErrorMessage, message: nil, preferredStyle: .alert)
+                                                
+                                                alertController.addAction(UIAlertAction(title: "Всё равно забрать", style: .default, handler: { _ in
+                                                    
+                                                    NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.RemoveFromSupplier?Akey=\(self!.key)&APurID=\(pur.purId)&AForce=1"))
+                                                    
+                                                }))
+                                                
+                                                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                
+                                                self?.present(alertController, animated: true, completion: nil)
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
                             }else if actionId == "18"{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.RemoveFromYourself?AKey=\(self!.key)&APurID=\(pur.purId)"))
                             }else if actionId == "25"{

@@ -10,13 +10,30 @@ import SwiftyJSON
 
 struct NoAnswerDataManager {
     
-    func sendNoAnswerDataRequest(url : URL?){
+    func sendNoAnswerDataRequest(url : URL? , completionHandler: ((JSON?, String?) -> Void)? = nil){
         
         guard let url = url else {return}
         
         print("NoAnswerDataManager Request with URL : \(url)")
         
-        URLSession(configuration: .default).dataTask(with: url).resume()
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            //            print(String(data: data!, encoding: String.Encoding.windowsCP1251)!)
+            
+            if error != nil {
+                completionHandler?(nil , error!.localizedDescription)
+                return
+            }
+            
+            guard let data = data else {completionHandler?(nil , "Data is empty");  return}
+            
+            let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+            
+            let jsonAnswer = JSON(parseJSON: json)
+            
+            completionHandler?(jsonAnswer , nil)
+            
+        }.resume()
         
     }
     
