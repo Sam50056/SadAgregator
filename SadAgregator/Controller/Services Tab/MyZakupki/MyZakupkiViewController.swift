@@ -558,6 +558,48 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
                                 
                                 self?.present(alertController, animated: true, completion: nil)
+                            
+                            }else if actionId == "7"{
+                                
+                                let confirmAlertController = UIAlertController(title: "Подтвердите действие", message: "Разбить закупку по поставщикам", preferredStyle: .alert)
+                                
+                                confirmAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                    
+                                    NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.PurVendCount?AKey=\(self!.key)&APurID=\(pur.purId)")) { purVendCountData, purVendCountError in
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            if let purVendCountError = purVendCountError , purVendCountData == nil{
+                                                print("Error with PurVendCount : \(purVendCountError)")
+                                                return
+                                            }
+                                            
+                                            if purVendCountData!["result"].intValue == 1{
+                                                
+                                                let infoAlertController = UIAlertController(title: "Закупка будет разбита по поставщикам", message: "Будет создано \(purVendCountData!["cnt"].stringValue) шт закупок, продолжить? Операция необратима", preferredStyle: .alert)
+                                                
+                                                infoAlertController.addAction(UIAlertAction(title: "Продолжить", style: .default
+                                                                                            , handler: { _ in
+                                                    
+                                                    NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.BreakBySupply?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                                                    
+                                                }))
+                                                
+                                                infoAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                
+                                                self?.present(infoAlertController, animated: true, completion: nil)
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }))
+                                
+                                confirmAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                
+                                self?.present(confirmAlertController, animated: true, completion: nil)
                                 
                             }else if actionId == "8"{
                                 
@@ -772,6 +814,63 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 }
                             }else if actionId == "18"{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.RemoveFromYourself?AKey=\(self!.key)&APurID=\(pur.purId)"))
+                            }else if actionId == "19"{
+                                
+                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.ToSupplierDropCheck?Akey=\(self!.key)&APurID=\(pur.purId)")) { toSupData, toSupError in
+                                    
+                                    DispatchQueue.main.async {
+                                        
+                                        if let toSupError = toSupError , toSupData == nil{
+                                            print("Error with : \(toSupError)")
+                                            return
+                                        }
+                                        
+                                        if toSupData!["result"].intValue == 1{
+                                            
+                                            if let errorMessage = toSupData!["msg"].string , !errorMessage.isEmpty{
+                                                
+                                                let errorAlertController = UIAlertController(title: errorMessage, message: nil, preferredStyle: .alert)
+                                                
+                                                errorAlertController.addAction(UIAlertAction(title: "Ок", style: .cancel, handler: nil))
+                                                
+                                                errorAlertController.addAction(UIAlertAction(title: "Показать", style: .default, handler: { _ in
+                                                    
+                                                    let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
+                                                    clientVC.thisClientId = toSupData!["client_id"].stringValue
+                                                    self?.navigationController?.pushViewController(clientVC, animated: true)
+                                                    
+                                                }))
+                                                
+                                                self?.present(errorAlertController, animated: true, completion: nil)
+                                                
+                                                return
+                                                
+                                            }
+                                            
+                                            let alertController = UIAlertController(title: "Дропшип закупки \(toSupData!["pur_name"].stringValue) на клиента ФИО «Иванова Петровна» в почтовое отделение \(toSupData!["client_index"].stringValue)? Проверьте ФИО и индекс, эти данные изменить будет нельзя.", message: nil, preferredStyle: .alert)
+                                            
+                                            alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                                
+                                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.ToSupplierDropship?Akey=\(self!.key)&APurID=\(pur.purId)"))
+                                                
+                                            }))
+                                            
+                                            alertController.addAction(UIAlertAction(title: "Клиент", style: .default, handler: { _ in
+                                                let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
+                                                clientVC.thisClientId = toSupData!["client_id"].stringValue
+                                                self?.navigationController?.pushViewController(clientVC, animated: true)
+                                            }))
+                                            
+                                            alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                            
+                                            self?.present(alertController, animated: true, completion: nil)
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
                             }else if actionId == "25"{
                                 
                             }
