@@ -1158,6 +1158,53 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                     
                                 }
                                 
+                            }else if actionId == "24"{
+                                
+                                self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Обновить трек номер посылки в закупке?", yesTapped: {
+                                    
+                                    let alertController = UIAlertController(title: "Обновить трек номер", message: nil, preferredStyle: .alert)
+                                    
+                                    alertController.addTextField { field in
+                                        
+                                    }
+                                    
+                                    alertController.addAction(UIAlertAction(title: "Обновить", style: .default, handler: { _ in
+
+                                        guard let trackNum = alertController.textFields?[0].text else {return}
+                                        
+                                        guard trackNum.count <= 32 else {
+                                            self?.showSimpleAlertWithOkButton(title: "Ошибка", message: "Максимум 32 символа")
+                                            return
+                                        }
+                                        
+                                        NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdateTrack?AKey=\(self!.key)&APurSYSID=\(pur.purId)&ATrack=\(trackNum)")) { updateTrackData , updateTrackError in
+                                            
+                                            DispatchQueue.main.async {
+                                                
+                                                if let updateTrackError = updateTrackError {
+                                                    print("Error with UpdateTrack : \(updateTrackError)")
+                                                    return
+                                                }
+                                                
+                                                if updateTrackData!["result"].intValue == 1{
+                                                    
+                                                    
+                                                    
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                        
+                                    }))
+                                    
+                                    alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                    
+                                    self?.present(alertController, animated: true, completion: nil)
+                                    
+                                })
+                                
                             }
                             
                             //...........
