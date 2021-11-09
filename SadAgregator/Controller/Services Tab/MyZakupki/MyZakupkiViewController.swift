@@ -782,44 +782,38 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                 return
                                             }
                                             
-                                            if firstData!["result"].intValue == 1{
+                                            if let errorMessage = firstData!["msg"].string , !errorMessage.isEmpty{
                                                 
+                                                let errorAlertController = UIAlertController(title: errorMessage, message: nil, preferredStyle: .alert)
                                                 
-                                                
-                                            }else{
-                                                
-                                                if let errorMessage = firstData!["msg"].string , !errorMessage.isEmpty{
+                                                errorAlertController.addAction(UIAlertAction(title: "Взять в обработку", style: .default, handler: { _ in
                                                     
-                                                    let errorAlertController = UIAlertController(title: errorMessage, message: nil, preferredStyle: .alert)
-                                                    
-                                                    errorAlertController.addAction(UIAlertAction(title: "Взять в обработку", style: .default, handler: { _ in
+                                                    PurchaseActionsStartPurProcessingDataManager().getPurchaseActionsStartPurProcessingData(key: self!.key, purId: pur.purId, force: "1") { secondData, secondError in
                                                         
-                                                        PurchaseActionsStartPurProcessingDataManager().getPurchaseActionsStartPurProcessingData(key: self!.key, purId: pur.purId, force: "1") { secondData, secondError in
+                                                        DispatchQueue.main.async {
                                                             
-                                                            DispatchQueue.main.async {
+                                                            if let secondError = secondError , secondData == nil{
+                                                                print("Error with PurchaseActionsStartPurProcessingDataManager : \(secondError)")
+                                                                return
+                                                            }
+                                                            
+                                                            if secondData!["result"].intValue == 1{
                                                                 
-                                                                if let secondError = secondError , secondData == nil{
-                                                                    print("Error with PurchaseActionsStartPurProcessingDataManager : \(secondError)")
-                                                                    return
-                                                                }
                                                                 
-                                                                if secondData!["result"].intValue == 1{
-                                                                    
-                                                                    
-                                                                    
-                                                                }
                                                                 
                                                             }
                                                             
                                                         }
                                                         
-                                                    }))
+                                                    }
                                                     
-                                                    errorAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-                                                    
-                                                    self?.present(errorAlertController, animated: true, completion: nil)
-                                                    
-                                                }
+                                                }))
+                                                
+                                                errorAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                
+                                                self?.present(errorAlertController, animated: true, completion: nil)
+                                                
+                                                return
                                                 
                                             }
                                             
