@@ -871,7 +871,199 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                     
                                 }
                                 
-                            }else if actionId == "25"{
+                            }else if actionId == "20"{
+                                
+                                let confirmAlertController = UIAlertController(title: "Подтвердите действие", message: "Передать закупку посреднику на дропшип?", preferredStyle: .alert)
+                                
+                                confirmAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                    
+                                    let alertController = UIAlertController(title: "Подбор посредника", message: nil, preferredStyle: .actionSheet)
+                                    
+                                    alertController.addAction(UIAlertAction(title: "По коду партнера", style: .default, handler: { _ in
+                                        
+                                        let partnerCodeAlertController = UIAlertController(title: "Код партнера", message: nil, preferredStyle: .alert)
+                                        
+                                        partnerCodeAlertController.addTextField { field in
+                                            field.placeholder = "Введите код партнера"
+                                            field.keyboardType = .numberPad
+                                        }
+                                        
+                                        partnerCodeAlertController.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
+                                            
+                                            guard let code = partnerCodeAlertController.textFields?[0].text else {return}
+                                            
+                                            PurchaseActionsCheckBrokerByCodeDataManager().getPurchaseActionsCheckBrokerByCodeData(key: self!.key, code: code) { checkBrokerdata, checkBrokerError in
+                                                
+                                                DispatchQueue.main.async {
+                                                    
+                                                    if let checkBrokerError = checkBrokerError , checkBrokerdata == nil {
+                                                        print("Error with PurchaseActionsCheckBrokerByCodeDataManager : \(checkBrokerError)")
+                                                        return
+                                                    }
+                                                    
+                                                    if checkBrokerdata!["result"].intValue == 1{
+                                                        
+                                                        let finalAlertController = UIAlertController(title: "Передать дропшип  посреднику \"\(checkBrokerdata!["broker_name"].stringValue)\"?", message: nil, preferredStyle: .alert)
+                                                        
+                                                        finalAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                                            
+                                                            NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.BrokerDropshipCheck?Akey=\(self!.key)&APurSYSID=\(pur.purId)&ABroker=\(checkBrokerdata!["broker_id"].stringValue)")) { brokerDropCheckData, brokerDropCheckError in
+                                                                
+                                                                DispatchQueue.main.async {
+                                                                    
+                                                                    if let brokerDropCheckError = brokerDropCheckError {
+                                                                        print("Error with BrokerDropshipCheck : \(brokerDropCheckError)")
+                                                                        return
+                                                                    }
+                                                                    
+                                                                    if let brokerDropCheckDataErrorMessage = brokerDropCheckData!["msg"].string , !brokerDropCheckDataErrorMessage.isEmpty{
+                                                                        
+                                                                        let brokerDropCheckErrorAlertController = UIAlertController(title: brokerDropCheckDataErrorMessage, message: nil, preferredStyle: .alert)
+                                                                        
+                                                                        brokerDropCheckErrorAlertController.addAction(UIAlertAction(title: "Ок", style: .cancel, handler: nil))
+                                                                        
+                                                                        brokerDropCheckErrorAlertController.addAction(UIAlertAction(title: "Показать", style: .default, handler: { _ in
+                                                                            
+                                                                            let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
+                                                                            clientVC.thisClientId = brokerDropCheckData!["client_id"].stringValue
+                                                                            self?.navigationController?.pushViewController(clientVC, animated: true)
+                                                                            
+                                                                        }))
+                                                                        
+                                                                        self?.present(brokerDropCheckErrorAlertController, animated: true, completion: nil)
+                                                                        
+                                                                        return
+                                                                        
+                                                                    }
+                                                                    let alertController = UIAlertController(title: "Дропшип закупки \(brokerDropCheckData!["pur_name"].stringValue) на клиента ФИО «\(brokerDropCheckData!["client_name"].stringValue)» в почтовое отделение \(brokerDropCheckData!["client_index"].stringValue)? Проверьте ФИО и индекс, эти данные изменить будет нельзя.", message: nil, preferredStyle: .alert)
+                                                                    
+                                                                    alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                                    
+                                                                    alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                                                        
+                                                                        NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.MoveToBrokerDropship?Akey=\(self!.key)&APurSYSID=\(pur.purId)&ABroker=\(checkBrokerdata!["broker_id"].stringValue)"))
+                                                                        
+                                                                    }))
+                                                                    
+                                                                    alertController.addAction(UIAlertAction(title: "Клиент", style: .default, handler: { _ in
+                                                                        let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
+                                                                        clientVC.thisClientId = brokerDropCheckData!["client_id"].stringValue
+                                                                        self?.navigationController?.pushViewController(clientVC, animated: true)
+                                                                    }))
+                                                                    
+                                                                    self?.present(alertController, animated: true, completion: nil)
+                                                                    
+                                                                }
+                                                                
+                                                            }
+                                                            
+                                                        }))
+                                                        
+                                                        finalAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                        
+                                                        self?.present(finalAlertController, animated: true, completion: nil)
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                
+                                            }
+                                            
+                                        }))
+                                        
+                                        partnerCodeAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+                                        
+                                        self?.present(partnerCodeAlertController,animated: true , completion: nil)
+                                        
+                                    }))
+                                    
+                                    alertController.addAction(UIAlertAction(title: "Из избранных", style: .default, handler: { _ in
+                                        
+                                        let favBrokersVC = FavoriteBrokersViewController()
+                                        
+                                        let navVC = UINavigationController(rootViewController: favBrokersVC)
+                                        
+                                        favBrokersVC.brokerSelected = { [weak self] brokerId , brokerName in
+                                            
+                                            navVC.dismiss(animated: true, completion: nil)
+                                            
+                                            let finalAlertController = UIAlertController(title: "Передать дропшип  посреднику \"\(brokerName)\"?", message: nil, preferredStyle: .alert)
+                                            
+                                            finalAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                                
+                                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.BrokerDropshipCheck?Akey=\(self!.key)&APurSYSID=\(pur.purId)&ABroker=\(brokerId)")) { brokerDropCheckData, brokerDropCheckError in
+                                                    
+                                                    DispatchQueue.main.async {
+                                                        
+                                                        if let brokerDropCheckError = brokerDropCheckError {
+                                                            print("Error with BrokerDropshipCheck : \(brokerDropCheckError)")
+                                                            return
+                                                        }
+                                                        
+                                                        if let brokerDropCheckDataErrorMessage = brokerDropCheckData!["msg"].string , !brokerDropCheckDataErrorMessage.isEmpty{
+                                                            
+                                                            let brokerDropCheckErrorAlertController = UIAlertController(title: brokerDropCheckDataErrorMessage, message: nil, preferredStyle: .alert)
+                                                            
+                                                            brokerDropCheckErrorAlertController.addAction(UIAlertAction(title: "Ок", style: .cancel, handler: nil))
+                                                            
+                                                            brokerDropCheckErrorAlertController.addAction(UIAlertAction(title: "Показать", style: .default, handler: { _ in
+                                                                
+                                                                let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
+                                                                clientVC.thisClientId = brokerDropCheckData!["client_id"].stringValue
+                                                                self?.navigationController?.pushViewController(clientVC, animated: true)
+                                                                
+                                                            }))
+                                                            
+                                                            self?.present(brokerDropCheckErrorAlertController, animated: true, completion: nil)
+                                                            
+                                                            return
+                                                            
+                                                        }
+                                                        let alertController = UIAlertController(title: "Дропшип закупки \(brokerDropCheckData!["pur_name"].stringValue) на клиента ФИО «\(brokerDropCheckData!["client_name"].stringValue)» в почтовое отделение \(brokerDropCheckData!["client_index"].stringValue)? Проверьте ФИО и индекс, эти данные изменить будет нельзя.", message: nil, preferredStyle: .alert)
+                                                        
+                                                        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                        
+                                                        alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                                            
+                                                            NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.MoveToBrokerDropship?Akey=\(self!.key)&APurSYSID=\(pur.purId)&ABroker=\(brokerId)"))
+                                                            
+                                                        }))
+                                                        
+                                                        alertController.addAction(UIAlertAction(title: "Клиент", style: .default, handler: { _ in
+                                                            let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
+                                                            clientVC.thisClientId = brokerDropCheckData!["client_id"].stringValue
+                                                            self?.navigationController?.pushViewController(clientVC, animated: true)
+                                                        }))
+                                                        
+                                                        self?.present(alertController, animated: true, completion: nil)
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                
+                                            }))
+                                            
+                                            finalAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                            
+                                            self?.present(finalAlertController, animated: true, completion: nil)
+                                            
+                                        }
+                                        
+                                        self?.present(navVC, animated: true, completion: nil)
+                                        
+                                    }))
+                                    
+                                    alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+                                    
+                                    self?.present(alertController , animated: true , completion: nil)
+                                    
+                                }))
+                                
+                                confirmAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                
+                                self?.present(confirmAlertController, animated: true, completion: nil)
+                                
+                            }else if actionId == "21"{
                                 
                             }
                             
