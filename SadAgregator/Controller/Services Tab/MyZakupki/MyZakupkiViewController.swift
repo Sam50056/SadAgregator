@@ -1121,6 +1121,43 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 
                             }else if actionId == "21"{
                                 
+                                
+                                
+                            }else if actionId == "23"{
+                                
+                                self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Отклонить закупку?") {
+                                    
+                                    NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.HandlerRejectAndReturn?AKey=\(self!.key)&APurSYSID=\(pur.purId)&AForce=0")) { handlerRejectData , handlerRejectError in
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            if let handlerRejectError = handlerRejectError{
+                                                print("Error with HandlerRejectAndReturn : \(handlerRejectError)")
+                                                return
+                                            }
+                                            
+                                            if let errorMessage = handlerRejectData!["msg"].string , !errorMessage.isEmpty{
+                                                
+                                                let errorAlertController = UIAlertController(title: errorMessage, message: nil, preferredStyle: .alert)
+                                                
+                                                errorAlertController.addAction(UIAlertAction(title: "Всё равно отклонить", style: .default, handler: { _ in
+                                                    
+                                                    NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.HandlerRejectAndReturn?AKey=\(self!.key)&APurSYSID=\(pur.purId)&AForce=1"))
+                                                    
+                                                }))
+                                                
+                                                errorAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                
+                                                self?.present(errorAlertController, animated: true, completion: nil)
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
                             }
                             
                             //...........
