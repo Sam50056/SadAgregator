@@ -49,6 +49,80 @@ class MyZakupkiViewController: UIViewController {
     
 }
 
+//MARK: - Functions
+
+extension MyZakupkiViewController {
+    
+    func showConfirmAlert(firstText : String, secondText : String , yesTapped : @escaping (() -> Void)){
+        
+        let confirmAlertController = UIAlertController(title: firstText, message: secondText, preferredStyle: .alert)
+        
+        confirmAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+            yesTapped()
+        }))
+        
+        confirmAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        present(confirmAlertController, animated: true, completion: nil)
+        
+    }
+    
+    func action12(pur : ZakupkaTableViewCell.Zakupka){
+        
+        let summAlertController = UIAlertController(title: "Какую сумму оплатил клиент?", message: nil, preferredStyle: .alert)
+        
+        summAlertController.addTextField { field in
+            field.keyboardType = .numberPad
+        }
+        
+        summAlertController.addAction(UIAlertAction(title: "Ок", style: .default, handler: { [weak self] _ in
+            
+            guard let summ = summAlertController.textFields?[0].text else {return}
+            
+            let confirmSumAlertController = UIAlertController(title: "Зачислить \(summ) на счет клиента на закупку?", message: nil, preferredStyle: .alert)
+            
+            confirmSumAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                
+                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.BrokerPurchasePayed?Akey=\(self!.key)&APurID=\(pur.purId)&ASumm=\(summ)")) { data , error in
+                    
+                    DispatchQueue.main.async {
+                        
+                        if let error = error {
+                            print("Error with BrokerPurchasePayed : \(error)")
+                            return
+                        }
+                        
+                        if let errorMessage = data!["msg"].string , !errorMessage.isEmpty{
+                            self?.showSimpleAlertWithOkButton(title: errorMessage, message: nil)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }))
+            
+            confirmSumAlertController.addAction(UIAlertAction(title: "Изменить", style: .default, handler: { _ in
+                
+                confirmSumAlertController.dismiss(animated: true, completion: nil)
+                self?.action12(pur: pur)
+                
+            }))
+            
+            confirmSumAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            self?.present(confirmSumAlertController, animated: true, completion: nil)
+            
+        }))
+        
+        summAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        present(summAlertController, animated: true, completion: nil)
+        
+    }
+    
+}
+
 //MARK: - PurchasesFormPagingDataManager
 
 extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
@@ -687,23 +761,11 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.PurHandlerReject?AKey=\(self!.key)&APurID=\(pur.purId)"))
                             }else if actionId == "12"{
                                 
-                                let summAlertController = UIAlertController(title: "Какую сумму оплатил клиент?", message: nil, preferredStyle: .alert)
-                                
-                                summAlertController.addTextField { field in
-                                    field.keyboardType = .numberPad
-                                }
-                                
-                                summAlertController.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
+                                self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Закупка оплачена?", yesTapped: {
                                     
-                                    guard let summ = summAlertController.textFields?[0].text else {return}
+                                    self?.action12(pur: pur)
                                     
-                                    
-                                    
-                                }))
-                                
-                                summAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-                                
-                                self?.present(summAlertController, animated: true, completion: nil)
+                                })
                                 
                             }else if actionId == "13"{
                                 
