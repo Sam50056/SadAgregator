@@ -120,6 +120,7 @@
 		225957A2259668540088C7E4 /* ListSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225957A1259668540088C7E4 /* ListSelectView.swift */; };
 		225957A52596A2A70088C7E4 /* MasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225957A42596A2A60088C7E4 /* MasterViewModel.swift */; };
 		225957AA2596A6450088C7E4 /* GetStepDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225957A92596A6450088C7E4 /* GetStepDataManager.swift */; };
+		225A843F273C0C1C009045E8 /* PurchasesOnePurDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A843E273C0C1C009045E8 /* PurchasesOnePurDataManager.swift */; };
 		225C6CAD25FCBF5700CC621E /* ClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225C6CAC25FCBF5700CC621E /* ClientDataManager.swift */; };
 		2263155E26BC8D4100920F8D /* BrokersBalanceAddRequestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263155D26BC8D4100920F8D /* BrokersBalanceAddRequestDataManager.swift */; };
 		22634AB625858CA800DF6FDB /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22634AB525858CA800DF6FDB /* UserData.swift */; };
@@ -472,6 +473,7 @@
 		225957A1259668540088C7E4 /* ListSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSelectView.swift; sourceTree = "<group>"; };
 		225957A42596A2A60088C7E4 /* MasterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewModel.swift; sourceTree = "<group>"; };
 		225957A92596A6450088C7E4 /* GetStepDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStepDataManager.swift; sourceTree = "<group>"; };
+		225A843E273C0C1C009045E8 /* PurchasesOnePurDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesOnePurDataManager.swift; sourceTree = "<group>"; };
 		225C6CAC25FCBF5700CC621E /* ClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDataManager.swift; sourceTree = "<group>"; };
 		2263155D26BC8D4100920F8D /* BrokersBalanceAddRequestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersBalanceAddRequestDataManager.swift; sourceTree = "<group>"; };
 		22634AB525858CA800DF6FDB /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -1288,6 +1290,7 @@
 				22B9E1712721FE4C00985450 /* Sborka */,
 				22B9E1722721FE6600985450 /* PurchasesUpdateInfoDataManager.swift */,
 				227B62FA2733133800687BEB /* Actions */,
+				225A843E273C0C1C009045E8 /* PurchasesOnePurDataManager.swift */,
 			);
 			path = "My Zakupki VC";
 			sourceTree = "<group>";
@@ -2415,6 +2418,7 @@
 				2201672925A777A20072BFE7 /* GetVendActionsDataManager.swift in Sources */,
 				229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */,
 				22692E4226BB235200CA2946 /* BrokersReviewUpdateDataManager.swift in Sources */,
+				225A843F273C0C1C009045E8 /* PurchasesOnePurDataManager.swift in Sources */,
 				22941A3F262A478C00119844 /* TovarTableViewCell.swift in Sources */,
 				225714E427176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.swift in Sources */,
 				22A2B56825E03200001359D6 /* SlideDownPresentationController.swift in Sources */,
