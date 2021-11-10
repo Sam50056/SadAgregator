@@ -187,7 +187,7 @@ extension MyZakupkiViewController {
         guard let imageSendingPur = imageSendingPur , let gruzImageId = gruzImageId else {return}
         
         NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurDocImg?AKey=\(key)&APurSYSID=\(imageSendingPur.purId)&AImgTYPE=1&AimgID=\(gruzImageId)"))
-
+        
         
     }
     
@@ -710,7 +710,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
                                 
                                 self?.present(alertController, animated: true, completion: nil)
-                            
+                                
                             }else if actionId == "7"{
                                 
                                 let confirmAlertController = UIAlertController(title: "Подтвердите действие", message: "Разбить закупку по поставщикам", preferredStyle: .alert)
@@ -1202,6 +1202,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Обновить фото груза?", yesTapped: {
                                     
                                     self?.isSendingGruz = true
+                                    self?.imageSendingPur = pur
                                     self?.showImagePickerController(sourceType: .photoLibrary)
                                     
                                 })
@@ -1211,6 +1212,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Обновить фото посылки?", yesTapped: {
                                     
                                     self?.isSendingGruz = false
+                                    self?.imageSendingPur = pur
                                     self?.showImagePickerController(sourceType: .photoLibrary)
                                     
                                 })
@@ -1261,7 +1263,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                     }
                                     
                                     alertController.addAction(UIAlertAction(title: "Обновить", style: .default, handler: { _ in
-
+                                        
                                         guard let trackNum = alertController.textFields?[0].text else {return}
                                         
                                         guard trackNum.count <= 32 else {
@@ -1298,8 +1300,6 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 })
                                 
                             }
-                            
-                            //...........
                             
                         }
                         
