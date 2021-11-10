@@ -34,7 +34,10 @@ class MyZakupkiViewController: UIViewController {
     private var posilkaImageUrl : URL?
     private var posilkaImageId : String?
     
-    private var isSendingGruz = true
+    private var oplataImageUrl : URL?
+    private var oplataImageId : String?
+    
+    private var sendingDocType : DocType?
     private var imageSendingPurIndex : Int?
     
     private var boxView = UIView()
@@ -74,6 +77,16 @@ class MyZakupkiViewController: UIViewController {
         navigationItem.title = "Мои закупки"
         
         navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil) , UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: nil) , UIBarButtonItem(image: UIImage(systemName: "magnifyingglass" ) , style: .plain, target: self, action: nil)]
+    }
+    
+}
+
+//MARK: - Enums
+
+extension MyZakupkiViewController {
+    
+    private enum DocType: Int {
+        case gruz , posilka , oplata
     }
     
 }
@@ -252,6 +265,16 @@ extension MyZakupkiViewController {
         guard let imageSendingPurIndex = imageSendingPurIndex , let posilkaImageId = posilkaImageId else {return}
         
         NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurDocImg?AKey=\(key)&APurSYSID=\(purchases[imageSendingPurIndex].purId)&AImgTYPE=2&AimgID=\(posilkaImageId)")) { [weak self] updateDocData , _ in
+            self?.simpleNoAnswerRequestDone(data: updateDocData, index: imageSendingPurIndex)
+        }
+        
+    }
+    
+    func oplataSent(){
+        
+        guard let imageSendingPurIndex = imageSendingPurIndex , let oplataImageId = oplataImageId else {return}
+        
+        NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurDocImg?AKey=\(key)&APurSYSID=\(purchases[imageSendingPurIndex].purId)&AImgTYPE=2&AimgID=\(oplataImageId)")) { [weak self] updateDocData , _ in
             self?.simpleNoAnswerRequestDone(data: updateDocData, index: imageSendingPurIndex)
         }
         
@@ -1284,7 +1307,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 
                                 self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Обновить фото груза?", yesTapped: {
                                     
-                                    self?.isSendingGruz = true
+                                    self?.sendingDocType = .gruz
                                     self?.imageSendingPurIndex = indexPath.row
                                     self?.showImagePickerController(sourceType: .photoLibrary)
                                     
@@ -1294,7 +1317,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 
                                 self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Обновить фото посылки?", yesTapped: {
                                     
-                                    self?.isSendingGruz = false
+                                    self?.sendingDocType = .posilka
                                     self?.imageSendingPurIndex = indexPath.row
                                     self?.showImagePickerController(sourceType: .photoLibrary)
                                     
@@ -1377,6 +1400,16 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                     alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
                                     
                                     self?.present(alertController, animated: true, completion: nil)
+                                    
+                                })
+                                
+                            }else if actionId == "27"{
+                                
+                                self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Обновить фото оплаты?", yesTapped: {
+                                    
+                                    self?.sendingDocType = .oplata
+                                    self?.imageSendingPurIndex = indexPath.row
+                                    self?.showImagePickerController(sourceType: .photoLibrary)
                                     
                                 })
                                 
@@ -1602,8 +1635,19 @@ extension MyZakupkiViewController : UIImagePickerControllerDelegate, UINavigatio
         
         if let safeUrl = info[.imageURL] as? URL{
             
-            isSendingGruz ? (gruzImageUrl = safeUrl) : (posilkaImageUrl = safeUrl)
-            showBoxView(with: "Загрузка фото \(isSendingGruz ? "груза" : "посылки")")
+//            isSendingGruz ? (gruzImageUrl = safeUrl) : (posilkaImageUrl = safeUrl)
+            
+            if sendingDocType == .gruz {
+                gruzImageUrl = safeUrl
+                showBoxView(with: "Загрузка фото груза")
+            }else if sendingDocType == .posilka{
+                posilkaImageUrl = safeUrl
+                showBoxView(with: "Загрузка фото посылки")
+            }else if sendingDocType == .oplata{
+                oplataImageUrl = safeUrl
+                showBoxView(with: "Загрузка фото оплаты")
+            }
+            
             newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
             
         }
@@ -1631,10 +1675,12 @@ extension MyZakupkiViewController : NewPhotoPlaceDataManagerDelegate{
                 
                 print("URL FOR SENDING THE FILE: \(url)")
                 
-                if isSendingGruz , let gruzImageUrl = gruzImageUrl {
+                if sendingDocType == .gruz , let gruzImageUrl = gruzImageUrl {
                     sendFileToServer(from: gruzImageUrl, to: url)
-                }else if !isSendingGruz , let posilkaImageUrl = posilkaImageUrl{
+                }else if sendingDocType == .posilka , let posilkaImageUrl = posilkaImageUrl{
                     sendFileToServer(from: posilkaImageUrl, to: url)
+                }else if sendingDocType == .oplata , let oplataImageUrl = oplataImageUrl{
+                    sendFileToServer(from: oplataImageUrl, to: url)
                 }
                 
                 let imageId = data["image_id"].stringValue
@@ -1645,7 +1691,13 @@ extension MyZakupkiViewController : NewPhotoPlaceDataManagerDelegate{
                 
                 print("Image Link: \(imageLink)")
                 
-                isSendingGruz ? (gruzImageId = imageId) : (posilkaImageId = imageId)
+                if sendingDocType == .gruz{
+                    gruzImageId = imageId
+                }else if sendingDocType == .posilka{
+                    posilkaImageId = imageId
+                }else if sendingDocType == .oplata{
+                    oplataImageId = imageId
+                }
                 
             }else{
                 
@@ -1704,9 +1756,19 @@ extension MyZakupkiViewController{
                 
                 DispatchQueue.main.async { [self] in
                     
-                    print("Got \(isSendingGruz ? "gruz" : "posilka") sent to server")
+                    //                    print("Got \(isSendingGruz ? "gruz" : "posilka") sent to server")
                     
-                    photoSavedDataManager.getPhotoSavedData(key: key, photoId: isSendingGruz ? gruzImageId! : posilkaImageId!) { data, error in
+                    var imageid = ""
+                    
+                    if sendingDocType == .gruz {
+                        imageid = gruzImageId!
+                    }else if sendingDocType == .posilka{
+                        imageid = posilkaImageId!
+                    }else if sendingDocType == .oplata{
+                        imageid = oplataImageId!
+                    }
+                    
+                    photoSavedDataManager.getPhotoSavedData(key: key, photoId: imageid) { data, error in
                         
                         if let error = error{
                             print("Error with PhotoSavedDataManager : \(error)")
@@ -1719,11 +1781,17 @@ extension MyZakupkiViewController{
                             
                             if data["result"].intValue == 1{
                                 
-                                print("\(isSendingGruz ? "Gruz" : "Posilka") image successfuly saved to server")
+                                //                                print("\(isSendingGruz ? "Gruz" : "Posilka") image successfuly saved to server")
                                 
                                 self?.removeBoxView()
                                 
-                                isSendingGruz ? gruzSent() : posilkaSent()
+                                if sendingDocType == .gruz{
+                                    gruzSent()
+                                }else if sendingDocType == .posilka{
+                                    posilkaSent()
+                                }else{
+                                    oplataSent()
+                                }
                                 
                             }else{
                                 
