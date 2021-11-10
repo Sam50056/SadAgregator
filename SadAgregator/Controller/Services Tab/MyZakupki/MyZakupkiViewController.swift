@@ -1567,6 +1567,7 @@ extension MyZakupkiViewController : PurchasesOnePurDataManagerDelegate{
                 if let updatePurIndex = self?.updatePurIndex {
                     self?.purchases[updatePurIndex] = pur
                     self?.tableView.reloadRows(at: [IndexPath(row: updatePurIndex, section: 0)], with: .automatic)
+                    self?.updatePurIndex = nil
                 }
                 
             }
