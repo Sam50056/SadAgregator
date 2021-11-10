@@ -22,6 +22,9 @@ class MyZakupkiViewController: UIViewController {
     
     private var purchases = [ZakupkaTableViewCell.Zakupka]()
     
+    private var page = 1
+    private var rowForPaggingUpdate : Int = 7
+    
     private var gruzImageUrl : URL?
     private var gruzImageId : String?
     
@@ -37,6 +40,8 @@ class MyZakupkiViewController: UIViewController {
     private lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
     private lazy var photoSavedDataManager = PhotoSavedDataManager()
     
+    var refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,11 +51,14 @@ class MyZakupkiViewController: UIViewController {
         
         tableView.register(UINib(nibName: "ZakupkaTableViewCell", bundle: nil), forCellReuseIdentifier: "purCell")
         
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl) // not required when using UITableViewController
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = false
         
-        purchasesFormPagingDataManager.getPurchasesFormPagingData(key: key, page: 1, status: "", query: "")
+        refresh()
         
         newPhotoPlaceDataManager.delegate = self
         
@@ -69,6 +77,22 @@ class MyZakupkiViewController: UIViewController {
 //MARK: - Functions
 
 extension MyZakupkiViewController {
+    
+    func update(){
+        
+        purchasesFormPagingDataManager.getPurchasesFormPagingData(key: key, page: page, status: "", query: "")
+        
+    }
+    
+    @objc func refresh(){
+        
+        page = 1
+        
+        rowForPaggingUpdate = 7
+        
+        update()
+        
+    }
     
     func showConfirmAlert(firstText : String, secondText : String , yesTapped : @escaping (() -> Void)){
         
@@ -1353,6 +1377,22 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
         
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == rowForPaggingUpdate{
+            
+            page += 1
+            
+            rowForPaggingUpdate += 8
+            
+            update()
+            
+            print("Done a request for page: \(page)")
+            
+        }
+        
+    }
+    
 }
 
 //MARK: - UITextField
@@ -1430,6 +1470,8 @@ extension MyZakupkiViewController : PurchasesFormPagingDataManagerDelegate{
                 self?.purchases.append(contentsOf: newPurs)
                 
                 self?.tableView.reloadData()
+                
+                self?.refreshControl.endRefreshing()
                 
             }
             
