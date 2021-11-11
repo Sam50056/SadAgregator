@@ -22,6 +22,15 @@ class MyZakupkiViewController: UIViewController {
     private var key = ""
     
     private var purchases = [ZakupkaTableViewCell.Zakupka]()
+    private var statuses = [JSON]()
+    
+    private var selectedStatus = 0{
+        didSet{
+            if selectedStatus != oldValue{
+                refresh()
+            }
+        }
+    }
     
     private var updatePurIndex : Int?
     
@@ -76,7 +85,8 @@ class MyZakupkiViewController: UIViewController {
         
         navigationItem.title = "Мои закупки"
         
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusNavBarButtonPressed)) , UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: nil) , UIBarButtonItem(image: UIImage(systemName: "magnifyingglass" ) , style: .plain, target: self, action: nil)]
+        updateNavBarItems()
+        
     }
     
 }
@@ -134,9 +144,61 @@ extension MyZakupkiViewController{
 
 extension MyZakupkiViewController {
     
+    func updateNavBarItems(){
+        
+        let asyncItem = UIDeferredMenuElement { [weak self] completion in
+            
+            NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchases.GetPurStatuses?AKey=\(self!.key)")) { data , error in
+                
+                if let error = error{
+                    print("Error with GetPurStatuses : \(error)")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        var menuItems = [UIAction]()
+                        
+                        let jsonSatuses = data!["statuses"].arrayValue
+                        
+                        self?.statuses = jsonSatuses
+                        
+                        for i in 0 ..< jsonSatuses.count {
+                            
+                            let jsonStatus = jsonSatuses[i]
+                            
+                            menuItems.append(UIAction(title: "\(jsonStatus["capt"].stringValue)" , state: i == self!.selectedStatus ? .on : .off) { action in
+                                
+                                self!.selectedStatus = i
+                                self!.updateNavBarItems()
+                                
+                            })
+                            
+                        }
+                        
+                        completion(menuItems)
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        let statusMenu = UIMenu(title: "Статус", children: [asyncItem])
+        
+        let statusNavBarItem = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), primaryAction: nil, menu: statusMenu)
+        
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusNavBarButtonPressed)) , statusNavBarItem , UIBarButtonItem(image: UIImage(systemName: "magnifyingglass" ) , style: .plain, target: self, action: nil)]
+        
+    }
+    
     func update(){
         
-        purchasesFormPagingDataManager.getPurchasesFormPagingData(key: key, page: page, status: "", query: "")
+        purchasesFormPagingDataManager.getPurchasesFormPagingData(key: key, page: page, status: statuses.isEmpty ? "" : statuses[selectedStatus]["id"].stringValue, query: "")
         
     }
     
