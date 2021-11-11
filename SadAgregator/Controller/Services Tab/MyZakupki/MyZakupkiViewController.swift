@@ -153,6 +153,13 @@ extension MyZakupkiViewController{
         
     }
     
+    @objc func searchBarButtonPressed(){
+        
+        present(searchController, animated: true, completion: nil)
+        searchController.searchBar.becomeFirstResponder()
+        
+    }
+    
 }
 
 //MARK: - Functions
@@ -207,7 +214,7 @@ extension MyZakupkiViewController {
         
         let statusNavBarItem = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), primaryAction: nil, menu: statusMenu)
         
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusNavBarButtonPressed)) , statusNavBarItem , UIBarButtonItem(image: UIImage(systemName: "magnifyingglass" ) , style: .plain, target: self, action: nil)]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusNavBarButtonPressed)) , statusNavBarItem , UIBarButtonItem(image: UIImage(systemName: "magnifyingglass" ) , style: .plain, target: self, action: #selector(searchBarButtonPressed))]
         
     }
     
@@ -413,6 +420,8 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard !purchases.isEmpty else {return UITableViewCell()}
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "purCell", for: indexPath) as! ZakupkaTableViewCell
         
