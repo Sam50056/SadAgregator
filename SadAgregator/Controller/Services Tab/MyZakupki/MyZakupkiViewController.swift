@@ -57,6 +57,12 @@ class MyZakupkiViewController: UIViewController {
     
     var refreshControl = UIRefreshControl()
     
+    private let searchController = UISearchController(searchResultsController: nil)
+    
+    private var searchText : String{
+        return searchController.searchBar.text ?? ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,6 +79,15 @@ class MyZakupkiViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = false
+        
+        //Set up search controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Быстрый поиск по именам"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        navigationItem.hidesSearchBarWhenScrolling = true
         
         refresh()
         
@@ -198,7 +213,7 @@ extension MyZakupkiViewController {
     
     func update(){
         
-        purchasesFormPagingDataManager.getPurchasesFormPagingData(key: key, page: page, status: statuses.isEmpty ? "" : statuses[selectedStatus]["id"].stringValue, query: "")
+        purchasesFormPagingDataManager.getPurchasesFormPagingData(key: key, page: page, status: statuses.isEmpty ? "" : statuses[selectedStatus]["id"].stringValue, query: searchText)
         
     }
     
@@ -385,7 +400,7 @@ extension MyZakupkiViewController {
     
 }
 
-//MARK: - PurchasesFormPagingDataManager
+//MARK: - TableView
 
 extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
     
@@ -1542,6 +1557,8 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
+        guard !purchases.isEmpty else {return 0}
+        
         let pur = purchases[indexPath.row]
         
         return K.makeHeightForZakupkaCell(data: pur)
@@ -1576,6 +1593,26 @@ extension MyZakupkiViewController : UITextFieldDelegate{
         let compSepByCharInSet = string.components(separatedBy: aSet)
         let numberFiltered = compSepByCharInSet.joined(separator: "")
         return string == numberFiltered
+    }
+    
+}
+
+//MARK: - SearchBar
+
+extension MyZakupkiViewController : UISearchResultsUpdating{
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        if let searchText = searchController.searchBar.text , searchText != "" {
+            
+            refresh()
+            
+        }else{
+            
+            refresh()
+            
+        }
+        
     }
     
 }
