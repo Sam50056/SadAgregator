@@ -76,7 +76,7 @@ class MyZakupkiViewController: UIViewController {
         
         navigationItem.title = "Мои закупки"
         
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil) , UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: nil) , UIBarButtonItem(image: UIImage(systemName: "magnifyingglass" ) , style: .plain, target: self, action: nil)]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusNavBarButtonPressed)) , UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: nil) , UIBarButtonItem(image: UIImage(systemName: "magnifyingglass" ) , style: .plain, target: self, action: nil)]
     }
     
 }
@@ -87,6 +87,45 @@ extension MyZakupkiViewController {
     
     private enum DocType: Int {
         case gruz , posilka , oplata
+    }
+    
+}
+
+//MARK: - Actions
+
+extension MyZakupkiViewController{
+    
+    @objc func plusNavBarButtonPressed(){
+        
+        let alertController = UIAlertController(title: "Создать новую закупку?", message: nil, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
+            
+            NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchases.CreateNew?AKey=\(self!.key)")) { data , error in
+                
+                DispatchQueue.main.async {
+                    
+                    if let error = error {
+                        print("Error with CreateNewPur : \(error)")
+                        return
+                    }
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        self?.refresh()
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        
+        present(alertController, animated: true, completion: nil)
+        
     }
     
 }
@@ -102,6 +141,8 @@ extension MyZakupkiViewController {
     }
     
     @objc func refresh(){
+        
+        purchases.removeAll()
         
         page = 1
         
@@ -1634,8 +1675,6 @@ extension MyZakupkiViewController : UIImagePickerControllerDelegate, UINavigatio
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let safeUrl = info[.imageURL] as? URL{
-            
-//            isSendingGruz ? (gruzImageUrl = safeUrl) : (posilkaImageUrl = safeUrl)
             
             if sendingDocType == .gruz {
                 gruzImageUrl = safeUrl
