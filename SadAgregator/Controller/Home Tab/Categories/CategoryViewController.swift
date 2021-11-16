@@ -385,6 +385,7 @@ extension CategoryViewController : GetCatpageDataManagerDelegate{
     
     func didFailGettingGetCatpageDataWithError(error: String) {
         print("Error with GetCatpageDataManager : \(error)")
+        stopSimpleCircleAnimation(activityController: activityController)
     }
     
 }
