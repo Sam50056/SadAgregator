@@ -7,10 +7,13 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
 class CenovieDiapazoniViewController: UIViewController {
     
     @IBOutlet weak var tableView : UITableView!
+    
+    let realm = try! Realm()
     
     private var purchasesZonesPriceDataManager = PurchasesZonesPriceDataManager()
     
@@ -27,7 +30,8 @@ class CenovieDiapazoniViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        key = "part_2_test"
+        //        key = "part_2_test"
+        loadUserData()
         
         purchasesZonesPriceDataManager.delegate = self
         
@@ -287,5 +291,22 @@ struct PurchaseZone{
     let marge : String
     let fix : String
     let trunc : String
+    
+}
+
+
+//MARK: - Data Manipulation Methods
+
+extension CenovieDiapazoniViewController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        key = userDataObject.first!.key
+        
+        //        isLogged = userDataObject.first!.isLogged
+        
+    }
     
 }

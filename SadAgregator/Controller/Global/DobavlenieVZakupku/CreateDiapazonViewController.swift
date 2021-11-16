@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
 class CreateDiapazonViewController: UIViewController {
     
@@ -25,6 +26,8 @@ class CreateDiapazonViewController: UIViewController {
     @IBOutlet weak var inPercentsButton: UIButton!
     
     @IBOutlet weak var picker: UIPickerView!
+    
+    let realm = try! Realm()
     
     private var key = ""
     
@@ -56,7 +59,8 @@ class CreateDiapazonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        key = "part_2_test"
+        //        key = "part_2_test"
+        loadUserData()
         
         inRublesButton.addTarget(self, action: #selector(inRublesButtonTapped(_:)), for: .touchUpInside)
         inPercentsButton.addTarget(self, action: #selector(inPersentsButtonTapped(_:)), for: .touchUpInside)
@@ -371,6 +375,23 @@ extension CreateDiapazonViewController : BrokersUpdZonePriceDataManagerDelegate{
     
     func didFailGettingBrokersUpdZonePriceDataWithError(error: String) {
         print("Error with BrokersUpdZonePriceDataManager : \(error)")
+    }
+    
+}
+
+
+//MARK: - Data Manipulation Methods
+
+extension CreateDiapazonViewController {
+    
+    func loadUserData (){
+        
+        let userDataObject = realm.objects(UserData.self)
+        
+        key = userDataObject.first!.key
+        
+        //        isLogged = userDataObject.first!.isLogged
+        
     }
     
 }

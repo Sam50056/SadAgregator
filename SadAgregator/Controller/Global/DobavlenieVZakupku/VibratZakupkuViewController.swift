@@ -25,8 +25,8 @@ class VibratZakupkuViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        loadUserData()
-        key = "part_2_test"
+        loadUserData()
+        //        key = "part_2_test"
         
         PurchasesPursListDataManager(delegate: self).getPurchasesPursListData(key: key, page: page)
         
