@@ -15,7 +15,7 @@ struct ProfileView: View {
     
     @EnvironmentObject var profileViewModel : ProfileViewModel
     
-    @EnvironmentObject var masterViewModel : MasterViewModel
+    @State var showMaster = false
     
     var body: some View {
         
@@ -141,7 +141,7 @@ struct ProfileView: View {
                             
                             if profileViewModel.isOkConnected! || profileViewModel.isVkConnected! {
                                 
-                                NavigationLink(destination: MasterNastroekView() , isActive: $masterViewModel.shouldShowMasterFromProfile){
+                                NavigationLink(destination: MasterNastroekView(showMaster: $showMaster) , isActive: $showMaster){
                                     
                                     HStack{
                                         
@@ -329,7 +329,7 @@ struct ProfileView: View {
         }
         .alert(isPresented: $profileViewModel.isAlertShown){
             Alert(title: Text(profileViewModel.alertTitle), message: nil, primaryButton: .default(Text("БЫСТРАЯ НАСТРОЙКА")){
-                masterViewModel.shouldShowMasterFromProfile = true
+                showMaster = true
             }, secondaryButton: .default(Text("ВСЁ РАВНО ПЕРЕЙТИ В WEB")){
                 if let url = URL(string: profileViewModel.settings){
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -342,7 +342,7 @@ struct ProfileView: View {
             profileViewModel.getProfileData()
         }
         .onDisappear{
-            if !masterViewModel.shouldShowMasterFromProfile{
+            if !showMaster{
                 menuViewModel.updateData()
             }
         }

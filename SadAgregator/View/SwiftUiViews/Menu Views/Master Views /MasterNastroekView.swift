@@ -9,7 +9,10 @@ import SwiftUI
 
 struct MasterNastroekView: View {
     
-    @EnvironmentObject var masterViewModel : MasterViewModel
+    @Binding var showMaster : Bool
+    
+    @ObservedObject var masterViewModel = MasterViewModel()
+    
     @EnvironmentObject var menuViewModel : MenuViewModel
     
     var body: some View {
@@ -107,7 +110,7 @@ struct MasterNastroekView: View {
                                     if masterViewModel.shouldShowBackButton{
                                         masterViewModel.backButtonPressed()
                                     }else{
-                                        masterViewModel.hideMaster()
+                                        showMaster = false
                                     }
                                     
                                 }) {
@@ -119,7 +122,7 @@ struct MasterNastroekView: View {
                                 }
                             ,trailing:
                                 Button(action: {
-                                    self.masterViewModel.hideMaster()
+                                    showMaster = false
                                     menuViewModel.updateData()
                                 }){
                                     
@@ -132,7 +135,9 @@ struct MasterNastroekView: View {
         
         .onAppear{
             masterViewModel.loadUserData()
-            masterViewModel.getStepData()
+            masterViewModel.getStepData(){
+                showMaster = false
+            }
         }
         .onDisappear{
             
@@ -141,6 +146,7 @@ struct MasterNastroekView: View {
             }
             
         }
+        .environmentObject(masterViewModel)
         
     }
     

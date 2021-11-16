@@ -15,7 +15,7 @@ struct MenuView: View {
     
     @ObservedObject var profileViewModel = ProfileViewModel()
     
-    @ObservedObject var masterViewModel = MasterViewModel()
+    @State var showMaster = false
     
     var body: some View {
         
@@ -278,7 +278,7 @@ struct MenuView: View {
                         
                         Section{
                             
-                            NavigationLink(destination: MasterNastroekView() , isActive: $masterViewModel.shouldShowMasterFromMenu){
+                            NavigationLink(destination: MasterNastroekView(showMaster: $showMaster) , isActive: $showMaster){
                                 
                                 HStack(spacing: 16){
                                     
@@ -433,7 +433,7 @@ struct MenuView: View {
             }
             .alert(isPresented: $menuViewModel.showAlert){
                 Alert(title: Text("Мы рекомендуем настраивать выгрузку через функцию БЫСТРОЙ НАСТРОЙКИ, это легко для новичков и не требует специальных знаний!"), message: nil, primaryButton: .default(Text("БЫСТРАЯ НАСТРОЙКА")){
-                    masterViewModel.shouldShowMasterFromMenu = true
+                    showMaster = true
                 }, secondaryButton: .default(Text("ВСЁ РАВНО ПЕРЕЙТИ В WEB")){
                     if let settings =  menuViewModel.getUserDataObject()?.settings, let url = URL(string: settings){
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -450,7 +450,6 @@ struct MenuView: View {
             
         }
         .environmentObject(menuViewModel)
-        .environmentObject(masterViewModel)
         .environmentObject(profileViewModel)
         
     }

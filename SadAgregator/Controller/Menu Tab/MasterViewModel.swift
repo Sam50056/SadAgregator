@@ -15,9 +15,6 @@ class MasterViewModel : ObservableObject{
     
     @Published var key = ""
     
-    @Published var shouldShowMasterFromMenu = false
-    @Published var shouldShowMasterFromProfile = false
-    
     @Published var shouldShowBackButton = false
     
     @Published var currentStepId : Int?
@@ -118,19 +115,6 @@ class MasterViewModel : ObservableObject{
     
 }
 
-//MARK: - Hide Master
-
-extension MasterViewModel{
-    
-    func hideMaster(){
-        
-        shouldShowMasterFromMenu = false
-        shouldShowMasterFromProfile = false
-        
-    }
-    
-}
-
 //MARK: - Hide Keyboarf
 
 extension MasterViewModel{
@@ -215,11 +199,11 @@ extension MasterViewModel{
 
 extension MasterViewModel : GetStepDataManagerDelegate{
     
-    func getStepData(){
+    func getStepData(hideMaster : ( () -> Void)? = nil){
         
         if nextStepId == "-2"{
             
-            hideMaster()
+            hideMaster?()
             
             emptyData()
             
