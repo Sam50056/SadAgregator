@@ -171,6 +171,7 @@ class CategoryViewController: UIViewController {
         
         if let safeId = thisCatId{
             getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page)
+            showSimpleCircleAnimation(activityController: activityController)
         }
         
     }
@@ -375,6 +376,8 @@ extension CategoryViewController : GetCatpageDataManagerDelegate{
             if page == 1 {
                 navigationItem.title = data["cat_name"].stringValue == "" ? "Категория" : data["cat_name"].stringValue
             }
+            
+            stopSimpleCircleAnimation(activityController: activityController)
             
         }
         
