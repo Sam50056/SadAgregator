@@ -275,7 +275,7 @@ extension SearchViewController : SearchImageDataManagerDelegate{
             
             cntList = nil
             
-            tableView.reloadSections([0,1,2], with: .none)
+            tableView.reloadSections([0,1], with: .none)
             
             stopSimpleCircleAnimation(activityController: activityController)
             
@@ -352,7 +352,7 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
             
             cntList = data["cnt_list"].arrayValue
             
-            tableView.reloadSections([0,1,2], with: .none)
+            tableView.reloadSections([0,1], with: .none)
             
             stopSimpleCircleAnimation(activityController: activityController)
             
@@ -397,7 +397,7 @@ extension SearchViewController : UITextFieldDelegate{
 extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -405,16 +405,12 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         switch section {
         
         case 0:
-            return cntList == nil ? 0 : 1
-        case 1:
-            
             if searchData != nil , searchData!["help"]["str"].stringValue != "" , hintCellShouldBeShown{
                 return 1
             }else{
                 return 0
             }
-            
-        case 2:
+        case 1:
             
             if searchData != nil , postsArray.isEmpty{
                 return 1
@@ -438,21 +434,13 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         case 0:
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "searchResultsCell", for: indexPath)
-            
-            guard let cntList = cntList else { return cell }
-            
-            setUpSearchResultsCell(cell: cell, data: cntList)
-            
-        case 1:
-            
             cell = tableView.dequeueReusableCell(withIdentifier: "hintCell", for: indexPath)
             
             guard let help = searchData?["help"] else {return cell}
             
             setUpHintCell(cell: cell, data: help)
             
-        case 2:
+        case 1:
             
             if postsArray.isEmpty{
                 
@@ -487,13 +475,9 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         case 0:
             
-            return 40
-            
-        case 1:
-            
             return K.simpleCellHeight
             
-        case 2:
+        case 1:
             
             return postsArray.isEmpty ? (UIScreen.main.bounds.height / 2) :  K.postHeight
             
@@ -505,7 +489,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 1 {
+        if indexPath.section == 0 {
             
             if let help = searchData?["help"] , let url = URL(string: help["url"].stringValue){
                 
@@ -523,7 +507,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         guard imageHashText == nil else {return}
         
-        if indexPath.section == 2{
+        if indexPath.section == 1{
             
             if indexPath.row == rowForPaggingUpdate{
                 
@@ -545,7 +529,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         hintCellShouldBeShown = false
         
-        tableView.reloadSections([1], with: .automatic)
+        tableView.reloadSections([0], with: .automatic)
         
     }
     
@@ -786,7 +770,7 @@ extension SearchViewController : PostCellCollectionViewActionsDelegate{
         
         searchTextField.text = option
         
-        tableView.reloadSections([0,1,2], with: .automatic)
+        tableView.reloadSections([0,1], with: .automatic)
         
         getSearchPageDataManager.getSearchPageData(key: key, query: option, page: page)
         
