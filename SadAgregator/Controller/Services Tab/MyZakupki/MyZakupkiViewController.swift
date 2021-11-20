@@ -431,6 +431,9 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
         
         cell.purNameTapped = { [weak self] in
             
+            guard let statusId = Int(pur.statusId) ,
+                    statusId < 2 else {return}
+            
             let alertController = UIAlertController(title: "Название закупки", message: nil, preferredStyle: .alert)
             
             alertController.addAction(UIAlertAction(title: "Изменить", style: .default, handler: { [weak self] _ in
@@ -471,6 +474,9 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
         }
         
         cell.dateTapped = { [weak self] in
+            
+            guard let statusId = Int(pur.statusId) ,
+                    statusId < 2 else {return}
             
             let datePickerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DatePickerVC") as! DatePickerViewController
             

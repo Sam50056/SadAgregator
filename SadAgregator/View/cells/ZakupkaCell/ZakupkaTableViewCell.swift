@@ -126,7 +126,12 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             cell.firstLabel.text = thisPur.capt
             cell.firstLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-            cell.firstLabel.textColor = .systemBlue
+            
+            if let statusIdInt = Int(thisPur.statusId) , statusIdInt >= 2{
+                cell.firstLabel.textColor =  .systemGray
+            }else{
+                cell.firstLabel.textColor =  .systemBlue
+            }
             
             cell.secondLabel.text = thisPur.dt
             cell.secondLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
