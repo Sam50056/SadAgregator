@@ -766,7 +766,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                         
                                         navVC.dismiss(animated: true, completion: nil)
                                         
-                                        let finalAlertController = UIAlertController(title: "Передать закупку помощнику \"\(brokerName)\"?", message: nil, preferredStyle: .alert)
+                                        let finalAlertController = UIAlertController(title: "Передать закупку посреднику \"\(brokerName)\"?", message: nil, preferredStyle: .alert)
                                         
                                         finalAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                                             
