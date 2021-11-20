@@ -897,6 +897,11 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                             return
                                                         }
                                                         
+                                                        self?.simpleNoAnswerRequestDone(data: deletePurData, index: indexPath.row)
+                                                        
+                                                        self?.purchases.remove(at: indexPath.row)
+                                                        self?.tableView.reloadData()
+                                                        
                                                     }
                                                     
                                                 }))
@@ -910,6 +915,9 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                             }
                                             
                                             self?.simpleNoAnswerRequestDone(data: deletePurData, index: indexPath.row)
+                                            
+                                            self?.purchases.remove(at: indexPath.row)
+                                            self?.tableView.reloadData()
                                             
                                         }
                                         
@@ -944,7 +952,12 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                                                             , handler: { _ in
                                                     
                                                     NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.BreakBySupply?AKey=\(self!.key)&APurID=\(pur.purId)")) { breakBySupplyData , _ in
+                                                        
                                                         self?.simpleNoAnswerRequestDone(data: breakBySupplyData, index: indexPath.row)
+                                                        
+                                                        self?.purchases.remove(at: indexPath.row)
+                                                        self?.tableView.reloadData()
+                                                        
                                                     }
                                                     
                                                 }))
@@ -1054,7 +1067,12 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                             }else if actionId == "11"{
                                 self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Отклонить закупку?", yesTapped: {
                                     NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.PurHandlerReject?AKey=\(self!.key)&APurID=\(pur.purId)")) { purRejectData , _ in
+                                        
                                         self?.simpleNoAnswerRequestDone(data: purRejectData, index: indexPath.row)
+                                        
+                                        self?.purchases.remove(at: indexPath.row)
+                                        self?.tableView.reloadData()
+                                        
                                     }
                                 })
                             }else if actionId == "12"{
@@ -1717,6 +1735,8 @@ extension MyZakupkiViewController : PurchasesOnePurDataManagerDelegate{
         DispatchQueue.main.async { [weak self] in
             
             if data["result"].intValue == 1{
+                
+                guard !data["purchaces"].arrayValue.isEmpty else {return}
                 
                 let purchaseData = data["purchaces"].arrayValue[0]
                 
