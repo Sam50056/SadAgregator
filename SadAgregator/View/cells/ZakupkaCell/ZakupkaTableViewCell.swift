@@ -28,6 +28,7 @@ class ZakupkaTableViewCell: UITableViewCell {
     var clientTapped : ((String) -> Void)?
     var handlerTapped : (() -> Void)?
     var tochkaTapped : (() -> Void)?
+    var zarabotokTapped : (() -> Void)?
     
     var documentImageTapped : ((Int) -> Void)?
     var documentImageRemoveButtonTapped : ((Int) -> Void)?
@@ -455,6 +456,8 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             tochkaTapped?()
         }else if section == 7{
             handlerTapped?()
+        }else if section == 8{
+            zarabotokTapped?()
         }else if section == 10{
             openTapped?(.docs)
         }else if section == 12{

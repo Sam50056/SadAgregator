@@ -650,6 +650,14 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             }
         }
         
+        cell.zarabotokTapped = { [weak self] in
+            
+            self?.showSimpleAlertWithOkButton(title: "Ваш заработок с этой покупки", message: nil, dismissButtonText: "Понятно", dismissAction: {
+                self?.dismiss(animated: true, completion: nil)
+            })
+            
+        }
+        
         cell.footerPressed = { [weak self] in
             
             PurchaseActionsGetActionsDataManager().getPurchaseActionsGetActionsData(key: self!.key, purId: pur.purId) { actionsData, actionsError in
