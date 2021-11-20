@@ -1032,7 +1032,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                                     return
                                                                 }
                                                                 
-                                                                self?.simpleNoAnswerRequestDone(data: finalData, index: indexPath.row)
+                                                                self?.refresh()
                                                                 
                                                             }
                                                             
