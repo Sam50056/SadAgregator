@@ -83,7 +83,7 @@ class MyZakupkiViewController: UIViewController {
         //Set up search controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Быстрый поиск по именам"
+        searchController.searchBar.placeholder = "Быстрый поиск"
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
@@ -593,7 +593,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             if item.label1 == "В ожидании:"{
                 status = "0"
                 navTitle = "В ожидании"
-            }else if item.label1 == "Выкуплены:"{
+            }else if item.label1 == "Выкуплено:"{
                 status = "1"
                 navTitle = "Выкуплены"
             }else if item.label1 == "Нет в наличии:"{
