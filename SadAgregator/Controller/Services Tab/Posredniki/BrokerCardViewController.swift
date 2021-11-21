@@ -637,9 +637,11 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             
             cell.contentView.backgroundColor = .systemGray6
             
-            guard let _ = cell.viewWithTag(1) as? UILabel ,
+            guard let label = cell.viewWithTag(1) as? UILabel ,
                   let textView = cell.viewWithTag(2) as? UITextView
             else {return cell}
+            
+            label.font = UIFont.boldSystemFont(ofSize: 17)
             
             textView.text = brokerData["dop_info"].stringValue.replacingOccurrences(of: "<br>", with: "\n")
             
