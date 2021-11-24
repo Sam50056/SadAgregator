@@ -399,7 +399,7 @@ extension MyZakupkiViewController {
         
         guard let imageSendingPurIndex = imageSendingPurIndex , let oplataImageId = oplataImageId else {return}
         
-        NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurDocImg?AKey=\(key)&APurSYSID=\(purchases[imageSendingPurIndex].purId)&AImgTYPE=2&AimgID=\(oplataImageId)")) { [weak self] updateDocData , _ in
+        NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurDocImg?AKey=\(key)&APurSYSID=\(purchases[imageSendingPurIndex].purId)&AImgTYPE=3&AimgID=\(oplataImageId)")) { [weak self] updateDocData , _ in
             self?.simpleNoAnswerRequestDone(data: updateDocData, index: imageSendingPurIndex)
         }
         
@@ -1935,28 +1935,30 @@ extension MyZakupkiViewController{
                 
                 print("Answer : \(json)")
                 
-                DispatchQueue.main.async { [self] in
+                DispatchQueue.main.async { [weak self] in
                     
                     //                    print("Got \(isSendingGruz ? "gruz" : "posilka") sent to server")
                     
                     var imageid = ""
                     
                     if sendingDocType == .gruz {
-                        imageid = gruzImageId!
+                        imageid = self!.gruzImageId!
                     }else if sendingDocType == .posilka{
-                        imageid = posilkaImageId!
+                        imageid = self!.posilkaImageId!
                     }else if sendingDocType == .oplata{
-                        imageid = oplataImageId!
+                        imageid = self!.oplataImageId!
                     }
                     
                     photoSavedDataManager.getPhotoSavedData(key: key, photoId: imageid) { data, error in
+                        
+                        self?.removeBoxView()
                         
                         if let error = error{
                             print("Error with PhotoSavedDataManager : \(error)")
                             return
                         }
                         
-                        DispatchQueue.main.async { [weak self] in
+                        DispatchQueue.main.async {
                             
                             guard let data = data else {return}
                             
@@ -1964,13 +1966,11 @@ extension MyZakupkiViewController{
                                 
                                 //                                print("\(isSendingGruz ? "Gruz" : "Posilka") image successfuly saved to server")
                                 
-                                self?.removeBoxView()
-                                
                                 if sendingDocType == .gruz{
                                     gruzSent()
                                 }else if sendingDocType == .posilka{
                                     posilkaSent()
-                                }else{
+                                }else if sendingDocType == .oplata{
                                     oplataSent()
                                 }
                                 
@@ -1990,6 +1990,7 @@ extension MyZakupkiViewController{
             
         }catch{
             print(error)
+            removeBoxView()
         }
         
     }
