@@ -39,12 +39,15 @@ class MyZakupkiViewController: UIViewController {
     
     private var gruzImageUrl : URL?
     private var gruzImageId : String?
+    private var gruzImage : UIImage?
     
     private var posilkaImageUrl : URL?
     private var posilkaImageId : String?
+    private var posilkaImage : UIImage?
     
     private var oplataImageUrl : URL?
     private var oplataImageId : String?
+    private var oplataImage : UIImage?
     
     private var sendingDocType : DocType?
     private var imageSendingPurIndex : Int?
@@ -368,9 +371,31 @@ extension MyZakupkiViewController {
     
     func removeBoxView(){
         
-        boxView.removeFromSuperview()
-        blurEffectView.removeFromSuperview()
-        view.isUserInteractionEnabled = true
+        DispatchQueue.main.async { [weak self] in
+            
+            self?.boxView.removeFromSuperview()
+            self?.blurEffectView.removeFromSuperview()
+            self?.view.isUserInteractionEnabled = true
+            
+        }
+        
+    }
+    
+    func getImage(){
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(title: "Сделать снимок", style: .default, handler: { [weak self] _ in
+            self?.showImagePickerController(sourceType: .camera)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Из галереи", style: .default, handler: { [weak self] _ in
+            self?.showImagePickerController(sourceType: .photoLibrary)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        present(alertController , animated: true)
         
     }
     
@@ -1486,7 +1511,8 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                     
                                     self?.sendingDocType = .gruz
                                     self?.imageSendingPurIndex = indexPath.row
-                                    self?.showImagePickerController(sourceType: .photoLibrary)
+                                    
+                                    self?.getImage()
                                     
                                 })
                                 
@@ -1496,7 +1522,8 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                     
                                     self?.sendingDocType = .posilka
                                     self?.imageSendingPurIndex = indexPath.row
-                                    self?.showImagePickerController(sourceType: .photoLibrary)
+                                    
+                                    self?.getImage()
                                     
                                 })
                                 
@@ -1586,7 +1613,8 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                     
                                     self?.sendingDocType = .oplata
                                     self?.imageSendingPurIndex = indexPath.row
-                                    self?.showImagePickerController(sourceType: .photoLibrary)
+                                    
+                                    self?.getImage()
                                     
                                 })
                                 
@@ -1849,6 +1877,21 @@ extension MyZakupkiViewController : UIImagePickerControllerDelegate, UINavigatio
             
             newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
             
+        }else if let safeImage = info[.originalImage] as? UIImage{
+            
+            if sendingDocType == .gruz {
+                gruzImage = safeImage
+                showBoxView(with: "Загрузка фото груза")
+            }else if sendingDocType == .posilka{
+                posilkaImage = safeImage
+                showBoxView(with: "Загрузка фото посылки")
+            }else if sendingDocType == .oplata{
+                oplataImage = safeImage
+                showBoxView(with: "Загрузка фото оплаты")
+            }
+            
+            newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
+            
         }
         
         //        print(info)
@@ -1874,12 +1917,24 @@ extension MyZakupkiViewController : NewPhotoPlaceDataManagerDelegate{
                 
                 print("URL FOR SENDING THE FILE: \(url)")
                 
-                if sendingDocType == .gruz , let gruzImageUrl = gruzImageUrl {
-                    sendFileToServer(from: gruzImageUrl, to: url)
-                }else if sendingDocType == .posilka , let posilkaImageUrl = posilkaImageUrl{
-                    sendFileToServer(from: posilkaImageUrl, to: url)
-                }else if sendingDocType == .oplata , let oplataImageUrl = oplataImageUrl{
-                    sendFileToServer(from: oplataImageUrl, to: url)
+                if sendingDocType == .gruz{
+                    if let gruzImageUrl = gruzImageUrl{
+                        sendFileToServer(from: gruzImageUrl, to: url)
+                    }else if let gruzImage = gruzImage{
+                        sendFileToServer(image: gruzImage, to: url)
+                    }
+                }else if sendingDocType == .posilka{
+                    if let posilkaImageUrl = posilkaImageUrl{
+                        sendFileToServer(from: posilkaImageUrl, to: url)
+                    }else if let posilkaImage = posilkaImage{
+                        sendFileToServer(image: posilkaImage, to: url)
+                    }
+                }else if sendingDocType == .oplata{
+                    if let oplataImageUrl = oplataImageUrl{
+                        sendFileToServer(from: oplataImageUrl, to: url)
+                    }else if let oplataImage = oplataImage{
+                        sendFileToServer(image: oplataImage, to: url)
+                    }
                 }
                 
                 let imageId = data["image_id"].stringValue
@@ -2009,6 +2064,96 @@ extension MyZakupkiViewController{
         }catch{
             print(error)
             removeBoxView()
+        }
+        
+    }
+    
+    func sendFileToServer(image : UIImage, to toUrl : String){
+        
+        //        print("import result : \(fromUrl)")
+        
+        guard let toUrl = URL(string: toUrl) else {return}
+        
+        print("To URL: \(toUrl)")
+        
+        do{
+            
+            let imageData = image.jpegData(compressionQuality: 0.5)
+            
+            var request = URLRequest(url: toUrl)
+            
+            request.httpMethod = "POST"
+            request.setValue("text/plane", forHTTPHeaderField: "Content-Type")
+            request.httpBody = imageData
+            
+            let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+                
+                if error != nil {
+                    print("Error sending file: \(error!.localizedDescription)")
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+                
+                print("Answer : \(json)")
+                
+                DispatchQueue.main.async {
+                    
+                    var imageid = ""
+                    
+                    if self!.sendingDocType == .gruz {
+                        imageid = self!.gruzImageId!
+                    }else if self!.sendingDocType == .posilka{
+                        imageid = self!.posilkaImageId!
+                    }else if self!.sendingDocType == .oplata{
+                        imageid = self!.oplataImageId!
+                    }
+                    
+                    self?.photoSavedDataManager.getPhotoSavedData(key: self!.key, photoId: imageid) { data, error in
+                        
+                        if let error = error{
+                            print("Error with PhotoSavedDataManager : \(error)")
+                            return
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            guard let data = data else {return}
+                            
+                            if data["result"].intValue == 1{
+                                
+                                print("Check image successfuly saved to server")
+                                
+                                self?.removeBoxView()
+                                
+                                if self!.sendingDocType == .gruz{
+                                    self?.gruzSent()
+                                }else if self!.sendingDocType == .posilka{
+                                    self?.posilkaSent()
+                                }else if self!.sendingDocType == .oplata{
+                                    self?.oplataSent()
+                                }
+                                
+                            }else{
+                                
+                                self?.removeBoxView()
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            task.resume()
+            
+        }catch{
+            print(error)
         }
         
     }
