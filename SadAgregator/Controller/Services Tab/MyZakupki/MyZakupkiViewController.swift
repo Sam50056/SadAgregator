@@ -1607,6 +1607,54 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                     
                                 })
                                 
+                            }else if actionId == "25"{
+                                
+                                let qrVC = QRScanViewController()
+                                
+                                qrVC.qrConnected = { [weak self] qrValue in
+                                    
+                                    NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurQR?AKey=\(self!.key)&APurSYSID=\(pur.purId)&AQR=\(qrValue)")) { qrData , qrError in
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            if let qrError = qrError {
+                                                print("Error with UpdatePurQR : \(qrError)")
+                                                return
+                                            }
+                                            
+                                            self?.simpleNoAnswerRequestDone(data: qrData, index: indexPath.row)
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                                qrVC.modalPresentationStyle = .formSheet
+                                
+                                self?.present(qrVC, animated: true, completion: nil)
+                                
+                            }else if actionId == "26"{
+                                
+                                self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Удалить QR код посылки из сборки?", yesTapped: {
+                                    
+                                    NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.DeletePurQR?AKey=\(self!.key)&APurSYSID=\(pur.purId)")) { qrData , qrError in
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            if let qrError = qrError{
+                                                print("Error with DeletePurQR : \(qrError)")
+                                                return
+                                            }
+                                            
+                                            self?.simpleNoAnswerRequestDone(data: qrData, index: indexPath.row)
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                })
+                                
                             }else if actionId == "27"{
                                 
                                 self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Обновить фото оплаты?", yesTapped: {

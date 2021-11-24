@@ -32,6 +32,7 @@
 		220704692685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220704682685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift */; };
 		2207046C2686A9CE00FC6B4B /* SborkaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207046B2686A9CE00FC6B4B /* SborkaView.swift */; };
 		220704702689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207046F2689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift */; };
+		22097AB8274EDB5800304F1F /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22097AB7274EDB5800304F1F /* QRScanViewController.swift */; };
 		220C95A226DF796900795DD4 /* AssemblySetRealPhotoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C95A126DF796900795DD4 /* AssemblySetRealPhotoDataManager.swift */; };
 		220C95A826E159C600795DD4 /* BalanceRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C95A626E159C600795DD4 /* BalanceRequestTableViewCell.swift */; };
 		220C95A926E159C600795DD4 /* BalanceRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220C95A726E159C600795DD4 /* BalanceRequestTableViewCell.xib */; };
@@ -385,6 +386,7 @@
 		220704682685681700FC6B4B /* ClientsDelClientFromPurDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsDelClientFromPurDataManager.swift; sourceTree = "<group>"; };
 		2207046B2686A9CE00FC6B4B /* SborkaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SborkaView.swift; sourceTree = "<group>"; };
 		2207046F2689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySegmentsInAssemblyDataManager.swift; sourceTree = "<group>"; };
+		22097AB7274EDB5800304F1F /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
 		220C95A126DF796900795DD4 /* AssemblySetRealPhotoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySetRealPhotoDataManager.swift; sourceTree = "<group>"; };
 		220C95A626E159C600795DD4 /* BalanceRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceRequestTableViewCell.swift; sourceTree = "<group>"; };
 		220C95A726E159C600795DD4 /* BalanceRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceRequestTableViewCell.xib; sourceTree = "<group>"; };
@@ -1257,6 +1259,7 @@
 				229CCABF26E7EC24000398E3 /* OneTovarViewController.swift */,
 				22692E3526B8CDDB00CA2946 /* DobavlenieVZakupku */,
 				227B6301273410C000687BEB /* SimpleDataTableViewController.swift */,
+				22097AB7274EDB5800304F1F /* QRScanViewController.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -2172,6 +2175,7 @@
 				229CCABE26E69752000398E3 /* BrokersSetBrokerActionsDataManager.swift in Sources */,
 				22DD117426CC755400E8494C /* RatingTableViewCellWithImages.swift in Sources */,
 				222375A026D96A250097AF41 /* SortirovkaContentViewController.swift in Sources */,
+				22097AB8274EDB5800304F1F /* QRScanViewController.swift in Sources */,
 				22B41BAB2648808600F7DC30 /* CreateDiapazonViewController.swift in Sources */,
 				22A09BFE2648B81C009B9921 /* PurchasesAddZonePriceDataManager.swift in Sources */,
 				222AF59525C7A69F002F7D5A /* RateUpdateDataManager.swift in Sources */,
