@@ -432,7 +432,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
         cell.purNameTapped = { [weak self] in
             
             guard let statusId = Int(pur.statusId) ,
-                    statusId < 2 else {return}
+                  statusId < 2 else {return}
             
             let alertController = UIAlertController(title: "Название закупки", message: nil, preferredStyle: .alert)
             
@@ -476,7 +476,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
         cell.dateTapped = { [weak self] in
             
             guard let statusId = Int(pur.statusId) ,
-                    statusId < 2 else {return}
+                  statusId < 2 else {return}
             
             let datePickerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DatePickerVC") as! DatePickerViewController
             
@@ -728,34 +728,39 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                     return
                                                 }
                                                 
-                                                if data!["result"].intValue == 1{
+                                                if let errorMessage = data!["msg"].string , errorMessage != ""{
                                                     
-                                                    let finalAlertController = UIAlertController(title: "Передать закупку  помощнику \"\(data!["broker_name"].stringValue)\"?", message: nil, preferredStyle: .alert)
+                                                    self?.showSimpleAlertWithOkButton(title: errorMessage, message: nil)
                                                     
-                                                    finalAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                                    return
+                                                }
+                                                
+                                                let finalAlertController = UIAlertController(title: "Передать закупку  помощнику \"\(data!["broker_name"].stringValue)\"?", message: nil, preferredStyle: .alert)
+                                                
+                                                finalAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                                    
+                                                    PurchaseActionsMoveToBrokerDataManager().getPurchaseActionsMoveToBrokerData(key: self!.key, purId: pur.purId, brokerId: data!["broker_id"].stringValue) { moveToBrokerData, moveToBrokerError in
                                                         
-                                                        PurchaseActionsMoveToBrokerDataManager().getPurchaseActionsMoveToBrokerData(key: self!.key, purId: pur.purId, brokerId: data!["broker_id"].stringValue) { moveToBrokerData, moveToBrokerError in
+                                                        DispatchQueue.main.async{
                                                             
-                                                            DispatchQueue.main.async{
-                                                                
-                                                                if let moveToBrokerError = moveToBrokerError , moveToBrokerData == nil {
-                                                                    print("Error with PurchaseActionsCheckBrokerByCodeDataManager : \(moveToBrokerError)")
-                                                                    return
-                                                                }
-                                                                
-                                                                self?.simpleNoAnswerRequestDone(data: moveToBrokerData, index: indexPath.row)
-                                                                
+                                                            if let moveToBrokerError = moveToBrokerError , moveToBrokerData == nil {
+                                                                print("Error with PurchaseActionsCheckBrokerByCodeDataManager : \(moveToBrokerError)")
+                                                                return
                                                             }
+                                                            
+                                                            self?.simpleNoAnswerRequestDone(data: moveToBrokerData, index: indexPath.row)
                                                             
                                                         }
                                                         
-                                                    }))
+                                                    }
                                                     
-                                                    finalAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-                                                    
-                                                    self?.present(finalAlertController, animated: true, completion: nil)
-                                                    
-                                                }
+                                                }))
+                                                
+                                                finalAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                
+                                                self?.present(finalAlertController, animated: true, completion: nil)
+                                                
+                                                
                                                 
                                             }
                                             
@@ -843,7 +848,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                     
                                                     commentController.addAction(UIAlertAction(title: "Отправить", style: .default, handler: { _ in
                                                         
-                                                        guard let comment = commentController.textFields?[0].text else {return}
+                                                        guard let comment = commentController.textFields?[0].text?.replacingOccurrences(of: "\n", with: "<br>") else {return}
                                                         
                                                         PurchaseActionsSetForSupplierCommentDataManager().getPurchaseActionsSetForSupplierCommentData(key: self!.key, purSysId: pur.purId, comment: comment) { commentData, commentError in
                                                             
