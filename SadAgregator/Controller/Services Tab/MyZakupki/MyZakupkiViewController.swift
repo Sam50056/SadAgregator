@@ -21,6 +21,8 @@ class MyZakupkiViewController: UIViewController {
     
     private var key = ""
     
+    let activityController = UIActivityIndicatorView()
+    
     private var purchases = [ZakupkaTableViewCell.Zakupka]()
     private var statuses = [JSON]()
     
@@ -228,6 +230,8 @@ extension MyZakupkiViewController {
     }
     
     @objc func refresh(){
+        
+        showSimpleCircleAnimation(activityController: activityController)
         
         purchases.removeAll()
         
@@ -1768,6 +1772,8 @@ extension MyZakupkiViewController : PurchasesFormPagingDataManagerDelegate{
         
         DispatchQueue.main.async { [weak self] in
             
+            self?.stopSimpleCircleAnimation(activityController: self!.activityController)
+            
             if data["result"].intValue == 1{
                 
                 var newPurs = [ZakupkaTableViewCell.Zakupka]()
@@ -1824,6 +1830,9 @@ extension MyZakupkiViewController : PurchasesFormPagingDataManagerDelegate{
     
     func didFailGettingPurchasesFormPagingDataWithError(error: String) {
         print("Error with PurchasesFormPagingDataManager : \(error)")
+        DispatchQueue.main.async { [weak self] in
+            self?.stopSimpleCircleAnimation(activityController: self!.activityController)
+        }
     }
     
 }
