@@ -525,6 +525,19 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             self?.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         
+        cell.zamenaTapped = { [weak self] in
+            
+            let prodsVC = ProdsByPurViewController()
+            
+            prodsVC.thisPurId = pur.purId
+            prodsVC.status = nil
+            prodsVC.navTitle = "Список замен в закупке"
+            prodsVC.showReplaces = true
+            
+            self?.navigationController?.pushViewController(prodsVC, animated: true)
+            
+        }
+        
         cell.clientTapped = { [weak self] id in
             
             let clientsListVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyZakupkiClientsList") as! MyZakupkiClientsListViewController
@@ -607,7 +620,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                 navTitle = "Нет в наличии"
             }
             
-            let prodsVC = ProdsByPurByStatusViewController()
+            let prodsVC = ProdsByPurViewController()
             
             prodsVC.thisPurId = pur.purId
             prodsVC.status = status

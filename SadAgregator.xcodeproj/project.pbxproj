@@ -105,7 +105,7 @@
 		2255301D261AA5B80017B9CF /* ClientsFilterPayHistByClientCountDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2255301C261AA5B80017B9CF /* ClientsFilterPayHistByClientCountDataManager.swift */; };
 		225714D4271206090082D583 /* ClientsCliensListByPurchaseDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714D3271206090082D583 /* ClientsCliensListByPurchaseDataManager.swift */; };
 		225714D7271209AB0082D583 /* MyZakupkiClientsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714D6271209AB0082D583 /* MyZakupkiClientsListViewController.swift */; };
-		225714D927161B4A0082D583 /* ProdsByPurByStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714D827161B4A0082D583 /* ProdsByPurByStatusViewController.swift */; };
+		225714D927161B4A0082D583 /* ProdsByPurViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714D827161B4A0082D583 /* ProdsByPurViewController.swift */; };
 		225714DB27161CCE0082D583 /* PurchasesProdsByClientByStatusDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714DA27161CCE0082D583 /* PurchasesProdsByClientByStatusDataManager.swift */; };
 		225714E427176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225714E227176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.swift */; };
 		225714E527176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225714E327176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.xib */; };
@@ -458,7 +458,7 @@
 		2255301C261AA5B80017B9CF /* ClientsFilterPayHistByClientCountDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsFilterPayHistByClientCountDataManager.swift; sourceTree = "<group>"; };
 		225714D3271206090082D583 /* ClientsCliensListByPurchaseDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsCliensListByPurchaseDataManager.swift; sourceTree = "<group>"; };
 		225714D6271209AB0082D583 /* MyZakupkiClientsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyZakupkiClientsListViewController.swift; sourceTree = "<group>"; };
-		225714D827161B4A0082D583 /* ProdsByPurByStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdsByPurByStatusViewController.swift; sourceTree = "<group>"; };
+		225714D827161B4A0082D583 /* ProdsByPurViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdsByPurViewController.swift; sourceTree = "<group>"; };
 		225714DA27161CCE0082D583 /* PurchasesProdsByClientByStatusDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesProdsByClientByStatusDataManager.swift; sourceTree = "<group>"; };
 		225714E227176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZakupkaTableViewCellDocumentsTableViewCell.swift; sourceTree = "<group>"; };
 		225714E327176B130082D583 /* ZakupkaTableViewCellDocumentsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZakupkaTableViewCellDocumentsTableViewCell.xib; sourceTree = "<group>"; };
@@ -1084,7 +1084,7 @@
 			children = (
 				22D9D12E26F65D1D005BD254 /* MyZakupkiViewController.swift */,
 				225714D6271209AB0082D583 /* MyZakupkiClientsListViewController.swift */,
-				225714D827161B4A0082D583 /* ProdsByPurByStatusViewController.swift */,
+				225714D827161B4A0082D583 /* ProdsByPurViewController.swift */,
 			);
 			path = MyZakupki;
 			sourceTree = "<group>";
@@ -2250,7 +2250,7 @@
 				225714E927177FF70082D583 /* ZakupkaTableViewCellDocumentsTableViewCellImageCollectionViewCell.swift in Sources */,
 				22D90224259AD188009732CC /* SetListWorkDataManager.swift in Sources */,
 				22CD3545269DD940009057C3 /* AssemblyAvailableStatusesDataManager.swift in Sources */,
-				225714D927161B4A0082D583 /* ProdsByPurByStatusViewController.swift in Sources */,
+				225714D927161B4A0082D583 /* ProdsByPurViewController.swift in Sources */,
 				2238F7F925940B8A00CFF51D /* MyVendorsDataManager.swift in Sources */,
 				22A4A9D22699F1C5000D3B73 /* AssemblyProdsInPointDataManager.swift in Sources */,
 				22B41BA726476EA000F7DC30 /* CenovieDiapazoniViewController.swift in Sources */,

@@ -25,6 +25,7 @@ class ZakupkaTableViewCell: UITableViewCell {
     
     var rightSideButtonPressedForCell : ((String) -> Void)?
     var tovarsSubItemTapped : ((Int) -> Void)?
+    var zamenaTapped : (() -> Void)?
     var clientTapped : ((String) -> Void)?
     var handlerTapped : (() -> Void)?
     var tochkaTapped : (() -> Void)?
@@ -73,7 +74,7 @@ class ZakupkaTableViewCell: UITableViewCell {
 extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        13
+        14
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,25 +87,27 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             return 1
         }else if section == 2 , thisPur.countItems != "" , thisPur.countItems != "0" , !thisPur.tovarsSubItems.isEmpty , thisPur.openTovars{
             return thisPur.tovarsSubItems.count
-        }else if section == 3 , thisPur.countClients != "" , thisPur.countClients != "0"{
+        }else if section == 3 , thisPur.replaces != "" , thisPur.replaces != "0"{
             return 1
-        }else if section == 4 , !thisPur.money.isEmpty{
+        }else if section == 4 , thisPur.countClients != "" , thisPur.countClients != "0"{
             return 1
-        }else if section == 5, !thisPur.money.isEmpty , thisPur.openMoney{
+        }else if section == 5 , !thisPur.money.isEmpty{
+            return 1
+        }else if section == 6, !thisPur.money.isEmpty , thisPur.openMoney{
             return thisPur.money.count
-        }else if section == 6 , thisPur.countPoints != "" , thisPur.countPoints != "0"{
+        }else if section == 7 , thisPur.countPoints != "" , thisPur.countPoints != "0"{
             return 1
-        }else if section == 7 , thisPur.handlerType != ""{
+        }else if section == 8 , thisPur.handlerType != ""{
             return 1
-        }else if section == 8 , thisPur.profit != "" , thisPur.profit != "0"{
+        }else if section == 9 , thisPur.profit != "" , thisPur.profit != "0"{
             return 1
-        }else if section == 9 , thisPur.postageCost != "" ,thisPur.postageCost != "0"{
+        }else if section == 10 , thisPur.postageCost != "" ,thisPur.postageCost != "0"{
             return 1
-        }else if section == 10 , !thisPur.images.isEmpty{
+        }else if section == 11 , !thisPur.images.isEmpty{
             return 1
-        }else if section == 11 , !thisPur.images.isEmpty , thisPur.openDocs{
+        }else if section == 12 , !thisPur.images.isEmpty , thisPur.openDocs{
             return 1
-        }else if section == 12{
+        }else if section == 13{
             return 1
         }
         
@@ -206,6 +209,28 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
+            cell.label1.text = "Замены"
+            cell.label2.text = thisPur.replaces
+            
+            cell.label1.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+            cell.label2.font = UIFont.systemFont(ofSize: 16)
+            
+            cell.label2.textColor = .systemBlue
+            
+            cell.iconImageView.image = UIImage(systemName: "return")
+            
+            cell.iconImageView.tintColor = .systemGray
+            
+            cell.dropDownImageView.isHidden = true
+            
+            cell.rightSideButton.isEnabled = false
+            
+            return cell
+            
+        case 4:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
+            
             cell.label1.text = "Клиенты"
             cell.label2.text = thisPur.countClients
             
@@ -224,7 +249,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        case 4:
+        case 5:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
@@ -245,7 +270,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        case 5:
+        case 6:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "subCell", for: indexPath) as! ZakupkaTableViewCellTableViewSubCell
             
@@ -265,7 +290,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        case 6:
+        case 7:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
@@ -286,7 +311,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        case 7:
+        case 8:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
@@ -317,7 +342,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        case 8:
+        case 9:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
@@ -338,7 +363,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        case 9:
+        case 10:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
@@ -359,7 +384,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        case 10:
+        case 11:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakupkaTableViewCellTableViewCell
             
@@ -380,7 +405,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        case 11:
+        case 12:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "docsCell", for: indexPath) as! ZakupkaTableViewCellDocumentsTableViewCell
             
@@ -396,7 +421,7 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        case 12:
+        case 13:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "footerCell", for: indexPath) as! ZakupkaTableViewCellFooterCell
             
@@ -424,11 +449,11 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
         
         if section == 0{
             return 45
-        }else if section == 2 || section == 5{
+        }else if section == 2 || section == 6{
             return 30
-        }else if section == 12{
+        }else if section == 13{
             return 50
-        }else if section == 11{
+        }else if section == 12{
             return 80
         }else{
             return 38
@@ -449,18 +474,20 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
         }else if section == 2{
             tovarsSubItemTapped?(indexPath.row)
         }else if section == 3{
-            clientTapped?(thisPur.clientId)
+            zamenaTapped?()
         }else if section == 4{
+            clientTapped?(thisPur.clientId)
+        }else if section == 5{
             openTapped?(.finance)
-        }else if section == 6{
-            tochkaTapped?()
         }else if section == 7{
-            handlerTapped?()
+            tochkaTapped?()
         }else if section == 8{
+            handlerTapped?()
+        }else if section == 9{
             zarabotokTapped?()
-        }else if section == 10{
+        }else if section == 11{
             openTapped?(.docs)
-        }else if section == 12{
+        }else if section == 13{
             footerPressed?()
         }
         

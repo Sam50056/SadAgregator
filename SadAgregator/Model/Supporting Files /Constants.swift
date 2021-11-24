@@ -182,6 +182,10 @@ struct K {
             height += 45
         }
         
+        if data.replaces != "" , data.replaces != "0"{
+            height += defaultCellHeight
+        }
+        
         if data.countClients != "" , data.countClients != "0"{
             height += defaultCellHeight
         }

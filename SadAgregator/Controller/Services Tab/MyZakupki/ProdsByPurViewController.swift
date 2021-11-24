@@ -1,5 +1,5 @@
 //
-//  ProdsByPurByStatusViewController.swift
+//  ProdsByPurViewController.swift
 //  SadAgregator
 //
 //  Created by Sam Yerznkyan on 12.10.2021.
@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 import SwiftyJSON
 
-class ProdsByPurByStatusViewController: UITableViewController {
+class ProdsByPurViewController: UITableViewController {
     
     let realm = try! Realm()
     
@@ -25,7 +25,11 @@ class ProdsByPurByStatusViewController: UITableViewController {
     
     private var purchasesProdsByClientByStatusDataManager = PurchasesProdsByClientByStatusDataManager()
     
+    private var dataManager = NoAnswerDataManager()
+    
     private var purProds = [JSON]()
+    
+    var showReplaces = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,13 +61,60 @@ class ProdsByPurByStatusViewController: UITableViewController {
 
 //MARK: - Functions
 
-extension ProdsByPurByStatusViewController{
+extension ProdsByPurViewController{
     
     func update(){
         
-        guard let thisPurId = thisPurId , let status = status else {return}
-        
-        purchasesProdsByClientByStatusDataManager.getPurchasesProdsByClientByStatusData(key: key, id: thisPurId, status: status, page: page)
+        if !showReplaces{
+            
+            guard let thisPurId = thisPurId , let status = status else {return}
+            
+            purchasesProdsByClientByStatusDataManager.getPurchasesProdsByClientByStatusData(key: key, id: thisPurId, status: status, page: page)
+            
+        }else{
+            
+            guard let thisPurId = thisPurId else {return}
+            
+            dataManager.sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchases.GetPurReplaces?AKey=\(key)&APurSYSID=\(thisPurId)&APage=\(page)")) { data, error in
+                
+                DispatchQueue.main.async { [weak self] in
+                    
+                    if let error = error , data == nil {
+                        print("Error with GetPurReplaces : \(error)")
+                        return
+                    }
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        if self!.page == 1{
+                            self?.purProds = data!["pur_prods"].arrayValue
+                        }else{
+                            self?.purProds.append(contentsOf: data!["pur_prods"].arrayValue)
+                        }
+                        
+                        if self!.page == 1 && self!.purProds.isEmpty{
+                            
+                            let alertController = UIAlertController(title: "У пользователя не добавлены товары", message: nil, preferredStyle: .alert)
+                            
+                            alertController.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { _ in
+                                self?.navigationController?.popViewController(animated: true)
+                            }))
+                            
+                            self?.present(alertController, animated: true, completion: nil)
+                            
+                        }
+                        
+                        self?.tableView.reloadData()
+                        
+                        self?.refreshControl!.endRefreshing()
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
         
     }
     
@@ -83,7 +134,7 @@ extension ProdsByPurByStatusViewController{
 
 //MARK: - TableView
 
-extension ProdsByPurByStatusViewController{
+extension ProdsByPurViewController{
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -634,7 +685,7 @@ extension ProdsByPurByStatusViewController{
 
 //MARK: - AssemblyProdsInPointDataManager
 
-extension ProdsByPurByStatusViewController : PurchasesProdsByClientByStatusDataManagerDelegate{
+extension ProdsByPurViewController : PurchasesProdsByClientByStatusDataManagerDelegate{
     
     func didGetPurchasesProdsByClientByStatusData(data: JSON) {
         
@@ -680,7 +731,7 @@ extension ProdsByPurByStatusViewController : PurchasesProdsByClientByStatusDataM
 
 //MARK: - Data Manipulation Methods
 
-extension ProdsByPurByStatusViewController {
+extension ProdsByPurViewController {
     
     func loadUserData (){
         
