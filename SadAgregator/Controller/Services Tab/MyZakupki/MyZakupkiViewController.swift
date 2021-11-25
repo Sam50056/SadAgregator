@@ -762,7 +762,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
         
         cell.zarabotokTapped = { [weak self] in
             
-            self?.showSimpleAlertWithOkButton(title: "Ваш заработок с этой покупки", message: nil, dismissButtonText: "Понятно", dismissAction: {
+            self?.showSimpleAlertWithOkButton(title: "Ваш заработок с этой закупки", message: nil, dismissButtonText: "Понятно", dismissAction: {
                 self?.dismiss(animated: true, completion: nil)
             })
             
