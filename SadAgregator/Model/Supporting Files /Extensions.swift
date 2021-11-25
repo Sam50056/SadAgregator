@@ -10,6 +10,7 @@ import RealmSwift
 import SwiftyJSON
 import MobileCoreServices
 import SwiftUI
+import AudioToolbox
 
 //MARK: - String
 
@@ -323,30 +324,30 @@ struct WillDisappearHandler: UIViewControllerRepresentable {
     func makeCoordinator() -> WillDisappearHandler.Coordinator {
         Coordinator(onWillDisappear: onWillDisappear)
     }
-
+    
     let onWillDisappear: () -> Void
-
+    
     func makeUIViewController(context: UIViewControllerRepresentableContext<WillDisappearHandler>) -> UIViewController {
         context.coordinator
     }
-
+    
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<WillDisappearHandler>) {
     }
-
+    
     typealias UIViewControllerType = UIViewController
-
+    
     class Coordinator: UIViewController {
         let onWillDisappear: () -> Void
-
+        
         init(onWillDisappear: @escaping () -> Void) {
             self.onWillDisappear = onWillDisappear
             super.init(nibName: nil, bundle: nil)
         }
-
+        
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
-
+        
         override func viewWillDisappear(_ animated: Bool) {
             super.viewWillDisappear(animated)
             onWillDisappear()
@@ -356,7 +357,7 @@ struct WillDisappearHandler: UIViewControllerRepresentable {
 
 struct WillDisappearModifier: ViewModifier {
     let callback: () -> Void
-
+    
     func body(content: Content) -> some View {
         content
             .background(WillDisappearHandler(onWillDisappear: callback))
@@ -369,3 +370,46 @@ extension View {
     }
 }
 
+enum Vibration {
+    case error
+    case success
+    case warning
+    case light
+    case medium
+    case heavy
+    @available(iOS 13.0, *)
+    case soft
+    @available(iOS 13.0, *)
+    case rigid
+    case selection
+    case oldSchool
+    
+    public func vibrate() {
+        switch self {
+        case .error:
+            UINotificationFeedbackGenerator().notificationOccurred(.error)
+        case .success:
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+        case .warning:
+            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+        case .light:
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        case .medium:
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        case .heavy:
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        case .soft:
+            if #available(iOS 13.0, *) {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            }
+        case .rigid:
+            if #available(iOS 13.0, *) {
+                UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+            }
+        case .selection:
+            UISelectionFeedbackGenerator().selectionChanged()
+        case .oldSchool:
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        }
+    }
+}

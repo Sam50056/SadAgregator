@@ -1621,12 +1621,22 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                         
                                         DispatchQueue.main.async {
                                             
+                                            self?.dismiss(animated: true, completion: nil)
+                                            
                                             if let qrError = qrError {
                                                 print("Error with UpdatePurQR : \(qrError)")
                                                 return
                                             }
                                             
                                             self?.simpleNoAnswerRequestDone(data: qrData, index: indexPath.row)
+                                            
+                                            if let errorMessage = qrData!["msg"].string , !errorMessage.isEmpty{
+                                                self?.showSimpleAlertWithOkButton(title: errorMessage, message: nil)
+                                                return
+                                            }
+                                            if qrData!["result"].intValue == 1{
+                                                Vibration.success.vibrate()
+                                            }
                                             
                                         }
                                         
