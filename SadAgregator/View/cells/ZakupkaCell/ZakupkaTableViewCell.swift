@@ -133,8 +133,12 @@ extension ZakupkaTableViewCell : UITableViewDelegate , UITableViewDataSource{
             
             if let statusIdInt = Int(thisPur.statusId) , statusIdInt >= 2{
                 cell.firstLabel.textColor =  .systemGray
+                cell.firstImageView.isHidden = true
+                cell.secondImageView.isHidden = true
             }else{
                 cell.firstLabel.textColor =  .systemBlue
+                cell.firstImageView.isHidden = false
+                cell.secondImageView.isHidden = false
             }
             
             cell.secondLabel.text = thisPur.dt

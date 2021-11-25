@@ -17,6 +17,9 @@ class ZakupkaTableViewCellHeaderCell: UITableViewCell {
     
     @IBOutlet weak var firstViewButton : UIButton!
     @IBOutlet weak var secondViewButton : UIButton!
+    
+    @IBOutlet weak var firstImageView : UIImageView!
+    @IBOutlet weak var secondImageView : UIImageView!
 
     var firstButtonTapped : (() -> ())?
     var secondButtonTapped : (() -> ())?
