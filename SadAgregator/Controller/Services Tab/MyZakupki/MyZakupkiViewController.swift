@@ -726,25 +726,30 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
         }
         
         cell.documentImageRemoveButtonTapped = { [weak self] i in
-            let image = pur.images[i]
-            PurchaseActionsDeletePurDocImgDataManager().getPurchaseActionsDeletePurDocImgData(key: self!.key, purSysId: pur.purId, imgId: image.id) { data, error in
+            
+            self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Удалить документ?"){
                 
-                if let error = error , data == nil {
-                    print("Error with PurchaseActionsDeletePurDocImgDataManager : \(error)")
-                    return
-                }
-                
-                DispatchQueue.main.async {
+                let image = pur.images[i]
+                PurchaseActionsDeletePurDocImgDataManager().getPurchaseActionsDeletePurDocImgData(key: self!.key, purSysId: pur.purId, imgId: image.id) { data, error in
                     
-                    if data!["result"].intValue == 1{
+                    if let error = error , data == nil {
+                        print("Error with PurchaseActionsDeletePurDocImgDataManager : \(error)")
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
                         
-                        self?.purchases[indexPath.row].images.remove(at: i)
-                        self?.tableView.reloadData()
-                        
-                    }else{
-                        
-                        if let message = data!["msg"].string , !message.isEmpty{
-                            self?.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                        if data!["result"].intValue == 1{
+                            
+                            self?.purchases[indexPath.row].images.remove(at: i)
+                            self?.tableView.reloadData()
+                            
+                        }else{
+                            
+                            if let message = data!["msg"].string , !message.isEmpty{
+                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                            }
+                            
                         }
                         
                     }
@@ -752,6 +757,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                 }
                 
             }
+            
         }
         
         cell.zarabotokTapped = { [weak self] in
