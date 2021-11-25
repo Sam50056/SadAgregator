@@ -1687,7 +1687,16 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                     }else{
                         
                         if let message = actionsData!["msg"].string , !message.isEmpty{
-                            self?.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                            
+                            let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+                            
+                            self?.present(alertController, animated: true, completion: nil)
+                            
+                            Timer.scheduledTimer(withTimeInterval: 1.2, repeats: false) { timer in
+                                alertController.dismiss(animated: true, completion: nil)
+                                timer.invalidate()
+                            }
+                            
                         }
                         
                     }
