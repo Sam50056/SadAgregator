@@ -2743,6 +2743,76 @@
             </objects>
             <point key="canvasLocation" x="1377" y="3181"/>
         </scene>
+        <!--Zakupki Confirm View Controller-->
+        <scene sceneID="Rqd-6m-LEU">
+            <objects>
+                <viewController storyboardIdentifier="ZakupkiConfirmVC" id="P4D-xp-a2b" customClass="ZakupkiConfirmViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qQg-1D-8p2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Low-5Z-jNA">
+                                <rect key="frame" x="16" y="60" width="382" height="723"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="XXD-Da-TaQ">
+                                <rect key="frame" x="16" y="799" width="382" height="63"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMs-ai-67m">
+                                        <rect key="frame" x="0.0" y="0.0" width="183" height="63"/>
+                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="63" id="7y5-dm-hWM"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Отмена"/>
+                                        <connections>
+                                            <action selector="otmenaButtonPressed:" destination="P4D-xp-a2b" eventType="touchUpInside" id="e9s-Ki-f8h"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Vx-b6-M34">
+                                        <rect key="frame" x="199" y="0.0" width="183" height="63"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="63" id="Sth-kc-k6r"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Принимаю"/>
+                                        <connections>
+                                            <action selector="acceptButtonPressed:" destination="P4D-xp-a2b" eventType="touchUpInside" id="FLP-by-wLG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ALN-Jo-SlV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="XXD-Da-TaQ" firstAttribute="leading" secondItem="ALN-Jo-SlV" secondAttribute="leading" constant="16" id="2Jj-o3-iBY"/>
+                            <constraint firstItem="XXD-Da-TaQ" firstAttribute="top" secondItem="Low-5Z-jNA" secondAttribute="bottom" constant="16" id="J4R-EK-QHj"/>
+                            <constraint firstItem="XXD-Da-TaQ" firstAttribute="bottom" secondItem="ALN-Jo-SlV" secondAttribute="bottom" id="LBd-so-lkY"/>
+                            <constraint firstItem="ALN-Jo-SlV" firstAttribute="trailing" secondItem="Low-5Z-jNA" secondAttribute="trailing" constant="16" id="WTA-9p-lXx"/>
+                            <constraint firstItem="Low-5Z-jNA" firstAttribute="top" secondItem="ALN-Jo-SlV" secondAttribute="top" constant="16" id="kPC-wS-KF0"/>
+                            <constraint firstItem="Low-5Z-jNA" firstAttribute="leading" secondItem="ALN-Jo-SlV" secondAttribute="leading" constant="16" id="nKk-SU-A9A"/>
+                            <constraint firstItem="ALN-Jo-SlV" firstAttribute="trailing" secondItem="XXD-Da-TaQ" secondAttribute="trailing" constant="16" id="tvm-zG-dCA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="acceptButton" destination="0Vx-b6-M34" id="gZF-pV-Xdn"/>
+                        <outlet property="otmenaButton" destination="mMs-ai-67m" id="GJh-CG-GIu"/>
+                        <outlet property="textView" destination="Low-5Z-jNA" id="bTU-x7-Ktj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cYp-HK-FrP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1376.8115942028987" y="3999.7767857142853"/>
+        </scene>
         <!--Vends Popularity Rating View Controller-->
         <scene sceneID="gVf-w0-7Kq">
             <objects>
@@ -7940,6 +8010,9 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
