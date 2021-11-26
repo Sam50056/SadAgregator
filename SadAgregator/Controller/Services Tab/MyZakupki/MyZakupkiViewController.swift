@@ -1459,13 +1459,19 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                                             return
                                                                             
                                                                         }
-                                                                        let alertController = UIAlertController(title: "Дропшип закупки \(brokerDropCheckData!["pur_name"].stringValue) на клиента ФИО «\(brokerDropCheckData!["client_name"].stringValue)» в почтовое отделение \(brokerDropCheckData!["client_index"].stringValue)? Проверьте ФИО и индекс, эти данные изменить будет нельзя.", message: nil, preferredStyle: .alert)
+                                                                        let alertController = UIAlertController(title: "Дропшип закупки \(brokerDropCheckData!["pur_name"].stringValue) на клиента ФИО «\(brokerDropCheckData!["client_fio"].stringValue)» в почтовое отделение \(brokerDropCheckData!["client_index"].stringValue)? Проверьте ФИО и индекс, эти данные изменить будет нельзя.", message: nil, preferredStyle: .alert)
                                                                         
                                                                         alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
                                                                         
                                                                         alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                                                                             
                                                                             NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.MoveToBrokerDropship?Akey=\(self!.key)&APurSYSID=\(pur.purId)&ABroker=\(checkBrokerdata!["broker_id"].stringValue)")) { moveToBrokerDropData , _ in
+                                                                                
+                                                                                if let errorMessage = moveToBrokerDropData!["msg"].string , !errorMessage.isEmpty{
+                                                                                    self?.showSimpleAlertWithOkButton(title: errorMessage, message: nil)
+                                                                                    return
+                                                                                }
+                                                                                
                                                                                 self?.simpleNoAnswerRequestDone(data: moveToBrokerDropData, index: indexPath.row)
                                                                             }
                                                                             
