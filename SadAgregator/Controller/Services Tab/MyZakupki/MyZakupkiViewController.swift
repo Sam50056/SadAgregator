@@ -1606,7 +1606,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 
                             }else if actionId == "22"{
                                 
-                                self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Обновить фото посылки?", yesTapped: {
+                                self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Обновить фото накладной?", yesTapped: {
                                     
                                     self?.sendingDocType = .posilka
                                     self?.imageSendingPurIndex = indexPath.row
@@ -2029,7 +2029,7 @@ extension MyZakupkiViewController : UIImagePickerControllerDelegate, UINavigatio
                 showBoxView(with: "Загрузка фото груза")
             }else if sendingDocType == .posilka{
                 posilkaImageUrl = safeUrl
-                showBoxView(with: "Загрузка фото посылки")
+                showBoxView(with: "Загрузка фото накладной")
             }else if sendingDocType == .oplata{
                 oplataImageUrl = safeUrl
                 showBoxView(with: "Загрузка фото оплаты")
@@ -2044,7 +2044,7 @@ extension MyZakupkiViewController : UIImagePickerControllerDelegate, UINavigatio
                 showBoxView(with: "Загрузка фото груза")
             }else if sendingDocType == .posilka{
                 posilkaImage = safeImage
-                showBoxView(with: "Загрузка фото посылки")
+                showBoxView(with: "Загрузка фото накладной")
             }else if sendingDocType == .oplata{
                 oplataImage = safeImage
                 showBoxView(with: "Загрузка фото оплаты")
