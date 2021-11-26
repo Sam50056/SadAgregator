@@ -834,7 +834,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                         return
                                                     }
                                                     
-                                                    let finalAlertController = UIAlertController(title: "Передать закупку  помощнику \"\(data!["broker_name"].stringValue)\"?", message: nil, preferredStyle: .alert)
+                                                    let finalAlertController = UIAlertController(title: "Передать закупку  посреднику \"\(data!["broker_name"].stringValue)\"?", message: nil, preferredStyle: .alert)
                                                     
                                                     finalAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                                                         
@@ -1084,7 +1084,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                     
                                                     NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.BreakBySupply?AKey=\(self!.key)&APurID=\(pur.purId)")) { breakBySupplyData , _ in
                                                         
-                                                        self?.simpleNoAnswerRequestDone(data: breakBySupplyData, index: indexPath.row)
+                                                        //                                                        self?.simpleNoAnswerRequestDone(data: breakBySupplyData, index: indexPath.row)
                                                         
                                                         self?.purchases.remove(at: indexPath.row)
                                                         self?.tableView.reloadData()
@@ -1199,7 +1199,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Отклонить закупку?", yesTapped: {
                                     NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.PurHandlerReject?AKey=\(self!.key)&APurID=\(pur.purId)")) { purRejectData , _ in
                                         
-                                        self?.simpleNoAnswerRequestDone(data: purRejectData, index: indexPath.row)
+                                        //                                        self?.simpleNoAnswerRequestDone(data: purRejectData, index: indexPath.row)
                                         
                                         self?.purchases.remove(at: indexPath.row)
                                         self?.tableView.reloadData()
