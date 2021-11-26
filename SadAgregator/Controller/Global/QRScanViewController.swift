@@ -156,6 +156,8 @@ extension QRScanViewController: AVCaptureMetadataOutputObjectsDelegate {
                 
                 print(qrValue)
                 
+                captureSession.stopRunning()
+                
             }
             
         }

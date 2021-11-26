@@ -1701,7 +1701,9 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 
                                 qrVC.qrConnected = { [weak self] qrValue in
                                     
-                                    NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurQR?AKey=\(self!.key)&APurSYSID=\(pur.purId)&AQR=\(qrValue)")) { qrData , qrError in
+                                    let encodedURL = "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurQR?AKey=\(self!.key)&APurSYSID=\(pur.purId)&AQR=\(qrValue)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                                    let url = URL(string: encodedURL ?? "")
+                                    NoAnswerDataManager().sendNoAnswerDataRequest(url: url) { qrData , qrError in
                                         
                                         DispatchQueue.main.async {
                                             
@@ -1712,14 +1714,11 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                 return
                                             }
                                             
-                                            self?.simpleNoAnswerRequestDone(data: qrData, index: indexPath.row)
-                                            
                                             if let errorMessage = qrData!["msg"].string , !errorMessage.isEmpty{
                                                 self?.showSimpleAlertWithOkButton(title: errorMessage, message: nil)
-                                                return
-                                            }
-                                            if qrData!["result"].intValue == 1{
+                                            }else if qrData!["result"].intValue == 1{
                                                 Vibration.success.vibrate()
+                                                self?.simpleNoAnswerRequestDone(data: qrData, index: indexPath.row)
                                             }
                                             
                                         }
