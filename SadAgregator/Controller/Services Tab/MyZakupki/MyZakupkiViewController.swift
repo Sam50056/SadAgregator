@@ -943,15 +943,28 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                     
                                                     alertController.addAction(UIAlertAction(title: "Да", style: .default , handler: { _ in
                                                         
-                                                        let commentController = UIAlertController(title: "Комментарий по закупке", message: nil, preferredStyle: .alert)
-                                                        
-                                                        commentController.addTextField { field in
-                                                            field.placeholder = "Ваш комментарий"
-                                                        }
-                                                        
-                                                        commentController.addAction(UIAlertAction(title: "Отправить", style: .default, handler: { _ in
+                                                        let alert = UIAlertController (title: "Оставить поставщику комментарий по закупке?", message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+                                                          alert.view.autoresizesSubviews = true
+
+                                                          let textView = UITextView (frame: .zero)
+                                                          
+                                                          textView.translatesAutoresizingMaskIntoConstraints = false
+
+                                                          let leadConstraint = NSLayoutConstraint (item: alert.view!, attribute: .leading, relatedBy: .equal, toItem: textView, attribute: .leading, multiplier: 1.0, constant: -8.0)
+
+                                                          let trailConstraint = NSLayoutConstraint (item: alert.view!, attribute: .trailing, relatedBy: .equal, toItem: textView, attribute: .trailing, multiplier: 1.0, constant: 8.0)
+
+                                                          let topConstraint = NSLayoutConstraint (item: alert.view!, attribute: .top, relatedBy: .equal, toItem: textView, attribute: .top, multiplier: 1.0, constant: -64.0)
+
+                                                          let bottomConstraint = NSLayoutConstraint (item: alert.view!, attribute: .bottom, relatedBy: .equal, toItem: textView, attribute: .bottom, multiplier: 1.0, constant: 64.0)
+
+                                                          alert.view.addSubview(textView)
+                                                          
+                                                          NSLayoutConstraint.activate([leadConstraint, trailConstraint, topConstraint, bottomConstraint])
+
+                                                        alert.addAction(UIAlertAction(title: "Отправить", style: .default, handler: { _ in
                                                             
-                                                            guard let comment = commentController.textFields?[0].text?.replacingOccurrences(of: "\n", with: "<br>") else {return}
+                                                            guard let comment = textView.text?.replacingOccurrences(of: "\n", with: "<br>") else {return}
                                                             
                                                             PurchaseActionsSetForSupplierCommentDataManager().getPurchaseActionsSetForSupplierCommentData(key: self!.key, purSysId: pur.purId, comment: comment) { commentData, commentError in
                                                                 
@@ -970,9 +983,9 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                             
                                                         }))
                                                         
-                                                        commentController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                                                        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
                                                         
-                                                        self?.present(commentController, animated: true, completion: nil)
+                                                          self?.present(alert, animated: true, completion: nil)
                                                         
                                                     }))
                                                     
@@ -1467,12 +1480,16 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                                             
                                                                             NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.MoveToBrokerDropship?Akey=\(self!.key)&APurSYSID=\(pur.purId)&ABroker=\(checkBrokerdata!["broker_id"].stringValue)")) { moveToBrokerDropData , _ in
                                                                                 
-                                                                                if let errorMessage = moveToBrokerDropData!["msg"].string , !errorMessage.isEmpty{
-                                                                                    self?.showSimpleAlertWithOkButton(title: errorMessage, message: nil)
-                                                                                    return
+                                                                                DispatchQueue.main.async {
+                                                                                    
+                                                                                    if let errorMessage = moveToBrokerDropData!["msg"].string , !errorMessage.isEmpty{
+                                                                                        self?.showSimpleAlertWithOkButton(title: errorMessage, message: nil)
+                                                                                        return
+                                                                                    }
+                                                                                    
+                                                                                    self?.simpleNoAnswerRequestDone(data: moveToBrokerDropData, index: indexPath.row)
+                                                                                    
                                                                                 }
-                                                                                
-                                                                                self?.simpleNoAnswerRequestDone(data: moveToBrokerDropData, index: indexPath.row)
                                                                             }
                                                                             
                                                                         }))
