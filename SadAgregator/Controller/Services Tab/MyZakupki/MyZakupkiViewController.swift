@@ -847,6 +847,11 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                                     return
                                                                 }
                                                                 
+                                                                if let errorMessage = moveToBrokerData!["msg"].string , !errorMessage.isEmpty{
+                                                                    self?.showSimpleAlertWithOkButton(title: errorMessage, message: nil)
+                                                                    return
+                                                                }
+                                                                
                                                                 self?.simpleNoAnswerRequestDone(data: moveToBrokerData, index: indexPath.row)
                                                                 
                                                             }
@@ -893,6 +898,11 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                         
                                                         if let moveToBrokerError = moveToBrokerError , moveToBrokerData == nil {
                                                             print("Error with PurchaseActionsCheckBrokerByCodeDataManager : \(moveToBrokerError)")
+                                                            return
+                                                        }
+                                                        
+                                                        if let errorMessage = moveToBrokerData!["msg"].string , !errorMessage.isEmpty{
+                                                            self?.showSimpleAlertWithOkButton(title: errorMessage, message: nil)
                                                             return
                                                         }
                                                         
@@ -1099,8 +1109,12 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                         
                                                         //                                                        self?.simpleNoAnswerRequestDone(data: breakBySupplyData, index: indexPath.row)
                                                         
-                                                        self?.purchases.remove(at: indexPath.row)
-                                                        self?.tableView.reloadData()
+                                                        DispatchQueue.main.async {
+                                                            
+                                                            self?.purchases.remove(at: indexPath.row)
+                                                            self?.tableView.reloadData()
+                                                            
+                                                        }
                                                         
                                                     }
                                                     
@@ -1756,7 +1770,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 
                             }else if actionId == "26"{
                                 
-                                self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Удалить QR код посылки из сборки?", yesTapped: {
+                                self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Удалить QR код посылки?", yesTapped: {
                                     
                                     NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.DeletePurQR?AKey=\(self!.key)&APurSYSID=\(pur.purId)")) { qrData , qrError in
                                         
