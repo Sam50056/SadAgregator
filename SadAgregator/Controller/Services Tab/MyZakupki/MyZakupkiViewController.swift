@@ -706,9 +706,9 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             }else if item.label1 == "Выкуплено:"{
                 status = "1"
                 navTitle = "Выкуплены"
-            }else if item.label1 == "Нет в наличии:"{
+            }else if item.label1 == "Не выкуплено:"{
                 status = "2"
-                navTitle = "Нет в наличии"
+                navTitle = "Не выкуплено:"
             }
             
             let prodsVC = ProdsByPurViewController()
