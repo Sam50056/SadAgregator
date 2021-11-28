@@ -342,6 +342,40 @@ extension MyZakupkiViewController {
         
     }
     
+    func showCommentVC(pur : ZakupkaTableViewCell.Zakupka , index : Int){
+        
+        let commentAlerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AlertWithTextFieldVC") as! AlertWithTextFieldViewController
+        
+        commentAlerVC.labelText = "Комментарий по закупке"
+        commentAlerVC.doneButtonTitle = "Отправить"
+        
+        commentAlerVC.modalPresentationStyle = .overFullScreen
+        
+        commentAlerVC.doneTapped = { [weak self] text in
+            
+            let comment = text.replacingOccurrences(of: "\n", with: "<br>")
+            
+            PurchaseActionsSetForSupplierCommentDataManager().getPurchaseActionsSetForSupplierCommentData(key: self!.key, purSysId: pur.purId, comment: comment) { commentData, commentError in
+                
+                DispatchQueue.main.async {
+                    
+                    if let commentError = commentError , commentData == nil{
+                        print("Error with PurchaseActionsSetForSupplierCommentDataManager : \(commentError)")
+                        return
+                    }
+                    
+                    self?.simpleNoAnswerRequestDone(data: commentData, index: index)
+                    
+                }
+                
+            }
+            
+        }
+        
+        present(commentAlerVC, animated: true, completion: nil)
+        
+    }
+    
     func action12(pur : ZakupkaTableViewCell.Zakupka , index : Int){
         
         let summAlertController = UIAlertController(title: "Какую сумму оплатил клиент?", message: nil, preferredStyle: .alert)
@@ -955,49 +989,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                     
                                                     alertController.addAction(UIAlertAction(title: "Да", style: .default , handler: { _ in
                                                         
-                                                        let alert = UIAlertController (title: "Оставить поставщику комментарий по закупке?", message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
-                                                          alert.view.autoresizesSubviews = true
-
-                                                          let textView = UITextView (frame: .zero)
-                                                          
-                                                          textView.translatesAutoresizingMaskIntoConstraints = false
-
-                                                          let leadConstraint = NSLayoutConstraint (item: alert.view!, attribute: .leading, relatedBy: .equal, toItem: textView, attribute: .leading, multiplier: 1.0, constant: -8.0)
-
-                                                          let trailConstraint = NSLayoutConstraint (item: alert.view!, attribute: .trailing, relatedBy: .equal, toItem: textView, attribute: .trailing, multiplier: 1.0, constant: 8.0)
-
-                                                          let topConstraint = NSLayoutConstraint (item: alert.view!, attribute: .top, relatedBy: .equal, toItem: textView, attribute: .top, multiplier: 1.0, constant: -64.0)
-
-                                                          let bottomConstraint = NSLayoutConstraint (item: alert.view!, attribute: .bottom, relatedBy: .equal, toItem: textView, attribute: .bottom, multiplier: 1.0, constant: 64.0)
-
-                                                          alert.view.addSubview(textView)
-                                                          
-                                                          NSLayoutConstraint.activate([leadConstraint, trailConstraint, topConstraint, bottomConstraint])
-
-                                                        alert.addAction(UIAlertAction(title: "Отправить", style: .default, handler: { _ in
-                                                            
-                                                            guard let comment = textView.text?.replacingOccurrences(of: "\n", with: "<br>") else {return}
-                                                            
-                                                            PurchaseActionsSetForSupplierCommentDataManager().getPurchaseActionsSetForSupplierCommentData(key: self!.key, purSysId: pur.purId, comment: comment) { commentData, commentError in
-                                                                
-                                                                DispatchQueue.main.async {
-                                                                    
-                                                                    if let commentError = commentError , commentData == nil{
-                                                                        print("Error with PurchaseActionsSetForSupplierCommentDataManager : \(commentError)")
-                                                                        return
-                                                                    }
-                                                                    
-                                                                    self?.simpleNoAnswerRequestDone(data: commentData, index: indexPath.row)
-                                                                    
-                                                                }
-                                                                
-                                                            }
-                                                            
-                                                        }))
-                                                        
-                                                        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-                                                        
-                                                          self?.present(alert, animated: true, completion: nil)
+                                                        self?.showCommentVC(pur: pur, index: indexPath.row)
                                                         
                                                     }))
                                                     
@@ -1364,6 +1356,8 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                 
                                 self?.showConfirmWindow(pur: pur, actId: "19"){
                                     
+                                    self?.showConfirmAlert(firstText: "Подтвердите действие", secondText: "Передать закупку поставщику на дропшип?") {
+                                    
                                     NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.ToSupplierDropCheck?Akey=\(self!.key)&APurID=\(pur.purId)")) { toSupData, toSupError in
                                         
                                         DispatchQueue.main.async {
@@ -1372,7 +1366,6 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                 print("Error with : \(toSupError)")
                                                 return
                                             }
-                                            
                                             
                                             if let errorMessage = toSupData!["msg"].string , !errorMessage.isEmpty{
                                                 
@@ -1398,8 +1391,40 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                             
                                             alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                                                 
-                                                NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.ToSupplierDropship?Akey=\(self!.key)&APurID=\(pur.purId)")) { toSupDropData , _ in
-                                                    self?.simpleNoAnswerRequestDone(data: toSupDropData, index: indexPath.row)
+                                                NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.ToSupplierDropship?Akey=\(self!.key)&APurID=\(pur.purId)") { toSupDropData , toSupDropError in
+                                                    
+                                                    DispatchQueue.main.async {
+                                                        
+                                                        if let toSupDropError = toSupDropError {
+                                                            print("Error with toSupplierDropship : \(toSupDropError)")
+                                                            return
+                                                        }
+                                                        
+                                                        if toSupDropData!["result"].intValue == 1{
+                                                            
+                                                            if let errorMessage = toSupDropData!["msg"].string , !errorMessage.isEmpty{
+                                                                self?.showSimpleAlertWithOkButton(title: errorMessage, message: nil)
+                                                                return
+                                                            }
+                                                            
+                                                            let commentAlertController = UIAlertController(title: "Оставить поставщику комментарий по закупке?", message: nil, preferredStyle: .alert)
+                                                            
+                                                            commentAlertController.addAction(UIAlertAction(title: "Да", style: .default , handler: { _ in
+                                                                
+                                                                self?.showCommentVC(pur: pur, index: indexPath.row)
+                                                                
+                                                            }))
+                                                            
+                                                            commentAlertController.addAction(UIAlertAction(title: "Отмена", style: .default, handler: nil))
+                                                            
+                                                            self?.present(commentAlertController, animated: true, completion: nil)
+                                                            
+                                                        }
+                                                        
+                                                        self?.simpleNoAnswerRequestDone(data: toSupDropData, index: indexPath.row)
+                                                        
+                                                    }
+                                                    
                                                 }
                                                 
                                             }))
@@ -1414,13 +1439,13 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                             
                                             self?.present(alertController, animated: true, completion: nil)
                                             
-                                            
-                                            
                                         }
                                         
                                     }
                                     
                                 }
+                                
+                            }
                                 
                             }else if actionId == "20"{
                                 

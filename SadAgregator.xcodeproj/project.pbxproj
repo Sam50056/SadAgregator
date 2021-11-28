@@ -34,6 +34,7 @@
 		220704702689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2207046F2689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift */; };
 		22097AB8274EDB5800304F1F /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22097AB7274EDB5800304F1F /* QRScanViewController.swift */; };
 		22097ABA274FB32700304F1F /* ZakupkiConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22097AB9274FB32700304F1F /* ZakupkiConfirmViewController.swift */; };
+		22097ABC2753F6D600304F1F /* AlertWithTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22097ABB2753F6D600304F1F /* AlertWithTextFieldViewController.swift */; };
 		220C95A226DF796900795DD4 /* AssemblySetRealPhotoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C95A126DF796900795DD4 /* AssemblySetRealPhotoDataManager.swift */; };
 		220C95A826E159C600795DD4 /* BalanceRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220C95A626E159C600795DD4 /* BalanceRequestTableViewCell.swift */; };
 		220C95A926E159C600795DD4 /* BalanceRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220C95A726E159C600795DD4 /* BalanceRequestTableViewCell.xib */; };
@@ -389,6 +390,7 @@
 		2207046F2689516700FC6B4B /* AssemblySegmentsInAssemblyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySegmentsInAssemblyDataManager.swift; sourceTree = "<group>"; };
 		22097AB7274EDB5800304F1F /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
 		22097AB9274FB32700304F1F /* ZakupkiConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZakupkiConfirmViewController.swift; sourceTree = "<group>"; };
+		22097ABB2753F6D600304F1F /* AlertWithTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertWithTextFieldViewController.swift; sourceTree = "<group>"; };
 		220C95A126DF796900795DD4 /* AssemblySetRealPhotoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySetRealPhotoDataManager.swift; sourceTree = "<group>"; };
 		220C95A626E159C600795DD4 /* BalanceRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceRequestTableViewCell.swift; sourceTree = "<group>"; };
 		220C95A726E159C600795DD4 /* BalanceRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceRequestTableViewCell.xib; sourceTree = "<group>"; };
@@ -1263,6 +1265,7 @@
 				22692E3526B8CDDB00CA2946 /* DobavlenieVZakupku */,
 				227B6301273410C000687BEB /* SimpleDataTableViewController.swift */,
 				22097AB7274EDB5800304F1F /* QRScanViewController.swift */,
+				22097ABB2753F6D600304F1F /* AlertWithTextFieldViewController.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -2455,6 +2458,7 @@
 				2238F7F6259400C600CFF51D /* FavoriteVendsView.swift in Sources */,
 				226F241626B344D000FB2744 /* BrokerTableViewCellTableViewCell.swift in Sources */,
 				22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */,
+				22097ABC2753F6D600304F1F /* AlertWithTextFieldViewController.swift in Sources */,
 				226975F12700C3B0008539CF /* PurchasesFormPagingDataManager.swift in Sources */,
 				22BF4DD926755D2800748D0B /* NastroykiPostavshikaTableViewController.swift in Sources */,
 				22CD3547269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift in Sources */,
