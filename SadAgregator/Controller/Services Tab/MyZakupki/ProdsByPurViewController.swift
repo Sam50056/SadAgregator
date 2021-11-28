@@ -17,6 +17,7 @@ class ProdsByPurViewController: UITableViewController {
     
     var thisPurId : String?
     var status : String?
+    var clientId : String?
     
     var navTitle : String?
     
@@ -27,9 +28,11 @@ class ProdsByPurViewController: UITableViewController {
     
     private var dataManager = NoAnswerDataManager()
     
+    private var purchasesProdsByClientDataManager = PurchasesProdsByClientDataManager()
+    
     private var purProds = [JSON]()
     
-    var showReplaces = false
+    var pageData : PageData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +42,7 @@ class ProdsByPurViewController: UITableViewController {
         refreshControl!.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
         purchasesProdsByClientByStatusDataManager.delegate = self
+        purchasesProdsByClientDataManager.delegate = self
         
         loadUserData()
         
@@ -59,19 +63,31 @@ class ProdsByPurViewController: UITableViewController {
     
 }
 
+extension ProdsByPurViewController {
+    
+    enum PageData {
+        case tovarSubItem
+        case purZamena
+        case client
+    }
+    
+}
+
 //MARK: - Functions
 
 extension ProdsByPurViewController{
     
     func update(){
         
-        if !showReplaces{
+        guard let pageData = pageData else {return}
+        
+        if pageData == .tovarSubItem{
             
             guard let thisPurId = thisPurId , let status = status else {return}
             
             purchasesProdsByClientByStatusDataManager.getPurchasesProdsByClientByStatusData(key: key, id: thisPurId, status: status, page: page)
             
-        }else{
+        }else if pageData == .purZamena{
             
             guard let thisPurId = thisPurId else {return}
             
@@ -113,6 +129,12 @@ extension ProdsByPurViewController{
                 }
                 
             }
+            
+        }else if pageData == .client{
+            
+            guard let thisPurId = thisPurId , let clientId = clientId else {return}
+            
+            purchasesProdsByClientDataManager.getPurchasesProdsByClientData(key: key, clientId: clientId, purSYSID: thisPurId, page: page)
             
         }
         
@@ -725,6 +747,52 @@ extension ProdsByPurViewController : PurchasesProdsByClientByStatusDataManagerDe
     
     func didFailGettingPurchasesProdsByClientByStatusDataWithError(error: String) {
         print("Error with PurchasesProdsByClientByStatusDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - PurchasesProdsByClientDataManager
+
+extension ProdsByPurViewController : PurchasesProdsByClientDataManagerDelegate {
+    
+    func didGetPurchasesProdsByClientData(data: JSON) {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            if data["result"].intValue == 1{
+                
+                if self!.page == 1{
+                    self?.purProds = data["pur_prods"].arrayValue
+                }else{
+                    self?.purProds.append(contentsOf: data["pur_prods"].arrayValue)
+                }
+                
+                if self!.page == 1 && self!.purProds.isEmpty{
+                    
+                    let alertController = UIAlertController(title: "У пользователя не добавлены товары", message: nil, preferredStyle: .alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { _ in
+                        self?.navigationController?.popViewController(animated: true)
+                    }))
+                    
+                    self?.present(alertController, animated: true, completion: nil)
+                    
+                }
+                
+                self?.tableView.reloadData()
+                
+                self?.refreshControl!.endRefreshing()
+                
+            }else{
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingPurchasesProdsByClientDataWithError(error: String) {
+        print("Error with PurchasesProdsByClientDataManager : \(error)")
     }
     
 }

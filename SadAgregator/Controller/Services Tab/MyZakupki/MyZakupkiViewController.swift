@@ -623,7 +623,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             prodsVC.thisPurId = pur.purId
             prodsVC.status = nil
             prodsVC.navTitle = "Список замен в закупке"
-            prodsVC.showReplaces = true
+            prodsVC.pageData = .purZamena
             
             self?.navigationController?.pushViewController(prodsVC, animated: true)
             
@@ -716,6 +716,8 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
             prodsVC.thisPurId = pur.purId
             prodsVC.status = status
             prodsVC.navTitle = navTitle
+            
+            prodsVC.pageData = .tovarSubItem
             
             self?.navigationController?.pushViewController(prodsVC, animated: true)
             

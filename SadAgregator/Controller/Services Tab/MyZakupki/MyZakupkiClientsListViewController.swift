@@ -237,7 +237,15 @@ extension MyZakupkiClientsListViewController : UITableViewDelegate , UITableView
             
             let id = clients[indexPath.row]["client_id"].string ?? clients[indexPath.row]["id"].string
             
-            goToClientVCWith(id)
+            let prodsVC = ProdsByPurViewController()
+            
+            prodsVC.thisPurId = thisPur
+            prodsVC.clientId = id
+            prodsVC.status = nil
+            prodsVC.navTitle = "Товары"
+            prodsVC.pageData = .client
+            
+            navigationController?.pushViewController(prodsVC, animated: true)
             
         }
         
