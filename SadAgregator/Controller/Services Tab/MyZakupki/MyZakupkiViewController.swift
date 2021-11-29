@@ -1387,7 +1387,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                 
                                             }
                                             
-                                            let alertController = UIAlertController(title: "Дропшип закупки \(toSupData!["pur_name"].stringValue) на клиента ФИО «Иванова Петровна» в почтовое отделение \(toSupData!["client_index"].stringValue)? Проверьте ФИО и индекс, эти данные изменить будет нельзя.", message: nil, preferredStyle: .alert)
+                                            let alertController = UIAlertController(title: "Дропшип закупки \(toSupData!["pur_name"].stringValue) на клиента ФИО «\(toSupData!["client_name"].stringValue)» в почтовое отделение \(toSupData!["client_index"].stringValue)? Проверьте ФИО и индекс, эти данные изменить будет нельзя.", message: nil, preferredStyle: .alert)
                                             
                                             alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                                                 
