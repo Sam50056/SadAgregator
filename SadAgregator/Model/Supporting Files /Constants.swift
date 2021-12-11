@@ -246,4 +246,42 @@ struct K {
         
     }
     
+    static func makeHeightForZakazCell(data : ZakazTableViewCell.Zakaz) -> CGFloat {
+        
+        var height : CGFloat = 0
+        
+        let defaultCellHeight : CGFloat = 38
+        
+        height += 70 //Header
+       
+        if !data.clientBalance.isEmpty , data.clientBalance != "0" {
+            height += defaultCellHeight
+        }
+        
+        if !data.itemsCount.isEmpty , data.itemsCount != "0"{
+            height += defaultCellHeight
+        }
+        
+        if !data.deliveryType.isEmpty{
+            height += defaultCellHeight
+        }
+        
+        if !data.statusName.isEmpty{
+            height += defaultCellHeight
+        }
+        
+        if data.comment.isEmpty{
+            
+        }
+        
+//        if section == 6{
+//            return 0
+//        }
+        
+        height += 8
+        
+        return height
+        
+    }
+    
 }

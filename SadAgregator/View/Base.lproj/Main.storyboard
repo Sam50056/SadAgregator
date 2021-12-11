@@ -2741,7 +2741,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hjd-Vc-Y36" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1377" y="3181"/>
+            <point key="canvasLocation" x="438" y="3198"/>
         </scene>
         <!--Zakupki Confirm View Controller-->
         <scene sceneID="Rqd-6m-LEU">
@@ -2811,7 +2811,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cYp-HK-FrP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1376.8115942028987" y="3999.7767857142853"/>
+            <point key="canvasLocation" x="438" y="4017"/>
         </scene>
         <!--Alert With Text Field View Controller-->
         <scene sceneID="UjW-da-7UZ">
@@ -2900,7 +2900,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bSK-en-x7A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1376.8115942028987" y="4812.7232142857138"/>
+            <point key="canvasLocation" x="438" y="4829"/>
         </scene>
         <!--Vends Popularity Rating View Controller-->
         <scene sceneID="gVf-w0-7Kq">
@@ -3048,7 +3048,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Cl-zS-KfS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2371" y="2400"/>
+            <point key="canvasLocation" x="-3310" y="2417"/>
         </scene>
         <!--Clients View Controller-->
         <scene sceneID="EnX-Qv-uTY">
@@ -3199,7 +3199,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nqS-DY-8jM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1089" y="2400"/>
+            <point key="canvasLocation" x="-2029" y="2417"/>
         </scene>
         <!--Create Client View Controller-->
         <scene sceneID="hrJ-Bh-8JO">
@@ -3369,7 +3369,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dbb-2f-3Pp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-678" y="3792"/>
+            <point key="canvasLocation" x="-1617" y="3808"/>
         </scene>
         <!--Payment History View Controller-->
         <scene sceneID="7A7-XU-Gbm">
@@ -3399,7 +3399,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8qQ-Oc-EKo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1500" y="3085"/>
+            <point key="canvasLocation" x="-2439" y="3101"/>
         </scene>
         <!--Client View Controller-->
         <scene sceneID="3Ey-VJ-6Ki">
@@ -3657,7 +3657,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rPM-rm-00f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-680" y="3085"/>
+            <point key="canvasLocation" x="-1620" y="3101"/>
         </scene>
         <!--DobavlenieV Zakupku View Controller-->
         <scene sceneID="udt-0N-g0b">
@@ -4535,7 +4535,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mtB-cn-ktT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="206" y="2400"/>
+            <point key="canvasLocation" x="-733" y="2417"/>
         </scene>
         <!--My Zakupki View Controller-->
         <scene sceneID="dDO-sG-i4Q">
@@ -4565,7 +4565,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sow-OH-xqn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1378" y="2400"/>
+            <point key="canvasLocation" x="438" y="2417"/>
         </scene>
         <!--Broker Card View Controller-->
         <scene sceneID="ypE-Qo-koo">
@@ -5257,7 +5257,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5HQ-UJ-KAH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2526" y="2400"/>
+            <point key="canvasLocation" x="1586" y="2417"/>
         </scene>
         <!--Sortirovka View Controller-->
         <scene sceneID="Yoo-dk-qGs">
@@ -5272,7 +5272,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEI-Q0-gF1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3546" y="2400"/>
+            <point key="canvasLocation" x="2606" y="2417"/>
+        </scene>
+        <!--My Zakazi View Controller-->
+        <scene sceneID="ll8-wx-paE">
+            <objects>
+                <viewController storyboardIdentifier="MyZakaziVC" id="crB-00-hoY" customClass="MyZakaziViewController" customModule="SadAgregator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jiY-5c-KHV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NU0-GG-7He">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="HYC-su-dVC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NU0-GG-7He" firstAttribute="leading" secondItem="HYC-su-dVC" secondAttribute="leading" id="D6z-tn-OKk"/>
+                            <constraint firstItem="NU0-GG-7He" firstAttribute="trailing" secondItem="HYC-su-dVC" secondAttribute="trailing" id="Ges-Ok-E5w"/>
+                            <constraint firstAttribute="bottom" secondItem="NU0-GG-7He" secondAttribute="bottom" id="MSa-ej-zih"/>
+                            <constraint firstItem="NU0-GG-7He" firstAttribute="top" secondItem="HYC-su-dVC" secondAttribute="top" id="dZf-x3-vUI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="NU0-GG-7He" id="cWc-UA-oDp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m2e-cm-Q8h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3751" y="2417"/>
         </scene>
         <!--Sortirovka Content View Controller-->
         <scene sceneID="awb-G1-kBC">
@@ -5771,7 +5801,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y9v-EQ-vwp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3546" y="3084"/>
+            <point key="canvasLocation" x="2606" y="3100"/>
         </scene>
         <!--Create Diapazon View Controller-->
         <scene sceneID="FXS-wV-VZC">
@@ -5997,7 +6027,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0En-nZ-2ba" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1497" y="4233"/>
+            <point key="canvasLocation" x="-2436" y="4250"/>
         </scene>
         <!--Payment Filter View Controller-->
         <scene sceneID="pQl-hT-TWa">
@@ -6256,7 +6286,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ib2-xY-LtY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1500" y="3749"/>
+            <point key="canvasLocation" x="-2439" y="3765"/>
         </scene>
         <!--Menu Hosting Controller-->
         <scene sceneID="Gya-o8-FEd">
@@ -8034,7 +8064,7 @@
         <segue reference="yR4-7g-u1L"/>
         <segue reference="UT5-6g-K7A"/>
         <segue reference="5co-KY-lmW"/>
-        <segue reference="CqK-8r-UgW"/>
+        <segue reference="BuK-hk-BZE"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="94"/>

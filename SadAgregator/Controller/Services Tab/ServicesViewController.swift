@@ -226,7 +226,9 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
             
         }else if section == 1{
             
+            let myZakaziVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyZakaziVC") as! MyZakaziViewController
             
+            navigationController?.pushViewController(myZakaziVC, animated: true)
             
         }else if section == 2{
             
