@@ -37,6 +37,13 @@ class MyZakaziViewController : UIViewController{
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.title = "Мои заказы"
+        
+    }
+    
 }
 
 //MARK: - TableView
