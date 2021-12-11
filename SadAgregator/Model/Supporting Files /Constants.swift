@@ -270,8 +270,14 @@ struct K {
             height += defaultCellHeight
         }
         
-        if data.comment.isEmpty{
-            
+        if !data.comment.isEmpty{
+            if data.comment.count >= 150{
+                height += 150
+            }else if data.comment.count >= 100{
+                height += 120
+            }else{
+                height += 100
+            }
         }
         
 //        if section == 6{

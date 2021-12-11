@@ -17,6 +17,7 @@ class ZakazTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         tableView.register(UINib(nibName: "ZakazTableViewCellHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "headerCell")
+        tableView.register(UINib(nibName: "ZakazTableViewCellCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "commentCell")
         tableView.register(UINib(nibName: "ZakazTableViewCellImageViewTwoLabelTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         
         tableView.delegate = self
@@ -154,6 +155,12 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
+        }else if section == 5{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
+            
+            return cell
+            
         }
         
         return UITableViewCell()
@@ -162,10 +169,20 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
+        guard let thisZakaz = thisZakaz else {return 0}
+        
         let section = indexPath.section
         
         if section == 0{
             return 70
+        }else if section == 5{
+            if thisZakaz.comment.count >= 150{
+                return 150
+            }else if thisZakaz.comment.count >= 100{
+                return 120
+            }else{
+                return 100
+            }
         }else{
             return 38
         }

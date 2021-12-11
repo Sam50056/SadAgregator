@@ -347,6 +347,8 @@
 		22D9D14026F6726A005BD254 /* ZakupkaTableViewCellTableViewSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D9D13E26F6726A005BD254 /* ZakupkaTableViewCellTableViewSubCell.xib */; };
 		22D9D14426FA6122005BD254 /* ZakupkaTableViewCellHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9D14226FA6122005BD254 /* ZakupkaTableViewCellHeaderCell.swift */; };
 		22D9D14526FA6122005BD254 /* ZakupkaTableViewCellHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D9D14326FA6122005BD254 /* ZakupkaTableViewCellHeaderCell.xib */; };
+		22D9DCA52764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9DCA32764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.swift */; };
+		22D9DCA62764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D9DCA42764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.xib */; };
 		22DC987226028B160016A31B /* PaggingPaymentsByClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC987126028B160016A31B /* PaggingPaymentsByClientDataManager.swift */; };
 		22DC9876260293E90016A31B /* ClientsPagingPaymentsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */; };
 		22DC987F2602AFCB0016A31B /* UpdateClientInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */; };
@@ -715,6 +717,8 @@
 		22D9D13E26F6726A005BD254 /* ZakupkaTableViewCellTableViewSubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZakupkaTableViewCellTableViewSubCell.xib; sourceTree = "<group>"; };
 		22D9D14226FA6122005BD254 /* ZakupkaTableViewCellHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZakupkaTableViewCellHeaderCell.swift; sourceTree = "<group>"; };
 		22D9D14326FA6122005BD254 /* ZakupkaTableViewCellHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZakupkaTableViewCellHeaderCell.xib; sourceTree = "<group>"; };
+		22D9DCA32764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZakazTableViewCellCommentTableViewCell.swift; sourceTree = "<group>"; };
+		22D9DCA42764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZakazTableViewCellCommentTableViewCell.xib; sourceTree = "<group>"; };
 		22DC987126028B160016A31B /* PaggingPaymentsByClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaggingPaymentsByClientDataManager.swift; sourceTree = "<group>"; };
 		22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsPagingPaymentsDataManager.swift; sourceTree = "<group>"; };
 		22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateClientInfoDataManager.swift; sourceTree = "<group>"; };
@@ -1420,6 +1424,7 @@
 			children = (
 				2286BE5B275FEFB9006C404C /* Cell */,
 				2286BE56275FE34C006C404C /* HeaderCell */,
+				22D9DCA22764CE0100A75055 /* Comment cell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1965,6 +1970,15 @@
 			path = HeaderCell;
 			sourceTree = "<group>";
 		};
+		22D9DCA22764CE0100A75055 /* Comment cell */ = {
+			isa = PBXGroup;
+			children = (
+				22D9DCA32764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.swift */,
+				22D9DCA42764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.xib */,
+			);
+			path = "Comment cell";
+			sourceTree = "<group>";
+		};
 		22DB5DD126895C0F00ACE62F /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
@@ -2186,6 +2200,7 @@
 				22941A49262B6F3400119844 /* TovarTableViewCellCollectionViewCell.xib in Resources */,
 				22D9D13A26F66E38005BD254 /* ZakupkaTableViewCellTableViewCell.xib in Resources */,
 				2237E77725FA32C500EBD919 /* PurchaseTableViewCell.xib in Resources */,
+				22D9DCA62764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.xib in Resources */,
 				22328CDA25FE857800C51CC9 /* PaymentTableViewCell.xib in Resources */,
 				22BF19DA25A3DDC800567DB7 /* TextLabelCollectionViewCell.xib in Resources */,
 				22DD117A26CC7D5400E8494C /* RatingTableViewCellWithImagesCollectionViewCell.xib in Resources */,
@@ -2451,6 +2466,7 @@
 				226EEF0726DC478D002417D2 /* QRScanQRDataManager.swift in Sources */,
 				22ADF827267C31BD00811DA9 /* VendAddSendRuleDataManager.swift in Sources */,
 				22B26520267D2B5E004342E3 /* BrokersAddZonePriceDataManager.swift in Sources */,
+				22D9DCA52764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.swift in Sources */,
 				2268869325994F030079933D /* ListWorkView.swift in Sources */,
 				22EF767D2596CCCE0093B645 /* SetSimpleReqDataManager.swift in Sources */,
 				22F7426A26226561009128AF /* PurchasesItemInfoDataManager.swift in Sources */,
