@@ -18,26 +18,28 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sjC-xp-ABg">
-                        <rect key="frame" x="20" y="13" width="30" height="25"/>
+                        <rect key="frame" x="20" y="6" width="30" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="3Dm-zR-zSx"/>
                             <constraint firstAttribute="width" constant="30" id="wat-m4-3I8"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Evx-pZ-ZI1">
-                        <rect key="frame" x="58" y="16.5" width="38" height="18"/>
+                        <rect key="frame" x="58" y="9.5" width="38" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDG-ab-0GF">
-                        <rect key="frame" x="328" y="16.5" width="38" height="18"/>
+                        <rect key="frame" x="328" y="9.5" width="38" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="sjC-xp-ABg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="3eg-Fe-LMQ"/>
+                    <constraint firstAttribute="bottom" secondItem="sjC-xp-ABg" secondAttribute="bottom" constant="6" id="4RX-6f-ZcS"/>
                     <constraint firstItem="Evx-pZ-ZI1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Mzq-Iq-Omy"/>
                     <constraint firstItem="DDG-ab-0GF" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="UJ1-RM-vhq"/>
                     <constraint firstItem="DDG-ab-0GF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dY4-D9-xKT"/>
@@ -52,7 +54,7 @@
                 <outlet property="label2" destination="DDG-ab-0GF" id="Lwp-wb-6Th"/>
                 <outlet property="zakazImageView" destination="sjC-xp-ABg" id="fYe-cb-DEa"/>
             </connections>
-            <point key="canvasLocation" x="185.50724637681162" y="75.334821428571431"/>
+            <point key="canvasLocation" x="186" y="65"/>
         </tableViewCell>
     </objects>
 </document>

@@ -272,11 +272,11 @@ struct K {
         
         if !data.comment.isEmpty{
             if data.comment.count >= 150{
-                height += 150
+                height += 135
             }else if data.comment.count >= 100{
-                height += 120
+                height += 105
             }else{
-                height += 100
+                height += 85
             }
         }
         
