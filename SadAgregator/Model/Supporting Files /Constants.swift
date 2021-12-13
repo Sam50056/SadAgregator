@@ -246,7 +246,7 @@ struct K {
         
     }
     
-    static func makeHeightForZakazCell(data : ZakazTableViewCell.Zakaz) -> CGFloat {
+    static func makeHeightForZakazCell(data : ZakazTableViewCell.Zakaz , width : CGFloat) -> CGFloat {
         
         var height : CGFloat = 0
         
@@ -278,6 +278,11 @@ struct K {
             }else{
                 height += 100
             }
+        }
+        
+        if !data.comment.isEmpty{
+            height += data.comment.heightWithConstrainedWidth(width: width, font: UIFont.systemFont(ofSize: 15))
+//            height += 8
         }
         
 //        if section == 6{

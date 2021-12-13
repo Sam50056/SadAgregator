@@ -349,6 +349,7 @@
 		22D9D14526FA6122005BD254 /* ZakupkaTableViewCellHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D9D14326FA6122005BD254 /* ZakupkaTableViewCellHeaderCell.xib */; };
 		22D9DCA52764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9DCA32764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.swift */; };
 		22D9DCA62764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D9DCA42764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.xib */; };
+		22D9DCA8276630A900A75055 /* ZakazViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9DCA7276630A900A75055 /* ZakazViewController.swift */; };
 		22DC987226028B160016A31B /* PaggingPaymentsByClientDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC987126028B160016A31B /* PaggingPaymentsByClientDataManager.swift */; };
 		22DC9876260293E90016A31B /* ClientsPagingPaymentsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */; };
 		22DC987F2602AFCB0016A31B /* UpdateClientInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */; };
@@ -719,6 +720,7 @@
 		22D9D14326FA6122005BD254 /* ZakupkaTableViewCellHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZakupkaTableViewCellHeaderCell.xib; sourceTree = "<group>"; };
 		22D9DCA32764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZakazTableViewCellCommentTableViewCell.swift; sourceTree = "<group>"; };
 		22D9DCA42764CE4E00A75055 /* ZakazTableViewCellCommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZakazTableViewCellCommentTableViewCell.xib; sourceTree = "<group>"; };
+		22D9DCA7276630A900A75055 /* ZakazViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZakazViewController.swift; sourceTree = "<group>"; };
 		22DC987126028B160016A31B /* PaggingPaymentsByClientDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaggingPaymentsByClientDataManager.swift; sourceTree = "<group>"; };
 		22DC9875260293E90016A31B /* ClientsPagingPaymentsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsPagingPaymentsDataManager.swift; sourceTree = "<group>"; };
 		22DC987E2602AFCB0016A31B /* UpdateClientInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateClientInfoDataManager.swift; sourceTree = "<group>"; };
@@ -1405,6 +1407,7 @@
 			isa = PBXGroup;
 			children = (
 				2286BE4E275AB7EF006C404C /* MyZakaziViewController.swift */,
+				22D9DCA7276630A900A75055 /* ZakazViewController.swift */,
 			);
 			path = MyZakazi;
 			sourceTree = "<group>";
@@ -2398,6 +2401,7 @@
 				22E4471B269238B50016D96E /* AssemblyPointsInSegmentDataManager.swift in Sources */,
 				22D90221259AC9EF009732CC /* AlbumsInProgressDataManager.swift in Sources */,
 				22B2D8EB267108A600F2F820 /* BrokersGetDeliveryTypeDataManager.swift in Sources */,
+				22D9DCA8276630A900A75055 /* ZakazViewController.swift in Sources */,
 				2200942825D831C00001F7B3 /* CategoriesTableViewCell.swift in Sources */,
 				22BF1A1125A5E19100567DB7 /* LinePointsPaggingDataManager.swift in Sources */,
 				22A4A9D4269A3EB3000D3B73 /* QRScannerController.swift in Sources */,

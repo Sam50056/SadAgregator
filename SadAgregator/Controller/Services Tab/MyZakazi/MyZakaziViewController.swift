@@ -71,7 +71,17 @@ extension MyZakaziViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        K.makeHeightForZakazCell(data: orders[indexPath.row])
+        K.makeHeightForZakazCell(data: orders[indexPath.row], width: view.bounds.width - 32)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let zakazVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZakazVC") as! ZakazViewController
+        
+        zakazVC.thisZakaz = orders[indexPath.row]
+        
+        navigationController?.pushViewController(zakazVC, animated: true)
+        
     }
     
 }

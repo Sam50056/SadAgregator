@@ -27,6 +27,9 @@ class ZakazTableViewCell: UITableViewCell {
         tableView.allowsSelection = false
         
         tableView.isScrollEnabled = false
+        tableView.isUserInteractionEnabled = false
+        
+        tableView.rowHeight = UITableView.automaticDimension
         
     }
     
@@ -157,7 +160,9 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             
         }else if section == 5{
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! ZakazTableViewCellCommentTableViewCell
+            
+            cell.commentTextView.text = thisZakaz.comment
             
             return cell
             
@@ -167,27 +172,27 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
         
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        guard let thisZakaz = thisZakaz else {return 0}
-        
-        let section = indexPath.section
-        
-        if section == 0{
-            return 70
-        }else if section == 5{
-            if thisZakaz.comment.count >= 150{
-                return 150
-            }else if thisZakaz.comment.count >= 100{
-                return 120
-            }else{
-                return 100
-            }
-        }else{
-            return 38
-        }
-        
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//
+//        guard let thisZakaz = thisZakaz else {return 0}
+//
+//        let section = indexPath.section
+//
+//        if section == 0{
+//            return 70
+//        }else if section == 5{
+//            if thisZakaz.comment.count >= 150{
+//                return 150
+//            }else if thisZakaz.comment.count >= 100{
+//                return 120
+//            }else{
+//                return 100
+//            }
+//        }else{
+//            return 38
+//        }
+//
+//    }
     
 }
 
