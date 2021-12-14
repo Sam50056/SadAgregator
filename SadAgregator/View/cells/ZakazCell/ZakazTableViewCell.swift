@@ -11,7 +11,19 @@ class ZakazTableViewCell: UITableViewCell {
     
     @IBOutlet weak var tableView : UITableView!
     
-    var thisZakaz : Zakaz?
+    var thisZakaz : Zakaz?{
+        didSet{
+            
+            tableView.reloadData()
+            
+            if let thisZakaz = thisZakaz , thisZakaz.isShownForOneZakaz {
+                tableView.isUserInteractionEnabled = true
+            }else{
+                tableView.isUserInteractionEnabled = false
+            }
+            
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,15 +31,14 @@ class ZakazTableViewCell: UITableViewCell {
         tableView.register(UINib(nibName: "ZakazTableViewCellHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "headerCell")
         tableView.register(UINib(nibName: "ZakazTableViewCellCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "commentCell")
         tableView.register(UINib(nibName: "ZakazTableViewCellImageViewTwoLabelTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        tableView.register(UINib(nibName: "ZakazTableViewCellBgViewTableViewCell", bundle: nil), forCellReuseIdentifier: "bgViewCell")
         
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
         
         tableView.isScrollEnabled = false
-        tableView.isUserInteractionEnabled = false
         
         tableView.rowHeight = UITableView.automaticDimension
         
@@ -65,7 +76,7 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
         }else if section == 5 , !thisZakaz.comment.isEmpty{
             return 1
         }else if section == 6{
-            return 0
+            return thisZakaz.isShownForOneZakaz ? 1 : 0
         }
         
         return 0
@@ -105,6 +116,8 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             cell.label2.textColor = .systemGray
             cell.label2.textColor = thisZakaz.clientBalance.contains("-") ? .systemRed : .systemGreen
             
+            cell.contentView.backgroundColor = UIColor(named: "whiteblack")
+            
             return cell
             
         }else if section == 2{
@@ -121,6 +134,8 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             cell.label1.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
             cell.label2.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
             cell.label2.textColor = .systemGray
+            
+            cell.contentView.backgroundColor = UIColor(named: "whiteblack")
             
             return cell
             
@@ -139,6 +154,8 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             cell.label2.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
             cell.label2.textColor = .systemGray
             
+            cell.contentView.backgroundColor = UIColor(named: "whiteblack")
+            
             return cell
             
         }else if section == 4{
@@ -156,6 +173,8 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             cell.label2.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
             cell.label2.textColor = .systemGray
             
+            cell.contentView.backgroundColor = UIColor(named: "whiteblack")
+            
             return cell
             
         }else if section == 5{
@@ -163,6 +182,21 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! ZakazTableViewCellCommentTableViewCell
             
             cell.commentTextView.text = thisZakaz.comment
+            
+            cell.contentView.backgroundColor = UIColor(named: "whiteblack")
+            
+            return cell
+            
+        }else if section == 6{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "bgViewCell", for: indexPath) as! ZakazTableViewCellBgViewTableViewCell
+            
+            cell.bgView.layer.cornerRadius = 8
+            
+            cell.label.text = "Отправить сообщение заказчику"
+            cell.imgView.image = UIImage(systemName: "bubble.right")
+            
+            cell.contentView.backgroundColor = UIColor(named: "whiteblack")
             
             return cell
             
@@ -172,27 +206,39 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
         
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//        guard let thisZakaz = thisZakaz else {return 0}
-//
-//        let section = indexPath.section
-//
-//        if section == 0{
-//            return 70
-//        }else if section == 5{
-//            if thisZakaz.comment.count >= 150{
-//                return 150
-//            }else if thisZakaz.comment.count >= 100{
-//                return 120
-//            }else{
-//                return 100
-//            }
-//        }else{
-//            return 38
-//        }
-//
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let section = indexPath.section
+        
+        if section == 6{
+            
+            
+            
+        }
+        
+    }
+    
+    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //
+    //        guard let thisZakaz = thisZakaz else {return 0}
+    //
+    //        let section = indexPath.section
+    //
+    //        if section == 0{
+    //            return 70
+    //        }else if section == 5{
+    //            if thisZakaz.comment.count >= 150{
+    //                return 150
+    //            }else if thisZakaz.comment.count >= 100{
+    //                return 120
+    //            }else{
+    //                return 100
+    //            }
+    //        }else{
+    //            return 38
+    //        }
+    //
+    //    }
     
 }
 
@@ -217,6 +263,8 @@ extension ZakazTableViewCell {
         var status : String
         var payCheckImg : String
         var orderQr : String
+        
+        var isShownForOneZakaz : Bool = false
         
     }
     

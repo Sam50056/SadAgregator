@@ -78,7 +78,7 @@ extension MyZakaziViewController : UITableViewDelegate , UITableViewDataSource {
         
         let zakazVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZakazVC") as! ZakazViewController
         
-        zakazVC.thisZakaz = orders[indexPath.row]
+        zakazVC.thisZakazId = orders[indexPath.row].id
         
         navigationController?.pushViewController(zakazVC, animated: true)
         

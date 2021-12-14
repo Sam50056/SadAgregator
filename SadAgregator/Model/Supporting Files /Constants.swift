@@ -190,9 +190,9 @@ struct K {
             height += defaultCellHeight
         }
         
-//        if data.countItems != ""{
-            height += defaultCellHeight
-//        }
+        //        if data.countItems != ""{
+        height += defaultCellHeight
+        //        }
         
         if !data.money.isEmpty{
             height += defaultCellHeight
@@ -253,7 +253,7 @@ struct K {
         let defaultCellHeight : CGFloat = 38
         
         height += 70 //Header
-       
+        
         if !data.clientBalance.isEmpty , data.clientBalance != "0" {
             height += defaultCellHeight
         }
@@ -282,12 +282,12 @@ struct K {
         
         if !data.comment.isEmpty{
             height += data.comment.heightWithConstrainedWidth(width: width, font: UIFont.systemFont(ofSize: 15))
-//            height += 8
+            //            height += 8
         }
         
-//        if section == 6{
-//            return 0
-//        }
+        if data.isShownForOneZakaz{
+            height += 60
+        }
         
         height += 8
         

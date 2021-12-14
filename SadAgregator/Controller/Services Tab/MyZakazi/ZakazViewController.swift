@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import SwiftyJSON
 
 class ZakazViewController: UIViewController {
     
@@ -17,14 +18,23 @@ class ZakazViewController: UIViewController {
     private var key = ""
     
     var thisZakaz : ZakazTableViewCell.Zakaz?
+    var thisZakazId : String?
+    
+    private var vendTargetOrderDataManager = VendTargetOrderDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadUserData()
         
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: "ZakazTableViewCell", bundle: nil), forCellReuseIdentifier: "zakazCell")
+        
+        vendTargetOrderDataManager.delegate = self
+        
+        refresh()
         
     }
     
@@ -51,7 +61,13 @@ extension ZakazViewController{
 
 extension ZakazViewController{
     
-    
+    @objc func refresh(){
+        
+        guard let thisZakazId = thisZakazId else {return}
+        
+        vendTargetOrderDataManager.getVendTargetOrderData(key: key, order: thisZakazId)
+        
+    }
     
 }
 
@@ -128,6 +144,40 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
         }
         
         return 0
+    }
+    
+}
+
+//MARK: - VendTargetOrderDataManager
+
+extension ZakazViewController : VendTargetOrderDataManagerDelegate{
+    
+    func didGetVendTargetOrderData(data: JSON) {
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            if data["result"].intValue == 1{
+                
+                let jsonOrder = data["order"]
+                
+                self?.thisZakaz = ZakazTableViewCell.Zakaz(id: jsonOrder["id"].stringValue, date: jsonOrder["dt"].stringValue, itemsCount: jsonOrder["items_cnt"].stringValue, replaces: jsonOrder["replaces"].stringValue, clientBalance: jsonOrder["client_balance"].stringValue, orderSumm: jsonOrder["ord_summ"].stringValue, comment: jsonOrder["comm"].stringValue, clientName: jsonOrder["client_name"].stringValue, clientId: jsonOrder["client_id"].stringValue, deliveryName: jsonOrder["delivery_name"].stringValue, deliveryType: jsonOrder["delivery_type"].stringValue, statusName: jsonOrder["status_name"].stringValue, status: jsonOrder["status"].stringValue, payCheckImg: jsonOrder["pay_check_img"].stringValue, orderQr: jsonOrder["order_qr"].stringValue , isShownForOneZakaz: true)
+                
+                self?.tableView.reloadData()
+                
+            }else{
+                
+                if let errorMessage = data["msg"].string , !errorMessage.isEmpty{
+                    self?.showSimpleAlertWithOkButton(title: errorMessage, message: nil)
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingVendTargetOrderDataWithError(error: String) {
+        print("Error with VendTargetOrderDataManager : \(error)")
     }
     
 }
