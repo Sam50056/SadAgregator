@@ -83,7 +83,7 @@ struct K {
         
     }
     
-    static func makeHeightForTovarCell(thisTovar : TovarCellItem , isZamena : Bool) -> CGFloat{
+    static func makeHeightForTovarCell(thisTovar : TovarCellItem , contentType : TovarTableViewCell.ContentType) -> CGFloat{
         
         var height : CGFloat = 0
         let cellHeight : CGFloat = 35
@@ -112,11 +112,11 @@ struct K {
             height += cellHeight
         }
         
-        if thisTovar.qr != "" , thisTovar.qr != "-1" , !isZamena{
+        if thisTovar.qr != "" , thisTovar.qr != "-1" , contentType != .zamena{
             height += cellHeight
         }
         
-        if thisTovar.status != "" , thisTovar.status != "-1" ,!isZamena{
+        if thisTovar.status != "" , thisTovar.status != "-1" , contentType != .zamena{
             height += cellHeight
         }
         
@@ -144,11 +144,23 @@ struct K {
             height += cellHeight
         }
         
-        if isZamena{
+        if contentType == .zamena{
             height += 52//This is for the footer button
         }
         
-        return height < 235 ? 235 : height
+        if contentType == .order{
+            height += 48
+        }
+        
+        if contentType == .order{
+            return height < 200 ? 200 : height
+        }
+        
+//        if contentType == .normal{
+            return height < 235 ? 235 : height
+//        }else{
+//            return height < 160 ? 160 : height
+//        }
         
     }
     

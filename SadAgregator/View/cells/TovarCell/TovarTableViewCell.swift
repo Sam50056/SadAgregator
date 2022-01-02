@@ -16,6 +16,12 @@ class TovarTableViewCell: UITableViewCell {
     @IBOutlet weak var tovarImageView : UIImageView!
     var tovarImageViewButton : UIButton!
     
+    @IBOutlet weak var bottomStackView : UIStackView!
+    @IBOutlet weak var bottomStackViewLeftView : UIView!
+    @IBOutlet weak var bottomStackViewRightView : UIView!
+    @IBOutlet weak var bottomStackViewLeftViewLabel : UILabel!
+    @IBOutlet weak var bottomStackViewRightViewLabel : UILabel!
+    
     private var collectionViewItems = [CollectionViewItem]()
     
     private var tableViewItems = [TableViewItem]()
@@ -44,11 +50,11 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Размер", label2Text: thisTovar.size , shouldSecondLabelBeBlue: thisTovar.chLvl != "0"))
             }
             
-            if thisTovar.status != "" , thisTovar.status != "-1" ,!isZamena{
+            if thisTovar.status != "" , thisTovar.status != "-1" , contentType != .zamena{
                 newItems.append(TableViewItem(label1Text: "Статус", label2Text: thisTovar.status , shouldSecondLabelBeBlue: true))
             }
             
-            if thisTovar.qr != "" , thisTovar.qr != "-1" , !isZamena{
+            if thisTovar.qr != "" , thisTovar.qr != "-1" , contentType != .zamena{
                 newItems.append(TableViewItem(label1Text: "QR-код", label2Text:  thisTovar.qr == "0" ? "Не привязан" : "Привязан", hasImage: true, image: "qrcode" , shouldSecondLabelBeBlue: true))
             }
             
@@ -119,7 +125,17 @@ class TovarTableViewCell: UITableViewCell {
         
     }
     
-    var isZamena = false
+    var contentType : ContentType = .normal{
+        didSet{
+            if contentType == .order{
+                bottomStackViewLeftView.isHidden = false
+                bottomStackViewRightView.isHidden = false
+            }else{
+                bottomStackViewLeftView.isHidden = true
+                bottomStackViewRightView.isHidden = true
+            }
+        }
+    }
     
     var tovarSelected : (() -> Void)?
     
@@ -136,6 +152,9 @@ class TovarTableViewCell: UITableViewCell {
     var qrCodeTapped : (() -> Void)?
     var magnifyingGlassTapped : (() -> Void)?
     var questionMarkTapped : (() -> Void)?
+    
+    var bottomStackViewLeftViewButtonTapped : (() -> Void)?
+    var bottomStackViewRightViewButtonTapped : (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -164,6 +183,11 @@ class TovarTableViewCell: UITableViewCell {
         
         tovarImageView.tintColor = .systemGray2
         
+        bottomStackViewLeftView.layer.cornerRadius = 8
+        bottomStackViewRightView.layer.cornerRadius = 8
+        bottomStackViewRightViewLabel.text = "Нет в наличии"
+        bottomStackViewLeftViewLabel.text = "Есть в наличии"
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -176,6 +200,18 @@ class TovarTableViewCell: UITableViewCell {
         thisTovar = nil
         
         tableView.reloadData()
+    }
+    
+}
+
+//MARK: - Enums
+
+extension TovarTableViewCell {
+    
+    enum ContentType {
+        case normal
+        case zamena
+        case order
     }
     
 }
@@ -197,6 +233,18 @@ extension TovarTableViewCell{
         guard let thisTovar = thisTovar, thisTovar.img != "" else {return}
         
         tovarImageTapped?()
+        
+    }
+    
+    @IBAction func bottomStackViewLeftViewButtonTapped(_ sender : Any){
+        
+        bottomStackViewLeftViewButtonTapped?()
+        
+    }
+    
+    @IBAction func bottomStackViewRightViewButtonTapped(_ sender : Any){
+        
+        bottomStackViewRightViewButtonTapped?()
         
     }
     
@@ -277,7 +325,7 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
-        guard isZamena else {return nil}
+        guard contentType == .zamena else {return nil}
         
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
         
@@ -314,7 +362,7 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return isZamena ? 60 : 0
+        return contentType == .zamena ? 60 : 0
     }
     
 }
@@ -359,7 +407,7 @@ extension TovarTableViewCell : UICollectionViewDataSource , UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return !isZamena ? collectionViewItems.count : 0
+        return contentType == .normal ? collectionViewItems.count : 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

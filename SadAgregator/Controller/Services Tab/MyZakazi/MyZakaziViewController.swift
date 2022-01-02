@@ -33,7 +33,7 @@ class MyZakaziViewController : UIViewController{
         
         vendFormOrdersDataManager.delegate = self
         
-        vendFormOrdersDataManager.getVendFormOrdersData(key: key, status: "", page: 1)
+        vendFormOrdersDataManager.getVendFormOrdersData(key: key, status: "2", page: 1)
         
     }
     
