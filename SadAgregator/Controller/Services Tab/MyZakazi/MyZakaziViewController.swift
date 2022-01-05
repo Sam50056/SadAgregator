@@ -21,6 +21,14 @@ class MyZakaziViewController : UIViewController{
     
     private var orders = [ZakazTableViewCell.Zakaz]()
     
+    private var selectedStatus = 0{
+        didSet{
+            if selectedStatus != oldValue{
+                refresh()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +41,7 @@ class MyZakaziViewController : UIViewController{
         
         vendFormOrdersDataManager.delegate = self
         
-        vendFormOrdersDataManager.getVendFormOrdersData(key: key, status: "2", page: 1)
+        refresh()
         
     }
     
@@ -41,6 +49,62 @@ class MyZakaziViewController : UIViewController{
         super.viewWillAppear(animated)
         
         navigationItem.title = "Мои заказы"
+        
+        updateNavBarItems()
+        
+    }
+    
+}
+
+//MARK: - Functions
+
+extension MyZakaziViewController {
+    
+    func updateNavBarItems(){
+        
+        let statusMenu = UIMenu(title: "Статус", children: [
+            UIAction(title: "Новый заказ", state: selectedStatus == 0 ? .on : .off) { [weak self] action in
+                self?.selectedStatus = 0
+                self?.updateNavBarItems()
+            },
+            UIAction(title: "Ожидает оплаты", state: selectedStatus == 1 ? .on : .off) { [weak self] action in
+                self?.selectedStatus = 1
+                self?.updateNavBarItems()
+            },
+            UIAction(title: "В обработке", state: selectedStatus == 2 ? .on : .off) { [weak self] action in
+                self?.selectedStatus = 2
+                self?.updateNavBarItems()
+            },
+            UIAction(title: "Собран", state: selectedStatus == 3 ? .on : .off) { [weak self] action in
+                self?.selectedStatus = 3
+                self?.updateNavBarItems()
+            },
+            UIAction(title: "Готов к отправке", state: selectedStatus == 4 ? .on : .off) { [weak self] action in
+                self?.selectedStatus = 4
+                self?.updateNavBarItems()
+            },
+            UIAction(title: "Отправлен", state: selectedStatus == 5 ? .on : .off) { [weak self] action in
+                self?.selectedStatus = 5
+                self?.updateNavBarItems()
+            }
+        ])
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), menu: statusMenu)
+        
+    }
+    
+    func update(){
+        
+        vendFormOrdersDataManager.getVendFormOrdersData(key: key, status: "\(selectedStatus)", page: 1)
+        
+    }
+    
+    @objc private func refresh(){
+        
+        orders.removeAll()
+        //        page = 1
+        
+        vendFormOrdersDataManager.getVendFormOrdersData(key: key, status: "\(selectedStatus)", page: 1)
         
     }
     
