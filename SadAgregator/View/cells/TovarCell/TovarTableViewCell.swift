@@ -121,6 +121,22 @@ class TovarTableViewCell: UITableViewCell {
             
             collectionView.reloadData()
             
+            //Order stuff
+            
+            if contentType == .order{
+                
+                if thisTovar.itemStatus == "1"{
+                    bottomStackViewLeftView.backgroundColor = UIColor(named: "whiteblack")
+                    bottomStackViewLeftViewLabel.textColor = .systemGreen
+                }else if thisTovar.itemStatus == "-1"{
+                    bottomStackViewRightView.backgroundColor = UIColor(named: "whiteblack")
+                    bottomStackViewRightViewLabel.textColor = .systemRed
+                    bottomStackViewRightViewLabel.text = "Товара нет в наличии"
+                    bottomStackViewLeftView.isHidden = true
+                }
+                
+            }
+            
         }
         
     }
@@ -504,6 +520,11 @@ struct TovarCellItem {
     var withoutRep : String
     var payedImage : String
     var shipmentImage : String
+    
+    //Order params
+    
+    var itemStatus : String = ""
+    var handlerStatus : String = ""
     
 }
 

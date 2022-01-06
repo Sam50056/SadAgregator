@@ -18,9 +18,18 @@ class ZakazViewController: UIViewController {
     private var key = ""
     
     private var thisZakaz : ZakazTableViewCell.Zakaz?
-    var thisZakazId : String?
+    var thisZakazId = ""
     
     private var purProds = [JSON]()
+    private var statuses = [JSON]()
+    
+    private var selectedStatus = 0{
+        didSet{
+            if selectedStatus != oldValue{
+                refresh()
+            }
+        }
+    }
     
     private var vendTargetOrderDataManager = VendTargetOrderDataManager()
     
@@ -39,14 +48,14 @@ class ZakazViewController: UIViewController {
         
         refresh()
         
+        updateNavBarItems()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let thisZakaz = thisZakaz else {return}
         
-        navigationItem.title = "Заказ #"+thisZakaz.id
         
     }
     
@@ -64,9 +73,61 @@ extension ZakazViewController{
 
 extension ZakazViewController{
     
+    func updateNavBarItems(){
+        
+        let asyncItem = UIDeferredMenuElement { [weak self] completion in
+            
+            NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_vend.GetOrderStatuses?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)")) { data , error in
+                
+                if let error = error{
+                    print("Error with GetPurStatuses : \(error)")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        var menuItems = [UIAction]()
+                        
+                        let jsonSatuses = data!["statuses"].arrayValue
+                        
+                        self?.statuses = jsonSatuses
+                        
+                        for i in 0 ..< jsonSatuses.count {
+                            
+                            let jsonStatus = jsonSatuses[i]
+                            
+                            menuItems.append(UIAction(title: "\(jsonStatus["capt"].stringValue)" , state: i == self!.selectedStatus ? .on : .off) { action in
+                                
+                                self!.selectedStatus = i
+                                self!.updateNavBarItems()
+                                
+                            })
+                            
+                        }
+                        
+                        completion(menuItems)
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        let statusMenu = UIMenu(title: "Статус", children: [asyncItem])
+        
+        let statusNavBarItem = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), primaryAction: nil, menu: statusMenu)
+        
+        navigationItem.rightBarButtonItems = [statusNavBarItem]
+        
+    }
+    
     @objc func refresh(){
         
-        guard let thisZakazId = thisZakazId else {return}
+        guard thisZakazId != "" else {return}
         
         vendTargetOrderDataManager.getVendTargetOrderData(key: key, order: thisZakazId)
         
@@ -134,7 +195,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
             let purProd = purProds[indexPath.row]
             
-            var tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue)
+            var tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , itemStatus : purProd["item_status"].stringValue , handlerStatus : purProd["handler_status"].stringValue)
             
             cell.thisTovar = tovar
             
@@ -672,6 +733,8 @@ extension ZakazViewController : VendTargetOrderDataManagerDelegate{
                 let jsonOrder = data["order"]
                 
                 self?.thisZakaz = ZakazTableViewCell.Zakaz(id: jsonOrder["id"].stringValue, date: jsonOrder["dt"].stringValue, itemsCount: jsonOrder["items_cnt"].stringValue, replaces: jsonOrder["replaces"].stringValue, clientBalance: jsonOrder["client_balance"].stringValue, orderSumm: jsonOrder["ord_summ"].stringValue, comment: jsonOrder["comm"].stringValue, clientName: jsonOrder["client_name"].stringValue, clientId: jsonOrder["client_id"].stringValue, deliveryName: jsonOrder["delivery_name"].stringValue, deliveryType: jsonOrder["delivery_type"].stringValue, statusName: jsonOrder["status_name"].stringValue, status: jsonOrder["status"].stringValue, payCheckImg: jsonOrder["pay_check_img"].stringValue, orderQr: jsonOrder["order_qr"].stringValue , isShownForOneZakaz: true)
+                
+                self?.navigationItem.title = "Заказ #"+self!.thisZakaz!.id
                 
                 self?.purProds = data["prods"].arrayValue
                 
