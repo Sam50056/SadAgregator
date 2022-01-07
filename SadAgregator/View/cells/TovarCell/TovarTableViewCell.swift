@@ -112,22 +112,19 @@ class TovarTableViewCell: UITableViewCell {
             
             //Order stuff
             
-            orderIf : if contentType == .order{
-                guard let intItemStatus = Int(thisTovar.itemStatus) else {
-                    removeBottomStackView()
-                    break orderIf
-                }
-                if intItemStatus == 1{
+            orderIf : if contentType == .order , let thisZakaz = thisZakaz{
+                guard let intStatus = Int(thisZakaz.status) else {break orderIf}
+                if intStatus == 1{
                     bottomStackViewLeftView.backgroundColor = UIColor(named: "whiteblack")
                     bottomStackViewLeftViewLabel.textColor = .systemGreen
-                }else if intItemStatus == -1{
+                }else if intStatus == -1{
                     bottomStackViewRightView.backgroundColor = UIColor(named: "whiteblack")
                     bottomStackViewRightViewLabel.textColor = .systemRed
                     bottomStackViewRightViewLabel.text = "Товара нет в наличии"
                     bottomStackViewLeftView.isHidden = true
-                }else if intItemStatus == 2{
+                }else if intStatus == 2{
                     bottomStackViewLeftViewLabel.text = "Собрано"
-                }else if intItemStatus >= 3{
+                }else if intStatus >= 3{
                     removeBottomStackView()
                 }
                 
@@ -171,6 +168,8 @@ class TovarTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    var thisZakaz : ZakazTableViewCell.Zakaz?
     
     var tovarSelected : (() -> Void)?
     
@@ -342,8 +341,8 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         
         if item.label1Text == "QR-код"{
             
-            guard contentType == .order , let intItemStatus = Int(thisTovar?.itemStatus ?? "") ,
-                  intItemStatus < 3 else {return}
+            guard contentType == .order , let intStatus = Int(thisZakaz?.status ?? "") ,
+                  intStatus < 3 else {return}
             qrCodeTapped?()
             
         }else if item.label1Text == "Оплачено" , item.shouldSecondLabelBeBlue{
