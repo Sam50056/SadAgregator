@@ -1321,7 +1321,7 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		226975EF2700C38C008539CF /* Pur Managers */ = {
+		226975EF2700C38C008539CF /* My Zakupki VC */ = {
 			isa = PBXGroup;
 			children = (
 				226975F02700C3B0008539CF /* PurchasesFormPagingDataManager.swift */,
@@ -1331,7 +1331,7 @@
 				227B62FA2733133800687BEB /* Actions */,
 				225A843E273C0C1C009045E8 /* PurchasesOnePurDataManager.swift */,
 			);
-			path = "Pur Managers";
+			path = "My Zakupki VC";
 			sourceTree = "<group>";
 		};
 		226EEF0526DC477E002417D2 /* QR */ = {
@@ -2097,7 +2097,7 @@
 		22F742682622653F009128AF /* Purchases */ = {
 			isa = PBXGroup;
 			children = (
-				226975EF2700C38C008539CF /* Pur Managers */,
+				226975EF2700C38C008539CF /* My Zakupki VC */,
 				22F7426926226561009128AF /* PurchasesItemInfoDataManager.swift */,
 				22D636F22625CB0000987E3F /* PurchasesPursListDataManager.swift */,
 				22703264262715E50068BD82 /* PurchasesClientsSelectListDataManager.swift */,
