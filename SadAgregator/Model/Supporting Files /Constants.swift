@@ -148,16 +148,20 @@ struct K {
             height += 52//This is for the footer button
         }
         
-        if contentType == .order{
+        if contentType == .order , thisTovar.shouldShowBottomStackView{
             height += 48
         }
         
         if contentType == .order{
-            return height < 200 ? 200 : height
+            if thisTovar.shouldShowBottomStackView{
+                return height < 180 ? 180 : height
+            }else{
+                return height < 130 ? 130 : height
+            }
         }
         
 //        if contentType == .normal{
-            return height < 235 ? 235 : height
+        return height < 235 ? 235 : height
 //        }else{
 //            return height < 160 ? 160 : height
 //        }

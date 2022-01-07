@@ -20,7 +20,7 @@ class ZakazViewController: UIViewController {
     private var thisZakaz : ZakazTableViewCell.Zakaz?
     var thisZakazId = ""
     
-    private var purProds = [JSON]()
+    private var purProds = [TovarCellItem]()
     private var statuses = [JSON]()
     
     private var selectedStatus = 0{
@@ -193,9 +193,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
             cell.contentType = .order
             
-            let purProd = purProds[indexPath.row]
-            
-            var tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , itemStatus : purProd["item_status"].stringValue , handlerStatus : purProd["handler_status"].stringValue)
+            var tovar = purProds[indexPath.row]
             
             cell.thisTovar = tovar
             
@@ -273,17 +271,28 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                     
                     alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                         
-                        let qrScannerVC = QRScannerController()
+                        let qrScannerVC = QRScanViewController()
                         
-                        qrScannerVC.pid = tovar.pid
-                        
-                        qrScannerVC.qrConnected = {
+                        qrScannerVC.qrConnected = { [weak self] qr in
                             
-                            self.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
-                            
-                            tovar.status = "Куплено"
-                            
-                            cell.thisTovar = tovar
+                            VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: "", qrValue: qr) { setQrData, setQrError in
+                                    
+                                if let setQrError = setQrError{
+                                    print("Error with VendorSetQRDataManager : \(setQrError)")
+                                    return
+                                }
+                                
+                                if setQrData!["result"].intValue == 1{
+                                    
+                                    self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+
+                                    self?.purProds[indexPath.row].shouldShowBottomStackView = false
+                                    
+                                    cell.thisTovar = tovar
+                                    
+                                }
+                                
+                            }
                             
                         }
                         
@@ -710,9 +719,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
             let purProd = purProds[indexPath.row]
             
-            let tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue)
-            
-            return K.makeHeightForTovarCell(thisTovar: tovar, contentType: .order)
+            return K.makeHeightForTovarCell(thisTovar: purProd, contentType: .order)
         }
         
         return 0
@@ -736,7 +743,25 @@ extension ZakazViewController : VendTargetOrderDataManagerDelegate{
                 
                 self?.navigationItem.title = "Заказ #"+self!.thisZakaz!.id
                 
-                self?.purProds = data["prods"].arrayValue
+                var newProds = [TovarCellItem]()
+                
+                data["prods"].arrayValue.forEach { purProd in
+                    
+                    var tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , itemStatus : purProd["item_status"].stringValue , handlerStatus : purProd["handler_status"].stringValue)
+                    
+                    if tovar.itemStatus == "" {
+                        tovar.shouldShowBottomStackView = false
+                    }
+                    
+                    if let intItemStatus = Int(tovar.itemStatus) , intItemStatus >= 3{
+                        tovar.shouldShowBottomStackView = false
+                    }
+                    
+                    newProds.append(tovar)
+                    
+                }
+                
+                self?.purProds = newProds
                 
                 self?.tableView.reloadData()
                 

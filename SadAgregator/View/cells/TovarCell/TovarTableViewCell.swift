@@ -54,7 +54,11 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Статус", label2Text: thisTovar.status , shouldSecondLabelBeBlue: true))
             }
             
-            if thisTovar.qr != "" , thisTovar.qr != "-1" , contentType != .zamena{
+            qrIf : if thisTovar.qr != "" , thisTovar.qr != "-1" , contentType != .zamena{
+                guard contentType == .order ,
+                      let intHandlerStatus = Int(thisTovar.handlerStatus) ,
+                      intHandlerStatus >= 0
+                else {break qrIf}
                 newItems.append(TableViewItem(label1Text: "QR-код", label2Text:  thisTovar.qr == "0" ? "Не привязан" : "Привязан", hasImage: true, image: "qrcode" , shouldSecondLabelBeBlue: true))
             }
             
@@ -106,6 +110,39 @@ class TovarTableViewCell: UITableViewCell {
                 tovarImageView.image = UIImage(systemName: "cart")
             }
             
+            //Order stuff
+            
+            orderIf : if contentType == .order{
+                guard let intItemStatus = Int(thisTovar.itemStatus) else {
+                    removeBottomStackView()
+                    break orderIf
+                }
+                if intItemStatus == 1{
+                    bottomStackViewLeftView.backgroundColor = UIColor(named: "whiteblack")
+                    bottomStackViewLeftViewLabel.textColor = .systemGreen
+                }else if intItemStatus == -1{
+                    bottomStackViewRightView.backgroundColor = UIColor(named: "whiteblack")
+                    bottomStackViewRightViewLabel.textColor = .systemRed
+                    bottomStackViewRightViewLabel.text = "Товара нет в наличии"
+                    bottomStackViewLeftView.isHidden = true
+                }else if intItemStatus == 2{
+                    bottomStackViewLeftViewLabel.text = "Собрано"
+                }else if intItemStatus >= 3{
+                    removeBottomStackView()
+                }
+                
+            }
+            
+            if contentType == .order{
+                
+                if thisTovar.shouldShowBottomStackView{
+                    showBottomStackView()
+                }else{
+                    removeBottomStackView()
+                }
+                
+            }
+            
             guard oldValue == nil else {return}
             
             //Setting collection view's items
@@ -121,22 +158,6 @@ class TovarTableViewCell: UITableViewCell {
             
             collectionView.reloadData()
             
-            //Order stuff
-            
-            if contentType == .order{
-                
-                if thisTovar.itemStatus == "1"{
-                    bottomStackViewLeftView.backgroundColor = UIColor(named: "whiteblack")
-                    bottomStackViewLeftViewLabel.textColor = .systemGreen
-                }else if thisTovar.itemStatus == "-1"{
-                    bottomStackViewRightView.backgroundColor = UIColor(named: "whiteblack")
-                    bottomStackViewRightViewLabel.textColor = .systemRed
-                    bottomStackViewRightViewLabel.text = "Товара нет в наличии"
-                    bottomStackViewLeftView.isHidden = true
-                }
-                
-            }
-            
         }
         
     }
@@ -144,11 +165,9 @@ class TovarTableViewCell: UITableViewCell {
     var contentType : ContentType = .normal{
         didSet{
             if contentType == .order{
-                bottomStackViewLeftView.isHidden = false
-                bottomStackViewRightView.isHidden = false
+                showBottomStackView()
             }else{
-                bottomStackViewLeftView.isHidden = true
-                bottomStackViewRightView.isHidden = true
+                removeBottomStackView()
             }
         }
     }
@@ -266,6 +285,26 @@ extension TovarTableViewCell{
     
 }
 
+//MARK: - Functions
+
+extension TovarTableViewCell {
+    
+    func showBottomStackView(){
+        
+        bottomStackViewLeftView.isHidden = false
+        bottomStackViewRightView.isHidden = false
+        
+    }
+    
+    func removeBottomStackView(){
+        
+        bottomStackViewLeftView.isHidden = true
+        bottomStackViewRightView.isHidden = true
+        
+    }
+    
+}
+
 //MARK: - TableView
 
 extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
@@ -303,6 +342,8 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         
         if item.label1Text == "QR-код"{
             
+            guard contentType == .order , let intItemStatus = Int(thisTovar?.itemStatus ?? "") ,
+                  intItemStatus < 3 else {return}
             qrCodeTapped?()
             
         }else if item.label1Text == "Оплачено" , item.shouldSecondLabelBeBlue{
@@ -525,6 +566,8 @@ struct TovarCellItem {
     
     var itemStatus : String = ""
     var handlerStatus : String = ""
+    
+    var shouldShowBottomStackView : Bool = true
     
 }
 
