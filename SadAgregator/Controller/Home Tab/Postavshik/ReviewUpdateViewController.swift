@@ -189,6 +189,8 @@ class ReviewUpdateViewController: UIViewController, UITextViewDelegate {
                     
                     guard let imageId = selectedImageId , let imageLink = selectedImageLink else {return}
                     
+                    PhotoSavedDataManager().getPhotoSavedData(key: key ?? "", photoId: imageId) { _, _ in }
+                    
                     imageCellObjects.append(ImageCellObject(id: imageId, link: imageLink))
                     
                     imagesCollectionView.reloadData()
