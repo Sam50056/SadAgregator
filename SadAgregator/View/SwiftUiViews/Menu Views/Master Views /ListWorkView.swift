@@ -189,7 +189,7 @@ struct ListWorkItemView : View , AddOrDeleteListWorkExtDataManagerDelegate{
                 VStack(alignment: .leading, spacing: 8){
                     
                     Text(item.capt)
-                        .foregroundColor(Color("whiteblack"))
+                        .foregroundColor(Color("blackwhite"))
                     
                     if item.subCapt != ""{
                         Text(item.subCapt)
