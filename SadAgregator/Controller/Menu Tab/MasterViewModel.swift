@@ -17,6 +17,8 @@ class MasterViewModel : ObservableObject{
     
     @Published var shouldShowBackButton = false
     
+    var hideMaster : (() -> Void)?
+    
     @Published var currentStepId : Int?
     @Published var previousStepId = ""
     @Published var nextStepId : String?
@@ -199,7 +201,7 @@ extension MasterViewModel{
 
 extension MasterViewModel : GetStepDataManagerDelegate{
     
-    func getStepData(hideMaster : ( () -> Void)? = nil){
+    func getStepData(){
         
         if nextStepId == "-2"{
             
