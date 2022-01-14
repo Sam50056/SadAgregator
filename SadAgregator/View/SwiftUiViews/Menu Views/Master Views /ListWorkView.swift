@@ -41,6 +41,7 @@ struct ListWorkView: View {
                                         ForEach(masterViewModel.list2 , id: \.id){ item in
                                             
                                             ListWorkItemView(item: item, isList1: false)
+                                                .environmentObject(masterViewModel)
                                             
                                         }
                                         
