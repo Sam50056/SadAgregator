@@ -226,7 +226,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                         qrScannerVC.qrConnected = { [weak self] qr in
                             
                             VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: "", qrValue: qr) { setQrData, setQrError in
-                                    
+                                
                                 if let setQrError = setQrError{
                                     print("Error with VendorSetQRDataManager : \(setQrError)")
                                     return
@@ -235,7 +235,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                                 if setQrData!["result"].intValue == 1{
                                     
                                     self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
-
+                                    
                                     self?.purProds[indexPath.row].shouldShowBottomStackView = false
                                     
                                     cell.thisTovar = tovar
@@ -300,7 +300,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
             let purProd = purProds[indexPath.row]
             
-            return K.makeHeightForTovarCell(thisTovar: purProd, contentType: .order)
+            return K.makeHeightForTovarCell(thisTovar: purProd, contentType: .order, width: view.bounds.width - 32)
         }
         
         return 0

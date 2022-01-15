@@ -17,6 +17,12 @@ class TovarTableViewCell: UITableViewCell {
     var tovarImageViewButton : UIButton!
     
     @IBOutlet weak var bottomStackView : UIStackView!
+    
+    @IBOutlet weak var commentView : UIView!
+    @IBOutlet weak var commentTextView : UITextView!
+    @IBOutlet weak var commentStackView : UIStackView!
+    
+    @IBOutlet weak var bottomButtonsStackView : UIStackView!
     @IBOutlet weak var bottomStackViewLeftView : UIView!
     @IBOutlet weak var bottomStackViewRightView : UIView!
     @IBOutlet weak var bottomStackViewLeftViewLabel : UILabel!
@@ -113,7 +119,12 @@ class TovarTableViewCell: UITableViewCell {
             //Order stuff
             
             orderIf : if contentType == .order , let thisZakaz = thisZakaz{
+                
+                commentStackView.isHidden = thisTovar.comExt == ""
+                commentTextView.text = thisTovar.comExt.replacingOccurrences(of: "<br>", with: "\n")
+                
                 guard let intStatus = Int(thisZakaz.status) else {break orderIf}
+                
                 if intStatus == 1{
                     bottomStackViewLeftView.backgroundColor = UIColor(named: "whiteblack")
                     bottomStackViewLeftViewLabel.textColor = .systemGreen
@@ -199,6 +210,8 @@ class TovarTableViewCell: UITableViewCell {
         
         tovarImageView.contentMode = .scaleAspectFill
         tovarImageView.layer.cornerRadius = 6
+        
+        commentView.layer.cornerRadius = 8
         
         collectionView.register(UINib(nibName: "TovarTableViewCellCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
         
@@ -290,12 +303,16 @@ extension TovarTableViewCell {
     
     func showBottomStackView(){
         
+        bottomButtonsStackView.isHidden = false
+        
         bottomStackViewLeftView.isHidden = false
         bottomStackViewRightView.isHidden = false
         
     }
     
     func removeBottomStackView(){
+        
+        bottomButtonsStackView.isHidden = true
         
         bottomStackViewLeftView.isHidden = true
         bottomStackViewRightView.isHidden = true

@@ -83,7 +83,7 @@ struct K {
         
     }
     
-    static func makeHeightForTovarCell(thisTovar : TovarCellItem , contentType : TovarTableViewCell.ContentType) -> CGFloat{
+    static func makeHeightForTovarCell(thisTovar : TovarCellItem , contentType : TovarTableViewCell.ContentType , width : CGFloat = 0) -> CGFloat{
         
         var height : CGFloat = 0
         let cellHeight : CGFloat = 35
@@ -152,19 +152,79 @@ struct K {
             height += 48
         }
         
+        if contentType == .order , !thisTovar.comExt.isEmpty{
+            
+            let comment = thisTovar.comExt.replacingOccurrences(of: "<br>", with: "\n")
+            
+            height += 25
+            
+            let oneLineSymbolCount = width / 7
+            
+                        print("One line symbol count: \(oneLineSymbolCount)")
+            
+            var linesCount = (CGFloat(comment.count) / oneLineSymbolCount).rounded(.awayFromZero)
+            
+            if comment.contains("\n"){
+                linesCount += 1
+            }
+            
+                        print("Lines count : \(linesCount)")
+            
+            height += linesCount * 28
+            
+        }
+        
+        height += 8
+        
         if contentType == .order{
-            if thisTovar.shouldShowBottomStackView{
-                return height < 180 ? 180 : height
+            if thisTovar.shouldShowBottomStackView , !thisTovar.comExt.isEmpty{
+                
+                var commentHeight : CGFloat = 0
+                
+                commentHeight += 10 //comment view without textView
+                
+                let comment = thisTovar.comExt.replacingOccurrences(of: "<br>", with: "\n")
+                
+                let oneLineSymbolCount = width / 7
+                
+                var linesCount = (CGFloat(comment.count) / oneLineSymbolCount).rounded(.awayFromZero)
+                
+                if comment.contains("\n"){
+                    linesCount += 1
+                }
+                
+                commentHeight += linesCount * 28
+                
+                return height < (184 + commentHeight) ? (184 + commentHeight) : height
+                
+            }else if thisTovar.shouldShowBottomStackView{
+                return height < 184 ? 184 : height
+            }else if !thisTovar.comExt.isEmpty{
+                
+                var commentHeight : CGFloat = 0
+                
+                commentHeight += 16
+                
+                let comment = thisTovar.comExt.replacingOccurrences(of: "<br>", with: "\n")
+                
+                let oneLineSymbolCount = width / 7
+                
+                var linesCount = (CGFloat(comment.count) / oneLineSymbolCount).rounded(.awayFromZero)
+                
+                if comment.contains("\n"){
+                    linesCount += 1
+                }
+                
+                commentHeight += linesCount * 28
+                
+                return height < (134 + commentHeight) ? (134 + commentHeight) : height
+                
             }else{
-                return height < 130 ? 130 : height
+                return height < 134 ? 134 : height
             }
         }
         
-//        if contentType == .normal{
         return height < 235 ? 235 : height
-//        }else{
-//            return height < 160 ? 160 : height
-//        }
         
     }
     
