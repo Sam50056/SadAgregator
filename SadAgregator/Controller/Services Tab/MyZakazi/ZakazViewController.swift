@@ -90,7 +90,7 @@ extension ZakazViewController{
                         
                         var menuItems = [UIAction]()
                         
-                        let jsonSatuses = data!["statuses"].arrayValue
+                        let jsonSatuses = data!["actions"].arrayValue
                         
                         self?.statuses = jsonSatuses
                         
@@ -102,6 +102,8 @@ extension ZakazViewController{
                                 
                                 self!.selectedStatus = i
                                 self!.updateNavBarItems()
+                                
+                                
                                 
                             })
                             

@@ -160,7 +160,7 @@ struct K {
             
             let oneLineSymbolCount = width / 7
             
-                        print("One line symbol count: \(oneLineSymbolCount)")
+            print("One line symbol count: \(oneLineSymbolCount)")
             
             var linesCount = (CGFloat(comment.count) / oneLineSymbolCount).rounded(.awayFromZero)
             
@@ -168,7 +168,7 @@ struct K {
                 linesCount += 1
             }
             
-                        print("Lines count : \(linesCount)")
+            print("Lines count : \(linesCount)")
             
             height += linesCount * 28
             
