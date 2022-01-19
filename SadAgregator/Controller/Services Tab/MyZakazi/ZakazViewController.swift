@@ -142,16 +142,18 @@ extension ZakazViewController{
 extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0{
             return 1
-        }else if section == 1{
+        }else if section == 1 || section == 3{
             return 1
         }else if section == 2{
+            return 1
+        }else if section == 4{
             return purProds.count
         }
         
@@ -172,7 +174,16 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        }else if section == 1{
+        }else if section == 1 || section == 3{
+            
+            let cell = UITableViewCell()
+            
+            cell.backgroundColor = UIColor(named: "gray")
+            cell.contentView.backgroundColor = UIColor(named: "gray")
+            
+            return cell
+            
+        }else if section == 2{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTowLabelCell", for: indexPath)
             
@@ -183,13 +194,22 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             else {return cell}
             
             imageView1.image = UIImage(systemName: "doc.text")
-            imageView2.image = UIImage(systemName: "chevron.right")
+            imageView2.image = nil
+            label2.text = ""
+           
             label1.text = "Статус"
-            label2.text = "Новый заказ"
+            
+            if let intStatus = Int(thisZakaz.status) , intStatus < 3{
+                
+                imageView2.image = UIImage(systemName: "chevron.right")
+                
+                label2.text = thisZakaz.statusName
+                
+            }
             
             return cell
             
-        }else if section == 2{
+        }else if section == 4{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "tovarCell",for: indexPath) as! TovarTableViewCell
             
@@ -288,6 +308,14 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+        
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         guard let thisZakaz = thisZakaz else {return 0}
@@ -296,9 +324,11 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
         
         if section == 0{
             return K.makeHeightForZakazCell(data: thisZakaz, width: view.bounds.width - 32)
-        }else if section == 1{
-            return 50
+        }else if section == 1 || section == 3{
+            return 30
         }else if section == 2{
+            return 50
+        }else if section == 4{
             
             let purProd = purProds[indexPath.row]
             
