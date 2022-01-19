@@ -368,6 +368,10 @@ extension ZakazViewController : VendTargetOrderDataManagerDelegate{
                         tovar.shouldShowBottomStackView = false
                     }
                     
+                    if tovar.qr == "1"{ //If qr is connected , no bottom bar should be shown
+                        tovar.shouldShowBottomStackView = false
+                    }
+                    
                     newProds.append(tovar)
                     
                 }
