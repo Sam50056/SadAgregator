@@ -17,19 +17,29 @@ class ZakazViewController: UIViewController {
     
     private var key = ""
     
+    private var zakazData : JSON?
     private var thisZakaz : ZakazTableViewCell.Zakaz?
     var thisZakazId = ""
     
     private var purProds = [TovarCellItem]()
-    private var statuses = [JSON]()
-    
-    private var selectedStatus = 0{
+    private var docs = [JSON](){
         didSet{
-            if selectedStatus != oldValue{
-                refresh()
+            
+            for doc in docs{
+                
+                if doc["type"].stringValue == "1"{
+                    parcelDoc = doc
+                }else if doc["type"].stringValue == "2"{
+                    trackDoc = doc
+                }
+                
             }
+            
         }
     }
+    
+    private var parcelDoc : JSON?
+    private var trackDoc : JSON?
     
     private var vendTargetOrderDataManager = VendTargetOrderDataManager()
     
@@ -47,8 +57,6 @@ class ZakazViewController: UIViewController {
         vendTargetOrderDataManager.delegate = self
         
         refresh()
-        
-        updateNavBarItems()
         
     }
     
@@ -73,65 +81,178 @@ extension ZakazViewController{
 
 extension ZakazViewController{
     
-    func updateNavBarItems(){
+    @objc func refresh(){
         
-        let asyncItem = UIDeferredMenuElement { [weak self] completion in
-            
-            NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_vend.GetOrderStatuses?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)")) { data , error in
-                
-                if let error = error{
-                    print("Error with GetPurStatuses : \(error)")
-                    return
-                }
+        guard thisZakazId != "" else {return}
+        
+        vendTargetOrderDataManager.getVendTargetOrderData(key: key, order: thisZakazId)
+        
+    }
+    
+    func statusChange(actId : String){
+        
+        if actId == "1"{
+            NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.SupplierAcceptOrder?AKey=\(key)&APurSYSID=\(thisZakazId)") { [weak self] acceptOrderData, acceptOrderError in
                 
                 DispatchQueue.main.async {
                     
-                    if data!["result"].intValue == 1{
+                    if let acceptOrderError = acceptOrderError{
+                        print("Error with Supplier Accept Order : \(acceptOrderError)")
+                        return
+                    }
+                    
+                    if acceptOrderData!["result"].intValue == 1{
                         
-                        var menuItems = [UIAction]()
+                        self?.refresh()
                         
-                        let jsonSatuses = data!["actions"].arrayValue
+                    }else{
                         
-                        self?.statuses = jsonSatuses
-                        
-                        for i in 0 ..< jsonSatuses.count {
+                        if let errorMessage = acceptOrderData!["msg"].string , errorMessage != ""{
                             
-                            let jsonStatus = jsonSatuses[i]
-                            
-                            menuItems.append(UIAction(title: "\(jsonStatus["capt"].stringValue)" , state: i == self!.selectedStatus ? .on : .off) { action in
-                                
-                                self!.selectedStatus = i
-                                self!.updateNavBarItems()
-                                
-                                
-                                
-                            })
+                            self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
                             
                         }
-                        
-                        completion(menuItems)
                         
                     }
                     
                 }
                 
             }
+        }else if actId == "2"{
+            
+            let questionAlertController = UIAlertController(title: "Отклонить заказ?", message: nil, preferredStyle: .alert)
+            
+            questionAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
+                NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.SupplierRejectOrder?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)") { rejectOrderData, rejectOrderError in
+                    
+                    DispatchQueue.main.async {
+                        
+                        if let acceptOrderError = rejectOrderError{
+                            print("Error with Supplier Reject Order : \(acceptOrderError)")
+                            return
+                        }
+                        
+                        if rejectOrderData!["result"].intValue == 1{
+                            
+                            self?.refresh()
+                            
+                        }else{
+                            
+                            if let errorMessage = rejectOrderData!["msg"].string , errorMessage != ""{
+                                
+                                questionAlertController.dismiss(animated: true, completion: nil)
+                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+            }))
+            
+            questionAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            present(questionAlertController, animated: true)
+            
+        }else if actId == "3"{
+            
+            let summAlertController = UIAlertController(title: "Какую сумму оплатил клиент?", message: nil, preferredStyle: .alert)
+            
+            summAlertController.addAction(UIAlertAction(title: "Ок", style: .default, handler: { [weak self] _ in
+                
+                guard let summ = summAlertController.textFields?[0].text else {return}
+                
+                let finalAlertController = UIAlertController(title: "Зачислить \(summ) на счет заказа?", message: nil, preferredStyle: .alert)
+                
+                finalAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                    NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.SupplierPayedOrder?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)&ASumm=\(summ)") { payedData , payedError in
+                        
+                        if let payedError = payedError{
+                            print("Error with Supplier Payed Order : \(payedError)")
+                            return
+                        }
+                        
+                        if payedData!["result"].intValue == 1{
+                            
+                            self?.refresh()
+                            
+                        }else{
+                            
+                            if let errorMessage = payedData!["msg"].string , errorMessage != ""{
+                                
+                                finalAlertController.dismiss(animated: true, completion: nil)
+                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }))
+                
+                finalAlertController.addAction(UIAlertAction(title: "Изменить", style: .default, handler: { _ in
+                    finalAlertController.dismiss(animated: true, completion: nil)
+                    self?.statusChange(actId: actId)
+                }))
+                
+                finalAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                
+                self?.present(finalAlertController, animated: true , completion : nil)
+                
+            }))
+            
+            summAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            summAlertController.addTextField { textField in
+                textField.keyboardType = .numberPad
+            }
+            
+            present(summAlertController, animated: true, completion: nil)
+            
+        }else if actId == "4"{
+            
+            let questionAlertController = UIAlertController(title: "Заказ собран?", message: nil, preferredStyle: .alert)
+            
+            questionAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
+                
+                NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.SupplierReadyOrder?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)") { [weak self] readyData, readyError in
+                    
+                    DispatchQueue.main.async {
+                        
+                        if let readyError = readyError{
+                            print("Error with Supplier Ready Order : \(readyError)")
+                            return
+                        }
+                        
+                        if readyData!["result"].intValue == 1{
+                            
+                            self?.refresh()
+                            
+                        }else{
+                            
+                            if let errorMessage = readyData!["msg"].string , errorMessage != ""{
+                                
+                                questionAlertController.dismiss(animated: true, completion: nil)
+                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }))
+            
+            questionAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+            
+            present(questionAlertController, animated: true, completion: nil)
             
         }
-        
-        let statusMenu = UIMenu(title: "Статус", children: [asyncItem])
-        
-        let statusNavBarItem = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), primaryAction: nil, menu: statusMenu)
-        
-        navigationItem.rightBarButtonItems = [statusNavBarItem]
-        
-    }
-    
-    @objc func refresh(){
-        
-        guard thisZakazId != "" else {return}
-        
-        vendTargetOrderDataManager.getVendTargetOrderData(key: key, order: thisZakazId)
         
     }
     
@@ -142,18 +263,28 @@ extension ZakazViewController{
 extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        5
+        8
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        guard let thisZakaz = thisZakaz else {return 0}
+        
         if section == 0{
             return 1
-        }else if section == 1 || section == 3{
+        }else if section == 1 || section == 7{
             return 1
-        }else if section == 2{
+        }else if section == 2 , !thisZakaz.payCheckImg.isEmpty{//Check
             return 1
-        }else if section == 4{
+        }else if section == 3{//Status
+            return 1
+        }else if section == 4 , let intStatus = Int(thisZakaz.status) , intStatus >= 3{ //Parcel
+            return 1
+        }else if section == 5, let intStatus = Int(thisZakaz.status) , intStatus >= 3{ //Track
+            return 1
+        }else if section == 6 , let intStatus = Int(thisZakaz.status) , intStatus >= 3{ //QR
+            return 1
+        }else if section == 8{ //Tovar
             return purProds.count
         }
         
@@ -174,7 +305,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        }else if section == 1 || section == 3{
+        }else if section == 1 || section == 7{
             
             let cell = UITableViewCell()
             
@@ -190,26 +321,258 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             guard let imageView1 = cell.viewWithTag(1) as? UIImageView ,
                   let label1 = cell.viewWithTag(2) as? UILabel,
                   let imageView2 = cell.viewWithTag(4) as? UIImageView,
-                  let label2 = cell.viewWithTag(3) as? UILabel
+                  let label2 = cell.viewWithTag(3) as? UILabel,
+                  let cellButton = cell.viewWithTag(5) as? UIButton
+            else {return cell}
+            
+            imageView1.image = UIImage(systemName: "list.bullet.rectangle")
+            
+            label1.text = "Чек оплаты"
+            
+            label2.text = "Показать"
+            
+            imageView2.image = UIImage(systemName: "chevron.right")
+            
+            cellButton.isHidden = true
+            
+            return cell
+            
+        }else if section == 3{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTowLabelCell", for: indexPath)
+            
+            guard let imageView1 = cell.viewWithTag(1) as? UIImageView ,
+                  let label1 = cell.viewWithTag(2) as? UILabel,
+                  let imageView2 = cell.viewWithTag(4) as? UIImageView,
+                  let label2 = cell.viewWithTag(3) as? UILabel,
+                  let cellButton = cell.viewWithTag(5) as? UIButton
             else {return cell}
             
             imageView1.image = UIImage(systemName: "doc.text")
-            imageView2.image = nil
-            label2.text = ""
-           
+            //            imageView2.image = nil
+            //            label2.text = ""
+            
             label1.text = "Статус"
+            
+            label2.text = thisZakaz.statusName
             
             if let intStatus = Int(thisZakaz.status) , intStatus < 3{
                 
                 imageView2.image = UIImage(systemName: "chevron.right")
                 
-                label2.text = thisZakaz.statusName
+                cellButton.showsMenuAsPrimaryAction = true
+                
+                let asyncItem = UIDeferredMenuElement { [weak self] completion in
+                    
+                    NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_vend.GetOrderStatuses?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)")) { data , error in
+                        
+                        if let error = error{
+                            print("Error with GetOrderStatuses : \(error)")
+                            return
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            if data!["result"].intValue == 1{
+                                
+                                var menuItems = [UIAction]()
+                                
+                                let jsonSatuses = data!["actions"].arrayValue
+                                
+                                for i in 0 ..< jsonSatuses.count {
+                                    
+                                    let jsonStatus = jsonSatuses[i]
+                                    
+                                    menuItems.append(UIAction(title: "\(jsonStatus["capt"].stringValue)") { action in
+                                        
+                                        let actId = jsonStatus["act_id"].stringValue
+                                        
+                                        self?.statusChange(actId: actId)
+                                        
+                                    })
+                                    
+                                }
+                                
+                                completion(menuItems)
+                                
+                            }else{
+                                
+                                completion([])
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                let statusMenu = UIMenu(title: "Статус", children: [asyncItem])
+                
+                cellButton.menu = statusMenu
                 
             }
             
+        }else if section == 4{
+            
+            if let parcelDoc = parcelDoc{
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath)
+                
+                guard let iconImageView = cell.viewWithTag(1) as? UIImageView ,
+                      let label = cell.viewWithTag(2) as? UILabel ,
+                      let _ = cell.viewWithTag(3), //imageViewView
+                      let imageView = cell.viewWithTag(4) as? UIImageView,
+                      let removeButtonView = cell.viewWithTag(5),
+                      let removeButton = cell.viewWithTag(7) as? UIButton,
+                      let imageViewButton = cell.viewWithTag(8) as? UIButton
+                else {return UITableViewCell()}
+                
+                iconImageView.image =  UIImage(systemName: "camera.viewfinder")
+                label.text = "Фото посылки"
+                
+                imageView.sd_setImage(with: URL(string: parcelDoc["img"].stringValue), completed: nil)
+                
+                imageView.layer.cornerRadius = 8
+                removeButtonView.layer.cornerRadius = 14
+                
+                imageViewButton.addAction(UIAction(handler: { [weak self] _ in
+                    self?.previewImage(parcelDoc["img"].stringValue)
+                }) , for:.touchUpInside)
+                
+                removeButton.addAction(UIAction(handler: { [weak self] _ in
+                    
+                    let confirmAlert = UIAlertController(title: "Удалить фото посылки?", message: nil, preferredStyle: .alert)
+                    
+                    confirmAlert.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                        
+                    }))
+                    
+                    confirmAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                    
+                    self?.present(confirmAlert , animated: true , completion: nil)
+                    
+                }), for: .touchUpInside)
+                
+                return cell
+                
+            }else{
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTowLabelCell", for: indexPath)
+                
+                guard let imageView1 = cell.viewWithTag(1) as? UIImageView ,
+                      let label1 = cell.viewWithTag(2) as? UILabel,
+                      let imageView2 = cell.viewWithTag(4) as? UIImageView,
+                      let label2 = cell.viewWithTag(3) as? UILabel
+                else {return cell}
+                
+                imageView1.image = UIImage(systemName: "camera.viewfinder")
+                
+                label1.text = "Фото посылки"
+                
+                label2.text = "Добавить"
+                
+                imageView2.image = UIImage(systemName: "chevron.right")
+                
+                return cell
+                
+            }
+            
+        }else if section == 5{
+            
+            if let trackDoc = trackDoc{
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath)
+                
+                guard let iconImageView = cell.viewWithTag(1) as? UIImageView ,
+                      let label = cell.viewWithTag(2) as? UILabel ,
+                      let _ = cell.viewWithTag(3), //imageViewView
+                      let imageView = cell.viewWithTag(4) as? UIImageView,
+                      let removeButtonView = cell.viewWithTag(5),
+                      let removeButton = cell.viewWithTag(7) as? UIButton,
+                      let imageViewButton = cell.viewWithTag(8) as? UIButton
+                else {return UITableViewCell()}
+                
+                iconImageView.image =  UIImage(systemName: "text.viewfinder")
+                label.text = "Фото трека"
+                
+                imageView.sd_setImage(with: URL(string: trackDoc["img"].stringValue), completed: nil)
+                
+                imageView.layer.cornerRadius = 8
+                removeButtonView.layer.cornerRadius = 14
+                
+                imageViewButton.addAction(UIAction(handler: { [weak self] _ in
+                    self?.previewImage(trackDoc["img"].stringValue)
+                }) , for:.touchUpInside)
+                
+                if thisZakaz.status == "5"{
+                    removeButtonView.isHidden = true
+                }else{
+                    removeButtonView.isHidden = false
+                }
+                
+                removeButton.addAction(UIAction(handler: { [weak self] _ in
+                    
+                    let confirmAlert = UIAlertController(title: "Удалить фото трека?", message: nil, preferredStyle: .alert)
+                    
+                    confirmAlert.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                        
+                    }))
+                    
+                    confirmAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                    
+                    self?.present(confirmAlert , animated: true , completion: nil)
+                    
+                }), for: .touchUpInside)
+                
+                return cell
+                
+            }else{
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTowLabelCell", for: indexPath)
+                
+                guard let imageView1 = cell.viewWithTag(1) as? UIImageView ,
+                      let label1 = cell.viewWithTag(2) as? UILabel,
+                      let imageView2 = cell.viewWithTag(4) as? UIImageView,
+                      let label2 = cell.viewWithTag(3) as? UILabel
+                else {return cell}
+                
+                imageView1.image = UIImage(systemName: "text.viewfinder")
+                
+                label1.text = "Фото трека"
+                
+                label2.text = "Добавить"
+                
+                imageView2.image = UIImage(systemName: "chevron.right")
+                
+                return cell
+                
+            }
+            
+        }else if section == 6{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTowLabelCell", for: indexPath)
+            
+            guard let imageView1 = cell.viewWithTag(1) as? UIImageView ,
+                  let label1 = cell.viewWithTag(2) as? UILabel,
+                  let imageView2 = cell.viewWithTag(4) as? UIImageView,
+                  let label2 = cell.viewWithTag(3) as? UILabel,
+                  let cellButton = cell.viewWithTag(5) as? UIButton
+            else {return cell}
+            
+            imageView1.image = UIImage(systemName: "qrcode.viewfinder")
+            
+            label1.text = "QR-код заказа"
+            
+            label2.text = "Добавить"
+            
+            imageView2.image = UIImage(systemName: "chevron.right")
+            
+            cellButton.isHidden = true
+            
             return cell
             
-        }else if section == 4{
+        }else if section == 8{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "tovarCell",for: indexPath) as! TovarTableViewCell
             
@@ -312,7 +675,15 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
         
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let section = indexPath.section
         
+        guard let thisZakaz = thisZakaz else {return}
+        
+        if section == 2{
+            
+            previewImage(thisZakaz.payCheckImg)
+            
+        }
         
     }
     
@@ -324,11 +695,23 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
         
         if section == 0{
             return K.makeHeightForZakazCell(data: thisZakaz, width: view.bounds.width - 32)
-        }else if section == 1 || section == 3{
+        }else if section == 1 || section == 7{
             return 30
-        }else if section == 2{
+        }else if section == 2 || section == 3 || section == 6{
             return 50
         }else if section == 4{
+            if parcelDoc != nil{
+                return 148
+            }else{
+                return 50
+            }
+        }else if section == 5{
+            if trackDoc != nil{
+                return 148
+            }else{
+                return 50
+            }
+        }else if section == 8{
             
             let purProd = purProds[indexPath.row]
             
@@ -348,7 +731,11 @@ extension ZakazViewController : VendTargetOrderDataManagerDelegate{
         
         DispatchQueue.main.async { [weak self] in
             
+            self?.zakazData = data
+            
             if data["result"].intValue == 1{
+                
+                self?.docs = data["docs"].arrayValue
                 
                 let jsonOrder = data["order"]
                 
