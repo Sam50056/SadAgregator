@@ -43,6 +43,22 @@ class ZakazViewController: UIViewController {
     
     private var vendTargetOrderDataManager = VendTargetOrderDataManager()
     
+    private var gruzImageUrl : URL?
+    private var gruzImageId : String?
+    private var gruzImage : UIImage?
+    
+    private var posilkaImageUrl : URL?
+    private var posilkaImageId : String?
+    private var posilkaImage : UIImage?
+    
+    private var sendingDocType : DocType?
+    
+    private var boxView = UIView()
+    private var blurEffectView = UIVisualEffectView()
+    
+    private lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
+    private lazy var photoSavedDataManager = PhotoSavedDataManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,6 +71,7 @@ class ZakazViewController: UIViewController {
         tableView.register(UINib(nibName: "TovarTableViewCell", bundle: nil), forCellReuseIdentifier: "tovarCell")
         
         vendTargetOrderDataManager.delegate = self
+        newPhotoPlaceDataManager.delegate = self
         
         refresh()
         
@@ -65,6 +82,16 @@ class ZakazViewController: UIViewController {
         
         
         
+    }
+    
+}
+
+//MARK: - Enums
+
+extension ZakazViewController {
+    
+    private enum DocType: Int {
+        case gruz , posilka
     }
     
 }
@@ -252,6 +279,99 @@ extension ZakazViewController{
             
             present(questionAlertController, animated: true, completion: nil)
             
+        }
+        
+    }
+    
+    func showBoxView(with text : String) {
+        
+        let blurEffect = UIBlurEffect(style: .systemChromeMaterial)
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+        
+        let width = text.width(withConstrainedHeight: UIScreen.main.bounds.width - 16, font: UIFont.systemFont(ofSize: 17)) + 60
+        
+        // You only need to adjust this frame to move it anywhere you want
+        boxView = UIView(frame: CGRect(x: view.frame.midX - (width/2), y: view.frame.midY - 25, width: width, height: 50))
+        boxView.backgroundColor = UIColor(named: "gray")
+        boxView.alpha = 0.95
+        boxView.layer.cornerRadius = 10
+        
+        boxView.center = view.center
+        
+        //Here the spinnier is initialized
+        let activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        activityView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityView.startAnimating()
+        
+        let textLabel = UILabel(frame: CGRect(x: 45, y: 0, width: 200, height: 50))
+        textLabel.textColor = UIColor.gray
+        textLabel.text = text
+        
+        boxView.addSubview(activityView)
+        boxView.addSubview(textLabel)
+        
+        view.addSubview(boxView)
+        
+        view.isUserInteractionEnabled = false
+        
+    }
+    
+    func removeBoxView(){
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            self?.boxView.removeFromSuperview()
+            self?.blurEffectView.removeFromSuperview()
+            self?.view.isUserInteractionEnabled = true
+            
+        }
+        
+    }
+    
+    func getImage(){
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(title: "Сделать снимок", style: .default, handler: { [weak self] _ in
+            self?.showImagePickerController(sourceType: .camera)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Из галереи", style: .default, handler: { [weak self] _ in
+            self?.showImagePickerController(sourceType: .photoLibrary)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        present(alertController , animated: true)
+        
+    }
+    
+    func gruzSent(){
+        
+        guard let gruzImageId = gruzImageId else {return}
+        
+        NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurDocImg?AKey=\(key)&APurSYSID=\(thisZakazId)&AImgTYPE=1&AimgID=\(gruzImageId)")) { [weak self] updateDocData , _ in
+            guard let updateDocData = updateDocData else {return}
+            if updateDocData["result"].intValue == 1{
+                self?.refresh()
+            }
+        }
+        
+        
+    }
+    
+    func posilkaSent(){
+        
+        guard let posilkaImageId = posilkaImageId else {return}
+        
+        NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurDocImg?AKey=\(key)&APurSYSID=\(thisZakazId)&AImgTYPE=2&AimgID=\(posilkaImageId)")) { [weak self] updateDocData , _ in
+            guard let updateDocData = updateDocData else {return}
+            if updateDocData["result"].intValue == 1{
+                self?.refresh()
+            }
         }
         
     }
@@ -463,7 +583,8 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                 guard let imageView1 = cell.viewWithTag(1) as? UIImageView ,
                       let label1 = cell.viewWithTag(2) as? UILabel,
                       let imageView2 = cell.viewWithTag(4) as? UIImageView,
-                      let label2 = cell.viewWithTag(3) as? UILabel
+                      let label2 = cell.viewWithTag(3) as? UILabel,
+                      let cellButton = cell.viewWithTag(5) as? UIButton
                 else {return cell}
                 
                 imageView1.image = UIImage(systemName: "camera.viewfinder")
@@ -473,6 +594,8 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                 label2.text = "Добавить"
                 
                 imageView2.image = UIImage(systemName: "chevron.right")
+                
+                cellButton.isHidden = true
                 
                 return cell
                 
@@ -534,7 +657,8 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                 guard let imageView1 = cell.viewWithTag(1) as? UIImageView ,
                       let label1 = cell.viewWithTag(2) as? UILabel,
                       let imageView2 = cell.viewWithTag(4) as? UIImageView,
-                      let label2 = cell.viewWithTag(3) as? UILabel
+                      let label2 = cell.viewWithTag(3) as? UILabel,
+                      let cellButton = cell.viewWithTag(5) as? UIButton
                 else {return cell}
                 
                 imageView1.image = UIImage(systemName: "text.viewfinder")
@@ -544,6 +668,8 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                 label2.text = "Добавить"
                 
                 imageView2.image = UIImage(systemName: "chevron.right")
+                
+                cellButton.isHidden = true
                 
                 return cell
                 
@@ -683,6 +809,12 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
             previewImage(thisZakaz.payCheckImg)
             
+        }else if section == 4{
+            sendingDocType = .gruz
+            getImage()
+        }else if section == 5{
+            sendingDocType = .posilka
+            getImage()
         }
         
     }
@@ -784,6 +916,302 @@ extension ZakazViewController : VendTargetOrderDataManagerDelegate{
     }
     
 }
+
+//MARK: - UIImagePickerControllerDelegate
+
+extension ZakazViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func showImagePickerController(sourceType : UIImagePickerController.SourceType) {
+        
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = false
+        imagePickerController.sourceType = sourceType
+        
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let safeUrl = info[.imageURL] as? URL{
+            
+            if sendingDocType == .gruz {
+                gruzImageUrl = safeUrl
+                showBoxView(with: "Загрузка фото груза")
+            }else if sendingDocType == .posilka{
+                posilkaImageUrl = safeUrl
+                showBoxView(with: "Загрузка фото накладной")
+            }
+            
+            newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
+            
+        }else if let safeImage = info[.originalImage] as? UIImage{
+            
+            if sendingDocType == .gruz {
+                gruzImage = safeImage
+                showBoxView(with: "Загрузка фото посылки")
+            }else if sendingDocType == .posilka{
+                posilkaImage = safeImage
+                showBoxView(with: "Загрузка фото трека")
+            }
+            
+            newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
+            
+        }
+        
+        //        print(info)
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+}
+
+
+//MARK: - NewPhotoPlaceDataManagerDelegate
+
+extension ZakazViewController : NewPhotoPlaceDataManagerDelegate{
+    
+    func didGetNewPhotoPlaceData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                let url = "\(data["post_to"].stringValue)/store?file_name=\(data["file_name"].stringValue)"
+                
+                print("URL FOR SENDING THE FILE: \(url)")
+                
+                if sendingDocType == .gruz{
+                    if let gruzImageUrl = gruzImageUrl{
+                        sendFileToServer(from: gruzImageUrl, to: url)
+                    }else if let gruzImage = gruzImage{
+                        sendFileToServer(image: gruzImage, to: url)
+                    }
+                }else if sendingDocType == .posilka{
+                    if let posilkaImageUrl = posilkaImageUrl{
+                        sendFileToServer(from: posilkaImageUrl, to: url)
+                    }else if let posilkaImage = posilkaImage{
+                        sendFileToServer(image: posilkaImage, to: url)
+                    }
+                }
+                
+                let imageId = data["image_id"].stringValue
+                
+                let imageLinkWithPortAndWithoutFile = "\(data["post_to"].stringValue)"
+                let splitIndex = imageLinkWithPortAndWithoutFile.lastIndex(of: ":")!
+                let imageLink = "\(String(imageLinkWithPortAndWithoutFile[imageLinkWithPortAndWithoutFile.startIndex ..< splitIndex]))\(data["file_name"].stringValue)"
+                
+                print("Image Link: \(imageLink)")
+                
+                if sendingDocType == .gruz{
+                    gruzImageId = imageId
+                }else if sendingDocType == .posilka{
+                    posilkaImageId = imageId
+                }
+                
+            }else{
+                
+                removeBoxView()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingNewPhotoPlaceDataWithError(error: String) {
+        print("Error with NewPhotoPlaceDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - File Sending
+
+extension ZakazViewController{
+    
+    func sendFileToServer(from fromUrl : URL, to toUrl : String){
+        
+        print("import result : \(fromUrl)")
+        
+        guard let toUrl = URL(string: toUrl) else {return}
+        
+        print("To URL: \(toUrl)")
+        
+        do{
+            
+            let data = try Data(contentsOf: fromUrl)
+            
+            let image = UIImage(data: data)!
+            
+            let imageData = image.jpegData(compressionQuality: 0.5)
+            
+            var request = URLRequest(url: toUrl)
+            
+            request.httpMethod = "POST"
+            request.setValue("text/plane", forHTTPHeaderField: "Content-Type")
+            request.httpBody = imageData
+            
+            let task = URLSession.shared.dataTask(with: request) { [self] (data, response, error) in
+                
+                if error != nil {
+                    print("Error sending file: \(error!.localizedDescription)")
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+                
+                print("Answer : \(json)")
+                
+                DispatchQueue.main.async { [weak self] in
+                    
+                    //                    print("Got \(isSendingGruz ? "gruz" : "posilka") sent to server")
+                    
+                    var imageid = ""
+                    
+                    if sendingDocType == .gruz {
+                        imageid = self!.gruzImageId!
+                    }else if sendingDocType == .posilka{
+                        imageid = self!.posilkaImageId!
+                    }
+                    
+                    photoSavedDataManager.getPhotoSavedData(key: key, photoId: imageid) { data, error in
+                        
+                        self?.removeBoxView()
+                        
+                        if let error = error{
+                            print("Error with PhotoSavedDataManager : \(error)")
+                            return
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            guard let data = data else {return}
+                            
+                            if data["result"].intValue == 1{
+                                
+                                //                                print("\(isSendingGruz ? "Gruz" : "Posilka") image successfuly saved to server")
+                                
+                                if sendingDocType == .gruz{
+                                    gruzSent()
+                                }else if sendingDocType == .posilka{
+                                    posilkaSent()
+                                }
+                                
+                            }else{
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            task.resume()
+            
+        }catch{
+            print(error)
+            removeBoxView()
+        }
+        
+    }
+    
+    func sendFileToServer(image : UIImage, to toUrl : String){
+        
+        //        print("import result : \(fromUrl)")
+        
+        guard let toUrl = URL(string: toUrl) else {return}
+        
+        print("To URL: \(toUrl)")
+        
+        do{
+            
+            let imageData = image.jpegData(compressionQuality: 0.5)
+            
+            var request = URLRequest(url: toUrl)
+            
+            request.httpMethod = "POST"
+            request.setValue("text/plane", forHTTPHeaderField: "Content-Type")
+            request.httpBody = imageData
+            
+            let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+                
+                if error != nil {
+                    print("Error sending file: \(error!.localizedDescription)")
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+                
+                print("Answer : \(json)")
+                
+                DispatchQueue.main.async {
+                    
+                    var imageid = ""
+                    
+                    if self!.sendingDocType == .gruz {
+                        imageid = self!.gruzImageId!
+                    }else if self!.sendingDocType == .posilka{
+                        imageid = self!.posilkaImageId!
+                    }
+                    
+                    self?.photoSavedDataManager.getPhotoSavedData(key: self!.key, photoId: imageid) { data, error in
+                        
+                        if let error = error{
+                            print("Error with PhotoSavedDataManager : \(error)")
+                            return
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            guard let data = data else {return}
+                            
+                            if data["result"].intValue == 1{
+                                
+                                print("Check image successfuly saved to server")
+                                
+                                self?.removeBoxView()
+                                
+                                if self!.sendingDocType == .gruz{
+                                    self?.gruzSent()
+                                }else if self!.sendingDocType == .posilka{
+                                    self?.posilkaSent()
+                                }
+                                
+                            }else{
+                                
+                                self?.removeBoxView()
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            task.resume()
+            
+        }catch{
+            print(error)
+        }
+        
+    }
+    
+}
+
+
 
 //MARK: - Data Manipulation Methods
 
