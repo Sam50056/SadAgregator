@@ -566,6 +566,31 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                     
                     confirmAlert.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                         
+                        NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.DeletePurDocIMG?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)&AImgID=\(parcelDoc["id"].stringValue)") { deleteData, deleteError in
+                            
+                            DispatchQueue.main.async {
+                                
+                                if let deleteError = deleteError{
+                                    print("Error with Delete Pur Doc IMG : \(deleteError)")
+                                    return
+                                }
+                                
+                                if let errorText = deleteData!["msg"].string , errorText != ""{
+                                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                                    return
+                                }
+                                
+                                if deleteData!["result"].intValue == 1{
+                                    
+                                    self?.parcelDoc = nil
+                                    self?.refresh()
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
                     }))
                     
                     confirmAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
@@ -639,6 +664,33 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                     let confirmAlert = UIAlertController(title: "Удалить фото трека?", message: nil, preferredStyle: .alert)
                     
                     confirmAlert.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                        
+                        NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.DeletePurDocIMG?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)&AImgID=\(trackDoc["id"].stringValue)") { deleteData, deleteError in
+                            
+                            DispatchQueue.main.async {
+                                
+                                if let deleteError = deleteError{
+                                    print("Error with Delete Pur Doc IMG : \(deleteError)")
+                                    return
+                                }
+                                
+                                if let errorText = deleteData!["msg"].string , errorText != ""{
+                                    
+                                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                                    return
+                                    
+                                }
+                                
+                                if deleteData!["result"].intValue == 1{
+                                    
+                                    self?.trackDoc = nil
+                                    self?.refresh()
+                                    
+                                }
+                                
+                            }
+                            
+                        }
                         
                     }))
                     
@@ -1210,8 +1262,6 @@ extension ZakazViewController{
     }
     
 }
-
-
 
 //MARK: - Data Manipulation Methods
 
