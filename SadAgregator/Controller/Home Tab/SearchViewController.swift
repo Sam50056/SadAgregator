@@ -117,6 +117,10 @@ class SearchViewController: UIViewController {
     
     var doneArray = [String]()
     
+    var isShownFromGallery = false
+    
+    var searchBarViewTapped : (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -146,6 +150,27 @@ class SearchViewController: UIViewController {
             getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
         }
         
+        if isShownFromGallery{
+            
+            let button = UIButton(frame: searchView.frame)
+            
+            button.setTitle("", for: .normal)
+            
+            view.addSubview(button)
+            
+            button.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                button.rightAnchor.constraint(equalTo: searchView.rightAnchor),
+                button.leftAnchor.constraint(equalTo: searchView.leftAnchor),
+                button.topAnchor.constraint(equalTo: searchView.topAnchor),
+                button.bottomAnchor.constraint(equalTo: searchView.bottomAnchor)
+            ])
+            
+            button.addTarget(self, action: #selector(searchBarButtonTapped), for: .touchUpInside)
+            
+        }
+        
         showSimpleCircleAnimation(activityController: activityController)
         
     }
@@ -155,6 +180,10 @@ class SearchViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.title = "Поиск"
+        
+        if isShownFromGallery {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(otmenaBarButtonTapped))
+        }
         
     }
     
@@ -174,6 +203,15 @@ extension SearchViewController {
         
         showImagePickerController(sourceType: .photoLibrary)
         
+    }
+    
+    @objc func otmenaBarButtonTapped(){
+        guard isShownFromGallery else {return}
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func searchBarButtonTapped(){
+        searchBarViewTapped?()
     }
     
 }
@@ -588,8 +626,6 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int, export : JSON?){
         
-        cell.delegate = self
-        
         cell.key = key
         
         let postId = data["id"].stringValue
@@ -603,6 +639,56 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         cell.vkLinkUrlString = data["vk_post"].stringValue
         
+        cell.didTapOnImageCell = { [weak self] index, images , sizes in
+            
+            let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
+            
+            galleryVC.selectedImageIndex = index
+            
+            galleryVC.images = images
+            
+            galleryVC.sizes = sizes
+            
+            galleryVC.key = self?.key ?? ""
+            
+            galleryVC.price = data["price"].stringValue
+            
+            galleryVC.point = data["vendor_capt"].stringValue
+            
+            galleryVC.forceClosed = { [weak self] in
+                self?.tableView.setContentOffset( CGPoint(x: 0, y: 0) , animated: true)
+            }
+            
+            galleryVC.isShownFromPhotoSearch = self?.isShownFromGallery ?? false
+            
+            let navVC = UINavigationController(rootViewController: galleryVC)
+            
+            self?.presentHero(navVC, navigationAnimationType: .fade)
+            
+        }
+        
+        cell.didTapOnOptionCell = { [weak self] option in
+            
+            self?.postsArray.removeAll()
+            
+            self?.cntList = nil
+            
+            self?.searchData = nil
+            
+            self?.hintCellShouldBeShown.toggle()
+            
+            self?.searchText = option
+            
+            self?.searchTextField.text = option
+            
+            self?.tableView.reloadSections([0,1], with: .automatic)
+            
+            self?.getSearchPageDataManager.getSearchPageData(key: self!.key, query: option, page: self!.page)
+            
+            self?.tableView.setContentOffset( CGPoint(x: 0, y: 0) , animated: true)
+            
+        }
+        
         cell.soobshitButtonCallback = { [self] in
             
             GetPostActionsDataManager(delegate: self).getGetPostActionsData(key: key, postId: postId)
@@ -613,6 +699,8 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         
         cell.vendorLabelButtonCallBack = { [self] in
             
+            guard !isShownFromGallery else {return}
+            
             selectedPointId = data["point_id"].stringValue
             
             self.performSegue(withIdentifier: "goToPoint", sender: self)
@@ -620,6 +708,8 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         }
         
         cell.byLabelButtonCallback = { [self] in
+            
+            guard !isShownFromGallery else {return}
             
             selectedVendId = data["vendor_id"].stringValue
             
@@ -747,50 +837,6 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
         isLogged ? (cell.likeButtonImageView.isHidden = false) : (cell.likeButtonImageView.isHidden = true)
         
         !isLogged ? (cell.vigruzitView.alpha = 0.6) : (cell.vigruzitView.alpha = 1)
-        
-    }
-    
-}
-
-//MARK: - PostCellCollectionViewActionsDelegate stuff
-
-extension SearchViewController : PostCellCollectionViewActionsDelegate{
-    
-    func didTapOnOptionCell(option: String) {
-        
-        postsArray.removeAll()
-        
-        cntList = nil
-        
-        searchData = nil
-        
-        hintCellShouldBeShown.toggle()
-        
-        searchText = option
-        
-        searchTextField.text = option
-        
-        tableView.reloadSections([0,1], with: .automatic)
-        
-        getSearchPageDataManager.getSearchPageData(key: key, query: option, page: page)
-        
-        self.tableView.setContentOffset( CGPoint(x: 0, y: 0) , animated: true)
-        
-    }
-    
-    func didTapOnImageCell(index: Int, images: [PostImage], sizes : [String]) {
-        
-        let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
-        
-        galleryVC.selectedImageIndex = index
-        
-        galleryVC.images = images
-        
-        galleryVC.sizes = sizes
-        
-        let navVC = UINavigationController(rootViewController: galleryVC)
-        
-        presentHero(navVC, navigationAnimationType: .fade)
         
     }
     

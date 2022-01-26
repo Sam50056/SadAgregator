@@ -30,6 +30,10 @@ struct K {
     static let sortAutoHide = "sortAutoHide" // Bool
     static let notFirstTimeSortOpened = "notFirstTimeOpenSort" // Bool
     
+    static let postTitle = "postTitle"
+    static let shouldShowButtonsViewInGallery = "showButtonsViewInGallery"
+    static let notFirstTimeGalleryOpened = "notFirstTimeGalleryOpened"
+    
     //MARK: - Design vars
     
     static let postHeight : CGFloat = 600

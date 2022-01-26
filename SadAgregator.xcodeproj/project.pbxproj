@@ -90,6 +90,7 @@
 		2245820325A9FB16008882A9 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2245820225A9FB15008882A9 /* HelpView.swift */; };
 		2245820D25AA2D6D008882A9 /* HelpPageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2245820C25AA2D6D008882A9 /* HelpPageDataManager.swift */; };
 		224584272592A6A60000B3D4 /* UserChangePassDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224584262592A6A60000B3D4 /* UserChangePassDataManager.swift */; };
+		2247844D27A1E0ED00BC48BB /* UtilsGetHashByImgIDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2247844C27A1E0ED00BC48BB /* UtilsGetHashByImgIDDataManager.swift */; };
 		224BC43B259FE61E003F147F /* VkAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC43A259FE61E003F147F /* VkAuthService.swift */; };
 		224BC44A25A013C3003F147F /* AuthSocialDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC44925A013C3003F147F /* AuthSocialDataManager.swift */; };
 		224BC44D25A0C529003F147F /* AddPointRequestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */; };
@@ -461,6 +462,7 @@
 		2245820225A9FB15008882A9 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		2245820C25AA2D6D008882A9 /* HelpPageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpPageDataManager.swift; sourceTree = "<group>"; };
 		224584262592A6A60000B3D4 /* UserChangePassDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserChangePassDataManager.swift; sourceTree = "<group>"; };
+		2247844C27A1E0ED00BC48BB /* UtilsGetHashByImgIDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsGetHashByImgIDDataManager.swift; sourceTree = "<group>"; };
 		224BC43A259FE61E003F147F /* VkAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkAuthService.swift; sourceTree = "<group>"; };
 		224BC44925A013C3003F147F /* AuthSocialDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSocialDataManager.swift; sourceTree = "<group>"; };
 		224BC44C25A0C528003F147F /* AddPointRequestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointRequestDataManager.swift; sourceTree = "<group>"; };
@@ -1028,6 +1030,23 @@
 			path = "Menu Managers";
 			sourceTree = "<group>";
 		};
+		2247844E27A1E0FA00BC48BB /* Gallery VC */ = {
+			isa = PBXGroup;
+			children = (
+				2247844C27A1E0ED00BC48BB /* UtilsGetHashByImgIDDataManager.swift */,
+			);
+			path = "Gallery VC";
+			sourceTree = "<group>";
+		};
+		2247844F27A1E10A00BC48BB /* Main VC */ = {
+			isa = PBXGroup;
+			children = (
+				22D60981255D41F000FC622B /* MessageReadedDataManager.swift */,
+				228D2D3A25AC9DED000E9FAE /* UpdateDeviceDataManager.swift */,
+			);
+			path = "Main VC";
+			sourceTree = "<group>";
+		};
 		224BC43D259FEE11003F147F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1543,9 +1562,9 @@
 			isa = PBXGroup;
 			children = (
 				228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */,
-				22D60981255D41F000FC622B /* MessageReadedDataManager.swift */,
-				228D2D3A25AC9DED000E9FAE /* UpdateDeviceDataManager.swift */,
+				2247844F27A1E10A00BC48BB /* Main VC */,
 				22B9E178272704C400985450 /* NoAnswerDataManager.swift */,
+				2247844E27A1E0FA00BC48BB /* Gallery VC */,
 			);
 			path = "General Managers";
 			sourceTree = "<group>";
@@ -2443,6 +2462,7 @@
 				22D60982255D41F000FC622B /* MessageReadedDataManager.swift in Sources */,
 				22BC71D2268A46A700846702 /* SborkaViewModel.swift in Sources */,
 				227B62FE27331E3700687BEB /* PurchaseActionsSetForSupplierCommentDataManager.swift in Sources */,
+				2247844D27A1E0ED00BC48BB /* UtilsGetHashByImgIDDataManager.swift in Sources */,
 				227B6308273487FC00687BEB /* PurchaseActionsStartPurProcessingDataManager.swift in Sources */,
 				226F241126B2D85F00FB2744 /* BrokersBrokersTopDataManager.swift in Sources */,
 				22D9D12F26F65D1D005BD254 /* MyZakupkiViewController.swift in Sources */,

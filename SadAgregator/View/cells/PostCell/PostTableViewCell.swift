@@ -118,8 +118,6 @@ class PostTableViewCell: UITableViewCell  {
         
     }
     
-    var delegate : PostCellCollectionViewActionsDelegate?
-    
     lazy var postLikeDataManager = PostLikeDataManager()
     
     var like : String = ""
@@ -137,6 +135,9 @@ class PostTableViewCell: UITableViewCell  {
     var peerButtonCallback : (() -> ())?
     var vigruzitButtonCallback : (() -> ())?
     var vibratTochkuButtonCallback : (() -> ())?
+    
+    var didTapOnImageCell : ((Int, [PostImage], [String]) -> ())?
+    var didTapOnOptionCell : ((String) -> ())?
     
     var postDescription : String?
     var showDescription = false
@@ -622,7 +623,7 @@ class PostTableViewCell: UITableViewCell  {
             sizesWithoutFirstItem.remove(at: 0)//We delete the first item because we add "Размеры" at 0 index when we just get the sizes array
         }
         
-        delegate?.didTapOnImageCell(index: index, images: images, sizes: sizesWithoutFirstItem)
+        didTapOnImageCell?(index, images, sizesWithoutFirstItem)
         
     }
     
@@ -634,7 +635,7 @@ class PostTableViewCell: UITableViewCell  {
         
         print("Selected option : \(selectedOption) with index in the array : \(index)")
         
-        delegate?.didTapOnOptionCell(option: selectedOption)
+        didTapOnOptionCell?(selectedOption)
         
     }
     
@@ -727,11 +728,4 @@ extension PostTableViewCell : PostLikeDataManagerDelegate{
         print("Error with PostLikeDataManager : \(error)")
     }
     
-}
-
-//MARK: - PhotoCollectionViewCellDelegate
-
-protocol PostCellCollectionViewActionsDelegate {
-    func didTapOnImageCell(index: Int, images : [PostImage], sizes : [String])
-    func didTapOnOptionCell(option : String)
 }

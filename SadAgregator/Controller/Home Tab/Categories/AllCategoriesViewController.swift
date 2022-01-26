@@ -13,6 +13,8 @@ class AllCategoriesViewController: UITableViewController {
     
     let realm = try! Realm()
     
+    let activityController = UIActivityIndicatorView()
+    
     var key = ""
     
     var getCatListDataManager = GetCatListDataManager()
@@ -31,6 +33,8 @@ class AllCategoriesViewController: UITableViewController {
         getCatListDataManager.delegate = self
         
         getCatListDataManager.getGetCatListData(key: key, parentId: parentId)
+        
+        showSimpleCircleAnimation(activityController: activityController)
         
     }
     
@@ -119,12 +123,17 @@ extension AllCategoriesViewController : GetCatListDataManagerDelegate{
             
             tableView.reloadData()
             
+            stopSimpleCircleAnimation(activityController: activityController)
+            
         }
         
     }
     
     func didFailGettingGetCatListDataWithError(error: String) {
         print("Error with GetCatListDataManager : \(error)")
+        DispatchQueue.main.async { [weak self] in
+            self?.stopSimpleCircleAnimation(activityController: self!.activityController)
+        }
     }
     
 }

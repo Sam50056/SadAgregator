@@ -16,13 +16,34 @@ class GalleryViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var buttonView: UIView!
+    @IBOutlet weak var searchView: UIView!
+    
+    @IBOutlet weak var pencilView: UIView!
+    @IBOutlet weak var buttonsView: UIView!
+    @IBOutlet weak var buttonsViewBottomView: UIView!
+    @IBOutlet weak var buttonsViewTochkaView: UIView!
+    @IBOutlet weak var buttonsViewPriceView: UIView!
+    @IBOutlet weak var buttonsViewPPView: UIView!
+    
+    @IBOutlet weak var buttonsViewBottomViewLabel: UILabel!
+    @IBOutlet weak var buttonsViewPointLabel: UILabel!
+    @IBOutlet weak var buttonsViewPriceLabel: UILabel!
+    @IBOutlet weak var buttonsViewPPLabel: UILabel!
     
     @IBOutlet weak var buyButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var buyButtonLabel: UILabel!
+    @IBOutlet weak var pencilButton : UIButton!
     
     var images : [PostImage]  = []
     
     var sizes : [String] = []
+    
+    var key = ""
+    
+    var price : String?
+    
+    var point : String?
     
     var selectedImageIndex = 0
     
@@ -31,6 +52,12 @@ class GalleryViewController: UIViewController {
     private var selectedSize : String?
     
     var simplePreviewMode : Bool = false
+    
+    var isShownFromPhotoSearch = false
+    
+    var shouldShowButtonsView = UserDefaults.standard.bool(forKey: K.shouldShowButtonsViewInGallery)
+    
+    var forceClosed : (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +73,14 @@ class GalleryViewController: UIViewController {
         heroView.heroID = images[selectedImageIndex].image
         
         buttonView.layer.cornerRadius = 8
+        searchView.layer.cornerRadius = 8
+        pencilView.layer.cornerRadius = 8
+        
+        buttonsViewTochkaView.layer.cornerRadius = 8
+        buttonsViewPriceView.layer.cornerRadius = 8
+        buttonsViewPPView.layer.cornerRadius = 8
+        
+        buttonsViewBottomView.layer.cornerRadius = 8
         
         buyButtonLabel.text = "Купить"
         
@@ -76,6 +111,33 @@ class GalleryViewController: UIViewController {
             
             buttonView.isHidden = true
             
+        }
+        
+        if isShownFromPhotoSearch{
+            searchView.isHidden = true
+        }
+        
+        if let title = UserDefaults.standard.string(forKey: K.postTitle) , !title.isEmpty{
+            buttonsViewBottomViewLabel.text = title
+        }else{
+            buttonsViewBottomViewLabel.text = "Укажите текст"
+        }
+        buttonsViewPointLabel.text = point ?? ""
+        if let price = price {
+            buttonsViewPriceLabel.text = price != "0" ? price + " руб" : ""
+        }else{
+            buttonsViewPriceLabel.text = "нет цены"
+        }
+        
+        sizes.append("Другой размер")
+        
+        if !UserDefaults.standard.bool(forKey: K.notFirstTimeGalleryOpened){
+            shouldShowButtonsView = true
+            buttonsView.isHidden = !shouldShowButtonsView
+            UserDefaults.standard.set(shouldShowButtonsView, forKey: K.shouldShowButtonsViewInGallery)
+            UserDefaults.standard.set(true, forKey: K.notFirstTimeGalleryOpened)
+        }else{
+            buttonsView.isHidden = !shouldShowButtonsView
         }
         
     }
@@ -140,8 +202,22 @@ class GalleryViewController: UIViewController {
         UIView.transition(with: buttonView, duration: 0.4,
                           options: .transitionCrossDissolve,
                           animations: {
-                            self.buttonView.isHidden.toggle()
-                          })
+            self.buttonView.isHidden.toggle()
+        })
+        
+        if !isShownFromPhotoSearch{
+            UIView.transition(with: searchView, duration: 0.4,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                self.searchView.isHidden.toggle()
+            })
+        }
+        
+        UIView.transition(with: pencilView, duration: 0.4,
+                          options: .transitionCrossDissolve,
+                          animations: {
+            self.pencilView.isHidden.toggle()
+        })
         
         navigationController?.setNavigationBarHidden(navigationController?.isNavigationBarHidden == false, animated: true)
         
@@ -191,6 +267,185 @@ class GalleryViewController: UIViewController {
         present(navVC, animated: true, completion: nil)
         
     }
+    
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
+        
+        let currentImageId = images[(currentIndexPathOf(collectionView).row)].imageId
+        
+        UtilsGetHashByImgIDDataManager().getUtilsGetHashByImgIDData(key: key, imgId: currentImageId) { data, error in
+            
+            DispatchQueue.main.async { [weak self] in
+                
+                if let error = error {
+                    print("Error with UtilsGetHashByImgIDDataManager : \(error)")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        let searchVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SearchVC") as! SearchViewController
+                        
+                        searchVC.searchText = ""
+                        
+                        searchVC.imageHashText = (data!["no_crop"].stringValue + "-" + data!["crop"].stringValue)
+                        
+                        searchVC.isShownFromGallery = true
+                        
+                        searchVC.searchBarViewTapped = { [weak self] in
+                            
+                            searchVC.dismiss(animated: true, completion: nil)
+                            self?.dismiss(animated: true, completion: nil)
+                            self?.forceClosed?()
+                            
+                        }
+                        
+                        let navVC = UINavigationController(rootViewController: searchVC)
+                        
+                        navVC.modalPresentationStyle = .formSheet
+                        
+                        self!.present(navVC, animated: true, completion: nil)
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    @IBAction func pencilButtonPressed(_ sender: UIButton) {
+        
+        shouldShowButtonsView.toggle()
+        
+        UIView.transition(with: buttonsView, duration: 0.4,
+                          options: .transitionCrossDissolve,
+                          animations: { [weak self] in
+            self!.buttonsView.isHidden = !self!.shouldShowButtonsView
+        })
+        
+        UserDefaults.standard.set(shouldShowButtonsView, forKey: K.shouldShowButtonsViewInGallery)
+        
+    }
+    
+    @IBAction func buttonsViewBottomViewButtonPressed(_ sender: UIButton) {
+        
+        let alertController = UIAlertController(title: "Редактировать заголовок", message: nil, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Изменить", style: .default, handler: { [weak self] _ in
+            
+            guard let newTitle = alertController.textFields?[0].text , !newTitle.isEmpty else {return}
+            
+            self?.buttonsViewBottomViewLabel.text = newTitle
+            
+            UserDefaults.standard.set(newTitle, forKey: K.postTitle)
+            
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        alertController.addTextField { field in
+            
+        }
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func buttonsViewPPViewButtonPressed(_ sender: UIButton) {
+        
+        let alertControlelr = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        for size in sizes {
+            
+            let action = UIAlertAction(title: size, style: .default) { [self] _ in
+                
+                if size == "Другой размер"{
+                    
+                    let sizeAlertController = UIAlertController(title: "Введите размер", message: nil, preferredStyle: .alert)
+                    
+                    sizeAlertController.addTextField { textField in
+                        textField.placeholder = "Размер"
+                    }
+                    
+                    sizeAlertController.addAction(UIAlertAction(title: "Готово", style: .default, handler: { _ in
+                        guard let newSize = sizeAlertController.textFields?[0].text else {return}
+                        sizes.insert(newSize, at: sizes.count - 1)
+                        buttonsViewPPLabel.text = "Размер: " + newSize
+                    }))
+                    
+                    sizeAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { _ in
+                        sizeAlertController.dismiss(animated: true, completion: nil)
+                    }))
+                    
+                    present(sizeAlertController, animated: true, completion: nil)
+                    
+                }else{
+                    buttonsViewPPLabel.text = "Размер: " + size
+                }
+            }
+            
+            alertControlelr.addAction(action)
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { _IOFBF in
+            alertControlelr.dismiss(animated: true, completion: nil)
+        }
+        
+        alertControlelr.addAction(cancelAction)
+        
+        present(alertControlelr, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func buttonsViewPointViewButtonPressed(_ sender: UIButton) {
+        
+        let alertController = UIAlertController(title: "Редактировать точку", message: nil, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Изменить", style: .default, handler: { [weak self] _ in
+            
+            guard let newPoint = alertController.textFields?[0].text , !newPoint.isEmpty else {return}
+            
+            self?.buttonsViewPointLabel.text = newPoint
+            
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        alertController.addTextField { field in
+            
+        }
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func buttonsViewPriceViewButtonPressed(_ sender: UIButton) {
+        
+        let alertController = UIAlertController(title: "Редактировать цену", message: nil, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Изменить", style: .default, handler: { [weak self] _ in
+            
+            guard let newPrice = alertController.textFields?[0].text , !newPrice.isEmpty else {return}
+            
+            self?.buttonsViewPriceLabel.text = newPrice != "0" ? newPrice + " руб" : ""
+            
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        alertController.addTextField { field in
+            field.keyboardType = .numberPad
+        }
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
     
     @IBAction func closeButtonPressed(_ sender : Any){
         self.dismiss(animated: true, completion: nil)

@@ -251,8 +251,6 @@ class TovarImageSearchTableViewController: UIViewController , UITableViewDataSou
             
         }
         
-        cell.delegate = self
-        
         cell.key = key
         
         cell.id = postId
@@ -263,6 +261,36 @@ class TovarImageSearchTableViewController: UIViewController , UITableViewDataSou
         like == "0" ? (cell.likeButtonImageView.image = UIImage(systemName: "heart")) : (cell.likeButtonImageView.image = UIImage(systemName: "heart.fill"))
         
         cell.vkLinkUrlString = data["vk_post"].stringValue
+        
+        cell.didTapOnImageCell = { [weak self] index, images , sizes in
+            
+            let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
+            
+            galleryVC.selectedImageIndex = index
+            
+            galleryVC.images = images
+            
+            galleryVC.sizes = sizes
+            
+            galleryVC.key = self?.key ?? ""
+            
+            galleryVC.price = data["price"].stringValue
+            
+            galleryVC.point = data["vendor_capt"].stringValue
+            
+            galleryVC.forceClosed = { [weak self] in
+                self?.tableView.setContentOffset( CGPoint(x: 0, y: 0) , animated: true)
+            }
+            
+            let navVC = UINavigationController(rootViewController: galleryVC)
+            
+            self?.presentHero(navVC, navigationAnimationType: .fade)
+            
+        }
+        
+        cell.didTapOnOptionCell = { _ in
+            //No option cells in this VC bitch
+        }
         
         cell.byLabelButtonCallback = { [self] in
             
@@ -303,33 +331,6 @@ class TovarImageSearchTableViewController: UIViewController , UITableViewDataSou
     }
     
 }
-
-//MARK: - PostCellCollectionViewActionsDelegate stuff
-
-extension TovarImageSearchTableViewController : PostCellCollectionViewActionsDelegate{
-    
-    func didTapOnOptionCell(option: String) {
-        //No option cells in this VC bitch
-    }
-    
-    func didTapOnImageCell(index: Int, images: [PostImage], sizes : [String]) {
-        
-        let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
-        
-        galleryVC.selectedImageIndex = index
-        
-        galleryVC.images = images
-        
-        galleryVC.sizes = sizes
-        
-        let navVC = UINavigationController(rootViewController: galleryVC)
-        
-        presentHero(navVC, navigationAnimationType: .fade)
-        
-    }
-    
-}
-
 
 //MARK: - Image Search Stuff
 

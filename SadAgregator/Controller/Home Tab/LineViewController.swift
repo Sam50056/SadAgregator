@@ -469,8 +469,6 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
     
     func setUpPostCell(cell: PostTableViewCell , data : JSON, index : Int, export : JSON?){
         
-        cell.delegate = self
-        
         cell.key = key
         
         let postId = data["id"].stringValue
@@ -483,6 +481,40 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         like == "0" ? (cell.likeButtonImageView.image = UIImage(systemName: "heart")) : (cell.likeButtonImageView.image = UIImage(systemName: "heart.fill"))
         
         cell.vkLinkUrlString = data["vk_post"].stringValue
+        
+        cell.didTapOnImageCell = { [weak self] index, images , sizes in
+            
+            let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
+            
+            galleryVC.selectedImageIndex = index
+            
+            galleryVC.images = images
+            
+            galleryVC.sizes = sizes
+            
+            galleryVC.key = self?.key ?? ""
+            
+            galleryVC.price = data["price"].stringValue
+            
+            galleryVC.point = data["vendor_capt"].stringValue
+            
+            galleryVC.forceClosed = { [weak self] in
+                self?.tableView.setContentOffset( CGPoint(x: 0, y: 0) , animated: true)
+            }
+            
+            let navVC = UINavigationController(rootViewController: galleryVC)
+            
+            self?.presentHero(navVC, navigationAnimationType: .fade)
+            
+        }
+        
+        cell.didTapOnOptionCell = { [weak self] option in
+            
+            self?.searchText = option
+            
+            self?.performSegue(withIdentifier: "goSearch", sender: self)
+            
+        }
         
         cell.soobshitButtonCallback = { [self] in
             
@@ -623,36 +655,6 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
         isLogged ? (cell.likeButtonImageView.isHidden = false) : (cell.likeButtonImageView.isHidden = true)
         
         !isLogged ? (cell.vigruzitView.alpha = 0.6) : (cell.vigruzitView.alpha = 1)
-        
-    }
-    
-}
-
-//MARK: - PostCellCollectionViewActionsDelegate stuff
-
-extension LineViewController : PostCellCollectionViewActionsDelegate{
-    
-    func didTapOnOptionCell(option: String) {
-        
-        searchText = option
-        
-        performSegue(withIdentifier: "goSearch", sender: self)
-        
-    }
-    
-    func didTapOnImageCell(index: Int, images: [PostImage], sizes : [String]) {
-        
-        let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
-        
-        galleryVC.selectedImageIndex = index
-        
-        galleryVC.images = images
-        
-        galleryVC.sizes = sizes
-        
-        let navVC = UINavigationController(rootViewController: galleryVC)
-        
-        presentHero(navVC, navigationAnimationType: .fade)
         
     }
     
