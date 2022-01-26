@@ -2881,32 +2881,19 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lkw-Bz-lkb">
-                                                    <rect key="frame" x="324.5" y="34.5" width="45.5" height="26"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26q-8h-rgk">
-                                                            <rect key="frame" x="4" y="4" width="37.5" height="18"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" name="shadow"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="26q-8h-rgk" secondAttribute="bottom" constant="4" id="6zg-ux-rJy"/>
-                                                        <constraint firstAttribute="trailing" secondItem="26q-8h-rgk" secondAttribute="trailing" constant="4" id="TCI-CU-Vwm"/>
-                                                        <constraint firstItem="26q-8h-rgk" firstAttribute="leading" secondItem="Lkw-Bz-lkb" secondAttribute="leading" constant="4" id="b9q-ZA-Iaz"/>
-                                                        <constraint firstItem="26q-8h-rgk" firstAttribute="top" secondItem="Lkw-Bz-lkb" secondAttribute="top" constant="4" id="tym-2V-i35"/>
-                                                    </constraints>
-                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26q-8h-rgk">
+                                                    <rect key="frame" x="327.5" y="37.5" width="42.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="26q-8h-rgk" secondAttribute="trailing" constant="8" id="0Gn-0Z-pJu"/>
                                                 <constraint firstItem="oaz-3Q-Zen" firstAttribute="leading" secondItem="gc8-gA-uFc" secondAttribute="trailing" constant="8" id="5VR-If-oEW"/>
                                                 <constraint firstItem="gc8-gA-uFc" firstAttribute="centerY" secondItem="Ouq-cc-e5X" secondAttribute="centerY" id="Bvb-eT-OCA"/>
-                                                <constraint firstItem="Lkw-Bz-lkb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oaz-3Q-Zen" secondAttribute="trailing" constant="8" id="lFf-Wn-Hy0"/>
+                                                <constraint firstItem="26q-8h-rgk" firstAttribute="centerY" secondItem="Ouq-cc-e5X" secondAttribute="centerY" id="uJA-0p-JgT"/>
                                                 <constraint firstItem="gc8-gA-uFc" firstAttribute="leading" secondItem="Ouq-cc-e5X" secondAttribute="leading" constant="8" id="w48-Qd-H44"/>
-                                                <constraint firstAttribute="trailing" secondItem="Lkw-Bz-lkb" secondAttribute="trailing" constant="8" id="yjU-kr-9Ve"/>
-                                                <constraint firstItem="Lkw-Bz-lkb" firstAttribute="centerY" secondItem="Ouq-cc-e5X" secondAttribute="centerY" id="z2j-eY-grs"/>
                                                 <constraint firstItem="oaz-3Q-Zen" firstAttribute="centerY" secondItem="gc8-gA-uFc" secondAttribute="centerY" id="znC-w1-I0V"/>
                                             </constraints>
                                         </collectionViewCellContentView>
@@ -8536,9 +8523,6 @@
         </namedColor>
         <namedColor name="searchbargray">
             <color red="0.81999999284744263" green="0.8190000057220459" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="shadow">
-            <color red="0.86299997568130493" green="0.86299997568130493" blue="0.87800002098083496" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="whiteblack">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

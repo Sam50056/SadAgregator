@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import RealmSwift
+import SwiftyJSON
 
 class ServicesViewController: UIViewController {
     
@@ -18,6 +19,10 @@ class ServicesViewController: UIViewController {
     private var key = ""
     private var isLogged = false
     private var isVendor = false
+    
+    let dataManager = NoAnswerDataManager()
+    
+    var servicesJsonData : JSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +42,45 @@ class ServicesViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
         
         loadUserData()
+        
+        refresh()
+        
+    }
+    
+}
+
+//MARK: - Functions
+
+extension ServicesViewController {
+    
+    func refresh(){
+        
+        dataManager.sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_services.GetInfo?AKey=\(key)") { data, error in
+            
+            DispatchQueue.main.async { [weak self] in
+                
+                if let error = error {
+                    print("Error with Services Get Info : \(error)")
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    self?.servicesJsonData = data!["services"]
+                    
+                    self?.collectionView.reloadData()
+                    
+                }else{
+                    
+                    if let errorText = data!["msg"].string , errorText != ""{
+                        self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                    }
+                    
+                }
+                
+            }
+            
+        }
         
     }
     
@@ -99,14 +143,13 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
         
         if let cellImageView = cell.viewWithTag(1) as? UIImageView ,
            let serviceNameLabel = cell.viewWithTag(2) as? UILabel,
-           let secondView = cell.viewWithTag(3){
+           let secondLabel = cell.viewWithTag(3) as? UILabel{
             
             cell.contentView.layer.cornerRadius = 8
             cell.contentView.backgroundColor = UIColor(named: "gray")
             
-            secondView.layer.cornerRadius = 5
-            
-            secondView.isHidden = true
+            secondLabel.textColor = .systemBlue
+            secondLabel.text = ""
             
             if indexPath.section == 0{
                 
@@ -118,17 +161,35 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                     
                     serviceNameLabel.text = "Клиенты"
                     
+                    if let clientsBalance = servicesJsonData?["clients_balance"].string , clientsBalance != "" {
+                        secondLabel.text = clientsBalance + " руб"
+                        if clientsBalance.contains("-"){
+                            secondLabel.textColor = .red
+                        }
+                    }
+                    
                 case 1:
                     
                     cellImageView.image = UIImage(systemName: "person.2.square.stack")
                     
                     serviceNameLabel.text = "Мои закупки"
                     
+                    if let pursCount = servicesJsonData?["purs_cnt"].string , pursCount != ""{
+                        secondLabel.text = pursCount
+                    }
+                    
                 case 2:
                     
                     cellImageView.image = UIImage(systemName: "shippingbox")
                     
                     serviceNameLabel.text = "Сборка"
+                    
+                    guard let servicesJsonData = servicesJsonData else {return cell}
+                    
+                    let assemblyWaitItems = servicesJsonData["assembly_wait_items"].stringValue
+                    let assemblyWaitCost = servicesJsonData["assembly_wait_cost"].stringValue
+                    
+                    secondLabel.text = assemblyWaitItems + " / " + assemblyWaitCost + " руб"
                     
                 case 3:
                     
@@ -149,6 +210,10 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 serviceNameLabel.text = "Мои заказы"
                 
                 cell.contentView.alpha = 1
+                
+                if let ordersCount = servicesJsonData?["orders_cnt"].string , ordersCount != ""{
+                    secondLabel.text = ordersCount
+                }
                 
             }else if indexPath.section == 2{
                 
