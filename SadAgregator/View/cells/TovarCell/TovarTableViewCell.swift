@@ -126,13 +126,9 @@ class TovarTableViewCell: UITableViewCell {
                 guard let intStatus = Int(thisZakaz.status) else {break orderIf}
                 
                 if intStatus == 1{
-                    bottomStackViewLeftView.backgroundColor = UIColor(named: "whiteblack")
-                    bottomStackViewLeftViewLabel.textColor = .systemGreen
+                    selectGreen()
                 }else if intStatus == -1{
-                    bottomStackViewRightView.backgroundColor = UIColor(named: "whiteblack")
-                    bottomStackViewRightViewLabel.textColor = .systemRed
-                    bottomStackViewRightViewLabel.text = "Товара нет в наличии"
-                    bottomStackViewLeftView.isHidden = true
+                    selectRed()
                 }else if intStatus == 2{
                     bottomStackViewLeftViewLabel.text = "Собрано"
                 }else if intStatus >= 3{
@@ -316,6 +312,22 @@ extension TovarTableViewCell {
         
         bottomStackViewLeftView.isHidden = true
         bottomStackViewRightView.isHidden = true
+        
+    }
+    
+    func selectGreen(){
+        
+        bottomStackViewLeftView.backgroundColor = UIColor(named: "whiteblack")
+        bottomStackViewLeftViewLabel.textColor = .systemGreen
+        
+    }
+    
+    func selectRed(){
+        
+        bottomStackViewRightView.backgroundColor = UIColor(named: "whiteblack")
+        bottomStackViewRightViewLabel.textColor = .systemRed
+        bottomStackViewRightViewLabel.text = "Товара нет в наличии"
+        bottomStackViewLeftView.isHidden = true
         
     }
     
