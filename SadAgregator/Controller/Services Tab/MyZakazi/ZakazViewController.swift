@@ -376,6 +376,44 @@ extension ZakazViewController{
         
     }
     
+    func addZakazQR(){
+        
+        let qrScannerVC = QRScanViewController()
+        
+        qrScannerVC.qrConnected = { [weak self] qr in
+            
+            NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurQR?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)&AQR=\(qr)") { data, error in
+                
+                DispatchQueue.main.async {
+                    
+                    if let error = error {
+                        print("Error with Update Pur QR : \(error)")
+                        return
+                    }
+                    
+                    if let errorText = data!["msg"].string , errorText != ""{
+                        
+                        self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                        return
+                        
+                    }
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        self?.refresh()
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        self.present(qrScannerVC, animated: true, completion: nil)
+        
+    }
+    
 }
 
 //MARK: - TableView
@@ -742,7 +780,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
             label1.text = "QR-код заказа"
             
-            label2.text = "Добавить"
+            label2.text = thisZakaz.orderQr == "1" ? "Изменить" : "Добавить"
             
             imageView2.image = UIImage(systemName: "chevron.right")
             
@@ -758,7 +796,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
             cell.contentType = .order
             
-            var tovar = purProds[indexPath.row]
+            let tovar = purProds[indexPath.row]
             
             cell.thisTovar = tovar
             
@@ -819,19 +857,28 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                     
                 }else{
                     
-                    let qrScannerVC = QRScannerController()
+                    let qrScannerVC = QRScanViewController()
                     
-                    qrScannerVC.pid = tovar.pid
-                    
-                    qrScannerVC.qrConnected = { [weak self] in
+                    qrScannerVC.qrConnected = { [weak self] qr in
                         
-                        self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
-                        
-                        tovar.status = "Куплено"
-                        
-                        tovar.qr = "1"
-                        
-                        cell.thisTovar = tovar
+                        VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: self!.thisZakazId, qrValue: qr) { setQrData, setQrError in
+                            
+                            if let setQrError = setQrError{
+                                print("Error with VendorSetQRDataManager : \(setQrError)")
+                                return
+                            }
+                            
+                            if setQrData!["result"].intValue == 1{
+                                
+                                self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                                
+                                self?.purProds[indexPath.row].shouldShowBottomStackView = false
+                                
+                                cell.thisTovar = tovar
+                                
+                            }
+                            
+                        }
                         
                     }
                     
@@ -867,6 +914,28 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
         }else if section == 5{
             sendingDocType = .posilka
             getImage()
+        }else if section == 6{
+            
+            if thisZakaz.orderQr == "1"{
+                
+                let alertController = UIAlertController(title: "К заказу уже привязан QR код заказа , вы хотите его изменить?", message: nil, preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
+                    
+                    self?.addZakazQR()
+                    
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                
+                present(alertController, animated: true)
+                
+            }else{
+                
+                addZakazQR()
+                
+            }
+            
         }
         
     }
