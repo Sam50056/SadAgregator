@@ -18,9 +18,9 @@ struct TopVendorsDataManager {
     
     var delegate : TopVendorsDataManagerDelegate?
     
-    func getTopVendorsData(key : String , query : String , page : Int = 1){
+    func getTopVendorsData(key : String , query : String , page : Int = 1, pryamoyVikup : Bool = false){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_srch.VendorsTOP?AKey=\(key)&AQuery=\(query)&APage=\(page)"
+        let urlString = "https://agrapi.tk-sad.ru/agr_srch.VendorsTOP\(pryamoyVikup ? "_p2" : "")?AKey=\(key)&AQuery=\(query)&APage=\(page)"
         
         print("URLString for TopVendorsDataManager: \(urlString)")
         

@@ -37,6 +37,12 @@ class VendsPopularityRatingViewController: UIViewController {
     
     var selectedVendId = ""
     
+    var shouldShowAll = true{
+        didSet{
+            refresh(self)
+        }
+    }
+    
     //MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
@@ -79,7 +85,7 @@ class VendsPopularityRatingViewController: UIViewController {
         
         if searchTextField.text != "" , key != nil{
             
-            topVendorsDataManager.getTopVendorsData(key: key!, query: searchTextField.text!)
+            topVendorsDataManager.getTopVendorsData(key: key!, query: searchTextField.text!, pryamoyVikup: !shouldShowAll)
             
             items.removeAll()
             
@@ -98,9 +104,10 @@ class VendsPopularityRatingViewController: UIViewController {
         
         guard let key = key else {return}
         
-        topVendorsDataManager.getTopVendorsData(key: key, query: searchTextField.text ?? "")
+        topVendorsDataManager.getTopVendorsData(key: key, query: searchTextField.text ?? "", pryamoyVikup: !shouldShowAll)
         
         items.removeAll()
+        help = nil
         
         page = 1
         rowForPaggingUpdate = 14
@@ -173,7 +180,7 @@ extension VendsPopularityRatingViewController : UITextFieldDelegate{
         
         if textField.text != "" , key != nil{
             
-            topVendorsDataManager.getTopVendorsData(key: key!, query: textField.text!)
+            topVendorsDataManager.getTopVendorsData(key: key!, query: textField.text!, pryamoyVikup: !shouldShowAll)
             
             items.removeAll()
             
@@ -190,16 +197,20 @@ extension VendsPopularityRatingViewController : UITextFieldDelegate{
 extension VendsPopularityRatingViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {
+        if section == 0{
+            return 1
+        }else if section == 1 {
             return help != nil ? (hintCellShouldBeShown ? 1 : 0) : 0
-        }else {
+        }else if section == 2{
             return items.count
         }
+        
+        return 0
         
     }
     
@@ -209,13 +220,55 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
         
         if indexPath.section == 0{
             
+            cell = tableView.dequeueReusableCell(withIdentifier: "switchCell", for: indexPath)
+            
+            guard let allView = cell.viewWithTag(1),
+                  let allViewLabel = cell.viewWithTag(2) as? UILabel,
+                  let allViewButton = cell.viewWithTag(3) as? UIButton,
+                  let pryamoyVikupView = cell.viewWithTag(4),
+                  let pryamoyVikupViewLabel = cell.viewWithTag(5) as? UILabel,
+                  let pryamoyVikupViewButton = cell.viewWithTag(6) as? UIButton
+            else {return cell}
+            
+            allViewLabel.text = "Все"
+            pryamoyVikupViewLabel.text = "Прямой выкуп"
+            
+            allView.layer.cornerRadius = 8
+            pryamoyVikupView.layer.cornerRadius = 8
+            
+            allViewButton.addAction(UIAction(handler: { [weak self] _ in
+                
+                self?.shouldShowAll = true
+                
+            }), for: .touchUpInside)
+            
+            pryamoyVikupViewButton.addAction(UIAction(handler: { [weak self] _ in
+                
+                self?.shouldShowAll = false
+                
+            }), for: .touchUpInside)
+            
+            if shouldShowAll{
+                allView.backgroundColor = .systemBlue
+                allViewLabel.textColor = .white
+                pryamoyVikupView.backgroundColor = UIColor(named: "whiteblack")
+                pryamoyVikupViewLabel.textColor = UIColor(named: "blackwhite")
+            }else{
+                allView.backgroundColor = UIColor(named: "whiteblack")
+                allViewLabel.textColor = UIColor(named: "blackwhite")
+                pryamoyVikupView.backgroundColor = .systemBlue
+                pryamoyVikupViewLabel.textColor = .white
+            }
+            
+        }else if indexPath.section == 1{
+            
             cell = tableView.dequeueReusableCell(withIdentifier: "hintCell", for: indexPath)
             
             guard let help = help else {return cell}
             
             setUpHintCell(cell: cell, data : help)
             
-        }else {
+        }else if indexPath.section == 2{
             
             if !items.isEmpty{
                 
@@ -232,9 +285,11 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 0 {
+        if indexPath.section == 0{
             return K.simpleCellHeight
-        }else {
+        }else if indexPath.section == 1 {
+            return K.simpleCellHeight
+        }else if indexPath.section == 2 {
             
             if !items.isEmpty{
                 return K.makeHeightForVendRatingCell(vendRatingCell: items[indexPath.row])
@@ -244,17 +299,19 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
             
         }
         
+        return 0
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 1{
+        if indexPath.section == 2{
             
             selectedVendId = items[indexPath.row]["vend_id"].stringValue
             
             performSegue(withIdentifier: "goToVend", sender: self)
             
-        }else if indexPath.section == 0 {
+        }else if indexPath.section == 1 {
             
             if let help = help , let url = URL(string: help["url"].stringValue){
                 
@@ -270,7 +327,7 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 1{
+        if indexPath.section == 2{
             
             if indexPath.row == rowForPaggingUpdate{
                 
@@ -278,7 +335,7 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
                 
                 rowForPaggingUpdate += 9
                 
-                topVendorsDataManager.getTopVendorsData(key: key!, query: searchTextField.text!, page: page)
+                topVendorsDataManager.getTopVendorsData(key: key!, query: searchTextField.text!, page: page, pryamoyVikup: !shouldShowAll)
                 
                 print("Done a request for page: \(page)")
                 
@@ -292,7 +349,7 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
         
         hintCellShouldBeShown = false
         
-        tableView.reloadSections([0], with: .automatic)
+        tableView.reloadSections([1], with: .automatic)
         
     }
     
