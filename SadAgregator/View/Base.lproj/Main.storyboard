@@ -3930,8 +3930,20 @@
                                                         <constraint firstAttribute="width" constant="19.670000000000002" id="qgw-R9-YuL"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPd-nX-OAd">
+                                                    <rect key="frame" x="323" y="7.5" width="67" height="28.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="67" id="4w7-bg-PGr"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="WPd-nX-OAd" firstAttribute="top" secondItem="rSQ-XO-EX9" secondAttribute="top" id="1nh-Yk-cLB"/>
+                                                <constraint firstItem="WPd-nX-OAd" firstAttribute="bottom" secondItem="rSQ-XO-EX9" secondAttribute="bottom" id="JLh-YY-r3T"/>
+                                                <constraint firstItem="WPd-nX-OAd" firstAttribute="centerY" secondItem="rSQ-XO-EX9" secondAttribute="centerY" id="LAb-6r-upM"/>
+                                                <constraint firstAttribute="trailing" secondItem="WPd-nX-OAd" secondAttribute="trailing" id="OQp-8M-Euy"/>
                                                 <constraint firstItem="rSQ-XO-EX9" firstAttribute="centerY" secondItem="FAQ-ev-QaY" secondAttribute="centerY" id="UNH-0n-ztn"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="rSQ-XO-EX9" secondAttribute="trailing" id="bEX-Pt-kV7"/>
                                                 <constraint firstItem="Mxj-Yv-fOh" firstAttribute="centerY" secondItem="FAQ-ev-QaY" secondAttribute="centerY" id="nMX-7S-HaR"/>
@@ -4014,14 +4026,23 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3g-0U-GMH">
+                                                    <rect key="frame" x="342.5" y="7.5" width="47.5" height="28.5"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Ihb-sK-bFe" firstAttribute="centerY" secondItem="Ybc-AF-tQk" secondAttribute="centerY" id="266-ma-XJg"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="H9l-u3-SdZ" secondAttribute="trailing" id="Gbt-14-hbJ"/>
+                                                <constraint firstItem="r3g-0U-GMH" firstAttribute="bottom" secondItem="H9l-u3-SdZ" secondAttribute="bottom" id="Jhi-gx-KnM"/>
                                                 <constraint firstItem="gUK-6U-Snp" firstAttribute="leading" secondItem="Ybc-AF-tQk" secondAttribute="leadingMargin" id="aYV-vT-aBD"/>
                                                 <constraint firstItem="H9l-u3-SdZ" firstAttribute="centerY" secondItem="Ybc-AF-tQk" secondAttribute="centerY" id="eGH-6p-Ase"/>
+                                                <constraint firstItem="r3g-0U-GMH" firstAttribute="top" secondItem="H9l-u3-SdZ" secondAttribute="top" id="jX0-og-K8g"/>
+                                                <constraint firstItem="r3g-0U-GMH" firstAttribute="leading" secondItem="Ihb-sK-bFe" secondAttribute="trailing" id="sgl-af-oL6"/>
                                                 <constraint firstItem="gUK-6U-Snp" firstAttribute="centerY" secondItem="Ybc-AF-tQk" secondAttribute="centerY" id="wXM-8i-2dt"/>
                                                 <constraint firstItem="H9l-u3-SdZ" firstAttribute="leading" secondItem="Ihb-sK-bFe" secondAttribute="trailing" constant="8" id="y79-4M-Dik"/>
+                                                <constraint firstAttribute="trailing" secondItem="r3g-0U-GMH" secondAttribute="trailing" id="ycX-ze-zbQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -4063,18 +4084,27 @@
                                                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="luh-M3-ELu">
                                                     <rect key="frame" x="314.5" y="7" width="36" height="30.5"/>
                                                 </button>
+                                                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09K-DH-3Kq">
+                                                    <rect key="frame" x="342.5" y="8" width="47.5" height="28.5"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="luh-M3-ELu" firstAttribute="leading" secondItem="pvk-8i-Ctx" secondAttribute="trailing" id="5vd-TL-OXY"/>
                                                 <constraint firstItem="X3G-Ql-sAj" firstAttribute="leading" secondItem="f32-G2-qHk" secondAttribute="trailing" constant="8" id="BVg-Gl-vJR"/>
                                                 <constraint firstItem="V5F-GA-E6X" firstAttribute="leading" secondItem="fUM-Bm-avV" secondAttribute="leadingMargin" id="DXl-XP-xyw"/>
+                                                <constraint firstItem="09K-DH-3Kq" firstAttribute="leading" secondItem="f32-G2-qHk" secondAttribute="trailing" id="QNT-Va-Dqt"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="X3G-Ql-sAj" secondAttribute="trailing" id="Qa8-bC-Kr1"/>
                                                 <constraint firstItem="pvk-8i-Ctx" firstAttribute="centerY" secondItem="fUM-Bm-avV" secondAttribute="centerY" id="SeH-KQ-tcQ"/>
+                                                <constraint firstItem="09K-DH-3Kq" firstAttribute="top" secondItem="X3G-Ql-sAj" secondAttribute="top" id="USW-hz-xVt"/>
                                                 <constraint firstItem="f32-G2-qHk" firstAttribute="centerY" secondItem="fUM-Bm-avV" secondAttribute="centerY" id="bbt-ut-Az6"/>
                                                 <constraint firstItem="V5F-GA-E6X" firstAttribute="centerY" secondItem="fUM-Bm-avV" secondAttribute="centerY" id="beE-Rj-cuh"/>
                                                 <constraint firstItem="luh-M3-ELu" firstAttribute="centerY" secondItem="f32-G2-qHk" secondAttribute="centerY" id="dNX-cD-Q2e"/>
                                                 <constraint firstItem="luh-M3-ELu" firstAttribute="top" secondItem="fUM-Bm-avV" secondAttribute="topMargin" constant="-4" id="ffH-zm-qPA"/>
+                                                <constraint firstAttribute="trailing" secondItem="09K-DH-3Kq" secondAttribute="trailing" id="ku3-7G-ULz"/>
                                                 <constraint firstItem="X3G-Ql-sAj" firstAttribute="centerY" secondItem="fUM-Bm-avV" secondAttribute="centerY" id="nwQ-Py-AqK"/>
+                                                <constraint firstItem="09K-DH-3Kq" firstAttribute="bottom" secondItem="X3G-Ql-sAj" secondAttribute="bottom" id="rFN-Ua-40H"/>
                                                 <constraint firstItem="f32-G2-qHk" firstAttribute="leading" secondItem="pvk-8i-Ctx" secondAttribute="trailing" constant="8" id="sO6-Cc-LR6"/>
                                                 <constraint firstItem="X3G-Ql-sAj" firstAttribute="leading" secondItem="luh-M3-ELu" secondAttribute="trailing" id="zFC-Wy-tRl"/>
                                             </constraints>
@@ -4165,11 +4195,20 @@
                                                 <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C0m-3W-d8u">
                                                     <rect key="frame" x="293.5" y="6.5" width="51" height="31"/>
                                                 </switch>
+                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PwB-vM-Aci">
+                                                    <rect key="frame" x="342.5" y="7.5" width="47.5" height="28.5"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="eDI-lc-jjt" secondAttribute="trailing" id="1jG-N3-Cfq"/>
                                                 <constraint firstItem="KBa-9M-XX5" firstAttribute="centerY" secondItem="4fa-SN-fx1" secondAttribute="centerY" id="4wu-Lf-RkR"/>
+                                                <constraint firstAttribute="trailing" secondItem="PwB-vM-Aci" secondAttribute="trailing" id="Cw5-kw-7TD"/>
                                                 <constraint firstItem="KBa-9M-XX5" firstAttribute="leading" secondItem="4fa-SN-fx1" secondAttribute="leadingMargin" id="I9b-tU-M6h"/>
+                                                <constraint firstItem="PwB-vM-Aci" firstAttribute="top" secondItem="eDI-lc-jjt" secondAttribute="top" id="JRT-qq-Nmd"/>
+                                                <constraint firstItem="PwB-vM-Aci" firstAttribute="bottom" secondItem="eDI-lc-jjt" secondAttribute="bottom" id="YUJ-5n-aa9"/>
+                                                <constraint firstItem="PwB-vM-Aci" firstAttribute="leading" secondItem="C0m-3W-d8u" secondAttribute="trailing" id="d8g-91-biT"/>
                                                 <constraint firstItem="eDI-lc-jjt" firstAttribute="centerY" secondItem="4fa-SN-fx1" secondAttribute="centerY" id="fVZ-lV-0Cc"/>
                                                 <constraint firstItem="eDI-lc-jjt" firstAttribute="leading" secondItem="C0m-3W-d8u" secondAttribute="trailing" constant="8" id="g0q-1d-5zq"/>
                                                 <constraint firstItem="C0m-3W-d8u" firstAttribute="centerY" secondItem="4fa-SN-fx1" secondAttribute="centerY" id="rid-RN-spJ"/>
@@ -4214,15 +4253,24 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
+                                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="llE-Bb-QOb">
+                                                    <rect key="frame" x="342.5" y="18" width="47.5" height="28"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="llE-Bb-QOb" secondAttribute="trailing" id="9gN-sE-Ca9"/>
                                                 <constraint firstItem="J4e-AB-3rS" firstAttribute="bottom" secondItem="MGO-Rf-8uD" secondAttribute="bottom" id="Dfe-JZ-BYm"/>
+                                                <constraint firstItem="llE-Bb-QOb" firstAttribute="bottom" secondItem="J4e-AB-3rS" secondAttribute="bottom" constant="5" id="HzL-YU-kbf"/>
                                                 <constraint firstItem="ZBO-ct-Rf3" firstAttribute="bottom" secondItem="MGO-Rf-8uD" secondAttribute="bottom" id="NxE-Y3-O9a"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="cCX-72-pYe" secondAttribute="trailing" id="SbN-ns-jm8"/>
                                                 <constraint firstItem="J4e-AB-3rS" firstAttribute="leading" secondItem="ZBO-ct-Rf3" secondAttribute="trailing" constant="8" id="U3c-6I-7iE"/>
+                                                <constraint firstItem="llE-Bb-QOb" firstAttribute="leading" secondItem="ZBO-ct-Rf3" secondAttribute="trailing" id="XP4-md-u7A"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="cCX-72-pYe" secondAttribute="bottom" id="YJX-Dp-3Pa"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="J4e-AB-3rS" secondAttribute="trailing" id="dGk-j0-RJQ"/>
                                                 <constraint firstItem="MGO-Rf-8uD" firstAttribute="top" secondItem="Htn-2x-JpC" secondAttribute="topMargin" id="gKA-hV-cJX"/>
+                                                <constraint firstItem="llE-Bb-QOb" firstAttribute="top" secondItem="J4e-AB-3rS" secondAttribute="top" constant="-5" id="mvO-d4-ogN"/>
                                                 <constraint firstItem="MGO-Rf-8uD" firstAttribute="leading" secondItem="Htn-2x-JpC" secondAttribute="leadingMargin" id="q0q-bo-wQG"/>
                                                 <constraint firstItem="cCX-72-pYe" firstAttribute="leading" secondItem="Htn-2x-JpC" secondAttribute="leadingMargin" id="qxs-At-hLV"/>
                                                 <constraint firstItem="cCX-72-pYe" firstAttribute="top" secondItem="ZBO-ct-Rf3" secondAttribute="bottom" constant="8" id="s1E-cH-afP"/>
@@ -4438,7 +4486,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kea-m4-D3T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-10703" y="3773"/>
+            <point key="canvasLocation" x="-10704.347826086958" y="3772.7678571428569"/>
         </scene>
         <!--Vibrat Zakupku View Controller-->
         <scene sceneID="Jy9-Zp-pOS">
@@ -6845,10 +6893,19 @@
                                         <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2si-YD-rkC">
                                             <rect key="frame" x="317.5" y="6.5" width="51" height="31"/>
                                         </switch>
+                                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgm-cx-glF">
+                                            <rect key="frame" x="366.5" y="10.5" width="47.5" height="23"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title=""/>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="gSI-aV-PIh" firstAttribute="leading" secondItem="2si-YD-rkC" secondAttribute="trailing" constant="8" id="EpO-4H-q3S"/>
+                                        <constraint firstAttribute="trailing" secondItem="sgm-cx-glF" secondAttribute="trailing" id="N1Y-6t-HCC"/>
+                                        <constraint firstItem="sgm-cx-glF" firstAttribute="leading" secondItem="2si-YD-rkC" secondAttribute="trailing" id="UHc-Ym-ILc"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="gSI-aV-PIh" secondAttribute="trailing" id="a0Z-8f-gBz"/>
+                                        <constraint firstItem="sgm-cx-glF" firstAttribute="bottom" secondItem="gSI-aV-PIh" secondAttribute="bottom" id="eLF-jT-hcA"/>
+                                        <constraint firstItem="sgm-cx-glF" firstAttribute="top" secondItem="gSI-aV-PIh" secondAttribute="top" id="i6D-KS-jR4"/>
                                         <constraint firstItem="OXy-mg-XqZ" firstAttribute="centerY" secondItem="kIi-WT-i8Q" secondAttribute="centerY" id="ixl-CR-IC1"/>
                                         <constraint firstItem="gSI-aV-PIh" firstAttribute="centerY" secondItem="kIi-WT-i8Q" secondAttribute="centerY" id="tvT-S5-pmh"/>
                                         <constraint firstItem="2si-YD-rkC" firstAttribute="centerY" secondItem="kIi-WT-i8Q" secondAttribute="centerY" id="wA0-VX-NnB"/>
@@ -7234,7 +7291,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eJK-Oh-UNC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11432" y="1636"/>
+            <point key="canvasLocation" x="11431.884057971016" y="1635.9375"/>
         </scene>
         <!--Nastroyki Postavshika Table View Controller-->
         <scene sceneID="Jfd-do-uNy">

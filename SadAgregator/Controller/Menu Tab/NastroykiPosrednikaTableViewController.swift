@@ -912,7 +912,9 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 cell = tableView.dequeueReusableCell(withIdentifier: "labelSwitchCell", for: indexPath)
                 
                 guard let label = cell.viewWithTag(1) as? UILabel ,
-                      let `switch` = cell.viewWithTag(2) as? UISwitch else {return cell}
+                      let `switch` = cell.viewWithTag(2) as? UISwitch,
+                      let infoButton = cell.viewWithTag(4) as? UIButton
+                else {return cell}
                 
                 `switch`.isOn = item.value == "1" ? true : false
                 
@@ -921,6 +923,16 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 `switch`.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
                 
                 label.text = item.label1Text
+                
+                //Info stuff (user hint)
+                
+                guard item.label1Text == "Активность услуги" else {return cell}
+                
+                let infoAction = UIAction(handler: { [weak self] _ in
+                    self?.showSimpleAlertWithOkButton(title: "Проверка на брак", message: "Отметьте эту опцию если вы оказываете услугу по проверке товара на брак. Ниже укажите точную стоимость проверки на брак в рублях")
+                })
+                
+                infoButton.addAction(infoAction, for: .touchUpInside)
                 
             }else {
                 

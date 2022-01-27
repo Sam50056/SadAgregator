@@ -582,11 +582,17 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
             
             cell = tableView.dequeueReusableCell(withIdentifier: "singleCentredLabelCell", for: indexPath)
             
-            guard let label = cell.viewWithTag(1) as? UILabel else {return cell}
+            guard let label = cell.viewWithTag(1) as? UILabel,
+                    let infoButton = cell.viewWithTag(2) as? UIButton
+            else {return cell}
             
             label.text = "Для себя"
             
             label.textColor = .systemBlue
+            
+            infoButton.addAction(UIAction(handler: { [weak self] _ in
+                self?.showSimpleAlertWithOkButton(title: "Закупка для себя", message: "Добавьте товар в закупку для себя что бы затем передать закупку посреднику или напрямую поставщику, либо можете добавить закупку в сборку и выкупить ее на рынке самостоятельно с системой сортировки")
+            }), for: .touchUpInside)
             
         case 1:
             
@@ -623,7 +629,8 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                           let secondLabel = cell.viewWithTag(2) as? UILabel,
                           let _ = cell.viewWithTag(3) as? UIImageView,
                           let _ = cell.viewWithTag(4) as? UIImageView,
-                          let gearButton = cell.viewWithTag(5) as? UIButton
+                          let gearButton = cell.viewWithTag(5) as? UIButton,
+                          let infoButton = cell.viewWithTag(6) as? UIButton
                     else {return cell}
                     
                     firstLabel.text = item.firstLabelText
@@ -633,6 +640,10 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     
                     gearButton.addTarget(self, action: #selector(gearButtonPressed(_:)), for: .touchUpInside)
                     
+                    infoButton.addAction(UIAction(handler: { [weak self] _ in
+                        self?.showSimpleAlertWithOkButton(title: "Цена продажи", message: "Это стоимость по которой вы продаете товар СВОЕМУ клиенту. Это влияет на расчет с вашими клиентами, с их баланса будет списана эта сумма при добавлении товара в закупку. Если товар не будет выкуплен, на баланс клиента вернется эта сумма.")
+                    }), for: .touchUpInside)
+                    
                 }else{
                     
                     if item.hasImageView{
@@ -641,13 +652,26 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                         
                         guard let firstLabel = cell.viewWithTag(1) as? UILabel ,
                               let secondLabel = cell.viewWithTag(2) as? UILabel,
-                              let _ = cell.viewWithTag(3) as? UIImageView
+                              let _ = cell.viewWithTag(3) as? UIImageView,
+                              let infoButton = cell.viewWithTag(4) as? UIButton
                         else {return cell}
                         
                         firstLabel.text = item.firstLabelText
                         secondLabel.text = item.secondLabelText
                         
                         secondLabel.textColor = item.shouldSecondLabelTextBeBlue ? .systemBlue : UIColor(named: "blackwhite")
+                        
+                        //Info Button Stuff (User Hint)
+                        
+                        let infoButtonAction = UIAction(handler: { [weak self] _ in
+                            self?.showSimpleAlertWithOkButton(title: "Цена закупки", message: "Эта цена учитывается как закупочная для расчетов с вашими клиентами и посредником либо поставщиком.")
+                        })
+                        
+                        if item.firstLabelText == "Закупка"{
+                            infoButton.addAction(infoButtonAction, for: .touchUpInside)
+                        }else{
+                            infoButton.removeAction(infoButtonAction, for: .touchUpInside)
+                        }
                         
                     }else{
                         
@@ -699,7 +723,8 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 cell = tableView.dequeueReusableCell(withIdentifier: "labelSwitchCell", for: indexPath)
                 
                 guard let label = cell.viewWithTag(1) as? UILabel,
-                      let switchh = cell.viewWithTag(2) as? UISwitch
+                      let switchh = cell.viewWithTag(2) as? UISwitch,
+                      let infoButton = cell.viewWithTag(4) as? UIButton
                 else {return cell}
                 
                 label.text = item.labelText
@@ -710,17 +735,29 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     
                     switchh.addTarget(self, action: #selector(bezZamenSwitchValueChanged(_:)), for: .valueChanged)
                     
+                    infoButton.addAction(UIAction(handler: { [weak self] _ in
+                        self?.showSimpleAlertWithOkButton(title: "Без замен", message: "Информационная пометка для посредника либо поставщика что вы отказываетесь от замен по выбранному товару")
+                    }), for: .touchUpInside)
+                    
                 }else if item.labelText == "Оплачено"{
                     
                     switchh.isOn = oplachenoSwitch
                     
                     switchh.addTarget(self, action: #selector(oplachenoSwitchValueChanged(_:)), for: .valueChanged)
                     
+                    infoButton.addAction(UIAction(handler: { [weak self] _ in
+                        self?.showSimpleAlertWithOkButton(title: "Опция оплаты", message: "Если вы поставили здесь отметку, то при расчетах с посредником или поставщиком этот товар будет стоить 0 рублей, так как вы учитываете его стоимость вне системы. Повлияет на ваши расчеты с посредником или поставщиком, но не повлияет на расчеты с вашими клиентами")
+                    }), for: .touchUpInside)
+                    
                 }else if item.labelText == "Проверка на брак"{
                     
                     switchh.isOn = proverkaNaBrakSwitch
                     
                     switchh.addTarget(self, action: #selector(proverkaNaBrakSwitchValueChanged(_:)), for: .valueChanged)
+                    
+                    infoButton.addAction(UIAction(handler: { [weak self] _ in
+                        self?.showSimpleAlertWithOkButton(title: "Проверка на брак", message: "Проверка на брак» - «Включая эту опцию для выбранного товара вы передаете информацию посреднику о том, что желаете проверить товар на брак. Однако учитывайте, это платная услуга и у всех посредников на нее своя дополнительная цена. Если выбранный посредник не оказывает эту услугу, вы не сможете передать ему закупку с таким товаром. Помимо стоимости услуг посредника будет добавлена еще стоимость проверки на брак")
+                    }), for: .touchUpInside)
                     
                 }
                 
@@ -731,7 +768,8 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 guard let label = cell.viewWithTag(1) as? UILabel,
                       let secondLabel = cell.viewWithTag(2) as? UILabel ,
                       let _ = cell.viewWithTag(3) as? UIImageView,
-                      let textView = cell.viewWithTag(4) as? UITextView
+                      let textView = cell.viewWithTag(4) as? UITextView,
+                      let infoButton = cell.viewWithTag(5) as? UIButton
                 else {return cell}
                 
                 label.text = item.labelText
@@ -745,11 +783,17 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     commentCountLabel = secondLabel
                     commentTextView = textView
                     textView.text = comment
+                    infoButton.addAction(UIAction(handler: { [weak self] _ in
+                        self?.showSimpleAlertWithOkButton(title: "Комментарий по товару", message: "Это комментарий по выбранному товару который при сборке заказа увидит посредник или поставщик")
+                    }), for: .touchUpInside)
                 }else{
                     secondLabel.text = "\(myCommentSymbolsCount)/150"
                     myCommentCountLabel = secondLabel
                     myCommentTextView = textView
                     textView.text = myComment
+                    infoButton.addAction(UIAction(handler: { [weak self] _ in
+                        self?.showSimpleAlertWithOkButton(title: "Свой комментарий", message: "Это комментарий который видите только вы при сканировании QR кода товара либо в окне комментариев по товару")
+                    }), for: .touchUpInside)
                 }
                 
                 textView.backgroundColor = .clear
