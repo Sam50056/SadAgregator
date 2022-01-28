@@ -382,6 +382,8 @@ extension ZakazViewController{
         
         qrScannerVC.qrConnected = { [weak self] qr in
             
+            qrScannerVC.dismiss(animated: true, completion: nil)
+            
             NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurQR?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)&AQR=\(qr)") { data, error in
                 
                 DispatchQueue.main.async {
@@ -836,6 +838,8 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                             
                             if setQrData!["result"].intValue == 1{
                                 
+                                qrScannerVC.dismiss(animated: true, completion: nil)
+                                
                                 self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
                                 
                                 self?.purProds[indexPath.row].shouldShowBottomStackView = false
@@ -952,6 +956,8 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                                 
                                 if setQrData!["result"].intValue == 1{
                                     
+                                    qrScannerVC.dismiss(animated: true, completion: nil)
+                                    
                                     self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
                                     
                                     self?.purProds[indexPath.row].shouldShowBottomStackView = false
@@ -986,6 +992,8 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                             }
                             
                             if setQrData!["result"].intValue == 1{
+                                
+                                qrScannerVC.dismiss(animated: true, completion: nil)
                                 
                                 self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
                                 

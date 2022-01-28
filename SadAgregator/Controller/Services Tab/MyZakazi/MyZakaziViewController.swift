@@ -119,10 +119,41 @@ extension MyZakaziViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        orders.count
+        orders.count == 0 ? 1 : orders.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if orders.isEmpty{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath)
+            
+            guard let label = cell.viewWithTag(1) as? UILabel
+            else {return cell}
+            
+            if selectedStatus == 0{
+                label.text = "Нет новых заказов"
+            }else if selectedStatus == 1{
+                label.text = "Нет заказов , ожидающих оплаты"
+            }else if selectedStatus == 2{
+                label.text = "Нет заказов в обработке"
+            }else if selectedStatus == 3{
+                label.text = "Нет собранных заказов"
+            }else if selectedStatus == 4{
+                label.text = "Нет заказов готовых к отправке"
+            }else if selectedStatus == 5{
+                label.text = "Нет отправленных заказов"
+            }
+            
+            label.textColor = .systemGray
+            label.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
+            
+            cell.backgroundColor = UIColor(named: "whiteblack")
+            cell.contentView.backgroundColor = UIColor(named: "whiteblack")
+            
+            return cell
+            
+        }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakazTableViewCell
         
@@ -157,10 +188,12 @@ extension MyZakaziViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        K.makeHeightForZakazCell(data: orders[indexPath.row], width: view.bounds.width - 32)
+        orders.isEmpty ? (view.frame.height - 64) : K.makeHeightForZakazCell(data: orders[indexPath.row], width: view.bounds.width - 32)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard !orders.isEmpty else {return}
         
         let zakazVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZakazVC") as! ZakazViewController
         

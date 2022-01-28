@@ -231,6 +231,9 @@ class TovarTableViewCell: UITableViewCell {
         bottomStackViewRightViewLabel.text = "Нет в наличии"
         bottomStackViewLeftViewLabel.text = "Есть в наличии"
         
+        backgroundColor = UIColor(named: "whiteblack")
+        contentView.backgroundColor = UIColor(named: "whiteblack")
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -348,6 +351,9 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         let item = tableViewItems[indexPath.row]
         
         cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelCell", for: indexPath) as! TovarTableViewCellTwoLabelTableViewCell
+        
+        cell.backgroundColor = UIColor(named: "whiteblack")
+        cell.contentView.backgroundColor = UIColor(named: "whiteblack")
         
         (cell as! TovarTableViewCellTwoLabelTableViewCell).label1.text = item.label1Text
         
