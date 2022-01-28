@@ -189,7 +189,7 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! ZakazTableViewCellCommentTableViewCell
             
-            cell.commentTextView.text = thisZakaz.comment
+            cell.commentTextView.text = thisZakaz.comment.replacingOccurrences(of: "<br>", with: "\n")
             
             cell.contentView.backgroundColor = UIColor(named: "whiteblack")
             
