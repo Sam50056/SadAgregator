@@ -226,9 +226,13 @@ struct K {
             }else{
                 return height < 134 ? 134 : height
             }
+        }else{
+            
+            height += 8
+            
         }
         
-        return height < 235 ? 235 : height
+        return height < 240 ? 240 : height //235
         
     }
     

@@ -145,6 +145,11 @@ class TovarTableViewCell: UITableViewCell {
                     removeBottomStackView()
                 }
                 
+            }else{
+                
+                commentView.isHidden = true
+                removeBottomStackView()
+                
             }
             
             guard oldValue == nil else {return}
