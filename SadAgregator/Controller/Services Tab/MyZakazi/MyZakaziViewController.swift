@@ -29,6 +29,11 @@ class MyZakaziViewController : UIViewController{
         }
     }
     
+    private var page = 1
+    private var rowForPaggingUpdate : Int = 15
+    
+    var refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +43,9 @@ class MyZakaziViewController : UIViewController{
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl) // not required when using UITableViewController
         
         vendFormOrdersDataManager.delegate = self
         
@@ -95,14 +103,14 @@ extension MyZakaziViewController {
     
     func update(){
         
-        vendFormOrdersDataManager.getVendFormOrdersData(key: key, status: "\(selectedStatus)", page: 1)
+        vendFormOrdersDataManager.getVendFormOrdersData(key: key, status: "\(selectedStatus)", page: page)
         
     }
     
     @objc private func refresh(){
         
         orders.removeAll()
-        //        page = 1
+        page = 1
         
         vendFormOrdersDataManager.getVendFormOrdersData(key: key, status: "\(selectedStatus)", page: 1)
         
@@ -203,6 +211,26 @@ extension MyZakaziViewController : UITableViewDelegate , UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0{
+            
+            if indexPath.row == rowForPaggingUpdate{
+                
+                page += 1
+                
+                rowForPaggingUpdate += 16
+                
+                update()
+                
+                print("Done a request for page: \(page)")
+                
+            }
+            
+        }
+        
+    }
+    
 }
 
 //MARK: - VendFormOrdersDataManager
@@ -212,6 +240,8 @@ extension MyZakaziViewController : VendFormOrdersDataManagerDelegate{
     func didGetVendFormOrdersData(data: JSON) {
         
         DispatchQueue.main.async { [weak self] in
+            
+            self?.refreshControl.endRefreshing()
             
             if data["result"].intValue == 1{
                 
@@ -236,6 +266,7 @@ extension MyZakaziViewController : VendFormOrdersDataManagerDelegate{
     }
     
     func didFailGettingVendFormOrdersDataWithError(error: String) {
+        refreshControl.endRefreshing()
         print("Error with VendFormOrdersDataManager : \(error)")
     }
     

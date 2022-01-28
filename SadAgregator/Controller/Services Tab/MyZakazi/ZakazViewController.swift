@@ -59,6 +59,11 @@ class ZakazViewController: UIViewController {
     private lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
     private lazy var photoSavedDataManager = PhotoSavedDataManager()
     
+    private var page = 1
+    private var rowForPaggingUpdate : Int = 15
+    
+    var refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,6 +74,9 @@ class ZakazViewController: UIViewController {
         
         tableView.register(UINib(nibName: "ZakazTableViewCell", bundle: nil), forCellReuseIdentifier: "zakazCell")
         tableView.register(UINib(nibName: "TovarTableViewCell", bundle: nil), forCellReuseIdentifier: "tovarCell")
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl) // not required when using UITableViewController
         
         vendTargetOrderDataManager.delegate = self
         newPhotoPlaceDataManager.delegate = self
@@ -119,6 +127,12 @@ extension ZakazViewController{
         trackDoc = nil
         
         vendTargetOrderDataManager.getVendTargetOrderData(key: key, order: thisZakazId)
+        
+    }
+    
+    func update(){
+        
+        guard thisZakazId != "" else {return}
         
     }
     
@@ -1111,6 +1125,26 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
         return 0
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 8{
+            
+            if indexPath.row == rowForPaggingUpdate{
+                
+                page += 1
+                
+                rowForPaggingUpdate += 16
+                
+                update()
+                
+                print("Done a request for page: \(page)")
+                
+            }
+            
+        }
+        
+    }
+    
 }
 
 //MARK: - VendTargetOrderDataManager
@@ -1120,6 +1154,8 @@ extension ZakazViewController : VendTargetOrderDataManagerDelegate{
     func didGetVendTargetOrderData(data: JSON) {
         
         DispatchQueue.main.async { [weak self] in
+            
+            self?.refreshControl.endRefreshing()
             
             self?.zakazData = data
             
@@ -1170,6 +1206,7 @@ extension ZakazViewController : VendTargetOrderDataManagerDelegate{
     }
     
     func didFailGettingVendTargetOrderDataWithError(error: String) {
+        refreshControl.endRefreshing()
         print("Error with VendTargetOrderDataManager : \(error)")
     }
     
