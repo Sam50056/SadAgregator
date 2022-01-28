@@ -110,6 +110,9 @@ class GalleryViewController: UIViewController {
         if simplePreviewMode{
             
             buttonView.isHidden = true
+            searchView.isHidden = true
+            pencilView.isHidden = true
+            buttonsView.isHidden = true
             
         }
         

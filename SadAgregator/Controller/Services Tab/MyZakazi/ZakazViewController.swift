@@ -612,6 +612,12 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                     self?.previewImage(parcelDoc["img"].stringValue)
                 }) , for:.touchUpInside)
                 
+                if thisZakaz.status == "5"{
+                    removeButtonView.isHidden = true
+                }else{
+                    removeButtonView.isHidden = false
+                }
+                
                 removeButton.addAction(UIAction(handler: { [weak self] _ in
                     
                     let confirmAlert = UIAlertController(title: "Удалить фото посылки?", message: nil, preferredStyle: .alert)
