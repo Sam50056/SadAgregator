@@ -253,6 +253,9 @@
 		22ADF829267C32D600811DA9 /* VendDelSendRuleDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF828267C32D600811DA9 /* VendDelSendRuleDataManager.swift */; };
 		22ADF82B267C369800811DA9 /* BrokersUpdSendTypeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF82A267C369800811DA9 /* BrokersUpdSendTypeDataManager.swift */; };
 		22ADF82D267C3ADB00811DA9 /* VendUpdSendRuleDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF82C267C3ADB00811DA9 /* VendUpdSendRuleDataManager.swift */; };
+		22B01A2327A40DB0005705B9 /* ZakazTableViewCellTableViewCellWithImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B01A2127A40DB0005705B9 /* ZakazTableViewCellTableViewCellWithImageView.swift */; };
+		22B01A2427A40DB0005705B9 /* ZakazTableViewCellTableViewCellWithImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B01A2227A40DB0005705B9 /* ZakazTableViewCellTableViewCellWithImageView.xib */; };
+		22B01A2627A41C7A005705B9 /* ZakazDeliveryDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B01A2527A41C7A005705B9 /* ZakazDeliveryDataTableViewController.swift */; };
 		22B26520267D2B5E004342E3 /* BrokersAddZonePriceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B2651F267D2B5E004342E3 /* BrokersAddZonePriceDataManager.swift */; };
 		22B26522267D61EA004342E3 /* BrokersDelZonePriceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B26521267D61EA004342E3 /* BrokersDelZonePriceDataManager.swift */; };
 		22B26524267D65AD004342E3 /* BrokersUpdZonePriceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B26523267D65AD004342E3 /* BrokersUpdZonePriceDataManager.swift */; };
@@ -628,6 +631,9 @@
 		22ADF828267C32D600811DA9 /* VendDelSendRuleDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendDelSendRuleDataManager.swift; sourceTree = "<group>"; };
 		22ADF82A267C369800811DA9 /* BrokersUpdSendTypeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersUpdSendTypeDataManager.swift; sourceTree = "<group>"; };
 		22ADF82C267C3ADB00811DA9 /* VendUpdSendRuleDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendUpdSendRuleDataManager.swift; sourceTree = "<group>"; };
+		22B01A2127A40DB0005705B9 /* ZakazTableViewCellTableViewCellWithImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZakazTableViewCellTableViewCellWithImageView.swift; sourceTree = "<group>"; };
+		22B01A2227A40DB0005705B9 /* ZakazTableViewCellTableViewCellWithImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZakazTableViewCellTableViewCellWithImageView.xib; sourceTree = "<group>"; };
+		22B01A2527A41C7A005705B9 /* ZakazDeliveryDataTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZakazDeliveryDataTableViewController.swift; sourceTree = "<group>"; };
 		22B2651F267D2B5E004342E3 /* BrokersAddZonePriceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersAddZonePriceDataManager.swift; sourceTree = "<group>"; };
 		22B26521267D61EA004342E3 /* BrokersDelZonePriceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersDelZonePriceDataManager.swift; sourceTree = "<group>"; };
 		22B26523267D65AD004342E3 /* BrokersUpdZonePriceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersUpdZonePriceDataManager.swift; sourceTree = "<group>"; };
@@ -1435,6 +1441,7 @@
 			children = (
 				2286BE4E275AB7EF006C404C /* MyZakaziViewController.swift */,
 				22D9DCA7276630A900A75055 /* ZakazViewController.swift */,
+				22B01A2527A41C7A005705B9 /* ZakazDeliveryDataTableViewController.swift */,
 			);
 			path = MyZakazi;
 			sourceTree = "<group>";
@@ -1453,6 +1460,7 @@
 			isa = PBXGroup;
 			children = (
 				22D9DCA9276916EF00A75055 /* BgViewCell */,
+				22B01A2027A40D73005705B9 /* Cell With ImgView */,
 				2286BE5B275FEFB9006C404C /* Cell */,
 				2286BE56275FE34C006C404C /* HeaderCell */,
 				22D9DCA22764CE0100A75055 /* Comment cell */,
@@ -1769,6 +1777,15 @@
 				22ACF1AD262B96A200F9584D /* TovarTableViewCellTwoLabelTableViewCell.xib */,
 			);
 			path = TwoLabelCell;
+			sourceTree = "<group>";
+		};
+		22B01A2027A40D73005705B9 /* Cell With ImgView */ = {
+			isa = PBXGroup;
+			children = (
+				22B01A2127A40DB0005705B9 /* ZakazTableViewCellTableViewCellWithImageView.swift */,
+				22B01A2227A40DB0005705B9 /* ZakazTableViewCellTableViewCellWithImageView.xib */,
+			);
+			path = "Cell With ImgView";
 			sourceTree = "<group>";
 		};
 		22B9E1712721FE4C00985450 /* Sborka */ = {
@@ -2235,6 +2252,7 @@
 				220704672685628800FC6B4B /* PurchaseTableViewCellTitleCellTableViewCell.xib in Resources */,
 				22D9DCAD2769179E00A75055 /* ZakazTableViewCellBgViewTableViewCell.xib in Resources */,
 				22A49CC42566717700CCC781 /* OptionCollectionViewCell.xib in Resources */,
+				22B01A2427A40DB0005705B9 /* ZakazTableViewCellTableViewCellWithImageView.xib in Resources */,
 				226F240F26B2004000FB2744 /* BrokerTableViewCell.xib in Resources */,
 				2237E77D25FA35C300EBD919 /* PurchaseTableViewCellTableViewCell.xib in Resources */,
 				22941A40262A478C00119844 /* TovarTableViewCell.xib in Resources */,
@@ -2578,6 +2596,7 @@
 				22DC987226028B160016A31B /* PaggingPaymentsByClientDataManager.swift in Sources */,
 				22CD354B269E4ECC009057C3 /* AssemblyGetItemSizesDataManager.swift in Sources */,
 				2201671C25A669790072BFE7 /* GetPostActionsDataManager.swift in Sources */,
+				22B01A2327A40DB0005705B9 /* ZakazTableViewCellTableViewCellWithImageView.swift in Sources */,
 				2201672925A777A20072BFE7 /* GetVendActionsDataManager.swift in Sources */,
 				229A95C625A161030086EAD9 /* PricesTableViewCell.swift in Sources */,
 				22692E4226BB235200CA2946 /* BrokersReviewUpdateDataManager.swift in Sources */,
@@ -2612,6 +2631,7 @@
 				22BF19D925A3DDC800567DB7 /* TextLabelCollectionViewCell.swift in Sources */,
 				22097ABC2753F6D600304F1F /* AlertWithTextFieldViewController.swift in Sources */,
 				226975F12700C3B0008539CF /* PurchasesFormPagingDataManager.swift in Sources */,
+				22B01A2627A41C7A005705B9 /* ZakazDeliveryDataTableViewController.swift in Sources */,
 				22BF4DD926755D2800748D0B /* NastroykiPostavshikaTableViewController.swift in Sources */,
 				22CD3547269DEDBA009057C3 /* AssemblySetItemStatusDataManager.swift in Sources */,
 				2269740025AE394800C76BA6 /* VendorPostsTableViewController.swift in Sources */,
@@ -2784,7 +2804,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 42;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2808,7 +2828,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 42;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

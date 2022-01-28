@@ -421,7 +421,7 @@ extension ZakazViewController{
 extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        8
+        9
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -460,6 +460,18 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "zakazCell", for: indexPath) as! ZakazTableViewCell
             
             cell.thisZakaz = thisZakaz
+            
+            cell.deliveryButtonTapped = { [weak self] in
+                
+                let zakazDeliveryDataVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZakazDeliveryDataVC") as! ZakazDeliveryDataTableViewController
+                
+                zakazDeliveryDataVC.zakazId = self!.thisZakazId
+                
+                let navVC = UINavigationController(rootViewController: zakazDeliveryDataVC)
+                
+                self?.present(navVC, animated: true)
+                
+            }
             
             return cell
             

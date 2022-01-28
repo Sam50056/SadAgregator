@@ -16,14 +16,18 @@ class ZakazTableViewCell: UITableViewCell {
             
             tableView.reloadData()
             
-            if let thisZakaz = thisZakaz , thisZakaz.isShownForOneZakaz {
-                tableView.isUserInteractionEnabled = true
-            }else{
-                tableView.isUserInteractionEnabled = false
-            }
+//            if let thisZakaz = thisZakaz , thisZakaz.isShownForOneZakaz {
+//                tableView.isUserInteractionEnabled = true
+//            }else{
+//                tableView.isUserInteractionEnabled = false
+//            }
             
         }
     }
+    
+    var tableViewTapped : (() -> ())?
+    
+    var deliveryButtonTapped : (() -> ())?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +35,7 @@ class ZakazTableViewCell: UITableViewCell {
         tableView.register(UINib(nibName: "ZakazTableViewCellHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "headerCell")
         tableView.register(UINib(nibName: "ZakazTableViewCellCommentTableViewCell", bundle: nil), forCellReuseIdentifier: "commentCell")
         tableView.register(UINib(nibName: "ZakazTableViewCellImageViewTwoLabelTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        tableView.register(UINib(nibName: "ZakazTableViewCellTableViewCellWithImageView", bundle: nil), forCellReuseIdentifier: "cellWithImgView")
         tableView.register(UINib(nibName: "ZakazTableViewCellBgViewTableViewCell", bundle: nil), forCellReuseIdentifier: "bgViewCell")
         
         tableView.delegate = self
@@ -141,20 +146,23 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             
         }else if section == 3{
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakazTableViewCellImageViewTwoLabelTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellWithImgView", for: indexPath) as! ZakazTableViewCellTableViewCellWithImageView
             
-            cell.zakazImageView.image = UIImage(systemName: "paperplane.fill")
+            cell.imgView1.image = UIImage(systemName: "paperplane.fill")
+            cell.imgView2.image = UIImage(systemName: "shippingbox")
             
-            cell.zakazImageView.tintColor = .systemGray
+            cell.imgView1.tintColor = .systemGray
+            cell.imgView2.tintColor = .systemBlue
             
-            cell.label1.text = thisZakaz.deliveryType
-            cell.label2.text = thisZakaz.deliveryName
+            cell.label.text = thisZakaz.deliveryType
             
-            cell.label1.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-            cell.label2.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-            cell.label2.textColor = .systemGray
+            cell.label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
             
             cell.contentView.backgroundColor = UIColor(named: "whiteblack")
+            
+            cell.imgView2ButtonTapped = { [weak self] in
+                self?.deliveryButtonTapped?()
+            }
             
             return cell
             
@@ -208,13 +216,9 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let section = indexPath.section
+        let _ = indexPath.section
         
-        if section == 6{
-            
-            
-            
-        }
+        tableViewTapped?()
         
     }
     

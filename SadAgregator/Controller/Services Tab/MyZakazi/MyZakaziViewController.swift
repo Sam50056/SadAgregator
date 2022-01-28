@@ -130,6 +130,28 @@ extension MyZakaziViewController : UITableViewDelegate , UITableViewDataSource {
         
         cell.thisZakaz = orders[index]
         
+        cell.tableViewTapped = { [weak self] in
+            
+            let zakazVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZakazVC") as! ZakazViewController
+            
+            zakazVC.thisZakazId = self!.orders[index].id
+            
+            self?.navigationController?.pushViewController(zakazVC, animated: true)
+            
+        }
+        
+        cell.deliveryButtonTapped = { [weak self] in
+            
+            let zakazDeliveryDataVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZakazDeliveryDataVC") as! ZakazDeliveryDataTableViewController
+            
+            zakazDeliveryDataVC.zakazId = self!.orders[index].id
+            
+            let navVC = UINavigationController(rootViewController: zakazDeliveryDataVC)
+            
+            self?.present(navVC, animated: true)
+            
+        }
+        
         return cell
         
     }
