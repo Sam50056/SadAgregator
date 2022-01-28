@@ -112,6 +112,12 @@ extension ZakazViewController{
         
         guard thisZakazId != "" else {return}
         
+        thisZakaz = nil
+        purProds.removeAll()
+        docs.removeAll()
+        parcelDoc = nil
+        trackDoc = nil
+        
         vendTargetOrderDataManager.getVendTargetOrderData(key: key, order: thisZakazId)
         
     }
