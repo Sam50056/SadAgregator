@@ -1022,10 +1022,17 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                         
                         qrScannerVC.qrConnected = { [weak self] qr in
                             
+                            qrScannerVC.dismiss(animated: true, completion: nil)
+                            
                             VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: "", qrValue: qr) { setQrData, setQrError in
                                 
                                 if let setQrError = setQrError{
                                     print("Error with VendorSetQRDataManager : \(setQrError)")
+                                    return
+                                }
+                                
+                                if let errorText = setQrData!["msg"].string , errorText != ""{
+                                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
                                     return
                                 }
                                 
@@ -1059,10 +1066,17 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                     
                     qrScannerVC.qrConnected = { [weak self] qr in
                         
+                        qrScannerVC.dismiss(animated: true, completion: nil)
+                        
                         VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: self!.thisZakazId, qrValue: qr) { setQrData, setQrError in
                             
                             if let setQrError = setQrError{
                                 print("Error with VendorSetQRDataManager : \(setQrError)")
+                                return
+                            }
+                            
+                            if let errorText = setQrData!["msg"].string , errorText != ""{
+                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
                                 return
                             }
                             
