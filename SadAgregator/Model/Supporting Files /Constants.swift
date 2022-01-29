@@ -90,7 +90,7 @@ struct K {
     static func makeHeightForTovarCell(thisTovar : TovarCellItem , contentType : TovarTableViewCell.ContentType , width : CGFloat = 0) -> CGFloat{
         
         var height : CGFloat = 0
-        let cellHeight : CGFloat = 35
+        let cellHeight : CGFloat = 40 //35
         
         if thisTovar.capt != "" {
             height += cellHeight
