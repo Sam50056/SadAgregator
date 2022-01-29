@@ -240,6 +240,9 @@ class TovarTableViewCell: UITableViewCell {
         backgroundColor = UIColor(named: "whiteblack")
         contentView.backgroundColor = UIColor(named: "whiteblack")
         
+        bottomStackViewLeftView.backgroundColor = .systemGreen.withAlphaComponent(0.8)
+        bottomStackViewRightView.backgroundColor = .systemRed.withAlphaComponent(0.8)
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
