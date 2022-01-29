@@ -33,15 +33,11 @@ class VendsPopularityRatingViewController: UIViewController {
     var help : JSON?
     
     var page = 1
-    var rowForPaggingUpdate : Int = 14
+    var rowForPaggingUpdate : Int = 15
     
     var selectedVendId = ""
     
-    var shouldShowAll = true{
-        didSet{
-            refresh(self)
-        }
-    }
+    var shouldShowAll = true
     
     //MARK: - Lifecycle Methods
     
@@ -85,7 +81,7 @@ class VendsPopularityRatingViewController: UIViewController {
         
         if searchTextField.text != "" , key != nil{
             
-            topVendorsDataManager.getTopVendorsData(key: key!, query: searchTextField.text!, pryamoyVikup: !shouldShowAll)
+            update()
             
             items.removeAll()
             
@@ -98,19 +94,39 @@ class VendsPopularityRatingViewController: UIViewController {
     }
     
     
-    //MARK: - Refresh func
+    //MARK: - Functions
     
-    @objc func refresh(_ sender: AnyObject) {
-        
-        guard let key = key else {return}
-        
-        topVendorsDataManager.getTopVendorsData(key: key, query: searchTextField.text ?? "", pryamoyVikup: !shouldShowAll)
+    @objc func refresh(_ sender: AnyObject?) {
         
         items.removeAll()
         help = nil
         
         page = 1
-        rowForPaggingUpdate = 14
+        rowForPaggingUpdate = 15
+        
+        update()
+        
+    }
+    
+    func update(){
+        
+        guard let key = key else {return}
+        
+        topVendorsDataManager.getTopVendorsData(key: key, query: searchTextField.text ?? "", page: page, pryamoyVikup: !shouldShowAll)
+        
+    }
+    
+    @objc func allViewButtonTapped(_ sender : UIButton){
+        
+        shouldShowAll = true
+        refresh(nil)
+        
+    }
+    
+    @objc func pryamoyVikupViewButtonTapped(_ sender : UIButton){
+        
+        shouldShowAll = false
+        refresh(nil)
         
     }
     
@@ -236,17 +252,8 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
             allView.layer.cornerRadius = 8
             pryamoyVikupView.layer.cornerRadius = 8
             
-            allViewButton.addAction(UIAction(handler: { [weak self] _ in
-                
-                self?.shouldShowAll = true
-                
-            }), for: .touchUpInside)
-            
-            pryamoyVikupViewButton.addAction(UIAction(handler: { [weak self] _ in
-                
-                self?.shouldShowAll = false
-                
-            }), for: .touchUpInside)
+            allViewButton.addTarget(self, action: #selector(allViewButtonTapped(_:)), for: .touchUpInside)
+            pryamoyVikupViewButton.addTarget(self, action: #selector(pryamoyVikupViewButtonTapped(_:)), for: .touchUpInside)
             
             if shouldShowAll{
                 allView.backgroundColor = .systemBlue
@@ -333,9 +340,9 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
                 
                 page += 1
                 
-                rowForPaggingUpdate += 9
+                rowForPaggingUpdate += 16
                 
-                topVendorsDataManager.getTopVendorsData(key: key!, query: searchTextField.text!, page: page, pryamoyVikup: !shouldShowAll)
+                update()
                 
                 print("Done a request for page: \(page)")
                 
