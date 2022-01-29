@@ -112,7 +112,7 @@ extension MyZakaziViewController {
         orders.removeAll()
         page = 1
         
-        vendFormOrdersDataManager.getVendFormOrdersData(key: key, status: "\(selectedStatus)", page: 1)
+        update()
         
     }
     

@@ -134,6 +134,48 @@ extension ZakazViewController{
         
         guard thisZakazId != "" else {return}
         
+        NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_vend.TargetOrderProdsPage?AKey=\(key)&AOrder=\(thisZakazId)&APage=\(page)") { [weak self] data, error in
+            
+            if let error = error{
+                print("Error with Target Order Prods Page : \(error)")
+                return
+            }
+            
+            if let errorText = data!["msg"].string , errorText != ""{
+                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                return
+            }
+            
+            if data!["result"].intValue == 1{
+                
+                var newProds = [TovarCellItem]()
+                
+                data!["prods"].arrayValue.forEach { purProd in
+                    
+                    var tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , itemStatus : purProd["item_status"].stringValue , handlerStatus : purProd["handler_status"].stringValue)
+                    
+                    guard let thisZakaz = self?.thisZakaz else {return}
+                    
+                    if let intStatus = Int(thisZakaz.status) , intStatus >= 3{
+                        tovar.shouldShowBottomStackView = false
+                    }
+                    
+                    if tovar.qr == "1"{ //If qr is connected , no bottom bar should be shown
+                        tovar.shouldShowBottomStackView = false
+                    }
+                    
+                    newProds.append(tovar)
+                    
+                }
+                
+                self?.purProds = newProds
+                
+                self?.tableView.reloadData()
+                
+            }
+            
+        }
+        
     }
     
     func statusChange(actId : String){
