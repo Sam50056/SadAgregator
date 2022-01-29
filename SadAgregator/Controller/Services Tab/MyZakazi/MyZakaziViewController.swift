@@ -175,6 +175,14 @@ extension MyZakaziViewController : UITableViewDelegate , UITableViewDataSource {
             
             zakazVC.thisZakazId = self!.orders[index].id
             
+            zakazVC.orderRejected = { [weak self] in
+                
+                self?.orders.remove(at: indexPath.row)
+                
+                self?.tableView.reloadSections([0], with: .automatic)
+                
+            }
+            
             self?.navigationController?.pushViewController(zakazVC, animated: true)
             
         }
@@ -206,6 +214,14 @@ extension MyZakaziViewController : UITableViewDelegate , UITableViewDataSource {
         let zakazVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZakazVC") as! ZakazViewController
         
         zakazVC.thisZakazId = orders[indexPath.row].id
+        
+        zakazVC.orderRejected = { [weak self] in
+            
+            self?.orders.remove(at: indexPath.row)
+            
+            self?.tableView.reloadSections([0], with: .automatic)
+            
+        }
         
         navigationController?.pushViewController(zakazVC, animated: true)
         

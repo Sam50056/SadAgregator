@@ -64,6 +64,8 @@ class ZakazViewController: UIViewController {
     
     var refreshControl = UIRefreshControl()
     
+    var orderRejected : (() -> ())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -227,7 +229,8 @@ extension ZakazViewController{
                         
                         if rejectOrderData!["result"].intValue == 1{
                             
-                            self?.refresh()
+                            self?.navigationController?.popViewController(animated: true)
+                            self?.orderRejected?()
                             
                         }else{
                             
