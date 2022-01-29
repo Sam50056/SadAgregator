@@ -45,7 +45,7 @@ class TovarTableViewCell: UITableViewCell {
             }
             
             if thisTovar.purCost != ""{
-                newItems.append(TableViewItem(label1Text: "Закупка", label2Text: thisTovar.purCost + " руб." , shouldSecondLabelBeBlue: thisTovar.chLvl != "0"))
+                newItems.append(TableViewItem(label1Text: "Закупка", label2Text: thisTovar.purCost + " руб." , shouldSecondLabelBeBlue: contentType == .order ? false : thisTovar.chLvl != "0"))
             }
             
             if thisTovar.sellCost != "" {
@@ -53,7 +53,7 @@ class TovarTableViewCell: UITableViewCell {
             }
             
             if thisTovar.size != "" {
-                newItems.append(TableViewItem(label1Text: "Размер", label2Text: thisTovar.size , shouldSecondLabelBeBlue: thisTovar.chLvl != "0"))
+                newItems.append(TableViewItem(label1Text: "Размер", label2Text: thisTovar.size , shouldSecondLabelBeBlue:    contentType == .order ? false : thisTovar.chLvl != "0"))
             }
             
             if thisTovar.status != "" , thisTovar.status != "-1" , contentType != .zamena{
@@ -81,7 +81,7 @@ class TovarTableViewCell: UITableViewCell {
             }
             
             if thisTovar.replaces != "" ,  thisTovar.replaces != "0"{
-                newItems.append(TableViewItem(label1Text: "Замен по товару ", label2Text: thisTovar.replaces))
+                newItems.append(TableViewItem(label1Text: "Замен по товару", label2Text: thisTovar.replaces, shouldSecondLabelBeBlue: contentType == .order ? true : false))
             }
             
             if thisTovar.shipmentImage != ""{
@@ -198,6 +198,7 @@ class TovarTableViewCell: UITableViewCell {
     var qrCodeTapped : (() -> Void)?
     var magnifyingGlassTapped : (() -> Void)?
     var questionMarkTapped : (() -> Void)?
+    var zameniTapped : (() -> Void)?
     
     var bottomStackViewLeftViewButtonTapped : (() -> Void)?
     var bottomStackViewRightViewButtonTapped : (() -> Void)?
@@ -414,6 +415,10 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         }else if item.label1Text == "Размер" , item.shouldSecondLabelBeBlue{
             
             razmerTapped?()
+            
+        }else if item.label1Text == "Замен по товару" , item.shouldSecondLabelBeBlue{
+            
+            zameniTapped?()
             
         }
         
