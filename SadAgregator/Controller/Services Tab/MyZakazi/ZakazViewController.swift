@@ -128,6 +128,8 @@ extension ZakazViewController{
         parcelDoc = nil
         trackDoc = nil
         
+        tableView.reloadData()
+        
         vendTargetOrderDataManager.getVendTargetOrderData(key: key, order: thisZakazId)
         
     }
@@ -265,21 +267,25 @@ extension ZakazViewController{
                 finalAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                     NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.SupplierPayedOrder?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)&ASumm=\(summ)") { payedData , payedError in
                         
-                        if let payedError = payedError{
-                            print("Error with Supplier Payed Order : \(payedError)")
-                            return
-                        }
-                        
-                        if payedData!["result"].intValue == 1{
+                        DispatchQueue.main.async {
                             
-                            self?.refresh()
+                            if let payedError = payedError{
+                                print("Error with Supplier Payed Order : \(payedError)")
+                                return
+                            }
                             
-                        }else{
-                            
-                            if let errorMessage = payedData!["msg"].string , errorMessage != ""{
+                            if payedData!["result"].intValue == 1{
                                 
-                                finalAlertController.dismiss(animated: true, completion: nil)
-                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
+                                self?.refresh()
+                                
+                            }else{
+                                
+                                if let errorMessage = payedData!["msg"].string , errorMessage != ""{
+                                    
+                                    finalAlertController.dismiss(animated: true, completion: nil)
+                                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
+                                    
+                                }
                                 
                             }
                             
@@ -424,8 +430,10 @@ extension ZakazViewController{
         
         NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurDocImg?AKey=\(key)&APurSYSID=\(thisZakazId)&AImgTYPE=1&AimgID=\(gruzImageId)")) { [weak self] updateDocData , _ in
             guard let updateDocData = updateDocData else {return}
-            if updateDocData["result"].intValue == 1{
-                self?.refresh()
+            DispatchQueue.main.async {
+                if updateDocData["result"].intValue == 1{
+                    self?.refresh()
+                }
             }
         }
         
@@ -438,8 +446,10 @@ extension ZakazViewController{
         
         NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurDocImg?AKey=\(key)&APurSYSID=\(thisZakazId)&AImgTYPE=2&AimgID=\(posilkaImageId)")) { [weak self] updateDocData , _ in
             guard let updateDocData = updateDocData else {return}
-            if updateDocData["result"].intValue == 1{
-                self?.refresh()
+            DispatchQueue.main.async {
+                if updateDocData["result"].intValue == 1{
+                    self?.refresh()
+                }
             }
         }
         
@@ -885,7 +895,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
             cell.contentType = .order
             
-            let tovar = purProds[indexPath.row]
+            var tovar = purProds[indexPath.row]
             
             cell.thisTovar = tovar
             
@@ -904,22 +914,37 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                     
                     qrScannerVC.qrConnected = { [weak self] qr in
                         
-                        VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: "", qrValue: qr) { setQrData, setQrError in
+                        VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: tovar.pid, qrValue: qr) { setQrData, setQrError in
                             
-                            if let setQrError = setQrError{
-                                print("Error with VendorSetQRDataManager : \(setQrError)")
-                                return
-                            }
-                            
-                            if setQrData!["result"].intValue == 1{
+                            DispatchQueue.main.async {
                                 
                                 qrScannerVC.dismiss(animated: true, completion: nil)
                                 
-                                self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                                if let setQrError = setQrError{
+                                    print("Error with VendorSetQRDataManager : \(setQrError)")
+                                    return
+                                }
                                 
-                                self?.purProds[indexPath.row].shouldShowBottomStackView = false
+                                if let errorText = setQrData!["msg"].string , !errorText.isEmpty{
+                                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                                    return
+                                }
                                 
-                                cell.thisTovar = tovar
+                                if setQrData!["result"].intValue == 1{
+                                    
+                                    self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                                    
+                                    self?.purProds[indexPath.row].shouldShowBottomStackView = false
+                                    
+                                    tovar.qr = "1"
+                                    
+                                    cell.thisTovar = tovar
+                                    
+                                    self?.purProds[indexPath.row].qr = "1"
+                                    
+                                    self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                                    
+                                }
                                 
                             }
                             
@@ -992,6 +1017,8 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                                     
                                     cell.thisTovar = replaceTovar
                                     
+                                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                                    
                                 }else{
                                     
                                     cell.selectRed()
@@ -1026,27 +1053,37 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                             
                             qrScannerVC.dismiss(animated: true, completion: nil)
                             
-                            VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: "", qrValue: qr) { setQrData, setQrError in
+                            VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: tovar.pid, qrValue: qr) { setQrData, setQrError in
                                 
-                                if let setQrError = setQrError{
-                                    print("Error with VendorSetQRDataManager : \(setQrError)")
-                                    return
-                                }
-                                
-                                if let errorText = setQrData!["msg"].string , errorText != ""{
-                                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
-                                    return
-                                }
-                                
-                                if setQrData!["result"].intValue == 1{
+                                DispatchQueue.main.async {
                                     
                                     qrScannerVC.dismiss(animated: true, completion: nil)
                                     
-                                    self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                                    if let setQrError = setQrError{
+                                        print("Error with VendorSetQRDataManager : \(setQrError)")
+                                        return
+                                    }
                                     
-                                    self?.purProds[indexPath.row].shouldShowBottomStackView = false
+                                    if let errorText = setQrData!["msg"].string , errorText != ""{
+                                        self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                                        return
+                                    }
                                     
-                                    cell.thisTovar = tovar
+                                    if setQrData!["result"].intValue == 1{
+                                        
+                                        self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                                        
+                                        self?.purProds[indexPath.row].shouldShowBottomStackView = false
+                                        
+                                        tovar.qr = "1"
+                                        
+                                        cell.thisTovar = tovar
+                                        
+                                        self?.purProds[indexPath.row].qr = "1"
+                                        
+                                        self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                                        
+                                    }
                                     
                                 }
                                 
@@ -1070,27 +1107,37 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                         
                         qrScannerVC.dismiss(animated: true, completion: nil)
                         
-                        VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: self!.thisZakazId, qrValue: qr) { setQrData, setQrError in
+                        VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: tovar.pid, qrValue: qr) { setQrData, setQrError in
                             
-                            if let setQrError = setQrError{
-                                print("Error with VendorSetQRDataManager : \(setQrError)")
-                                return
-                            }
-                            
-                            if let errorText = setQrData!["msg"].string , errorText != ""{
-                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
-                                return
-                            }
-                            
-                            if setQrData!["result"].intValue == 1{
+                            DispatchQueue.main.async {
                                 
-                                qrScannerVC.dismiss(animated: true, completion: nil)
+                                if let setQrError = setQrError{
+                                    print("Error with VendorSetQRDataManager : \(setQrError)")
+                                    return
+                                }
                                 
-                                self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                                if let errorText = setQrData!["msg"].string , errorText != ""{
+                                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                                    return
+                                }
                                 
-                                self?.purProds[indexPath.row].shouldShowBottomStackView = false
-                                
-                                cell.thisTovar = tovar
+                                if setQrData!["result"].intValue == 1{
+                                    
+                                    qrScannerVC.dismiss(animated: true, completion: nil)
+                                    
+                                    self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                                    
+                                    self?.purProds[indexPath.row].shouldShowBottomStackView = false
+                                    
+                                    tovar.qr = "1"
+                                    
+                                    cell.thisTovar = tovar
+                                    
+                                    self?.purProds[indexPath.row].qr = "1"
+                                    
+                                    self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                                    
+                                }
                                 
                             }
                             
@@ -1114,6 +1161,10 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                 
                 self?.navigationController?.pushViewController(zameniVC, animated: true)
                 
+            }
+            
+            if tovar.shouldShowBottomStackView{
+                cell.resetBottomStackView()
             }
             
             return cell

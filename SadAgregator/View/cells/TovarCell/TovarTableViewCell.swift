@@ -261,10 +261,6 @@ class TovarTableViewCell: UITableViewCell {
         
         tableView.reloadData()
         
-        if contentType == .order{
-            resetBottomStackView()
-        }
-        
     }
     
 }
