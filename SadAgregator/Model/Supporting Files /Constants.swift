@@ -164,15 +164,23 @@ struct K {
             
             let oneLineSymbolCount = width / 7
             
-            print("One line symbol count: \(oneLineSymbolCount)")
+            //            print("One line symbol count: \(oneLineSymbolCount)")
             
             var linesCount = (CGFloat(comment.count) / oneLineSymbolCount).rounded(.awayFromZero)
             
             if comment.contains("\n"){
-                linesCount += 1
+                
+                for s in comment {
+                    
+                    if s == "\n"{
+                        linesCount += 1
+                    }
+                    
+                }
+               
             }
             
-            print("Lines count : \(linesCount)")
+            //            print("Lines count : \(linesCount)")
             
             height += linesCount * 28
             
@@ -355,18 +363,37 @@ struct K {
         }
         
         if !data.comment.isEmpty{
-            if data.comment.count >= 150{
-                height += 135
-            }else if data.comment.count >= 100{
-                height += 105
-            }else{
-                height += 85
-            }
-        }
         
-        if !data.comment.isEmpty{
-            height += data.comment.heightWithConstrainedWidth(width: width, font: UIFont.systemFont(ofSize: 15))
-            //            height += 8
+            height += 60
+            
+            let comment = data.comment
+            
+            let oneLineSymbolCount = width / 7
+            
+            //            print("One line symbol count: \(oneLineSymbolCount)")
+            
+            var linesCount = (CGFloat(comment.count) / oneLineSymbolCount).rounded(.awayFromZero)
+            
+            if comment.contains("\n"){
+                
+                for s in comment {
+                    
+                    if s == "\n"{
+                        linesCount += 1
+                    }
+                    
+                }
+               
+            }
+            
+            //            print("Lines count : \(linesCount)")
+            
+            height += linesCount * 22
+            
+            if linesCount == 1{
+                height += 6
+            }
+            
         }
         
         if data.isShownForOneZakaz{
