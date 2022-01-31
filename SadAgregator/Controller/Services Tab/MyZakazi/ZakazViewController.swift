@@ -317,11 +317,6 @@ extension ZakazViewController{
             
         }else if actId == "4"{
             
-            thisZakaz?.statusName = "Хуй"
-            tableView.reloadData()
-            print("DONE")
-            return
-            
             let questionAlertController = UIAlertController(title: "Заказ собран?", message: nil, preferredStyle: .alert)
             
             questionAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
@@ -946,7 +941,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                                 
                                 if setQrData!["result"].intValue == 1{
                                     
-                                    self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                                    Vibration.success.vibrate()
                                     
                                     self?.purProds[indexPath.row].shouldShowBottomStackView = false
                                     
@@ -1087,7 +1082,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                                     
                                     if setQrData!["result"].intValue == 1{
                                         
-                                        self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                                        Vibration.success.vibrate()
                                         
                                         self?.purProds[indexPath.row].shouldShowBottomStackView = false
                                         
@@ -1141,7 +1136,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                                     
                                     qrScannerVC.dismiss(animated: true, completion: nil)
                                     
-                                    self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                                    Vibration.success.vibrate()
                                     
                                     self?.purProds[indexPath.row].shouldShowBottomStackView = false
                                     
