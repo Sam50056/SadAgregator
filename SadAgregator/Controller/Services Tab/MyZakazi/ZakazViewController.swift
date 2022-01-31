@@ -123,6 +123,7 @@ extension ZakazViewController{
         guard thisZakazId != "" else {return}
         
         thisZakaz = nil
+        zakazData = nil
         purProds.removeAll()
         docs.removeAll()
         parcelDoc = nil
@@ -315,6 +316,11 @@ extension ZakazViewController{
             present(summAlertController, animated: true, completion: nil)
             
         }else if actId == "4"{
+            
+            thisZakaz?.statusName = "Хуй"
+            tableView.reloadData()
+            print("DONE")
+            return
             
             let questionAlertController = UIAlertController(title: "Заказ собран?", message: nil, preferredStyle: .alert)
             
@@ -567,7 +573,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
         }else if section == 2{
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTowLabelCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTwoLabelCell", for: indexPath)
             
             guard let imageView1 = cell.viewWithTag(1) as? UIImageView ,
                   let label1 = cell.viewWithTag(2) as? UILabel,
@@ -590,7 +596,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
         }else if section == 3{
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTowLabelCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTwoLabelCell", for: indexPath)
             
             guard let imageView1 = cell.viewWithTag(1) as? UIImageView ,
                   let label1 = cell.viewWithTag(2) as? UILabel,
@@ -600,8 +606,6 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             else {return cell}
             
             imageView1.image = UIImage(systemName: "doc.text")
-            //            imageView2.image = nil
-            //            label2.text = ""
             
             label1.text = "Статус"
             
@@ -610,6 +614,8 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             if let intStatus = Int(thisZakaz.status) , intStatus < 3{
                 
                 imageView2.image = UIImage(systemName: "chevron.right")
+                
+                cellButton.isHidden = false
                 
                 cellButton.showsMenuAsPrimaryAction = true
                 
@@ -625,6 +631,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                         DispatchQueue.main.async {
                             
                             if let errorText = data!["msg"].string , !errorText.isEmpty{
+                                completion([])
                                 self!.showSimpleAlertWithOkButton(title: errorText, message: nil)
                                 return
                             }
@@ -668,6 +675,8 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                 cellButton.menu = statusMenu
                 
             }
+            
+            return cell
             
         }else if section == 4{
             
@@ -745,7 +754,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                 
             }else{
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTowLabelCell", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTwoLabelCell", for: indexPath)
                 
                 guard let imageView1 = cell.viewWithTag(1) as? UIImageView ,
                       let label1 = cell.viewWithTag(2) as? UILabel,
@@ -846,7 +855,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                 
             }else{
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTowLabelCell", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTwoLabelCell", for: indexPath)
                 
                 guard let imageView1 = cell.viewWithTag(1) as? UIImageView ,
                       let label1 = cell.viewWithTag(2) as? UILabel,
@@ -871,7 +880,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             
         }else if section == 6{
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTowLabelCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "twoImageViewTwoLabelCell", for: indexPath)
             
             guard let imageView1 = cell.viewWithTag(1) as? UIImageView ,
                   let label1 = cell.viewWithTag(2) as? UILabel,
