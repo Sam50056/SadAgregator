@@ -43,7 +43,11 @@ class ServicesViewController: UIViewController {
         
         loadUserData()
         
-        refresh()
+        if isLogged{
+            
+            refresh()
+            
+        }
         
     }
     
@@ -161,7 +165,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                     
                     serviceNameLabel.text = "Клиенты"
                     
-                    if let clientsBalance = servicesJsonData?["clients_balance"].string , clientsBalance != "" {
+                    if let clientsBalance = servicesJsonData?["clients_balance"].string , clientsBalance != ""  , clientsBalance != "0" , isLogged{
                         secondLabel.text = clientsBalance + " руб"
                         if clientsBalance.contains("-"){
                             secondLabel.textColor = .red
@@ -174,7 +178,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                     
                     serviceNameLabel.text = "Мои закупки"
                     
-                    if let pursCount = servicesJsonData?["purs_cnt"].string , pursCount != ""{
+                    if let pursCount = servicesJsonData?["purs_cnt"].string , pursCount != "" , pursCount != "0" , isLogged{
                         secondLabel.text = pursCount
                     }
                     
@@ -189,7 +193,9 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                     let assemblyWaitItems = servicesJsonData["assembly_wait_items"].stringValue
                     let assemblyWaitCost = servicesJsonData["assembly_wait_cost"].stringValue
                     
-                    secondLabel.text = assemblyWaitItems + " / " + assemblyWaitCost + " руб"
+                    if !assemblyWaitItems.isEmpty || assemblyWaitItems != "0" || !assemblyWaitCost.isEmpty || assemblyWaitCost != "0" , isLogged{
+                        secondLabel.text = assemblyWaitItems + " / " + assemblyWaitCost + " руб"
+                    }
                     
                 case 3:
                     
