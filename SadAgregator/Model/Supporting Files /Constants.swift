@@ -366,7 +366,7 @@ struct K {
         
             height += 60
             
-            let comment = data.comment
+            let comment = data.comment.replacingOccurrences(of: "<br>", with: "\n")
             
             let oneLineSymbolCount = width / 7
             
@@ -388,7 +388,7 @@ struct K {
             
             //            print("Lines count : \(linesCount)")
             
-            height += linesCount * 22
+            height += linesCount * 24
             
             if linesCount == 1{
                 height += 6
