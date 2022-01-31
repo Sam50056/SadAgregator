@@ -160,7 +160,7 @@ struct K {
             
             let comment = thisTovar.comExt.replacingOccurrences(of: "<br>", with: "\n")
             
-            height += 25
+            height += 30 //25
             
             let oneLineSymbolCount = width / 7
             

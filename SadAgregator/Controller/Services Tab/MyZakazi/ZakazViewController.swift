@@ -1025,9 +1025,11 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                                         replaceTovar.shouldShowBottomStackView = false
                                     }
                                     
+                                    self?.purProds[indexPath.row] = replaceTovar
+                                    
                                     cell.thisTovar = replaceTovar
                                     
-                                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                                    self?.tableView.reloadRows(at: [indexPath], with: .automatic)
                                     
                                 }else{
                                     
