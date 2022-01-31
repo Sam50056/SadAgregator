@@ -354,6 +354,10 @@ struct K {
             height += defaultCellHeight
         }
         
+        if !data.replaces.isEmpty , data.replaces != "0"{
+            height += defaultCellHeight
+        }
+        
         if !data.deliveryType.isEmpty{
             height += defaultCellHeight
         }

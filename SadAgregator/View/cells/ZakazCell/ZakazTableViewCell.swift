@@ -61,7 +61,7 @@ class ZakazTableViewCell: UITableViewCell {
 extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        7
+        8
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,13 +74,15 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             return 1
         }else if section == 2 , !thisZakaz.itemsCount.isEmpty , thisZakaz.itemsCount != "0"{
             return 1
-        }else if section == 3 , !thisZakaz.deliveryType.isEmpty{
+        }else if section == 3 , !thisZakaz.replaces.isEmpty , thisZakaz.replaces != "0"{
             return 1
-        }else if section == 4 , !thisZakaz.statusName.isEmpty{
+        }else if section == 4 , !thisZakaz.deliveryType.isEmpty{
             return 1
-        }else if section == 5 , !thisZakaz.comment.isEmpty{
+        }else if section == 5 , !thisZakaz.statusName.isEmpty{
             return 1
-        }else if section == 6{
+        }else if section == 6 , !thisZakaz.comment.isEmpty{
+            return 1
+        }else if section == 7{
             return thisZakaz.isShownForOneZakaz ? 1 : 0
         }
         
@@ -146,6 +148,25 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             
         }else if section == 3{
             
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakazTableViewCellImageViewTwoLabelTableViewCell
+            
+            cell.zakazImageView.image = UIImage(systemName: "return")
+            
+            cell.zakazImageView.tintColor = .systemGray
+            
+            cell.label1.text = "Замены"
+            cell.label2.text = thisZakaz.replaces
+            
+            cell.label1.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+            cell.label2.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+            cell.label2.textColor = .systemGray
+            
+            cell.contentView.backgroundColor = UIColor(named: "whiteblack")
+            
+            return cell
+            
+        }else if section == 4{
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellWithImgView", for: indexPath) as! ZakazTableViewCellTableViewCellWithImageView
             
             cell.imgView1.image = UIImage(systemName: "paperplane.fill")
@@ -166,7 +187,7 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        }else if section == 4{
+        }else if section == 5{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ZakazTableViewCellImageViewTwoLabelTableViewCell
             
@@ -185,7 +206,7 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        }else if section == 5{
+        }else if section == 6{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! ZakazTableViewCellCommentTableViewCell
             
@@ -195,7 +216,7 @@ extension ZakazTableViewCell  : UITableViewDelegate , UITableViewDataSource{
             
             return cell
             
-        }else if section == 6{
+        }else if section == 7{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "bgViewCell", for: indexPath) as! ZakazTableViewCellBgViewTableViewCell
             
