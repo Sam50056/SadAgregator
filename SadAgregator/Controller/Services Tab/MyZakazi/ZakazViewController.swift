@@ -172,7 +172,7 @@ extension ZakazViewController{
                         
                     }
                     
-                    self?.purProds = newProds
+                    self?.purProds.append(contentsOf: newProds)
                     
                     self?.tableView.reloadData()
                     

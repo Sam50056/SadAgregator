@@ -118,25 +118,6 @@ class TovarTableViewCell: UITableViewCell {
             
             //Order stuff
             
-            orderIf : if contentType == .order , let thisZakaz = thisZakaz{
-                
-                commentStackView.isHidden = thisTovar.comExt == ""
-                commentTextView.text = thisTovar.comExt.replacingOccurrences(of: "<br>", with: "\n")
-                
-                guard let intStatus = Int(thisZakaz.status) else {break orderIf}
-                
-                if intStatus == 1{
-                    selectGreen()
-                }else if intStatus == -1{
-                    selectRed()
-                }else if intStatus == 2{
-                    bottomStackViewLeftViewLabel.text = "Собрано"
-                }else if intStatus >= 3{
-                    removeBottomStackView()
-                }
-                
-            }
-            
             if contentType == .order{
                 
                 if thisTovar.shouldShowBottomStackView{
@@ -149,6 +130,33 @@ class TovarTableViewCell: UITableViewCell {
                 
                 commentView.isHidden = true
                 removeBottomStackView()
+                
+            }
+            
+            orderIf : if contentType == .order , let thisZakaz = thisZakaz{
+                
+                commentStackView.isHidden = thisTovar.comExt == ""
+                commentTextView.text = thisTovar.comExt.replacingOccurrences(of: "<br>", with: "\n")
+                
+                var intStatus = 0
+                
+                if thisZakaz.status.isEmpty || thisZakaz.status == "0" || thisZakaz.status == "1"{
+                    guard let intItemStatus = Int(thisTovar.itemStatus) else {break orderIf}
+                    intStatus = intItemStatus
+                }else{
+                    guard let intZakazStatus = Int(thisZakaz.status) else {break orderIf}
+                    intStatus = intZakazStatus
+                }
+                
+                if intStatus == 1{
+                    selectGreen()
+                }else if intStatus == -1{
+                    selectRed()
+                }else if intStatus == 2{
+                    bottomStackViewLeftViewLabel.text = "Собрано"
+                }else if intStatus >= 3{
+                    removeBottomStackView()
+                }
                 
             }
             
@@ -234,14 +242,11 @@ class TovarTableViewCell: UITableViewCell {
         
         bottomStackViewLeftView.layer.cornerRadius = 8
         bottomStackViewRightView.layer.cornerRadius = 8
-        bottomStackViewRightViewLabel.text = "Нет в наличии"
-        bottomStackViewLeftViewLabel.text = "Есть в наличии"
+        
+        resetBottomStackView()
         
         backgroundColor = UIColor(named: "whiteblack")
         contentView.backgroundColor = UIColor(named: "whiteblack")
-        
-        bottomStackViewLeftView.backgroundColor = .systemGreen.withAlphaComponent(0.8)
-        bottomStackViewRightView.backgroundColor = .systemRed.withAlphaComponent(0.8)
         
     }
     
@@ -255,6 +260,11 @@ class TovarTableViewCell: UITableViewCell {
         thisTovar = nil
         
         tableView.reloadData()
+        
+        if contentType == .order{
+            resetBottomStackView()
+        }
+        
     }
     
 }
@@ -332,6 +342,8 @@ extension TovarTableViewCell {
         bottomStackViewLeftView.backgroundColor = UIColor(named: "whiteblack")
         bottomStackViewLeftViewLabel.textColor = .systemGreen
         
+        getBottomStackViewRightViewToDefault()
+        
     }
     
     func selectRed(){
@@ -340,6 +352,58 @@ extension TovarTableViewCell {
         bottomStackViewRightViewLabel.textColor = .systemRed
         bottomStackViewRightViewLabel.text = "Товара нет в наличии"
         bottomStackViewLeftView.isHidden = true
+        
+        getBottomStackViewLeftViewToDefault()
+        
+    }
+    
+    func resetBottomStackView(){
+        
+        bottomStackViewRightViewLabel.text = "Нет в наличии"
+        bottomStackViewLeftViewLabel.text = "Есть в наличии"
+        
+        bottomStackViewLeftView.backgroundColor = .systemGreen.withAlphaComponent(0.8)
+        bottomStackViewRightView.backgroundColor = .systemRed.withAlphaComponent(0.8)
+        bottomStackViewLeftViewLabel.textColor = .white
+        bottomStackViewRightViewLabel.textColor = .white
+        
+        var intStatus = 0
+        
+        guard let thisTovar = thisTovar , let thisZakaz = thisZakaz else {return}
+        
+        if thisZakaz.status.isEmpty || thisZakaz.status == "0" || thisZakaz.status == "1"{
+            guard let intItemStatus = Int(thisTovar.itemStatus) else {return}
+            intStatus = intItemStatus
+        }else{
+            guard let intZakazStatus = Int(thisZakaz.status) else {return}
+            intStatus = intZakazStatus
+        }
+        
+        if intStatus == 1{
+            selectGreen()
+        }else if intStatus == -1{
+            selectRed()
+        }else if intStatus == 2{
+            bottomStackViewLeftViewLabel.text = "Собрано"
+        }else if intStatus >= 3{
+            removeBottomStackView()
+        }
+        
+    }
+    
+    func getBottomStackViewRightViewToDefault(){
+        
+        bottomStackViewRightView.backgroundColor = .systemRed.withAlphaComponent(0.8)
+        bottomStackViewRightViewLabel.textColor = .white
+        bottomStackViewRightViewLabel.text = "Нет в наличии"
+        
+    }
+    
+    func getBottomStackViewLeftViewToDefault(){
+        
+        bottomStackViewLeftView.backgroundColor = .systemGreen.withAlphaComponent(0.8)
+        bottomStackViewLeftViewLabel.textColor = .white
+        bottomStackViewLeftViewLabel.text = "Есть в наличии"
         
     }
     
