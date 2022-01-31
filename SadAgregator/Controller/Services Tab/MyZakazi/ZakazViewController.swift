@@ -624,6 +624,11 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                         
                         DispatchQueue.main.async {
                             
+                            if let errorText = data!["msg"].string , !errorText.isEmpty{
+                                self!.showSimpleAlertWithOkButton(title: errorText, message: nil)
+                                return
+                            }
+                            
                             if data!["result"].intValue == 1{
                                 
                                 var menuItems = [UIAction]()
@@ -969,6 +974,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                         
                         if confirmData!["result"].intValue == 1{
                             
+                            self?.purProds[indexPath.row].bottomStackViewButtonSelectedType = .green
                             cell.selectGreen()
                             
                         }
@@ -1021,6 +1027,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                                     
                                 }else{
                                     
+                                    self?.purProds[indexPath.row].bottomStackViewButtonSelectedType = .red
                                     cell.selectRed()
                                     
                                 }
@@ -1164,7 +1171,13 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
             }
             
             if tovar.shouldShowBottomStackView{
-                cell.resetBottomStackView()
+                if tovar.bottomStackViewButtonSelectedType == .green{
+                    cell.selectGreen()
+                }else if tovar.bottomStackViewButtonSelectedType == .red{
+                    cell.selectRed()
+                }else{
+                    cell.resetBottomStackView()
+                }
             }
             
             return cell

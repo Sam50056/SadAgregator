@@ -275,6 +275,13 @@ extension TovarTableViewCell {
         case order
     }
     
+    //Order Enum
+    enum BottomStackViewButtonSelectedType{
+        case green
+        case red
+        case none
+    }
+    
 }
 
 //MARK: - Actions
@@ -334,6 +341,8 @@ extension TovarTableViewCell {
     }
     
     func selectGreen(){
+        
+        
         
         bottomStackViewLeftView.backgroundColor = UIColor(named: "whiteblack")
         bottomStackViewLeftViewLabel.textColor = .systemGreen
@@ -675,6 +684,8 @@ struct TovarCellItem {
     var handlerStatus : String = ""
     
     var shouldShowBottomStackView : Bool = true
+    
+    var bottomStackViewButtonSelectedType : TovarTableViewCell.BottomStackViewButtonSelectedType = .none
     
 }
 
