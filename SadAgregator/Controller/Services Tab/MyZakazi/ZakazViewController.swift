@@ -992,9 +992,11 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                                     
                                     cell.thisTovar = replaceTovar
                                     
+                                }else{
+                                    
+                                    cell.selectRed()
+                                    
                                 }
-                                
-                                cell.selectRed()
                                 
                             }
                             
