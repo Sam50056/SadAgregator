@@ -51,6 +51,7 @@ struct SimpleReqView: View {
                                         .foregroundColor(Color(.systemGray))
                                         .lineLimit(nil)
                                         .fixedSize(horizontal: false, vertical: true)
+                                        .multilineTextAlignment(.leading)
                                     
                                 }
                                 
