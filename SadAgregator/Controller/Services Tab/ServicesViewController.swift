@@ -188,13 +188,15 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                     
                     serviceNameLabel.text = "Сборка"
                     
-                    guard let servicesJsonData = servicesJsonData else {return cell}
-                    
-                    let assemblyWaitItems = servicesJsonData["assembly_wait_items"].stringValue
-                    let assemblyWaitCost = servicesJsonData["assembly_wait_cost"].stringValue
-                    
-                    if !assemblyWaitItems.isEmpty || assemblyWaitItems != "0" || !assemblyWaitCost.isEmpty || assemblyWaitCost != "0" , isLogged{
-                        secondLabel.text = assemblyWaitItems + " / " + assemblyWaitCost + " руб"
+                    if let servicesJsonData = servicesJsonData {
+                        
+                        let assemblyWaitItems = servicesJsonData["assembly_wait_items"].stringValue
+                        let assemblyWaitCost = servicesJsonData["assembly_wait_cost"].stringValue
+                        
+                        if !assemblyWaitItems.isEmpty || assemblyWaitItems != "0" || !assemblyWaitCost.isEmpty || assemblyWaitCost != "0" , isLogged{
+                            secondLabel.text = assemblyWaitItems + " / " + assemblyWaitCost + " руб"
+                        }
+                        
                     }
                     
                 case 3:
