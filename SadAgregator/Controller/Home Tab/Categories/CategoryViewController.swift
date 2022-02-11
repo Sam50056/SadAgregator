@@ -21,12 +21,14 @@ class CategoryViewController: UIViewController {
     
     var isLogged = false
     
+    var catWorkDomain = ""
+    
     var categoryData : JSON?
     
     var postsArray = [JSON]()
     
     var page = 1
-    var rowForPaggingUpdate : Int = 15
+    var rowForPaggingUpdate : Int = 0
     
     var sizes : Array<[String]> {
         get{
@@ -143,7 +145,7 @@ class CategoryViewController: UIViewController {
                     
                     postsArray.removeAll()
                     
-                    getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
+                    getCatpageDataManager.getGetCatpageData(domain : catWorkDomain , key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
                 }
             }
         }
@@ -170,7 +172,7 @@ class CategoryViewController: UIViewController {
         getCatpageDataManager.delegate = self
         
         if let safeId = thisCatId{
-            getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page)
+            getCatpageDataManager.getGetCatpageData(domain : catWorkDomain , key: key, catId: safeId, page: page)
             showSimpleCircleAnimation(activityController: activityController)
         }
         
@@ -264,7 +266,7 @@ class CategoryViewController: UIViewController {
                 
                 postsArray.removeAll()
                 
-                getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
+                getCatpageDataManager.getGetCatpageData(domain : catWorkDomain , key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
             }
             
         }
@@ -354,6 +356,8 @@ extension CategoryViewController {
         
         isLogged = userDataObject.first!.isLogged
         
+        catWorkDomain = userDataObject.first?.catWork ?? ""
+        
     }
     
 }
@@ -370,6 +374,12 @@ extension CategoryViewController : GetCatpageDataManagerDelegate{
             
             postsArray.append(contentsOf: data["posts"].arrayValue)
             
+            if page == 1{
+                rowForPaggingUpdate += data["posts"].arrayValue.count - 1
+            }else{
+                rowForPaggingUpdate += data["posts"].arrayValue.count
+            }
+            
             tableView.reloadData()
             
             //This is only available when page is 1 , that's why it's in the if block ))
@@ -385,7 +395,6 @@ extension CategoryViewController : GetCatpageDataManagerDelegate{
     
     func didFailGettingGetCatpageDataWithError(error: String) {
         print("Error with GetCatpageDataManager : \(error)")
-        stopSimpleCircleAnimation(activityController: activityController)
     }
     
 }
@@ -424,10 +433,8 @@ extension CategoryViewController : UITableViewDelegate , UITableViewDataSource{
             
             page += 1
             
-            rowForPaggingUpdate += 16
-            
             if let safeId = thisCatId{
-                getCatpageDataManager.getGetCatpageData(key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
+                getCatpageDataManager.getGetCatpageData(domain : catWorkDomain , key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
             }
             
             print("Done a request for page: \(page)")

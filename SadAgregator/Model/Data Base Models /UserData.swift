@@ -25,6 +25,8 @@ class UserData : Object{
     @objc dynamic var imageHashSearch : String = ""
     @objc dynamic var imageHashServer : String = ""
     
+    @objc dynamic var catWork : String = ""
+    
     @objc dynamic var settings : String = ""
     
     @objc dynamic var exportType : String = ""

@@ -33,7 +33,7 @@ class LineViewController: UIViewController {
     var postsArray = [JSON]()
     
     var page : Int = 1
-    var rowForPaggingUpdate : Int = 15
+    var rowForPaggingUpdate : Int = 0
     
     var sizes : Array<[String]> {
         get{
@@ -192,6 +192,8 @@ extension LineViewController : ActivityLineDataManagerDelegate{
             
             postsArray = data["posts"].arrayValue
             
+            rowForPaggingUpdate += data["posts"].arrayValue.count - 1
+            
             tableView.reloadData()
             
             refreshControl.endRefreshing()
@@ -212,6 +214,9 @@ extension LineViewController : ActivityLineDataManagerDelegate{
         
         if let safeId = thisLineId{
             
+            page = 1
+            rowForPaggingUpdate = 0
+            
             activityLineDataManager.getActivityData(key: key, lineId: safeId)
             
             showSimpleCircleAnimation(activityController: activityController)
@@ -231,6 +236,8 @@ extension LineViewController : LinePostsPaggingDataManagerDelegate {
         DispatchQueue.main.async { [self] in
             
             postsArray.append(contentsOf: data["posts"].arrayValue)
+            
+            rowForPaggingUpdate += data["posts"].arrayValue.count
             
             tableView.reloadSections([5], with: .none)
             
@@ -377,8 +384,6 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             if indexPath.row == rowForPaggingUpdate{
                 
                 page += 1
-                
-                rowForPaggingUpdate += 16
                 
                 linePostsPaggingDataManager.getLinePostsPaggingData(key: key, lineId: thisLineId!, page: page)
                 

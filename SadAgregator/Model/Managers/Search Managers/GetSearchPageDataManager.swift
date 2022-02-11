@@ -15,11 +15,19 @@ protocol GetSearchPageDataManagerDelegate {
 
 struct GetSearchPageDataManager {
     
-    var delegate : GetSearchPageDataManagerDelegate? 
+    var delegate : GetSearchPageDataManagerDelegate?
     
-    func getSearchPageData(key : String , query : String , page : Int) {
+    func getSearchPageData(domain : String , key : String , query : String , page : Int) {
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_srch.GetSearchPage?AKey=\(key)&AQuery=\(query)&APage=\(page)"
+        var thisDomain = ""
+        
+        if domain != ""{
+            thisDomain = domain
+        }else{
+            thisDomain = "agrapi.tk-sad.ru"
+        }
+        
+        let urlString = "https://\(thisDomain)/agr_srch.GetSearchPage?AKey=\(key)&AQuery=\(query)&APage=\(page)"
         
         print("URLString for GetSearchPageDataManager: \(urlString)")
         

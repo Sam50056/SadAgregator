@@ -30,11 +30,13 @@ class SearchViewController: UIViewController {
     var imageHashSearch = ""
     var imageHashServer = ""
     
+    var catWorkDomain = ""
+    
     var searchText : String = ""
     var imageHashText : String?
     
     var page : Int = 1
-    var rowForPaggingUpdate : Int = 15
+    var rowForPaggingUpdate : Int = 0
     
     var hintCellShouldBeShown = false
     
@@ -147,7 +149,7 @@ class SearchViewController: UIViewController {
             imageSearch()
             
         }else{
-            getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
+            getSearchPageDataManager.getSearchPageData(domain: catWorkDomain , key: key, query: searchText, page: page)
         }
         
         if isShownFromGallery{
@@ -311,9 +313,15 @@ extension SearchViewController : SearchImageDataManagerDelegate{
             
             postsArray = data["posts"].arrayValue
             
+            if page == 1{
+                rowForPaggingUpdate += data["posts"].arrayValue.count - 1
+            }else{
+                rowForPaggingUpdate += data["posts"].arrayValue.count
+            }
+            
             cntList = nil
             
-            tableView.reloadSections([0,1], with: .none)
+            tableView.reloadData()
             
             stopSimpleCircleAnimation(activityController: activityController)
             
@@ -367,6 +375,8 @@ extension SearchViewController {
         imageHashServer = userDataObjects.first!.imageHashServer
         imageHashSearch = userDataObjects.first!.imageHashSearch
         
+        catWorkDomain = userDataObjects.first?.catWork ?? ""
+        
         exportType = userDataObjects.first!.exportType
         exportFast = userDataObjects.first!.exportFast
         
@@ -388,9 +398,15 @@ extension SearchViewController : GetSearchPageDataManagerDelegate {
             
             postsArray.append(contentsOf: data["posts"].arrayValue)
             
+            if page == 1{
+                rowForPaggingUpdate += data["posts"].arrayValue.count - 1
+            }else{
+                rowForPaggingUpdate += data["posts"].arrayValue.count
+            }
+            
             cntList = data["cnt_list"].arrayValue
             
-            tableView.reloadSections([0,1], with: .none)
+            tableView.reloadData()
             
             stopSimpleCircleAnimation(activityController: activityController)
             
@@ -420,7 +436,7 @@ extension SearchViewController : UITextFieldDelegate{
             
             searchData = nil
             
-            getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
+            getSearchPageDataManager.getSearchPageData(domain: catWorkDomain, key: key, query: searchText, page: page)
             
         }
         
@@ -551,9 +567,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
                 
                 page += 1
                 
-                rowForPaggingUpdate += 16
-                
-                getSearchPageDataManager.getSearchPageData(key: key, query: searchText, page: page)
+                getSearchPageDataManager.getSearchPageData(domain: catWorkDomain, key: key, query: searchText, page: page)
                 
                 print("Done a request for page: \(page)")
                 
@@ -681,9 +695,9 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource{
             
             self?.searchTextField.text = option
             
-            self?.tableView.reloadSections([0,1], with: .automatic)
+            self?.tableView.reloadData()
             
-            self?.getSearchPageDataManager.getSearchPageData(key: self!.key, query: option, page: self!.page)
+            self?.getSearchPageDataManager.getSearchPageData(domain: self!.catWorkDomain, key: self!.key, query: option, page: self!.page)
             
             self?.tableView.setContentOffset( CGPoint(x: 0, y: 0) , animated: true)
             

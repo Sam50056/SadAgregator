@@ -39,7 +39,7 @@ class PointViewController: UIViewController {
     var postsArray = [JSON]()
     
     var page : Int = 1
-    var rowForPaggingUpdate = 15
+    var rowForPaggingUpdate = 0
     
     var nextPointId : String?{
         return pointData?["arrows"]["id_next"].string
@@ -240,6 +240,8 @@ extension PointViewController : ActivityPointDataManagerDelegate {
             
             postsArray = data["posts"].arrayValue
             
+            rowForPaggingUpdate += data["posts"].arrayValue.count - 1
+            
             tableView.reloadData()
             
             refreshControl.endRefreshing()
@@ -264,6 +266,8 @@ extension PointViewController : PointPostsPaggingDataManagerDelegate {
         DispatchQueue.main.async {
             
             self.postsArray.append(contentsOf: data["posts"].arrayValue)
+            
+            self.rowForPaggingUpdate += data["posts"].arrayValue.count
             
             self.tableView.reloadSections([8], with: .none)
             
@@ -513,8 +517,6 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             if indexPath.row == rowForPaggingUpdate{
                 
                 page += 1
-                
-                rowForPaggingUpdate += 16
                 
                 pointPostsPaggingDataManager.getPointPostsPaggingData(key: key, pointId: thisPointId!, page: page)
                 

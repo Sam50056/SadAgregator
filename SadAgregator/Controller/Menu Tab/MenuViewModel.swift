@@ -115,6 +115,8 @@ extension MenuViewModel : CheckKeysDataManagerDelegate{
                 userDataObject.imageHashSearch = data["img_hash_srch"].stringValue
                 userDataObject.imageHashServer = data["img_hash_srv"].stringValue
                 
+                userDataObject.catWork = data["cat_work"].stringValue
+                
                 userDataObject.key = safeKey
                 
                 deleteAllDataFromDB()

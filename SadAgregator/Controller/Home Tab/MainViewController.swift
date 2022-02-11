@@ -47,7 +47,7 @@ class MainViewController: UIViewController {
     var categoriesArray = [JSON]()
     
     var page = 1
-    var rowForPaggingUpdate : Int = 15
+    var rowForPaggingUpdate : Int = 0
     
     var sizes : Array<[String]> {
         get{
@@ -378,6 +378,8 @@ extension MainViewController : CheckKeysDataManagerDelegate {
                 userDataObject.imageHashSearch = data["img_hash_srch"].stringValue
                 userDataObject.imageHashServer = data["img_hash_srv"].stringValue
                 
+                userDataObject.catWork = data["cat_work"].stringValue
+                
                 userDataObject.key = safeKey
                 
                 deleteAllDataFromDB()
@@ -487,6 +489,8 @@ extension MainViewController : MainDataManagerDelegate{
             
             postsArray = data["posts"].arrayValue
             
+            rowForPaggingUpdate += data["posts"].arrayValue.count - 1
+            
             tableView.reloadData()
             
             refreshControl.endRefreshing()
@@ -505,11 +509,13 @@ extension MainViewController : MainPaggingDataManagerDelegate{
     
     func didGetMainPaggingData(data: JSON) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             
-            self.postsArray.append(contentsOf: data["posts"].arrayValue)
+            self?.postsArray.append(contentsOf: data["posts"].arrayValue)
             
-            self.tableView.reloadData()
+            self?.rowForPaggingUpdate += data["posts"].arrayValue.count
+            
+            self?.tableView.reloadData()
             
         }
         
@@ -730,11 +736,9 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         
         if indexPath.section == 8{
             
-            if indexPath.row == rowForPaggingUpdate{
+            if rowForPaggingUpdate != 0 , indexPath.row == rowForPaggingUpdate{
                 
                 page += 1
-                
-                rowForPaggingUpdate += 16
                 
                 mainPaggingDataManager.getMainPaggingData(key: key!, page: page)
                 
@@ -755,7 +759,13 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             return
         }
         
+        postsArray.removeAll()
+        
+        page = 1
+        rowForPaggingUpdate = 0
+        
         mainDataManager.getMainData(key: key)
+        
     }
     
     

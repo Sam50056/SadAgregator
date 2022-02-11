@@ -19,7 +19,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
     var isLogged = false
     
     var page = 1
-    var rowForPaggingUpdate = 15
+    var rowForPaggingUpdate = 0
     
     lazy var getVendPostsPaggingDataManager = GetVendPostsPaggingDataManager()
     
@@ -129,6 +129,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             postsArray.removeAll()
             
             page = 1
+            rowForPaggingUpdate = 0
             
             getVendPostsPaggingDataManager.getGetVendPostsPaggingData(key: key, vendId: thisVendId, page: page)
             
@@ -147,6 +148,12 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             pageData = data
             
             postsArray.append(contentsOf: data["posts"].arrayValue)
+            
+            if page == 1{
+                rowForPaggingUpdate += data["posts"].arrayValue.count - 1
+            }else{
+                rowForPaggingUpdate += data["posts"].arrayValue.count
+            }
             
             tableView.reloadData()
             
@@ -192,8 +199,6 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
         if indexPath.row == rowForPaggingUpdate{
             
             page += 1
-            
-            rowForPaggingUpdate += 16
             
             getVendPostsPaggingDataManager.getGetVendPostsPaggingData(key: key, vendId: thisVendId!, page: page)
             

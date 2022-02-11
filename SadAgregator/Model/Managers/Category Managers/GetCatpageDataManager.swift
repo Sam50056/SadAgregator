@@ -17,9 +17,17 @@ struct GetCatpageDataManager {
     
     var delegate : GetCatpageDataManagerDelegate?
     
-    func getGetCatpageData(key : String , catId : String , page : Int , filter : String = "" , min : String = "" , max : String = ""){
+    func getGetCatpageData(domain : String, key : String , catId : String , page : Int , filter : String = "" , min : String = "" , max : String = ""){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_cats.GetCatPage?AKey=\(key)&ACatID=\(catId)&APage=\(page)&AFilter=\(filter)&AMin=\(min)&AMax=\(max)"
+        var thisDomain = ""
+        
+        if domain != ""{
+            thisDomain = domain
+        }else{
+            thisDomain = "agrapi.tk-sad.ru"
+        }
+        
+        let urlString = "https://\(thisDomain)/agr_cats.GetCatPage?AKey=\(key)&ACatID=\(catId)&APage=\(page)&AFilter=\(filter)&AMin=\(min)&AMax=\(max)"
         
         print("URLString for GetCatpageDataManager: \(urlString)")
         
