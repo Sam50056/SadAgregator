@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import SwiftyJSON
+import SDWebImage
 
 //MARK: - ViewController Representable
 
@@ -39,6 +40,14 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     private var isPosrednikTab = false
     
+    private var pageData : JSON?
+    
+    private var officialStatus : JSON?{
+        get{
+            pageData?["broker_profile"]["official_status"]
+        }
+    }
+    
     private var firstSectionItemsForPosrednik = [FirstSectionItem]()
     private var firstSectionItemsForOrg = [FirstSectionItem]()
     
@@ -59,12 +68,30 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     private lazy var brokersUpdateInfoDataManager = BrokersUpdateInfoDataManager()
     
+    private lazy var newPhotoPlaceDataManager = NewPhotoPlaceDataManager()
+    private lazy var photoSavedDataManager = PhotoSavedDataManager()
+    
+    private var sendingImageType : ImageSendType?
+    
+    private var boxView = UIView()
+    private var blurEffectView = UIVisualEffectView()
+    
+    private var cardImageUrl : URL?
+    private var cardImageId : String?
+    private var cardImage : UIImage?
+    
+    private var selfieImageUrl : URL?
+    private var selfieImageId : String?
+    private var selfieImage : UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.separatorStyle = .none
         
         brokersFormDataManager.delegate = self
+        
+        newPhotoPlaceDataManager.delegate = self
         
         update()
         
@@ -76,6 +103,102 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
         if let key = key{
             brokersFormDataManager.getBrokersFormData(key: key)
+        }
+        
+    }
+    
+    func showBoxView(with text : String) {
+        
+        let blurEffect = UIBlurEffect(style: .systemChromeMaterial)
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+        
+        let width = text.width(withConstrainedHeight: UIScreen.main.bounds.width - 16, font: UIFont.systemFont(ofSize: 17)) + 60
+        
+        // You only need to adjust this frame to move it anywhere you want
+        boxView = UIView(frame: CGRect(x: view.frame.midX - (width/2), y: view.frame.midY - 25, width: width, height: 50))
+        boxView.backgroundColor = UIColor(named: "gray")
+        boxView.alpha = 0.95
+        boxView.layer.cornerRadius = 10
+        
+        boxView.center = view.center
+        
+        //Here the spinnier is initialized
+        let activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        activityView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityView.startAnimating()
+        
+        let textLabel = UILabel(frame: CGRect(x: 45, y: 0, width: 200, height: 50))
+        textLabel.textColor = UIColor.gray
+        textLabel.text = text
+        
+        boxView.addSubview(activityView)
+        boxView.addSubview(textLabel)
+        
+        view.addSubview(boxView)
+        
+        view.isUserInteractionEnabled = false
+        
+    }
+    
+    func removeBoxView(){
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            self?.boxView.removeFromSuperview()
+            self?.blurEffectView.removeFromSuperview()
+            self?.view.isUserInteractionEnabled = true
+            
+        }
+        
+    }
+    
+    func getImage(){
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(title: "Сделать снимок", style: .default, handler: { [weak self] _ in
+            self?.showImagePickerController(sourceType: .camera)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Из галереи", style: .default, handler: { [weak self] _ in
+            self?.showImagePickerController(sourceType: .photoLibrary)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        present(alertController , animated: true)
+        
+    }
+    
+    func cardSent(){
+        
+        guard let cardImageId = cardImageId , let key = key else {return}
+        
+        NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_brokers.UploadDoc?AKey=\(key)&ADocType=1&ADocImgID=\(cardImageId)")) { [weak self] updateDocData , _ in
+            guard let updateDocData = updateDocData else {return}
+            DispatchQueue.main.async {
+                if updateDocData["result"].intValue == 1{
+                    self?.update()
+                }
+            }
+        }
+        
+    }
+    
+    func selfieSent(){
+        
+        guard let selfieimageId = selfieImageId , let key = key else {return}
+        
+        NoAnswerDataManager().sendNoAnswerDataRequest(url: URL(string: "https://agrapi.tk-sad.ru/agr_brokers.UploadDoc?AKey=\(key)&ADocType=2&ADocImgID=\(selfieimageId)")) { [weak self] updateDocData , _ in
+            guard let updateDocData = updateDocData else {return}
+            DispatchQueue.main.async {
+                if updateDocData["result"].intValue == 1{
+                    self?.update()
+                }
+            }
         }
         
     }
@@ -342,7 +465,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                                             
                                             helpersForPosrednik.append(Helper(id: data!["rec_id"].stringValue, name: name, code: code))
                                             
-                                            tableView.reloadSections([9], with: .automatic)
+                                            tableView.reloadSections([14], with: .automatic)
                                             
                                         }
                                         
@@ -391,7 +514,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     
                     self.sposobOtpravkiSectionForPosrednikItems.remove(at: index)
                     
-                    self.tableView.reloadSections([7], with: .automatic)
+                    self.tableView.reloadSections([12], with: .automatic)
                     
                 }
                 
@@ -434,7 +557,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     
                     helpersForPosrednik.remove(at: index)
                     
-                    tableView.reloadSections([9], with: .automatic)
+                    tableView.reloadSections([14], with: .automatic)
                     
                 }
                 
@@ -466,7 +589,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         if isPosrednikTab{
-            return 11
+            return 15
         }else{
             return 6
         }
@@ -479,28 +602,36 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         if isPosrednikTab{
             
             switch section {
-            
-            case 0: return 1
                 
-            case 1: return level == nil ? 0 : 1
+            case 0: return pageData == nil ? 0 : 1
                 
-            case 2: return firstSectionItemsForPosrednik.count
+            case 1: return pageData == nil ? 0 : 1
                 
-            case 3: return 1
+            case 2: return pageData == nil ? 0 : 1
                 
-            case 4: return zonesForPosrednik.isEmpty ? 1 : zonesForPosrednik.count
+            case 3: return pageData == nil ? 0 : 1
                 
-            case 5: return thirdSectionItemsForPosrednik.isEmpty ? 0 : 1
+            case 4: return pageData == nil ? 0 : 1
                 
-            case 6: return thirdSectionItemsForPosrednik.count
+            case 5: return level == nil ? 0 : 1
                 
-            case 7: return 1
+            case 6: return firstSectionItemsForPosrednik.count
                 
-            case 8: return sposobOtpravkiSectionForPosrednikItems.isEmpty ? 1 : sposobOtpravkiSectionForPosrednikItems.count
+            case 7: return pageData == nil ? 0 : 1
                 
-            case 9: return 1
+            case 8: return zonesForPosrednik.isEmpty ? 1 : zonesForPosrednik.count
                 
-            case 10: return helpersForPosrednik.isEmpty ? 1 : helpersForPosrednik.count
+            case 9: return thirdSectionItemsForPosrednik.isEmpty ? 0 : 1
+                
+            case 10: return thirdSectionItemsForPosrednik.count
+                
+            case 11: return pageData == nil ? 0 : 1
+                
+            case 12: return sposobOtpravkiSectionForPosrednikItems.isEmpty ? 1 : sposobOtpravkiSectionForPosrednikItems.count
+                
+            case 13: return pageData == nil ? 0 : 1
+                
+            case 14: return helpersForPosrednik.isEmpty ? 1 : helpersForPosrednik.count
                 
             default: return 0
                 
@@ -509,7 +640,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         }else {
             
             switch section {
-            
+                
             case 0: return 1
                 
             case 1: return firstSectionItemsForOrg.count
@@ -563,14 +694,34 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             switch section {
             case 0: return 70
-            case 1: return 65
-            case 2:
+            case 3:
+                
+                guard let officialStatus = officialStatus else {return 0}
+                
+                if officialStatus["img_card_id"].stringValue != ""{
+                    return 148
+                }else{
+                    return defaultHeight
+                }
+            
+            case 4:
+                
+                guard let officialStatus = officialStatus else {return 0}
+                
+                if officialStatus["img_selfie_id"].stringValue != ""{
+                    return 148
+                }else{
+                    return defaultHeight
+                }
+                
+            case 5: return 65
+            case 6:
                 
                 if firstSectionItemsForPosrednik[index].isDopInfo{
                     return 95
                 }
                 
-            case 4:
+            case 8:
                 
                 if !zonesForPosrednik.isEmpty{
                     return 85
@@ -672,7 +823,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             return UISwipeActionsConfiguration(actions: [deleteAction,editAction])
             
-        }else if isPosrednikTab , indexPath.section == 4{
+        }else if isPosrednikTab , indexPath.section == 12{
             
             let editAction = UIContextualAction(style: .normal, title: nil) { [self] action, view, completion in
                 
@@ -713,7 +864,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                             
                             completion(true)
                             
-                            tableView.reloadSections([3], with: .automatic)
+                            tableView.reloadSections([8], with: .automatic)
                             
                         }
                         
@@ -745,6 +896,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         let index = indexPath.row
         let section = indexPath.section
         
+        guard let _ = pageData else {return cell}
+        
         if section == 0{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "segmentedControlCell", for: indexPath)
@@ -757,6 +910,204 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             segmentedControl.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
             
         }else if section == 1{
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelOneButtonCell", for: indexPath)
+            
+            guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                  let label2 = cell.viewWithTag(2) as? UILabel
+            else {return cell}
+            
+            label1.text = "Официальный посредник"
+            
+            label2.text = officialStatus!["verify_str"].stringValue
+            
+        }else if section == 2{
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelOneButtonCell", for: indexPath)
+            
+            guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                  let label2 = cell.viewWithTag(2) as? UILabel
+            else {return cell}
+            
+            label1.text = "Пропуск до"
+            
+            label2.text = officialStatus!["pass_dt"].stringValue
+            
+        }else if section == 3{
+            
+            if officialStatus!["img_card_id"].stringValue == ""{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "uploadImageCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel ,
+                      let uploadView = cell.viewWithTag(2),
+                      let uploadViewLabel = cell.viewWithTag(3) as? UILabel ,
+                      let uploadViewButton = cell.viewWithTag(4) as? UIButton
+                else {return cell}
+                
+                label.text = "Фото пропуска"
+                uploadView.layer.cornerRadius = 8
+                uploadViewLabel.text = "Загрузить"
+                
+                uploadViewButton.addAction(UIAction(handler: { [weak self] _ in
+                    
+                    self?.sendingImageType = .card
+                    self?.getImage()
+                    
+                }), for: .touchUpInside)
+                
+            }else{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel ,
+                      let _ = cell.viewWithTag(3), //imageViewView
+                      let imageView = cell.viewWithTag(4) as? UIImageView,
+                      let removeButtonView = cell.viewWithTag(5),
+                      let removeButton = cell.viewWithTag(7) as? UIButton,
+                      let imageViewButton = cell.viewWithTag(8) as? UIButton
+                else {return UITableViewCell()}
+                
+                label.text = "Фото пропуска"
+                
+                imageView.sd_setImage(with: URL(string: officialStatus!["img_card"].stringValue), completed: nil)
+                
+                imageView.layer.cornerRadius = 8
+                removeButtonView.layer.cornerRadius = 14
+                
+                imageViewButton.addAction(UIAction(handler: { [weak self] _ in
+                    self?.previewImage(self!.officialStatus!["img_card"].stringValue)
+                }) , for:.touchUpInside)
+                
+                removeButton.addAction(UIAction(handler: { [weak self] _ in
+                    
+                    let confirmAlert = UIAlertController(title: "Удалить фото посылки?", message: nil, preferredStyle: .alert)
+                    
+                    confirmAlert.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                        
+                        //                    NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.DeletePurDocIMG?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)&AImgID=\(parcelDoc["id"].stringValue)") { deleteData, deleteError in
+                        //
+                        //                        DispatchQueue.main.async {
+                        //
+                        //                            if let deleteError = deleteError{
+                        //                                print("Error with Delete Pur Doc IMG : \(deleteError)")
+                        //                                return
+                        //                            }
+                        //
+                        //                            if let errorText = deleteData!["msg"].string , errorText != ""{
+                        //                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                        //                                return
+                        //                            }
+                        //
+                        //                            if deleteData!["result"].intValue == 1{
+                        //
+                        //                                self?.parcelDoc = nil
+                        //                                self?.refresh()
+                        //
+                        //                            }
+                        //
+                        //                        }
+                        //
+                        //                    }
+                        
+                    }))
+                    
+                    confirmAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                    
+                    self?.present(confirmAlert , animated: true , completion: nil)
+                    
+                }), for: .touchUpInside)
+                
+            }
+            
+        }else if section == 4{
+            
+            if officialStatus!["img_selfie_id"].stringValue == ""{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "uploadImageCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel ,
+                      let uploadView = cell.viewWithTag(2),
+                      let uploadViewLabel = cell.viewWithTag(3) as? UILabel ,
+                      let uploadViewButton = cell.viewWithTag(4) as? UIButton
+                else {return cell}
+                
+                label.text = "Личное фото"
+                uploadView.layer.cornerRadius = 8
+                uploadViewLabel.text = "Загрузить"
+                
+                uploadViewButton.addAction(UIAction(handler: { [weak self] _ in
+                    
+                    self?.sendingImageType = .selfie
+                    self?.getImage()
+                    
+                }), for: .touchUpInside)
+                
+            }else{
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath)
+                
+                guard let label = cell.viewWithTag(1) as? UILabel ,
+                      let _ = cell.viewWithTag(3), //imageViewView
+                      let imageView = cell.viewWithTag(4) as? UIImageView,
+                      let removeButtonView = cell.viewWithTag(5),
+                      let removeButton = cell.viewWithTag(7) as? UIButton,
+                      let imageViewButton = cell.viewWithTag(8) as? UIButton
+                else {return UITableViewCell()}
+                
+                label.text = "Личное фото"
+                
+                imageView.sd_setImage(with: URL(string: officialStatus!["img_selfie"].stringValue), completed: nil)
+                
+                imageView.layer.cornerRadius = 8
+                removeButtonView.layer.cornerRadius = 14
+                
+                imageViewButton.addAction(UIAction(handler: { [weak self] _ in
+                    self?.previewImage(self!.officialStatus!["img_card"].stringValue)
+                }) , for:.touchUpInside)
+                
+                removeButton.addAction(UIAction(handler: { [weak self] _ in
+                    
+                    let confirmAlert = UIAlertController(title: "Удалить фото посылки?", message: nil, preferredStyle: .alert)
+                    
+                    confirmAlert.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                        
+                        //                    NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.DeletePurDocIMG?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)&AImgID=\(parcelDoc["id"].stringValue)") { deleteData, deleteError in
+                        //
+                        //                        DispatchQueue.main.async {
+                        //
+                        //                            if let deleteError = deleteError{
+                        //                                print("Error with Delete Pur Doc IMG : \(deleteError)")
+                        //                                return
+                        //                            }
+                        //
+                        //                            if let errorText = deleteData!["msg"].string , errorText != ""{
+                        //                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                        //                                return
+                        //                            }
+                        //
+                        //                            if deleteData!["result"].intValue == 1{
+                        //
+                        //                                self?.parcelDoc = nil
+                        //                                self?.refresh()
+                        //
+                        //                            }
+                        //
+                        //                        }
+                        //
+                        //                    }
+                        
+                    }))
+                    
+                    confirmAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                    
+                    self?.present(confirmAlert , animated: true , completion: nil)
+                    
+                }), for: .touchUpInside)
+                
+            }
+            
+        }else if section == 5{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "ratingCell", for: indexPath)
             
@@ -781,7 +1132,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             button.addTarget(self, action: #selector(ratingCellButtonTapped(_:)), for: .touchUpInside)
             
-        }else if section == 2{
+        }else if section == 6{
             
             guard !firstSectionItemsForPosrednik.isEmpty else {return cell}
             
@@ -820,7 +1171,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
-        }else if section == 3{
+        }else if section == 7{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
@@ -834,7 +1185,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitKomissiaPressedInPosrednik(_:)), for: .touchUpInside)
             
-        }else if section == 4{
+        }else if section == 8{
             
             if zonesForPosrednik.isEmpty{
                 
@@ -895,7 +1246,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
-        }else if section == 5{
+        }else if section == 9{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
@@ -903,7 +1254,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).isHidden = true
             
-        }else if section == 6{
+        }else if section == 10{
             
             let item = thirdSectionItemsForPosrednik[index]
             
@@ -951,7 +1302,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
-        }else if section == 7{
+        }else if section == 11{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
@@ -965,7 +1316,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitSposobOtpravkiPressedInPosrednik(_:)), for: .touchUpInside)
             
-        }else if section == 8{
+        }else if section == 12{
             
             if sposobOtpravkiSectionForPosrednikItems.isEmpty{
                 
@@ -997,7 +1348,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             removeButton.addTarget(self, action: #selector(removeSposobOtpravkiPressed(_:)), for: .touchUpInside)
             
-        }else if section == 9{
+        }else if section == 13{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
             
@@ -1011,7 +1362,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             (cell.viewWithTag(2) as! UIButton).addTarget(self, action: #selector(dobavitPomoshnikaPressedInPosrednik(_:)), for: .touchUpInside)
             
-        }else if section == 10{
+        }else if section == 14{
             
             if helpersForPosrednik.isEmpty{
                 
@@ -1258,7 +1609,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         let section = indexPath.section
         let index = indexPath.row
         
-        if section == 2{
+        if section == 6{
             
             let item = firstSectionItemsForPosrednik[index]
             
@@ -1313,7 +1664,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
-        }else if section == 6{
+        }else if section == 10{
             
             let item = thirdSectionItemsForPosrednik[index]
             
@@ -1372,7 +1723,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
             }
             
-        }else if section == 8{
+        }else if section == 12{
             
             guard !sposobOtpravkiSectionForPosrednikItems.isEmpty else {return}
             
@@ -1709,6 +2060,16 @@ extension NastroykiPosrednikaTableViewController : UITextFieldDelegate , UITextV
     
 }
 
+//MARK: - Enums
+
+extension NastroykiPosrednikaTableViewController {
+    
+    private enum ImageSendType {
+        case card , selfie
+    }
+    
+}
+
 //MARK: - Structs
 
 extension NastroykiPosrednikaTableViewController {
@@ -1779,6 +2140,8 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
     func didGetBrokersFormData(data: JSON) {
         
         DispatchQueue.main.async { [self] in
+            
+            pageData = data
             
             var newFirstSectionItemsForPosrednik = [FirstSectionItem]()
             
@@ -1907,6 +2270,302 @@ extension NastroykiPosrednikaTableViewController : BrokersFormDataManagerDelegat
     
     func didFailGettingBrokersFormDataWithError(error: String) {
         print("Error with BrokersFormDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - UIImagePickerControllerDelegate
+
+extension NastroykiPosrednikaTableViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func showImagePickerController(sourceType : UIImagePickerController.SourceType) {
+        
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = false
+        imagePickerController.sourceType = sourceType
+        
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let key = key else {return}
+        
+        if let safeUrl = info[.imageURL] as? URL{
+            
+            if sendingImageType == .card {
+                cardImageUrl = safeUrl
+                showBoxView(with: "Загрузка фото пропуска")
+            }else if sendingImageType == .selfie{
+                selfieImageUrl = safeUrl
+                showBoxView(with: "Загрузка личного фото")
+            }
+            
+            newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
+            
+        }else if let safeImage = info[.originalImage] as? UIImage{
+            
+            if sendingImageType == .card {
+                cardImage = safeImage
+                showBoxView(with: "Загрузка фото пропуска")
+            }else if sendingImageType == .selfie{
+                selfieImage = safeImage
+                showBoxView(with: "Загрузка личного фото")
+            }
+            
+            newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
+            
+        }
+        
+        //        print(info)
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+}
+
+
+//MARK: - NewPhotoPlaceDataManagerDelegate
+
+extension NastroykiPosrednikaTableViewController : NewPhotoPlaceDataManagerDelegate{
+    
+    func didGetNewPhotoPlaceData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if data["result"].intValue == 1{
+                
+                let url = "\(data["post_to"].stringValue)/store?file_name=\(data["file_name"].stringValue)"
+                
+                print("URL FOR SENDING THE FILE: \(url)")
+                
+                if sendingImageType == .card{
+                    if let cardImageUrl = cardImageUrl{
+                        sendFileToServer(from: cardImageUrl, to: url)
+                    }else if let cardImage = cardImage{
+                        sendFileToServer(image: cardImage, to: url)
+                    }
+                }else if sendingImageType == .selfie{
+                    if let selfieImageUrl = selfieImageUrl{
+                        sendFileToServer(from: selfieImageUrl, to: url)
+                    }else if let selfieImage = selfieImage{
+                        sendFileToServer(image: selfieImage, to: url)
+                    }
+                }
+                
+                let imageId = data["image_id"].stringValue
+                
+                let imageLinkWithPortAndWithoutFile = "\(data["post_to"].stringValue)"
+                let splitIndex = imageLinkWithPortAndWithoutFile.lastIndex(of: ":")!
+                let imageLink = "\(String(imageLinkWithPortAndWithoutFile[imageLinkWithPortAndWithoutFile.startIndex ..< splitIndex]))\(data["file_name"].stringValue)"
+                
+                print("Image Link: \(imageLink)")
+                
+                if sendingImageType == .card{
+                    cardImageId = imageId
+                }else if sendingImageType == .selfie{
+                    selfieImageId = imageId
+                }
+                
+            }else{
+                
+                removeBoxView()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingNewPhotoPlaceDataWithError(error: String) {
+        print("Error with NewPhotoPlaceDataManager: \(error)")
+    }
+    
+}
+
+//MARK: - File Sending
+
+extension NastroykiPosrednikaTableViewController{
+    
+    func sendFileToServer(from fromUrl : URL, to toUrl : String){
+        
+        print("import result : \(fromUrl)")
+        
+        guard let toUrl = URL(string: toUrl) else {return}
+        
+        print("To URL: \(toUrl)")
+        
+        do{
+            
+            let data = try Data(contentsOf: fromUrl)
+            
+            let image = UIImage(data: data)!
+            
+            let imageData = image.jpegData(compressionQuality: 0.5)
+            
+            var request = URLRequest(url: toUrl)
+            
+            request.httpMethod = "POST"
+            request.setValue("text/plane", forHTTPHeaderField: "Content-Type")
+            request.httpBody = imageData
+            
+            let task = URLSession.shared.dataTask(with: request) { [self] (data, response, error) in
+                
+                if error != nil {
+                    print("Error sending file: \(error!.localizedDescription)")
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+                
+                print("Answer : \(json)")
+                
+                DispatchQueue.main.async { [weak self] in
+                    
+                    //                    print("Got \(isSendingGruz ? "gruz" : "posilka") sent to server")
+                    
+                    var imageid = ""
+                    
+                    if sendingImageType == .card {
+                        imageid = self!.cardImageId!
+                    }else if sendingImageType == .selfie{
+                        imageid = self!.selfieImageId!
+                    }
+                    
+                    photoSavedDataManager.getPhotoSavedData(key: key!, photoId: imageid) { data, error in
+                        
+                        self?.removeBoxView()
+                        
+                        if let error = error{
+                            print("Error with PhotoSavedDataManager : \(error)")
+                            return
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            guard let data = data else {return}
+                            
+                            if data["result"].intValue == 1{
+                                
+                                //                                print("\(isSendingGruz ? "Gruz" : "Posilka") image successfuly saved to server")
+                                
+                                if sendingImageType == .card{
+                                    cardSent()
+                                }else if sendingImageType == .selfie{
+                                    selfieSent()
+                                }
+                                
+                            }else{
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            task.resume()
+            
+        }catch{
+            print(error)
+            removeBoxView()
+        }
+        
+    }
+    
+    func sendFileToServer(image : UIImage, to toUrl : String){
+        
+        //        print("import result : \(fromUrl)")
+        
+        guard let toUrl = URL(string: toUrl) else {return}
+        
+        print("To URL: \(toUrl)")
+        
+        do{
+            
+            let imageData = image.jpegData(compressionQuality: 0.5)
+            
+            var request = URLRequest(url: toUrl)
+            
+            request.httpMethod = "POST"
+            request.setValue("text/plane", forHTTPHeaderField: "Content-Type")
+            request.httpBody = imageData
+            
+            let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+                
+                if error != nil {
+                    print("Error sending file: \(error!.localizedDescription)")
+                    return
+                }
+                
+                guard let data = data else {return}
+                
+                let json = String(data: data , encoding: String.Encoding.windowsCP1251)!
+                
+                print("Answer : \(json)")
+                
+                DispatchQueue.main.async {
+                    
+                    var imageid = ""
+                    
+                    if self!.sendingImageType == .card {
+                        imageid = self!.cardImageId!
+                    }else if self!.sendingImageType == .selfie{
+                        imageid = self!.selfieImageId!
+                    }
+                    
+                    self?.photoSavedDataManager.getPhotoSavedData(key: self!.key!, photoId: imageid) { data, error in
+                        
+                        if let error = error{
+                            print("Error with PhotoSavedDataManager : \(error)")
+                            return
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            guard let data = data else {return}
+                            
+                            if data["result"].intValue == 1{
+                                
+                                print("Check image successfuly saved to server")
+                                
+                                self?.removeBoxView()
+                                
+                                if self!.sendingImageType == .card{
+                                    self?.cardSent()
+                                }else if self!.sendingImageType == .selfie{
+                                    self?.selfieSent()
+                                }
+                                
+                            }else{
+                                
+                                self?.removeBoxView()
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            task.resume()
+            
+        }catch{
+            print(error)
+        }
+        
     }
     
 }
