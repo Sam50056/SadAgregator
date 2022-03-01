@@ -7602,6 +7602,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="UPb-zI-ESr" secondAttribute="trailing" id="6vd-TD-RIT"/>
+                                        <constraint firstItem="tWl-nF-8Gs" firstAttribute="centerY" secondItem="t9r-8a-DTk" secondAttribute="centerY" id="7uk-rB-cHk"/>
                                         <constraint firstItem="oHs-qb-8Ty" firstAttribute="centerY" secondItem="t9r-8a-DTk" secondAttribute="centerY" id="8Li-36-lg9"/>
                                         <constraint firstItem="oHs-qb-8Ty" firstAttribute="leading" secondItem="t9r-8a-DTk" secondAttribute="leadingMargin" id="IFb-HB-yhe"/>
                                         <constraint firstItem="UPb-zI-ESr" firstAttribute="leading" secondItem="tWl-nF-8Gs" secondAttribute="trailing" constant="8" id="L5x-hq-BGe"/>
