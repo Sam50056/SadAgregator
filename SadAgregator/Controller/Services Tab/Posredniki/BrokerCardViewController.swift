@@ -315,6 +315,11 @@ extension BrokerCardViewController{
             
         }
         
+        if let propusk = data["official_status"]["pass_dt"].string , propusk != ""{
+            
+            infoCells.append(InfoCellObject(image: UIImage(systemName: "text.badge.checkmark")!, leftLabelText: "Пропуск до", rightLabelText: propusk, shouldRightLabelBeBlue: data["official_status"]["img_card"].stringValue != ""))
+            
+        }
         
     }
     
@@ -782,6 +787,10 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                     
                 }
                 
+            }else if selectedInfoCell.image == UIImage(systemName: "text.badge.checkmark") , selectedInfoCell.shouldRightLabelBeBlue{
+                
+                previewImage(brokerData!["official_status"]["img_card"].stringValue)
+                
             }
             
         }
@@ -810,6 +819,10 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             count += 1
         }
         
+        if let propusk = brokerData["official_status"]["pass_dt"].string , propusk != ""{
+            count += 1
+        }
+        
         return count
     }
     
@@ -826,7 +839,9 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
            let revLabel = cell.viewWithTag(7) as? UILabel,
            let imageCountImageView = cell.viewWithTag(8) as? UIImageView,
            let imageCountLabel = cell.viewWithTag(9) as? UILabel,
-           let ratingLabel = cell.viewWithTag(10) as? UILabel
+           let ratingLabel = cell.viewWithTag(10) as? UILabel,
+           let verifyImageView = cell.viewWithTag(11) as? UIImageView,
+           let verifyImageViewButton = cell.viewWithTag(12) as? UIButton
         {
             
             //Set up the name
@@ -877,6 +892,16 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             }else{
                 imageView.image = UIImage(systemName: "person")
             }
+            
+            //Verify Image Stuff
+            
+            verifyImageView.isHidden = data["official_status"]["verify"].intValue == 0
+            verifyImageViewButton.setTitle("", for: .normal)
+            verifyImageViewButton.addAction(UIAction(handler: { [weak self] _ in
+                if let imgLink = data["official_status"]["img_card"].string , !imgLink.isEmpty{
+                    self?.previewImage(imgLink)
+                }
+            }), for: .touchUpInside)
             
             //Set up the rating
             
