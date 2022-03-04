@@ -64,15 +64,15 @@ extension AssemblyCommentsViewController : UITextViewDelegate{
         
         if textView == orgCommentTextField{
             
-            purchasesAddItemCommentDataManager.getPurchasesAddItemCommentData(key: key, purItemId: thisTovarId, comType: "1", comment: textView.text)
+            purchasesAddItemCommentDataManager.getPurchasesAddItemCommentData(key: key, purItemId: thisTovarId, comType: "1", comment: textView.text.replacingOccurrences(of: "\n", with: "<br>"))
             
         }else if textView == commentForIspTextField{
             
-            purchasesAddItemCommentDataManager.getPurchasesAddItemCommentData(key: key, purItemId: thisTovarId, comType: "0", comment: textView.text)
+            purchasesAddItemCommentDataManager.getPurchasesAddItemCommentData(key: key, purItemId: thisTovarId, comType: "0", comment: textView.text.replacingOccurrences(of: "\n", with: "<br>"))
             
         }else if textView == commentFromIspTextField{
             
-            purchasesAddItemCommentDataManager.getPurchasesAddItemCommentData(key: key, purItemId: thisTovarId, comType: "", comment: textView.text)
+            purchasesAddItemCommentDataManager.getPurchasesAddItemCommentData(key: key, purItemId: thisTovarId, comType: "", comment: textView.text.replacingOccurrences(of: "\n", with: "<br>"))
             
         }
         
@@ -90,9 +90,9 @@ extension AssemblyCommentsViewController : PurchasesGetItemCommentsDataManagerDe
             
             if data["result"].intValue == 1{
                 
-                self?.orgCommentTextField.text = data["priv_com"].stringValue
-                self?.commentForIspTextField.text = data["handle_com"].stringValue
-                self?.commentFromIspTextField.text = data["by_handle_com"].stringValue
+                self?.orgCommentTextField.text = data["priv_com"].stringValue.replacingOccurrences(of: "<br>", with: "\n")
+                self?.commentForIspTextField.text = data["handle_com"].stringValue.replacingOccurrences(of: "<br>", with: "\n")
+                self?.commentFromIspTextField.text = data["by_handle_com"].stringValue.replacingOccurrences(of: "<br>", with: "\n")
                 
                 self?.orgCommentTextField.isEditable = data["priv_com_ch"].intValue == 1
                 self?.commentForIspTextField.isEditable = data["handle_com_ch"].intValue == 1
