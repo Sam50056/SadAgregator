@@ -45,6 +45,8 @@ class ClientViewController: UIViewController {
     private var boxView = UIView()
     private var blurEffectView = UIVisualEffectView()
     
+    var shouldShowCloseButton = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,6 +69,15 @@ class ClientViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if shouldShowCloseButton{
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .plain, target: self, action: #selector(closeButtonTapped(_:)))
+        }
+        
+    }
+    
 }
 
 //MARK: - Refresh
@@ -85,6 +96,12 @@ extension ClientViewController{
 //MARK: - Funtions
 
 extension ClientViewController{
+    
+    @objc func closeButtonTapped(_ sender : Any?){
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
     
     func makeInfoItemsFrom(_ clientHeaderData : JSON){
         
@@ -114,7 +131,6 @@ extension ClientViewController{
         }
         
     }
-    
     
     func showBoxView(with text : String) {
         

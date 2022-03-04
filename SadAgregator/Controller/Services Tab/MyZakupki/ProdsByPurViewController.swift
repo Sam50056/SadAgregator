@@ -356,6 +356,8 @@ extension ProdsByPurViewController{
             
             clientVC.thisClientId = tovar.clientId
             
+            clientVC.shouldShowCloseButton = true
+            
             let navVC = UINavigationController(rootViewController: clientVC)
             
             self.present(navVC, animated: true, completion: nil)
