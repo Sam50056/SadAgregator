@@ -148,7 +148,12 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                     
                     DispatchQueue.main.async {
                         
-                        guard data!["result"].intValue == 1 else {return}
+                        guard data!["result"].intValue == 1 else {
+                            if let errorMessage = data!["msg"].string , errorMessage != "" {
+                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
+                            }
+                            return
+                        }
                         
                         self?.captureSession.stopRunning()
                         
@@ -238,6 +243,8 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                 }
                 
                 print(qrValue)
+                
+                qrValue = nil
                 
             }
             

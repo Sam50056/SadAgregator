@@ -329,7 +329,7 @@ extension BrokerCardViewController{
         
         var newBalanceItems = [BalanceCellItem]()
         
-        if var balance = balanceBlock["balance"].string , balance != ""{
+        if var balance = balanceBlock["balance"].string , balance != "" , balance != "0"{
             
             balance = String(String(balance.reversed()).inserting(separator: " ", every: 3).reversed())
             

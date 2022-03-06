@@ -323,7 +323,7 @@ extension ProdsInPointTableViewController{
                         
                         qrScannerVC.qrConnected = {
                             
-                            self.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                            Vibration.success.vibrate()
                             
                             tovar.status = "Куплено"
                             

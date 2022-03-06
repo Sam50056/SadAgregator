@@ -99,27 +99,27 @@ class SortirovkaContentViewController: UIViewController {
                 
                 if jsonOpt["point_id"].stringValue != ""{
                     
-                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue , shouldLabel2BeBlue: true , pointId: jsonOpt["point_id"].stringValue))
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["value"].stringValue , shouldLabel2BeBlue: true , pointId: jsonOpt["point_id"].stringValue))
                     
                 }else if jsonOpt["vend_id"].stringValue != ""{
                     
-                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue , shouldLabel2BeBlue: true , vendId: jsonOpt["vend_id"].stringValue))
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["value"].stringValue , shouldLabel2BeBlue: true , vendId: jsonOpt["vend_id"].stringValue))
                     
                 }else if jsonOpt["broker_id"].stringValue != ""{
                     
-                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue, shouldLabel2BeBlue: true , brokerId: jsonOpt["broker_id"].stringValue))
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["value"].stringValue, shouldLabel2BeBlue: true , brokerId: jsonOpt["broker_id"].stringValue))
                     
                 }else if jsonOpt["url"].stringValue != ""{
                     
-                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue, shouldLabel2BeBlue: true , url: jsonOpt["url"].stringValue))
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["value"].stringValue, shouldLabel2BeBlue: true , url: jsonOpt["url"].stringValue))
                     
                 }else if jsonOpt["img"].stringValue != ""{
                     
-                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue , shouldLabel2BeBlue: true, img: jsonOpt["img"].stringValue))
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["value"].stringValue , shouldLabel2BeBlue: true, img: jsonOpt["img"].stringValue))
                     
                 }else{
                     
-                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["val"].stringValue))
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["value"].stringValue))
                     
                 }
                 
@@ -408,6 +408,13 @@ class SortirovkaContentViewController: UIViewController {
         progressView.setProgress(Float(currInt / maxInt), animated: false)
         
         progressLabel.text = curr + "/" + max
+        
+        if currInt == maxInt{
+            progressView.tintColor = .systemGreen
+            Vibration.success.vibrate()
+        }else{
+            progressView.tintColor = .systemBlue
+        }
         
     }
     

@@ -249,6 +249,12 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                         
                         update()
                         
+                    }else{
+                        
+                        if let errorMessage = data!["msg"].string , errorMessage != ""{
+                            showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
+                        }
+                        
                     }
                     
                 }
