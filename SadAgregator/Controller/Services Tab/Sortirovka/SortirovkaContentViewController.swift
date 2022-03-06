@@ -48,6 +48,7 @@ class SortirovkaContentViewController: UIViewController {
     
     var state = 1{
         didSet{
+            screenRestartTimer()
             UIView.animate(withDuration: 1) { [weak self] in
                 self?.tableView.reloadData()
                 self?.view.layoutIfNeeded()
@@ -211,6 +212,10 @@ class SortirovkaContentViewController: UIViewController {
         timer?.invalidate()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        screenRestartTimer()
+    }
+    
     //MARK: - Actions
  
     @IBAction func closeButtonPressed(_ sender : Any?){
@@ -304,6 +309,14 @@ class SortirovkaContentViewController: UIViewController {
             }
             
         }
+        
+    }
+    
+    func screenRestartTimer(){
+        
+        timer?.invalidate()
+        
+        resetTimer(withSeconds: true)
         
     }
     
@@ -620,6 +633,10 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
             
         }
         
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+       screenRestartTimer()
     }
     
 }
