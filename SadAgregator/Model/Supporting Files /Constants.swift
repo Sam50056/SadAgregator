@@ -108,7 +108,7 @@ struct K {
             height += cellHeight
         }
         
-        if thisTovar.sellCost != "" {
+        if thisTovar.sellCost != "" , thisTovar.sellCost != "0"{
             height += cellHeight
         }
         

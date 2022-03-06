@@ -48,7 +48,7 @@ class TovarTableViewCell: UITableViewCell {
                 newItems.append(TableViewItem(label1Text: "Закупка", label2Text: thisTovar.purCost + " руб." , shouldSecondLabelBeBlue: contentType == .order ? false : thisTovar.chLvl != "0"))
             }
             
-            if thisTovar.sellCost != "" {
+            if thisTovar.sellCost != "" , thisTovar.sellCost != "0"{
                 newItems.append(TableViewItem(label1Text: "Продажа", label2Text: thisTovar.sellCost + " руб." , shouldSecondLabelBeBlue: thisTovar.chLvl != "0"))
             }
             
@@ -341,8 +341,6 @@ extension TovarTableViewCell {
     }
     
     func selectGreen(){
-        
-        
         
         bottomStackViewLeftView.backgroundColor = UIColor(named: "whiteblack")
         bottomStackViewLeftViewLabel.textColor = .systemGreen
