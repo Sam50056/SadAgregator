@@ -669,13 +669,13 @@ extension SortirovkaContentViewController : UIImagePickerControllerDelegate, UIN
         if let safeUrl = info[.imageURL] as? URL{
             
             imageUrl = safeUrl
-            showBoxView(with: "Загрузка фото чека")
+            showBoxView(with: "Загрузка фото")
             newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
             
         }else if let safeImage = info[.originalImage] as? UIImage{
             
             image = safeImage
-            showBoxView(with: "Загрузка фото чека")
+            showBoxView(with: "Загрузка фото")
             newPhotoPlaceDataManager.getNewPhotoPlaceData(key: key)
             
         }else{
