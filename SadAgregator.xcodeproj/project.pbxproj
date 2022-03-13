@@ -197,6 +197,7 @@
 		228CB776255BF9C0002B4A96 /* CheckKeysDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */; };
 		228D2D3725ABE1D5000E9FAE /* DelDeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D2D3625ABE1D5000E9FAE /* DelDeviceDataManager.swift */; };
 		228D2D3B25AC9DED000E9FAE /* UpdateDeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D2D3A25AC9DED000E9FAE /* UpdateDeviceDataManager.swift */; };
+		228D920327DD281C00E8F89D /* PurchasesDeleteItemDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D920227DD281C00E8F89D /* PurchasesDeleteItemDataManager.swift */; };
 		2290485C256DAC80000B7A28 /* VendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290485A256DAC80000B7A28 /* VendTableViewCell.swift */; };
 		2290485D256DAC80000B7A28 /* VendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2290485B256DAC80000B7A28 /* VendTableViewCell.xib */; };
 		22904862256DC701000B7A28 /* VendTableViewCellRatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22904860256DC701000B7A28 /* VendTableViewCellRatingTableViewCell.swift */; };
@@ -576,6 +577,7 @@
 		228CB775255BF9C0002B4A96 /* CheckKeysDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckKeysDataManager.swift; sourceTree = "<group>"; };
 		228D2D3625ABE1D5000E9FAE /* DelDeviceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelDeviceDataManager.swift; sourceTree = "<group>"; };
 		228D2D3A25AC9DED000E9FAE /* UpdateDeviceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDeviceDataManager.swift; sourceTree = "<group>"; };
+		228D920227DD281C00E8F89D /* PurchasesDeleteItemDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesDeleteItemDataManager.swift; sourceTree = "<group>"; };
 		2290485A256DAC80000B7A28 /* VendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendTableViewCell.swift; sourceTree = "<group>"; };
 		2290485B256DAC80000B7A28 /* VendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VendTableViewCell.xib; sourceTree = "<group>"; };
 		22904860256DC701000B7A28 /* VendTableViewCellRatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendTableViewCellRatingTableViewCell.swift; sourceTree = "<group>"; };
@@ -2152,6 +2154,7 @@
 				2293B66426A79C9C00022FAC /* PurchasesGetItemCommentsDataManager.swift */,
 				2293B66626A7A3DD00022FAC /* PurchasesAddItemCommentDataManager.swift */,
 				2252F76B26E7F8C600291464 /* PurchasesOneItemDataManager.swift */,
+				228D920227DD281C00E8F89D /* PurchasesDeleteItemDataManager.swift */,
 			);
 			path = Purchases;
 			sourceTree = "<group>";
@@ -2337,6 +2340,7 @@
 			files = (
 				225957A52596A2A70088C7E4 /* MasterViewModel.swift in Sources */,
 				2231DB6F2649CB600075228E /* PurchasesAddItemDataManager.swift in Sources */,
+				228D920327DD281C00E8F89D /* PurchasesDeleteItemDataManager.swift in Sources */,
 				22BF1A0D25A558FA00567DB7 /* LinePointsPaggingSearchDataManager.swift in Sources */,
 				22692E3326B889E700CA2946 /* BrokersBrokersTopBySearchDataManager.swift in Sources */,
 				22553015261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift in Sources */,

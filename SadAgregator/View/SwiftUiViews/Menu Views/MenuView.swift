@@ -441,8 +441,7 @@ struct MenuView: View {
                 })
             }
             .onAppear {
-                menuViewModel.loadUserData()
-                menuViewModel.updateData()
+                menuViewModel.viewDidAppear()
             }
             
             .navigationBarHidden(true)

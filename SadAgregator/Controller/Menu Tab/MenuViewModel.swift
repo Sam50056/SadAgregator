@@ -55,6 +55,25 @@ class MenuViewModel : ObservableObject{
     
 }
 
+//MARK: - Global Functions
+
+extension MenuViewModel{
+    
+    //Function runs when MenuView appears (it's runned from onAppear method)
+    func viewDidAppear(){
+        
+        loadUserData()
+        updateData()
+        
+        if MenuViewController.shared.shouldOpenAuthView{
+            showModalLogIn = true
+            MenuViewController.shared.shouldOpenAuthView = false
+        }
+        
+    }
+    
+}
+
 //MARK: - CheckKeysDataManagerDelegate
 
 extension MenuViewModel : CheckKeysDataManagerDelegate{
@@ -430,5 +449,15 @@ extension MenuViewModel {
         }
         
     }
+    
+}
+
+//MARK: - MenuViewController
+
+class MenuViewController {
+    
+    static var shared = MenuViewController()
+    
+    var shouldOpenAuthView = false
     
 }

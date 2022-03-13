@@ -11,8 +11,6 @@ class TovarTableViewCell: UITableViewCell {
     
     @IBOutlet weak var tableView : UITableView!
     
-    @IBOutlet weak var collectionView : UICollectionView!
-    
     @IBOutlet weak var tovarImageView : UIImageView!
     var tovarImageViewButton : UIButton!
     
@@ -27,8 +25,6 @@ class TovarTableViewCell: UITableViewCell {
     @IBOutlet weak var bottomStackViewRightView : UIView!
     @IBOutlet weak var bottomStackViewLeftViewLabel : UILabel!
     @IBOutlet weak var bottomStackViewRightViewLabel : UILabel!
-    
-    private var collectionViewItems = [CollectionViewItem]()
     
     private var tableViewItems = [TableViewItem]()
     
@@ -123,13 +119,12 @@ class TovarTableViewCell: UITableViewCell {
                 if thisTovar.shouldShowBottomStackView{
                     showBottomStackView()
                 }else{
-                    removeBottomStackView()
+                    removeBottomButtonsStackView()
                 }
                 
             }else{
                 
-                commentView.isHidden = true
-                removeBottomStackView()
+                removeStackViews()
                 
             }
             
@@ -155,25 +150,10 @@ class TovarTableViewCell: UITableViewCell {
                 }else if intStatus == 2{
                     bottomStackViewLeftViewLabel.text = "Собрано"
                 }else if intStatus >= 3{
-                    removeBottomStackView()
+                    removeBottomButtonsStackView()
                 }
                 
             }
-            
-            guard oldValue == nil else {return}
-            
-            //Setting collection view's items
-            collectionViewItems = [
-                CollectionViewItem(image: "questionmark", type: .questionMark),
-                CollectionViewItem(image: "magnifyingglass", type: .magnifyingGlass),
-                CollectionViewItem(image: "info", type: .info)
-            ]
-            
-            if thisTovar.qr != "-1"{
-                collectionViewItems.append(CollectionViewItem(image: "qrcode", type: .qr))
-            }
-            
-            collectionView.reloadData()
             
         }
         
@@ -184,7 +164,7 @@ class TovarTableViewCell: UITableViewCell {
             if contentType == .order{
                 showBottomStackView()
             }else{
-                removeBottomStackView()
+                removeBottomButtonsStackView()
             }
         }
     }
@@ -202,10 +182,7 @@ class TovarTableViewCell: UITableViewCell {
     var zakupkaTapped : (() -> Void)?
     var prodazhaTapped : (() -> Void)?
     var razmerTapped : (() -> Void)?
-    var infoTapped : (() -> Void)?
     var qrCodeTapped : (() -> Void)?
-    var magnifyingGlassTapped : (() -> Void)?
-    var questionMarkTapped : (() -> Void)?
     var zameniTapped : (() -> Void)?
     
     var bottomStackViewLeftViewButtonTapped : (() -> Void)?
@@ -223,20 +200,11 @@ class TovarTableViewCell: UITableViewCell {
         
         commentView.layer.cornerRadius = 8
         
-        collectionView.register(UINib(nibName: "TovarTableViewCellCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
-        
         tableView.register(UINib(nibName: "TovarTableViewCellTwoLabelTableViewCell", bundle: nil), forCellReuseIdentifier: "twoLabelCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = false
         tableView.separatorStyle = .none
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        
-        collectionView.collectionViewLayout = createLayout()
-        
-        //        collectionView.isScrollEnabled = false
         
         tovarImageView.tintColor = .systemGray2
         
@@ -331,7 +299,14 @@ extension TovarTableViewCell {
         
     }
     
-    func removeBottomStackView(){
+    func removeStackViews(){
+        
+        commentStackView.isHidden = true
+        bottomButtonsStackView.isHidden = true
+        
+    }
+    
+    func removeBottomButtonsStackView(){
         
         bottomButtonsStackView.isHidden = true
         
@@ -389,7 +364,7 @@ extension TovarTableViewCell {
         }else if intStatus == 2{
             bottomStackViewLeftViewLabel.text = "Собрано"
         }else if intStatus >= 3{
-            removeBottomStackView()
+            removeBottomButtonsStackView()
         }
         
     }
@@ -534,95 +509,6 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return contentType == .zamena ? 60 : 0
-    }
-    
-}
-
-//MARK: - CollectionView
-
-extension TovarTableViewCell : UICollectionViewDataSource , UICollectionViewDelegate{
-    
-    func createLayout() -> UICollectionViewLayout {
-        
-        let sectionProvider = { (sectionIndex: Int,
-                                 layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.4),
-                                                  heightDimension: .fractionalHeight(1))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            
-            
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),heightDimension: .fractionalHeight(0.4))
-            
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-            
-            group.interItemSpacing = .fixed(16)
-            
-            let section = NSCollectionLayoutSection(group: group)
-            
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0)
-            
-            section.interGroupSpacing = 16
-            
-            return section
-        }
-        
-        let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 0
-        
-        let layout = UICollectionViewCompositionalLayout(
-            sectionProvider: sectionProvider, configuration: config)
-        
-        return layout
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return contentType == .normal ? collectionViewItems.count : 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TovarTableViewCellCollectionViewCell
-        
-        let item = collectionViewItems[indexPath.row]
-        
-        cell.imageView.image = UIImage(systemName: item.image)
-        
-        cell.imageView.tintColor = .systemBlue
-        
-        cell.bgView.backgroundColor = UIColor(named: "gray")
-        
-        cell.roundCorners(.allCorners, radius: 8)
-        
-        return cell
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let item = collectionViewItems[indexPath.row]
-        
-        let itemType = item.type
-        
-        if itemType == .qr{
-            
-            qrCodeTapped?()
-            
-        }else if itemType == .info{
-            
-            infoTapped?()
-            
-        }else if itemType == .magnifyingGlass{
-            
-            magnifyingGlassTapped?()
-            
-        }else if itemType == .questionMark{
-            
-            questionMarkTapped?()
-            
-        }
-        
     }
     
 }

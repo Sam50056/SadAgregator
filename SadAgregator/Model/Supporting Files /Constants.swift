@@ -90,7 +90,7 @@ struct K {
     static func makeHeightForTovarCell(thisTovar : TovarCellItem , contentType : TovarTableViewCell.ContentType , width : CGFloat = 0) -> CGFloat{
         
         var height : CGFloat = 0
-        let cellHeight : CGFloat = 40 //35
+        let cellHeight : CGFloat = 35 //35
         
         if thisTovar.capt != "" {
             height += cellHeight
@@ -186,7 +186,7 @@ struct K {
             
         }
         
-        height += 8
+//        height += 8
         
         if contentType == .order{
             if thisTovar.shouldShowBottomStackView , !thisTovar.comExt.isEmpty{
@@ -236,11 +236,11 @@ struct K {
             }
         }else{
             
-            height += 8
+//            height += 8
             
         }
         
-        return height < 240 ? 240 : height //235
+        return height < 120 ? 120 : height //235
         
     }
     

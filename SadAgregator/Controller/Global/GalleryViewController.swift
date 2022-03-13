@@ -25,6 +25,26 @@ class GalleryViewController: UIViewController {
     @IBOutlet weak var buttonsViewPriceView: UIView!
     @IBOutlet weak var buttonsViewPPView: UIView!
     
+    @IBOutlet weak var tovarItemsView: UIView!
+    
+    @IBOutlet weak var tovarItemsViewStackView: UIStackView!
+    
+    @IBOutlet weak var tovarItemsViewTrashView: UIView!
+    @IBOutlet weak var tovarItemsViewTrashViewImageView: UIImageView!
+    @IBOutlet weak var tovarItemsViewTrashViewButton: UIButton!
+    @IBOutlet weak var tovarItemsViewQuestionView: UIView!
+    @IBOutlet weak var tovarItemsViewQuestionViewImageView: UIImageView!
+    @IBOutlet weak var tovarItemsViewQuestionViewButton: UIButton!
+    @IBOutlet weak var tovarItemsViewInfoView: UIView!
+    @IBOutlet weak var tovarItemsViewInfoViewImageView: UIImageView!
+    @IBOutlet weak var tovarItemsViewInfoViewButton: UIButton!
+    @IBOutlet weak var tovarItemsViewCommentView: UIView!
+    @IBOutlet weak var tovarItemsViewCommentViewImageView: UIImageView!
+    @IBOutlet weak var tovarItemsViewCommentViewButton: UIButton!
+    @IBOutlet weak var tovarItemsViewMagnifyView: UIView!
+    @IBOutlet weak var tovarItemsViewMagnifyViewImageView: UIImageView!
+    @IBOutlet weak var tovarItemsViewMagnifyViewButton: UIButton!
+    
     @IBOutlet weak var buttonsViewBottomViewLabel: UILabel!
     @IBOutlet weak var buttonsViewPointLabel: UILabel!
     @IBOutlet weak var buttonsViewPriceLabel: UILabel!
@@ -51,13 +71,19 @@ class GalleryViewController: UIViewController {
     
     private var selectedSize : String?
     
-    var simplePreviewMode : Bool = false
+    var previewMode : PreviewMode = .normal
     
     var isShownFromPhotoSearch = false
     
     var shouldShowButtonsView = UserDefaults.standard.bool(forKey: K.shouldShowButtonsViewInGallery)
     
     var forceClosed : (() -> Void)?
+    
+    var tovarTrashTapped : (() -> Void)?
+    var tovarQuestionMarkTapped : (() -> Void)?
+    var tovarInfoTapped : (() -> Void)?
+    var tovarCommentTapped : (() -> Void)?
+    var tovarMagnifyingGlassTapped : (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,7 +133,9 @@ class GalleryViewController: UIViewController {
         //If there are sizes , menu shows up after tapping a button and if not , it just taps without menu
         buyButton.showsMenuAsPrimaryAction = sizes.isEmpty ? false : true
 
-        if simplePreviewMode{
+        tovarItemsView.isHidden = previewMode != .tovar
+        
+        if previewMode == .simple{
             
             buttonView.isHidden = true
             searchView.isHidden = true
@@ -134,6 +162,12 @@ class GalleryViewController: UIViewController {
         
         sizes.append("Другой размер")
         
+        tovarItemsViewTrashView.backgroundColor = UIColor(white: 1, alpha: 0)
+        tovarItemsViewQuestionView.backgroundColor = UIColor(white: 1, alpha: 0)
+        tovarItemsViewInfoView.backgroundColor = UIColor(white: 1, alpha: 0)
+        tovarItemsViewCommentView.backgroundColor = UIColor(white: 1, alpha: 0)
+        tovarItemsViewMagnifyView.backgroundColor = UIColor(white: 1, alpha: 0)
+        
         if !UserDefaults.standard.bool(forKey: K.notFirstTimeGalleryOpened){
             shouldShowButtonsView = true
             buttonsView.isHidden = !shouldShowButtonsView
@@ -142,6 +176,8 @@ class GalleryViewController: UIViewController {
         }else{
             buttonsView.isHidden = !shouldShowButtonsView
         }
+        
+        setUpTovarItemButtons()
         
     }
     
@@ -167,7 +203,7 @@ class GalleryViewController: UIViewController {
         
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
-        if !simplePreviewMode{
+        if previewMode != .simple{
             navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(downloadButtonPressed(_:)))
         }
         
@@ -192,6 +228,47 @@ class GalleryViewController: UIViewController {
         
     }
     
+    //MARK: - Functions
+    
+    func setUpTovarItemButtons(){
+        
+        tovarItemsViewTrashViewButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.showSimpleAlertWithTwoButtons(title: "Удалить товар?", actionButtonText: "Да", actionButtonAction: {
+                self?.dismiss(animated: true, completion: nil)
+                self?.tovarTrashTapped?()
+            })
+        }), for: .touchUpInside)
+        
+        tovarItemsViewQuestionViewButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.showSimpleAlertWithTwoButtons(title: "Задать вопрос клиенту?", actionButtonText: "Да", actionButtonAction: {
+                self?.dismiss(animated: true, completion: nil)
+                self?.tovarQuestionMarkTapped?()
+            })
+        }), for: .touchUpInside)
+        
+        tovarItemsViewInfoViewButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.showSimpleAlertWithTwoButtons(title: "Перейти на источник поста в ВК?", actionButtonText: "Да", actionButtonAction: {
+                self?.dismiss(animated: true, completion: nil)
+                self?.tovarInfoTapped?()
+            })
+        }), for: .touchUpInside)
+        
+        tovarItemsViewCommentViewButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.showSimpleAlertWithTwoButtons(title: "Перейти к комментариям по товару?", actionButtonText: "Да", actionButtonAction: {
+                self?.dismiss(animated: true, completion: nil)
+                self?.tovarCommentTapped?()
+            })
+        }), for: .touchUpInside)
+        
+        tovarItemsViewMagnifyViewButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.showSimpleAlertWithTwoButtons(title: "Совершить поиск по фото?", actionButtonText: "Да", actionButtonAction: {
+                self?.dismiss(animated: true, completion: nil)
+                self?.tovarMagnifyingGlassTapped?()
+            })
+        }), for: .touchUpInside)
+        
+    }
+    
     //MARK: - Actions
     
     @objc func handlePan(_ sender: UIPanGestureRecognizer? = nil) {
@@ -200,7 +277,7 @@ class GalleryViewController: UIViewController {
     
     @objc func handleTap(_ sender: UIPanGestureRecognizer? = nil) {
         
-        guard !simplePreviewMode else {return}
+        guard previewMode != .simple else {return}
         
         UIView.transition(with: buttonView, duration: 0.4,
                           options: .transitionCrossDissolve,
@@ -534,5 +611,14 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
         
     }
     
+}
+
+//MARK: - Enums
+
+extension GalleryViewController {
+    
+    enum PreviewMode{
+        case normal , simple , tovar
+    }
     
 }

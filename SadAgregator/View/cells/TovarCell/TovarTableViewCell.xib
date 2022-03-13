@@ -29,19 +29,6 @@
                         <rect key="frame" x="148" y="11" width="205" height="205"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </tableView>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="JfY-cL-Cz8">
-                        <rect key="frame" x="20" y="119" width="120" height="100"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="100" id="ZWG-lC-eef"/>
-                        </constraints>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JS6-4H-3Rw">
-                            <size key="itemSize" width="128" height="128"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                    </collectionView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="F4d-HG-ltx">
                         <rect key="frame" x="20" y="224" width="333" height="214"/>
                         <subviews>
@@ -146,18 +133,15 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="JuR-7i-gzh" firstAttribute="leading" secondItem="JfY-cL-Cz8" secondAttribute="trailing" constant="8" id="0HS-IQ-8yx"/>
                     <constraint firstItem="F4d-HG-ltx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="35t-vr-GIf"/>
                     <constraint firstItem="DoT-JE-s5d" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="4iV-t5-cT4"/>
                     <constraint firstAttribute="trailingMargin" secondItem="F4d-HG-ltx" secondAttribute="trailing" id="BTf-3W-FKn"/>
-                    <constraint firstItem="JfY-cL-Cz8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="BVv-Jc-LMF"/>
                     <constraint firstItem="JuR-7i-gzh" firstAttribute="leading" secondItem="DoT-JE-s5d" secondAttribute="trailing" constant="8" id="NNe-dY-XlT"/>
                     <constraint firstItem="DoT-JE-s5d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="NjG-AE-j5m"/>
                     <constraint firstItem="JuR-7i-gzh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="QPc-aX-dmH"/>
                     <constraint firstAttribute="bottomMargin" secondItem="F4d-HG-ltx" secondAttribute="bottom" id="brb-bv-YIU"/>
                     <constraint firstItem="F4d-HG-ltx" firstAttribute="top" secondItem="JuR-7i-gzh" secondAttribute="bottom" constant="8" id="swO-UF-5Ki"/>
                     <constraint firstAttribute="trailingMargin" secondItem="JuR-7i-gzh" secondAttribute="trailing" id="taR-ia-jKe"/>
-                    <constraint firstItem="JfY-cL-Cz8" firstAttribute="top" secondItem="DoT-JE-s5d" secondAttribute="bottom" constant="8" id="uCQ-Jv-PDp"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -168,7 +152,6 @@
                 <outlet property="bottomStackViewLeftViewLabel" destination="fhw-It-xtl" id="xuf-bo-HAz"/>
                 <outlet property="bottomStackViewRightView" destination="Nfk-KO-ns5" id="6tq-0s-xH5"/>
                 <outlet property="bottomStackViewRightViewLabel" destination="aJZ-Rj-uDv" id="aXh-KF-KyL"/>
-                <outlet property="collectionView" destination="JfY-cL-Cz8" id="rct-kF-JXj"/>
                 <outlet property="commentStackView" destination="zF5-xq-rKO" id="df6-J3-biQ"/>
                 <outlet property="commentTextView" destination="B1V-xL-qk0" id="GGh-we-kzy"/>
                 <outlet property="commentView" destination="sKW-o8-7Eg" id="de4-Rb-EOD"/>

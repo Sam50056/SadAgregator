@@ -201,7 +201,7 @@ extension MainViewController {
     @IBAction func scanViewButtonPressed(_ sender : UIButton){
         
         guard isLogged else{
-            showSimpleAlertWithOkButton(title: "Требуется авторизация", message: nil)
+            showAuthScreen()
             return
         }
         

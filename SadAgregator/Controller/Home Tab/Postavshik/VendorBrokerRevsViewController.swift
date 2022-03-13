@@ -182,7 +182,7 @@ class VendorBrokerRevsViewController: UITableViewController {
             
             galleryVC.sizes = []
             
-            galleryVC.simplePreviewMode = true
+            galleryVC.previewMode = .simple
             
             let navVC = UINavigationController(rootViewController: galleryVC)
             

@@ -166,6 +166,20 @@ extension UIViewController{
         
     }
     
+    func showSimpleAlertWithTwoButtons(title : String? , message : String? = nil, cancelButtonText : String? = "Отмена" , actionButtonText : String , actionButtonAction : @escaping (() -> Void)){
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: cancelButtonText, style: .cancel, handler: nil))
+        
+        alertController.addAction(UIAlertAction(title: actionButtonText, style: .default, handler: { _ in
+            actionButtonAction()
+        }))
+        
+        present(alertController , animated: true , completion: nil)
+        
+    }
+    
     func showActionsSheet(actionsArray : [JSON] , _ selectionCallBack : @escaping (_ action : JSON) -> Void){
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -222,7 +236,32 @@ extension UIViewController {
         
         let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
         
-        galleryVC.simplePreviewMode = true
+        galleryVC.previewMode = .simple
+        
+        galleryVC.selectedImageIndex = 0
+        
+        galleryVC.images = [PostImage(image: imageLink, imageId: "")]
+        
+        galleryVC.sizes = []
+        
+        let navVC = UINavigationController(rootViewController: galleryVC)
+        
+        self.presentHero(navVC, navigationAnimationType: .fade)
+        
+    }
+    
+    func previewTovarImage(_ imageLink : String , tovarTrashTapped : (() -> Void)? , tovarQuestionMarkTapped : (() -> Void)? , tovarInfoTapped : (() -> Void)? , tovarCommentTapped : (() -> Void)? , tovarMagnifyingGlassTapped : (() -> Void)?){
+        
+        let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
+        
+        galleryVC.previewMode = .tovar
+        
+        galleryVC.tovarTrashTapped = tovarTrashTapped
+        galleryVC.tovarQuestionMarkTapped = tovarQuestionMarkTapped
+        galleryVC.tovarInfoTapped = tovarInfoTapped
+        galleryVC.tovarCommentTapped = tovarCommentTapped
+        galleryVC.tovarCommentTapped = tovarCommentTapped
+        galleryVC.tovarMagnifyingGlassTapped = tovarMagnifyingGlassTapped
         
         galleryVC.selectedImageIndex = 0
         
@@ -240,7 +279,7 @@ extension UIViewController {
         
         let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
         
-        galleryVC.simplePreviewMode = true
+        galleryVC.previewMode = .simple
         
         galleryVC.selectedImageIndex = selectedImageIndex
         
@@ -275,6 +314,13 @@ extension UIViewController{
         let formattedDate = dateFormatterGet.string(from: date)
         
         return formattedDate
+        
+    }
+    
+    func showAuthScreen(){
+        
+        MenuViewController.shared.shouldOpenAuthView = true
+        self.tabBarController?.selectedIndex = 3
         
     }
     

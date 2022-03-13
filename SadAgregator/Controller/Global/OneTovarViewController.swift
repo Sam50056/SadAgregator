@@ -77,31 +77,39 @@ extension OneTovarViewController{
         
         cell.tovarImageTapped = {
             
-            self.previewImage(tovar.img)
-            
-        }
-        
-        cell.infoTapped = {
-            
-            if tovar.comExt != "0"{
+            self.previewTovarImage(tovar.img ,
+                                   tovarTrashTapped: { [weak self] in
                 
-                let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                PurchasesDeleteItemDataManager().getPurchasesDeleteItemData(key: self!.key, itemId: tovar.pid) { data, error in
+                    
+                    if let error = error{
+                        print("Error with PurchasesDeleteItemDataManager : \(error)")
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        
+                        if data!["result"].intValue == 1{
+                            
+                            self!.dismiss(animated: true, completion: nil)
+                            self!.tovarItems.remove(at: indexPath.row)
+                            self!.tableView.reloadRows(at: [indexPath], with: .automatic)
+                            
+                        }else{
+                            if let errorText = data!["msg"].string, errorText != ""{
+                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                            }
+                        }
+                        
+                    }
+                    
+                }
                 
-                alertController.addAction(UIAlertAction(title: "Перейти на пост в VK", style: .default, handler: { _ in
-                    
-                    guard let vkLink = URL(string: "https://vk.com/wall\(tovar.link)") else {return}
-                    
-                    UIApplication.shared.open(vkLink, options: [:])
-                    
-                }))
+            },tovarQuestionMarkTapped: {
                 
-                alertController.addAction(UIAlertAction(title: "Посмотреть комментарии", style: .default, handler: { _ in
-                    
-                    let assemblyCommentsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AssemblyCommentsVC") as! AssemblyCommentsViewController
-                    
-                    assemblyCommentsVC.thisTovarId = tovar.pid
-                    
-                    self.present(assemblyCommentsVC, animated: true, completion: nil)
+                let alertController = UIAlertController(title: "Задать вопрос клиенту по товару?", message: nil, preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                     
                 }))
                 
@@ -109,27 +117,89 @@ extension OneTovarViewController{
                 
                 self.present(alertController, animated: true, completion: nil)
                 
-            }else{
+            },tovarInfoTapped: {
                 
-                guard let vkLink = URL(string: "https://vk.com/wall\(tovar.link)") else {return}
+                if tovar.comExt != "0"{
+                    
+                    let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                    
+                    alertController.addAction(UIAlertAction(title: "Перейти на пост в VK", style: .default, handler: { _ in
+                        
+                        guard let vkLink = URL(string: "https://vk.com/wall\(tovar.link)") else {return}
+                        
+                        UIApplication.shared.open(vkLink, options: [:])
+                        
+                    }))
+                    
+                    alertController.addAction(UIAlertAction(title: "Посмотреть комментарии", style: .default, handler: { _ in
+                        
+                        let assemblyCommentsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AssemblyCommentsVC") as! AssemblyCommentsViewController
+                        
+                        assemblyCommentsVC.thisTovarId = tovar.pid
+                        
+                        self.present(assemblyCommentsVC, animated: true, completion: nil)
+                        
+                    }))
+                    
+                    alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                }else{
+                    
+                    guard let vkLink = URL(string: "https://vk.com/wall\(tovar.link)") else {return}
+                    
+                    UIApplication.shared.open(vkLink, options: [:])
+                    
+                }
                 
-                UIApplication.shared.open(vkLink, options: [:])
+            },tovarCommentTapped: {
                 
-            }
-            
-        }
-        
-        cell.questionMarkTapped = {
-            
-            let alertController = UIAlertController(title: "Задать вопрос клиенту по товару?", message: nil, preferredStyle: .alert)
-            
-            alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                let assemblyCommentsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AssemblyCommentsVC") as! AssemblyCommentsViewController
                 
-            }))
-            
-            alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-            
-            self.present(alertController, animated: true, completion: nil)
+                assemblyCommentsVC.thisTovarId = tovar.pid
+                
+                self.present(assemblyCommentsVC, animated: true, completion: nil)
+                
+            },tovarMagnifyingGlassTapped: { [weak self] in
+                
+                let tovarImageSearchVC = TovarImageSearchTableViewController()
+                
+                tovarImageSearchVC.imageHashText = tovar.hash
+                
+                //            tovarImageSearchVC.thisPointId = self!.pointId
+                
+                tovarImageSearchVC.thisPid = tovar.pid
+                
+                tovarImageSearchVC.vibratTochkaInPost = { postId in
+                    
+                    tovarImageSearchVC.dismiss(animated: true, completion: nil)
+                    
+                    self?.tovarItems.remove(at: indexPath.row)
+                    
+                    self?.tableView.reloadData()
+                    
+                    if self!.tovarItems.isEmpty{
+                        
+                        let alertController = UIAlertController(title: "У пользователя не добавлены товары", message: nil, preferredStyle: .alert)
+                        
+                        alertController.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { _ in
+                            self?.navigationController?.popViewController(animated: true)
+                        }))
+                        
+                        self?.present(alertController, animated: true, completion: nil)
+                        
+                    }
+                    
+                }
+                
+                //            print("HASH THAT WE'RE GIVING \(tovar.hash)")
+                
+                let navVC = UINavigationController(rootViewController: tovarImageSearchVC)
+                
+                self!.present(navVC, animated: true, completion: nil)
+                
+            })
             
         }
         
@@ -182,30 +252,6 @@ extension OneTovarViewController{
                 self.present(qrScannerVC, animated: true, completion: nil)
                 
             }
-            
-        }
-        
-        cell.magnifyingGlassTapped = { [weak self] in
-            
-            let tovarImageSearchVC = TovarImageSearchTableViewController()
-            
-            tovarImageSearchVC.imageHashText = tovar.hash
-            
-            tovarImageSearchVC.thisPointId = ""
-            
-            tovarImageSearchVC.vibratTochkaInPost = { [weak self] postId in
-                
-                self!.tovarItems.remove(at: indexPath.row)
-                
-                self!.tableView.reloadRows(at: [indexPath], with: .automatic)
-                
-            }
-            
-            //            print("HASH THAT WE'RE GIVING \(tovar.hash)")
-            
-            let navVC = UINavigationController(rootViewController: tovarImageSearchVC)
-            
-            self!.present(navVC, animated: true, completion: nil)
             
         }
         
