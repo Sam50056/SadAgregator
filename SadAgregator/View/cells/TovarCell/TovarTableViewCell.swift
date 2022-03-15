@@ -20,6 +20,11 @@ class TovarTableViewCell: UITableViewCell {
     @IBOutlet weak var commentTextView : UITextView!
     @IBOutlet weak var commentStackView : UIStackView!
     
+    @IBOutlet weak var commentViewStackView: UIStackView!
+    @IBOutlet weak var commentViewTopView: UIView!
+    @IBOutlet weak var commentTopViewImageView: UIImageView!
+    @IBOutlet weak var commentViewTopViewLabel: UILabel!
+    
     @IBOutlet weak var bottomButtonsStackView : UIStackView!
     @IBOutlet weak var bottomStackViewLeftView : UIView!
     @IBOutlet weak var bottomStackViewRightView : UIView!
@@ -122,9 +127,26 @@ class TovarTableViewCell: UITableViewCell {
                     removeBottomButtonsStackView()
                 }
                 
-            }else{
+            }else{ //Not order )))
                 
-                removeStackViews()
+                if thisTovar.commentMessage != ""{
+                    
+                    commentStackView.isHidden = false
+                    commentTextView.text = thisTovar.commentMessage.replacingOccurrences(of: "<br>", with: "\n")
+                    
+                    if thisTovar.commentTitle != ""{
+                        commentViewTopViewLabel.text = thisTovar.commentTitle
+                    }else{
+                        commentViewTopView.removeFromSuperview()
+                    }
+                    
+                    removeBottomButtonsStackView()
+                    
+                }else{
+                    
+                    removeStackViews()
+                    
+                }
                 
             }
             
@@ -561,6 +583,9 @@ struct TovarCellItem {
     var withoutRep : String
     var payedImage : String
     var shipmentImage : String
+    
+    var commentTitle : String
+    var commentMessage : String
     
     //Order params
     

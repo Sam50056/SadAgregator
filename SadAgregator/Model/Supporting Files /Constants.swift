@@ -87,7 +87,7 @@ struct K {
         
     }
     
-    static func makeHeightForTovarCell(thisTovar : TovarCellItem , contentType : TovarTableViewCell.ContentType , width : CGFloat = 0) -> CGFloat{
+    static func makeHeightForTovarCell(thisTovar : TovarCellItem , contentType : TovarTableViewCell.ContentType , width : CGFloat) -> CGFloat{
         
         var height : CGFloat = 0
         let cellHeight : CGFloat = 35 //35
@@ -236,7 +236,33 @@ struct K {
             }
         }else{
             
-//            height += 8
+            if thisTovar.commentMessage != ""{
+
+                var commentHeight : CGFloat = 0
+
+                commentHeight += 16
+
+                let comment = thisTovar.commentMessage.replacingOccurrences(of: "<br>", with: "\n")
+
+                let oneLineSymbolCount = width / 7
+
+                var linesCount = (CGFloat(comment.count) / oneLineSymbolCount).rounded(.awayFromZero)
+
+                if comment.contains("\n"){
+                    linesCount += 1
+                }
+
+                commentHeight += linesCount * 28
+
+                if thisTovar.commentTitle != ""{
+                    commentHeight += 25 + 8
+                }
+                
+                height += commentHeight
+
+                return height < (120 + commentHeight) ? (120 + commentHeight) : height
+                
+            }
             
         }
         

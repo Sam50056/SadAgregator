@@ -11,11 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="449" id="KGk-i7-Jjw" customClass="TovarTableViewCell" customModule="SadAgregator" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="373" height="449"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="507" id="KGk-i7-Jjw" customClass="TovarTableViewCell" customModule="SadAgregator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="373" height="507"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="373" height="449"/>
+                <rect key="frame" x="0.0" y="0.0" width="373" height="507"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DoT-JE-s5d">
@@ -26,32 +26,63 @@
                         </constraints>
                     </imageView>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JuR-7i-gzh">
-                        <rect key="frame" x="148" y="11" width="205" height="205"/>
+                        <rect key="frame" x="148" y="11" width="205" height="135"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </tableView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="F4d-HG-ltx">
-                        <rect key="frame" x="20" y="224" width="333" height="214"/>
+                        <rect key="frame" x="20" y="154" width="333" height="342"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="zF5-xq-rKO">
-                                <rect key="frame" x="0.0" y="0.0" width="333" height="166"/>
+                                <rect key="frame" x="0.0" y="0.0" width="333" height="294"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sKW-o8-7Eg">
-                                        <rect key="frame" x="0.0" y="0.0" width="333" height="166"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="333" height="294"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1V-xL-qk0">
-                                                <rect key="frame" x="8" y="8" width="317" height="150"/>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum d</string>
-                                                <color key="textColor" systemColor="labelColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="px0-YS-1Jz">
+                                                <rect key="frame" x="8" y="8" width="317" height="278"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djb-CA-Srf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="317" height="25"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bubble.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QYx-Le-2PC">
+                                                                <rect key="frame" x="0.0" y="3" width="21" height="19.5"/>
+                                                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="21" id="CeM-xL-Kwy"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="Qck-X5-15R"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEa-Tf-EXC">
+                                                                <rect key="frame" x="25" y="4" width="35.5" height="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <color key="textColor" systemColor="systemGrayColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="iEa-Tf-EXC" firstAttribute="centerY" secondItem="djb-CA-Srf" secondAttribute="centerY" id="42t-GN-UDI"/>
+                                                            <constraint firstItem="QYx-Le-2PC" firstAttribute="leading" secondItem="djb-CA-Srf" secondAttribute="leading" id="E1h-5B-CiE"/>
+                                                            <constraint firstItem="iEa-Tf-EXC" firstAttribute="leading" secondItem="QYx-Le-2PC" secondAttribute="trailing" constant="4" id="E93-H5-gYo"/>
+                                                            <constraint firstAttribute="height" constant="25" id="Nbh-uG-HKo"/>
+                                                            <constraint firstItem="QYx-Le-2PC" firstAttribute="centerY" secondItem="djb-CA-Srf" secondAttribute="centerY" id="cbM-tp-ldB"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1V-xL-qk0">
+                                                        <rect key="frame" x="0.0" y="33" width="317" height="245"/>
+                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum d</string>
+                                                        <color key="textColor" systemColor="labelColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="B1V-xL-qk0" secondAttribute="bottom" constant="8" id="0AI-2r-DMR"/>
-                                            <constraint firstItem="B1V-xL-qk0" firstAttribute="top" secondItem="sKW-o8-7Eg" secondAttribute="top" constant="8" id="6GV-uj-war"/>
-                                            <constraint firstItem="B1V-xL-qk0" firstAttribute="leading" secondItem="sKW-o8-7Eg" secondAttribute="leading" constant="8" id="8XM-Zd-Ntd"/>
-                                            <constraint firstAttribute="trailing" secondItem="B1V-xL-qk0" secondAttribute="trailing" constant="8" id="tIV-UO-moa"/>
+                                            <constraint firstItem="px0-YS-1Jz" firstAttribute="leading" secondItem="sKW-o8-7Eg" secondAttribute="leading" constant="8" id="5Bq-Us-Jeh"/>
+                                            <constraint firstItem="px0-YS-1Jz" firstAttribute="top" secondItem="sKW-o8-7Eg" secondAttribute="top" constant="8" id="6oA-ho-b3C"/>
+                                            <constraint firstAttribute="bottom" secondItem="px0-YS-1Jz" secondAttribute="bottom" constant="8" id="92a-cL-vC4"/>
+                                            <constraint firstAttribute="trailing" secondItem="px0-YS-1Jz" secondAttribute="trailing" constant="8" id="Ma0-yS-Lpc"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="zvl-4g-08o"/>
                                         </constraints>
                                     </view>
@@ -64,7 +95,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Vr7-OM-skl">
-                                <rect key="frame" x="0.0" y="174" width="333" height="40"/>
+                                <rect key="frame" x="0.0" y="302" width="333" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dic-YV-EiK">
                                         <rect key="frame" x="0.0" y="0.0" width="162.5" height="40"/>
@@ -154,15 +185,20 @@
                 <outlet property="bottomStackViewRightViewLabel" destination="aJZ-Rj-uDv" id="aXh-KF-KyL"/>
                 <outlet property="commentStackView" destination="zF5-xq-rKO" id="df6-J3-biQ"/>
                 <outlet property="commentTextView" destination="B1V-xL-qk0" id="GGh-we-kzy"/>
+                <outlet property="commentTopViewImageView" destination="QYx-Le-2PC" id="qYQ-aG-ZOD"/>
                 <outlet property="commentView" destination="sKW-o8-7Eg" id="de4-Rb-EOD"/>
+                <outlet property="commentViewStackView" destination="px0-YS-1Jz" id="zTh-pF-qDw"/>
+                <outlet property="commentViewTopView" destination="djb-CA-Srf" id="RQM-ZH-Efd"/>
+                <outlet property="commentViewTopViewLabel" destination="iEa-Tf-EXC" id="3Ul-4h-Pu3"/>
                 <outlet property="editingAccessoryView" destination="sKW-o8-7Eg" id="kec-xs-vlM"/>
                 <outlet property="tableView" destination="JuR-7i-gzh" id="zsa-dc-bOY"/>
                 <outlet property="tovarImageView" destination="DoT-JE-s5d" id="MpH-YA-e9W"/>
             </connections>
-            <point key="canvasLocation" x="112.31884057971016" y="242.74553571428569"/>
+            <point key="canvasLocation" x="112.31884057971016" y="262.16517857142856"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="bubble.right" catalog="system" width="128" height="110"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -171,6 +207,9 @@
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
