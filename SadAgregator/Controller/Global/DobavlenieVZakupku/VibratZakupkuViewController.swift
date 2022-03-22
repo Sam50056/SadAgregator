@@ -22,12 +22,15 @@ class VibratZakupkuViewController: UITableViewController {
     
     var purSelected : ((String, String) -> ())?
     
+    let activityController = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadUserData()
         //        key = "part_2_test"
         
+        showSimpleCircleAnimation(activityController: activityController)
         PurchasesPursListDataManager(delegate: self).getPurchasesPursListData(key: key, page: page)
         
     }
@@ -113,17 +116,23 @@ extension VibratZakupkuViewController : PurchasesPursListDataManagerDelegate{
     
     func didGetPurchasesPursListData(data: JSON) {
         
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async { [weak self] in
+            
+            self?.stopSimpleCircleAnimation(activityController: self!.activityController)
             
             if data["result"].intValue == 1{
                 
-                purs.append(contentsOf: data["purs"].arrayValue)
+                self?.purs.append(contentsOf: data["purs"].arrayValue)
                 
-                tableView.reloadData()
+                self?.tableView.reloadData()
                 
             }else{
                 
-                
+                if let errorMessage = data["msg"].string , errorMessage != ""{
+                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage, dismissAction: {
+                        self?.dismiss(animated: true, completion: nil)
+                    })
+                }
                 
             }
             

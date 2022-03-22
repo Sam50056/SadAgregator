@@ -29,6 +29,8 @@ class ZamenaDlyaTableViewController: UITableViewController {
     
     var shouldCloseWindowFromNav = false
     
+    let activityController = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,6 +42,7 @@ class ZamenaDlyaTableViewController: UITableViewController {
         tableView.allowsSelection = false
         
         if let id = thisClientId{
+            showSimpleCircleAnimation(activityController: activityController)
             purchasesProdsByClientDataManager.getPurchasesProdsByClientData(key: key, clientId: id, purSYSID: zakupkaId ?? "")
         }
         
@@ -86,27 +89,35 @@ extension ZamenaDlyaTableViewController : PurchasesProdsByClientDataManagerDeleg
     
     func didGetPurchasesProdsByClientData(data: JSON) {
         
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async { [weak self] in
             
             if data["result"].intValue == 1{
                 
-                purProds.append(contentsOf: data["pur_prods"].arrayValue)
+                self?.stopSimpleCircleAnimation(activityController: self!.activityController)
                 
-                if page == 1 && purProds.isEmpty{
+                self?.purProds.append(contentsOf: data["pur_prods"].arrayValue)
+                
+                if self!.page == 1 && self!.purProds.isEmpty{
                     
                     let alertController = UIAlertController(title: "У пользователя не добавлены товары", message: nil, preferredStyle: .alert)
                     
                     alertController.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { _ in
-                        self.dismiss(animated: true, completion: nil)
+                        self!.dismiss(animated: true, completion: nil)
                     }))
                     
-                    present(alertController, animated: true, completion: nil)
+                    self?.present(alertController, animated: true, completion: nil)
                     
                 }
                 
-                tableView.reloadData()
+                self?.tableView.reloadData()
                 
             }else{
+                
+                if let errorMessage = data["msg"].string , errorMessage != "" {
+                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage , dismissAction: {
+                        self?.dismiss(animated: true, completion: nil)
+                    })
+                }
                 
             }
             

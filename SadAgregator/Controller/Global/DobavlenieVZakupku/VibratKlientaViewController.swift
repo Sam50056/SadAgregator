@@ -30,6 +30,8 @@ class VibratKlientaViewController: UITableViewController{
     var isForReplace : Bool = false
     var zakupkaId : String?
     
+    let activityController = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +47,7 @@ class VibratKlientaViewController: UITableViewController{
         
         purchasesClientsSelectListDataManager.delegate = self
         
+        showSimpleCircleAnimation(activityController: activityController)
         purchasesClientsSelectListDataManager.getPurchasesClientsSelectListData(key: key, page: page, forReplace: isForReplace, zakupkaId: zakupkaId ?? "")
         
     }
@@ -181,7 +184,9 @@ extension VibratKlientaViewController : PurchasesClientsSelectListDataManagerDel
     
     func didGetPurchasesClientsSelectListData(data: JSON) {
         
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async { [weak self] in
+            
+            self?.stopSimpleCircleAnimation(activityController: self!.activityController)
             
             if data["result"].intValue == 1{
                 
@@ -193,7 +198,7 @@ extension VibratKlientaViewController : PurchasesClientsSelectListDataManagerDel
                     
                 }
                 
-                if !selectedClientsIds.isEmpty{
+                if !self!.selectedClientsIds.isEmpty{
                     
                     var lastArray = [DobavlenieVZakupkuViewController.KlientiCellKlientItem]()
                     
@@ -201,7 +206,7 @@ extension VibratKlientaViewController : PurchasesClientsSelectListDataManagerDel
                         
                         var hasIt = false
                         
-                        for selectedClientId in selectedClientsIds{
+                        for selectedClientId in self!.selectedClientsIds{
                             
                             if client.id == selectedClientId{
                                 
@@ -217,15 +222,15 @@ extension VibratKlientaViewController : PurchasesClientsSelectListDataManagerDel
                         
                     }
                     
-                    clients.append(contentsOf: lastArray)
+                    self?.clients.append(contentsOf: lastArray)
                     
-                    tableView.reloadData()
+                    self?.tableView.reloadData()
                     
                 }else{
                     
-                    clients.append(contentsOf: structArray)
+                    self?.clients.append(contentsOf: structArray)
                     
-                    tableView.reloadData()
+                    self?.tableView.reloadData()
                     
                 }
                 

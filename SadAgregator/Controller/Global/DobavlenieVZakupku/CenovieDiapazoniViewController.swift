@@ -27,6 +27,8 @@ class CenovieDiapazoniViewController: UIViewController {
     
     var hasDoneChanges = false
     
+    let activityController = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,6 +69,7 @@ class CenovieDiapazoniViewController: UIViewController {
 extension CenovieDiapazoniViewController{
     
     func update() {
+        showSimpleCircleAnimation(activityController: activityController)
         purchasesZonesPriceDataManager.getPurchasesZonesPrice(key: key)
     }
     
@@ -249,9 +252,11 @@ extension CenovieDiapazoniViewController : PurchasesZonesPriceDataManagerDelegat
     
     func didGetPurchasesZonesPrice(data: JSON) {
         
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async { [weak self] in
             
             if data["result"].intValue == 1{
+                
+                self?.stopSimpleCircleAnimation(activityController: self!.activityController)
                 
                 let jsonZones = data["zones"].arrayValue
                 
@@ -265,9 +270,17 @@ extension CenovieDiapazoniViewController : PurchasesZonesPriceDataManagerDelegat
                     
                 }
                 
-                zones = newZones
+                self?.zones = newZones
                 
-                tableView.reloadData()
+                self?.tableView.reloadData()
+                
+            }else{
+                
+                if let errorMessage = data["msg"].string , errorMessage != ""{
+                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage , dismissAction: {
+                        self?.dismiss(animated: true, completion: nil)
+                    })
+                }
                 
             }
             
