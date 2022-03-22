@@ -180,6 +180,19 @@ extension UIViewController{
         
     }
     
+    func showSelfDismissingAlertWithTimer(title : String? = "Ошибка" , message : String?){
+        
+        let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        
+        present(alertController, animated: true, completion: nil)
+        
+        Timer.scheduledTimer(withTimeInterval: 1.2, repeats: false) { timer in
+            alertController.dismiss(animated: true, completion: nil)
+            timer.invalidate()
+        }
+        
+    }
+    
     func showActionsSheet(actionsArray : [JSON] , _ selectionCallBack : @escaping (_ action : JSON) -> Void){
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

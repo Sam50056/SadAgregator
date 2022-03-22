@@ -260,6 +260,12 @@ extension MyZakupkiViewController {
             updatePurIndex = index
             updatePur(purchases[index])
             
+        }else {
+            if let message = data["msg"].string , !message.isEmpty{
+                
+                showSelfDismissingAlertWithTimer(message: message)
+                
+            }
         }
         
         print("Simple no answer request done for index : \(index) And pur : \(purchases[index].capt)")
@@ -1835,14 +1841,7 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                         
                         if let message = actionsData!["msg"].string , !message.isEmpty{
                             
-                            let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-                            
-                            self?.present(alertController, animated: true, completion: nil)
-                            
-                            Timer.scheduledTimer(withTimeInterval: 1.2, repeats: false) { timer in
-                                alertController.dismiss(animated: true, completion: nil)
-                                timer.invalidate()
-                            }
+                            self?.showSelfDismissingAlertWithTimer(message: message)
                             
                         }
                         
