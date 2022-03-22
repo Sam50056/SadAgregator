@@ -450,7 +450,7 @@ extension BrokerCardViewController{
 extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        14
+        15
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -518,6 +518,10 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
             return brokerRevs.count < 3 ? brokerRevs.count : 3
             
         case 13:
+            
+            return brokerRevs.count >= 3 ? 1 : 0
+            
+        case 14:
             
             if brokerData?["alert_text"].stringValue != "" || brokerData?["altert_text"].stringValue != "" {
                 return 1
@@ -700,6 +704,10 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
+        case 13:
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "oneLabelCell", for: indexPath)
+            
         default:
             
             return cell
@@ -753,7 +761,7 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 
             }
             
-        }else if indexPath.section == 11{
+        }else if indexPath.section == 11 || indexPath.section == 13{
             
             if brokerRevs.count >= 3 {
                 
