@@ -450,7 +450,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
                 if data!["result"].intValue == 1{
                     
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
                         
                         let name = data!["name"].stringValue
                         let error = data!["err_msg"].stringValue
@@ -463,15 +463,15 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                             
                             nameAlertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
                                 
-                                BrokersAddBrokerHelperDataManager().getBrokersAddBrokerHelperData(key: key!, code: code) { data, error in
+                                BrokersAddBrokerHelperDataManager().getBrokersAddBrokerHelperData(key: self!.key!, code: code) { data, error in
                                     
                                     if data!["result"].intValue == 1{
                                         
                                         DispatchQueue.main.async {
                                             
-                                            helpersForPosrednik.append(Helper(id: data!["rec_id"].stringValue, name: name, code: code))
+                                            self?.helpersForPosrednik.append(Helper(id: data!["rec_id"].stringValue, name: name, code: code))
                                             
-                                            tableView.reloadSections([14], with: .automatic)
+                                            self?.tableView.reloadSections([14], with: .automatic)
                                             
                                         }
                                         
@@ -481,11 +481,11 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                                 
                             }))
                             
-                            present(nameAlertController, animated: true, completion: nil)
+                            self?.present(nameAlertController, animated: true, completion: nil)
                             
                         }else{
                             DispatchQueue.main.async {
-                                self.showSimpleAlertWithOkButton(title: "Ошибка", message: error)
+                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: error)
                             }
                         }
                         
@@ -920,24 +920,34 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelOneButtonCell", for: indexPath)
             
             guard let label1 = cell.viewWithTag(1) as? UILabel ,
-                  let label2 = cell.viewWithTag(2) as? UILabel
+                  let label2 = cell.viewWithTag(2) as? UILabel ,
+                  let hintButton = cell.viewWithTag(4) as? UIButton
             else {return cell}
             
             label1.text = "Официальный посредник"
             
             label2.text = officialStatus!["verify_str"].stringValue
             
+            hintButton.addAction(UIAction(handler: { [weak self] _ in
+                self?.showSimpleAlertWithOkButton(title: "Официальный посредник", message: "Эта опция показывает пользователям являетесь ли вы официальным посредником рынка. Для того что бы получить эту отметку загрузите фото пропуска и личное фото в систему для модерации. После успешного прохождения модерации на вашей карточке посредника будет стоять синяя отметка официального посредника")
+            }), for: .touchUpInside)
+            
         }else if section == 2{
             
             cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelOneButtonCell", for: indexPath)
             
             guard let label1 = cell.viewWithTag(1) as? UILabel ,
-                  let label2 = cell.viewWithTag(2) as? UILabel
+                  let label2 = cell.viewWithTag(2) as? UILabel ,
+                  let hintButton = cell.viewWithTag(4) as? UIButton
             else {return cell}
             
             label1.text = "Пропуск до"
             
             label2.text = officialStatus!["pass_dt"].stringValue
+            
+            hintButton.addAction(UIAction(handler: { [weak self] _ in
+                self?.showSimpleAlertWithOkButton(title: "Действие пропуска", message: "После прохождения модерации официального посредника здесь указывается дата действия вашего пропуска как посредника. Клиенты так же видят эту информацию")
+            }), for: .touchUpInside)
             
         }else if section == 3{
             
@@ -948,7 +958,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 guard let label = cell.viewWithTag(1) as? UILabel ,
                       let uploadView = cell.viewWithTag(2),
                       let uploadViewLabel = cell.viewWithTag(3) as? UILabel ,
-                      let uploadViewButton = cell.viewWithTag(4) as? UIButton
+                      let uploadViewButton = cell.viewWithTag(4) as? UIButton,
+                      let hintButton = cell.viewWithTag(5) as? UIButton
                 else {return cell}
                 
                 label.text = "Фото пропуска"
@@ -962,6 +973,12 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     
                 }), for: .touchUpInside)
                 
+                hintButton.addAction(UIAction(handler: { [weak self] _ in
+                    
+                    self?.showSimpleAlertWithOkButton(title: "Фото пропуска", message: "Загрузите сюда фотографию пропуска на которой отчелтиво видно всю информацию на пропуске, в том числе ваше фото на пропуску и дату его действия. Сам пропуск должен быть целиком виден на фото, весь текст на пропуске должен быть хорошо читаемым. Эту информацию видят клиенты")
+                    
+                }), for: .touchUpInside)
+                
             }else{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath)
@@ -971,7 +988,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                       let imageView = cell.viewWithTag(4) as? UIImageView,
                       let removeButtonView = cell.viewWithTag(5),
                       let removeButton = cell.viewWithTag(7) as? UIButton,
-                      let imageViewButton = cell.viewWithTag(8) as? UIButton
+                      let imageViewButton = cell.viewWithTag(8) as? UIButton,
+                      let hintButton = cell.viewWithTag(9) as? UIButton
                 else {return UITableViewCell()}
                 
                 label.text = "Фото пропуска"
@@ -987,40 +1005,45 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 
                 removeButton.addAction(UIAction(handler: { [weak self] _ in
                     
-                    let confirmAlert = UIAlertController(title: "Удалить фото посылки?", message: nil, preferredStyle: .alert)
+                    let confirmAlert = UIAlertController(title: "Удаление фото привезет к сбросу верификации аккаунта, продолжить?", message: nil, preferredStyle: .alert)
                     
-                    confirmAlert.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                    confirmAlert.addAction(UIAlertAction(title: "Продолжить", style: .default, handler: { _ in
                         
-                        //                    NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.DeletePurDocIMG?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)&AImgID=\(parcelDoc["id"].stringValue)") { deleteData, deleteError in
-                        //
-                        //                        DispatchQueue.main.async {
-                        //
-                        //                            if let deleteError = deleteError{
-                        //                                print("Error with Delete Pur Doc IMG : \(deleteError)")
-                        //                                return
-                        //                            }
-                        //
-                        //                            if let errorText = deleteData!["msg"].string , errorText != ""{
-                        //                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
-                        //                                return
-                        //                            }
-                        //
-                        //                            if deleteData!["result"].intValue == 1{
-                        //
-                        //                                self?.parcelDoc = nil
-                        //                                self?.refresh()
-                        //
-                        //                            }
-                        //
-                        //                        }
-                        //
-                        //                    }
+                        NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_brokers.DelBrokerDoc?AKey=\(self!.key!)&ADocType=1&ADocImgID=\(self!.officialStatus!["img_card_id"].stringValue)") { [weak self] deleteData, deleteError in
+                            
+                            DispatchQueue.main.async {
+                                
+                                if let deleteError = deleteError{
+                                    print("Error with Delete DelBrokerDoc : \(deleteError)")
+                                    return
+                                }
+                                
+                                if let errorText = deleteData!["msg"].string , errorText != ""{
+                                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                                    return
+                                }
+                                
+                                if deleteData!["result"].intValue == 1{
+                                    
+                                    self?.update()
+                                    
+                                }
+                                
+                            }
+                            
+                        }
                         
                     }))
                     
                     confirmAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
                     
                     self?.present(confirmAlert , animated: true , completion: nil)
+                    
+                }), for: .touchUpInside)
+                
+                hintButton.addAction(UIAction(handler: { [weak self] _ in
+                    
+                    self?.showSimpleAlertWithOkButton(title: "Фото пропуска", message: "Загрузите сюда фотографию пропуска на которой отчелтиво видно всю информацию на пропуске, в том числе ваше фото на пропуску и дату его действия. Сам пропуск должен быть целиком виден на фото, весь текст на пропуске должен быть хорошо читаемым. Эту информацию видят клиенты")
                     
                 }), for: .touchUpInside)
                 
@@ -1035,7 +1058,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 guard let label = cell.viewWithTag(1) as? UILabel ,
                       let uploadView = cell.viewWithTag(2),
                       let uploadViewLabel = cell.viewWithTag(3) as? UILabel ,
-                      let uploadViewButton = cell.viewWithTag(4) as? UIButton
+                      let uploadViewButton = cell.viewWithTag(4) as? UIButton,
+                      let hintButton = cell.viewWithTag(5) as? UIButton
                 else {return cell}
                 
                 label.text = "Личное фото"
@@ -1049,6 +1073,12 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     
                 }), for: .touchUpInside)
                 
+                hintButton.addAction(UIAction(handler: { [weak self] _ in
+                    
+                    self?.showSimpleAlertWithOkButton(title: "Личное фото", message: "Загрузите сюда ваше селфи с пропуском для прохождения модерации, это фото НЕ ВИДЯТ КЛИЕНТЫ. Оно доступно только модератору")
+                    
+                }), for: .touchUpInside)
+                
             }else{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: "photoCell", for: indexPath)
@@ -1058,7 +1088,8 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                       let imageView = cell.viewWithTag(4) as? UIImageView,
                       let removeButtonView = cell.viewWithTag(5),
                       let removeButton = cell.viewWithTag(7) as? UIButton,
-                      let imageViewButton = cell.viewWithTag(8) as? UIButton
+                      let imageViewButton = cell.viewWithTag(8) as? UIButton,
+                      let hintButton = cell.viewWithTag(9) as? UIButton
                 else {return UITableViewCell()}
                 
                 label.text = "Личное фото"
@@ -1069,45 +1100,50 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 removeButtonView.layer.cornerRadius = 14
                 
                 imageViewButton.addAction(UIAction(handler: { [weak self] _ in
-                    self?.previewImage(self!.officialStatus!["img_card"].stringValue)
+                    self?.previewImage(self!.officialStatus!["img_selfie"].stringValue)
                 }) , for:.touchUpInside)
                 
                 removeButton.addAction(UIAction(handler: { [weak self] _ in
                     
-                    let confirmAlert = UIAlertController(title: "Удалить фото посылки?", message: nil, preferredStyle: .alert)
+                    let confirmAlert = UIAlertController(title: "Удаление фото привезет к сбросу верификации аккаунта, продолжить?", message: nil, preferredStyle: .alert)
                     
-                    confirmAlert.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                    confirmAlert.addAction(UIAlertAction(title: "Продолжить", style: .default, handler: { _ in
                         
-                        //                    NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.DeletePurDocIMG?AKey=\(self!.key)&APurSYSID=\(self!.thisZakazId)&AImgID=\(parcelDoc["id"].stringValue)") { deleteData, deleteError in
-                        //
-                        //                        DispatchQueue.main.async {
-                        //
-                        //                            if let deleteError = deleteError{
-                        //                                print("Error with Delete Pur Doc IMG : \(deleteError)")
-                        //                                return
-                        //                            }
-                        //
-                        //                            if let errorText = deleteData!["msg"].string , errorText != ""{
-                        //                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
-                        //                                return
-                        //                            }
-                        //
-                        //                            if deleteData!["result"].intValue == 1{
-                        //
-                        //                                self?.parcelDoc = nil
-                        //                                self?.refresh()
-                        //
-                        //                            }
-                        //
-                        //                        }
-                        //
-                        //                    }
+                        NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_brokers.DelBrokerDoc?AKey=\(self!.key!)&ADocType=2&ADocImgID=\(self!.officialStatus!["img_selfie_id"].stringValue)") { [weak self] deleteData, deleteError in
+                            
+                            DispatchQueue.main.async {
+                                
+                                if let deleteError = deleteError{
+                                    print("Error with Delete DelBrokerDoc : \(deleteError)")
+                                    return
+                                }
+                                
+                                if let errorText = deleteData!["msg"].string , errorText != ""{
+                                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                                    return
+                                }
+                                
+                                if deleteData!["result"].intValue == 1{
+                                    
+                                    self?.update()
+                                    
+                                }
+                                
+                            }
+                            
+                        }
                         
                     }))
                     
                     confirmAlert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
                     
                     self?.present(confirmAlert , animated: true , completion: nil)
+                    
+                }), for: .touchUpInside)
+                
+                hintButton.addAction(UIAction(handler: { [weak self] _ in
+                    
+                    self?.showSimpleAlertWithOkButton(title: "Личное фото", message: "Загрузите сюда ваше селфи с пропуском для прохождения модерации, это фото НЕ ВИДЯТ КЛИЕНТЫ. Оно доступно только модератору")
                     
                 }), for: .touchUpInside)
                 

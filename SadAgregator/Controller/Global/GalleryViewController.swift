@@ -135,11 +135,13 @@ class GalleryViewController: UIViewController {
 
         tovarItemsView.isHidden = previewMode != .tovar
         
-        if previewMode == .simple{
+        if previewMode != .normal{
             
             buttonView.isHidden = true
             searchView.isHidden = true
             pencilView.isHidden = true
+            buttonsView.isHidden = true
+            
             buttonsView.isHidden = true
             
         }
@@ -168,13 +170,17 @@ class GalleryViewController: UIViewController {
         tovarItemsViewCommentView.backgroundColor = UIColor(white: 1, alpha: 0)
         tovarItemsViewMagnifyView.backgroundColor = UIColor(white: 1, alpha: 0)
         
-        if !UserDefaults.standard.bool(forKey: K.notFirstTimeGalleryOpened){
-            shouldShowButtonsView = true
-            buttonsView.isHidden = !shouldShowButtonsView
-            UserDefaults.standard.set(shouldShowButtonsView, forKey: K.shouldShowButtonsViewInGallery)
-            UserDefaults.standard.set(true, forKey: K.notFirstTimeGalleryOpened)
-        }else{
-            buttonsView.isHidden = !shouldShowButtonsView
+        if previewMode == .normal{
+            
+            if !UserDefaults.standard.bool(forKey: K.notFirstTimeGalleryOpened){
+                shouldShowButtonsView = true
+                buttonsView.isHidden = !shouldShowButtonsView
+                UserDefaults.standard.set(shouldShowButtonsView, forKey: K.shouldShowButtonsViewInGallery)
+                UserDefaults.standard.set(true, forKey: K.notFirstTimeGalleryOpened)
+            }else{
+                buttonsView.isHidden = !shouldShowButtonsView
+            }
+            
         }
         
         setUpTovarItemButtons()
@@ -247,24 +253,18 @@ class GalleryViewController: UIViewController {
         }), for: .touchUpInside)
         
         tovarItemsViewInfoViewButton.addAction(UIAction(handler: { [weak self] _ in
-            self?.showSimpleAlertWithTwoButtons(title: "Перейти на источник поста в ВК?", actionButtonText: "Да", actionButtonAction: {
-                self?.dismiss(animated: true, completion: nil)
-                self?.tovarInfoTapped?()
-            })
+            self?.dismiss(animated: true, completion: nil)
+            self?.tovarInfoTapped?()
         }), for: .touchUpInside)
         
         tovarItemsViewCommentViewButton.addAction(UIAction(handler: { [weak self] _ in
-            self?.showSimpleAlertWithTwoButtons(title: "Перейти к комментариям по товару?", actionButtonText: "Да", actionButtonAction: {
-                self?.dismiss(animated: true, completion: nil)
-                self?.tovarCommentTapped?()
-            })
+            self?.dismiss(animated: true, completion: nil)
+            self?.tovarCommentTapped?()
         }), for: .touchUpInside)
         
         tovarItemsViewMagnifyViewButton.addAction(UIAction(handler: { [weak self] _ in
-            self?.showSimpleAlertWithTwoButtons(title: "Совершить поиск по фото?", actionButtonText: "Да", actionButtonAction: {
-                self?.dismiss(animated: true, completion: nil)
-                self?.tovarMagnifyingGlassTapped?()
-            })
+            self?.dismiss(animated: true, completion: nil)
+            self?.tovarMagnifyingGlassTapped?()
         }), for: .touchUpInside)
         
     }
@@ -562,13 +562,21 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
             
             let originalUrlString = images[indexPath.row].image
             
-            let indexOfLastSlash = originalUrlString.lastIndex(of: "/")
-            let indexOfDot = originalUrlString.lastIndex(of: ".")
-            let firstPartOfURL = String(originalUrlString[originalUrlString.startIndex ..< indexOfLastSlash!])
-            let secondPartOfURL = "/550\(String(originalUrlString[indexOfDot! ..< originalUrlString.endIndex]))"
-            let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
-            
-            imageView.sd_setImage(with: URL(string: fullURL), completed: nil)
+            if let indexOfLastSlash = originalUrlString.lastIndex(of: "/"),
+               let indexOfDot = originalUrlString.lastIndex(of: ".") {
+                
+                let firstPartOfURL = String(originalUrlString[originalUrlString.startIndex ..< indexOfLastSlash])
+                let secondPartOfURL = "/550\(String(originalUrlString[indexOfDot ..< originalUrlString.endIndex]))"
+                let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
+                
+                imageView.sd_setImage(with: URL(string: fullURL), completed: nil)
+                
+            }else {
+                
+                imageView.sd_setImage(with: URL(string: originalUrlString), completed: nil)
+                
+            }
+           
             
         }
         

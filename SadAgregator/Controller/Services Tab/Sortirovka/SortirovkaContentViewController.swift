@@ -133,6 +133,8 @@ class SortirovkaContentViewController: UIViewController {
     
     var time : Float = 5
     
+    var vcWillDisappear : ((Int) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -210,6 +212,7 @@ class SortirovkaContentViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
         timer?.invalidate()
+        vcWillDisappear?(state)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -518,7 +521,7 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
                     img.compressPhotoQuality(compression: "340")
                     
                     (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: img) , completed: nil)
-                    (cell.viewWithTag(1) as! UIImageView).contentMode = .scaleAspectFill
+                    (cell.viewWithTag(1) as! UIImageView).contentMode = .scaleAspectFit
                     (cell.viewWithTag(1) as! UIImageView).layer.cornerRadius = 8
                     
                 }else{

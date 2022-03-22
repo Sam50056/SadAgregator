@@ -42,6 +42,8 @@ class SortirovkaViewController: UIViewController {
     
     var qrValue : String?
     
+    var oldState = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -209,6 +211,12 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                             
                         }
                         
+                        contentVC.vcWillDisappear = { [weak self] state in
+                            
+                            self?.oldState = state
+                            
+                        }
+                        
                         self?.fpc.layout = MyFloatingPanelLayout()
                         
                         self?.fpc.set(contentViewController: UINavigationController(rootViewController: contentVC))
@@ -233,6 +241,19 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                         // Set the new appearance
                         self?.fpc.surfaceView.appearance = appearance
                         
+                        if self!.oldState != self!.getCurrentStateInInt(){
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                if self!.oldState == 1{
+                                    self?.fpc.move(to: .tip, animated: true)
+                                }else if self!.oldState == 2{
+                                    self?.fpc.move(to: .half, animated: true)
+                                }else if self!.oldState == 3{
+                                    self?.fpc.move(to: .full, animated: true)
+                                }
+                                (self?.fpc.contentViewController as! SortirovkaContentViewController).state = self!.oldState
+                            }
+                        }
+                        
                         self?.present(self!.fpc, animated: true, completion: nil)
                         
                         // Track a scroll view(or the siblings) in the content view controller.
@@ -242,7 +263,7 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                     
                 }
                 
-                print(qrValue)
+                print(qrValue ?? "No Qr Value")
                 
                 qrValue = nil
                 
@@ -279,7 +300,7 @@ class MyFloatingPanelLayout: FloatingPanelLayout {
     var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
         return [
             .full: FloatingPanelLayoutAnchor(absoluteInset: 16.0, edge: .top, referenceGuide: .safeArea),
-            .half: FloatingPanelLayoutAnchor(absoluteInset: 490, edge: .bottom, referenceGuide: .safeArea),
+            .half: FloatingPanelLayoutAnchor(absoluteInset: 590, edge: .bottom, referenceGuide: .safeArea),
             .tip: FloatingPanelLayoutAnchor(absoluteInset: 316, edge: .bottom, referenceGuide: .safeArea),
         ]
     }
@@ -305,6 +326,26 @@ extension SortirovkaViewController : FloatingPanelControllerDelegate{
             ((fpc.children.first! as! UINavigationController).children.first! as! SortirovkaContentViewController).state = 3
             
         }
+        
+    }
+    
+}
+
+//MARK: - Functions
+
+extension SortirovkaViewController{
+    
+    func getCurrentStateInInt() -> Int{
+        
+        if fpc.state == .tip{
+            return 1
+        }else if fpc.state == .half{
+            return 2
+        }else if fpc.state == .full{
+            return 3
+        }
+        
+        return 1
         
     }
     

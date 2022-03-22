@@ -586,7 +586,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     let infoButton = cell.viewWithTag(2) as? UIButton
             else {return cell}
             
-            label.text = "Для себя"
+            label.text = "Закупка для себя"
             
             label.textColor = .systemBlue
             
