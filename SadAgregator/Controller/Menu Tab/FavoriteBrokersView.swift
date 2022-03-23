@@ -41,7 +41,7 @@ class FavoriteBrokersViewController : UITableViewController {
     var page = 1
     var rowForPaggingUpdate : Int = 10
     
-    var brokersArray = [JSON]()
+    var brokers = [JSON]()
     
     var brokersData : JSON?
     
@@ -82,7 +82,7 @@ class FavoriteBrokersViewController : UITableViewController {
         
         page = 1
         
-        brokersArray.removeAll()
+        brokers.removeAll()
         
         tableView.reloadData()
         
@@ -95,12 +95,12 @@ class FavoriteBrokersViewController : UITableViewController {
     //MARK: - TableView Stuff
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return brokersData != nil ? brokersArray.count == 0 ? 1 : brokersArray.count : 0
+        return brokersData != nil ? brokers.count == 0 ? 1 : brokers.count : 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if brokersArray.isEmpty{
+        if brokers.isEmpty{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath)
             
@@ -112,7 +112,7 @@ class FavoriteBrokersViewController : UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "brokerCell" , for: indexPath) as! BrokerTableViewCell
         
-        let broker = brokersArray[indexPath.row]
+        let broker = brokers[indexPath.row]
         
         cell.label.text = broker["name"].stringValue
         
@@ -158,19 +158,34 @@ class FavoriteBrokersViewController : UITableViewController {
         var rateItemsArray = [BrokerTableViewCell.TableViewItem]()
         var parcelItemsArray = [BrokerTableViewCell.TableViewItem]()
         
+        let brokerJsonRates = broker["rates"].arrayValue
+        let brokerJsonParcels = broker["parcels"].arrayValue
+        
         if let phone = broker["phone"].string , phone != ""{
             otherItemsArray.append(BrokerTableViewCell.TableViewItem(image: "phone", label1Text: "Телефон", label2Text: phone))
         }
         
-        broker["rates"].arrayValue.forEach { jsonRate in
+        if !brokerJsonRates.isEmpty{
             
-            rateItemsArray.append(BrokerTableViewCell.TableViewItem(image: "newspaper", label1Text: "Условия закупки", label2Text: jsonRate["capt"].stringValue + " " + jsonRate["marge"].stringValue))
+            rateItemsArray.append(BrokerTableViewCell.TableViewItem(image: "newspaper", label1Text: "Условия закупки", label2Text: ""))
+            
+            brokerJsonRates.forEach { jsonRate in
+                
+                rateItemsArray.append(BrokerTableViewCell.TableViewItem(image: "newspaper", label1Text: "Условия закупки", label2Text: jsonRate["capt"].stringValue + " " + jsonRate["marge"].stringValue))
+                
+            }
             
         }
         
-        broker["parcels"].arrayValue.forEach { jsonParcel in
+        if !brokerJsonParcels.isEmpty{
             
-            parcelItemsArray.append(BrokerTableViewCell.TableViewItem(image: "shippingbox", label1Text: "Условия доставки", label2Text: jsonParcel["name"].stringValue + " " + jsonParcel["price"].stringValue))
+            parcelItemsArray.append(BrokerTableViewCell.TableViewItem(image: "shippingbox", label1Text: "Условия доставки", label2Text: ""))
+            
+            brokerJsonParcels.forEach { jsonParcel in
+                
+                parcelItemsArray.append(BrokerTableViewCell.TableViewItem(image: "shippingbox", label1Text: "Условия доставки", label2Text: jsonParcel["name"].stringValue + " " + jsonParcel["price"].stringValue))
+                
+            }
             
         }
         
@@ -187,21 +202,21 @@ class FavoriteBrokersViewController : UITableViewController {
             
             let newFrame = CGRect(x: cell.ratingLabel.frame.origin.x, y: cell.ratingView.frame.origin.y, width: 70, height: 25)
             
-            let newView = UIView(frame: newFrame)
+            cell.newView = UIView(frame: newFrame)
             
-            newView.backgroundColor = #colorLiteral(red: 0.8812789321, green: 0.9681747556, blue: 0.9018383622, alpha: 1)
-            newView.layer.cornerRadius = 6
+            cell.newView.backgroundColor = #colorLiteral(red: 0.8812789321, green: 0.9681747556, blue: 0.9018383622, alpha: 1)
+            cell.newView.layer.cornerRadius = 6
             
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: newView.frame.width, height: newView.frame.height))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: cell.newView.frame.width, height: cell.newView.frame.height))
             label.font = UIFont.systemFont(ofSize: 14)
             label.textAlignment = .center
             label.textColor = .systemGreen
             
             label.text = "Новичок"
             
-            newView.addSubview(label)
+            cell.newView.addSubview(label)
             
-            cell.contentView.addSubview(newView)
+            cell.contentView.addSubview(cell.newView)
             
         }else{
             cell.ratingView.isHidden = false
@@ -229,12 +244,12 @@ class FavoriteBrokersViewController : UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let brokerSelected = brokerSelected {
-            brokerSelected(brokersArray[indexPath.row]["id"].stringValue , brokersArray[indexPath.row]["name"].stringValue)
+            brokerSelected(brokers[indexPath.row]["id"].stringValue , brokers[indexPath.row]["name"].stringValue)
         }else{
             
             let brokerCardVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BrokerCardVC") as! BrokerCardViewController
             
-            let selectedBrokerId = brokersArray[indexPath.row]["id"].string
+            let selectedBrokerId = brokers[indexPath.row]["id"].string
             
             brokerCardVC.thisBrokerId = selectedBrokerId
             
@@ -245,7 +260,7 @@ class FavoriteBrokersViewController : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (brokersArray.count == 0) ? ((UIScreen.main.bounds.height / 2)) : (K.makeHeightForBrokerCell(broker: brokersArray[indexPath.row]))
+        return (brokers.count == 0) ? ((UIScreen.main.bounds.height / 2)) : (K.makeHeightForBrokerCell(broker: brokers[indexPath.row]))
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -276,7 +291,7 @@ extension FavoriteBrokersViewController : BrokersFavoritesDataManagerDelegate {
             
             self?.brokersData = data
             
-            self?.brokersArray.append(contentsOf: data["brokers"].arrayValue)
+            self?.brokers.append(contentsOf: data["brokers"].arrayValue)
             
             self?.tableView.reloadSections([0], with: .automatic)
             

@@ -44,6 +44,8 @@ class SortirovkaViewController: UIViewController {
     
     var oldState = 1
     
+    var connectingPurId : String? // This var helps to know if next scanned qr will be connected to some purchase or not
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -141,6 +143,42 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                 
                 qrValue = qr
                 
+                if let connectingPurId = connectingPurId{
+                    
+                    NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchase_actions.UpdatePurQR?AKey=\(key)&APurSYSID=\(connectingPurId)&AQR=\(qr)") { data, error in
+                        
+                        if let error = error {
+                            print("Error with Update Pur QR Data Manager (No answer data manager) in sort vc : \(error)")
+                            return
+                        }
+                        
+                        DispatchQueue.main.async { [weak self] in
+                            
+                            if data!["result"].intValue == 1{
+                                
+                                self?.showSelfDismissingAlertWithTimer(title: "QR код успешно привязан!", message: nil)
+                                
+                            }else{
+                                
+                                if let errorMessage = data!["msg"].string , errorMessage != ""{
+                                    self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    print(qrValue ?? "No Qr Value")
+                    
+                    qrValue = nil
+                    self.connectingPurId = nil
+                    
+                    return
+                    
+                }
+                
                 QRScanQRDataManager().getQRScanQRData(key: key, qr: qr, assembly: assembly ?? "") { [weak self] data, error in
                     
                     if let error = error , data == nil{
@@ -213,7 +251,38 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                         
                         contentVC.vcWillDisappear = { [weak self] state in
                             
+                            //Remembering the state for reopen with same
                             self?.oldState = state
+                            
+                            
+                            
+                            guard let data = data,
+                                  let max = data["progress"]["max"].string,
+                                  let curr = data["progress"]["curr"].string,
+                                  !max.isEmpty , curr != "0"
+                            else {return}
+                            
+                            let maxInt = Int(max)!
+                            let currInt = Int(curr)!
+                            
+                            if maxInt == currInt{
+                                
+                                self?.captureSession.stopRunning()
+                                
+                                let alertController = UIAlertController(title: "Привязать QR код пакета к закупке «\(data["pur_name"].stringValue)»?", message: nil, preferredStyle: .alert)
+                                
+                                alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { _ in
+                                    self?.captureSession.startRunning()
+                                }))
+                                
+                                alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                                    self?.connectingPurId = data["pur_id"].stringValue
+                                    self?.captureSession.startRunning()
+                                }))
+                                
+                                self?.present(alertController , animated: true)
+                                
+                            }
                             
                         }
                         
@@ -250,7 +319,7 @@ extension SortirovkaViewController: AVCaptureMetadataOutputObjectsDelegate {
                                 }else if self!.oldState == 3{
                                     self?.fpc.move(to: .full, animated: true)
                                 }
-                                (self?.fpc.contentViewController as! SortirovkaContentViewController).state = self!.oldState
+                                ((self?.fpc.contentViewController as! UINavigationController).children.first! as! SortirovkaContentViewController).state = self!.oldState
                             }
                         }
                         

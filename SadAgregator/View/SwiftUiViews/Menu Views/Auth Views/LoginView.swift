@@ -21,6 +21,10 @@ struct LoginView: View {
     
     @State var passText : String = ""
     
+    @State var showAlert = false
+    @State var alertTitle : String = ""
+    @State var alertMessage : String?
+    
     var body: some View {
         
         VStack{
@@ -106,6 +110,8 @@ struct LoginView: View {
                     
                     Button(action: {
                         
+                        guard emailText != "" , passText != "" else {return}
+                        
                         menuViewModel.loadUserData()
                         
                         AuthDataManager(delegate: self).getAuthData(key: menuViewModel.key, login: emailText, pass: passText)
@@ -168,6 +174,9 @@ struct LoginView: View {
             .padding(.top , 8)
             
         }
+        .alert(isPresented: $showAlert){
+            Alert(title: Text(alertTitle), message: alertMessage != nil ? Text(alertMessage!) : nil, dismissButton: .cancel(Text("Ок")))
+        }
         
         .navigationBarTitle("Авторизация", displayMode: .inline)
         
@@ -187,7 +196,11 @@ extension LoginView : AuthDataManagerDelegate {
             
         }else{
             
-            
+            if let errorMessage = data["msg"].string , errorMessage != ""{
+                alertTitle = "Ошибка"
+                alertMessage = errorMessage
+                showAlert = true
+            }
             
         }
         

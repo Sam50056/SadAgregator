@@ -30,8 +30,7 @@ class VibratZakupkuViewController: UITableViewController {
         loadUserData()
         //        key = "part_2_test"
         
-        showSimpleCircleAnimation(activityController: activityController)
-        PurchasesPursListDataManager(delegate: self).getPurchasesPursListData(key: key, page: page)
+        refresh()
         
     }
     
@@ -41,6 +40,22 @@ class VibratZakupkuViewController: UITableViewController {
         navigationItem.title = "Выбрать закупку"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отмена", style: .plain, target: self, action: #selector(otmenaTapped(_:)))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusTapped))
+        
+    }
+    
+}
+
+//MARK: Functions
+
+extension VibratZakupkuViewController{
+    
+    func refresh(){
+        
+        purs.removeAll()
+        showSimpleCircleAnimation(activityController: activityController)
+        PurchasesPursListDataManager(delegate: self).getPurchasesPursListData(key: key, page: page)
         
     }
     
@@ -52,6 +67,29 @@ extension VibratZakupkuViewController{
     
     @IBAction func otmenaTapped(_ sender : Any){
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func plusTapped(){
+        
+        NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://agrapi.tk-sad.ru/agr_purchases.CreateNew?AKey=\(key)") { [weak self] data, error in
+            
+            if let error = error{
+                print("Error with Create New Purchase : \(error)")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                
+                if data!["result"].intValue == 1{
+                    
+                    self?.refresh()
+                    
+                }
+                
+            }
+            
+        }
+        
     }
     
 }

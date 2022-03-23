@@ -210,7 +210,11 @@ extension PaymentHistoryViewController {
         
         oneTovarItemVC.itemId = id
         
-        navigationController?.pushViewController(oneTovarItemVC, animated: true)
+        oneTovarItemVC.shouldShowNavBarCloseButton = true
+        
+        let navVC = UINavigationController(rootViewController: oneTovarItemVC)
+        
+        present(navVC, animated: true)
         
     }
     

@@ -19,6 +19,8 @@ class OneTovarViewController: UITableViewController {
     
     var itemId : String?
     
+    var shouldShowNavBarCloseButton = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +31,15 @@ class OneTovarViewController: UITableViewController {
         tableView.allowsSelection = false
         
         refresh()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if shouldShowNavBarCloseButton{
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .plain, target: self, action: #selector(closeTapped))
+        }
         
     }
     
@@ -45,6 +56,10 @@ extension OneTovarViewController{
         
         PurchasesOneItemDataManager(delegate: self).getPurchasesOneItemData(key: key, item: itemId)
         
+    }
+    
+    @objc func closeTapped () {
+        dismiss(animated: true, completion: nil)
     }
     
 }
