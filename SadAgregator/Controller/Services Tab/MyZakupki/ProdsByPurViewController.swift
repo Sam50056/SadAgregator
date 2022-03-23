@@ -368,6 +368,16 @@ extension ProdsByPurViewController{
             
         }
         
+        cell.commentViewTapped = {
+            
+            let assemblyCommentsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AssemblyCommentsVC") as! AssemblyCommentsViewController
+            
+            assemblyCommentsVC.thisTovarId = tovar.pid
+            
+            self.present(assemblyCommentsVC, animated: true, completion: nil)
+            
+        }
+        
         cell.oplachenoTapped = {
             
             self.previewImage(tovar.payedImage)

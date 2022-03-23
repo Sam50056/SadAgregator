@@ -17,6 +17,7 @@ class TovarTableViewCell: UITableViewCell {
     @IBOutlet weak var bottomStackView : UIStackView!
     
     @IBOutlet weak var commentView : UIView!
+    @IBOutlet weak var commentViewButton : UIButton!
     @IBOutlet weak var commentTextView : UITextView!
     @IBOutlet weak var commentStackView : UIStackView!
     
@@ -208,6 +209,8 @@ class TovarTableViewCell: UITableViewCell {
     var qrCodeTapped : (() -> Void)?
     var zameniTapped : (() -> Void)?
     
+    var commentViewTapped : (() -> Void)?
+    
     var bottomStackViewLeftViewButtonTapped : (() -> Void)?
     var bottomStackViewRightViewButtonTapped : (() -> Void)?
     
@@ -304,6 +307,12 @@ extension TovarTableViewCell{
     @IBAction func bottomStackViewRightViewButtonTapped(_ sender : Any){
         
         bottomStackViewRightViewButtonTapped?()
+        
+    }
+    
+    @IBAction func commentViewButtonTapped(_ sender : UIButton){
+        
+        commentViewTapped?()
         
     }
     

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -76,6 +76,14 @@
                                                     </textView>
                                                 </subviews>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNi-NY-i1m">
+                                                <rect key="frame" x="0.0" y="0.0" width="333" height="294"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                <connections>
+                                                    <action selector="commentViewButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="b9K-LW-3bM"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <constraints>
@@ -83,6 +91,10 @@
                                             <constraint firstItem="px0-YS-1Jz" firstAttribute="top" secondItem="sKW-o8-7Eg" secondAttribute="top" constant="8" id="6oA-ho-b3C"/>
                                             <constraint firstAttribute="bottom" secondItem="px0-YS-1Jz" secondAttribute="bottom" constant="8" id="92a-cL-vC4"/>
                                             <constraint firstAttribute="trailing" secondItem="px0-YS-1Jz" secondAttribute="trailing" constant="8" id="Ma0-yS-Lpc"/>
+                                            <constraint firstAttribute="bottom" secondItem="RNi-NY-i1m" secondAttribute="bottom" id="iIW-iQ-exQ"/>
+                                            <constraint firstItem="RNi-NY-i1m" firstAttribute="leading" secondItem="sKW-o8-7Eg" secondAttribute="leading" id="iuU-Sf-sEg"/>
+                                            <constraint firstAttribute="trailing" secondItem="RNi-NY-i1m" secondAttribute="trailing" id="lkb-1S-n3y"/>
+                                            <constraint firstItem="RNi-NY-i1m" firstAttribute="top" secondItem="sKW-o8-7Eg" secondAttribute="top" id="xMV-Kq-YfX"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="zvl-4g-08o"/>
                                         </constraints>
                                     </view>
@@ -187,6 +199,7 @@
                 <outlet property="commentTextView" destination="B1V-xL-qk0" id="GGh-we-kzy"/>
                 <outlet property="commentTopViewImageView" destination="QYx-Le-2PC" id="qYQ-aG-ZOD"/>
                 <outlet property="commentView" destination="sKW-o8-7Eg" id="de4-Rb-EOD"/>
+                <outlet property="commentViewButton" destination="RNi-NY-i1m" id="t74-8M-XrN"/>
                 <outlet property="commentViewStackView" destination="px0-YS-1Jz" id="zTh-pF-qDw"/>
                 <outlet property="commentViewTopView" destination="djb-CA-Srf" id="RQM-ZH-Efd"/>
                 <outlet property="commentViewTopViewLabel" destination="iEa-Tf-EXC" id="3Ul-4h-Pu3"/>
