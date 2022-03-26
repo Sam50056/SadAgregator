@@ -51,7 +51,7 @@ class TovarTableViewCell: UITableViewCell {
             }
             
             if thisTovar.sellCost != "" , thisTovar.sellCost != "0"{
-                newItems.append(TableViewItem(label1Text: thisTovar.vt != "1" ? "Продажа" : "Посреднику", label2Text: thisTovar.sellCost + " руб." , shouldSecondLabelBeBlue: thisTovar.chLvl != "0" || thisTovar.vt != "1"))
+                newItems.append(TableViewItem(label1Text: thisTovar.vt != "1" ? "Продажа" : "Посреднику", label2Text: thisTovar.sellCost + " руб." , shouldSecondLabelBeBlue: thisTovar.chLvl != "0" && thisTovar.vt != "1"))
             }//Vt is a check to see if tovar is watched from posrednik (sborka vc)
             
             if thisTovar.size != "" {
