@@ -207,10 +207,10 @@ struct K {
                 
                 commentHeight += linesCount * 28
                 
-                return height < (184 + commentHeight) ? (184 + commentHeight) : height
+                return height < (224 + commentHeight) ? (224 + commentHeight) : height
                 
             }else if thisTovar.shouldShowBottomStackView{
-                return height < 184 ? 184 : height
+                return height < 224 ? 224 : height
             }else if !thisTovar.comExt.isEmpty{
                 
                 var commentHeight : CGFloat = 0
@@ -229,10 +229,10 @@ struct K {
                 
                 commentHeight += linesCount * 28
                 
-                return height < (134 + commentHeight) ? (134 + commentHeight) : height
+                return height < (174 + commentHeight) ? (174 + commentHeight) : height
                 
             }else{
-                return height < 134 ? 134 : height
+                return height < 174 ? 174 : height
             }
         }else{
             
@@ -260,13 +260,13 @@ struct K {
                 
                 height += commentHeight
 
-                return height < (120 + commentHeight) ? (120 + commentHeight) : height
+                return height < (160 + commentHeight) ? (160 + commentHeight) : height
                 
             }
             
         }
         
-        return height < 120 ? 120 : height //235
+        return height < 160 ? 160 : height //235
         
     }
     

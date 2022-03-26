@@ -253,19 +253,23 @@ extension MyZakupkiViewController {
     
     func simpleNoAnswerRequestDone(data : JSON? , index : Int){
         
-        guard let data = data else {return}
-        
-        if data["result"].intValue == 1{
+        DispatchQueue.main.async { [weak self] in
             
-            updatePurIndex = index
-            updatePur(purchases[index])
+            guard let data = data else {return}
             
-        }else {
-            if let message = data["msg"].string , !message.isEmpty{
+            if data["result"].intValue == 1{
                 
-                showSelfDismissingAlertWithTimer(message: message)
+                self?.updatePurIndex = index
+                self?.updatePur(self!.purchases[index])
                 
+            }else {
+                if let message = data["msg"].string , !message.isEmpty{
+                    
+                    self?.showSelfDismissingAlertWithTimer(message: message)
+                    
+                }
             }
+            
         }
         
         print("Simple no answer request done for index : \(index) And pur : \(purchases[index].capt)")

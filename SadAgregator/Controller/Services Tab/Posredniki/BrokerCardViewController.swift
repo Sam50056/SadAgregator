@@ -769,7 +769,7 @@ extension BrokerCardViewController : UITableViewDelegate , UITableViewDataSource
                 
                 brokerRevsVC.key = key
                 
-                brokerRevsVC.thisBrokerId = brokerRevs[indexPath.row]["id"].string
+                brokerRevsVC.thisBrokerId = thisBrokerId!
                 
                 navigationController?.pushViewController(brokerRevsVC, animated: true)
                 

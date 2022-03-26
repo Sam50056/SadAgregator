@@ -63,10 +63,11 @@ class TovarTableViewCell: UITableViewCell {
             }
             
             qrIf : if thisTovar.qr != "" , thisTovar.qr != "-1" , contentType != .zamena{
-                guard contentType == .order ,
-                      let intHandlerStatus = Int(thisTovar.handlerStatus) ,
-                      intHandlerStatus >= 0
-                else {break qrIf}
+                if contentType == .order ,
+                   let intHandlerStatus = Int(thisTovar.handlerStatus) ,
+                   intHandlerStatus < 0{
+                    break qrIf
+                }
                 newItems.append(TableViewItem(label1Text: "QR-код", label2Text:  thisTovar.qr == "0" ? "Не привязан" : "Привязан", hasImage: true, image: "qrcode" , shouldSecondLabelBeBlue: true))
             }
             
