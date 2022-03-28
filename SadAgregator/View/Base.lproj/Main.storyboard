@@ -4224,13 +4224,22 @@
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="131" id="fFp-qI-fBG"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nIB-BU-ITs">
+                                                    <rect key="frame" x="231" y="11" width="139" height="115"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="vzI-FK-CoX" firstAttribute="leading" secondItem="kYA-Ge-Php" secondAttribute="trailing" constant="16" id="0CW-gf-3iv"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="nIB-BU-ITs" secondAttribute="bottom" id="27f-Ns-bGL"/>
                                                 <constraint firstItem="vzI-FK-CoX" firstAttribute="trailing" secondItem="KPY-hT-K1k" secondAttribute="trailingMargin" id="4P5-7i-bab"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="vzI-FK-CoX" secondAttribute="bottom" id="91J-bs-6V8"/>
                                                 <constraint firstItem="vzI-FK-CoX" firstAttribute="top" secondItem="KPY-hT-K1k" secondAttribute="topMargin" id="K0Y-2T-jLW"/>
+                                                <constraint firstItem="nIB-BU-ITs" firstAttribute="leading" secondItem="kYA-Ge-Php" secondAttribute="trailing" constant="8" id="PnA-wp-PRD"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="nIB-BU-ITs" secondAttribute="trailing" id="bxN-ll-vpL"/>
                                                 <constraint firstItem="kYA-Ge-Php" firstAttribute="leading" secondItem="KPY-hT-K1k" secondAttribute="leadingMargin" id="o2T-CW-paO"/>
+                                                <constraint firstItem="nIB-BU-ITs" firstAttribute="top" secondItem="KPY-hT-K1k" secondAttribute="topMargin" id="ocS-XF-dzb"/>
                                                 <constraint firstItem="kYA-Ge-Php" firstAttribute="top" secondItem="KPY-hT-K1k" secondAttribute="topMargin" id="oyh-Un-4Br"/>
                                             </constraints>
                                         </tableViewCellContentView>

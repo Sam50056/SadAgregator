@@ -603,6 +603,7 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 guard let captLabel = cell.viewWithTag(1) as? UILabel,
                       let priceLabel = cell.viewWithTag(2) as? UILabel,
                       let imageView = cell.viewWithTag(3) as? UIImageView,
+                      let imageViewButton = cell.viewWithTag(4) as? UIButton,
                       let itemInfo = itemInfo
                 else {return cell}
                 
@@ -614,6 +615,10 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     
                     imageView.sd_setImage(with: imageURL, completed: nil)
                     imageView.layer.cornerRadius = 12
+                    
+                    imageViewButton.addAction(UIAction(handler: { [weak self] _ in
+                        self?.previewImage(imageURLString)
+                    }), for: .touchUpInside)
                     
                 }
                 
