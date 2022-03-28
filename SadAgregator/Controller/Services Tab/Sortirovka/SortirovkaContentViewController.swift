@@ -32,6 +32,9 @@ class SortirovkaContentViewController: UIViewController {
     @IBOutlet weak var podrobneeViewBottomButton : UIButton!
     
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var bottomViewStackView : UIStackView!
+    @IBOutlet weak var bottomViewDobavitPhotoView : UIView!
+    @IBOutlet weak var bottomViewHideDetailsView : UIView! //Skrit detali ""
     
     var key = ""
     
@@ -164,6 +167,8 @@ class SortirovkaContentViewController: UIViewController {
         
         podrobneeViewBottomButton.setTitle("", for: .normal)
         dobavitPhotoViewBottomButton.setTitle("", for: .normal)
+        
+        bottomViewDobavitPhotoView.isHidden = true
         
     }
     
@@ -571,9 +576,11 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
     func makeFooterCell(cell : UITableViewCell){
         
         guard let dobavitPhotoButton = cell.viewWithTag(1) as? UIButton,
-              let podrobneeButton = cell.viewWithTag(3) as? UIButton else {
-                  return
-              }
+              let podrobneeButton = cell.viewWithTag(3) as? UIButton ,
+        let dobavitPhotoView = cell.viewWithTag(5)
+        else {return}
+        
+        dobavitPhotoView.isHidden = true
         
         dobavitPhotoButton.backgroundColor = UIColor(named: "gray")
         dobavitPhotoButton.layer.cornerRadius = 8

@@ -6021,7 +6021,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="U2V-eS-cKs">
-                                <rect key="frame" x="16" y="147" width="382" height="571"/>
+                                <rect key="frame" x="16" y="147" width="382" height="621"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="whiteblack"/>
                                 <prototypes>
@@ -6121,7 +6121,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="EpC-v1-Zxl">
                                                             <rect key="frame" x="0.0" y="18" width="382" height="102"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97S-Ol-wUP">
+                                                                <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97S-Ol-wUP">
                                                                     <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
                                                                     <subviews>
                                                                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFw-FP-mf8">
@@ -6147,7 +6147,7 @@
                                                                         <constraint firstItem="lFw-FP-mf8" firstAttribute="top" secondItem="97S-Ol-wUP" secondAttribute="top" id="lDc-40-lrZ"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fS-6N-FgY">
+                                                                <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fS-6N-FgY">
                                                                     <rect key="frame" x="0.0" y="52" width="382" height="50"/>
                                                                     <subviews>
                                                                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cv-vn-c9h">
@@ -6255,7 +6255,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t8C-37-Bcf">
-                                <rect key="frame" x="16" y="726" width="382" height="136"/>
+                                <rect key="frame" x="16" y="776" width="382" height="86"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAp-gG-Ueq">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="2"/>
@@ -6333,7 +6333,7 @@
                                     <constraint firstItem="alh-k1-dkw" firstAttribute="leading" secondItem="t8C-37-Bcf" secondAttribute="leading" id="XZo-Sj-e2M"/>
                                     <constraint firstItem="alh-k1-dkw" firstAttribute="top" secondItem="yAp-gG-Ueq" secondAttribute="bottom" constant="16" id="ebq-lM-vXb"/>
                                     <constraint firstAttribute="trailing" secondItem="alh-k1-dkw" secondAttribute="trailing" id="hH7-mf-DCx"/>
-                                    <constraint firstAttribute="height" constant="136" id="jfW-tD-mhr"/>
+                                    <constraint firstAttribute="height" constant="86" id="jfW-tD-mhr"/>
                                     <constraint firstItem="yAp-gG-Ueq" firstAttribute="leading" secondItem="t8C-37-Bcf" secondAttribute="leading" id="njT-yu-qN7"/>
                                     <constraint firstItem="yAp-gG-Ueq" firstAttribute="top" secondItem="t8C-37-Bcf" secondAttribute="top" id="sCr-76-bgC"/>
                                     <constraint firstAttribute="trailing" secondItem="yAp-gG-Ueq" secondAttribute="trailing" id="tB1-fc-PD3"/>
@@ -6368,6 +6368,9 @@
                     </view>
                     <connections>
                         <outlet property="bottomView" destination="t8C-37-Bcf" id="T3O-ZY-hvF"/>
+                        <outlet property="bottomViewDobavitPhotoView" destination="4ej-89-qca" id="9yp-o3-LDf"/>
+                        <outlet property="bottomViewHideDetailsView" destination="E6q-Ma-D0Q" id="MmC-vI-Yhe"/>
+                        <outlet property="bottomViewStackView" destination="alh-k1-dkw" id="Df6-5P-OpR"/>
                         <outlet property="cameraImageView" destination="D1T-pp-Dbk" id="z5c-Fv-5u7"/>
                         <outlet property="cameraView" destination="HXo-xl-etn" id="AQz-sw-nZr"/>
                         <outlet property="cameraViewButton" destination="ihl-Zm-K9s" id="tLN-ir-DUS"/>
