@@ -204,20 +204,6 @@ extension PaymentHistoryViewController {
         
     }
     
-    func showOneTovarItem(id : String){
-        
-        let oneTovarItemVC = OneTovarViewController()
-        
-        oneTovarItemVC.itemId = id
-        
-        oneTovarItemVC.shouldShowNavBarCloseButton = true
-        
-        let navVC = UINavigationController(rootViewController: oneTovarItemVC)
-        
-        present(navVC, animated: true)
-        
-    }
-    
 }
 
 //MARK: - SearchBar

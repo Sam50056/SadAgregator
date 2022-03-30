@@ -84,7 +84,7 @@ class TovarTableViewCell: UITableViewCell {
             }
             
             if thisTovar.replaces != "" ,  thisTovar.replaces != "0"{
-                newItems.append(TableViewItem(label1Text: "Замен по товару", label2Text: thisTovar.replaces, shouldSecondLabelBeBlue: contentType == .order ? true : false))
+                newItems.append(TableViewItem(label1Text: "Замен по товару", label2Text: thisTovar.replaces, shouldSecondLabelBeBlue: true))
             }
             
             if thisTovar.shipmentImage != ""{
@@ -209,6 +209,7 @@ class TovarTableViewCell: UITableViewCell {
     var razmerTapped : (() -> Void)?
     var qrCodeTapped : (() -> Void)?
     var zameniTapped : (() -> Void)?
+    var isReplaceTapped : (() -> Void)?
     
     var commentViewTapped : (() -> Void)?
     
@@ -498,6 +499,10 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
             
             zameniTapped?()
             
+        }else if item.label1Text == "Это замена" , item.shouldSecondLabelBeBlue{
+            
+            isReplaceTapped?()
+            
         }
         
     }
@@ -600,7 +605,7 @@ struct TovarCellItem {
     
     //Sborka params
     
-    var vt : String = ""
+    var vt : String
     
     //Order params
     

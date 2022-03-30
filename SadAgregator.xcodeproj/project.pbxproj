@@ -172,6 +172,7 @@
 		227B630627346FB600687BEB /* PurchaseActionsaCombinePurchasesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B630527346FB600687BEB /* PurchaseActionsaCombinePurchasesDataManager.swift */; };
 		227B6308273487FC00687BEB /* PurchaseActionsStartPurProcessingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227B6307273487FC00687BEB /* PurchaseActionsStartPurProcessingDataManager.swift */; };
 		228004A42645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228004A32645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift */; };
+		2281173627F3D79000F9DD94 /* PurchasesGetProdReplacesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2281173527F3D79000F9DD94 /* PurchasesGetProdReplacesDataManager.swift */; };
 		228289C426519B0D00E3AA83 /* PhotoSavedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228289C326519B0D00E3AA83 /* PhotoSavedDataManager.swift */; };
 		2284EAD625BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284EAD525BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift */; };
 		2284EADA25BB196B00CC1D58 /* OKAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284EAD925BB196B00CC1D58 /* OKAuthService.swift */; };
@@ -550,6 +551,7 @@
 		227B630527346FB600687BEB /* PurchaseActionsaCombinePurchasesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsaCombinePurchasesDataManager.swift; sourceTree = "<group>"; };
 		227B6307273487FC00687BEB /* PurchaseActionsStartPurProcessingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseActionsStartPurProcessingDataManager.swift; sourceTree = "<group>"; };
 		228004A32645EE5A00F7EE18 /* PurchasesZonesPriceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesZonesPriceDataManager.swift; sourceTree = "<group>"; };
+		2281173527F3D79000F9DD94 /* PurchasesGetProdReplacesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesGetProdReplacesDataManager.swift; sourceTree = "<group>"; };
 		228289C326519B0D00E3AA83 /* PhotoSavedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSavedDataManager.swift; sourceTree = "<group>"; };
 		2284EAD525BB12AC00CC1D58 /* AssignOKToAppIDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignOKToAppIDDataManager.swift; sourceTree = "<group>"; };
 		2284EAD925BB196B00CC1D58 /* OKAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKAuthService.swift; sourceTree = "<group>"; };
@@ -2155,6 +2157,7 @@
 				2293B66626A7A3DD00022FAC /* PurchasesAddItemCommentDataManager.swift */,
 				2252F76B26E7F8C600291464 /* PurchasesOneItemDataManager.swift */,
 				228D920227DD281C00E8F89D /* PurchasesDeleteItemDataManager.swift */,
+				2281173527F3D79000F9DD94 /* PurchasesGetProdReplacesDataManager.swift */,
 			);
 			path = Purchases;
 			sourceTree = "<group>";
@@ -2520,6 +2523,7 @@
 				22A4A9CE2699CDE1000D3B73 /* AssemblyGetHelpersInAssemblyDataManager.swift in Sources */,
 				22582C7F25D20170005E341C /* SignInWIthAppleIdDataManager.swift in Sources */,
 				2259579F259668370088C7E4 /* InputValView.swift in Sources */,
+				2281173627F3D79000F9DD94 /* PurchasesGetProdReplacesDataManager.swift in Sources */,
 				2255301D261AA5B80017B9CF /* ClientsFilterPayHistByClientCountDataManager.swift in Sources */,
 				2293B66726A7A3DD00022FAC /* PurchasesAddItemCommentDataManager.swift in Sources */,
 				2286BE59275FE36D006C404C /* ZakazTableViewCellHeaderTableViewCell.swift in Sources */,

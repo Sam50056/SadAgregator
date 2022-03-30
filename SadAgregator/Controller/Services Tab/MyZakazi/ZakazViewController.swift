@@ -159,7 +159,7 @@ extension ZakazViewController{
                     
                     data!["prods"].arrayValue.forEach { purProd in
                         
-                        var tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , commentTitle: purProd["comment"]["title"].stringValue , commentMessage: purProd["comment"]["msg"].stringValue, itemStatus : purProd["item_status"].stringValue , handlerStatus : purProd["handler_status"].stringValue)
+                        var tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , commentTitle: purProd["comment"]["title"].stringValue , commentMessage: purProd["comment"]["msg"].stringValue, vt: purProd["vt"].stringValue, itemStatus : purProd["item_status"].stringValue , handlerStatus : purProd["handler_status"].stringValue)
                         
                         guard let thisZakaz = self?.thisZakaz else {return}
                         
@@ -1036,6 +1036,28 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                 
             }
             
+            cell.zameniTapped = { [weak self] in
+                
+                let prodsVC = ProdsByPurViewController()
+                
+                prodsVC.thisPurId = self?.thisZakazId
+                
+                prodsVC.zameniItemId = tovar.pid
+                
+                prodsVC.navTitle = "Замены по товару"
+                
+                prodsVC.pageData = .tovarZameni
+                
+                self?.navigationController?.pushViewController(prodsVC, animated: true)
+                
+            }
+            
+            cell.isReplaceTapped = { [weak self] in
+                
+                self?.showOneTovarItem(id: tovar.forReplacePid)
+                
+            }
+            
             cell.bottomStackViewLeftViewButtonTapped = { [weak self] in
                 //                print("Left tapped")
                 
@@ -1135,7 +1157,7 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                                     
                                     let purProd = replaceJSONTovar
                                     
-                                    var replaceTovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , commentTitle: purProd["comment"]["title"].stringValue , commentMessage: purProd["comment"]["msg"].stringValue ,itemStatus : purProd["item_status"].stringValue , handlerStatus : purProd["handler_status"].stringValue)
+                                    var replaceTovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , commentTitle: purProd["comment"]["title"].stringValue , commentMessage: purProd["comment"]["msg"].stringValue, vt: purProd["vt"].stringValue ,itemStatus : purProd["item_status"].stringValue , handlerStatus : purProd["handler_status"].stringValue)
                                     
                                     guard let thisZakaz = self?.thisZakaz else {return}
                                     
@@ -1452,7 +1474,7 @@ extension ZakazViewController : VendTargetOrderDataManagerDelegate{
                 
                 data["prods"].arrayValue.forEach { purProd in
                     
-                    var tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , commentTitle: purProd["comment"]["title"].stringValue , commentMessage: purProd["comment"]["msg"].stringValue ,itemStatus : purProd["item_status"].stringValue , handlerStatus : purProd["handler_status"].stringValue)
+                    var tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , commentTitle: purProd["comment"]["title"].stringValue , commentMessage: purProd["comment"]["msg"].stringValue, vt: purProd["vt"].stringValue ,itemStatus : purProd["item_status"].stringValue , handlerStatus : purProd["handler_status"].stringValue)
                     
                     guard let thisZakaz = self?.thisZakaz else {return}
                     

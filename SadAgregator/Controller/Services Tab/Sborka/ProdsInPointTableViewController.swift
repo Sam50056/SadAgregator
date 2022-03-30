@@ -379,6 +379,28 @@ extension ProdsInPointTableViewController{
                 
             }
             
+            cell.zameniTapped = { [weak self] in
+                
+                let prodsVC = ProdsByPurViewController()
+                
+                prodsVC.thisPurId = self?.thisPurId
+                
+                prodsVC.zameniItemId = tovar.pid
+                
+                prodsVC.navTitle = "Замены по товару"
+                
+                prodsVC.pageData = .tovarZameni
+                
+                self?.navigationController?.pushViewController(prodsVC, animated: true)
+                
+            }
+            
+            cell.isReplaceTapped = { [weak self] in
+                
+                self?.showOneTovarItem(id: tovar.forReplacePid)
+                
+            }
+            
             cell.qrCodeTapped = {
                 
                 if tovar.qr == "1"{

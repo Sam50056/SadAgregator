@@ -30,9 +30,13 @@ class ProdsByPurViewController: UITableViewController {
     
     private var purchasesProdsByClientDataManager = PurchasesProdsByClientDataManager()
     
+    private var purchasesGetProdReplacesDataManager = PurchasesGetProdReplacesDataManager()
+    
     private var purProds = [JSON]()
     
     var pageData : PageData?
+    
+    var zameniItemId : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,12 +67,15 @@ class ProdsByPurViewController: UITableViewController {
     
 }
 
+//MARK: - Enums
+
 extension ProdsByPurViewController {
     
     enum PageData {
         case tovarSubItem
         case purZamena
         case client
+        case tovarZameni
     }
     
 }
@@ -135,6 +142,50 @@ extension ProdsByPurViewController{
             guard let thisPurId = thisPurId , let clientId = clientId else {return}
             
             purchasesProdsByClientDataManager.getPurchasesProdsByClientData(key: key, clientId: clientId, purSYSID: thisPurId, page: page)
+            
+        }else if pageData == .tovarZameni{
+            
+            guard let thisPurId = thisPurId , let zameniItemId = zameniItemId
+            else {return}
+            
+            purchasesGetProdReplacesDataManager.getPurchasesGetProdReplacesData(key: key, purId: thisPurId, itemId: zameniItemId, page: page) { data, error in
+                
+                DispatchQueue.main.async { [weak self] in
+                    
+                    if let error = error {
+                        print("Error with PurchasesGetProdReplacesDataManager : \(error)")
+                        return
+                    }
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        if self!.page == 1{
+                            self?.purProds = data!["pur_prods"].arrayValue
+                        }else{
+                            self?.purProds.append(contentsOf: data!["pur_prods"].arrayValue)
+                        }
+                        
+                        if self!.page == 1 && self!.purProds.isEmpty{
+                            
+                            let alertController = UIAlertController(title: "У пользователя не добавлены товары", message: nil, preferredStyle: .alert)
+                            
+                            alertController.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { _ in
+                                self?.navigationController?.popViewController(animated: true)
+                            }))
+                            
+                            self?.present(alertController, animated: true, completion: nil)
+                            
+                        }
+                        
+                        self?.tableView.reloadData()
+                        
+                        self?.refreshControl!.endRefreshing()
+                        
+                    }
+                    
+                }
+                
+            }
             
         }
         
@@ -375,6 +426,28 @@ extension ProdsByPurViewController{
             assemblyCommentsVC.thisTovarId = tovar.pid
             
             self.present(assemblyCommentsVC, animated: true, completion: nil)
+            
+        }
+        
+        cell.zameniTapped = { [weak self] in
+            
+            let prodsVC = ProdsByPurViewController()
+            
+            prodsVC.thisPurId = self?.thisPurId
+            
+            prodsVC.zameniItemId = tovar.pid
+            
+            prodsVC.navTitle = "Замены по товару"
+            
+            prodsVC.pageData = .tovarZameni
+            
+            self?.navigationController?.pushViewController(prodsVC, animated: true)
+            
+        }
+        
+        cell.isReplaceTapped = { [weak self] in
+            
+            self?.showOneTovarItem(id: tovar.forReplacePid)
             
         }
         
@@ -719,7 +792,7 @@ extension ProdsByPurViewController{
         
         let purProd = purProds[indexPath.row]
         
-        let tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , commentTitle: purProd["comment"]["title"].stringValue , commentMessage: purProd["comment"]["msg"].stringValue)
+        let tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , commentTitle: purProd["comment"]["title"].stringValue , commentMessage: purProd["comment"]["msg"].stringValue, vt: purProd["vt"].stringValue)
         
         return K.makeHeightForTovarCell(thisTovar: tovar, contentType: .normal, width: view.bounds.width - 32)
         
