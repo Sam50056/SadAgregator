@@ -44,6 +44,10 @@ class GalleryViewController: UIViewController {
     @IBOutlet weak var tovarItemsViewMagnifyView: UIView!
     @IBOutlet weak var tovarItemsViewMagnifyViewImageView: UIImageView!
     @IBOutlet weak var tovarItemsViewMagnifyViewButton: UIButton!
+    @IBOutlet weak var tovarItemsViewQrView: UIView!
+    @IBOutlet weak var tovarItemsViewQrImageView: UIImageView!
+    @IBOutlet weak var tovarItemsViewQrViewButton: UIButton!
+    
     
     @IBOutlet weak var buttonsViewBottomViewLabel: UILabel!
     @IBOutlet weak var buttonsViewPointLabel: UILabel!
@@ -79,11 +83,14 @@ class GalleryViewController: UIViewController {
     
     var forceClosed : (() -> Void)?
     
+    var tovar : TovarCellItem?
+    
     var tovarTrashTapped : (() -> Void)?
     var tovarQuestionMarkTapped : (() -> Void)?
     var tovarInfoTapped : (() -> Void)?
     var tovarCommentTapped : (() -> Void)?
     var tovarMagnifyingGlassTapped : (() -> Void)?
+    var tovarQrTapped : (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,6 +176,17 @@ class GalleryViewController: UIViewController {
         tovarItemsViewInfoView.backgroundColor = UIColor(white: 1, alpha: 0)
         tovarItemsViewCommentView.backgroundColor = UIColor(white: 1, alpha: 0)
         tovarItemsViewMagnifyView.backgroundColor = UIColor(white: 1, alpha: 0)
+        tovarItemsViewQrView.backgroundColor = UIColor(white: 1, alpha: 0)
+        
+        if previewMode == .tovar{
+            
+            if tovar?.qr == "-1"{
+                
+                tovarItemsViewQrView.isHidden = true
+                
+            }
+            
+        }
         
         if previewMode == .normal{
             
@@ -265,6 +283,11 @@ class GalleryViewController: UIViewController {
         tovarItemsViewMagnifyViewButton.addAction(UIAction(handler: { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
             self?.tovarMagnifyingGlassTapped?()
+        }), for: .touchUpInside)
+        
+        tovarItemsViewQrViewButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.dismiss(animated: true, completion: nil)
+            self?.tovarQrTapped?()
         }), for: .touchUpInside)
         
     }

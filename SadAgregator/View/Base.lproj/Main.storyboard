@@ -2279,10 +2279,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rva-XD-RqC">
-                                <rect key="frame" x="364" y="248" width="50" height="260"/>
+                                <rect key="frame" x="364" y="222" width="50" height="312"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="R86-wV-wUs">
-                                        <rect key="frame" x="0.0" y="4" width="50" height="252"/>
+                                        <rect key="frame" x="0.0" y="4" width="50" height="304"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5q-M9-JPW">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
@@ -2409,6 +2409,31 @@
                                                     <constraint firstItem="lzU-iA-ZWh" firstAttribute="top" secondItem="zPe-VQ-sA5" secondAttribute="top" constant="6" id="x9b-o6-3wM"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gxx-BS-JId">
+                                                <rect key="frame" x="0.0" y="260" width="50" height="44"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="BvE-55-W7V">
+                                                        <rect key="frame" x="6" y="7" width="38" height="29.5"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c56-rq-8OO">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="BvE-55-W7V" firstAttribute="leading" secondItem="Gxx-BS-JId" secondAttribute="leading" constant="6" id="Aqr-sS-d62"/>
+                                                    <constraint firstItem="BvE-55-W7V" firstAttribute="top" secondItem="Gxx-BS-JId" secondAttribute="top" constant="6" id="JjI-1Z-Rmi"/>
+                                                    <constraint firstItem="c56-rq-8OO" firstAttribute="top" secondItem="Gxx-BS-JId" secondAttribute="top" id="PBZ-oB-u7E"/>
+                                                    <constraint firstAttribute="trailing" secondItem="c56-rq-8OO" secondAttribute="trailing" id="PvD-f1-k81"/>
+                                                    <constraint firstAttribute="bottom" secondItem="c56-rq-8OO" secondAttribute="bottom" id="Uc1-F9-ALL"/>
+                                                    <constraint firstItem="c56-rq-8OO" firstAttribute="leading" secondItem="Gxx-BS-JId" secondAttribute="leading" id="Z2j-H3-tID"/>
+                                                    <constraint firstAttribute="trailing" secondItem="BvE-55-W7V" secondAttribute="trailing" constant="6" id="jiL-aS-HJK"/>
+                                                    <constraint firstAttribute="bottom" secondItem="BvE-55-W7V" secondAttribute="bottom" constant="6" id="oUW-Uo-pCU"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -2416,7 +2441,7 @@
                                 <constraints>
                                     <constraint firstItem="R86-wV-wUs" firstAttribute="top" secondItem="Rva-XD-RqC" secondAttribute="top" constant="4" id="JGe-6y-Fq1"/>
                                     <constraint firstAttribute="trailing" secondItem="R86-wV-wUs" secondAttribute="trailing" id="Qbf-FP-pmK"/>
-                                    <constraint firstAttribute="height" constant="260" id="StC-jL-VnU"/>
+                                    <constraint firstAttribute="height" constant="312" id="StC-jL-VnU"/>
                                     <constraint firstAttribute="width" constant="50" id="UjA-UC-TkW"/>
                                     <constraint firstItem="R86-wV-wUs" firstAttribute="leading" secondItem="Rva-XD-RqC" secondAttribute="leading" id="mM0-Ry-3Wf"/>
                                     <constraint firstAttribute="bottom" secondItem="R86-wV-wUs" secondAttribute="bottom" constant="4" id="p7b-Nt-0rL"/>
@@ -2481,6 +2506,9 @@
                         <outlet property="tovarItemsViewMagnifyView" destination="zPe-VQ-sA5" id="g7t-69-BAj"/>
                         <outlet property="tovarItemsViewMagnifyViewButton" destination="TDM-Ba-5bG" id="ekH-Hq-WdB"/>
                         <outlet property="tovarItemsViewMagnifyViewImageView" destination="lzU-iA-ZWh" id="Spg-yC-txV"/>
+                        <outlet property="tovarItemsViewQrImageView" destination="BvE-55-W7V" id="kja-bL-c34"/>
+                        <outlet property="tovarItemsViewQrView" destination="Gxx-BS-JId" id="Dsh-Jk-Rba"/>
+                        <outlet property="tovarItemsViewQrViewButton" destination="c56-rq-8OO" id="666-rq-flm"/>
                         <outlet property="tovarItemsViewQuestionView" destination="GrT-Vr-Krc" id="sTa-fp-SMh"/>
                         <outlet property="tovarItemsViewQuestionViewButton" destination="Mql-pU-p4u" id="z6Q-Ye-Yfd"/>
                         <outlet property="tovarItemsViewQuestionViewImageView" destination="1DJ-zl-npz" id="W2I-S3-efo"/>
@@ -9148,6 +9176,7 @@
         <image name="photo.fill" catalog="system" width="128" height="93"/>
         <image name="photo.on.rectangle.fill" catalog="system" width="128" height="97"/>
         <image name="plus.message.fill" catalog="system" width="128" height="113"/>
+        <image name="qrcode" catalog="system" width="128" height="114"/>
         <image name="questionmark" catalog="system" width="96" height="128"/>
         <image name="questionmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="rectangle.fill.on.rectangle.fill" catalog="system" width="128" height="97"/>

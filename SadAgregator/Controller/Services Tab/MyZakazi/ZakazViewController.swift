@@ -924,9 +924,12 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                             
                             if data!["result"].intValue == 1{
                                 
-                                self!.dismiss(animated: true, completion: nil)
                                 self!.purProds.remove(at: indexPath.row)
-                                self!.tableView.reloadRows(at: [indexPath], with: .automatic)
+                                var updateSections : IndexSet = []
+                                for i in 0..<tableView.numberOfSections {
+                                    updateSections.insert(i)
+                                }
+                                self!.tableView.reloadSections(updateSections, with: .automatic)
                                 
                             }else{
                                 if let errorText = data!["msg"].string, errorText != ""{
@@ -1032,7 +1035,117 @@ extension ZakazViewController : UITableViewDelegate , UITableViewDataSource{
                     
                     self!.present(navVC, animated: true, completion: nil)
                     
-                })
+                }, tovarQrTapped: { [weak self] in
+                    
+                    if tovar.qr == "1"{
+                        
+                        let alertController = UIAlertController(title: "Перепривязать код?", message: nil, preferredStyle: .alert)
+                        
+                        alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                            
+                            let qrScannerVC = QRScanViewController()
+                            
+                            qrScannerVC.qrConnected = { [weak self] qr in
+                                
+                                qrScannerVC.dismiss(animated: true, completion: nil)
+                                
+                                VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: tovar.pid, qrValue: qr) { setQrData, setQrError in
+                                    
+                                    DispatchQueue.main.async {
+                                        
+                                        qrScannerVC.dismiss(animated: true, completion: nil)
+                                        
+                                        if let setQrError = setQrError{
+                                            print("Error with VendorSetQRDataManager : \(setQrError)")
+                                            return
+                                        }
+                                        
+                                        if let errorText = setQrData!["msg"].string , errorText != ""{
+                                            self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                                            return
+                                        }
+                                        
+                                        if setQrData!["result"].intValue == 1{
+                                            
+                                            Vibration.success.vibrate()
+                                            
+                                            self?.purProds[indexPath.row].shouldShowBottomStackView = false
+                                            
+                                            tovar.qr = "1"
+                                            
+                                            cell.thisTovar = tovar
+                                            
+                                            self?.purProds[indexPath.row].qr = "1"
+                                            
+                                            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                            self?.present(qrScannerVC, animated: true, completion: nil)
+                            
+                        }))
+                        
+                        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                        
+                        self?.present(alertController, animated: true, completion: nil)
+                        
+                    }else{
+                        
+                        let qrScannerVC = QRScanViewController()
+                        
+                        qrScannerVC.qrConnected = { [weak self] qr in
+                            
+                            qrScannerVC.dismiss(animated: true, completion: nil)
+                            
+                            VendorSetQRDataManager().getVendorSetQRData(key: self!.key, pid: tovar.pid, qrValue: qr) { setQrData, setQrError in
+                                
+                                DispatchQueue.main.async {
+                                    
+                                    if let setQrError = setQrError{
+                                        print("Error with VendorSetQRDataManager : \(setQrError)")
+                                        return
+                                    }
+                                    
+                                    if let errorText = setQrData!["msg"].string , errorText != ""{
+                                        self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorText)
+                                        return
+                                    }
+                                    
+                                    if setQrData!["result"].intValue == 1{
+                                        
+                                        qrScannerVC.dismiss(animated: true, completion: nil)
+                                        
+                                        Vibration.success.vibrate()
+                                        
+                                        self?.purProds[indexPath.row].shouldShowBottomStackView = false
+                                        
+                                        tovar.qr = "1"
+                                        
+                                        cell.thisTovar = tovar
+                                        
+                                        self?.purProds[indexPath.row].qr = "1"
+                                        
+                                        self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        self?.present(qrScannerVC, animated: true, completion: nil)
+                        
+                    }
+                    
+                }, tovar: tovar)
                 
             }
             

@@ -102,7 +102,7 @@ class VendsPopularityRatingViewController: UIViewController {
         help = nil
         
         page = 1
-        rowForPaggingUpdate = 15
+        rowForPaggingUpdate = 14
         
         update()
         
@@ -340,7 +340,7 @@ extension VendsPopularityRatingViewController : UITableViewDelegate , UITableVie
                 
                 page += 1
                 
-                rowForPaggingUpdate += 16
+                rowForPaggingUpdate += 15
                 
                 update()
                 

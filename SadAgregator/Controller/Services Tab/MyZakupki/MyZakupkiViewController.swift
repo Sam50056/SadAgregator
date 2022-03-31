@@ -352,40 +352,6 @@ extension MyZakupkiViewController {
         
     }
     
-    func showCommentVC(pur : ZakupkaTableViewCell.Zakupka , index : Int){
-        
-        let commentAlerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AlertWithTextFieldVC") as! AlertWithTextFieldViewController
-        
-        commentAlerVC.labelText = "Комментарий по закупке"
-        commentAlerVC.doneButtonTitle = "Отправить"
-        
-        commentAlerVC.modalPresentationStyle = .overFullScreen
-        
-        commentAlerVC.doneTapped = { [weak self] text in
-            
-            let comment = text.replacingOccurrences(of: "\n", with: "<br>")
-            
-            PurchaseActionsSetForSupplierCommentDataManager().getPurchaseActionsSetForSupplierCommentData(key: self!.key, purSysId: pur.purId, comment: comment) { commentData, commentError in
-                
-                DispatchQueue.main.async {
-                    
-                    if let commentError = commentError , commentData == nil{
-                        print("Error with PurchaseActionsSetForSupplierCommentDataManager : \(commentError)")
-                        return
-                    }
-                    
-                    self?.simpleNoAnswerRequestDone(data: commentData, index: index)
-                    
-                }
-                
-            }
-            
-        }
-        
-        present(commentAlerVC, animated: true, completion: nil)
-        
-    }
-    
     func action12(pur : ZakupkaTableViewCell.Zakupka , index : Int){
         
         let summAlertController = UIAlertController(title: "Какую сумму оплатил клиент?", message: nil, preferredStyle: .alert)
@@ -999,7 +965,34 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                     
                                                     alertController.addAction(UIAlertAction(title: "Да", style: .default , handler: { _ in
                                                         
-                                                        self?.showCommentVC(pur: pur, index: indexPath.row)
+                                                        let commentAlertController = UIAlertController(title: "Комментарий по закупке", message: nil, preferredStyle: .alert)
+                                                        
+                                                        commentAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+                                                        
+                                                        commentAlertController.addAction(UIAlertAction(title: "Отправить", style: .default, handler: { [weak self] _ in
+                                                            
+                                                            guard let text = commentAlertController.textFields?[0].text else {return}
+                                                            
+                                                            let comment = text.replacingOccurrences(of: "\n", with: "<br>")
+                                                            
+                                                            PurchaseActionsSetForSupplierCommentDataManager().getPurchaseActionsSetForSupplierCommentData(key: self!.key, purSysId: pur.purId, comment: comment) { commentData, commentError in
+                                                                
+                                                                DispatchQueue.main.async {
+                                                                    
+                                                                    if let commentError = commentError , commentData == nil{
+                                                                        print("Error with PurchaseActionsSetForSupplierCommentDataManager : \(commentError)")
+                                                                        return
+                                                                    }
+                                                                    
+                                                                    self?.simpleNoAnswerRequestDone(data: commentData, index: indexPath.row)
+                                                                    
+                                                                }
+                                                                
+                                                            }
+                                                            
+                                                        }))
+                                                        
+                                                        self?.present(commentAlertController, animated: true)
                                                         
                                                     }))
                                                     
@@ -1421,7 +1414,34 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                             
                                                             commentAlertController.addAction(UIAlertAction(title: "Да", style: .default , handler: { _ in
                                                                 
-                                                                self?.showCommentVC(pur: pur, index: indexPath.row)
+                                                                let commentAlertController = UIAlertController(title: "Комментарий по закупке", message: nil, preferredStyle: .alert)
+                                                                
+                                                                commentAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+                                                                
+                                                                commentAlertController.addAction(UIAlertAction(title: "Отправить", style: .default, handler: { [weak self] _ in
+                                                                    
+                                                                    guard let text = commentAlertController.textFields?[0].text else {return}
+                                                                    
+                                                                    let comment = text.replacingOccurrences(of: "\n", with: "<br>")
+                                                                    
+                                                                    PurchaseActionsSetForSupplierCommentDataManager().getPurchaseActionsSetForSupplierCommentData(key: self!.key, purSysId: pur.purId, comment: comment) { commentData, commentError in
+                                                                        
+                                                                        DispatchQueue.main.async {
+                                                                            
+                                                                            if let commentError = commentError , commentData == nil{
+                                                                                print("Error with PurchaseActionsSetForSupplierCommentDataManager : \(commentError)")
+                                                                                return
+                                                                            }
+                                                                            
+                                                                            self?.simpleNoAnswerRequestDone(data: commentData, index: indexPath.row)
+                                                                            
+                                                                        }
+                                                                        
+                                                                    }
+                                                                    
+                                                                }))
+                                                                
+                                                                self?.present(commentAlertController, animated: true)
                                                                 
                                                             }))
                                                             

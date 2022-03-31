@@ -22,7 +22,7 @@ class ProdsByPurViewController: UITableViewController {
     var navTitle : String?
     
     private var page = 1
-    private var rowForPaggingUpdate : Int = 15
+    private var rowForPaggingUpdate : Int = 14
     
     private var purchasesProdsByClientByStatusDataManager = PurchasesProdsByClientByStatusDataManager()
     
@@ -253,9 +253,12 @@ extension ProdsByPurViewController{
                         
                         if data!["result"].intValue == 1{
                             
-                            self!.dismiss(animated: true, completion: nil)
                             self!.purProds.remove(at: indexPath.row)
-                            self!.tableView.reloadRows(at: [indexPath], with: .automatic)
+                            var updateSections : IndexSet = []
+                            for i in 0..<tableView.numberOfSections {
+                                updateSections.insert(i)
+                            }
+                            self!.tableView.reloadSections(updateSections, with: .automatic)
                             
                         }else{
                             if let errorText = data!["msg"].string, errorText != ""{
@@ -361,7 +364,57 @@ extension ProdsByPurViewController{
                 
                 self!.present(navVC, animated: true, completion: nil)
                 
-            })
+            } , tovarQrTapped: { [weak self] in
+                
+                if tovar.qr == "1"{
+                    
+                    let alertController = UIAlertController(title: "Перепривязать код?", message: nil, preferredStyle: .alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+                        
+                        let qrScannerVC = QRScannerController()
+                        
+                        qrScannerVC.pid = tovar.pid
+                        
+                        qrScannerVC.qrConnected = {
+                            
+                            Vibration.success.vibrate()
+                            
+                            tovar.status = "Куплено"
+                            
+                            cell.thisTovar = tovar
+                            
+                        }
+                        
+                        self?.present(qrScannerVC, animated: true, completion: nil)
+                        
+                    }))
+                    
+                    alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                    
+                    self?.present(alertController, animated: true, completion: nil)
+                    
+                }else{
+                    
+                    let qrScannerVC = QRScannerController()
+                    
+                    qrScannerVC.pid = tovar.pid
+                    
+                    qrScannerVC.qrConnected = {
+                        
+                        Vibration.success.vibrate()
+                        
+                        tovar.status = "Куплено"
+                        
+                        cell.thisTovar = tovar
+                        
+                    }
+                    
+                    self?.present(qrScannerVC, animated: true, completion: nil)
+                    
+                }
+                
+            }, tovar: tovar)
             
         }
         
@@ -379,7 +432,7 @@ extension ProdsByPurViewController{
                     
                     qrScannerVC.qrConnected = {
                         
-                        self.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                        Vibration.success.vibrate()
                         
                         tovar.status = "Куплено"
                         
@@ -403,7 +456,7 @@ extension ProdsByPurViewController{
                 
                 qrScannerVC.qrConnected = { [weak self] in
                     
-                    self?.showSimpleAlertWithOkButton(title: "QR-код успешно привязан", message: nil)
+                    Vibration.success.vibrate()
                     
                     tovar.status = "Куплено"
                     
@@ -800,19 +853,15 @@ extension ProdsByPurViewController{
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 8{
+        if indexPath.row == rowForPaggingUpdate{
             
-            if indexPath.row == rowForPaggingUpdate{
-                
-                page += 1
-                
-                rowForPaggingUpdate += 16
-                
-                update()
-                
-                print("Done a request for page: \(page)")
-                
-            }
+            page += 1
+            
+            rowForPaggingUpdate += 15
+            
+            update()
+            
+            print("Done a request for page: \(page)")
             
         }
         

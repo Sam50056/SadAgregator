@@ -263,11 +263,13 @@ extension UIViewController {
         
     }
     
-    func previewTovarImage(_ imageLink : String , tovarTrashTapped : (() -> Void)? , tovarQuestionMarkTapped : (() -> Void)? , tovarInfoTapped : (() -> Void)? , tovarCommentTapped : (() -> Void)? , tovarMagnifyingGlassTapped : (() -> Void)?){
+    func previewTovarImage(_ imageLink : String , tovarTrashTapped : (() -> Void)? , tovarQuestionMarkTapped : (() -> Void)? , tovarInfoTapped : (() -> Void)? , tovarCommentTapped : (() -> Void)? , tovarMagnifyingGlassTapped : (() -> Void)?, tovarQrTapped : (() -> Void)? , tovar : TovarCellItem){
         
         let galleryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GalleryVC") as! GalleryViewController
         
         galleryVC.previewMode = .tovar
+        
+        galleryVC.tovar = tovar
         
         galleryVC.tovarTrashTapped = tovarTrashTapped
         galleryVC.tovarQuestionMarkTapped = tovarQuestionMarkTapped
@@ -275,6 +277,7 @@ extension UIViewController {
         galleryVC.tovarCommentTapped = tovarCommentTapped
         galleryVC.tovarCommentTapped = tovarCommentTapped
         galleryVC.tovarMagnifyingGlassTapped = tovarMagnifyingGlassTapped
+        galleryVC.tovarQrTapped = tovarQrTapped
         
         galleryVC.selectedImageIndex = 0
         
