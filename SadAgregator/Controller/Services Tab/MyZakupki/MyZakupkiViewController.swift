@@ -1445,7 +1445,13 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                                 
                                                             }))
                                                             
-                                                            commentAlertController.addAction(UIAlertAction(title: "Отмена", style: .default, handler: nil))
+                                                            commentAlertController.addAction(UIAlertAction(title: "Нет", style: .default, handler: { _ in
+                                                                
+                                                                
+                                                                self?.updatePurIndex = indexPath.row
+                                                                self?.updatePur(pur)
+                                                                
+                                                            }))
                                                             
                                                             self?.present(commentAlertController, animated: true, completion: nil)
                                                             

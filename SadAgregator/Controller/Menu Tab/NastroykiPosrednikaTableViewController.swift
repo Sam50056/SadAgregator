@@ -724,7 +724,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             case 6:
                 
                 if firstSectionItemsForPosrednik[index].isDopInfo{
-                    return 95
+                    return 125
                 }
                 
             case 8:
