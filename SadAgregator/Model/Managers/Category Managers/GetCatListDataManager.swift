@@ -17,14 +17,14 @@ struct GetCatListDataManager {
     
     var delegate : GetCatListDataManagerDelegate?
     
-    func getGetCatListData(key : String , parentId : String?){
+    func getGetCatListData(domain : String , key : String , parentId : String?){
         
         var urlString = ""
         
         if parentId == nil{
-            urlString = "https://agrapi.tk-sad.ru/agr_cats.GetCatList?AKey=\(key)"
+            urlString = "https://\(domain != "" ? domain : "agrapi.tk-sad.ru")/agr_cats.GetCatList?AKey=\(key)"
         }else{
-            urlString = "https://agrapi.tk-sad.ru/agr_cats.GetCatListParent?AKey=\(key)&AParentID=\(parentId!)"
+            urlString = "https://\(domain != "" ? domain : "agrapi.tk-sad.ru")/agr_cats.GetCatListParent?AKey=\(key)&AParentID=\(parentId!)"
         }
         
         print("URLString for GetCatListDataManager: \(urlString)")

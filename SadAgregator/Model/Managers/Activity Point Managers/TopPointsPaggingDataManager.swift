@@ -17,9 +17,9 @@ struct TopPointsPaggingDataManager {
     
     var delegate : TopPointsPaggingDataManagerDelegate?
     
-    func getTopPointsPaggingData(key : String, page : Int){
+    func getTopPointsPaggingData(domain : String , key : String, page : Int){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_intf.TopPointsPaging?AKey=\(key)&APage=\(page)"
+        let urlString = "https://\(domain != "" ? domain : "agrapi.tk-sad.ru")/agr_intf.TopPointsPaging?AKey=\(key)&APage=\(page)"
         
         print("URLString for TopPointsPaggingDataManager: \(urlString)")
         

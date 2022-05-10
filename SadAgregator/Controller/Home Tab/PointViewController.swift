@@ -22,7 +22,9 @@ class PointViewController: UIViewController {
     
     var key = ""
     
-    var isLogged = false 
+    var isLogged = false
+    
+    var catWorkDomain = ""
     
     var thisPointId : String?
     
@@ -217,6 +219,8 @@ extension PointViewController {
         key = userDataObject.first!.key
         
         isLogged = userDataObject.first!.isLogged
+        
+        catWorkDomain = userDataObject.first!.catWork
         
     }
     
@@ -518,7 +522,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
                 
                 page += 1
                 
-                pointPostsPaggingDataManager.getPointPostsPaggingData(key: key, pointId: thisPointId!, page: page)
+                pointPostsPaggingDataManager.getPointPostsPaggingData(domain: catWorkDomain, key: key, pointId: thisPointId!, page: page)
                 
                 print("Done a request for page: \(page)")
                 
@@ -742,7 +746,7 @@ extension PointViewController : UITableViewDelegate , UITableViewDataSource{
             
             showSimpleCircleAnimation(activityController: activityController)
             
-            ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
+            ExportPeersDataManager(delegate: self).getExportPeersData(domain: catWorkDomain, key: key)
             
         }
         

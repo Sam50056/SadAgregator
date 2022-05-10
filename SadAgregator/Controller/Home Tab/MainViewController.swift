@@ -35,6 +35,8 @@ class MainViewController: UIViewController {
     var imageHashSearch : String?
     var imageHashServer : String?
     
+    var catWorkDomain = ""
+    
     lazy var checkKeysDataManager = CheckKeysDataManager()
     lazy var mainDataManager = MainDataManager()
     lazy var mainPaggingDataManager = MainPaggingDataManager()
@@ -249,6 +251,7 @@ extension MainViewController {
         isLogged = userDataFirst?.isLogged ?? false
         imageHashServer = userDataFirst?.imageHashServer
         imageHashSearch = userDataFirst?.imageHashSearch
+        catWorkDomain = userDataFirst?.catWork ?? ""
         
         if key != "" {
             tableView.reloadData()
@@ -740,7 +743,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
                 
                 page += 1
                 
-                mainPaggingDataManager.getMainPaggingData(key: key!, page: page)
+                mainPaggingDataManager.getMainPaggingData(domain: catWorkDomain, key: key!, page: page)
                 
                 print("Done a request for page: \(page)")
                 
@@ -764,7 +767,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
         page = 1
         rowForPaggingUpdate = 0
         
-        mainDataManager.getMainData(key: key)
+        mainDataManager.getMainData(domain: catWorkDomain, key: key)
         
     }
     
@@ -906,7 +909,7 @@ extension MainViewController : UITableViewDelegate , UITableViewDataSource {
             
             showSimpleCircleAnimation(activityController: activityController)
             
-            ExportPeersDataManager(delegate: self).getExportPeersData(key: key!)
+            ExportPeersDataManager(delegate: self).getExportPeersData(domain : catWorkDomain , key: key!)
             
         }
         

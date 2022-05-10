@@ -17,9 +17,9 @@ struct TopLinesDataManager {
     
     var delegate : TopLinesDataManagerDelegate?
     
-    func getTopLinesData(key : String){
+    func getTopLinesData(domain : String , key : String){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_intf.TopLines?AKey=\(key)"
+        let urlString = "https://\(domain != "" ? domain : "agrapi.tk-sad.ru")/agr_intf.TopLines?AKey=\(key)"
         
         print("URLString for TopLinesDataManager: \(urlString)")
         

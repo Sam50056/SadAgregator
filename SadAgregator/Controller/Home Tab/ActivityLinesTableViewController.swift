@@ -23,6 +23,8 @@ class ActivityLinesTableViewController: UITableViewController, TopLinesDataManag
     
     var selectedLineId = ""
     
+    var catWorkDomain = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +34,7 @@ class ActivityLinesTableViewController: UITableViewController, TopLinesDataManag
         
         tableView.separatorStyle = .none
         
-        topLinesDataManager.getTopLinesData(key: "")
+        topLinesDataManager.getTopLinesData(domain: catWorkDomain, key: "")
         
         showSimpleCircleAnimation(activityController: activityController)
         
@@ -52,6 +54,8 @@ class ActivityLinesTableViewController: UITableViewController, TopLinesDataManag
         let userDataObject = realm.objects(UserData.self)
         
         key = userDataObject.first!.key
+        
+        catWorkDomain = userDataObject.first!.catWork
         
     }
     

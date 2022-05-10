@@ -17,9 +17,9 @@ struct PointPostsPaggingDataManager {
     
     var delegate : PointPostsPaggingDataManagerDelegate?
     
-    func getPointPostsPaggingData(key : String, pointId : String, page : Int) {
+    func getPointPostsPaggingData(domain : String, key : String, pointId : String, page : Int) {
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_intf.PointPostsPaging?AKey=\(key)&APointID=\(pointId)&APage=\(page)"
+        let urlString = "https://\(domain != "" ? domain : "agrapi.tk-sad.ru")/agr_intf.PointPostsPaging?AKey=\(key)&APointID=\(pointId)&APage=\(page)"
         
         print("URLString for PointPostsPaggingDataManager: \(urlString)")
         

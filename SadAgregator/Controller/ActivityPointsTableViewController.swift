@@ -15,6 +15,8 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
     
     var key = ""
     
+    var catWorkDomain = ""
+    
     var lineId : String?
     
     let searchController = UISearchController(searchResultsController: nil)
@@ -65,7 +67,7 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
         if lineId != nil{
             linePointsPaggingDataManager.getLinePointsPaggingData(key: key, lineId: lineId!, page: page)
         }else{
-            topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
+            topPointsPaggingDataManager.getTopPointsPaggingData(domain: catWorkDomain, key: key, page: page)
         }
         
         showSimpleCircleAnimation(activityController: activityController)
@@ -113,7 +115,7 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
             if lineId != nil{
                 linePointsPaggingDataManager.getLinePointsPaggingData(key: key, lineId: lineId!, page: page)
             }else{
-                topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
+                topPointsPaggingDataManager.getTopPointsPaggingData(domain: catWorkDomain, key: key, page: page)
             }
             
         }
@@ -238,7 +240,7 @@ class ActivityPointsTableViewController: UITableViewController, TopPointsPagging
                 if lineId != nil{
                     linePointsPaggingDataManager.getLinePointsPaggingData(key: key, lineId: lineId!, page: page)
                 }else{
-                    topPointsPaggingDataManager.getTopPointsPaggingData(key: key, page: page)
+                    topPointsPaggingDataManager.getTopPointsPaggingData(domain: catWorkDomain, key: key, page: page)
                 }
                 
             }else{

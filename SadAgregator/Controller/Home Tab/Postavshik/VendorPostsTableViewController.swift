@@ -17,6 +17,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
     
     var key = ""
     var isLogged = false
+    var catWorkDomain = ""
     
     var page = 1
     var rowForPaggingUpdate = 0
@@ -131,7 +132,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             page = 1
             rowForPaggingUpdate = 0
             
-            getVendPostsPaggingDataManager.getGetVendPostsPaggingData(key: key, vendId: thisVendId, page: page)
+            getVendPostsPaggingDataManager.getGetVendPostsPaggingData(domain: catWorkDomain, key: key, vendId: thisVendId, page: page)
             
             showSimpleCircleAnimation(activityController: activityController)
             
@@ -200,7 +201,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             
             page += 1
             
-            getVendPostsPaggingDataManager.getGetVendPostsPaggingData(key: key, vendId: thisVendId!, page: page)
+            getVendPostsPaggingDataManager.getGetVendPostsPaggingData(domain: catWorkDomain, key: key, vendId: thisVendId!, page: page)
             
             print("Done a request for page: \(page)")
             
@@ -305,7 +306,7 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
             
             showSimpleCircleAnimation(activityController: activityController)
             
-            ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
+            ExportPeersDataManager(delegate: self).getExportPeersData(domain: catWorkDomain, key: key)
             
         }
         

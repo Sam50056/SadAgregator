@@ -17,9 +17,9 @@ struct LinePostsPaggingDataManager {
     
     var delegate : LinePostsPaggingDataManagerDelegate?
     
-    func getLinePostsPaggingData(key : String , lineId : String , page : Int) {
+    func getLinePostsPaggingData(domain : String , key : String , lineId : String , page : Int) {
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_intf.LinePostsPaging?AKey=\(key)&ALineID=\(lineId)&APage=\(page)"
+        let urlString = "https://\(domain != "" ? domain : "agrapi.tk-sad.ru")/agr_intf.LinePostsPaging?AKey=\(key)&ALineID=\(lineId)&APage=\(page)"
         
         print("URLString for LinePostsPaggingDataManager: \(urlString)")
         

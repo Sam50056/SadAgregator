@@ -17,9 +17,9 @@ struct MainPaggingDataManager {
     
     var delegate : MainPaggingDataManagerDelegate?
     
-    func getMainPaggingData(key : String , page : Int){
+    func getMainPaggingData(domain : String, key : String , page : Int){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_intf.MainPaging?AKey=\(key)&APage=\(page)"
+        let urlString = "https://\(domain != "" ? domain : "agrapi.tk-sad.ru")/agr_intf.MainPaging?AKey=\(key)&APage=\(page)"
         
         print("URLString for MainPaggingDataManager: \(urlString)")
         

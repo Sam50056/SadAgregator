@@ -17,9 +17,9 @@ struct GetForExportDataManager {
     
     var delegate : GetForExportDataManagerDelegate?
     
-    func getGetForExportData(key : String , postId : String){
+    func getGetForExportData(domain : String, key : String , postId : String){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_intf.GetForExport?AKey=\(key)&APostID=\(postId)"
+        let urlString = "https://\(domain != "" ? domain : "agrapi.tk-sad.ru")/agr_intf.GetForExport?AKey=\(key)&APostID=\(postId)"
         
         print("URLString for GetForExportDataManager: \(urlString)")
         

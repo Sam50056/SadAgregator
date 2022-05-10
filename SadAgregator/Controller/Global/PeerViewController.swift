@@ -23,13 +23,14 @@ class PeerViewController: UIViewController{
     
     var key = ""
     
-    var peers : [JSON]?{
-        didSet{
-            filteredPeers = peers
-        }
-    }
+    var catWorkDomain = ""
     
-    var filteredPeers : [JSON]?
+    var exportPeersDataManager = ExportPeersDataManager()
+    
+    var peers : [JSON]?
+    
+    var page = 1
+    var rowForPaggingUpdate : Int = 15
     
     var selectedPeerIndex : Int?
     
@@ -45,7 +46,17 @@ class PeerViewController: UIViewController{
         tableView.delegate = self
         tableView.dataSource = self
         
+        exportPeersDataManager.delegate = self
+        
         searchTextField.addTarget(self, action: #selector(searchTextFieldValueChanged(_:)), for: .editingChanged)
+        
+    }
+    
+    //MARK: - Functions
+    
+    func update(){
+        
+        exportPeersDataManager.getExportPeersData(domain: catWorkDomain, key: key, query: searchTextField.text ?? "" , page: page)
         
     }
     
@@ -65,27 +76,16 @@ class PeerViewController: UIViewController{
     
     @IBAction func searchTextFieldValueChanged(_ sender : UITextField){
         
-        guard let searchText = sender.text , let peers = peers else {return}
+        guard let _ = sender.text else {return}
         
-        if searchText == ""{
-            
-            filteredPeers = peers
-            
-        }else{
-            
-            var newArray = [JSON]()
-            
-            peers.forEach { peer in
-                if peer["capt"].stringValue.lowercased().contains(searchText.lowercased()){
-                    newArray.append(peer)
-                }
-            }
-            
-            filteredPeers = newArray
-            
-        }
+        page = 1
+        rowForPaggingUpdate = 15
+        
+        peers?.removeAll()
         
         tableView.reloadData()
+        
+        update()
         
     }
     
@@ -188,18 +188,18 @@ extension PeerViewController : SetDefaultPeerDataManagerDelegate{
 extension PeerViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredPeers?.count ?? 0
+        return peers?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = UITableViewCell()
         
-        guard let peers = filteredPeers else { return cell }
+        guard peers != nil , !peers!.isEmpty else {return cell}
         
         cell = tableView.dequeueReusableCell(withIdentifier: "peerCell", for: indexPath)
         
-        setUpPeerCell(cell: cell, data: peers[indexPath.row])
+        setUpPeerCell(cell: cell, data: peers![indexPath.row])
         
         return cell
         
@@ -207,7 +207,7 @@ extension PeerViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let id = filteredPeers?[indexPath.row]["peer_id"].stringValue{
+        if let id = peers?[indexPath.row]["peer_id"].stringValue{
             
             selectedPeerIndex = indexPath.row
             
@@ -216,6 +216,22 @@ extension PeerViewController : UITableViewDelegate , UITableViewDataSource{
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == rowForPaggingUpdate{
+            
+            page += 1
+            
+            rowForPaggingUpdate += 15
+            
+            update()
+            
+            print("Done a request for page: \(page)")
+            
+        }
         
     }
     
@@ -250,6 +266,38 @@ extension PeerViewController {
         
         key = userDataObject.first!.key
         
+        catWorkDomain = userDataObject.first!.catWork
+        
+    }
+    
+}
+
+//MARK: - ExportPeersDataManager
+
+extension PeerViewController : ExportPeersDataManagerDelegate{
+    
+    func didGetExportPeersData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            stopSimpleCircleAnimation(activityController: activityController)
+            
+            if data["result"].intValue == 1{
+                
+                guard peers != nil else {return}
+                
+                peers!.append(contentsOf: data["peers"].arrayValue)
+                
+                tableView.reloadData()
+                
+            }
+            
+        }
+        
+    }
+    
+    func didFailGettingExportPeersDataWithError(error: String) {
+        print("Error with ExportPeersDataManager : \(error)")
     }
     
 }

@@ -18,6 +18,7 @@ class EditVigruzkaViewController: UIViewController {
     let realm = try! Realm()
     
     var key = ""
+    var catWorkDomain = ""
     
     var thisPostId : String?
     
@@ -37,7 +38,7 @@ class EditVigruzkaViewController: UIViewController {
         
         guard let postId = thisPostId else { return }
         
-        GetForExportDataManager(delegate: self).getGetForExportData(key: key, postId: postId)
+        GetForExportDataManager(delegate: self).getGetForExportData(domain : catWorkDomain, key: key, postId: postId)
         
     }
     
@@ -130,6 +131,8 @@ extension EditVigruzkaViewController {
         let userDataObject = realm.objects(UserData.self)
         
         key = userDataObject.first!.key
+        
+        catWorkDomain = userDataObject.first!.catWork
         
     }
     

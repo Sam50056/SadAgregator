@@ -36,6 +36,8 @@ class FavoritePostsViewController : UITableViewController {
     
     var isLogged = false
     
+    var catWorkDomain = ""
+    
     lazy var myPostsDataManager = MyPostsDataManager()
     
     var page = 1
@@ -304,7 +306,7 @@ class FavoritePostsViewController : UITableViewController {
             
             showSimpleCircleAnimation(activityController: activityController)
             
-            ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
+            ExportPeersDataManager(delegate: self).getExportPeersData(domain: catWorkDomain, key: key)
             
         }
         
@@ -548,6 +550,8 @@ extension FavoritePostsViewController {
         key = userDataObject.first!.key
         
         isLogged = userDataObject.first!.isLogged
+        
+        catWorkDomain = userDataObject.first!.catWork
         
     }
     

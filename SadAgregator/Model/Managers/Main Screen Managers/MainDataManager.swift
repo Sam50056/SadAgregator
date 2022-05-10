@@ -17,9 +17,9 @@ struct MainDataManager {
     
     var delegate : MainDataManagerDelegate?
     
-    func getMainData(key : String){
+    func getMainData(domain : String , key : String){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_intf.Main?AKey=\(key)"
+        let urlString = "https://\(domain != "" ? domain : "agrapi.tk-sad.ru")/agr_intf.Main?AKey=\(key)"
         
         print("URLString for MainPageDataManager: \(urlString)")
         

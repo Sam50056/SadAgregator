@@ -17,9 +17,9 @@ struct GetVendPostsPaggingDataManager {
     
     var delegate : GetVendPostsPaggingDataManagerDelegate?
     
-    func getGetVendPostsPaggingData(key : String , vendId : String , page : Int){
+    func getGetVendPostsPaggingData(domain : String , key : String , vendId : String , page : Int){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_intf.GetVendPostsPaging?AKEy=\(key)&AVendorID=\(vendId)&APage=\(page)"
+        let urlString = "https://\(domain != "" ? domain : "agrapi.tk-sad.ru")/agr_intf.GetVendPostsPaging?AKEy=\(key)&AVendorID=\(vendId)&APage=\(page)"
         
         print("URLString for GetVendPostsPaggingDataManager: \(urlString)")
         

@@ -10,7 +10,6 @@ import SwiftyJSON
 import Cosmos
 import SDWebImage
 import RealmSwift
-import Cosmos
 
 class PostavshikViewController: UIViewController {
     
@@ -23,6 +22,8 @@ class PostavshikViewController: UIViewController {
     var key = ""
     
     var isLogged = false
+    
+    var catWorkDomain = ""
     
     var thisVendorId : String?
     
@@ -106,6 +107,10 @@ class PostavshikViewController: UIViewController {
     
     var vendorPop : String? {
         return vendorData?["pop"].stringValue
+    }
+    
+    var vendorProds : String? {
+        return vendorData?["prods"].stringValue
     }
     
     var vendorRegDate : String? {
@@ -656,6 +661,36 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
                     
                 }
                 
+            }else if selectedInfoCell.image == UIImage(systemName: "cart"){
+                
+                guard let thisVendorId = thisVendorId else {return}
+                
+                NoAnswerDataManager().sendNoAnswerDataRequest(urlString: "https://\(catWorkDomain != "" ? catWorkDomain : "agrapi.tk-sad.ru")/agr_cats.VandCatExt?AKey=\(key)&AVendID=\(thisVendorId)") { data, error in
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        
+                        if data!["result"].intValue == 1{
+                            
+                            let allCategoriesVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AllCatVC") as! AllCategoriesViewController
+                            
+                            allCategoriesVC.contentType = .vend
+                            
+                            allCategoriesVC.vendId = thisVendorId
+                            
+                            self?.navigationController?.pushViewController(allCategoriesVC, animated: true)
+                            
+                        }else{
+                            
+                            if let errorMessage = data!["msg"].string , errorMessage != "" {
+                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
             }
             
         }
@@ -670,7 +705,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
         
         var count = 0
         
-        guard let phone = vendorPhone , let pop = vendorPop, let place = vendorPlace , let regDate = vendorRegDate , let vkLink = vendorVkLink else {return count}
+        guard let phone = vendorPhone , let pop = vendorPop, let prods = vendorProds, let place = vendorPlace , let regDate = vendorRegDate , let vkLink = vendorVkLink else {return count}
         
         if phone != "" {
             count += 1
@@ -685,6 +720,8 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             infoCells.append(InfoCellObject(image: UIImage(systemName: "person.2.fill")!, leftLabelText: "Охват", rightLabelText: pop, shouldRightLabelBeBlue: false))
             
         }
+        
+        infoCells.append(InfoCellObject(image: UIImage(systemName: "cart")!, leftLabelText: "Товары", rightLabelText: prods, shouldRightLabelBeBlue: true))
         
         if place != "" {
             count += 1
@@ -1054,7 +1091,7 @@ extension PostavshikViewController : UITableViewDelegate , UITableViewDataSource
             
             showSimpleCircleAnimation(activityController: activityController)
             
-            ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
+            ExportPeersDataManager(delegate: self).getExportPeersData(domain: catWorkDomain, key: key)
             
         }
         

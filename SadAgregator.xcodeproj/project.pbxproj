@@ -54,6 +54,8 @@
 		2222676D2698B05C00E1AFFC /* AssemblyRemoveFromHelperDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222676C2698B05C00E1AFFC /* AssemblyRemoveFromHelperDataManager.swift */; };
 		2222676F2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222676E2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift */; };
 		222267712698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222267702698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift */; };
+		2222FE5E281DC0110015193A /* CatsGetVendCatsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222FE5D281DC0100015193A /* CatsGetVendCatsDataManager.swift */; };
+		2222FE60281F07470015193A /* CatsVendCatProdsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222FE5F281F07470015193A /* CatsVendCatProdsDataManager.swift */; };
 		2223759B26D460D40097AF41 /* OnlyCorneredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223759A26D460D40097AF41 /* OnlyCorneredView.swift */; };
 		2223759D26D46BB20097AF41 /* SortirovkaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223759C26D46BB20097AF41 /* SortirovkaViewController.swift */; };
 		222375A026D96A250097AF41 /* SortirovkaContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2223759F26D96A250097AF41 /* SortirovkaContentViewController.swift */; };
@@ -432,6 +434,8 @@
 		2222676C2698B05C00E1AFFC /* AssemblyRemoveFromHelperDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyRemoveFromHelperDataManager.swift; sourceTree = "<group>"; };
 		2222676E2698DB1A00E1AFFC /* AssemblyMoveToHelperPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyMoveToHelperPoint.swift; sourceTree = "<group>"; };
 		222267702698DD4B00E1AFFC /* AssemblyRemoveFromHelperPointDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyRemoveFromHelperPointDataManager.swift; sourceTree = "<group>"; };
+		2222FE5D281DC0100015193A /* CatsGetVendCatsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsGetVendCatsDataManager.swift; sourceTree = "<group>"; };
+		2222FE5F281F07470015193A /* CatsVendCatProdsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsVendCatProdsDataManager.swift; sourceTree = "<group>"; };
 		2223759A26D460D40097AF41 /* OnlyCorneredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyCorneredView.swift; sourceTree = "<group>"; };
 		2223759C26D46BB20097AF41 /* SortirovkaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortirovkaViewController.swift; sourceTree = "<group>"; };
 		2223759F26D96A250097AF41 /* SortirovkaContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortirovkaContentViewController.swift; sourceTree = "<group>"; };
@@ -810,6 +814,8 @@
 			children = (
 				2200943C25DB26D00001F7B3 /* GetCatpageDataManager.swift */,
 				22B6BCAD25DEFD8100EAE067 /* GetCatListDataManager.swift */,
+				2222FE5D281DC0100015193A /* CatsGetVendCatsDataManager.swift */,
+				2222FE5F281F07470015193A /* CatsVendCatProdsDataManager.swift */,
 			);
 			path = "Category Managers";
 			sourceTree = "<group>";
@@ -2375,6 +2381,7 @@
 				2291BE452560620F004F55DF /* MainDataManager.swift in Sources */,
 				2286BE622761471F006C404C /* VendFormOrdersDataManager.swift in Sources */,
 				22DD117C26D1535800E8494C /* BrokersGetBrokerRevsPagginationDataManager.swift in Sources */,
+				2222FE5E281DC0110015193A /* CatsGetVendCatsDataManager.swift in Sources */,
 				22CADB1225B2484000A5E475 /* AssignVkToAppIDDataManager.swift in Sources */,
 				22D175F22567E86B00DA7D0E /* PhotoCollectionViewCell.swift in Sources */,
 				22B7271625741B1100B56249 /* PointPostsPaggingDataManager.swift in Sources */,
@@ -2423,6 +2430,7 @@
 				226D9445258D2179008CEC4A /* GalleryViewController.swift in Sources */,
 				224BC44D25A0C529003F147F /* AddPointRequestDataManager.swift in Sources */,
 				22595798259667F90088C7E4 /* MasterNastroekView.swift in Sources */,
+				2222FE60281F07470015193A /* CatsVendCatProdsDataManager.swift in Sources */,
 				22ADF821267C16F600811DA9 /* BrokersAddSendTypeDataManager.swift in Sources */,
 				22906B372578020300F00B0D /* PostavshikViewController.swift in Sources */,
 				2259579C259668220088C7E4 /* SimpleReqView.swift in Sources */,

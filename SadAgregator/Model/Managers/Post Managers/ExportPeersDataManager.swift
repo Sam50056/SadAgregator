@@ -17,16 +17,13 @@ struct ExportPeersDataManager {
     
     var delegate : ExportPeersDataManagerDelegate?
     
-    func getExportPeersData(key : String){
+    func getExportPeersData(domain : String , key : String , query : String = "" , page : Int = 1){
         
-        let urlString = "https://agrapi.tk-sad.ru/agr_intf.ExportPeers?AKey=\(key)"
+        let urlString = "https://\(domain != "" ? domain : "agrapi.tk-sad.ru")/agr_intf.ExportPeersv2?AKey=\(key)&AQuery=\(query)&APage=\(page)"
         
         print("URLString for ExportPeersDataManager: \(urlString)")
         
-        guard let url = URL(string: urlString) else {
-            delegate?.didFailGettingExportPeersDataWithError(error: "Wrong URL")
-            return
-        }
+        guard let encodedURL = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: encodedURL)  else {return}
         
         let session = URLSession(configuration: .default)
         

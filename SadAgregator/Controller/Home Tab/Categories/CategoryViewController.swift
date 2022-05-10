@@ -107,7 +107,12 @@ class CategoryViewController: UIViewController {
     
     var thisCatId : String?
     
+    var thisVendId : String?
+    
+    var contentType : ContentType = .normal
+    
     var getCatpageDataManager = GetCatpageDataManager()
+    var catsVendCatProdsDataManager = CatsVendCatProdsDataManager()
     
     var filter = ""
     
@@ -145,7 +150,16 @@ class CategoryViewController: UIViewController {
                     
                     postsArray.removeAll()
                     
-                    getCatpageDataManager.getGetCatpageData(domain : catWorkDomain , key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
+                    if contentType == .normal{
+                        
+                        getCatpageDataManager.getGetCatpageData(domain : catWorkDomain , key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
+                        
+                    }else if contentType == .vend , let vendId = thisVendId{
+                        
+                        catsVendCatProdsDataManager.getCatsVendCatProdsData(domain: catWorkDomain, key: key, catId: safeId, vendId: vendId, page: page, filter: filter, min: min, max: max)
+                        
+                    }
+                    
                 }
             }
         }
@@ -170,10 +184,22 @@ class CategoryViewController: UIViewController {
         tableView.register(UINib(nibName: "PostTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
         
         getCatpageDataManager.delegate = self
+        catsVendCatProdsDataManager.delegate = self
         
         if let safeId = thisCatId{
-            getCatpageDataManager.getGetCatpageData(domain : catWorkDomain , key: key, catId: safeId, page: page)
+            
+            if contentType == .normal{
+                
+                getCatpageDataManager.getGetCatpageData(domain : catWorkDomain , key: key, catId: safeId, page: page)
+                
+            }else if contentType == .vend , let vendId = thisVendId{
+                
+                catsVendCatProdsDataManager.getCatsVendCatProdsData(domain: catWorkDomain, key: key, catId: safeId, vendId: vendId, page: page)
+                
+            }
+            
             showSimpleCircleAnimation(activityController: activityController)
+            
         }
         
     }
@@ -266,7 +292,17 @@ class CategoryViewController: UIViewController {
                 
                 postsArray.removeAll()
                 
-                getCatpageDataManager.getGetCatpageData(domain : catWorkDomain , key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
+                if contentType == .normal {
+                    
+                    
+                    getCatpageDataManager.getGetCatpageData(domain : catWorkDomain , key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
+                    
+                }else if contentType == .vend , let vendId = thisVendId{
+                    
+                    catsVendCatProdsDataManager.getCatsVendCatProdsData(domain: catWorkDomain, key: key, catId: safeId, vendId: vendId, page: page, filter: filter, min: min, max: max)
+                    
+                }
+                
             }
             
         }
@@ -374,10 +410,14 @@ extension CategoryViewController : GetCatpageDataManagerDelegate{
             
             postsArray.append(contentsOf: data["posts"].arrayValue)
             
-            if page == 1{
-                rowForPaggingUpdate += data["posts"].arrayValue.count - 1
-            }else{
-                rowForPaggingUpdate += data["posts"].arrayValue.count
+            let dataCount = data["posts"].arrayValue.count
+            
+            if page == 1 , dataCount != 0{
+                rowForPaggingUpdate += dataCount - 1
+            }else if dataCount != 0{
+                rowForPaggingUpdate += dataCount
+            }else if dataCount == 0{
+                rowForPaggingUpdate += 10
             }
             
             tableView.reloadData()
@@ -394,7 +434,54 @@ extension CategoryViewController : GetCatpageDataManagerDelegate{
     }
     
     func didFailGettingGetCatpageDataWithError(error: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.stopSimpleCircleAnimation(activityController: self!.activityController)
+        }
         print("Error with GetCatpageDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - CatsVendCatProdsDataManagerDelegate
+
+extension CategoryViewController : CatsVendCatProdsDataManagerDelegate{
+    
+    func didGetCatsVendCatProdsData(data: JSON) {
+        
+        DispatchQueue.main.async { [self] in
+            
+            if categoryData == nil { categoryData = data}
+            
+            postsArray.append(contentsOf: data["posts"].arrayValue)
+            
+            let dataCount = data["posts"].arrayValue.count
+            
+            if page == 1 , dataCount != 0{
+                rowForPaggingUpdate += dataCount - 1
+            }else if dataCount != 0{
+                rowForPaggingUpdate += dataCount
+            }else if dataCount == 0{
+                rowForPaggingUpdate += 10
+            }
+            
+            tableView.reloadData()
+            
+            //This is only available when page is 1 , that's why it's in the if block ))
+            if page == 1 {
+                navigationItem.title = data["cat_name"].stringValue == "" ? "Категория" : data["cat_name"].stringValue
+            }
+            
+            stopSimpleCircleAnimation(activityController: activityController)
+            
+        }
+        
+    }
+    
+    func didFailGettingCatsVendCatProdsDataWithError(error: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.stopSimpleCircleAnimation(activityController: self!.activityController)
+        }
+        print("Error with CatsVendCatProdsDataManager : \(error)")
     }
     
 }
@@ -429,12 +516,23 @@ extension CategoryViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.row == rowForPaggingUpdate{
+        if indexPath.row == rowForPaggingUpdate , !postsArray.isEmpty{
             
             page += 1
             
             if let safeId = thisCatId{
-                getCatpageDataManager.getGetCatpageData(domain : catWorkDomain , key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
+                
+                if contentType == .normal {
+                    
+                    getCatpageDataManager.getGetCatpageData(domain : catWorkDomain , key: key, catId: safeId, page: page, filter: filter, min : min, max: max)
+                    
+                }else if contentType == .vend , let vendId = thisVendId{
+                    
+                    catsVendCatProdsDataManager.getCatsVendCatProdsData(domain: catWorkDomain, key: key, catId: safeId, vendId: vendId, page: page, filter: filter, min: min, max: max)
+                    
+                }
+                
+                
             }
             
             print("Done a request for page: \(page)")
@@ -543,7 +641,7 @@ extension CategoryViewController : UITableViewDelegate , UITableViewDataSource{
             
             showSimpleCircleAnimation(activityController: activityController)
             
-            ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
+            ExportPeersDataManager(delegate: self).getExportPeersData(domain: catWorkDomain, key: key)
             
         }
         
@@ -746,6 +844,16 @@ extension CategoryViewController : ExportPeersDataManagerDelegate{
     
     func didFailGettingExportPeersDataWithError(error: String) {
         print("Error with ExportPeersDataManager : \(error)")
+    }
+    
+}
+
+//MARK: - Enums
+
+extension CategoryViewController {
+    
+    enum ContentType{
+        case normal , vend
     }
     
 }

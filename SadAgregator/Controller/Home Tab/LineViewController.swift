@@ -24,6 +24,8 @@ class LineViewController: UIViewController {
     
     var isLogged = false
     
+    var catWorkDomain = ""
+    
     lazy var activityLineDataManager = ActivityLineDataManager()
     lazy var linePostsPaggingDataManager = LinePostsPaggingDataManager()
     
@@ -171,6 +173,8 @@ extension LineViewController {
         key = userDataObject.first!.key
         
         isLogged = userDataObject.first!.isLogged
+        
+        catWorkDomain = userDataObject.first!.catWork
         
     }
     
@@ -385,7 +389,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
                 
                 page += 1
                 
-                linePostsPaggingDataManager.getLinePostsPaggingData(key: key, lineId: thisLineId!, page: page)
+                linePostsPaggingDataManager.getLinePostsPaggingData(domain: catWorkDomain, key: key, lineId: thisLineId!, page: page)
                 
                 print("Done a request for page: \(page)")
                 
@@ -556,7 +560,7 @@ extension LineViewController : UITableViewDelegate , UITableViewDataSource{
             
             showSimpleCircleAnimation(activityController: activityController)
             
-            ExportPeersDataManager(delegate: self).getExportPeersData(key: key)
+            ExportPeersDataManager(delegate: self).getExportPeersData(domain: catWorkDomain, key: key)
             
         }
         

@@ -17,11 +17,18 @@ class AllCategoriesViewController: UITableViewController {
     
     var key = ""
     
+    var catWorkDomain = ""
+    
     var getCatListDataManager = GetCatListDataManager()
+    var catsGetVendCatsDataManager = CatsGetVendCatsDataManager()
     
     var categories = [JSON]()
     
     var parentId : String?
+    
+    var vendId : String?
+    
+    var contentType : ContentType = .normal
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +39,60 @@ class AllCategoriesViewController: UITableViewController {
         
         getCatListDataManager.delegate = self
         
-        getCatListDataManager.getGetCatListData(key: key, parentId: parentId)
+        refresh()
+        
+    }
+    
+    //MARK: - Functions
+    
+    @objc func refresh(){
         
         showSimpleCircleAnimation(activityController: activityController)
         
+        if contentType == .normal{
+            
+            getCatListDataManager.getGetCatListData(domain: catWorkDomain, key: key, parentId: parentId)
+            
+        }else if contentType == .vend , let vendId = vendId{
+            
+            catsGetVendCatsDataManager.getCatsGetVendCatsData(key: key, domain: catWorkDomain, vendId: vendId) { data, error in
+                
+                DispatchQueue.main.async{ [weak self] in
+                    
+                    self?.stopSimpleCircleAnimation(activityController: self!.activityController)
+                    
+                    if let error = error {
+                        print("Error with CatsGetVendCatsDataManager : \(error)")
+                        return
+                    }
+                    
+                    if data!["result"].intValue == 1{
+                        
+                        self?.categories = data!["list"].arrayValue
+                        
+                        if let title = data!["name"].string{
+                            self?.navigationItem.title = title
+                        }
+                        
+                        self?.tableView.reloadData()
+                        
+                    }else{
+                        
+                        if let errorMessage = data!["msg"].string {
+                            self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
     }
+    
+    //MARK: - TableView
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
@@ -75,15 +131,35 @@ class AllCategoriesViewController: UITableViewController {
             
             categoryVC.thisCatId = id
             
+            categoryVC.contentType = contentType == .normal ? .normal : .vend
+            
+            categoryVC.thisVendId = vendId
+            
             navigationController?.pushViewController(categoryVC, animated: true)
             
         }else {
             
-            let allCategoriesVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AllCatVC") as! AllCategoriesViewController
-            
-            allCategoriesVC.parentId = id
-            
-            navigationController?.pushViewController(allCategoriesVC, animated: true)
+            if contentType == .normal{
+                
+                let allCategoriesVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AllCatVC") as! AllCategoriesViewController
+                
+                allCategoriesVC.parentId = id
+                
+                navigationController?.pushViewController(allCategoriesVC, animated: true)
+                
+            }else if contentType == .vend{
+                
+                let allCategoriesVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AllCatVC") as! AllCategoriesViewController
+                
+                allCategoriesVC.parentId = parentId
+                
+                allCategoriesVC.contentType = .vend
+                
+                allCategoriesVC.vendId = vendId
+                
+                navigationController?.pushViewController(allCategoriesVC, animated: true)
+                
+            }
             
         }
         
@@ -102,6 +178,8 @@ extension AllCategoriesViewController{
         let userDataObject = realm.objects(UserData.self)
         
         key = userDataObject.first!.key
+        
+        catWorkDomain = userDataObject.first!.catWork
         
     }
     
@@ -134,6 +212,17 @@ extension AllCategoriesViewController : GetCatListDataManagerDelegate{
         DispatchQueue.main.async { [weak self] in
             self?.stopSimpleCircleAnimation(activityController: self!.activityController)
         }
+    }
+    
+}
+
+//MARK: - Enums
+
+extension AllCategoriesViewController {
+    
+    enum ContentType {
+        case normal
+        case vend
     }
     
 }
