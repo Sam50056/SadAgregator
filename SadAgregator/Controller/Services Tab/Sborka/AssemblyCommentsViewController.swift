@@ -11,14 +11,7 @@ import RealmSwift
 
 class AssemblyCommentsViewController: UIViewController {
     
-    @IBOutlet weak var orgCommentTextField: UITextView!
-    @IBOutlet weak var orgCommentLabel: UILabel!
-    
-    @IBOutlet weak var commentForIspTextField: UITextView!
-    @IBOutlet weak var commentForIspLabel: UILabel!
-    
-    @IBOutlet weak var commentFromIspTextField: UITextView!
-    @IBOutlet weak var commentFromIspLabel: UILabel!
+    @IBOutlet weak var tableView : UITableView!
     
     private let realm = try! Realm()
     
@@ -29,26 +22,58 @@ class AssemblyCommentsViewController: UIViewController {
     private var purchasesGetItemCommentsDataManager = PurchasesGetItemCommentsDataManager()
     private lazy var purchasesAddItemCommentDataManager = PurchasesAddItemCommentDataManager()
     
+    var pageData : JSON?
+    
+    var isEditingComFromOrg = false
+    var isEditingComForIsp = false
+    var isEditingComFromIsp = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         loadUserData()
         
         purchasesGetItemCommentsDataManager.delegate = self
         
-        orgCommentTextField.text.removeAll()
-        commentForIspTextField.text.removeAll()
-        commentFromIspTextField.text.removeAll()
+        refresh()
         
-        orgCommentTextField.delegate = self
-        commentForIspTextField.delegate = self
-        commentFromIspTextField.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.title = "Комментарии"
+        
+    }
+    
+}
+
+//MARK: - Functions
+
+extension AssemblyCommentsViewController {
+    
+    func refresh(){
         
         guard let thisTovarId = thisTovarId else {
             return
         }
         
+        pageData = nil
+        
+        bringTextViewsDown()
+        
         purchasesGetItemCommentsDataManager.getPurchasesGetItemCommentsData(key: key, id: thisTovarId)
+        
+    }
+    
+    func bringTextViewsDown() {
+        
+        isEditingComFromOrg = false
+        isEditingComForIsp = false
+        isEditingComFromIsp = false
         
     }
     
@@ -62,19 +87,25 @@ extension AssemblyCommentsViewController : UITextViewDelegate{
         
         guard let thisTovarId = thisTovarId else {return}
         
-        if textView == orgCommentTextField{
+        let id = textView.restorationIdentifier ?? ""
+        
+        bringTextViewsDown()
+        
+        if id == "1"{
             
             purchasesAddItemCommentDataManager.getPurchasesAddItemCommentData(key: key, purItemId: thisTovarId, comType: "1", comment: textView.text.replacingOccurrences(of: "\n", with: "<br>"))
             
-        }else if textView == commentForIspTextField{
+        }else if id == "2"{
             
             purchasesAddItemCommentDataManager.getPurchasesAddItemCommentData(key: key, purItemId: thisTovarId, comType: "0", comment: textView.text.replacingOccurrences(of: "\n", with: "<br>"))
             
-        }else if textView == commentFromIspTextField{
+        }else if id == "3"{
             
             purchasesAddItemCommentDataManager.getPurchasesAddItemCommentData(key: key, purItemId: thisTovarId, comType: "", comment: textView.text.replacingOccurrences(of: "\n", with: "<br>"))
             
         }
+        
+        refresh()
         
     }
     
@@ -88,15 +119,11 @@ extension AssemblyCommentsViewController : PurchasesGetItemCommentsDataManagerDe
         
         DispatchQueue.main.async { [weak self] in
             
+            self?.pageData = data
+            
             if data["result"].intValue == 1{
                 
-                self?.orgCommentTextField.text = data["priv_com"].stringValue.replacingOccurrences(of: "<br>", with: "\n")
-                self?.commentForIspTextField.text = data["handle_com"].stringValue.replacingOccurrences(of: "<br>", with: "\n")
-                self?.commentFromIspTextField.text = data["by_handle_com"].stringValue.replacingOccurrences(of: "<br>", with: "\n")
-                
-                self?.orgCommentTextField.isEditable = data["priv_com_ch"].intValue == 1
-                self?.commentForIspTextField.isEditable = data["handle_com_ch"].intValue == 1
-                self?.commentFromIspTextField.isEditable = data["by_handle_com_ch"].intValue == 1
+                self?.tableView.reloadData()
                 
             }else{
                 
@@ -123,6 +150,137 @@ extension AssemblyCommentsViewController {
         let userDataObjects = realm.objects(UserData.self)
         
         key = userDataObjects.first!.key
+        
+    }
+    
+}
+
+
+//MARK: - UITableView
+
+extension AssemblyCommentsViewController : UITableViewDataSource , UITableViewDelegate{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        6
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let section = indexPath.section
+        
+        guard let pageData = pageData else {return UITableViewCell()}
+        
+        if section == 0{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
+            
+            guard let label = cell.viewWithTag(1) as? UILabel ,
+                  let button = cell.viewWithTag(2) as? UIButton
+            else {return cell}
+            
+            label.text = "Комментарий от организатора"
+            button.isHidden = pageData["priv_com_ch"].intValue == 0
+            button.setTitle(isEditingComFromOrg ? "Готово" : "Изменить", for: .normal)
+            button.addAction(UIAction(handler: { [weak self] _ in
+                self?.isEditingComFromOrg.toggle()
+                self?.tableView.reloadData()
+            }), for: .touchUpInside)
+            
+            return cell
+            
+        }else if section == 1{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "textViewCell", for: indexPath)
+            
+            guard let textView = cell.viewWithTag(1) as? UITextView else {return cell}
+            
+            textView.restorationIdentifier = "1"
+            
+            textView.text = pageData["priv_com"].stringValue != "" ? pageData["priv_com"].stringValue.replacingOccurrences(of: "<br>", with: "\n") : (isEditingComFromOrg ? "" : "Нет комментария")
+            
+            textView.isEditable = isEditingComFromOrg
+            
+            textView.delegate = self
+            
+            return cell
+            
+        }else if section == 2{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
+            
+            guard let label = cell.viewWithTag(1) as? UILabel ,
+                  let button = cell.viewWithTag(2) as? UIButton
+            else {return cell}
+            
+            label.text = "Комментарий для исполнителя"
+            button.isHidden = pageData["handle_com_ch"].intValue == 0
+            
+            button.setTitle(isEditingComForIsp ? "Готово" : "Изменить", for: .normal)
+            button.addAction(UIAction(handler: { [weak self] _ in
+                self?.isEditingComForIsp.toggle()
+                self?.tableView.reloadData()
+            }), for: .touchUpInside)
+            
+            return cell
+            
+        }else if section == 3{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "textViewCell", for: indexPath)
+            
+            guard let textView = cell.viewWithTag(1) as? UITextView else {return cell}
+            
+            textView.restorationIdentifier = "2"
+            
+            textView.text = pageData["handle_com"].stringValue != "" ? pageData["handle_com"].stringValue.replacingOccurrences(of: "<br>", with: "\n") : ( isEditingComForIsp ? "" : "Нет комментария")
+            
+            textView.isEditable = isEditingComForIsp
+            
+            textView.delegate = self
+            
+            return cell
+            
+        }else if section == 4{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
+            
+            guard let label = cell.viewWithTag(1) as? UILabel ,
+                  let button = cell.viewWithTag(2) as? UIButton
+            else {return cell}
+            
+            label.text = "Комментарий от исполнителя"
+            button.isHidden = pageData["by_handle_com_ch"].intValue == 0
+            
+            button.setTitle(isEditingComFromIsp ? "Готово" : "Изменить", for: .normal)
+            button.addAction(UIAction(handler: { [weak self] _ in
+                self?.isEditingComFromIsp.toggle()
+                self?.tableView.reloadData()
+            }), for: .touchUpInside)
+            
+            return cell
+            
+        }else if section == 5{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "textViewCell", for: indexPath)
+            
+            guard let textView = cell.viewWithTag(1) as? UITextView else {return cell}
+            
+            textView.restorationIdentifier = "3"
+            
+            textView.text = pageData["by_handle_com"].stringValue != "" ? pageData["by_handle_com"].stringValue.replacingOccurrences(of: "<br>", with: "\n") : (isEditingComFromIsp ? "" : "Нет комментария")
+            
+            textView.isEditable = isEditingComFromIsp
+            
+            textView.delegate = self
+            
+            return cell
+            
+        }
+        
+        return UITableViewCell()
         
     }
     

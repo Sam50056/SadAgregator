@@ -316,6 +316,7 @@
 		22C5D02825B0E065001C69C6 /* PeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D02725B0E064001C69C6 /* PeerViewController.swift */; };
 		22C5D02B25B0E9DF001C69C6 /* ExportPeersDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D02A25B0E9DE001C69C6 /* ExportPeersDataManager.swift */; };
 		22C5D02E25B1EC9E001C69C6 /* SetDefaultPeerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C5D02D25B1EC9D001C69C6 /* SetDefaultPeerDataManager.swift */; };
+		22C6D226286689F200455ED3 /* ClientsGetPaymentsFilterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C6D225286689F200455ED3 /* ClientsGetPaymentsFilterDataManager.swift */; };
 		22C9221025814C6F0063B5D4 /* MenuHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */; };
 		22C9221325814CA40063B5D4 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C9221225814CA40063B5D4 /* MenuView.swift */; };
 		22CA693D25A141F400D21840 /* VendsPopularityRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */; };
@@ -700,6 +701,7 @@
 		22C5D02725B0E064001C69C6 /* PeerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerViewController.swift; sourceTree = "<group>"; };
 		22C5D02A25B0E9DE001C69C6 /* ExportPeersDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPeersDataManager.swift; sourceTree = "<group>"; };
 		22C5D02D25B1EC9D001C69C6 /* SetDefaultPeerDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDefaultPeerDataManager.swift; sourceTree = "<group>"; };
+		22C6D225286689F200455ED3 /* ClientsGetPaymentsFilterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsGetPaymentsFilterDataManager.swift; sourceTree = "<group>"; };
 		22C9220F25814C6F0063B5D4 /* MenuHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHostingController.swift; sourceTree = "<group>"; };
 		22C9221225814CA40063B5D4 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		22CA693C25A141F400D21840 /* VendsPopularityRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendsPopularityRatingViewController.swift; sourceTree = "<group>"; };
@@ -1139,6 +1141,7 @@
 			children = (
 				22553014261931360017B9CF /* ClientsFilterPayHistoryCountDataManager.swift */,
 				22553018261941CF0017B9CF /* ClientsFilterPayListDataManager.swift */,
+				22C6D225286689F200455ED3 /* ClientsGetPaymentsFilterDataManager.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -2395,6 +2398,7 @@
 				220C95AD26E15DAD00795DD4 /* BalanceRequestTableViewCellTableViewCell.swift in Sources */,
 				2278290A258BB60E00B435FA /* GetMyReviewDataManager.swift in Sources */,
 				2253EE2B2569D85D00103C86 /* LineViewController.swift in Sources */,
+				22C6D226286689F200455ED3 /* ClientsGetPaymentsFilterDataManager.swift in Sources */,
 				229FE68E25700B120001FF54 /* SearchViewController.swift in Sources */,
 				221C072C256E5ABB001BC842 /* VendTableViewCellPhoneTableViewCell.swift in Sources */,
 				22D9DCAF27692DAA00A75055 /* VendTargetOrderDataManager.swift in Sources */,
@@ -2824,7 +2828,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2848,7 +2852,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SadAgregator/SadAgregator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = 68788AEQ8E;
 				INFOPLIST_FILE = SadAgregator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

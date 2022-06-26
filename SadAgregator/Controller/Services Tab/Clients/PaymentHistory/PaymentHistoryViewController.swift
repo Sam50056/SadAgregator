@@ -415,7 +415,7 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
             
             guard let tovarId = payment["pi_id"].string , !tovarId.isEmpty else {return}
             
-            self?.showOneTovarItem(id: tovarId)
+            self?.showOneTovarItem(id: tovarId , editable: false , navTitle: "Списание за товар")
             
         }
         
@@ -426,7 +426,7 @@ extension PaymentHistoryViewController : UITableViewDataSource , UITableViewDele
                 
                 guard let tovarId = payment["pi_id"].string , !tovarId.isEmpty else {return}
                 
-                self?.showOneTovarItem(id: tovarId)
+                self?.showOneTovarItem(id: tovarId , editable: false , navTitle: "Списание за товар")
                 
             }else{
                 

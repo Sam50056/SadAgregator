@@ -28,7 +28,14 @@ class DobavlenieVZakupkuViewController: UIViewController {
     private var klientiCellItemsArray = [KlientiCellItem]()
     private var clients = [KlientiCellKlientItem]()
     
-    private var selectedZakupka : Zakupka?
+    private var selectedZakupka : Zakupka?{
+        didSet{
+            if let selectedZakupka = selectedZakupka , let oldValue = oldValue, oldValue.id != selectedZakupka.id{
+                //If client changed selected zakupka to another , gotta remove replace client
+                clientForReplace = nil
+            }
+        }
+    }
     
     private var purchasesItemInfoDataManager = PurchasesItemInfoDataManager()
     
@@ -960,6 +967,8 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                 label1.textColor = .systemGray
             }else if item.labelText == "Добавить клиента в закупку" , clientForReplace != nil {
                 label1.textColor = .systemGray
+            }else if item.labelText == "Выбрать клиента для замены" , selectedZakupka == nil{
+                label1.textColor = .systemGray
             }
             
         default:
@@ -1212,6 +1221,11 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                         return
                     }
                     
+                    guard selectedZakupka != nil else{
+                        showSimpleAlertWithOkButton(title: "Сначала выберите закупку", message: nil)
+                        return
+                    }
+                    
                     let vibratKlientaVC = VibratKlientaViewController()
                     
                     vibratKlientaVC.isForReplace = true
@@ -1231,10 +1245,15 @@ extension DobavlenieVZakupkuViewController : UITableViewDelegate , UITableViewDa
                     
                     present(navVC, animated: true, completion: nil)
                     
-                }else if klientiCellItemsArray[index - clients.count].labelText == "Выбрать товар под замену" && clientForReplace != nil{
+                }else if klientiCellItemsArray[index - clients.count].labelText == "Выбрать товар под замену"{
                     
                     guard clients.isEmpty else {
                         showSimpleAlertWithOkButton(title: "Вы уже добавляете товары в закупку", message: nil)
+                        return
+                    }
+                    
+                    guard clientForReplace != nil else{
+                        showSimpleAlertWithOkButton(title: "Сначала выберите закупку", message: nil)
                         return
                     }
                     

@@ -145,6 +145,8 @@ extension ZamenaDlyaTableViewController{
         
         cell.contentType = .zamena
         
+        cell.editable = false
+        
         let purProd = purProds[indexPath.row]
         
         var tovar = TovarCellItem(pid: purProd["pi_id"].stringValue, capt: purProd["capt"].stringValue, size: purProd["size"].stringValue, payed: purProd["payed"].stringValue, purCost: purProd["cost_pur"].stringValue, sellCost: purProd["cost_sell"].stringValue, hash: purProd["hash"].stringValue, link: purProd["link"].stringValue, clientId: purProd["client_id"].stringValue, clientName: purProd["client_name"].stringValue, comExt: purProd["com_ext"].stringValue, qr: purProd["qr"].stringValue, status: purProd["status"].stringValue, isReplace: purProd["is_replace"].stringValue, forReplacePid: purProd["for_replace_pi_id"].stringValue, replaces: purProd["replaces"].stringValue, img: purProd["img"].stringValue, chLvl: purProd["ch_lvl"].stringValue, defCheck: purProd["def_check"].stringValue , withoutRep: purProd["without_rep"].stringValue, payedImage: purProd["payed_img"].stringValue, shipmentImage: purProd["shipment_img"].stringValue , commentTitle: purProd["comment"]["title"].stringValue , commentMessage: purProd["comment"]["msg"].stringValue, vt: purProd["vt"].stringValue)
@@ -224,7 +226,9 @@ extension ZamenaDlyaTableViewController{
                         
                         assemblyCommentsVC.thisTovarId = tovar.pid
                         
-                        self.present(assemblyCommentsVC, animated: true, completion: nil)
+                        let navVC = UINavigationController(rootViewController: assemblyCommentsVC)
+                        
+                        self.present(navVC, animated: true, completion: nil)
                         
                     }))
                     
@@ -246,7 +250,9 @@ extension ZamenaDlyaTableViewController{
                 
                 assemblyCommentsVC.thisTovarId = tovar.pid
                 
-                self.present(assemblyCommentsVC, animated: true, completion: nil)
+                let navVC = UINavigationController(rootViewController: assemblyCommentsVC)
+                
+                self.present(navVC, animated: true, completion: nil)
                 
             },tovarMagnifyingGlassTapped: { [weak self] in
                 
@@ -304,6 +310,8 @@ extension ZamenaDlyaTableViewController{
                             
                             tovar.status = "Куплено"
                             
+                            tovar.qr = "1"
+                            
                             cell.thisTovar = tovar
                             
                         }
@@ -327,6 +335,8 @@ extension ZamenaDlyaTableViewController{
                         Vibration.success.vibrate()
                         
                         tovar.status = "Куплено"
+                        
+                        tovar.qr = "1"
                         
                         cell.thisTovar = tovar
                         
@@ -358,7 +368,7 @@ extension ZamenaDlyaTableViewController{
         
         cell.isReplaceTapped = { [weak self] in
             
-            self?.showOneTovarItem(id: tovar.forReplacePid)
+            self?.showOneTovarItem(id: tovar.forReplacePid , navTitle: "Основной товар")
             
         }
         
@@ -368,7 +378,9 @@ extension ZamenaDlyaTableViewController{
             
             assemblyCommentsVC.thisTovarId = tovar.pid
             
-            self.present(assemblyCommentsVC, animated: true, completion: nil)
+            let navVC = UINavigationController(rootViewController: assemblyCommentsVC)
+            
+            self.present(navVC, animated: true, completion: nil)
             
         }
         

@@ -120,6 +120,13 @@ class VendorPostsTableViewController: UITableViewController, GetVendPostsPagging
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.title = "Свежие посты"
+        
+    }
+    
     
     //MARK: - Refresh func
     

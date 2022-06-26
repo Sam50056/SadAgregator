@@ -19,6 +19,8 @@ class ClientsViewController: UIViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     
+    private var refreshControl = UIRefreshControl()
+    
     private var areRequests = false
     
     private var areRequestsShown = false
@@ -68,6 +70,10 @@ class ClientsViewController: UIViewController {
         searchController.searchBar.placeholder = "Быстрый поиск по именам"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        
+        //Pull to refresh
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl) // not required when using UITableViewController
         
         navigationItem.hidesSearchBarWhenScrolling = false
         
@@ -587,23 +593,25 @@ extension ClientsViewController : FormDataManagerDelegate{
     
     func didGetFormData(data: JSON) {
         
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async { [weak self] in
+            
+            self?.refreshControl.endRefreshing()
             
             if data["result"].intValue == 1{
                 
                 let stat = data["stat"]
                 
-                makeStatsFrom(stat)
+                self?.makeStatsFrom(stat)
                 
-                clients = data["clients"].arrayValue
+                self?.clients = data["clients"].arrayValue
                 
-                tableView.reloadData()
+                self?.tableView.reloadData()
                 
-                if data["pay_reqs"]["cnt"].stringValue != "" , data["pay_reqs"]["cnt"].stringValue != "0" , clientsData == nil{
-                    clientsPayRequestsDataManager.getClientsPayRequestsData(key: key, page: balanceRequestsPage)
+                if data["pay_reqs"]["cnt"].stringValue != "" , data["pay_reqs"]["cnt"].stringValue != "0" , self!.clientsData == nil{
+                    self?.clientsPayRequestsDataManager.getClientsPayRequestsData(key: self!.key, page: self!.balanceRequestsPage)
                 }
                 
-                clientsData = data
+                self?.clientsData = data
                 
             }else{
                 print("Error with getting FormData , result : 0")
@@ -682,6 +690,8 @@ extension ClientsViewController : CreateClientViewControllerDelegate{
     func didCloseVC(didCreateUser: Bool, clientId: String?, clientName : String?) {
         
         if didCreateUser{
+            
+            refresh()
             
             let alertController = UIAlertController(title: "Клиент создан!", message: nil, preferredStyle: .alert)
             

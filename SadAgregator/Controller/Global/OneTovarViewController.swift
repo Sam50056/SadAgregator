@@ -21,6 +21,8 @@ class OneTovarViewController: UITableViewController {
     
     var shouldShowNavBarCloseButton = false
     
+    var tovarEditable = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,6 +83,8 @@ extension OneTovarViewController{
         guard !tovarItems.isEmpty else {return UITableViewCell()}
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tovar_cell",for: indexPath) as! TovarTableViewCell
+        
+        cell.editable = tovarEditable
         
         cell.contentType = .normal
         
@@ -155,7 +159,9 @@ extension OneTovarViewController{
                         
                         assemblyCommentsVC.thisTovarId = tovar.pid
                         
-                        self.present(assemblyCommentsVC, animated: true, completion: nil)
+                        let navVC = UINavigationController(rootViewController: assemblyCommentsVC)
+                        
+                        self.present(navVC, animated: true, completion: nil)
                         
                     }))
                     
@@ -177,7 +183,9 @@ extension OneTovarViewController{
                 
                 assemblyCommentsVC.thisTovarId = tovar.pid
                 
-                self.present(assemblyCommentsVC, animated: true, completion: nil)
+                let navVC = UINavigationController(rootViewController: assemblyCommentsVC)
+                
+                self.present(navVC, animated: true, completion: nil)
                 
             },tovarMagnifyingGlassTapped: { [weak self] in
                 
@@ -235,6 +243,8 @@ extension OneTovarViewController{
                             
                             tovar.status = "Куплено"
                             
+                            tovar.qr = "1"
+                            
                             cell.thisTovar = tovar
                             
                         }
@@ -258,6 +268,8 @@ extension OneTovarViewController{
                         Vibration.success.vibrate()
                         
                         tovar.status = "Куплено"
+                        
+                        tovar.qr = "1"
                         
                         cell.thisTovar = tovar
                         
@@ -289,6 +301,8 @@ extension OneTovarViewController{
                         
                         tovar.status = "Куплено"
                         
+                        tovar.qr = "1"
+                        
                         cell.thisTovar = tovar
                         
                     }
@@ -312,6 +326,8 @@ extension OneTovarViewController{
                     Vibration.success.vibrate()
                     
                     tovar.status = "Куплено"
+                    
+                    tovar.qr = "1"
                     
                     cell.thisTovar = tovar
                     
@@ -341,7 +357,7 @@ extension OneTovarViewController{
         
         cell.isReplaceTapped = { [weak self] in
             
-            self?.showOneTovarItem(id: tovar.forReplacePid)
+            self?.showOneTovarItem(id: tovar.forReplacePid , navTitle: "Основной товар")
             
         }
         
@@ -351,7 +367,9 @@ extension OneTovarViewController{
             
             assemblyCommentsVC.thisTovarId = tovar.pid
             
-            self.present(assemblyCommentsVC, animated: true, completion: nil)
+            let navVC = UINavigationController(rootViewController: assemblyCommentsVC)
+            
+            self.present(navVC, animated: true, completion: nil)
             
         }
         

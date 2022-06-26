@@ -103,6 +103,57 @@ extension URL {
     
 }
 
+//MARK: - UIImage
+
+extension UIImage
+{
+    var highestQualityJPEGNSData: NSData { return self.jpegData(compressionQuality: 1.0)! as NSData }
+    var highQualityJPEGNSData: NSData    { return self.jpegData(compressionQuality: 0.75)! as NSData}
+    var mediumQualityJPEGNSData: NSData  { return self.jpegData(compressionQuality: 0.5)! as NSData }
+    var lowQualityJPEGNSData: NSData     { return self.jpegData(compressionQuality: 0.25)! as NSData}
+    var lowestQualityJPEGNSData: NSData  { return self.jpegData(compressionQuality: 0.0)! as NSData }
+    
+    //image compression
+   func resizeImage(image: UIImage) -> UIImage {
+       var actualHeight: Float = Float(image.size.height)
+       var actualWidth: Float = Float(image.size.width)
+       let maxHeight: Float = 800
+       let maxWidth: Float = 800
+       var imgRatio: Float = actualWidth / actualHeight
+       let maxRatio: Float = maxWidth / maxHeight
+       let compressionQuality: Float = 0.5
+       //50 percent compression
+
+       if actualHeight > maxHeight || actualWidth > maxWidth {
+           if imgRatio < maxRatio {
+               //adjust width according to maxHeight
+               imgRatio = maxHeight / actualHeight
+               actualWidth = imgRatio * actualWidth
+               actualHeight = maxHeight
+           }
+           else if imgRatio > maxRatio {
+               //adjust height according to maxWidth
+               imgRatio = maxWidth / actualWidth
+               actualHeight = imgRatio * actualHeight
+               actualWidth = maxWidth
+           }
+           else {
+               actualHeight = maxHeight
+               actualWidth = maxWidth
+           }
+       }
+
+       let rect = CGRect(x: 0.0, y: 0.0, width: CGFloat(actualWidth), height: CGFloat(actualHeight))
+       UIGraphicsBeginImageContext(rect.size)
+       image.draw(in: rect)
+       let img = UIGraphicsGetImageFromCurrentImageContext()
+       let imageData = img!.jpegData(compressionQuality: CGFloat(compressionQuality))
+       UIGraphicsEndImageContext()
+       return UIImage(data: imageData!)!
+   }
+    
+}
+
 //MARK: - UIImageView
 
 extension  UIImageView{
@@ -342,15 +393,19 @@ extension UIViewController{
     
     //MARK: - Tovar Funcs
     
-    func showOneTovarItem(id : String){
+    func showOneTovarItem(id : String , editable : Bool = true , navTitle : String = ""){
         
         let oneTovarItemVC = OneTovarViewController()
         
         oneTovarItemVC.itemId = id
         
+        oneTovarItemVC.tovarEditable = editable
+        
         oneTovarItemVC.shouldShowNavBarCloseButton = true
         
         let navVC = UINavigationController(rootViewController: oneTovarItemVC)
+        
+        oneTovarItemVC.navigationItem.title = navTitle
         
         present(navVC, animated: true)
         

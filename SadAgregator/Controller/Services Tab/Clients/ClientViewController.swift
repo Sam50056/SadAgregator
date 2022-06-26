@@ -604,6 +604,24 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                 
             }
             
+        }else if section == 4{
+            
+            guard !purs.isEmpty else {return}
+            
+            let pur = purs[indexPath.row]
+            
+            let prodsVC = ProdsByPurViewController()
+            
+            prodsVC.thisPurId = pur["id"].stringValue
+            
+            prodsVC.clientId = thisClientId
+            
+            prodsVC.navTitle = pur["capt"].stringValue
+            
+            prodsVC.pageData = .client
+            
+            navigationController?.pushViewController(prodsVC, animated: true)
+            
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -646,9 +664,9 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
             
             let alertController = UIAlertController(title: "Удалить невыкупленные товары из закупки?", message: nil, preferredStyle: .alert)
             
-            alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { _ in
+            alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
                 
-                ClientsDelClientFromPurDataManager().getClientsDelClientFromPurData(key: key, clientId: thisClientId!, purId: pur["id"].stringValue) { data, error in
+                ClientsDelClientFromPurDataManager().getClientsDelClientFromPurData(key: self!.key, clientId: self!.thisClientId!, purId: pur["id"].stringValue) { data, error in
                     
                     if let error = error , data == nil {
                         print("Error with purchasesDelZonePriceDataManager : \(error)")
@@ -659,7 +677,7 @@ extension ClientViewController : UITableViewDelegate, UITableViewDataSource{
                     
                     if data["result"].intValue == 1{
                         
-                        DispatchQueue.main.async { [weak self] in
+                        DispatchQueue.main.async {
                             
                             completion(true)
                             
@@ -728,7 +746,7 @@ extension ClientViewController{
             
         }
         
-        let action = UIAlertAction(title: "Ок", style: .default) { [self] (_) in
+        let action = UIAlertAction(title: "Ок", style: .default) { [weak self] (_) in
             
             if let summ = alertController.textFields?.first?.text ,
                var intSumm = Int(summ){
@@ -749,7 +767,7 @@ extension ClientViewController{
                         comment = String(comment.prefix(200))
                     }
                     
-                    clientsChangeBalanceDataManager.getClientsChangeBalanceData(key: key, clientId: thisClientId!, summ: intSumm, comment: comment) { data, error in
+                    self?.clientsChangeBalanceDataManager.getClientsChangeBalanceData(key: self!.key, clientId: self!.thisClientId!, summ: intSumm, comment: comment) { data, error in
                         
                         if let error = error , data == nil {
                             print("Error with ClientsChangeBalanceDataManager : \(error)")
@@ -797,7 +815,7 @@ extension ClientViewController{
                 secondAlertController.addAction(secondAlertAction)
                 secondAlertController.addAction(secondAlertCancelAction)
                 
-                present(secondAlertController, animated: true, completion: nil)
+                self?.present(secondAlertController, animated: true, completion: nil)
                 
             }
             

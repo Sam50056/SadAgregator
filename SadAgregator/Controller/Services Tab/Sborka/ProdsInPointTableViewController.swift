@@ -316,7 +316,9 @@ extension ProdsInPointTableViewController{
                             
                             assemblyCommentsVC.thisTovarId = tovar.pid
                             
-                            self.present(assemblyCommentsVC, animated: true, completion: nil)
+                            let navVC = UINavigationController(rootViewController: assemblyCommentsVC)
+                            
+                            self.present(navVC, animated: true, completion: nil)
                             
                         }))
                         
@@ -338,7 +340,9 @@ extension ProdsInPointTableViewController{
                     
                     assemblyCommentsVC.thisTovarId = tovar.pid
                     
-                    self.present(assemblyCommentsVC, animated: true, completion: nil)
+                    let navVC = UINavigationController(rootViewController: assemblyCommentsVC)
+                    
+                    self.present(navVC, animated: true, completion: nil)
                     
                 },tovarMagnifyingGlassTapped: { [weak self] in
                     
@@ -396,6 +400,8 @@ extension ProdsInPointTableViewController{
                                 
                                 tovar.status = "Куплено"
                                 
+                                tovar.qr = "1"
+                                
                                 cell.thisTovar = tovar
                                 
                             }
@@ -419,6 +425,8 @@ extension ProdsInPointTableViewController{
                             Vibration.success.vibrate()
                             
                             tovar.status = "Куплено"
+                            
+                            tovar.qr = "1"
                             
                             cell.thisTovar = tovar
                             
@@ -450,7 +458,7 @@ extension ProdsInPointTableViewController{
             
             cell.isReplaceTapped = { [weak self] in
                 
-                self?.showOneTovarItem(id: tovar.forReplacePid)
+                self?.showOneTovarItem(id: tovar.forReplacePid , navTitle: "Основной товар")
                 
             }
             
@@ -471,6 +479,8 @@ extension ProdsInPointTableViewController{
                             Vibration.success.vibrate()
                             
                             tovar.status = "Куплено"
+                            
+                            tovar.qr = "1"
                             
                             cell.thisTovar = tovar
                             
@@ -526,7 +536,9 @@ extension ProdsInPointTableViewController{
                 
                 assemblyCommentsVC.thisTovarId = tovar.pid
                 
-                self.present(assemblyCommentsVC, animated: true, completion: nil)
+                let navVC = UINavigationController(rootViewController: assemblyCommentsVC)
+                
+                self.present(navVC, animated: true, completion: nil)
                 
             }
             

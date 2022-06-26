@@ -39,6 +39,8 @@ class ServicesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        dismiss(animated: true) //This is for content VC if it's slided from QR VC 
+        
         navigationController?.isNavigationBarHidden = false
         
         loadUserData()
@@ -193,7 +195,7 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                         let assemblyWaitItems = servicesJsonData["assembly_wait_items"].stringValue
                         let assemblyWaitCost = servicesJsonData["assembly_wait_cost"].stringValue
                         
-                        if !assemblyWaitItems.isEmpty || assemblyWaitItems != "0" || !assemblyWaitCost.isEmpty || assemblyWaitCost != "0" , isLogged{
+                        if !assemblyWaitItems.isEmpty && assemblyWaitItems != "0" && !assemblyWaitCost.isEmpty && assemblyWaitCost != "0" , isLogged{
                             secondLabel.text = assemblyWaitItems + " / " + assemblyWaitCost + " руб"
                         }
                         

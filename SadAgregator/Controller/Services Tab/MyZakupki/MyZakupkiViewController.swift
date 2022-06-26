@@ -64,9 +64,7 @@ class MyZakupkiViewController: UIViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     
-    private var searchText : String{
-        return searchController.searchBar.text ?? ""
-    }
+    private var searchText : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -258,7 +256,7 @@ extension MyZakupkiViewController {
             guard let data = data else {return}
             
             if data["result"].intValue == 1{
-                
+                print("FUCKING INDEX : \(index)")
                 self?.updatePurIndex = index
                 self?.updatePur(self!.purchases[index])
                 
@@ -272,7 +270,7 @@ extension MyZakupkiViewController {
             
         }
         
-        print("Simple no answer request done for index : \(index) And pur : \(purchases[index].capt)")
+        //        print("Simple no answer request done for index : \(index) And pur : \(purchases[index].capt)")
         
     }
     
@@ -969,6 +967,8 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                         
                                                         commentAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel))
                                                         
+                                                        commentAlertController.addTextField()
+                                                        
                                                         commentAlertController.addAction(UIAlertAction(title: "Отправить", style: .default, handler: { [weak self] _ in
                                                             
                                                             guard let text = commentAlertController.textFields?[0].text else {return}
@@ -996,7 +996,11 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                         
                                                     }))
                                                     
-                                                    alertController.addAction(UIAlertAction(title: "Отмена", style: .default, handler: nil))
+                                                    alertController.addAction(UIAlertAction(title: "Отмена", style: .default, handler: { _ in
+                                                        
+                                                        self?.simpleNoAnswerRequestDone(data: data, index: indexPath.row)
+                                                        
+                                                    }))
                                                     
                                                     self?.present(alertController, animated: true, completion: nil)
                                                     
@@ -1416,7 +1420,13 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                                                 
                                                                 let commentAlertController = UIAlertController(title: "Комментарий по закупке", message: nil, preferredStyle: .alert)
                                                                 
-                                                                commentAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+                                                                commentAlertController.addTextField()
+                                                                
+                                                                commentAlertController.addAction(UIAlertAction(title: "Отмена", style: .default, handler: { _ in
+                                                                    
+                                                                    self?.simpleNoAnswerRequestDone(data: toSupDropData, index: indexPath.row)
+                                                                    
+                                                                }))
                                                                 
                                                                 commentAlertController.addAction(UIAlertAction(title: "Отправить", style: .default, handler: { [weak self] _ in
                                                                     
@@ -1811,14 +1821,17 @@ extension MyZakupkiViewController : UITableViewDataSource , UITableViewDelegate{
                                             
                                             if let qrError = qrError {
                                                 print("Error with UpdatePurQR : \(qrError)")
+                                                qrVC.dismiss(animated: true)
                                                 return
                                             }
                                             
                                             if let errorMessage = qrData!["msg"].string , !errorMessage.isEmpty{
                                                 self?.showSimpleAlertWithOkButton(title: errorMessage, message: nil)
+                                                qrVC.dismiss(animated: true)
                                             }else if qrData!["result"].intValue == 1{
                                                 Vibration.success.vibrate()
                                                 self?.simpleNoAnswerRequestDone(data: qrData, index: indexPath.row)
+                                                qrVC.dismiss(animated: true)
                                             }
                                             
                                         }
@@ -1937,12 +1950,9 @@ extension MyZakupkiViewController : UISearchResultsUpdating{
     
     func updateSearchResults(for searchController: UISearchController) {
         
-        if let searchText = searchController.searchBar.text , searchText != "" {
+        if let newSearchText = searchController.searchBar.text , newSearchText != searchText{
             
-            refresh()
-            
-        }else{
-            
+            searchText = newSearchText
             refresh()
             
         }

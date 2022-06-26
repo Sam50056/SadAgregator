@@ -76,7 +76,7 @@ class SortirovkaContentViewController: UIViewController {
     
     var showMore = false
     
-    var autoHide = true{
+    var autoHide = false{
         didSet{
             guard let timer = timer else{return}
             if timer.isValid , !autoHide{
@@ -88,6 +88,8 @@ class SortirovkaContentViewController: UIViewController {
             }
         }
     }
+    
+    var hasImageAttached = false
     
     var data : JSON?{
         didSet{
@@ -112,6 +114,10 @@ class SortirovkaContentViewController: UIViewController {
                     
                     items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["value"].stringValue, shouldLabel2BeBlue: true , brokerId: jsonOpt["broker_id"].stringValue))
                     
+                }else if jsonOpt["client_id"].stringValue != ""{
+                    
+                    items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["value"].stringValue, shouldLabel2BeBlue: true , clientId: jsonOpt["client_id"].stringValue))
+                    
                 }else if jsonOpt["url"].stringValue != ""{
                     
                     items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["value"].stringValue, shouldLabel2BeBlue: true , url: jsonOpt["url"].stringValue))
@@ -119,6 +125,8 @@ class SortirovkaContentViewController: UIViewController {
                 }else if jsonOpt["img"].stringValue != ""{
                     
                     items.append(TableViewItem(label1Text: jsonOpt["capt"].stringValue, label2Text: jsonOpt["value"].stringValue , shouldLabel2BeBlue: true, img: jsonOpt["img"].stringValue))
+                    
+                    hasImageAttached = true
                     
                 }else{
                     
@@ -236,19 +244,25 @@ class SortirovkaContentViewController: UIViewController {
     
     @IBAction func addImageButtonPressed(_ sender : Any?){
         
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        if hasImageAttached {
+            
+            let alertController = UIAlertController(title: "Фото товара уже есть , заменить?", message: nil, preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+            
+            alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] _ in
+                
+                self?.addImage()
+                
+            }))
+            
+            present(alertController , animated: true)
+            
+            return
+            
+        }
         
-        alertController.addAction(UIAlertAction(title: "Сделать снимок", style: .default, handler: { [weak self] _ in
-            self?.showImagePickerController(sourceType: .camera)
-        }))
-        
-        alertController.addAction(UIAlertAction(title: "Из галереи", style: .default, handler: { [weak self] _ in
-            self?.showImagePickerController(sourceType: .photoLibrary)
-        }))
-        
-        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-        
-        present(alertController , animated: true)
+        addImage()
         
     }
     
@@ -325,6 +339,24 @@ class SortirovkaContentViewController: UIViewController {
         timer?.invalidate()
         
         resetTimer(withSeconds: true)
+        
+    }
+    
+    func addImage(){
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(title: "Сделать снимок", style: .default, handler: { [weak self] _ in
+            self?.showImagePickerController(sourceType: .camera)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Из галереи", style: .default, handler: { [weak self] _ in
+            self?.showImagePickerController(sourceType: .photoLibrary)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        present(alertController , animated: true)
         
     }
     
@@ -638,6 +670,12 @@ extension SortirovkaContentViewController : UITableViewDelegate , UITableViewDat
                 
                 navigationController?.pushViewController(pointVC, animated: true)
                 
+            }else if !item.clientId.isEmpty{
+                
+                let clientVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ClientVC") as! ClientViewController
+                clientVC.thisClientId = item.clientId
+                navigationController?.pushViewController(clientVC, animated: true)
+                
             }
             
         }else if section == 2 , state == 2 || state == 3{
@@ -672,6 +710,7 @@ extension SortirovkaContentViewController {
         var pointId : String = ""
         var vendId : String = ""
         var brokerId : String = ""
+        var clientId : String = ""
         var url : String = ""
         var img : String = ""
         

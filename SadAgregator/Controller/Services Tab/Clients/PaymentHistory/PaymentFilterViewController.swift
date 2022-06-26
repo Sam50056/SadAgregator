@@ -27,18 +27,53 @@ class PaymentFilterViewController: UIViewController {
     
     var minDateFromApi : String?{
         didSet{
+            oldMinDate = minDateFromApi
             minDate = minDateFromApi
         }
     }
     
-    var opType : Int? //Тип операции
+    var clientsGetPaymentsFilterDataManager = ClientsGetPaymentsFilterDataManager()
+    
+    var opType : Int? {//Тип операции
+        didSet{
+            guard collectionView != nil else {return}
+            collectionView.reloadData()
+        }
+    }
     var source : Int? //Источник операции
     var commentQuery : String?
-    var lowPrice : Int?
-    var upPrice : Int?
-    var maxPrice : Int?
-    var minDate : String?
-    var maxDate : String?
+    var lowPrice : Int? {
+        didSet{
+            guard collectionView != nil else {return}
+            collectionView.reloadData()
+        }
+    }
+    var upPrice : Int? {//Max price set
+        didSet{
+            guard collectionView != nil else {return}
+            collectionView.reloadData()
+        }
+    }
+    var maxPrice : Int? //Max price from api in paymentsHist..VC
+    var minDate : String?{
+        didSet{
+            guard collectionView != nil else {return}
+            collectionView.reloadData()
+        }
+    }
+    var maxDate : String?{
+        didSet{
+            guard collectionView != nil else {return}
+            collectionView.reloadData()
+        }
+    }
+    
+    var oldOpType : Int?
+    var oldLowPrice : Int?
+    var oldUpPrice : Int?
+    var oldMinDate : String?
+    var oldMaxDate : String?
+    
     
     private var resultsCount : Int?
     
@@ -52,9 +87,11 @@ class PaymentFilterViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        if opType != nil || commentQuery != nil || lowPrice != nil || upPrice != nil || minDate != nil || maxDate != nil {
-            checkForResults()
-        }
+        fillTheFields()
+        
+        //        if opType != nil || commentQuery != nil || lowPrice != nil || upPrice != nil || minDate != nil || maxDate != nil {
+        //            checkForResults()
+        //        }
         
     }
     
@@ -134,6 +171,45 @@ extension PaymentFilterViewController{
             ClientsFilterPayHistByClientCountDataManager(delegate: self).getClientsFilterPayHistByClientCountData(key: key, clientId: thisClientId!, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentQuery ?? "")
         }else{
             ClientsFilterPayHistoryCountDataManager(delegate: self).getClientsFilterPayHistoryCountData(key: key, source: source == nil ? "" : String(source!), opType: opType == nil ? "" : String(opType!), sumMin: lowPrice == nil ? "" : String(lowPrice!), sumMax: upPrice == nil ? "" : String(upPrice!), startDate: minDate ?? "", endDate: maxDate ?? formatDate(Date()), query: commentQuery ?? "")
+        }
+        
+    }
+    
+    func fillTheFields(){
+        
+        clientsGetPaymentsFilterDataManager.getClientsGetPaymentsFilterData(key: key, client: thisClientId ?? "") { data, error in
+            
+            DispatchQueue.main.async { [weak self] in
+                
+                self?.oldOpType = self?.opType ?? 0// Op type doesn't come from this api that's why we just save it from paymentHist VC
+                
+                if let error = error {
+                    print("Error with ClientsGetPaymentsFilterDataManager : \(error)")
+                    self?.checkForResults()
+                    return
+                }
+                
+                if data!["result"].intValue == 1{
+                    
+                    let filter = data!["filter"]
+                    
+                    self?.upPrice = Int(filter["max_sum"].stringValue)
+                    self?.lowPrice = Int(filter["min_sum"].stringValue)
+                    
+                    self?.oldUpPrice = self?.upPrice
+                    self?.oldLowPrice = self?.lowPrice
+                    self?.oldMaxDate = self?.maxDate
+                    self?.minDate = self?.minDate
+                    
+                    self?.minDate = filter["min_dt"].stringValue != "" ? filter["min_dt"].stringValue : nil
+                    
+                    self?.collectionView.reloadData()
+                    self?.checkForResults()
+                    
+                }
+                
+            }
+            
         }
         
     }
@@ -321,8 +397,8 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
                 minView.layer.cornerRadius = 10
                 maxView.layer.cornerRadius = 10
                 
-                minTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
-                maxTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+                minTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingDidEnd)
+                maxTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingDidEnd)
                 
                 minTextField.text = lowPrice == nil ? "0" : String(lowPrice!)
                 maxTextField.text = upPrice == nil ? maxPrice == nil ? "" : String(maxPrice!) : String(upPrice!)
@@ -467,9 +543,56 @@ extension PaymentFilterViewController : UICollectionViewDelegate , UICollectionV
     
     func setUpHeaderCell(with header : String, for cell : UICollectionViewCell){
         
-        guard let label = cell.viewWithTag(1) as? UILabel else {return}
+        guard let label = cell.viewWithTag(1) as? UILabel,
+              let button = cell.viewWithTag(2) as? UIButton
+        else {return}
         
         label.text = header
+        
+        if header == "Тип операции"{
+            
+            button.isHidden = opType == oldOpType
+            
+        }else if header == "Сумма"{
+            
+            if lowPrice != oldLowPrice || upPrice != oldUpPrice{
+                button.isHidden = false
+            }else{
+                button.isHidden = true
+            }
+            
+        }else if header == "Дата"{
+            
+            if minDate != oldMinDate || maxDate != oldMaxDate{
+                button.isHidden = false
+            }else{
+                button.isHidden = true
+            }
+            
+        }
+        
+        button.addAction(UIAction(handler: { [weak self] _ in
+            
+            if header == "Тип операции"{
+                
+                self?.opType = self?.oldOpType
+                
+            }else if header == "Сумма"{
+                
+                self?.lowPrice = self?.oldLowPrice
+                self?.upPrice = self?.oldUpPrice
+                
+            }else if header == "Дата"{
+                
+                self?.minDate = self?.oldMinDate
+                self?.maxDate = self?.oldMaxDate
+                
+            }
+            
+            self?.checkForResults()
+            self?.collectionView.reloadData()
+            
+        }), for: .touchUpInside)
         
     }
     

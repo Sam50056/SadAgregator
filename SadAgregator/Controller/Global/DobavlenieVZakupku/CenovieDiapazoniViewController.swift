@@ -99,10 +99,29 @@ extension CenovieDiapazoniViewController {
 extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return zones.count
+        return zones.count == 0 ? 1 : zones.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard !zones.isEmpty else{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath)
+            
+            if let _ = cell.viewWithTag(1) as? UILabel, //label
+               let button = cell.viewWithTag(2) as? UIButton{
+                
+                button.addAction(UIAction(handler: { [weak self] _ in
+                    
+                    button.addTarget(self!, action: #selector(self!.plusTapped(_:)), for: .touchUpInside)
+                    
+                }), for: .touchUpInside)
+                
+            }
+            
+            return cell
+            
+        }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "diapazonCell", for: indexPath)
         
@@ -147,7 +166,7 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
             if zone.marge.contains("%"){
                 fixNadbavkaTextLabel.isHidden = false
                 fixNadbavkaLabel.isHidden = false
-                fixNadbavkaLabel.text = zone.fix
+                fixNadbavkaLabel.text = zone.fix + " руб."
                 okruglenieLabel.isHidden = false
                 okruglenieTextLabel.isHidden = false
             }else{
@@ -166,6 +185,10 @@ extension CenovieDiapazoniViewController : UITableViewDelegate , UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        guard !zones.isEmpty else {
+            return view.bounds.height * 0.85
+        }
         
         let zone = zones[indexPath.row]
         

@@ -47,15 +47,33 @@ class TovarTableViewCell: UITableViewCell {
             }
             
             if thisTovar.purCost != ""{
-                newItems.append(TableViewItem(label1Text: "Закупка", label2Text: thisTovar.purCost + " руб." , shouldSecondLabelBeBlue: contentType == .order ? false : thisTovar.chLvl != "0"))
+                var shouldBeBlue = editable
+                if editable {
+                    if thisTovar.chLvl == "0" || contentType == .order{
+                        shouldBeBlue = false
+                    }
+                }
+                newItems.append(TableViewItem(label1Text: "Закупка", label2Text: thisTovar.purCost + " руб." , shouldSecondLabelBeBlue: shouldBeBlue))
             }
             
             if thisTovar.sellCost != "" , thisTovar.sellCost != "0"{
-                newItems.append(TableViewItem(label1Text: thisTovar.vt != "1" ? "Продажа" : "Посреднику", label2Text: thisTovar.sellCost + " руб." , shouldSecondLabelBeBlue: thisTovar.chLvl != "0" && thisTovar.vt != "1"))
+                var shouldBeBlue = editable
+                if editable{
+                    if thisTovar.chLvl == "0" || thisTovar.vt != "0"{
+                        shouldBeBlue = false
+                    }
+                }
+                newItems.append(TableViewItem(label1Text: thisTovar.vt != "1" ? "Продажа" : "Посреднику", label2Text: thisTovar.sellCost + " руб." , shouldSecondLabelBeBlue: shouldBeBlue))
             }//Vt is a check to see if tovar is watched from posrednik (sborka vc)
             
             if thisTovar.size != "" {
-                newItems.append(TableViewItem(label1Text: "Размер", label2Text: thisTovar.size , shouldSecondLabelBeBlue:    contentType == .order ? false : thisTovar.chLvl != "0"))
+                var shouldBeBlue = editable
+                if editable {
+                    if thisTovar.chLvl == "0" || contentType == .order{
+                        shouldBeBlue = false
+                    }
+                }
+                newItems.append(TableViewItem(label1Text: "Размер", label2Text: thisTovar.size , shouldSecondLabelBeBlue:    shouldBeBlue))
             }
             
             if thisTovar.status != "" , thisTovar.status != "-1" , contentType != .zamena{
@@ -195,6 +213,8 @@ class TovarTableViewCell: UITableViewCell {
     }
     
     var thisZakaz : ZakazTableViewCell.Zakaz?
+    
+    var editable = true
     
     var tovarSelected : (() -> Void)?
     
@@ -461,8 +481,15 @@ extension TovarTableViewCell : UITableViewDataSource , UITableViewDelegate{
         
         if item.label1Text == "QR-код"{
             
-            guard contentType == .order , let intStatus = Int(thisZakaz?.status ?? "") ,
-                  intStatus < 3 else {return}
+            if contentType == .order {
+                
+                if let intStatus = Int(thisZakaz?.status ?? "") ,
+                   intStatus < 3 {
+                    qrCodeTapped?()
+                }
+                return
+            }
+            
             qrCodeTapped?()
             
         }else if item.label1Text == "Оплачено" , item.shouldSecondLabelBeBlue{

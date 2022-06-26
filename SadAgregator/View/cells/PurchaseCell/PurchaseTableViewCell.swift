@@ -39,6 +39,7 @@ class PurchaseTableViewCell: UITableViewCell {
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.isUserInteractionEnabled = false
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
         

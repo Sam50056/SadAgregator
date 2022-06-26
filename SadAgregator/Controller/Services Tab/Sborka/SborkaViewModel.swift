@@ -40,6 +40,8 @@ class SborkaViewModel : ObservableObject{
     var alertMessage : String? = nil
     var alertButtonText = "Да"
     
+    var updateUIAfterSimpleAlertDismiss = true
+    
     @Published var showAlertInHelperView = false
     var showSimpleAlertInHelperView = true
     var alertInHelperViewTitle = "Помощники не участвуют в сборке"
@@ -236,6 +238,17 @@ extension SborkaViewModel{
         navBarTitle = "Сборка"
         helperID = ""
         updateSegments()
+        
+    }
+    
+    func showNoHelpersAlert(){
+        
+        self.alertTitle = "Помощники не участвуют в сборке"
+        self.alertMessage = nil
+        self.alertButtonText = "Ок"
+        self.updateUIAfterSimpleAlertDismiss = false //So we can check it in SborkaView and not update UI after alert is dismissed
+        self.showSimpleAlert = true
+        self.showAlert = true
         
     }
     
@@ -440,7 +453,15 @@ extension SborkaViewModel : AssemblyGetHelpersDataManagerDelegate{
                     Helper(id: jsonHelper["hl_id"].stringValue, capt: jsonHelper["capt"].stringValue)
                 }
                 
-                self.showHelperListSheet = true
+                if self.helpers.isEmpty{
+                    
+                    self.showNoHelpersAlert()
+                    
+                }else{
+                    
+                    self.showHelperListSheet = true
+                    
+                }
                 
             }
             
@@ -470,16 +491,14 @@ extension SborkaViewModel : AssemblyGetHelpersInAssemblyDataManagerDelegate{
                     Helper(id: jsonHelper["hl_id"].stringValue, capt: jsonHelper["capt"].stringValue)
                 }
                 
-                self.showHelperListSheet = true
-                
                 //Showing alert that there are no helpers out there
                 if self.helpers.isEmpty{
                     
-                    self.alertInHelperViewTitle = "Помощники не участвуют в сборке"
-                    self.alertInHelperViewMessage = nil
-                    self.alertInHelperViewButtonText = "Ок"
-                    self.showSimpleAlertInHelperView = true
-                    self.showAlertInHelperView = true
+                    self.showNoHelpersAlert()
+                    
+                }else{
+                    
+                    self.showHelperListSheet = true
                     
                 }
                 

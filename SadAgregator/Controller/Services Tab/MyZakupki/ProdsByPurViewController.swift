@@ -302,7 +302,9 @@ extension ProdsByPurViewController{
                         
                         assemblyCommentsVC.thisTovarId = tovar.pid
                         
-                        self.present(assemblyCommentsVC, animated: true, completion: nil)
+                        let navVC = UINavigationController(rootViewController: assemblyCommentsVC)
+                        
+                        self.present(navVC, animated: true, completion: nil)
                         
                     }))
                     
@@ -324,7 +326,9 @@ extension ProdsByPurViewController{
                 
                 assemblyCommentsVC.thisTovarId = tovar.pid
                 
-                self.present(assemblyCommentsVC, animated: true, completion: nil)
+                let navVC = UINavigationController(rootViewController: assemblyCommentsVC)
+                
+                self.present(navVC, animated: true, completion: nil)
                 
             },tovarMagnifyingGlassTapped: { [weak self] in
                 
@@ -382,6 +386,8 @@ extension ProdsByPurViewController{
                             
                             tovar.status = "Куплено"
                             
+                            tovar.qr = "1"
+                            
                             cell.thisTovar = tovar
                             
                         }
@@ -405,6 +411,8 @@ extension ProdsByPurViewController{
                         Vibration.success.vibrate()
                         
                         tovar.status = "Куплено"
+                        
+                        tovar.qr = "1"
                         
                         cell.thisTovar = tovar
                         
@@ -435,6 +443,8 @@ extension ProdsByPurViewController{
                         Vibration.success.vibrate()
                         
                         tovar.status = "Куплено"
+                        
+                        tovar.qr = "1"
                         
                         cell.thisTovar = tovar
                         
@@ -478,7 +488,9 @@ extension ProdsByPurViewController{
             
             assemblyCommentsVC.thisTovarId = tovar.pid
             
-            self.present(assemblyCommentsVC, animated: true, completion: nil)
+            let navVC = UINavigationController(rootViewController: assemblyCommentsVC)
+            
+            self.present(navVC, animated: true, completion: nil)
             
         }
         
@@ -500,7 +512,7 @@ extension ProdsByPurViewController{
         
         cell.isReplaceTapped = { [weak self] in
             
-            self?.showOneTovarItem(id: tovar.forReplacePid)
+            self?.showOneTovarItem(id: tovar.forReplacePid , navTitle: "Основной товар")
             
         }
         

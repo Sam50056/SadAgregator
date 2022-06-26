@@ -26,7 +26,7 @@
                         </constraints>
                     </imageView>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JuR-7i-gzh">
-                        <rect key="frame" x="148" y="11" width="205" height="135"/>
+                        <rect key="frame" x="148" y="2" width="205" height="144"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </tableView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="F4d-HG-ltx">
@@ -179,9 +179,9 @@
                     <constraint firstItem="F4d-HG-ltx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="35t-vr-GIf"/>
                     <constraint firstItem="DoT-JE-s5d" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="4iV-t5-cT4"/>
                     <constraint firstAttribute="trailingMargin" secondItem="F4d-HG-ltx" secondAttribute="trailing" id="BTf-3W-FKn"/>
+                    <constraint firstItem="JuR-7i-gzh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="LmF-mG-5py"/>
                     <constraint firstItem="JuR-7i-gzh" firstAttribute="leading" secondItem="DoT-JE-s5d" secondAttribute="trailing" constant="8" id="NNe-dY-XlT"/>
                     <constraint firstItem="DoT-JE-s5d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="NjG-AE-j5m"/>
-                    <constraint firstItem="JuR-7i-gzh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="QPc-aX-dmH"/>
                     <constraint firstAttribute="bottomMargin" secondItem="F4d-HG-ltx" secondAttribute="bottom" id="brb-bv-YIU"/>
                     <constraint firstItem="F4d-HG-ltx" firstAttribute="top" secondItem="JuR-7i-gzh" secondAttribute="bottom" constant="8" id="swO-UF-5Ki"/>
                     <constraint firstAttribute="trailingMargin" secondItem="JuR-7i-gzh" secondAttribute="trailing" id="taR-ia-jKe"/>

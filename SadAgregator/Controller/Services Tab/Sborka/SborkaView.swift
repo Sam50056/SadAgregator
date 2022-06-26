@@ -55,11 +55,18 @@ struct SborkaView : View {
                 
                 return Alert(title: Text(sborkaViewModel.alertTitle), message: sborkaViewModel.alertMessage != nil ? Text(sborkaViewModel.alertMessage!) : nil, dismissButton: .default(Text(sborkaViewModel.alertButtonText), action: {
                     
-                    sborkaViewModel.updateSegments()
-                    
-                    sborkaViewModel.selectedByLongPressSegment = nil
+                    if sborkaViewModel.updateUIAfterSimpleAlertDismiss{
+                        
+                        sborkaViewModel.updateSegments()
+                        
+                        sborkaViewModel.selectedByLongPressSegment = nil
+                        
+                    }
                     
                     sborkaViewModel.showAlert = false
+                    
+                    sborkaViewModel.updateUIAfterSimpleAlertDismiss = true
+                    
                     
                 }))
                 
@@ -332,6 +339,7 @@ struct SborkaView : View {
                             
                             sborkaViewModel.alertTitle = sborkaViewModel.helperID == "" ? "Передать сегмент помощнику?" :  "Забрать сегмент у помощника?"
                             sborkaViewModel.alertMessage = nil
+                            sborkaViewModel.alertButtonText = "Да"
                             sborkaViewModel.showSimpleAlert = false
                             sborkaViewModel.showAlert = true
                             

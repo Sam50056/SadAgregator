@@ -92,8 +92,12 @@ class GalleryViewController: UIViewController {
     var tovarMagnifyingGlassTapped : (() -> Void)?
     var tovarQrTapped : (() -> Void)?
     
+    let activityController = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        showSimpleCircleAnimation(activityController: activityController)
         
         collectionView.isPagingEnabled = true
         
@@ -592,11 +596,15 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
                 let secondPartOfURL = "/550\(String(originalUrlString[indexOfDot ..< originalUrlString.endIndex]))"
                 let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
                 
-                imageView.sd_setImage(with: URL(string: fullURL), completed: nil)
+                imageView.sd_setImage(with: URL(string: fullURL)) { [weak self] _, _, _, _ in
+                    self?.stopSimpleCircleAnimation(activityController: self!.activityController)
+                }
                 
             }else {
                 
-                imageView.sd_setImage(with: URL(string: originalUrlString), completed: nil)
+                imageView.sd_setImage(with: URL(string: originalUrlString)) { [weak self] _, _, _, _ in
+                    self?.stopSimpleCircleAnimation(activityController: self!.activityController)
+                }
                 
             }
            

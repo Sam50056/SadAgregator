@@ -236,7 +236,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                 status = "0"
             }
             
-            BrokersBrokerStatusDataManager().getBrokersBrokerStatusData(key: key!, status: status) { data, error in
+            BrokersBrokerStatusDataManager().getBrokersBrokerStatusData(key: key!, status: status) { [weak self] data, error in
                 
                 DispatchQueue.main.async {
                     
@@ -247,12 +247,12 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     
                     if data!["result"].intValue == 1{
                         
-                        update()
+                        self?.update()
                         
                     }else{
                         
                         if let errorMessage = data!["msg"].string , errorMessage != ""{
-                            showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
+                            self?.showSimpleAlertWithOkButton(title: "Ошибка", message: errorMessage)
                         }
                         
                     }
@@ -324,7 +324,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
         
         BrokersGetDeliveryTypeDataManager().getBrokersGetDeliveryTypeData(key: key!) { data, error in
             
-            DispatchQueue.main.async { [self] in
+            DispatchQueue.main.async { [weak self] in
                 
                 if error != nil , data == nil {
                     print("Erorr with BrokersUpdateInfoDataManager : \(error!)")
@@ -354,7 +354,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                                 
                                 guard let price = priceAlertController.textFields?[0].text else {return}
                                 
-                                BrokersAddSendTypeDataManager().getBrokersAddSendTypeData(key: key!, sendType: deliveryId, price: price) { data, error in
+                                BrokersAddSendTypeDataManager().getBrokersAddSendTypeData(key: self!.key!, sendType: deliveryId, price: price) { data, error in
                                     
                                     if error != nil , data == nil {
                                         print("Erorr with BrokersAddSendTypeDataManager : \(error!)")
@@ -367,9 +367,9 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                                         
                                         DispatchQueue.main.async {
                                             
-                                            sposobOtpravkiSectionForPosrednikItems.append(SposobiOtpravkiSectionForPosrednikItem(ruleId: ruleId, name: deliveryName, typeId: deliveryId, price: price))
+                                            self?.sposobOtpravkiSectionForPosrednikItems.append(SposobiOtpravkiSectionForPosrednikItem(ruleId: ruleId, name: deliveryName, typeId: deliveryId, price: price))
                                             
-                                            self.tableView.reloadData()
+                                            self?.tableView.reloadData()
                                             
                                         }
                                         
@@ -378,7 +378,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                                         if let message = data!["msg"].string{
                                             
                                             DispatchQueue.main.async {
-                                                self.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
+                                                self?.showSimpleAlertWithOkButton(title: "Ошибка", message: message)
                                             }
                                             
                                         }
@@ -392,7 +392,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                             priceAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
                             
                             DispatchQueue.main.async {
-                                self.present(priceAlertController, animated: true, completion: nil)
+                                self?.present(priceAlertController, animated: true, completion: nil)
                             }
                             
                         }))
@@ -402,7 +402,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     sheetAlertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
                     
                     DispatchQueue.main.async {
-                        self.present(sheetAlertController, animated: true, completion: nil)
+                        self?.present(sheetAlertController, animated: true, completion: nil)
                     }
                     
                 }
@@ -1532,6 +1532,22 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
                     textView.restorationIdentifier = "\(item.type)|\(index)"
                     
                     textView.delegate = self
+                    
+                }else if item.label1Text == "Пересылка"{
+                 
+                    cell = tableView.dequeueReusableCell(withIdentifier: "twoLabelOneImageCell", for: indexPath)
+                    
+                    guard let label1 = cell.viewWithTag(1) as? UILabel ,
+                          let label2 = cell.viewWithTag(2) as? UILabel ,
+                          let imageView = cell.viewWithTag(3) as? UIImageView else {return cell}
+                    
+                    label1.text = item.label1Text
+                    
+                    label2.text = "Выбрать вариант"
+                    
+                    label2.textColor = .systemGray
+                    
+                    imageView.image = UIImage(systemName: "pencil")
                     
                 }else{
                     

@@ -32,6 +32,7 @@ class PointsInSborkaSegmentViewModel : ObservableObject{
     @Published var showProdsInPointView = false
     
     @Published var showAlert = false
+    var showSimpleAlert = false
     var alertTitle = ""
     var alertMessage : String? = nil
     var alertButtonText = "Да"
@@ -179,6 +180,16 @@ extension PointsInSborkaSegmentViewModel{
         
     }
     
+    func showNoHelpersAlert(){
+        
+        self.alertTitle = "Помощники не участвуют в сборке"
+        self.alertMessage = nil
+        self.alertButtonText = "Ок"
+        self.showSimpleAlert = true
+        self.showAlert = true
+        
+    }
+    
 }
 
 //MARK: - Item
@@ -294,7 +305,15 @@ extension PointsInSborkaSegmentViewModel : AssemblyGetHelpersDataManagerDelegate
                     Helper(id: jsonHelper["hl_id"].stringValue, capt: jsonHelper["capt"].stringValue)
                 }
                 
-                self.showHelperListSheet = true
+                if self.helpers.isEmpty{
+                    
+                    self.showNoHelpersAlert()
+                    
+                }else{
+                    
+                    self.showHelperListSheet = true
+                    
+                }
                 
             }
             
@@ -324,12 +343,14 @@ extension PointsInSborkaSegmentViewModel : AssemblyGetHelpersInAssemblyDataManag
                     Helper(id: jsonHelper["hl_id"].stringValue, capt: jsonHelper["capt"].stringValue)
                 }
                 
-                self.showHelperListSheet = true
-                
                 //Showing alert that there are no helpers out there
                 if self.helpers.isEmpty{
                     
-                    self.showAlertInHelperView = true
+                    self.showNoHelpersAlert()
+                    
+                }else{
+                    
+                    self.showHelperListSheet = true
                     
                 }
                 
