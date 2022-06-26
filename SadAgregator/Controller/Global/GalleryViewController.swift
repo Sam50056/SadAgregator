@@ -595,7 +595,7 @@ extension GalleryViewController : UICollectionViewDelegate , UICollectionViewDat
                 let firstPartOfURL = String(originalUrlString[originalUrlString.startIndex ..< indexOfLastSlash])
                 let secondPartOfURL = "/550\(String(originalUrlString[indexOfDot ..< originalUrlString.endIndex]))"
                 let fullURL = "\(firstPartOfURL)\(secondPartOfURL)"
-                 
+                   
                 imageView.sd_setImage(with: URL(string: fullURL)) { [weak self] _, _, _, _ in
                     self?.stopSimpleCircleAnimation(activityController: self!.activityController)
                 }
