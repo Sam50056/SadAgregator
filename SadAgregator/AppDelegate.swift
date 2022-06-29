@@ -12,7 +12,7 @@ import YandexMobileMetrica
 import RealmSwift
 import VK_ios_sdk
 import ok_ios_sdk
-
+ 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
