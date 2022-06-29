@@ -284,4 +284,16 @@ extension AssemblyCommentsViewController : UITableViewDataSource , UITableViewDe
         
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let section = indexPath.section
+        
+        if section % 2 != 0 {
+            return 150
+        }else{
+            return K.simpleHeaderCellHeight
+        }
+        
+    }
+    
 }

@@ -39,8 +39,6 @@ class ServicesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        dismiss(animated: true) //This is for content VC if it's slided from QR VC 
-        
         navigationController?.isNavigationBarHidden = false
         
         loadUserData()
@@ -290,6 +288,10 @@ extension ServicesViewController : UICollectionViewDelegate , UICollectionViewDa
                 let sortVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortirovkaVC") as! SortirovkaViewController
                 
                 sortVC.assembly = "1"
+                
+                sortVC.viewWillDis = { [weak self] in
+                    self?.dismiss(animated: true) //Dismiss the floating panel content vc
+                }
                 
                 navigationController?.pushViewController(sortVC, animated: true)
                 

@@ -46,6 +46,8 @@ class SortirovkaViewController: UIViewController {
     
     var connectingPurId : String? // This var helps to know if next scanned qr will be connected to some purchase or not
     
+    var viewWillDis : (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -116,7 +118,7 @@ class SortirovkaViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        viewWillDis?()
     }
     
 }

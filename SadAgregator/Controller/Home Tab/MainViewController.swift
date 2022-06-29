@@ -211,6 +211,10 @@ extension MainViewController {
         
         sortVC.assembly = "0"
         
+        sortVC.viewWillDis = { [weak self] in
+            self?.dismiss(animated: true) //Dismiss the floating panel content vc
+        }
+        
         navigationController?.pushViewController(sortVC, animated: true)
         
     }

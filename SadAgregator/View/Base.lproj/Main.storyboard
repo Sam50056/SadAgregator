@@ -6043,7 +6043,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="U2V-eS-cKs">
-                                <rect key="frame" x="16" y="147" width="382" height="621"/>
+                                <rect key="frame" x="16" y="155" width="382" height="639"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" name="whiteblack"/>
                                 <prototypes>
@@ -6277,7 +6277,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t8C-37-Bcf">
-                                <rect key="frame" x="16" y="776" width="382" height="86"/>
+                                <rect key="frame" x="16" y="802" width="382" height="86"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAp-gG-Ueq">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="2"/>
@@ -6286,8 +6286,8 @@
                                             <constraint firstAttribute="height" constant="2" id="kfQ-BI-Tx3"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="alh-k1-dkw">
-                                        <rect key="frame" x="0.0" y="18" width="382" height="86"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="alh-k1-dkw">
+                                        <rect key="frame" x="0.0" y="18" width="382" height="84"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ej-89-qca">
                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="42"/>
@@ -6319,7 +6319,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E6q-Ma-D0Q">
-                                                <rect key="frame" x="0.0" y="44" width="382" height="42"/>
+                                                <rect key="frame" x="0.0" y="42" width="382" height="42"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Lr-p2-p3t">
                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="42"/>
@@ -6371,13 +6371,13 @@
                             <constraint firstItem="iwn-7x-GLX" firstAttribute="leading" secondItem="9Iw-bI-u66" secondAttribute="trailing" constant="16" id="7Zy-e0-35O"/>
                             <constraint firstItem="0fu-S5-ViV" firstAttribute="trailing" secondItem="jJq-xK-Q9Y" secondAttribute="trailing" constant="16" id="7tX-jF-1O9"/>
                             <constraint firstItem="iwn-7x-GLX" firstAttribute="top" secondItem="0fu-S5-ViV" secondAttribute="top" constant="16" id="AD3-9a-65u"/>
+                            <constraint firstAttribute="bottom" secondItem="t8C-37-Bcf" secondAttribute="bottom" constant="8" id="Dhd-Xb-p3b"/>
                             <constraint firstItem="U2V-eS-cKs" firstAttribute="leading" secondItem="0fu-S5-ViV" secondAttribute="leading" constant="16" id="Dtu-YO-ryk"/>
                             <constraint firstItem="jJq-xK-Q9Y" firstAttribute="leading" secondItem="AKw-iA-epU" secondAttribute="trailing" constant="16" id="E0E-65-WHa"/>
                             <constraint firstItem="9Iw-bI-u66" firstAttribute="leading" secondItem="0fu-S5-ViV" secondAttribute="leading" constant="16" id="EcB-hW-KL2"/>
                             <constraint firstItem="t8C-37-Bcf" firstAttribute="top" secondItem="U2V-eS-cKs" secondAttribute="bottom" constant="8" id="GcI-z4-7ra"/>
-                            <constraint firstItem="U2V-eS-cKs" firstAttribute="top" secondItem="zOn-rc-wAr" secondAttribute="bottom" constant="16" id="H1o-8B-pCo"/>
+                            <constraint firstItem="U2V-eS-cKs" firstAttribute="top" secondItem="zOn-rc-wAr" secondAttribute="bottom" constant="24" id="H1o-8B-pCo"/>
                             <constraint firstItem="AKw-iA-epU" firstAttribute="centerY" secondItem="HXo-xl-etn" secondAttribute="centerY" id="IRQ-gg-rc7"/>
-                            <constraint firstItem="0fu-S5-ViV" firstAttribute="bottom" secondItem="t8C-37-Bcf" secondAttribute="bottom" id="Rsi-75-QCf"/>
                             <constraint firstItem="jJq-xK-Q9Y" firstAttribute="centerY" secondItem="HXo-xl-etn" secondAttribute="centerY" id="Tbt-d8-TRX"/>
                             <constraint firstItem="HXo-xl-etn" firstAttribute="top" secondItem="9Iw-bI-u66" secondAttribute="bottom" constant="32" id="ZxO-7Y-3PX"/>
                             <constraint firstItem="0fu-S5-ViV" firstAttribute="trailing" secondItem="U2V-eS-cKs" secondAttribute="trailing" constant="16" id="dE2-bg-YE7"/>
@@ -9137,11 +9137,11 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="lNg-NF-ZhP"/>
+        <segue reference="0O8-eQ-Bac"/>
         <segue reference="yR4-7g-u1L"/>
         <segue reference="UT5-6g-K7A"/>
-        <segue reference="5f5-1E-ndJ"/>
-        <segue reference="3eo-7Z-uW5"/>
+        <segue reference="LYd-3X-sUB"/>
+        <segue reference="ZSI-nF-15U"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="94"/>

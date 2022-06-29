@@ -33,6 +33,7 @@ class DobavlenieVZakupkuViewController: UIViewController {
             if let selectedZakupka = selectedZakupka , let oldValue = oldValue, oldValue.id != selectedZakupka.id{
                 //If client changed selected zakupka to another , gotta remove replace client
                 clientForReplace = nil
+                removeZamenaPressed(self)
             }
         }
     }

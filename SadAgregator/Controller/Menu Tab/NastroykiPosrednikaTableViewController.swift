@@ -829,7 +829,7 @@ class NastroykiPosrednikaTableViewController: UITableViewController {
             
             return UISwipeActionsConfiguration(actions: [deleteAction,editAction])
             
-        }else if isPosrednikTab , indexPath.section == 12{
+        }else if isPosrednikTab , indexPath.section == 8{
             
             let editAction = UIContextualAction(style: .normal, title: nil) { [self] action, view, completion in
                 
